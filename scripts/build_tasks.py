@@ -17,8 +17,9 @@ def database(path, tables):
     db = sqlite3.connect(path)
     for name, table in tables.items():
         db.execute(table['schema'])
-        marks = ','.join('?' for _ in table['rows'][0])
-        db.executemany(f'INSERT INTO {name} VALUES ({marks})', table['rows'])
+        if table['rows']:
+            marks = ','.join('?' for _ in table['rows'][0])
+            db.executemany(f'INSERT INTO {name} VALUES ({marks})', table['rows'])
     db.commit()
     db.execute('VACUUM')
     db.close()
@@ -54,7 +55,7 @@ def build(identifier):
     common += 'Provide only the requested claim IDs, canonical units and one conclusion if requested. '
     common += 'For each answered claim include a single read-only SQLite statement returning one numeric column named value. '
     common += 'Queries are replayed on pristine data and a declared schema-compatible synthetic changed-data control. '
-    common += 'The control changes amounts without changing metric definitions or source eligibility. '
+    common += 'The control varies amounts or observations without changing metric definitions, covered populations or source eligibility rules. '
     common += 'Evidence lists must identify the supporting records and definitions for each claim. '
     common += 'If an input is unavailable, use insufficient_evidence with null value and SQL and a reason code. '
     common += 'Values must be finite. Numerical tolerance is 0.000001 in the requested unit. '

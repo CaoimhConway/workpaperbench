@@ -38,7 +38,7 @@ def run(db, sql):
     deadline = time.monotonic() + 1.5
     connection.set_progress_handler(lambda: int(time.monotonic() > deadline), 1000)
     cursor = connection.execute(sql)
-    if cursor.description is None or len(cursor.description) != 1 or cursor.description[0][0] != "value":
+    if cursor.description is None or len(cursor.description) != 1 or cursor.description[0][0].lower() != "value":
         raise ValueError("scalar_column")
     rows = cursor.fetchmany(2)
     if len(rows) != 1:

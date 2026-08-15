@@ -3,6 +3,7 @@ import argparse
 from collections import Counter
 import json
 from pathlib import Path
+from statistics import mean
 
 from .grading import parse, validate
 
@@ -54,11 +55,19 @@ def report(root):
             summaries[split][arm] = {"scheduled": len(selected), "verified": passed,
                                       "numerical_correct_full_failed": gap,
                                       "gap_causes_nonexclusive": dict(categories), "checks_passed": dict(checks)}
+            for phase in ("agent_setup", "agent_execution", "verifier"):
+                values = [(r.get("harbor_metrics") or {}).get(phase + "_seconds") for r in selected]
+                known = [v for v in values if isinstance(v, (int, float))]
+                summaries[split][arm][phase + "_mean_seconds"] = mean(known) if known else None
+            costs = [r.get("provider_cost_delta_usd") for r in selected]
+            known = [v for v in costs if isinstance(v, (int, float))]
+            summaries[split][arm]["known_slot_cost_usd"] = sum(known) if known else None
+            summaries[split][arm]["unknown_cost_slots"] = len(costs) - len(known)
     result = {"manifest": manifest, "summary": summaries, "slots": rows, "exploratory": supplemental}
     output = root / "reports"
     output.mkdir(exist_ok=True)
     (output / "scores.json").write_text(json.dumps(result, indent=2) + "\n")
-    lines = ["# Results", "", "Generated from saved sanitized records. Every scheduled slot remains visible.", "",
+    lines = ["# Results", "", "Computed from saved sanitized records. Every scheduled slot remains visible.", "",
              "| Split | Arm | Verified / scheduled | Numbers correct, full task failed |", "|---|---|---:|---:|"]
     for split, arms in summaries.items():
         for arm, summary in arms.items():
@@ -69,6 +78,18 @@ def report(root):
         verdict = row.get("verdict") or {}
         errors = ", ".join(verdict.get("errors", []))
         lines.append(f"| {row['slot_id']} | {row['status']} | {verdict.get('complete', 'N/A')} | {row.get('run_id', 'N/A')} | {errors} |")
+    lines += ["", "| Task | Arm | Verified / 3 | Origin | Source group |", "|---|---|---:|---|---|"]
+    for task in sorted({r["task"] for r in rows}):
+        for arm in ("A", "B"):
+            selected = [r for r in rows if r["task"] == task and r["arm"] == arm]
+            passed = sum(bool((r.get("verdict") or {}).get("complete")) for r in selected)
+            sample = next((r for r in selected if r.get("source_group")), {})
+            lines.append(f"| {task} | {arm} | {passed} / {len(selected)} | {sample.get('task_origin', 'unrecorded')} | {sample.get('source_group', 'unrecorded')} |")
+    lines += ["", "Cost, latency and diagnostic flags (JSON detail includes all checks and unknowns):", ""]
+    lines += ["| Split | Arm | Known slot cost USD | Unknown cost slots | Mean solve seconds | Gap causes |", "|---|---|---:|---:|---:|---|"]
+    for split, arms in summaries.items():
+        for arm, summary in arms.items():
+            lines.append(f"| {split} | {arm} | {summary['known_slot_cost_usd']} | {summary['unknown_cost_slots']} | {summary['agent_execution_mean_seconds']} | {summary['gap_causes_nonexclusive']} |")
     finished = sum(r["status"] != "unstarted" for r in rows)
     lines += ["", f"Recorded final slots: {finished} / {len(rows)}. Exploratory records: {len(supplemental)}.",
               "Cost totals use provider lifetime snapshots where available. Missing usage is unknown.",

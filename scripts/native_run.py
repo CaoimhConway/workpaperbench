@@ -212,6 +212,14 @@ def result_metrics(path):
         return None, None
     context = result.get("agent_result") or {}
     metrics = {}
+    for phase in ("environment_setup", "agent_setup", "agent_execution", "verifier"):
+        timing = result.get(phase) or {}
+        try:
+            seconds = (datetime.fromisoformat(timing["finished_at"]) - datetime.fromisoformat(timing["started_at"])).total_seconds()
+            if seconds >= 0:
+                metrics[phase + "_seconds"] = round(seconds, 3)
+        except (KeyError, TypeError, ValueError):
+            metrics[phase + "_seconds"] = None
     for field in ("n_input_tokens", "n_cache_tokens", "n_output_tokens"):
         value = context.get(field)
         if isinstance(value, int) and not isinstance(value, bool) and value >= 0:
@@ -311,6 +319,8 @@ def execute(mode, slot_id):
     }
     definition = json.loads((ROOT / "sources" / (task_id + ".json")).read_text())
     record["source_group"] = definition["source_group"]
+    record["task_origin"] = definition.get("origin", "synthetic" if task_id in ("wp02", "wp05") else "primary_filing_facts")
+    record["config_hash"] = hashlib.sha256((ROOT / "config/runtime.json").read_bytes() + (task_dir / "task.toml").read_bytes() + (task_dir / "instruction.md").read_bytes()).hexdigest()
     if mode == "final":
         try:
             freeze = frozen_inputs()
