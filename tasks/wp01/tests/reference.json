@@ -1,0 +1,32 @@
+{
+  "task_id": "wp01",
+  "answers": [
+    {
+      "id": "q1_rd",
+      "status": "answered",
+      "value": 1151,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:q2",
+        "filing:h1",
+        "filing:context"
+      ],
+      "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN amount_million END) q2, MAX(CASE WHEN period='H1' THEN amount_million END) h1 FROM expenses WHERE entity='Tesla' AND year=2024 AND metric='R&D') SELECT h1-q2 AS value FROM p",
+      "reason_code": null
+    },
+    {
+      "id": "sequential_change",
+      "status": "answered",
+      "value": -6.689834926151173,
+      "unit": "percent",
+      "evidence": [
+        "filing:q2",
+        "filing:h1",
+        "filing:context"
+      ],
+      "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN amount_million END) q2, MAX(CASE WHEN period='H1' THEN amount_million END) h1 FROM expenses WHERE entity='Tesla' AND year=2024 AND metric='R&D') SELECT 100.0*(q2-(h1-q2))/(h1-q2) AS value FROM p",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}

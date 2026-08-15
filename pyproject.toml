@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "workpaperbench"
+version = "0.1.0"
+description = "Reproducible evaluations for financial research agents"
+requires-python = ">=3.11"
+dependencies = ["jsonschema==4.26.0"]
+
+[project.optional-dependencies]
+test = ["pytest==8.4.2"]
+
+[project.scripts]
+workpaperbench = "workpaperbench.cli:main"
+
+[tool.setuptools]
+packages = ["workpaperbench"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

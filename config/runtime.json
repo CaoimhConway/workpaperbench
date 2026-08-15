@@ -1,0 +1,50 @@
+{
+  "python": {
+    "tag": "python:3.12-slim-bookworm",
+    "manifest_digest": "sha256:54c85f3c47607a77f32adec749d3c81d1348bf25833671f512b26a9b6d778cb3",
+    "linux_amd64_digest": "sha256:9901e0a8d75037d8242ed43155cbcb2d1f61be1356383d8054afb59fd50e39c4"
+  },
+  "base_image": "python:3.12-slim-bookworm@sha256:54c85f3c47607a77f32adec749d3c81d1348bf25833671f512b26a9b6d778cb3",
+  "harbor": {
+    "version": "0.23.0",
+    "git_commit": "1e5c5c6db929a10a140d05e606882c671ae20729",
+    "python_requirement": "harbor==0.23.0"
+  },
+  "hermes": {
+    "release_tag": "v2026.9.24",
+    "resolved_release_commit": "f97608f178d1ffeca59860195ab7da295f7c8e5f",
+    "native_pin_kind": "tag",
+    "native_install_note": "Harbor's native Hermes adapter passes --branch v2026.9.24 to the moving main-branch installer URL. Harbor does not pass --commit or verify checkout HEAD. The resolved commit is upstream tag metadata, not an assertion about each runtime checkout."
+  },
+  "model": {
+    "id": "qwen/qwen3.6-35b-a3b",
+    "harbor_model": "openrouter/qwen/qwen3.6-35b-a3b",
+    "provider": "openrouter",
+    "route_policy": "OpenRouter default routing for this model. Provider may vary between compatible endpoints",
+    "tool_capable": true,
+    "catalog_snapshot_date": "2026-10-04",
+    "catalog_source": "https://openrouter.ai/api/v1/models/qwen/qwen3.6-35b-a3b/endpoints"
+  },
+  "agent": {
+    "toolsets": "file,terminal,skills",
+    "max_turns": 90,
+    "max_turns_source": "Harbor v0.23.0 native Hermes adapter hardcodes this config value and exposes no max_turns option",
+    "setup_timeout_sec": 1200,
+    "solve_timeout_sec": 600,
+    "verifier_timeout_sec": 180,
+    "treatment_skill_dir": "config/skills/contract-check",
+    "treatment_delivery": [
+      "Harbor extra_instruction_paths points to SKILL.md",
+      "Harbor agent.skills registers the containing directory for Hermes discovery"
+    ]
+  },
+  "cost": {
+    "provider_metadata_url": "https://openrouter.ai/api/v1/key",
+    "reservation_usd_per_slot": 0.2,
+    "pilot_cost_multiplier": 10,
+    "remaining_schedule_reservation": true,
+    "accounting": "OpenRouter lifetime metadata before and after each slot; Harbor-reported cost is retained separately when present"
+  },
+  "max_answer_bytes": 65536,
+  "task_toml": "schema_version = \"1.4\"\n\n[task]\nname = \"workpaperbench/{task_id}\"\ndescription = \"Deterministic workpaper preparation and verification\"\nauthors = []\nkeywords = [\"accounting\", \"workpaper\"]\n\n[agent]\ntimeout_sec = 600.0\nnetwork_mode = \"allowlist\"\nallowed_hosts = [\"openrouter.ai\"]\n\n[verifier]\ntimeout_sec = 180.0\nenvironment_mode = \"separate\"\nnetwork_mode = \"no-network\"\n\n[environment]\nbuild_timeout_sec = 900.0\ncpus = 2\nmemory_mb = 4096\nnetwork_mode = \"public\"\n\n[verifier.environment]\nnetwork_mode = \"no-network\"\n"
+}

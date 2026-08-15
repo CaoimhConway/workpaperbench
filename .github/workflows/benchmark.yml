@@ -1,0 +1,79 @@
+name: WorkpaperBench trials
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [pilot, final]
+        default: pilot
+      batch:
+        type: choice
+        options: [baseline, treatment, all]
+        default: baseline
+      manifest_id:
+        type: string
+        required: true
+        default: development-v1
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: workpaperbench-live
+  cancel-in-progress: false
+jobs:
+  schedule:
+    if: github.repository == 'CaoimhConway/workpaperbench' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      matrix: ${{ steps.select.outputs.matrix }}
+      has_slots: ${{ steps.select.outputs.has_slots }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - id: select
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WPB_MODE: ${{ inputs.mode }}
+          WPB_BATCH: ${{ inputs.batch }}
+          WPB_MANIFEST_ID: ${{ inputs.manifest_id }}
+        run: python scripts/select_slots.py "$WPB_MODE" "$WPB_MANIFEST_ID" --batch "$WPB_BATCH"
+  trial:
+    needs: schedule
+    if: needs.schedule.outputs.has_slots == 'true'
+    name: trial-${{ matrix.slot_id }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.schedule.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'harbor==0.23.0' -e .
+      - name: Capped budget check and one native live slot
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          WPB_MODE: ${{ inputs.mode }}
+          WPB_SLOT_ID: ${{ matrix.slot_id }}
+        run: |
+          stop_marker="$(python -c 'import uuid
+          print(uuid.uuid4())')"
+          echo "::stop-commands::$stop_marker"
+          set +e
+          python scripts/native_run.py "$WPB_MODE" "$WPB_SLOT_ID"
+          exit_code=$?
+          echo "::$stop_marker::"
+          exit "$exit_code"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: slot-${{ github.sha }}-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.slot_id }}
+          path: reports/runs/${{ matrix.slot_id }}/*
+          retention-days: 7

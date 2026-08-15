@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euo pipefail
+cat > /logs/artifacts/answer.json <<'ANSWER'
+{
+  "task_id": "wp05",
+  "answers": [
+    {
+      "id": "naive_growth",
+      "status": "answered",
+      "value": 65,
+      "unit": "percent",
+      "evidence": [
+        "export:periods",
+        "policy:definitions"
+      ],
+      "sql": "SELECT 100.0*((SELECT transfer_volume FROM exports WHERE period='P2')/(1.0*(SELECT transfer_volume FROM exports WHERE period='P1'))-1) AS value",
+      "reason_code": null
+    },
+    {
+      "id": "comparable_growth",
+      "status": "answered",
+      "value": 10,
+      "unit": "percent",
+      "evidence": [
+        "ledger:events",
+        "policy:definitions"
+      ],
+      "sql": "WITH totals AS (SELECT period,SUM(amount_units) amount FROM events WHERE event_kind='transfer' GROUP BY period) SELECT 100.0*((SELECT amount FROM totals WHERE period='P2')/(1.0*(SELECT amount FROM totals WHERE period='P1'))-1) AS value",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "ledger:events",
+      "policy:definitions"
+    ]
+  }
+}
+ANSWER
