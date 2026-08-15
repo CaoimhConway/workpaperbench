@@ -43,7 +43,7 @@
     "reservation_usd_per_slot": 0.2,
     "pilot_cost_multiplier": 10,
     "remaining_schedule_reservation": true,
-    "accounting": "OpenRouter lifetime metadata before and after each slot; Harbor-reported cost is retained separately when present"
+    "accounting": "OpenRouter lifetime metadata before and after each slot. Harbor-reported cost is retained separately when present"
   },
   "max_answer_bytes": 65536,
   "task_toml": "schema_version = \"1.4\"\n\n[task]\nname = \"workpaperbench/{task_id}\"\ndescription = \"Deterministic workpaper preparation and verification\"\nauthors = []\nkeywords = [\"accounting\", \"workpaper\"]\n\n[agent]\ntimeout_sec = 600.0\nnetwork_mode = \"allowlist\"\nallowed_hosts = [\"openrouter.ai\"]\n\n[verifier]\ntimeout_sec = 180.0\nenvironment_mode = \"separate\"\nnetwork_mode = \"no-network\"\n\n[environment]\nbuild_timeout_sec = 900.0\ncpus = 2\nmemory_mb = 4096\nnetwork_mode = \"public\"\n\n[verifier.environment]\nnetwork_mode = \"no-network\"\n"

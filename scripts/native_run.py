@@ -79,10 +79,16 @@ def provider_snapshot(key):
     )
     with urlopen(request, timeout=20) as response:
         data = json.load(response).get("data", {})
+    credit_request = Request("https://openrouter.ai/api/v1/credits", headers={"Authorization": "Bearer " + key})
+    with urlopen(credit_request, timeout=20) as response:
+        credits = json.load(response).get("data", {})
+    total_credit = finite_number(credits.get("total_credits"))
+    total_usage = finite_number(credits.get("total_usage"))
     return {
         "lifetime_limit_usd": finite_number(data.get("limit")),
         "remaining_usd": finite_number(data.get("limit_remaining")),
         "usage_usd": finite_number(data.get("usage")),
+        "funded_remaining_usd": total_credit - total_usage if total_credit is not None and total_usage is not None else None,
         "byok_usage_usd": finite_number(data.get("byok_usage")),
         "reset_is_null": "limit_reset" in data and data.get("limit_reset") is None,
         "includes_byok": data.get("include_byok_in_limit")
@@ -122,6 +128,7 @@ def final_reservation(schedule, records):
 def preflight(snapshot, reserve, remaining_slots):
     limit = snapshot.get("lifetime_limit_usd")
     remaining = snapshot.get("remaining_usd")
+    funded = snapshot.get("funded_remaining_usd")
     byok = snapshot.get("byok_usage_usd")
     if limit is None or not 0 < limit <= 50:
         return "invalid_lifetime_limit"
@@ -130,7 +137,7 @@ def preflight(snapshot, reserve, remaining_slots):
     if byok is None or byok != 0:
         return "byok_usage_must_be_zero"
     required = round(reserve * max(1, remaining_slots), 8)
-    if remaining is None or remaining + 0.00000001 < required:
+    if remaining is None or funded is None or min(remaining, funded) + 0.00000001 < required:
         return "insufficient_reserved_balance"
     return None
 
@@ -302,6 +309,8 @@ def execute(mode, slot_id):
         "model_route_policy": RUNTIME["model"]["route_policy"],
         "reservation_usd_per_slot": float(RUNTIME["cost"]["reservation_usd_per_slot"]),
     }
+    definition = json.loads((ROOT / "sources" / (task_id + ".json")).read_text())
+    record["source_group"] = definition["source_group"]
     if mode == "final":
         try:
             freeze = frozen_inputs()
