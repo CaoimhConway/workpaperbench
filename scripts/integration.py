@@ -23,13 +23,13 @@ def native(task, name, expected, agent="oracle"):
         print((RAW / (name + ".log")).read_text()[-10000:])
         raise AssertionError("native verifier did not run: " + name)
     verdict = json.loads(verdict_path.read_text())
+    summary = {"name": name, "expected_complete": expected, "verdict": verdict,
+            "agent": agent, "exception_type": (result.get("exception_info") or {}).get("exception_type")}
+    (OUTPUT / (name + ".json")).write_text(json.dumps(summary, indent=2) + "\n")
     if process.returncode or verdict["complete"] != expected:
         print(json.dumps({"name": name, "verdict": verdict, "exception": result.get("exception_info")}))
         raise AssertionError("unexpected native result")
     print(name, "passed")
-    summary = {"name": name, "expected_complete": expected, "verdict": verdict,
-            "agent": agent, "exception_type": (result.get("exception_info") or {}).get("exception_type")}
-    (OUTPUT / (name + ".json")).write_text(json.dumps(summary, indent=2) + "\n")
     return summary
 
 
