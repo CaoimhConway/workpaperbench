@@ -79,6 +79,7 @@ def build(identifier):
     (tests / 'Dockerfile').write_text('FROM ' + runtime['base_image'] + '\n'
         'RUN pip install --no-cache-dir jsonschema==4.26.0\n'
         'COPY . /tests/\n')
+    (tests / 'docker-compose.yaml').write_text('services:\n  main:\n    network_mode: none\n')
     (task / 'task.toml').write_text(runtime['task_toml'].replace('{task_id}', identifier))
     return identifier
 

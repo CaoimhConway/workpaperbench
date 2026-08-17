@@ -14,7 +14,8 @@
     "release_tag": "v2026.9.24",
     "resolved_release_commit": "f97608f178d1ffeca59860195ab7da295f7c8e5f",
     "native_pin_kind": "tag",
-    "native_install_note": "Harbor's native Hermes adapter passes --branch v2026.9.24 to the moving main-branch installer URL. Harbor does not pass --commit or verify checkout HEAD. The resolved commit is upstream tag metadata, not an assertion about each runtime checkout."
+    "native_install_note": "Harbor's native Hermes adapter passes --branch v2026.9.24 to the moving main-branch installer URL. Harbor does not pass --commit or verify checkout HEAD. The resolved commit is upstream tag metadata, not an assertion about each runtime checkout.",
+    "runtime_check": "Native AGENT_START hook verifies checkout HEAD against the resolved release commit before solving"
   },
   "model": {
     "id": "qwen/qwen3.6-35b-a3b",
@@ -47,5 +48,6 @@
   },
   "max_answer_bytes": 65536,
   "task_toml": "schema_version = \"1.4\"\n\n[task]\nname = \"workpaperbench/{task_id}\"\ndescription = \"Deterministic workpaper preparation and verification\"\nauthors = []\nkeywords = [\"accounting\", \"workpaper\"]\n\n[agent]\ntimeout_sec = 600.0\nnetwork_mode = \"allowlist\"\nallowed_hosts = [\"openrouter.ai\"]\n\n[verifier]\ntimeout_sec = 180.0\nenvironment_mode = \"separate\"\nnetwork_mode = \"no-network\"\n\n[environment]\nbuild_timeout_sec = 900.0\ncpus = 2\nmemory_mb = 4096\nnetwork_mode = \"public\"\n\n[verifier.environment]\nnetwork_mode = \"no-network\"\n",
-  "uv": "0.9.26"
+  "uv": "0.9.26",
+  "verifier_network": "Native tests/docker-compose.yaml main.network_mode=none, checked by loopback-only interface inventory and failed external TLS probe"
 }
