@@ -11,11 +11,12 @@
     "python_requirement": "harbor==0.23.0"
   },
   "hermes": {
-    "release_tag": "v2026.9.24",
-    "resolved_release_commit": "f97608f178d1ffeca59860195ab7da295f7c8e5f",
-    "native_pin_kind": "tag",
-    "native_install_note": "Harbor's native Hermes adapter passes --branch v2026.9.24 to the moving main-branch installer URL. Harbor does not pass --commit or verify checkout HEAD. The resolved commit is upstream tag metadata, not an assertion about each runtime checkout.",
-    "runtime_check": "Native AGENT_START hook verifies checkout HEAD against the resolved release commit before solving"
+    "release_tag": "v0.21.4+canary.20261004T084456Z",
+    "resolved_release_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "native_pin_kind": "timestamped_canary_tag",
+    "native_install_note": "Native Harbor passes --branch with the timestamped canary tag to the moving main installer. The stable September tag is incompatible with the current pm bootstrap. Runtime HEAD is checked before solving. Bootstrap and dependency retrieval remain moving parts.",
+    "runtime_check": "Native AGENT_START hook verifies checkout HEAD against the resolved release commit before solving",
+    "installed_checkout_path": "/root/.hermes/hermes-agent"
   },
   "model": {
     "id": "qwen/qwen3.6-35b-a3b",
