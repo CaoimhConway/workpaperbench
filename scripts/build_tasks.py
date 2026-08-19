@@ -73,7 +73,7 @@ def build(identifier):
     runtime = json.loads((ROOT / 'config/runtime.json').read_text())
     (environment / 'Dockerfile').write_text('FROM ' + runtime['base_image'] + '\n'
         'WORKDIR /workspace\n'
-        'RUN apt-get update && apt-get install -y --no-install-recommends bash curl git ca-certificates procps iproute2 && rm -rf /var/lib/apt/lists/*\n'
+        'RUN apt-get update && apt-get install -y --no-install-recommends bash curl git ca-certificates procps iproute2 libatomic1 && rm -rf /var/lib/apt/lists/*\n'
         'RUN pip install --no-cache-dir jsonschema==4.26.0\n'
         'COPY data.sqlite evidence.json sources.md schema.json check_answer.py /workspace/\n')
     (tests / 'Dockerfile').write_text('FROM ' + runtime['base_image'] + '\n'
