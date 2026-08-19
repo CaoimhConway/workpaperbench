@@ -24,6 +24,15 @@ async def check():
                   "override_setup_timeout_sec": 1200},
     })
     trial = await Trial.create(config)
+    captured = []
+
+    async def setup_output(entry):
+        if entry.phase == "agent_setup":
+            captured.append(entry.text)
+            while sum(len(chunk) for chunk in captured) > 100_000 and len(captured) > 1:
+                captured.pop(0)
+
+    trial.add_log_callback(setup_output)
     result = await trial.run()
     exception = result.exception_info
     diagnostic = {"install_complete": exception is None, "key_free": True,
@@ -33,6 +42,13 @@ async def check():
         if re.search(r"sk-or-v1-[A-Za-z0-9_-]{16,}|gh[pousr]_[A-Za-z0-9]{20,}|PRIVATE KEY", detail):
             detail = "credential_pattern_removed"
         diagnostic["controlled_install_error"] = detail
+        output = "".join(captured)
+        lines = output.splitlines()
+        important = [line for line in lines if re.search(r"error|failed|fatal|exception|traceback|not found|not installed|cannot|denied", line, re.I)]
+        excerpt = "\n".join(important)[-8000:]
+        if re.search(r"sk-or-v1-[A-Za-z0-9_-]{16,}|gh[pousr]_[A-Za-z0-9]{20,}|PRIVATE KEY", excerpt):
+            excerpt = "credential_pattern_removed"
+        diagnostic["controlled_setup_errors"] = excerpt
     destination = root / "installation-results"
     destination.mkdir(exist_ok=True)
     (destination / "install.json").write_text(json.dumps(diagnostic, indent=2) + "\n")
