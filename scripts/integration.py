@@ -86,6 +86,8 @@ BOUNDARY
             for claim in alternate["answers"]:
                 if claim["sql"]:
                     claim["sql"] = wrapper.format(sql=claim["sql"])
+            if task.name == "wp05" and index == 0:
+                alternate["answers"][0]["evidence"] = ["export:periods"]
             name = task.name + "-alternative-" + str(index)
             results.append(native(control(task, name, alternate), name, True))
         for index, mutation in enumerate(("constant", "citations", "abstain")):
@@ -121,6 +123,11 @@ BOUNDARY
     results.append(native(control(task, "sql-denied", forbidden), "sql-denied", False))
     forbidden["answers"][0]["sql"] = "WITH RECURSIVE t(n) AS (VALUES(1) UNION ALL SELECT n+1 FROM t) SELECT SUM(n) AS value FROM t"
     results.append(native(control(task, "sql-timeout", forbidden), "sql-timeout", False))
+    historical = ROOT / "reports/runs/pilot-wp05-A-2/answer.json"
+    if historical.is_file():
+        answer = json.loads(historical.read_text())
+        name = "pilot-wp05-A-2-citation-regrade"
+        results.append(native(control(ROOT / "tasks/wp05", name, answer), name, False))
     (OUTPUT / "controls.json").write_text(json.dumps({"scope": scope, "run_id": os.environ["GITHUB_RUN_ID"], "commit": os.environ["GITHUB_SHA"], "controls": results}, indent=2) + "\n")
 
 

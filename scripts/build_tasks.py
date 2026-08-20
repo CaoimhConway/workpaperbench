@@ -50,7 +50,8 @@ def build(identifier):
     (environment / 'sources.md').write_text(definition['context'] + '\n')
     shutil.copyfile(environment / 'evidence.json', tests / 'evidence.json')
     shutil.copyfile(environment / 'sources.md', tests / 'sources.md')
-    common = '\n\nInputs are in /workspace: data.sqlite, evidence.json, sources.md, schema.json and check_answer.py. '
+    common = f'\n\nTask identifier: {identifier}. '
+    common += 'Inputs are in /workspace: data.sqlite, evidence.json, sources.md, schema.json and check_answer.py. '
     common += 'Publish one answer.json at /logs/artifacts/answer.json, using the shared schema. '
     common += 'Provide only the requested claim IDs, canonical units and one conclusion if requested. '
     common += 'For each answered claim include a single read-only SQLite statement returning one numeric column named value. '

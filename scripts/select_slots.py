@@ -36,7 +36,7 @@ def selection(mode, manifest_id, batch):
             raise ValueError("exploration ceiling")
         slots = [s for s in slots if batch == "all" or (s["arm"] == "A" if batch == "baseline" else s["arm"] == "B")]
     for slot in slots:
-        if not re.fullmatch(r"(?:pilot|final)-wp0[1-8]-[AB]-[1-3]", slot["slot_id"]):
+        if not re.fullmatch(r"(?:pilot-wp0[1-8]-[AB]-[1-9]|final-wp0[1-8]-[AB]-[1-3])", slot["slot_id"]):
             raise ValueError("invalid slot identifier")
     attempted = {}
     for page in range(1, 11):

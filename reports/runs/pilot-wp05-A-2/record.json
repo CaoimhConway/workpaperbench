@@ -1,0 +1,93 @@
+{
+  "answer_sha256": "d42121bbca58959f9128dfc61f0c6d1de124cc10e71881fd406597cea0d8d3ee",
+  "answer_status": "saved",
+  "arm": "A",
+  "campaign": "pilot",
+  "commit_sha": "df94c506ec6a87e80c12692881aa59621c321bda",
+  "config_hash": "72ab441e8c7a866ce4ad8d9b2031944b5fb362b9710d163a890e047733bb1c50",
+  "finished_at": "2026-10-05T06:16:22.896738+00:00",
+  "github_run_attempt": "1",
+  "github_run_id": "37271209030",
+  "harbor_commit": "1e5c5c6db929a10a140d05e606882c671ae20729",
+  "harbor_metrics": {
+    "agent_execution_seconds": 65.661,
+    "agent_setup_seconds": 121.69,
+    "environment_setup_seconds": 18.045,
+    "n_input_tokens": 0,
+    "n_output_tokens": 0,
+    "verifier_seconds": 18.148
+  },
+  "harbor_native_version_fix": {
+    "change": "Two version invocations use --version. OpenRouter models use the canonical ID with explicit --provider openrouter. Session export selects the current oneshot source. Existing native adapter only, no new adapter or credential flow.",
+    "corrected_module_sha256": "02ebd73edb387091480df45fdea27b70bf37ca377ee0b68047b84d6cdbede112",
+    "original_module_sha256": "012e980302b26641dcf77f31fe71a368b2022b098619853addd015c5e18e47c6"
+  },
+  "harbor_version": "0.23.0",
+  "hermes_checkout_commit_verified": true,
+  "hermes_release_tag": "v0.21.4+canary.20261004T084456Z",
+  "hermes_resolved_release_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "hermes_runtime_version": {
+    "checked_before_solving": true,
+    "checkout_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "expected_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "matches_pin": true
+  },
+  "model": "qwen/qwen3.6-35b-a3b",
+  "model_route_policy": "OpenRouter default routing for this model. Provider may vary between compatible endpoints",
+  "native_command": "Harbor Trial.create / Trial.run with native Hermes",
+  "native_return_code": 0,
+  "provider_after": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 19.9866029,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 19.98878225,
+    "reset_is_null": true,
+    "usage_usd": 0.01121775
+  },
+  "provider_before": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 20.0,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 20.0,
+    "reset_is_null": true,
+    "usage_usd": 0.0
+  },
+  "provider_cost_delta_usd": 0.01121775,
+  "repetition": 2,
+  "reservation_usd_per_slot": 0.2,
+  "run_id": "37271209030",
+  "slot_id": "pilot-wp05-A-2",
+  "source_group": "authored-migration",
+  "split": "development",
+  "started_at": "2026-10-05T06:12:15.944301+00:00",
+  "status": "task_failed",
+  "task": "wp05",
+  "task_origin": "synthetic",
+  "tool_event_counts": {
+    "read_file": 5,
+    "terminal": 6,
+    "write_file": 1
+  },
+  "verdict": {
+    "checks": {
+      "availability": false,
+      "conclusion": null,
+      "evidence_context": false,
+      "format": false,
+      "numerical": null,
+      "replay": null
+    },
+    "complete": false,
+    "errors": [
+      "format:ValueError"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    }
+  }
+}
