@@ -1,4 +1,4 @@
-"""Key-free native installation diagnostic on the hosted runner."""
+"""Key-free native installation and CLI argument diagnostic on the hosted runner."""
 import asyncio
 import json
 import os
@@ -8,6 +8,7 @@ import re
 
 async def check():
     from harbor.models.trial.config import TrialConfig
+    from harbor.trial.hooks import TrialEvent
     from harbor.trial.trial import Trial
 
     if os.environ.get("RUNNER_OS") != "Linux" or os.environ.get("GITHUB_REPOSITORY") != "CaoimhConway/workpaperbench":
@@ -18,7 +19,7 @@ async def check():
     runtime = json.loads((root / "config/runtime.json").read_text())
     config = TrialConfig.model_validate({
         "task": {"path": str(root / "tasks/wp01")}, "trial_name": "native-install",
-        "trials_dir": str(root / ".raw/install"), "install_only": True,
+        "trials_dir": str(root / ".raw/install"), "verifier": {"disable": True},
         "agent": {"name": "hermes", "model_name": runtime["model"]["harbor_model"],
                   "env": {"HERMES_HOME": "/tmp/hermes"},
                   "kwargs": {"version": runtime["hermes"]["release_tag"]},
@@ -34,11 +35,27 @@ async def check():
                 captured.pop(0)
 
     trial.add_log_callback(setup_output)
+    startup = {}
+
+    async def arguments(event):
+        result = await trial.agent_environment.exec(
+            command='export PATH="$HOME/.local/bin:$PATH" && hermes --yolo chat --help',
+            env={"HERMES_HOME": "/tmp/hermes"}, timeout_sec=30)
+        text = (result.stdout or "") + (result.stderr or "")
+        startup.update(return_code=result.return_code,
+                       supported_flags={flag: flag in text for flag in ("--model", "--toolsets", "-Q", "--query")})
+        if result.return_code:
+            startup["key_free_cli_error"] = text[-4000:]
+        raise RuntimeError("key_free_argument_check_complete")
+
+    trial.add_hook(TrialEvent.AGENT_START, arguments)
     result = await trial.run()
     exception = result.exception_info
-    diagnostic = {"install_complete": exception is None, "key_free": True,
+    passed = startup.get("return_code") == 0 and all(startup.get("supported_flags", {}).values())
+    diagnostic = {"install_complete": bool(startup), "cli_arguments_valid": passed,
+                  "startup": startup, "key_free": True,
                   "exception_type": exception.exception_type if exception else None}
-    if exception:
+    if exception and not startup:
         detail = exception.exception_message[-4000:]
         if re.search(r"sk-or-v1-[A-Za-z0-9_-]{16,}|gh[pousr]_[A-Za-z0-9]{20,}|PRIVATE KEY", detail):
             detail = "credential_pattern_removed"
@@ -53,8 +70,8 @@ async def check():
     destination = root / "installation-results"
     destination.mkdir(exist_ok=True)
     (destination / "install.json").write_text(json.dumps(diagnostic, indent=2) + "\n")
-    print("Native installation", "passed" if exception is None else "failed")
-    return 0 if exception is None else 1
+    print("Native installation and CLI arguments", "passed" if passed else "failed")
+    return 0 if passed else 1
 
 
 if __name__ == "__main__":
