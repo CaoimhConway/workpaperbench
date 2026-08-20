@@ -39,3 +39,15 @@ def test_decoded_artifact_scan_catches_json_escaped_credential():
     assert not runner.credential_in(wire, key)
     canonical = json.dumps(json.loads(wire)).encode()
     assert runner.credential_in(canonical, key)
+
+
+def test_failure_diagnostics_emit_codes_without_untrusted_text(tmp_path, monkeypatch):
+    monkeypatch.setattr(runner, 'ROOT', tmp_path)
+    raw = tmp_path / '.raw'
+    raw.mkdir()
+    path = raw / 'failure.txt'
+    path.write_text('Invalid model ID\nUntrusted candidate prose and private-value-1234567890')
+    codes = runner.failure_codes(path)
+    assert codes == ['invalid_model_id']
+    assert 'private-value' not in json.dumps(codes)
+    assert runner.failure_codes(tmp_path / 'missing') == []

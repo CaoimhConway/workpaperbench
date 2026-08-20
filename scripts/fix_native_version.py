@@ -1,4 +1,4 @@
-"""Correct two obsolete version invocations in the pinned native adapter."""
+"""Correct pinned native CLI version, OpenRouter routing and session export."""
 import hashlib
 from importlib.metadata import distribution
 import os
@@ -14,8 +14,12 @@ source = path.read_bytes()
 if hashlib.sha256(source).hexdigest() != "012e980302b26641dcf77f31fe71a368b2022b098619853addd015c5e18e47c6":
     raise SystemExit("Pinned native source mismatch")
 corrected = source.replace(b"hermes version", b"hermes --version")
+original_route = b'            env["OPENROUTER_API_KEY"] = openrouter_key\n'
+corrected = corrected.replace(original_route, original_route +
+    b'            if provider == "openrouter":\n                hermes_provider_flag = "openrouter"\n')
+corrected = corrected.replace(b"--source cli 2>/dev/null", b"--source oneshot 2>/dev/null")
 digest = hashlib.sha256(corrected).hexdigest()
-if digest != "c80026a637135f3accfbc1534f77767f65269a0fcbbdc094355af3a8af5d498e":
+if digest != "02ebd73edb387091480df45fdea27b70bf37ca377ee0b68047b84d6cdbede112":
     raise SystemExit("Native correction mismatch")
 path.write_bytes(corrected)
-print("Native Hermes version flag corrected", digest)
+print("Native Hermes CLI compatibility corrected", digest)
