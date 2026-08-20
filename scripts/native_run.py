@@ -387,6 +387,7 @@ def execute(mode, slot_id):
     trial_config = {"task": {"path": str(task_dir)}, "trial_name": slot_id,
                     "trials_dir": str(raw_root), "agent": {
                         "name": "hermes", "model_name": RUNTIME["model"]["harbor_model"],
+                        "env": {"HERMES_HOME": "/tmp/hermes"},
                         "kwargs": {"version": RUNTIME["hermes"]["release_tag"],
                                    "toolsets": RUNTIME["agent"]["toolsets"]},
                         "override_timeout_sec": RUNTIME["agent"]["solve_timeout_sec"],

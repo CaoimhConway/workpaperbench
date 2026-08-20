@@ -20,6 +20,7 @@ async def check():
         "task": {"path": str(root / "tasks/wp01")}, "trial_name": "native-install",
         "trials_dir": str(root / ".raw/install"), "install_only": True,
         "agent": {"name": "hermes", "model_name": runtime["model"]["harbor_model"],
+                  "env": {"HERMES_HOME": "/tmp/hermes"},
                   "kwargs": {"version": runtime["hermes"]["release_tag"]},
                   "override_setup_timeout_sec": 1200},
     })

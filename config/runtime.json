@@ -21,7 +21,7 @@
     "native_pin_kind": "timestamped_canary_tag",
     "native_install_note": "Native Harbor passes --branch with the timestamped canary tag to the moving main installer. The stable September tag is incompatible with the current pm bootstrap. Runtime HEAD is checked before solving. Bootstrap and dependency retrieval remain moving parts.",
     "runtime_check": "Native AGENT_START hook verifies checkout HEAD against the resolved release commit before solving",
-    "installed_checkout_path": "/root/.hermes/hermes-agent"
+    "installed_checkout_path": "/tmp/hermes/hermes-agent"
   },
   "model": {
     "id": "qwen/qwen3.6-35b-a3b",
@@ -43,7 +43,10 @@
     "treatment_delivery": [
       "Harbor extra_instruction_paths points to SKILL.md",
       "Harbor agent.skills registers the containing directory for Hermes discovery"
-    ]
+    ],
+    "env": {
+      "HERMES_HOME": "/tmp/hermes"
+    }
   },
   "cost": {
     "provider_metadata_url": "https://openrouter.ai/api/v1/key",
