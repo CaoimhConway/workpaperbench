@@ -58,6 +58,7 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install 'uv==0.9.26'
       - run: uv pip install --system 'harbor==0.23.0' -e .
+      - run: python scripts/fix_native_version.py
       - name: Capped budget check and one native live slot
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}

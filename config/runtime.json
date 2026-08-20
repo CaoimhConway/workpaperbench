@@ -8,7 +8,12 @@
   "harbor": {
     "version": "0.23.0",
     "git_commit": "1e5c5c6db929a10a140d05e606882c671ae20729",
-    "python_requirement": "harbor==0.23.0"
+    "python_requirement": "harbor==0.23.0",
+    "native_version_fix": {
+      "original_module_sha256": "012e980302b26641dcf77f31fe71a368b2022b098619853addd015c5e18e47c6",
+      "corrected_module_sha256": "c80026a637135f3accfbc1534f77767f65269a0fcbbdc094355af3a8af5d498e",
+      "change": "Two native Hermes CLI version invocations use the supported --version flag. No agent behavior, adapter class or credential flow changed."
+    }
   },
   "hermes": {
     "release_tag": "v0.21.4+canary.20261004T084456Z",
