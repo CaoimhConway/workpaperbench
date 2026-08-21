@@ -1,0 +1,39 @@
+{
+  "task_id": "wp05",
+  "answers": [
+    {
+      "id": "naive_growth",
+      "status": "answered",
+      "value": 65.0,
+      "unit": "percent",
+      "evidence": [
+        "P1 export: definition=largest_eligible_per_tx, transfer_volume=200, events t1/a/b/c",
+        "P2 export: definition=all_eligible_events, transfer_volume=330, events t5/f/g/h"
+      ],
+      "sql": "SELECT (330.0 - 200.0) / 200.0 * 100.0 AS value",
+      "reason_code": null
+    },
+    {
+      "id": "comparable_growth",
+      "status": "answered",
+      "value": 10.0,
+      "unit": "percent",
+      "evidence": [
+        "P1 all_eligible_events: events a(100)+b(100)+c(100)=300, excluding mint d and burn e",
+        "P2 all_eligible_events: events f(110)+g(110)+h(110)=330, excluding mint i and burn j",
+        "Definition from sources.md: exclude mint/burn, count all remaining transfer events"
+      ],
+      "sql": "SELECT ((SELECT SUM(amount_units) FROM events WHERE period='P2' AND event_kind NOT IN ('mint','burn')) - (SELECT SUM(amount_units) FROM events WHERE period='P1' AND event_kind NOT IN ('mint','burn'))) * 100.0 / (SELECT SUM(amount_units) FROM events WHERE period='P1' AND event_kind NOT IN ('mint','burn')) AS value",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "P1 all_eligible_events eligible transfer total=300",
+      "P2 all_eligible_events eligible transfer total=330",
+      "Sources.md definition: exclude mint/burn, all_eligible_events counts all remaining event amounts"
+    ]
+  }
+}
