@@ -1,0 +1,56 @@
+#!/bin/bash
+set -euo pipefail
+cat > /logs/artifacts/answer.json <<'ANSWER'
+{
+  "task_id": "wp07",
+  "answers": [
+    {
+      "id": "q1_revenue",
+      "status": "answered",
+      "value": 23117,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:revenue"
+      ],
+      "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN revenue_million END) r2,MAX(CASE WHEN period='H1' THEN revenue_million END) rh,MAX(CASE WHEN period='Q2' THEN gross_profit_million END) g2,MAX(CASE WHEN period='H1' THEN gross_profit_million END) gh FROM services WHERE entity='Apple' AND fiscal_year=2024) SELECT rh-r2 AS value FROM p",
+      "reason_code": null
+    },
+    {
+      "id": "q1_gross_profit",
+      "status": "answered",
+      "value": 16837,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:profit"
+      ],
+      "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN revenue_million END) r2,MAX(CASE WHEN period='H1' THEN revenue_million END) rh,MAX(CASE WHEN period='Q2' THEN gross_profit_million END) g2,MAX(CASE WHEN period='H1' THEN gross_profit_million END) gh FROM services WHERE entity='Apple' AND fiscal_year=2024) SELECT gh-g2 AS value FROM p",
+      "reason_code": null
+    },
+    {
+      "id": "q1_margin",
+      "status": "answered",
+      "value": 72.8338452221309,
+      "unit": "percent",
+      "evidence": [
+        "filing:revenue",
+        "filing:profit"
+      ],
+      "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN revenue_million END) r2,MAX(CASE WHEN period='H1' THEN revenue_million END) rh,MAX(CASE WHEN period='Q2' THEN gross_profit_million END) g2,MAX(CASE WHEN period='H1' THEN gross_profit_million END) gh FROM services WHERE entity='Apple' AND fiscal_year=2024) SELECT 100.0*(gh-g2)/(rh-r2) AS value FROM p",
+      "reason_code": null
+    },
+    {
+      "id": "margin_change",
+      "status": "answered",
+      "value": 1.783827715397905,
+      "unit": "percentage_points",
+      "evidence": [
+        "filing:revenue",
+        "filing:profit"
+      ],
+      "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN revenue_million END) r2,MAX(CASE WHEN period='H1' THEN revenue_million END) rh,MAX(CASE WHEN period='Q2' THEN gross_profit_million END) g2,MAX(CASE WHEN period='H1' THEN gross_profit_million END) gh FROM services WHERE entity='Apple' AND fiscal_year=2024) SELECT 100.0*g2/r2-100.0*(gh-g2)/(rh-r2) AS value FROM p",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}
+ANSWER

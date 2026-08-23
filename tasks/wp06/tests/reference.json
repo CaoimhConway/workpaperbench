@@ -1,0 +1,37 @@
+{
+  "task_id": "wp06",
+  "answers": [
+    {
+      "id": "reported_growth",
+      "status": "answered",
+      "value": 100,
+      "unit": "percent",
+      "evidence": [
+        "observations:amounts",
+        "policy:coverage"
+      ],
+      "sql": "SELECT 100.0*((SELECT SUM(amount_units) FROM observations WHERE period='P2')-(SELECT SUM(amount_units) FROM observations WHERE period='P1'))/(SELECT SUM(amount_units) FROM observations WHERE period='P1') AS value",
+      "reason_code": null
+    },
+    {
+      "id": "matched_growth",
+      "status": "answered",
+      "value": 0,
+      "unit": "percent",
+      "evidence": [
+        "observations:amounts",
+        "policy:coverage"
+      ],
+      "sql": "WITH matched_keys AS (SELECT network_asset FROM observations GROUP BY network_asset HAVING COUNT(DISTINCT period)=2), totals AS (SELECT period,SUM(o.amount_units) AS amount FROM observations AS o JOIN matched_keys AS m USING(network_asset) GROUP BY period) SELECT 100.0*((SELECT amount FROM totals WHERE period='P2')-(SELECT amount FROM totals WHERE period='P1'))/(SELECT amount FROM totals WHERE period='P1') AS value",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "incompatible_coverage",
+    "evidence": [
+      "observations:amounts",
+      "policy:coverage"
+    ]
+  }
+}

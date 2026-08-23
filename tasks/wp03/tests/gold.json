@@ -1,0 +1,108 @@
+{
+  "answers": {
+    "p1_total": {
+      "status": "answered",
+      "value": 100,
+      "changed_value": 120,
+      "unit": "token_units",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "release:20240701",
+          "policy:selection"
+        ],
+        [
+          "release:20240701",
+          "policy:selection",
+          "policy:coverage"
+        ]
+      ]
+    },
+    "p2_total": {
+      "status": "answered",
+      "value": 120,
+      "changed_value": 150,
+      "unit": "token_units",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "release:20240703",
+          "policy:selection"
+        ],
+        [
+          "release:20240703",
+          "policy:selection",
+          "release:20240702"
+        ],
+        [
+          "release:20240703",
+          "policy:selection",
+          "policy:coverage"
+        ]
+      ]
+    },
+    "as_of_growth": {
+      "status": "answered",
+      "value": 20,
+      "changed_value": 25,
+      "unit": "percent",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "release:20240701",
+          "release:20240703",
+          "policy:selection",
+          "policy:coverage"
+        ],
+        [
+          "release:20240701",
+          "release:20240703",
+          "policy:selection",
+          "policy:coverage",
+          "release:20240702"
+        ]
+      ]
+    },
+    "p2_usd_value": {
+      "status": "insufficient_evidence",
+      "unit": "usd",
+      "reason_codes": [
+        "missing_required_input"
+      ],
+      "evidence": [
+        [
+          "valuation:availability"
+        ]
+      ]
+    }
+  },
+  "conclusion": {
+    "verdict": "supported",
+    "reason_codes": [
+      "supported_by_calculation"
+    ],
+    "evidence": [
+      [
+        "release:20240701",
+        "release:20240703",
+        "policy:selection",
+        "policy:coverage"
+      ],
+      [
+        "release:20240701",
+        "release:20240703",
+        "policy:selection",
+        "policy:coverage",
+        "release:20240702"
+      ]
+    ]
+  },
+  "task_id": "wp03",
+  "hashes": {
+    "data.sqlite": "fd3baf6e69e71a6f534e4974574e945276cf7874f21a5b620cb3980c1dfa1729",
+    "changed.sqlite": "23c3a4913914473ccb27e13781808736097247dd996f4a2b585171b518eb100f",
+    "schema.json": "72ec4ad819d5f5a67b25b7707b7630e603333d95f3e23330e215b9b7af14ee77",
+    "evidence.json": "f901cbb14cff7b9d088f242c376e87d2d81e5db19920a529fe89d3bef11216f0",
+    "sources.md": "41ee5623ea1df533def601c7e31ad517063e0be7ad6bdfe5ad7f0b19f5534e32"
+  }
+}

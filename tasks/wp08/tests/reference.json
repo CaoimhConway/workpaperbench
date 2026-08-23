@@ -1,0 +1,50 @@
+{
+  "task_id": "wp08",
+  "answers": [
+    {
+      "id": "transfer_total",
+      "status": "answered",
+      "value": 775,
+      "unit": "token_units",
+      "evidence": [
+        "corpus:events",
+        "policy:counting",
+        "metadata:token"
+      ],
+      "sql": "SELECT SUM(amount_base_units)/1000000.0 AS value FROM events WHERE sender!='0x0000000000000000000000000000000000000000' AND recipient!='0x0000000000000000000000000000000000000000'",
+      "reason_code": null
+    },
+    {
+      "id": "business_payment_volume",
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "token_units",
+      "evidence": [
+        "corpus:events",
+        "policy:scope"
+      ],
+      "sql": null,
+      "reason_code": "missing_required_labels"
+    },
+    {
+      "id": "unique_humans",
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "humans",
+      "evidence": [
+        "corpus:events",
+        "policy:scope"
+      ],
+      "sql": null,
+      "reason_code": "missing_required_labels"
+    }
+  ],
+  "conclusion": {
+    "verdict": "not_established",
+    "reason_code": "missing_required_evidence",
+    "evidence": [
+      "corpus:events",
+      "policy:scope"
+    ]
+  }
+}

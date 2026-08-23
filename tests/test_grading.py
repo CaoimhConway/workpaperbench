@@ -39,7 +39,7 @@ def test_alternative_cte_and_subquery(tmp_path, task):
 
 
 @pytest.mark.parametrize('task', TASKS)
-@pytest.mark.parametrize('control', ['constant', 'table_constant', 'all_citations', 'always_abstain', 'wrong_unit', 'wrong_scalar', 'wrong_evidence', 'always_skeptical'])
+@pytest.mark.parametrize('control', ['constant', 'table_constant', 'all_citations', 'always_abstain', 'wrong_unit', 'wrong_scalar', 'wrong_evidence', 'wrong_conclusion'])
 def test_wrong_submissions(tmp_path, task, control):
     trusted = ROOT / 'tasks' / Path(task).stem / 'tests'
     answer = json.loads((trusted / 'reference.json').read_text())

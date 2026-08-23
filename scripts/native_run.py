@@ -345,7 +345,7 @@ def execute(mode, slot_id):
     }
     definition = json.loads((ROOT / "sources" / (task_id + ".json")).read_text())
     record["source_group"] = definition["source_group"]
-    record["task_origin"] = definition.get("origin", "synthetic" if task_id in ("wp02", "wp05") else "primary_filing_facts")
+    record["task_origin"] = definition["origin"]
     record["config_hash"] = hashlib.sha256((ROOT / "config/runtime.json").read_bytes() + (task_dir / "task.toml").read_bytes() + (task_dir / "instruction.md").read_bytes()).hexdigest()
     if mode == "final":
         try:

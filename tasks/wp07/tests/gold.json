@@ -1,0 +1,109 @@
+{
+  "answers": {
+    "q1_revenue": {
+      "status": "answered",
+      "value": 23117,
+      "changed_value": 24000,
+      "unit": "usd_million",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "filing:revenue"
+        ],
+        [
+          "filing:services2024"
+        ],
+        [
+          "filing:revenue",
+          "filing:context"
+        ],
+        [
+          "filing:services2024",
+          "filing:context"
+        ]
+      ]
+    },
+    "q1_gross_profit": {
+      "status": "answered",
+      "value": 16837,
+      "changed_value": 17500,
+      "unit": "usd_million",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "filing:profit"
+        ],
+        [
+          "filing:services2024"
+        ],
+        [
+          "filing:profit",
+          "filing:context"
+        ],
+        [
+          "filing:services2024",
+          "filing:context"
+        ]
+      ]
+    },
+    "q1_margin": {
+      "status": "answered",
+      "value": 72.8338452221309,
+      "changed_value": 72.91666666666667,
+      "unit": "percent",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "filing:revenue",
+          "filing:profit"
+        ],
+        [
+          "filing:services2024"
+        ],
+        [
+          "filing:revenue",
+          "filing:profit",
+          "filing:context"
+        ],
+        [
+          "filing:services2024",
+          "filing:context"
+        ]
+      ]
+    },
+    "margin_change": {
+      "status": "answered",
+      "value": 1.783827715397905,
+      "changed_value": 1.0833333333333286,
+      "unit": "percentage_points",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "filing:revenue",
+          "filing:profit"
+        ],
+        [
+          "filing:services2024"
+        ],
+        [
+          "filing:revenue",
+          "filing:profit",
+          "filing:context"
+        ],
+        [
+          "filing:services2024",
+          "filing:context"
+        ]
+      ]
+    }
+  },
+  "conclusion": null,
+  "task_id": "wp07",
+  "hashes": {
+    "data.sqlite": "73acafad4cad6c307087c1a6b7717a5bf8209ca071e3d0c8c3fc7464e6548610",
+    "changed.sqlite": "afb70789ef8938cebf75dbb1da2aae46af3c0b0b71d9570b82cafd7cf1c0f522",
+    "schema.json": "72ec4ad819d5f5a67b25b7707b7630e603333d95f3e23330e215b9b7af14ee77",
+    "evidence.json": "0767fa8a7e598af6815776a8930fdf37f705dceaaf4b42346c6b6f247b41e406",
+    "sources.md": "5dc74f832f1674f34647df4447795f8ef2e7f6aef1aeff5e42b76825b80265b8"
+  }
+}
