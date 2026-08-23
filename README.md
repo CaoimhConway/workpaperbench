@@ -4,7 +4,7 @@ Can an agent calculate the right number - and support the conclusion?
 
 Eight small native Harbor tasks test financial evidence selection, metric
 comparability and replayable SQL using Hermes Agent with one hosted model. Software is complete and the full native gate passed 64
-controls. The 48-slot evaluation is not yet run. Development exploration is recorded separately.
+controls. The frozen 48-slot evaluation is running. Development exploration is recorded separately.
 
 This authored workpaper derives Tesla calendar Q1 2024 R&D from
 [its Q2 filing](https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm).
