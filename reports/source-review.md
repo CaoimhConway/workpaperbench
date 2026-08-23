@@ -45,3 +45,11 @@ questions are legitimate requirements. It noted that wp04's single-window questi
 and wp08's logs-versus-purpose/person question can partly cue evidence limits.
 These cases do not establish difficult open-world discovery or contamination-free
 performance. Source correctness was outside that review's restricted scope.
+
+The final source-first audit found an originally invisible wrong matched-coverage
+join: equal tag multiplicities cancel in the original ratio. The wp06 changed
+control now varies metadata-row multiplicity for one covered asset as well as
+amounts, preserving population and definitions. The bad query still returns 0%
+on original data but 22% on changed data instead of the correct 25%. A named
+local and native negative control requires rejection. The audit also accepted
+wp08 policy:scope alone as a valid explanation of absent purpose/person labels.
