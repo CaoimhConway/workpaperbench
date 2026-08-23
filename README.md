@@ -3,8 +3,8 @@
 Can an agent calculate the right number - and support the conclusion?
 
 Eight small native Harbor tasks test financial evidence selection, metric
-comparability and replayable SQL using Hermes Agent with one hosted model. The
-48-slot evaluation is not yet run. Development exploration is recorded separately.
+comparability and replayable SQL using Hermes Agent with one hosted model. Software is complete and the full native gate passed 64
+controls. The 48-slot evaluation is not yet run. Development exploration is recorded separately.
 
 This authored workpaper derives Tesla calendar Q1 2024 R&D from
 [its Q2 filing](https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm).
@@ -69,7 +69,7 @@ The candidate environment receives the dedicated lifetime-capped inference key.
 Its terminal can read that key. Native TCP filtering allows the inference host,
 but DNS/ICMP remain residual channels. This is not absolute egress isolation or
 keyless execution. The separate verifier uses a network-none namespace and has
-no inference key or Docker socket. Candidate inputs exclude gold, checkout,
+no inference key or Docker socket. Candidate inputs exclude gold, project checkout and
 Git history, GitHub credentials and host sockets. No paid key is provided to
 push or pull-request CI.
 
