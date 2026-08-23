@@ -16,25 +16,99 @@ for raw in tracked:
     data = path.read_bytes()
     if any(re.search(pattern, data) for pattern in patterns):
         failures.append(str(path.relative_to(ROOT)) + ':credential_pattern')
-for dockerfile in (ROOT / 'tasks').glob('*/environment/Dockerfile'):
+for dockerfile in list((ROOT / 'tasks').glob('*/environment/Dockerfile')) + list((ROOT / 'datasets').glob('*/tasks/*/environment/Dockerfile')):
     text = dockerfile.read_text()
     if 'COPY . ' in text or 'gold' in text or '.git' in text or 'OPENROUTER_API_KEY' in text:
         failures.append(str(dockerfile.relative_to(ROOT)) + ':candidate_context')
-for obj in subprocess.check_output(['git','rev-list','--objects','--all'],cwd=ROOT).splitlines():
-    sha = obj.split(b' ')[0]
-    kind = subprocess.check_output(['git','cat-file','-t',sha],cwd=ROOT).strip()
-    if kind != b'blob':
-        continue
-    content = subprocess.check_output(['git','cat-file','blob',sha],cwd=ROOT)
-    if any(re.search(pattern,content) for pattern in patterns):
-        failures.append('history:credential_pattern')
+with subprocess.Popen(['git', 'cat-file', '--batch'], cwd=ROOT,
+                      stdin=subprocess.PIPE, stdout=subprocess.PIPE) as objects:
+    for obj in subprocess.check_output(['git', 'rev-list', '--objects', '--all'], cwd=ROOT).splitlines():
+        objects.stdin.write(obj.split(b' ')[0] + b'\n')
+        objects.stdin.flush()
+        header = objects.stdout.readline().split()
+        content = objects.stdout.read(int(header[2]))
+        if objects.stdout.read(1) != b'\n':
+            raise ValueError('history_object_framing')
+        if header[1] == b'blob' and any(re.search(pattern, content) for pattern in patterns):
+            failures.append('history:credential_pattern')
+    objects.stdin.close()
+    if objects.wait() != 0:
+        raise ValueError('history_object_read_failed')
 freeze = ROOT / 'config/freeze.json'
 if freeze.exists():
     manifest = json.loads(freeze.read_text())
-    for name, expected in manifest['hashes'].items():
-        if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected:
-            failures.append(name + ':freeze_mismatch')
+    expected_hashes = dict(manifest['hashes'])
+    if (ROOT / 'config/publication-inputs.json').exists():
+        from operations_review import publication_input_hashes
+        expected_hashes = publication_input_hashes(manifest, ROOT)
+    review_path = ROOT / 'config/review.json'
+    if review_path.exists():
+        review = json.loads(review_path.read_text())
+        if review['original_manifest_id'] != manifest['manifest_id'] or hashlib.sha256(freeze.read_bytes()).hexdigest() != review.get('publication_freeze_sha256', review['original_freeze_sha256']):
+            failures.append('original_freeze_changed')
+        # Publication copies have explicit original and current byte bindings.
+        # Financial contracts and all other inputs retain their original hashes.
+        allowed = {
+            '.github/workflows/benchmark.yml', '.github/workflows/ci.yml',
+            'pyproject.toml',
+            'workpaperbench/cli.py', 'workpaperbench/grading.py', 'workpaperbench/sql_worker.py',
+            *(f'scripts/{name}.py' for name in ('attempts', 'audit', 'collect_results', 'integration',
+                                              'native_run', 'regrade', 'select_slots')),
+            *(f'tasks/wp0{i}/tests/workpaperbench/{name}.py'
+              for i in range(1, 9) for name in ('grading', 'sql_worker')),
+        }
+        for name in review['correction_hashes']:
+            if name not in allowed and not re.fullmatch(r'tests/test_[a-z_]+\.py', name):
+                failures.append('unauthorized_correction_path')
+        if 'pyproject.toml' in review['correction_hashes']:
+            original = subprocess.check_output(['git', 'show', 'v0.1.0-software:pyproject.toml'], cwd=ROOT)
+            current = (ROOT / 'pyproject.toml').read_bytes()
+            version = rb'(?m)^version = "[0-9]+\.[0-9]+\.[0-9]+"$'
+            if (hashlib.sha256(original).hexdigest() != manifest['hashes']['pyproject.toml']
+                    or re.sub(version, b'version = "VERSION"', original, count=1)
+                    != re.sub(version, b'version = "VERSION"', current, count=1)):
+                failures.append('package_changes_beyond_version')
+        for name, expected in expected_hashes.items():
+            immutable = name.startswith('sources/') or name.startswith('config/') or (
+                name.startswith('tasks/') and '/workpaperbench/' not in name)
+            if immutable and hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected:
+                failures.append(name + ':candidate_or_reference_changed')
+        expected_hashes.update(review['correction_hashes'])
+    upgrade_path = ROOT / 'datasets/real-v1/manifest.json'
+    if upgrade_path.is_file():
+        upgrade = json.loads(upgrade_path.read_text())
+        from operations_review import reviewed_hashes
+        upgrade_hashes = reviewed_hashes(upgrade, ROOT)
+        permitted = {
+            '.github/workflows/benchmark.yml', '.github/workflows/ci.yml',
+            'pyproject.toml', 'DATA_SOURCES.md', 'workpaperbench/cli.py',
+            'scripts/native_trial.py', 'scripts/check_install.py', 'scripts/fix_native_version.py',
+            *(f'scripts/{name}.py' for name in ('audit', 'attempts', 'collect_results',
+                                              'native_run', 'select_slots')),
+        }
+        for name in permitted & expected_hashes.keys() & upgrade_hashes.keys():
+            expected_hashes[name] = upgrade_hashes[name]
+        for name, expected in upgrade_hashes.items():
+            path = ROOT / name
+            if path.is_symlink() or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+                failures.append(name + ':real_dataset_hash_mismatch')
+    if (ROOT / 'config/publication-inputs.json').exists():
+        expected_hashes = publication_input_hashes(manifest, ROOT, expected_hashes)
+    for name, expected in expected_hashes.items():
+        path = ROOT / name
+        if path.is_symlink() or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+            failures.append(name + ':versioned_hash_mismatch')
 if failures:
     print('\n'.join(failures))
     raise SystemExit(1)
-print('Tracked files, Git blobs, candidate contexts and available freeze hashes passed publication checks')
+for manifest_path in (ROOT / 'datasets/challenge-v1/manifests').glob('*.json'):
+    from select_slots import manifest_content_hash
+    manifest = json.loads(manifest_path.read_text())
+    if manifest_content_hash(manifest) != manifest['content_hash']:
+        raise SystemExit('challenge_manifest_changed')
+    from operations_review import challenge_reviewed_hashes
+    for name, expected in challenge_reviewed_hashes(manifest, ROOT).items():
+        path = ROOT / name
+        if path.is_symlink() or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+            raise SystemExit('challenge_input_changed:' + name)
+print('Publication checks passed. Frozen financial contracts, explicit publication copies and versioned implementation hashes verified.')
