@@ -53,3 +53,12 @@ amounts, preserving population and definitions. The bad query still returns 0%
 on original data but 22% on changed data instead of the correct 25%. A named
 local and native negative control requires rejection. The audit also accepted
 wp08 policy:scope alone as a valid explanation of absent purpose/person labels.
+
+A fresh read-only source-first audit independently checked filing context and
+arithmetic, source origins, SQL/evidence alternatives, the candidate/verifier
+boundary, workflows, and saved development accounting. Its material findings
+were the synthetic-origin fallback, shared metadata locators, tag-weight
+cancellation and legitimate scope-only conclusion evidence. These were corrected
+before evaluation. It then reported no additional material defect. The primary
+verification remains the actual local/native tests, with no external human
+validation or proof of unrestricted adversarial isolation.
