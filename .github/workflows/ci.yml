@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     permissions:
-      contents: read
+      contents: write
       actions: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
@@ -104,6 +104,22 @@ jobs:
           name: integration-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: integration-results/*.json
           retention-days: 7
+      - name: Preserve verified review evidence on the dedicated branch
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/fix/review-integrity'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name 'Caoimh Conway'
+          git config user.email '55163829+CaoimhConway@users.noreply.github.com'
+          gh auth setup-git
+          git fetch origin "$GITHUB_REF_NAME"
+          test "$(git rev-parse FETCH_HEAD)" = "$GITHUB_SHA"
+          cp integration-results/controls.json "reports/integration-review-$GITHUB_RUN_ID.json"
+          git add reports/runs reports/results.md reports/scores.json reports/reconciliation.json "reports/integration-review-$GITHUB_RUN_ID.json"
+          python scripts/audit.py
+          git diff --cached --quiet && exit 0
+          git commit -m 'Preserve reviewed trial evidence and native checks [skip ci]'
+          git push origin "HEAD:$GITHUB_REF_NAME"
   capture:
     if: github.event_name == 'workflow_dispatch' && inputs.capture
     runs-on: ubuntu-24.04
