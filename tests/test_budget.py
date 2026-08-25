@@ -36,7 +36,7 @@ def test_decoded_artifact_scan_catches_json_escaped_credential():
     key = 'synthetic-private-value-' + '0123456789' * 4
     escaped = ''.join('\\u' + format(ord(character), '04x') for character in key)
     wire = ('{"sql":"' + escaped + '"}').encode()
-    assert not runner.credential_in(wire, key)
+    assert runner.credential_in(wire, key)
     canonical = json.dumps(json.loads(wire)).encode()
     assert runner.credential_in(canonical, key)
 
