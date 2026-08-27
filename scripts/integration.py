@@ -26,7 +26,9 @@ def native(task, name, expected, agent="oracle"):
     summary = {"name": name, "expected_complete": expected, "verdict": verdict,
             "agent": agent, "exception_type": (result.get("exception_info") or {}).get("exception_type")}
     (OUTPUT / (name + ".json")).write_text(json.dumps(summary, indent=2) + "\n")
-    if process.returncode or verdict["complete"] != expected:
+    boundary = verdict.get("isolation", {})
+    isolated = all(boundary.get(key) is True for key in ("network_namespace_none", "network_probe_blocked", "no_inference_key", "no_docker_socket"))
+    if process.returncode or verdict["complete"] != expected or not isolated:
         print(json.dumps({"name": name, "verdict": verdict, "exception": result.get("exception_info")}))
         raise AssertionError("unexpected native result")
     print(name, "passed")

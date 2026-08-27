@@ -178,3 +178,14 @@ def test_reference_copies_use_current_reviewed_grader():
     for task in (ROOT/'tasks').glob('wp*'):
         for name in ('grading.py','sql_worker.py'):
             assert (task/'tests/workpaperbench'/name).read_bytes()==(ROOT/'workpaperbench'/name).read_bytes()
+
+
+def test_authored_formula_control_exposes_accidentally_correct_number(tmp_path):
+    # Separate control, not a repaired or rescored model submission.
+    trusted, answer, directory = output(tmp_path)
+    answer['answers'][2]['sql'] = "SELECT (SELECT transfer_units FROM releases WHERE release_id='r-p2-20240703') - (SELECT transfer_units FROM releases WHERE release_id='r-p1-20240701') * 100.0 / (SELECT transfer_units FROM releases WHERE release_id='r-p1-20240701') AS value"
+    verdict = evaluate(directory, answer, trusted)
+    assert verdict['checks']['numerical'] is True
+    assert verdict['details']['claims']['as_of_growth']['original_replay'] is True
+    assert verdict['details']['claims']['as_of_growth']['changed_replay'] is False
+    assert not verdict['complete']
