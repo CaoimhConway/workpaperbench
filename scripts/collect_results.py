@@ -44,6 +44,7 @@ def authenticate_attempt(artifact, run, manifest_id, cache):
             or actual['run_attempt'] != attempt):
         raise ValueError('artifact_attempt_identity_mismatch')
     artifact['workflow_run'] = {**artifact['workflow_run'], 'run_attempt': attempt}
+    artifact['declared_slots'] = match[2].split('--') if match.lastindex == 2 else []
 
 
 def screened(data):
@@ -80,7 +81,11 @@ def import_archive(data, artifact, root):
     for group, files in groups.items():
         if not all(screened(b) for b in files.values()):
             raise ValueError("credential_pattern_in_artifact")
+        if 'record.json' not in files:
+            raise ValueError('artifact_record_missing')
         record = json.loads(files["record.json"])
+        if not isinstance(record, dict) or record.get('slot_id') not in artifact.get('declared_slots', []):
+            raise ValueError('artifact_declared_slot_identity_mismatch')
         if group != "single" and record.get("slot_id") != group:
             raise ValueError("archive_slot_mismatch")
         imported.append(save_files(files, artifact, hashlib.sha256(data).hexdigest(), root))
@@ -114,6 +119,7 @@ def save_files(files, artifact, archive_sha256, root):
     audit = {
         "artifact_id": artifact["id"], "archive_sha256": archive_sha256,
         "workflow_run": artifact["workflow_run"], "archive_digest_verified": True,
+        "declared_slots": artifact['declared_slots'],
         "retained_file_sha256": {n: hashlib.sha256(b).hexdigest() for n, b in files.items()},
         "original_bytes_available": "answer.raw.txt" in files,
         "legacy_record_digest": record.get("answer_sha256") if "raw_sha256" not in record else None,

@@ -30,6 +30,7 @@ def archive(tmp_path, member=None, update=None):
         z.writestr(member or 'answer.json', '{}\n')
     data = buffer.getvalue()
     artifact = {'id': 1, 'digest': 'sha256:' + hashlib.sha256(data).hexdigest(),
+                'declared_slots': [slot['slot_id']],
                 'workflow_run': {'id': 5, 'head_sha': 'a' * 40, 'run_attempt': 1}}
     return data, artifact
 
@@ -147,6 +148,7 @@ def test_attempt_number_is_authenticated_against_actions(monkeypatch):
     collect_results.authenticate_attempt(artifact, run, 'test', {})
     assert paths == ['repos/CaoimhConway/workpaperbench/actions/runs/5/attempts/1']
     assert artifact['workflow_run']['run_attempt'] == 1
+    assert artifact['declared_slots'] == ['final-wp03-A-1']
     monkeypatch.setattr(collect_results, 'api', lambda path: run)
     with pytest.raises(ValueError, match='attempt_identity'):
         collect_results.authenticate_attempt(artifact, run, 'test', {})
@@ -165,3 +167,33 @@ def test_new_experiment_import_cannot_overwrite_legacy_slot(tmp_path):
 def test_actual_corrected_checkout_cannot_launch_old_paid_freeze():
     with pytest.raises(ValueError, match='freeze_hash_mismatch'):
         native_run.frozen_inputs()
+
+
+def test_artifact_name_cannot_substitute_another_scheduled_slot(tmp_path):
+    data, artifact = archive(tmp_path)
+    artifact['declared_slots'] = ['final-wp03-B-1']
+    with pytest.raises(ValueError, match='declared_slot_identity'):
+        collect_results.import_archive(data, artifact, tmp_path)
+    assert not (tmp_path / 'reports/runs').exists()
+
+
+@pytest.mark.parametrize('field', ['verdict', 'campaign', 'freeze_manifest_id'])
+def test_regrade_checks_original_record_hash_before_replay(tmp_path, monkeypatch, field):
+    import shutil
+    import regrade
+    data, artifact = archive(tmp_path)
+    collect_results.import_archive(data, artifact, tmp_path)
+    record_path = tmp_path / 'reports/runs/test/final-wp03-A-1/record.json'
+    record = json.loads(record_path.read_text())
+    record[field] = {'checks': {'format': True}} if field == 'verdict' else 'changed'
+    record_path.write_text(json.dumps(record))
+    (tmp_path / 'workpaperbench').mkdir()
+    for name in ('grading.py', 'sql_worker.py'):
+        shutil.copyfile(ROOT / 'workpaperbench' / name, tmp_path / 'workpaperbench' / name)
+    monkeypatch.setattr(regrade, 'ROOT', tmp_path)
+    monkeypatch.setenv('GITHUB_ACTIONS', 'true')
+    monkeypatch.setenv('RUNNER_OS', 'Linux')
+    for key in ('OPENROUTER_API_KEY', 'GH_TOKEN', 'GITHUB_TOKEN'):
+        monkeypatch.delenv(key, raising=False)
+    with pytest.raises(ValueError, match='original_record_hash'):
+        regrade.main()

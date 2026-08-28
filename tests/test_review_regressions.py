@@ -168,7 +168,7 @@ def test_retained_file_hash_is_separate_from_legacy_raw_hash(tmp_path):
     with zipfile.ZipFile(buffer,'w') as z:
         z.writestr('record.json',json.dumps(record))
         z.writestr('answer.json','{}\n')
-    artifact={'id':123,'digest':'sha256:'+hashlib.sha256(buffer.getvalue()).hexdigest(),'workflow_run':{'id':1,'head_sha':'a'*40,'run_attempt':1}}
+    artifact={'id':123,'digest':'sha256:'+hashlib.sha256(buffer.getvalue()).hexdigest(),'declared_slots':[slot['slot_id']],'workflow_run':{'id':1,'head_sha':'a'*40,'run_attempt':1}}
     collect_results.import_archive(buffer.getvalue(),artifact,tmp_path)
     audit=json.loads((tmp_path/'reports/runs/test/final-wp03-A-1/artifact-audit.json').read_text())
     assert audit['retained_file_sha256']['answer.json']==hashlib.sha256(b'{}\n').hexdigest()
