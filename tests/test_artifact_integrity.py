@@ -128,3 +128,8 @@ def test_correction_registry_cannot_authorize_experiment_inputs(tmp_path, name):
     assert result.returncode == 1
     assert 'candidate_or_reference_changed' in result.stdout
     assert 'unauthorized_correction_path' in result.stdout
+
+
+def test_deep_malformed_original_can_be_screened_without_json_parse_success():
+    original = b'[' * 3000 + b'0' + b']' * 3000
+    assert native_run.credential_in(original, 'synthetic-private-' + '12345678' * 4) is False

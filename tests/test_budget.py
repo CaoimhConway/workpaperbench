@@ -12,7 +12,7 @@ spec.loader.exec_module(runner)
 def test_lifetime_cap_and_reservation():
     snapshot={'lifetime_limit_usd':20,'remaining_usd':20,'funded_remaining_usd':20,'byok_usage_usd':0,'reset_is_null':True}
     assert runner.preflight(snapshot,0.2,48) is None
-    for field,value in [('lifetime_limit_usd',0),('lifetime_limit_usd',51),('remaining_usd',9),('reset_is_null',False),('byok_usage_usd',1)]:
+    for field,value in [('lifetime_limit_usd',0),('lifetime_limit_usd',21),('remaining_usd',9),('reset_is_null',False),('byok_usage_usd',1)]:
         changed={**snapshot,field:value}
         assert runner.preflight(changed,0.2,48) is not None
 

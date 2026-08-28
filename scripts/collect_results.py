@@ -96,6 +96,8 @@ def save_files(files, artifact, archive_sha256, root):
 
 
 def validate_record(record, root, run):
+    if not isinstance(record, dict):
+        raise ValueError('invalid_artifact_record')
     schedule = json.loads((Path(root) / "config/schedule.json").read_text())
     slots = {s["slot_id"]: s for s in schedule}
     slot = slots.get(record.get("slot_id"))
