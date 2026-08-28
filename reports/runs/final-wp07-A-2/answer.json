@@ -1,0 +1,50 @@
+{
+  "task_id": "wp07",
+  "answers": [
+    {
+      "id": "q1_revenue",
+      "status": "answered",
+      "value": 23117,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT (SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2') AS value",
+      "reason_code": null
+    },
+    {
+      "id": "q1_gross_profit",
+      "status": "answered",
+      "value": 16837,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT (SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2') AS value",
+      "reason_code": null
+    },
+    {
+      "id": "q1_margin",
+      "status": "answered",
+      "value": 72.8338452221309,
+      "unit": "percent",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT ((SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2')) * 100.0 / ((SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2')) AS value",
+      "reason_code": null
+    },
+    {
+      "id": "margin_change",
+      "status": "answered",
+      "value": 1.783827715397901,
+      "unit": "percentage_points",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT ((SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2') * 1.0 / (SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2') - ((SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2')) * 1.0 / ((SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2'))) * 100.0 AS value",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}

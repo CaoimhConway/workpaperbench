@@ -45,8 +45,8 @@ def control(original, name, answer, extra=""):
 
 
 def main():
-    if os.environ.get("RUNNER_OS") != "Linux" or os.environ.get("GITHUB_REPOSITORY") != "CaoimhConway/workpaperbench":
-        raise SystemExit("Container integration runs only in the dedicated hosted Actions repository")
+    if os.environ.get("RUNNER_OS") != "Linux" or os.environ.get("GITHUB_ACTIONS") != "true":
+        raise SystemExit("Container integration runs only on hosted Linux Actions")
     if any(k in os.environ for k in ("OPENROUTER_API_KEY", "ANTHROPIC_API_KEY", "OPENAI_API_KEY")):
         raise SystemExit("No paid key belongs in CI")
     RAW.mkdir(parents=True)
@@ -113,7 +113,7 @@ BOUNDARY
         wrong["answers"][1]["sql"] = "WITH common AS (SELECT network_asset FROM observations GROUP BY network_asset HAVING COUNT(DISTINCT period)=2), totals AS (SELECT period,SUM(amount_units) amount FROM observations JOIN common USING(network_asset) JOIN asset_tags USING(network_asset) GROUP BY period) SELECT 100.0*((SELECT amount FROM totals WHERE period='P2')-(SELECT amount FROM totals WHERE period='P1'))/(SELECT amount FROM totals WHERE period='P1') AS value"
         name = "wp06-matched-tag-join"
         results.append(native(control(original, name, wrong), name, False))
-    if scope == "review":
+    if scope in ("full", "review"):
         task = ROOT / "tasks/wp03"
         ref = json.loads((task / "tests/reference.json").read_text())
         for label, condition in (("date", "date(published_on)<=date('2024-07-05')"), ("lower", "published_on<='2024-07-05' AND lower(period)='p2'")):

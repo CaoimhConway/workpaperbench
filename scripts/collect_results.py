@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import re
+import stat
 import subprocess
 import zipfile
 from datetime import datetime, timezone
@@ -27,16 +28,19 @@ def import_archive(data, artifact, root):
     if len(data) > 2_000_000:
         raise ValueError("oversized_artifact")
     expected = artifact.get("digest")
-    if expected and expected != "sha256:" + hashlib.sha256(data).hexdigest():
+    if expected != "sha256:" + hashlib.sha256(data).hexdigest():
         raise ValueError("artifact_archive_digest_mismatch")
     with zipfile.ZipFile(io.BytesIO(data)) as archive:
         entries = archive.infolist()
         groups = {}
-        if len(entries) > 2 * len(FILES):
+        if len(entries) > 2 * len(FILES) or sum(e.file_size for e in entries) > 1_000_000:
             raise ValueError("unexpected_archive_entry")
         for entry in entries:
             parts = Path(entry.filename).parts
-            if entry.file_size > 200_000 or len(parts) not in (1, 2) or parts[-1] not in FILES:
+            mode = stat.S_IFMT(entry.external_attr >> 16)
+            if (mode not in (0, stat.S_IFREG) or entry.is_dir() or entry.flag_bits & 1
+                    or Path(entry.filename).is_absolute() or ".." in parts
+                    or entry.file_size > 500_000 or len(parts) not in (1, 2) or parts[-1] not in FILES):
                 raise ValueError("unexpected_archive_entry")
             group = parts[0] if len(parts) == 2 else "single"
             if group != "single" and not re.fullmatch(r"final-wp0[1-8]-[AB]-[1-3]", group):
@@ -57,6 +61,7 @@ def import_archive(data, artifact, root):
 
 def save_files(files, artifact, archive_sha256, root):
     record = json.loads(files["record.json"])
+    validate_record(record, root, artifact["workflow_run"])
     identifier = record.get("slot_id", "")
     if not re.fullmatch(r"final-wp0[1-8]-[AB]-[1-3]", identifier):
         raise ValueError("unexpected_slot")
@@ -64,14 +69,23 @@ def save_files(files, artifact, archive_sha256, root):
     if record.get("freeze_manifest_id") != manifest["manifest_id"]:
         raise ValueError("artifact_experiment_mismatch")
     destination = root / "reports/runs" / identifier
+    if any(p.is_symlink() for p in (root / "reports", root / "reports/runs", destination)):
+        raise ValueError("unsafe_artifact_destination")
     destination.mkdir(parents=True, exist_ok=True)
     for name, content in files.items():
         target = destination / name
         if target.is_symlink() or (target.exists() and target.read_bytes() != content):
             raise ValueError("immutable_artifact_conflict")
+    if "answer.raw.txt" in files and hashlib.sha256(files["answer.raw.txt"]).hexdigest() != record.get("raw_sha256"):
+        raise ValueError("original_bytes_hash_mismatch")
+    if "retained_sha256" in record and ("answer.json" not in files or hashlib.sha256(files["answer.json"]).hexdigest() != record["retained_sha256"]):
+        raise ValueError("normalized_bytes_hash_mismatch")
+    for name, content in files.items():
+        target = destination / name
         target.write_bytes(content)
     audit = {
         "artifact_id": artifact["id"], "archive_sha256": archive_sha256,
+        "workflow_run": artifact["workflow_run"], "archive_digest_verified": True,
         "retained_file_sha256": {n: hashlib.sha256(b).hexdigest() for n, b in files.items()},
         "original_bytes_available": "answer.raw.txt" in files,
         "legacy_record_digest": record.get("answer_sha256") if "raw_sha256" not in record else None,
@@ -81,32 +95,97 @@ def save_files(files, artifact, archive_sha256, root):
     return identifier
 
 
+def validate_record(record, root, run):
+    schedule = json.loads((Path(root) / "config/schedule.json").read_text())
+    slots = {s["slot_id"]: s for s in schedule}
+    slot = slots.get(record.get("slot_id"))
+    if slot is None or any(record.get(k) != slot[k] for k in ("campaign", "task", "arm", "repetition", "split")):
+        raise ValueError("artifact_slot_identity_mismatch")
+    if str(record.get("run_id")) != str(run["id"]) or record.get("commit_sha") != run["head_sha"]:
+        raise ValueError("artifact_run_identity_mismatch")
+    if not str(record.get("github_run_attempt", "")).isdigit():
+        raise ValueError("artifact_run_attempt_missing")
+    return slot
+
+
+def missing_state(job):
+    if not job_started(job):
+        return "never_started"
+    if job["status"] != "completed":
+        return "running"
+    if job.get("conclusion") == "cancelled":
+        return "cancelled_exposure_unknown"
+    if job.get("conclusion") == "success":
+        return "completed_evidence_unavailable"
+    live = [s for s in job.get("steps", []) if "native live" in s.get("name", "").lower()
+            or "fresh native trials" in s.get("name", "").lower()]
+    if live and all(not s.get("started_at") or s.get("conclusion") == "skipped" for s in live):
+        return "setup_failed"
+    return "started_exposure_unknown"
+
+
+def provider_archive(data, artifact, run, root):
+    if len(data) > 100_000 or artifact.get("digest") != "sha256:" + hashlib.sha256(data).hexdigest():
+        raise ValueError("provider_archive_digest_mismatch")
+    with zipfile.ZipFile(io.BytesIO(data)) as z:
+        entries = z.infolist()
+        if len(entries) != 1 or entries[0].filename != "provider.json" or entries[0].file_size > 10000:
+            raise ValueError("unexpected_provider_entry")
+        content = z.read(entries[0])
+    if not screened(content):
+        raise ValueError("credential_pattern_in_provider")
+    value = json.loads(content)
+    if str(value.get("run_id")) != str(run["id"]):
+        raise ValueError("provider_run_mismatch")
+    target = Path(root) / "reports/provider" / (str(run["id"]) + ".json")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if target.exists() and target.read_bytes() != content:
+        raise ValueError("immutable_provider_conflict")
+    target.write_bytes(content)
+    return {"artifact_id": artifact["id"], "archive_sha256": hashlib.sha256(data).hexdigest(),
+            "retained_sha256": hashlib.sha256(content).hexdigest(), "workflow_run": artifact["workflow_run"]}
+
+
 def collect(run_id, root=ROOT):
     root = Path(root)
     run = api(f"repos/{REPO}/actions/runs/{run_id}")
     manifest_id = json.loads((root / "config/freeze.json").read_text())["manifest_id"]
     if run_manifest(run, "final", {}) != manifest_id:
         raise ValueError("run_experiment_mismatch")
-    imported = []
+    imported, withheld, provider = [], [], None
     for artifact in pages(f"repos/{REPO}/actions/runs/{run_id}/artifacts", "artifacts"):
-        if not artifact["name"].startswith(("slot-", "pair-")) or artifact.get("expired"):
+        if not artifact["name"].startswith(("slot-", "pair-", "provider-")) or artifact.get("expired"):
             continue
+        provenance = artifact.get("workflow_run", {})
+        if provenance.get("id") != run_id or provenance.get("head_sha") != run["head_sha"]:
+            raise ValueError("artifact_workflow_origin_mismatch")
+        if artifact.get("size_in_bytes", 2_000_001) > 2_000_000:
+            raise ValueError("oversized_artifact")
         data = subprocess.check_output(["gh", "api", f"repos/{REPO}/actions/artifacts/{artifact['id']}/zip"])
-        imported.extend(import_archive(data, artifact, root))
+        try:
+            if artifact["name"].startswith("provider-"):
+                provider = provider_archive(data, artifact, run, root)
+            else:
+                imported.extend(import_archive(data, artifact, root))
+        except ValueError as exc:
+            if "immutable" in str(exc):
+                raise
+            withheld.append({"artifact_id": artifact["id"], "reason": type(exc).__name__ + ":" + str(exc)})
     states = {}
     for job in pages(f"repos/{REPO}/actions/runs/{run_id}/jobs?filter=all", "jobs"):
         for identifier in job_slots(job):
-            started = job_started(job)
-            state = "running" if started and job["status"] == "in_progress" else (
-                "artifact_missing" if started and job.get("conclusion") == "success" else
-                "infra_failed" if started else "unstarted")
+            state = missing_state(job)
+            retained = root / 'reports/runs' / identifier / 'record.json'
+            if identifier in imported and retained.is_file():
+                state = json.loads(retained.read_text())['status']
             states[identifier] = {"status": state, "run_id": run_id, "job_id": job["id"],
+                "artifact_available": identifier in imported,
                 "run_attempt": job.get("run_attempt", 1), "started_at": job.get("started_at"),
                 "finished_at": job.get("completed_at"), "job_conclusion": job.get("conclusion")}
     result = {"run_id": run_id, "commit_sha": run["head_sha"], "manifest_id": manifest_id,
               "as_of": datetime.now(timezone.utc).isoformat(), "workflow_status": run["status"],
               "workflow_conclusion": run.get("conclusion"), "imported_slots": sorted(set(imported)),
-              "slots": states}
+              "slots": states, "withheld_artifacts": withheld, "provider_artifact": provider}
     (root / "reports/reconciliation.json").write_text(json.dumps(result, indent=2) + "\n")
     print("Imported", len(set(imported)), "slot artifacts. Reconciled", len(states), "scheduled job states.")
     return result

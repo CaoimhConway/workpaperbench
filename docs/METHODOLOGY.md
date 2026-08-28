@@ -6,7 +6,7 @@ WorkpaperBench measures bounded financial work over supplied tables and evidence
 
 A task is complete only when every requested answer has the right value, unit, supporting evidence and availability decision, its SQL recomputes correctly, and any requested conclusion is supported. Correct JSON alone is not enough. Neither is a correct scalar.
 
-The reviewed scorer accepts ordinary safe SQLite arithmetic, CTEs, joins, subqueries and aggregates. Its bounded function set includes `sum`, `total`, `count`, `min`, `max`, `avg`, `round`, `abs`, `coalesce`, `ifnull`, `nullif`, `lower`, `upper`, `length`, `substr`, `substring`, `trim`, `ltrim`, `rtrim`, `replace`, `instr`, `typeof`, `iif`, `like` and `glob`. Date/time functions accept explicit values: `date`, `time`, `datetime`, `julianday`, `unixepoch` and `strftime`. Wall-clock defaults, `now`, timezone-dependent modifiers and implicit-current-time subsecond forms are rejected. Writes, attached databases, extensions and arbitrary candidate Python remain prohibited.
+The reviewed scorer accepts ordinary safe SQLite arithmetic, CTEs, joins, subqueries and aggregates. Its bounded function set includes `sum`, `total`, `count`, `min`, `max`, `avg`, `round`, `abs`, `coalesce`, `ifnull`, `nullif`, `lower`, `upper`, `length`, `substr`, `substring`, `trim`, `ltrim`, `rtrim`, `replace`, `instr`, `typeof`, `iif`, `like` and `glob`. Window functions such as `row_number`, `rank`, `lag`, `lead`, `first_value` and `last_value` are supported under the same resource limits. Date/time functions accept explicit text or numeric values: `date`, `time`, `datetime`, `julianday`, `unixepoch` and `strftime`. Wall-clock defaults, `now`, timezone-dependent modifiers and implicit-current-time subsecond forms are rejected. Writes, attached databases, extensions and arbitrary candidate Python remain prohibited.
 
 Read-only inputs, an authorizer, a bounded subprocess, resource limits and a native separate verifier are complementary controls. A statement-prefix check is not the security boundary.
 
@@ -18,9 +18,9 @@ The reviewed scorer records numerical correctness, units, source-ID requirements
 
 ## Frozen experiment versus reviewed scoring
 
-`config/freeze.json` remains the original, immutable experiment manifest `wpb-v1-92baa4a72f0e`. Its execution snapshot is commit `b4e256dc8976223a8a3fdad157a6b212f49bb8e1`, and its active run is `37280454673`. The review changes neither its candidate inputs, model, skill nor already running jobs.
+`config/freeze.json` remains the original, immutable experiment manifest `wpb-v1-92baa4a72f0e`. Its execution snapshot is commit `b4e256dc8976223a8a3fdad157a6b212f49bb8e1`, and its completed run is `37280454673`. The review changes neither its candidate inputs, model, skill nor historical jobs.
 
-`config/review.json` hashes the correction implementation. The publication audit separately checks that original candidate-facing inputs are unchanged. Original records and verdicts are never overwritten. Native, inference-free rescoring of retained answers writes `regrade.json`, identifying scorer version, code hash, input hash and Actions run. Results show original and reviewed scores separately.
+`config/review.json` hashes the correction implementation. The publication audit separately checks that original candidate-facing inputs are unchanged. Original records and verdicts are never overwritten. Native, inference-free rescoring of retained answers writes `regrade.json`, identifying scorer version, code hash, input hash and Actions run. Results show original and reviewed scores separately. Repeating a review with the same scorer and input is a no-op. A changed review preserves the prior sidecar under its content hash. A report cannot silently mix scorer versions.
 
 The working tree intentionally no longer matches every code hash of the old execution snapshot. Dispatching a new paid final campaign under that old freeze fails closed. Reproduce the old implementation from its commit. Any new scored experiment requires an explicitly new immutable manifest, not a silent refresh of old hashes or retries selected for better scores.
 
@@ -35,3 +35,7 @@ New valid and malformed answers retain bounded, credential-screened original byt
 ## Limits that matter
 
 Eight tasks, one model, one intervention and three attempts per arm are a small engineering study. Five evaluation tasks are not five independent datasets. Two filing tasks use public facts, the other six cases are synthetic, and two share the same fallback corpus. Some evidence-limit tasks are explicitly cued by supplied scope notes. Changed-input controls expose selected mistakes, not all possible programs. Provider routing and upstream installation dependencies retain disclosed variability. Per-slot cost snapshots can lag and are not exact A/B cost allocations.
+
+## Results publication
+
+The key-free CI workflow collects the requested existing campaign, checks native controls and regrades retained answers without inference. It emits screened results as downloadable artifacts. Repository maintainers inspect those artifacts before committing or publishing them. No workflow writes source or Git identity. These operations do not launch, repeat or repair model answers.

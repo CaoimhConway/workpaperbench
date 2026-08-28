@@ -1,0 +1,22 @@
+{
+  "checks": {
+    "availability": true,
+    "conclusion": false,
+    "evidence_context": false,
+    "format": true,
+    "numerical": true,
+    "replay": false
+  },
+  "complete": false,
+  "errors": [
+    "transfer_total:replay",
+    "transfer_total:evidence_context",
+    "conclusion"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "task_id": "wp05",
+  "answers": [
+    {
+      "id": "naive_growth",
+      "status": "answered",
+      "value": 65.0,
+      "unit": "percent",
+      "evidence": [
+        "export:periods",
+        "ledger:events"
+      ],
+      "sql": "SELECT (CAST(MAX(CASE WHEN period = 'P2' THEN transfer_volume END) AS REAL) - CAST(MAX(CASE WHEN period = 'P1' THEN transfer_volume END) AS REAL)) / CAST(MAX(CASE WHEN period = 'P1' THEN transfer_volume END) AS REAL) * 100.0 FROM exports;",
+      "reason_code": null
+    },
+    {
+      "id": "comparable_growth",
+      "status": "answered",
+      "value": 10.0,
+      "unit": "percent",
+      "evidence": [
+        "ledger:events",
+        "policy:definitions"
+      ],
+      "sql": "SELECT (CAST((SELECT SUM(amount_units) FROM events WHERE period = 'P2' AND event_kind NOT IN ('mint', 'burn')) AS REAL) / CAST((SELECT SUM(amount_units) FROM events WHERE period = 'P1' AND event_kind NOT IN ('mint', 'burn')) AS REAL) - 1.0) * 100.0;",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "ledger:events",
+      "policy:definitions"
+    ]
+  }
+}

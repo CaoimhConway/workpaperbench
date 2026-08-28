@@ -53,7 +53,7 @@ def test_extra_claim_does_not_erase_correct_requested_numbers(tmp_path):
     assert not verdict['complete']
     assert verdict['checks']['format'] is False
     assert verdict['checks']['numerical'] is True
-    assert verdict['checks']['replay'] is True
+    assert verdict['checks']['replay'] is None
 
 
 def test_duplicate_requested_claim_is_not_resolved_by_grader(tmp_path):
@@ -144,9 +144,9 @@ def test_job_pagination_is_not_limited_to_first_hundred(monkeypatch):
 
 def test_setup_receipt_becomes_explicit_infrastructure_failure(tmp_path,monkeypatch):
     monkeypatch.setattr(attempts,'ROOT',tmp_path)
-    p=tmp_path/'reports/runs/final-wp03-A-1/record.json'
+    p=tmp_path/'reports/runs/test-freeze/final-wp03-A-1/record.json'
     attempts.write(p,{'status':'setup_started','verdict':None})
-    attempts.finalize(['final-wp03-A-1'])
+    attempts.finalize('test-freeze', ['final-wp03-A-1'])
     assert json.loads(p.read_text())['status']=='infra_failed'
 
 
@@ -161,12 +161,14 @@ def test_retained_file_hash_is_separate_from_legacy_raw_hash(tmp_path):
     import io,zipfile
     (tmp_path/'config').mkdir()
     (tmp_path/'config/freeze.json').write_text('{"manifest_id":"test"}')
-    record={'slot_id':'final-wp03-A-1','freeze_manifest_id':'test','answer_sha256':'legacy'}
+    slot={'slot_id':'final-wp03-A-1','campaign':'final','task':'wp03','arm':'A','repetition':1,'split':'evaluation'}
+    (tmp_path/'config/schedule.json').write_text(json.dumps([slot]))
+    record={**slot,'freeze_manifest_id':'test','answer_sha256':'legacy','run_id':'1','commit_sha':'a'*40,'github_run_attempt':'1'}
     buffer=io.BytesIO()
     with zipfile.ZipFile(buffer,'w') as z:
         z.writestr('record.json',json.dumps(record))
         z.writestr('answer.json','{}\n')
-    artifact={'id':123,'digest':'sha256:'+hashlib.sha256(buffer.getvalue()).hexdigest()}
+    artifact={'id':123,'digest':'sha256:'+hashlib.sha256(buffer.getvalue()).hexdigest(),'workflow_run':{'id':1,'head_sha':'a'*40}}
     collect_results.import_archive(buffer.getvalue(),artifact,tmp_path)
     audit=json.loads((tmp_path/'reports/runs/final-wp03-A-1/artifact-audit.json').read_text())
     assert audit['retained_file_sha256']['answer.json']==hashlib.sha256(b'{}\n').hexdigest()

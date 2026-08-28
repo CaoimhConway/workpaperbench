@@ -83,6 +83,9 @@ def report(root):
             if original_name not in ("answer.json", "answer.raw.txt") or digest(path.with_name(original_name)) != review.get("input_sha256"):
                 raise ValueError("regrade input mismatch")
             reviews[record["slot_id"]] = review
+    scorer_identities = {(v.get("scorer_version"), v.get("scorer_sha256")) for v in reviews.values()}
+    if len(scorer_identities) > 1:
+        raise ValueError("mixed reviewed scorer versions")
     by_id = {slot["slot_id"]: slot for slot in schedule}
     if len(by_id) != len(schedule):
         raise ValueError("duplicate scheduled slot")
@@ -165,8 +168,41 @@ def report(root):
               "The original matrix limited concurrency but did not enforce pair order. Actual start order and per-slot latency/cost/diagnostic fields are preserved in scores.json.",
               "Five evaluation tasks are not five independent datasets. Two share the synthetic acquisition fallback. Development and evaluation remain separate."]
     (output / "results.md").write_text("\n".join(lines) + "\n")
+    update_readme(root, result)
     return result
 
+
+
+def update_readme(root, result):
+    """Refresh only the marked results block from persisted evidence."""
+    path = Path(root) / "README.md"
+    if not path.is_file():
+        return
+    text = path.read_text()
+    begin, end = "<!-- study-results:start -->", "<!-- study-results:end -->"
+    if begin not in text and end not in text:
+        return
+    if text.count(begin) != 1 or text.count(end) != 1 or text.index(begin) >= text.index(end):
+        raise ValueError("invalid README result markers")
+    rows = result["slots"]
+    assessed = sum(r.get("verdict") is not None for r in rows)
+    reviewed = len(result["reviews"])
+    terminal = sum(r["status"] in TERMINAL | {"infra_failed", "blocked", "artifact_missing"} for r in rows)
+    state = "All scheduled attempts accounted for" if terminal == len(rows) else "Partial campaign"
+    lines = [begin, "", f"**{state}.** Original verdicts: **{assessed}/{len(rows)}**. Reviewed verdicts: **{reviewed}/{len(rows)}**.", "",
+             "| Evaluation arm | Original verified / planned | Reviewed verified / planned | Reviewed coverage |",
+             "|---|---:|---:|---:|"]
+    for arm in ("A", "B"):
+        original = result["summary"]["evaluation"][arm]
+        correction = result["reviewed_summary"]["evaluation"][arm]
+        def cell(summary):
+            return f"{summary['verified']} / {summary['scheduled']}" if summary["assessed"] else "Not assessed"
+        lines.append(f"| {arm} | {cell(original)} | {cell(correction)} | {correction['assessed']} / {correction['scheduled']} |")
+    lines += ["", "Only evaluation tasks appear here. Development is reported separately. Unfinished or unreviewable trials are not observed zero-score answers. These are coverage-aware counts, not a treatment-effect claim.", "",
+              "[Full results, failures, costs and original records](reports/results.md)", "", end]
+    prefix, remainder = text.split(begin, 1)
+    _, suffix = remainder.split(end, 1)
+    path.write_text(prefix + "\n".join(lines) + suffix)
 
 def main():
     parser = argparse.ArgumentParser()

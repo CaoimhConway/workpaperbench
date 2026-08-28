@@ -83,6 +83,16 @@ def credential_in(content, key):
         pass
     # Also catch escaped credentials in incomplete or otherwise invalid JSON.
     candidates.append(re.sub(rb"\\u00([0-9a-fA-F]{2})", lambda m: bytes([int(m[1], 16)]), content))
+    from urllib.parse import unquote_to_bytes
+    candidates.append(unquote_to_bytes(content))
+    for match in re.finditer(rb"[A-Za-z0-9+/]{24,}={0,2}|(?:[0-9a-fA-F]{2}){16,}", content):
+        encoded = match[0]
+        try:
+            candidates.append(base64.b64decode(encoded, validate=True))
+        except ValueError:
+            pass
+        if re.fullmatch(rb"(?:[0-9a-fA-F]{2}){16,}", encoded):
+            candidates.append(bytes.fromhex(encoded.decode()))
     return any(SECRET_RE.search(c) or any(fragment in c for fragment in fragments) for c in candidates)
 
 
@@ -112,7 +122,7 @@ def provider_snapshot(key):
 
 
 def all_records():
-    for path in sorted((ROOT / "reports/runs").glob("*/record.json")):
+    for path in sorted((ROOT / "reports/runs").glob("**/record.json")):
         try:
             yield read_json(path, 300_000)
         except (OSError, ValueError, json.JSONDecodeError):
@@ -236,21 +246,31 @@ def save_tool_evidence(path, destination, key):
         trajectory = read_json(path, 5_000_000)
     except (OSError, ValueError):
         return {"status": "unavailable", "calls": 0}
-    calls, omitted = [], 0
+    calls, observations, omitted = [], [], 0
     for step in trajectory.get("steps", []):
         for call in step.get("tool_calls", []) if isinstance(step, dict) else []:
             if not isinstance(call, dict):
                 continue
             item = {k: call[k] for k in ("function_name", "arguments", "tool_call_id") if k in call}
             payload = json.dumps(item).encode()
-            if len(calls) >= 50 or len(payload) > 8000 or credential_in(payload, key):
+            if len(calls) >= 25 or len(payload) > 8000 or credential_in(payload, key):
                 omitted += 1
                 continue
             calls.append(item)
-    data = {"calls": calls, "omitted_calls": omitted,
-            "scope": "Tool invocation fields only. No assistant messages, private reasoning or claim of complete trajectories."}
+        observation = step.get("observation", {}) if isinstance(step, dict) else {}
+        for result in observation.get("results", []) if isinstance(observation, dict) else []:
+            if not isinstance(result, dict):
+                continue
+            item = {k: result[k] for k in ("source_call_id", "content") if k in result}
+            payload = json.dumps(item).encode()
+            if len(observations) >= 25 or len(payload) > 8000 or credential_in(payload, key):
+                omitted += 1
+                continue
+            observations.append(item)
+    data = {"calls": calls, "observations": observations, "omitted_items": omitted,
+            "scope": "Bounded screened tool invocations and observations only. No assistant messages, private reasoning or claim of complete trajectories. Omitted items may exceed bounds or contain credential patterns."}
     destination.write_text(json.dumps(data, indent=2) + "\n")
-    return {"status": "screened_invocations", "calls": len(calls), "omitted_calls": omitted}
+    return {"status": "screened_tools", "calls": len(calls), "observations": len(observations), "omitted_items": omitted}
 
 
 def failure_codes(path):
@@ -352,7 +372,11 @@ def execute(mode, slot_id):
     if not task_dir.is_dir() or task_dir.is_symlink():
         raise ValueError("task_directory_missing")
 
-    output_dir = ROOT / "reports/runs" / slot_id
+    from attempts import check, record_directory
+    manifest_id = os.environ["WPB_MANIFEST_ID"]
+    if mode == "pilot" and manifest_id != "development-v1":
+        raise ValueError("pilot_manifest_mismatch")
+    output_dir = record_directory(manifest_id, slot_id)
     for directory in (ROOT / "reports", ROOT / "reports/runs", output_dir):
         if directory.exists() and (directory.is_symlink() or not directory.is_dir()):
             raise ValueError("unsafe_output_path")
@@ -370,7 +394,9 @@ def execute(mode, slot_id):
     if os.environ.get("GITHUB_RUN_ATTEMPT") != "1":
         raise ValueError("same_run_retry_disabled")
 
+    check(mode, manifest_id, [slot_id])
     record = {
+        "experiment_id": manifest_id,
         "campaign": slot["campaign"],
         "task": task_id,
         "arm": slot.get("arm"),
@@ -380,6 +406,7 @@ def execute(mode, slot_id):
         "status": "started",
         "started_at": prior["started_at"] if prior else now(),
         "execution_started_at": now(),
+        "remaining_planned_slots": prior.get("remaining_planned_slots"),
         "github_run_id": os.environ.get("GITHUB_RUN_ID"),
         "run_id": os.environ.get("GITHUB_RUN_ID"),
         "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
@@ -426,7 +453,10 @@ def execute(mode, slot_id):
     schedule = slots if mode == "final" else []
     if mode == "final":
         schedule = list_slots(ROOT / "config/schedule.json")
-        reserve, remaining_slots = final_reservation(schedule, list(all_records()))
+        reserve, _ = final_reservation(schedule, list(all_records()))
+        remaining_slots = prior.get("remaining_planned_slots")
+        if isinstance(remaining_slots, bool) or not isinstance(remaining_slots, int) or not 1 <= remaining_slots <= len(schedule):
+            raise ValueError("remaining_reservation_receipt_missing")
     else:
         reserve, remaining_slots = float(RUNTIME["cost"]["reservation_usd_per_slot"]), 1
     record["reservation_usd_per_slot"] = reserve
