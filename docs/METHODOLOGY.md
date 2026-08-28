@@ -24,9 +24,11 @@ The reviewed scorer records numerical correctness, units, source-ID requirements
 
 The working tree intentionally no longer matches every code hash of the old execution snapshot. Dispatching a new paid final campaign under that old freeze fails closed. Reproduce the old implementation from its commit. Any new scored experiment requires an explicitly new immutable manifest, not a silent refresh of old hashes or retries selected for better scores.
 
+The correction registry authorizes publication of reviewed code, never paid execution under the old freeze. The launcher checks every original frozen hash without consulting that registry. Attempt receipts and new imports use experiment/slot directories. Published legacy evidence keeps its flat paths. Collection authenticates each named attempt against Actions metadata, including earlier attempts when a run has since been rerun.
+
 ## Attempts, ordering and missing data
 
-New workflows identify trials by experiment plus slot, reject same-run reruns, and recheck history before installation. Receipts are written before setup and incomplete receipts become infrastructure failures. Reconciliation distinguishes queued, running, missing-artifact and completed states. Missing evidence is never fabricated.
+New workflows identify trials by experiment plus slot, reject same-run reruns, and recheck history before installation. An older Actions run retains its original workflow definition, so these protections cannot retrofit a rerun of the legacy campaign. Never rerun that original run. Receipts in new workflows are written before setup and incomplete receipts become infrastructure failures. Reconciliation distinguishes queued, running, missing-artifact and completed states. Missing evidence is never fabricated.
 
 Both arms for one task/repetition execute in declared order inside one short-lived job, with fresh native environments for each arm. Pairs run serially. The order between pairs remains scheduler-dependent and is recorded, not assumed. The original campaign used a serial matrix without this within-pair guarantee, so its actual order must be inspected rather than retroactively relabeled.
 

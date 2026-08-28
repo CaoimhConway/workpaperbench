@@ -20,13 +20,13 @@ def write(path, data):
     temporary.replace(path)
 
 
-def record_directory(manifest_id, identifier):
+def record_directory(manifest_id, identifier, root=None):
     if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,95}', manifest_id):
         raise ValueError('invalid_experiment_identifier')
     from select_slots import SLOT_PATTERN
     if not re.fullmatch(SLOT_PATTERN, identifier):
         raise ValueError('invalid_slot_identifier')
-    return ROOT / 'reports/runs' / manifest_id / identifier
+    return (ROOT if root is None else Path(root)) / 'reports/runs' / manifest_id / identifier
 
 
 def check(mode, manifest_id, identifiers):
