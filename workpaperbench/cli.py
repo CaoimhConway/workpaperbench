@@ -2,6 +2,7 @@
 import argparse
 from collections import Counter
 import json
+from math import fsum
 from pathlib import Path
 from statistics import mean
 
@@ -59,7 +60,7 @@ def summarize(rows):
                 "gap_causes_nonexclusive": dict(causes), "checks_passed": dict(checks),
                 "checks_assessed": dict(assessed_checks),
                 "checks_na": dict(unknown), "statuses": dict(Counter(r["status"] for r in selected)),
-                "known_slot_cost_usd": sum(known_cost) if known_cost else None,
+                "known_slot_cost_usd": fsum(known_cost) if known_cost else None,
                 "unknown_cost_slots": len(costs) - len(known_cost),
                 "agent_execution_mean_seconds": mean(known_time) if known_time else None,
             }
