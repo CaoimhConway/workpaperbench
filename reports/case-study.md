@@ -66,6 +66,6 @@ The legacy runner retained normalized JSON, not the raw serialization described 
 
 ## Why this case leads
 
-This was the first inspected evaluation artifact with a correct scalar and a demonstrably wrong submitted calculation. It was not selected because a treatment improved it. The full results retain all collected attempts, including successes, infrastructure failures and regressions. One failure does not establish an error rate, a general model ranking or treatment effectiveness.
+This retained evaluation artifact has a correct scalar and a demonstrably wrong submitted calculation. It illustrates a verification failure without relying on a treatment improvement. The full results retain all collected attempts, including successes, infrastructure failures and regressions. One failure does not establish an error rate, a general model ranking or treatment effectiveness.
 
 [Results and completeness status](results.md) · [Scoring and correction policy](../docs/METHODOLOGY.md)

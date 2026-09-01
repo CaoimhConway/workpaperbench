@@ -68,18 +68,20 @@ The frozen comparison has **48 scheduled trials**: eight tasks, two configuratio
 
 <!-- study-results:start -->
 
-**All scheduled attempts accounted for.** Original verdicts: **48/48**. Corrected verdicts: **33/48**.
+**All scheduled attempts accounted for.** Original verdicts: **48/48**. Corrected verdicts: **47/48**.
 
 | Evaluation arm | Original complete / planned | Corrected complete / planned | Corrected numerical / assessed | Corrected coverage |
 |---|---:|---:|---:|---:|
-| A | 3 / 15 | 0 / 15 | 7 / 7 | 8 / 15 |
-| B | 1 / 15 | 1 / 15 | 7 / 7 | 8 / 15 |
+| A | 3 / 15 | 3 / 15 | 13 / 13 | 15 / 15 |
+| B | 1 / 15 | 1 / 15 | 13 / 14 | 15 / 15 |
 
 Only evaluation tasks appear here. Development is reported separately. Unfinished or unreviewable trials are not observed zero-score answers. These are coverage-aware counts, not a treatment-effect claim.
 
 [Full results, failures, costs and original records](reports/results.md)
 
 <!-- study-results:end -->
+
+Scalar accuracy was already high. The contract-check skill did not improve verified completion in this recorded comparison. Failures frequently concerned evidence, SQL replay and conclusion contracts. The small, partly synthetic sample supports no causal or significance claim.
 
 Original verdicts and corrected scores are retained side by side. A green Actions job can still contain a scored task failure. Collection and regrading use saved records and no new model calls.
 
@@ -101,7 +103,7 @@ The reviewed grader accepts valid alternative SQL, distinguishes a wrong conclus
 
 The replay worker is read-only, function-restricted, resource-bounded and isolated from inference credentials. All Docker, Harbor and live execution belong on GitHub-hosted Ubuntu runners. The local machine only edits, runs lightweight tests and views results.
 
-Native tests cover reference answers, valid alternatives, wrong periods, constants, joins, abstention, malformed outputs and isolation. New run controls use experiment-scoped identities, pre-setup receipts and ordered A/B pairs. [Methodology](docs/METHODOLOGY.md) explains the supported SQL subset, original-run limitations and correction policy. [Native compatibility notes](build-notes/NATIVE_COMPATIBILITY.md) document the integration findings.
+Native tests cover reference answers, valid alternatives, wrong periods, constants, joins, abstention, malformed outputs and isolation. New run controls use experiment-scoped identities, pre-setup receipts and ordered A/B pairs. [Methodology](docs/METHODOLOGY.md) explains the supported SQL subset, original-run limitations and correction policy. [The 71-control native report](reports/integration-full-37373492428.json) preserves actual outcomes. [Native compatibility notes](build-notes/NATIVE_COMPATIBILITY.md) document the integration findings.
 
 ## Replay a saved submission on Actions
 

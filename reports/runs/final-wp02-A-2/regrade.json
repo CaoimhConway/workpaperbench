@@ -1,43 +1,36 @@
 {
   "manifest_id": "wpb-v1-92baa4a72f0e",
-  "scorer_version": "1.1.0",
-  "scorer_sha256": "0ee1de64ab8b5b73c3e72aa9edd0807ec7fbcd91c61407b04e4ed72d04c27206",
+  "scorer_version": "1.2.0",
+  "scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
   "input_file": "answer.json",
   "input_sha256": "06191684f73934b6d34c39928f28da80a3cad060c911bae57be75378f85e92ff",
   "verdict": {
-    "scorer_version": "1.1.0",
+    "scorer_version": "1.2.0",
     "complete": false,
     "checks": {
       "format": false,
       "numerical": true,
-      "evidence_context": false,
-      "availability": true,
-      "conclusion": false,
-      "replay": false
+      "evidence_context": null,
+      "availability": null,
+      "conclusion": null,
+      "replay": null
     },
     "details": {
       "claims": {
         "transfer_total": {
           "numerical": true,
-          "evidence": false,
-          "availability": true,
-          "unit": true,
+          "evidence": null,
+          "availability": null,
+          "unit": null,
           "reason_code": null,
-          "original_replay": false,
-          "changed_replay": false
+          "original_replay": null,
+          "changed_replay": null
         }
       },
-      "conclusion": {
-        "verdict": true,
-        "reason_code": true,
-        "evidence": false
-      }
+      "conclusion": null
     },
     "errors": [
-      "format:ValueError",
-      "transfer_total:replay",
-      "transfer_total:evidence_context",
-      "conclusion"
+      "format:ValueError"
     ],
     "isolation": {
       "network_probe_blocked": true,
@@ -46,7 +39,7 @@
       "no_docker_socket": true
     }
   },
-  "run_id": "37295210415",
-  "commit_sha": "1a6f7146f827b5a97d163a456f19aeece3f9adf6",
+  "run_id": "37373492428",
+  "commit_sha": "554e67ef4b8304c341ff21316b4f9a3b5933e639",
   "scope": "Same retained answer, pristine inputs, no answer repairs and no model call. Original verdict preserved."
 }
