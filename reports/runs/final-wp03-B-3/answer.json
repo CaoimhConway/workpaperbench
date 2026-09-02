@@ -1,0 +1,58 @@
+{
+  "task_id": "wp03",
+  "answers": [
+    {
+      "id": "p1_total",
+      "status": "answered",
+      "value": 100,
+      "unit": "token_units",
+      "evidence": [
+        "release:20240701"
+      ],
+      "sql": "SELECT transfer_units AS value FROM releases WHERE period='P1' AND published_on <= '2024-07-05' ORDER BY published_on DESC LIMIT 1",
+      "reason_code": null
+    },
+    {
+      "id": "p2_total",
+      "status": "answered",
+      "value": 120,
+      "unit": "token_units",
+      "evidence": [
+        "release:20240703"
+      ],
+      "sql": "SELECT transfer_units AS value FROM releases WHERE period='P2' AND published_on <= '2024-07-05' ORDER BY published_on DESC LIMIT 1",
+      "reason_code": null
+    },
+    {
+      "id": "as_of_growth",
+      "status": "answered",
+      "value": 20.0,
+      "unit": "percent",
+      "evidence": [
+        "release:20240701",
+        "release:20240703"
+      ],
+      "sql": "SELECT (SELECT transfer_units FROM releases WHERE period='P2' AND published_on <= '2024-07-05' ORDER BY published_on DESC LIMIT 1) * 1.0 / (SELECT transfer_units FROM releases WHERE period='P1' AND published_on <= '2024-07-05' ORDER BY published_on DESC LIMIT 1) * 100.0 - 100.0 AS value",
+      "reason_code": null
+    },
+    {
+      "id": "p2_usd_value",
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "usd",
+      "evidence": [
+        "valuation:availability"
+      ],
+      "sql": null,
+      "reason_code": "missing_required_input"
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "release:20240701",
+      "release:20240703"
+    ]
+  }
+}

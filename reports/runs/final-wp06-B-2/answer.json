@@ -1,0 +1,35 @@
+{
+  "task_id": "wp06",
+  "answers": [
+    {
+      "id": "reported_growth",
+      "status": "answered",
+      "value": 100.0,
+      "unit": "percent",
+      "evidence": [
+        "observations:amounts"
+      ],
+      "sql": "SELECT 100.0 * (\n  (SELECT COALESCE(SUM(amount_units), 0) FROM observations WHERE period = 'P2') -\n  (SELECT COALESCE(SUM(amount_units), 0) FROM observations WHERE period = 'P1')\n) / (CAST((SELECT COALESCE(SUM(amount_units), 0) FROM observations WHERE period = 'P1') AS REAL)) AS value;",
+      "reason_code": null
+    },
+    {
+      "id": "matched_growth",
+      "status": "answered",
+      "value": 0.0,
+      "unit": "percent",
+      "evidence": [
+        "observations:amounts"
+      ],
+      "sql": "SELECT 100.0 * (\n  (SELECT COALESCE(SUM(o2.amount_units), 0) FROM observations o2 WHERE o2.period = 'P2' AND o2.network_asset IN (SELECT network_asset FROM observations WHERE period = 'P1')) -\n  (SELECT COALESCE(SUM(o1.amount_units), 0) FROM observations o1 WHERE o1.period = 'P1')\n) / (CAST((SELECT COALESCE(SUM(amount_units), 0) FROM observations WHERE period = 'P1') AS REAL)) AS value;",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "observations:amounts",
+      "policy:coverage"
+    ]
+  }
+}

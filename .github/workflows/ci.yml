@@ -9,12 +9,18 @@ on:
         default: true
       scope:
         type: choice
-        options: [full, smoke]
+        options: [full, smoke, review]
         default: full
       capture:
         type: boolean
         default: false
       setup:
+        type: boolean
+        default: false
+      results_run_id:
+        type: string
+        default: ''
+      regrade:
         type: boolean
         default: false
 permissions:
@@ -29,7 +35,15 @@ jobs:
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
+          fetch-depth: 0
           persist-credentials: false
+      - name: Archive tracked source for reproducibility
+        run: git archive --format=tar -o /tmp/workpaperbench-source.tar HEAD
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: source-${{ github.sha }}
+          path: /tmp/workpaperbench-source.tar
+          retention-days: 7
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12'
@@ -38,9 +52,13 @@ jobs:
       - run: workpaperbench demo
       - run: python scripts/audit.py
   integration:
+    needs: unit
     if: github.event_name == 'workflow_dispatch' && inputs.integration
     runs-on: ubuntu-24.04
     timeout-minutes: 90
+    permissions:
+      contents: read
+      actions: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -57,10 +75,31 @@ jobs:
       - run: python -m pip install 'uv==0.9.26'
       - run: uv pip install --system 'harbor==0.23.0' -e '.[test]'
       - run: python scripts/fix_native_version.py
+      - name: Collect the original campaign without inference
+        if: inputs.results_run_id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WPB_RESULTS_RUN: ${{ inputs.results_run_id }}
+        run: python scripts/collect_results.py --run-id "$WPB_RESULTS_RUN"
       - name: Native reference and isolation controls
         env:
           WPB_INTEGRATION_SCOPE: ${{ inputs.scope }}
         run: python -u scripts/integration.py
+      - name: Review retained answers in separate native verifiers without inference
+        if: inputs.regrade
+        run: python scripts/regrade.py
+      - name: Generate the versioned report
+        if: always()
+        run: |
+          workpaperbench report
+          tar -cf /tmp/workpaperbench-results.tar reports/runs reports/results.md reports/scores.json README.md
+          if [ -f reports/reconciliation.json ]; then tar -rf /tmp/workpaperbench-results.tar reports/reconciliation.json; fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: reviewed-results-${{ github.sha }}-${{ github.run_id }}
+          path: /tmp/workpaperbench-results.tar
+          retention-days: 7
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:

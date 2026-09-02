@@ -1,0 +1,55 @@
+{
+  "task_id": "wp04",
+  "answers": [
+    {
+      "id": "all_events",
+      "status": "answered",
+      "value": 775.0,
+      "unit": "token_units",
+      "evidence": [
+        "corpus:events",
+        "policy:counting",
+        "metadata:token",
+        "policy:window"
+      ],
+      "sql": "SELECT SUM(amount_base_units) / 1000000.0 AS value FROM events WHERE chain_id = 1 AND block_number >= 20000000 AND block_number <= 20000031 AND sender != '0x0000000000000000000000000000000000000000' AND recipient != '0x0000000000000000000000000000000000000000'",
+      "reason_code": null
+    },
+    {
+      "id": "max_per_tx",
+      "status": "answered",
+      "value": 675.0,
+      "unit": "token_units",
+      "evidence": [
+        "corpus:events",
+        "policy:counting",
+        "metadata:token",
+        "policy:window"
+      ],
+      "sql": "SELECT SUM(max_amount) / 1000000.0 AS value FROM (SELECT MAX(amount_base_units) AS max_amount FROM events WHERE chain_id = 1 AND block_number >= 20000000 AND block_number <= 20000031 AND sender != '0x0000000000000000000000000000000000000000' AND recipient != '0x0000000000000000000000000000000000000000' GROUP BY tx_id)",
+      "reason_code": null
+    },
+    {
+      "id": "all_events_minus_max_per_tx",
+      "status": "answered",
+      "value": 100.0,
+      "unit": "token_units",
+      "evidence": [
+        "corpus:events",
+        "policy:counting",
+        "metadata:token",
+        "policy:window"
+      ],
+      "sql": "SELECT (all_val - max_val) AS value FROM (SELECT (SELECT SUM(amount_base_units) / 1000000.0 FROM events WHERE chain_id = 1 AND block_number >= 20000000 AND block_number <= 20000031 AND sender != '0x0000000000000000000000000000000000000000' AND recipient != '0x0000000000000000000000000000000000000000') AS all_val, (SELECT SUM(max_amount) / 1000000.0 FROM (SELECT MAX(amount_base_units) AS max_amount FROM events WHERE chain_id = 1 AND block_number >= 20000000 AND block_number <= 20000031 AND sender != '0x0000000000000000000000000000000000000000' AND recipient != '0x0000000000000000000000000000000000000000' GROUP BY tx_id)) AS max_val)",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "not_established",
+    "reason_code": "incompatible_coverage",
+    "evidence": [
+      "policy:window",
+      "policy:scope"
+    ]
+  }
+}

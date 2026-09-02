@@ -18,7 +18,8 @@ RUNTIME = json.loads((ROOT / "config/runtime.json").read_text())
 SLOT_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,95}$")
 SAFE_TOOL_RE = re.compile(r"^[A-Za-z0-9_.-]{1,80}$")
 SAFE_ERROR_RE = re.compile(r"^[a-zA-Z0-9_.:-]{1,100}$")
-SECRET_RE = re.compile(rb"sk-or-v1-[A-Za-z0-9_-]{16,}|gh[pousr]_[A-Za-z0-9]{20,}")
+SECRET_RE = re.compile(rb"sk-or-v1-[A-Za-z0-9_-]{16,}|gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}")
+PROVIDER_CEILING_USD = 20.0
 
 
 def now():
@@ -76,7 +77,24 @@ def credential_in(content, key):
     exact = key.encode("utf-8")
     variants = [exact, base64.b64encode(exact), exact.hex().encode()]
     fragments = [variant[i:i+16] for variant in variants for i in range(0, len(variant)-15, 8)]
-    return bool(SECRET_RE.search(content) or any(fragment in content for fragment in fragments))
+    candidates = [content]
+    try:
+        candidates.append(json.dumps(json.loads(content), ensure_ascii=False).encode())
+    except (ValueError, UnicodeError, RecursionError):
+        pass
+    # Also catch escaped credentials in incomplete or otherwise invalid JSON.
+    candidates.append(re.sub(rb"\\u00([0-9a-fA-F]{2})", lambda m: bytes([int(m[1], 16)]), content))
+    from urllib.parse import unquote_to_bytes
+    candidates.append(unquote_to_bytes(content))
+    for match in re.finditer(rb"[A-Za-z0-9+/]{24,}={0,2}|(?:[0-9a-fA-F]{2}){16,}", content):
+        encoded = match[0]
+        try:
+            candidates.append(base64.b64decode(encoded, validate=True))
+        except ValueError:
+            pass
+        if re.fullmatch(rb"(?:[0-9a-fA-F]{2}){16,}", encoded):
+            candidates.append(bytes.fromhex(encoded.decode()))
+    return any(SECRET_RE.search(c) or any(fragment in c for fragment in fragments) for c in candidates)
 
 
 def provider_snapshot(key):
@@ -105,7 +123,7 @@ def provider_snapshot(key):
 
 
 def all_records():
-    for path in sorted((ROOT / "reports/runs").glob("*/record.json")):
+    for path in sorted((ROOT / "reports/runs").glob("**/record.json")):
         try:
             yield read_json(path, 300_000)
         except (OSError, ValueError, json.JSONDecodeError):
@@ -137,7 +155,7 @@ def preflight(snapshot, reserve, remaining_slots):
     remaining = snapshot.get("remaining_usd")
     funded = snapshot.get("funded_remaining_usd")
     byok = snapshot.get("byok_usage_usd")
-    if limit is None or not 0 < limit <= 50:
+    if limit is None or not 0 < limit <= PROVIDER_CEILING_USD:
         return "invalid_lifetime_limit"
     if not snapshot.get("reset_is_null"):
         return "provider_limit_must_be_lifetime"
@@ -195,6 +213,18 @@ def sanitized_verdict(path):
         and key in {"network_probe_blocked", "network_namespace_none", "no_inference_key", "no_docker_socket"}
         and isinstance(state, bool)
     } if isinstance(isolation, dict) else {}
+    if isinstance(value.get("scorer_version"), str) and re.fullmatch(r"[0-9.]{1,20}", value["scorer_version"]):
+        result["scorer_version"] = value["scorer_version"]
+    detail = value.get("details")
+    if isinstance(detail, dict):
+        def states(item):
+            return {k: v for k, v in item.items() if isinstance(k, str)
+                    and re.fullmatch(r"[a-z_]{1,40}", k) and (v is None or isinstance(v, bool))}
+        result["details"] = {
+            "claims": {k: states(v) for k, v in detail.get("claims", {}).items()
+                       if isinstance(k, str) and re.fullmatch(r"[a-z0-9_]{1,60}", k) and isinstance(v, dict)},
+            "conclusion": states(detail["conclusion"]) if isinstance(detail.get("conclusion"), dict) else None,
+        }
     return result
 
 
@@ -210,6 +240,38 @@ def tool_counts(path, key=None):
             if isinstance(name, str) and SAFE_TOOL_RE.fullmatch(name) and not (key and credential_in(name.encode(), key)):
                 counts[name] = counts.get(name, 0) + 1
     return dict(sorted(counts.items())[:50])
+
+
+def save_tool_evidence(path, destination, key):
+    try:
+        trajectory = read_json(path, 5_000_000)
+    except (OSError, ValueError):
+        return {"status": "unavailable", "calls": 0}
+    calls, observations, omitted = [], [], 0
+    for step in trajectory.get("steps", []):
+        for call in step.get("tool_calls", []) if isinstance(step, dict) else []:
+            if not isinstance(call, dict):
+                continue
+            item = {k: call[k] for k in ("function_name", "arguments", "tool_call_id") if k in call}
+            payload = json.dumps(item).encode()
+            if len(calls) >= 25 or len(payload) > 8000 or credential_in(payload, key):
+                omitted += 1
+                continue
+            calls.append(item)
+        observation = step.get("observation", {}) if isinstance(step, dict) else {}
+        for result in observation.get("results", []) if isinstance(observation, dict) else []:
+            if not isinstance(result, dict):
+                continue
+            item = {k: result[k] for k in ("source_call_id", "content") if k in result}
+            payload = json.dumps(item).encode()
+            if len(observations) >= 25 or len(payload) > 8000 or credential_in(payload, key):
+                omitted += 1
+                continue
+            observations.append(item)
+    data = {"calls": calls, "observations": observations, "omitted_items": omitted,
+            "scope": "Bounded screened tool invocations and observations only. No assistant messages, private reasoning or claim of complete trajectories. Omitted items may exceed bounds or contain credential patterns."}
+    destination.write_text(json.dumps(data, indent=2) + "\n")
+    return {"status": "screened_tools", "calls": len(calls), "observations": len(observations), "omitted_items": omitted}
 
 
 def failure_codes(path):
@@ -311,16 +373,31 @@ def execute(mode, slot_id):
     if not task_dir.is_dir() or task_dir.is_symlink():
         raise ValueError("task_directory_missing")
 
-    output_dir = ROOT / "reports/runs" / slot_id
+    from attempts import check, record_directory
+    manifest_id = os.environ["WPB_MANIFEST_ID"]
+    if mode == "pilot" and manifest_id != "development-v1":
+        raise ValueError("pilot_manifest_mismatch")
+    output_dir = record_directory(manifest_id, slot_id)
     for directory in (ROOT / "reports", ROOT / "reports/runs", output_dir):
         if directory.exists() and (directory.is_symlink() or not directory.is_dir()):
             raise ValueError("unsafe_output_path")
     output_dir.mkdir(parents=True, exist_ok=True)
     record_path = output_dir / "record.json"
-    if record_path.exists() or record_path.is_symlink():
+    prior = read_json(record_path, 300_000) if record_path.is_file() else None
+    if record_path.is_symlink() or (prior is not None and not (
+        prior.get("status") == "setup_started"
+        and str(prior.get("run_id")) == os.environ.get("GITHUB_RUN_ID")
+        and str(prior.get("github_run_attempt")) == "1"
+    )):
         raise ValueError("slot_record_already_exists")
+    if prior is None:
+        raise ValueError("attempt_receipt_missing")
+    if os.environ.get("GITHUB_RUN_ATTEMPT") != "1":
+        raise ValueError("same_run_retry_disabled")
 
+    check(mode, manifest_id, [slot_id])
     record = {
+        "experiment_id": manifest_id,
         "campaign": slot["campaign"],
         "task": task_id,
         "arm": slot.get("arm"),
@@ -328,7 +405,9 @@ def execute(mode, slot_id):
         "slot_id": slot_id,
         "split": slot.get("split"),
         "status": "started",
-        "started_at": now(),
+        "started_at": prior["started_at"] if prior else now(),
+        "execution_started_at": now(),
+        "remaining_planned_slots": prior.get("remaining_planned_slots"),
         "github_run_id": os.environ.get("GITHUB_RUN_ID"),
         "run_id": os.environ.get("GITHUB_RUN_ID"),
         "github_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT"),
@@ -351,6 +430,7 @@ def execute(mode, slot_id):
         try:
             freeze = frozen_inputs()
             record["freeze_manifest_id"] = freeze.get("manifest_id")
+            record["experiment_id"] = freeze.get("manifest_id")
             record["freeze_hash_count"] = len(freeze["hashes"])
         except (OSError, ValueError, json.JSONDecodeError) as exc:
             record.update(status="blocked", reason_code=str(exc))
@@ -374,7 +454,10 @@ def execute(mode, slot_id):
     schedule = slots if mode == "final" else []
     if mode == "final":
         schedule = list_slots(ROOT / "config/schedule.json")
-        reserve, remaining_slots = final_reservation(schedule, list(all_records()))
+        reserve, _ = final_reservation(schedule, list(all_records()))
+        remaining_slots = prior.get("remaining_planned_slots")
+        if isinstance(remaining_slots, bool) or not isinstance(remaining_slots, int) or not 1 <= remaining_slots <= len(schedule):
+            raise ValueError("remaining_reservation_receipt_missing")
     else:
         reserve, remaining_slots = float(RUNTIME["cost"]["reservation_usd_per_slot"]), 1
     record["reservation_usd_per_slot"] = reserve
@@ -449,14 +532,18 @@ def execute(mode, slot_id):
         record["native_exception_type"] = exception_type
         record["native_failure_codes"] = failure_codes(trial_dir / "agent/hermes.txt")
     record["tool_event_counts"] = tool_counts(trial_dir / "agent/trajectory.json", key)
+    record["tool_evidence"] = save_tool_evidence(trial_dir / "agent/trajectory.json", output_dir / "tool-evidence.json", key)
 
     answer_path = trial_dir / "artifacts/logs/artifacts/answer.json"
     answer, answer_error = bounded_bytes(answer_path, int(RUNTIME["max_answer_bytes"]))
     if answer is not None:
         if credential_in(answer, key):
             answer_error = "credential_pattern"
+            record["raw_artifact_status"] = "withheld_credential_pattern"
         else:
-            record["answer_sha256"] = hashlib.sha256(answer).hexdigest()
+            record["raw_sha256"] = hashlib.sha256(answer).hexdigest()
+            record["raw_artifact_status"] = "screened_original_bytes"
+            (output_dir / "answer.raw.txt").write_bytes(answer)
             try:
                 from workpaperbench.grading import parse, validate
                 parsed = parse(answer)
@@ -466,8 +553,10 @@ def execute(mode, slot_id):
                     answer_error = "credential_pattern"
                 else:
                     (output_dir / "answer.json").write_bytes(canonical)
+                    record["retained_sha256"] = hashlib.sha256(canonical).hexdigest()
+                    record["answer_sha256"] = record["retained_sha256"]
             except Exception:
-                answer_error = "malformed_structure_digest_only"
+                answer_error = "invalid_structure_original_retained"
     record["answer_status"] = "saved" if answer is not None and answer_error is None else answer_error
 
     verdict = sanitized_verdict(trial_dir / "verifier/verdict.json")

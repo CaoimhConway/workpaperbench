@@ -1,0 +1,52 @@
+{
+  "task_id": "wp04",
+  "answers": [
+    {
+      "id": "all_events",
+      "status": "answered",
+      "value": 775.0,
+      "unit": "token_units",
+      "evidence": [
+        "corpus:events",
+        "policy:counting",
+        "metadata:token"
+      ],
+      "sql": "SELECT SUM(amount_base_units) / 1000000.0 AS value FROM events WHERE sender != '0x0000000000000000000000000000000000000000' AND recipient != '0x0000000000000000000000000000000000000000'",
+      "reason_code": null
+    },
+    {
+      "id": "max_per_tx",
+      "status": "answered",
+      "value": 675.0,
+      "unit": "token_units",
+      "evidence": [
+        "corpus:events",
+        "policy:counting",
+        "metadata:token"
+      ],
+      "sql": "SELECT SUM(max_amount) / 1000000.0 AS value FROM (SELECT tx_id, MAX(amount_base_units) AS max_amount FROM events WHERE sender != '0x0000000000000000000000000000000000000000' AND recipient != '0x0000000000000000000000000000000000000000' GROUP BY tx_id)",
+      "reason_code": null
+    },
+    {
+      "id": "difference",
+      "status": "answered",
+      "value": 100.0,
+      "unit": "token_units",
+      "evidence": [
+        "corpus:events",
+        "policy:counting",
+        "metadata:token"
+      ],
+      "sql": "SELECT (SELECT SUM(amount_base_units) / 1000000.0 FROM events WHERE sender != '0x0000000000000000000000000000000000000000' AND recipient != '0x0000000000000000000000000000000000000000') - (SELECT SUM(max_amount) / 1000000.0 FROM (SELECT tx_id, MAX(amount_base_units) AS max_amount FROM events WHERE sender != '0x0000000000000000000000000000000000000000' AND recipient != '0x0000000000000000000000000000000000000000' GROUP BY tx_id)) AS value",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "not_established",
+    "reason_code": "incompatible_coverage",
+    "evidence": [
+      "policy:scope",
+      "methodology:context"
+    ]
+  }
+}

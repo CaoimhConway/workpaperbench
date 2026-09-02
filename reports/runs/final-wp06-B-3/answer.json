@@ -1,0 +1,49 @@
+{
+  "task_id": "wp06",
+  "answers": [
+    {
+      "id": "reported_growth",
+      "status": "answered",
+      "value": 100.0,
+      "unit": "percent",
+      "evidence": [
+        "observations:amounts",
+        "policy:coverage"
+      ],
+      "sql": "SELECT CAST(SUM(CASE WHEN period = 'P2' THEN amount_units ELSE 0 END) - SUM(CASE WHEN period = 'P1' THEN amount_units ELSE 0 END) AS REAL) * 100.0 / SUM(CASE WHEN period = 'P1' THEN amount_units ELSE 0 END) FROM observations WHERE period IN ('P1', 'P2')",
+      "reason_code": null
+    },
+    {
+      "id": "matched_growth",
+      "status": "answered",
+      "value": 0.0,
+      "unit": "percent",
+      "evidence": [
+        "observations:amounts",
+        "policy:coverage"
+      ],
+      "sql": "SELECT CAST(SUM(CASE WHEN period = 'P2' AND network_asset IN (SELECT network_asset FROM observations WHERE period = 'P1') THEN amount_units ELSE 0 END) - SUM(CASE WHEN period = 'P1' THEN amount_units ELSE 0 END) AS REAL) * 100.0 / SUM(CASE WHEN period = 'P1' THEN amount_units ELSE 0 END) FROM observations WHERE period IN ('P1', 'P2')",
+      "reason_code": null
+    },
+    {
+      "id": "proposition",
+      "status": "answered",
+      "value": 0.0,
+      "unit": "percent_difference",
+      "evidence": [
+        "observations:amounts",
+        "policy:coverage"
+      ],
+      "sql": "SELECT CAST(SUM(CASE WHEN period = 'P2' AND network_asset IN (SELECT network_asset FROM observations WHERE period = 'P1') THEN amount_units ELSE 0 END) - SUM(CASE WHEN period = 'P1' THEN amount_units ELSE 0 END) AS REAL) * 100.0 / SUM(CASE WHEN period = 'P1' THEN amount_units ELSE 0 END) FROM observations WHERE period IN ('P1', 'P2')",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "observations:amounts",
+      "policy:coverage"
+    ]
+  }
+}

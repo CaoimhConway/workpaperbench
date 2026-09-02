@@ -1,0 +1,36 @@
+{
+  "task_id": "wp05",
+  "answers": [
+    {
+      "id": "naive_growth",
+      "status": "answered",
+      "value": 65.0,
+      "unit": "percent",
+      "evidence": [
+        "export:periods"
+      ],
+      "sql": "SELECT (MAX(CASE WHEN period='P2' THEN transfer_volume ELSE 0 END) - MAX(CASE WHEN period='P1' THEN transfer_volume ELSE 0 END)) * 100.0 / MAX(CASE WHEN period='P1' THEN transfer_volume ELSE 0 END) FROM exports",
+      "reason_code": null
+    },
+    {
+      "id": "comparable_growth",
+      "status": "answered",
+      "value": 10.0,
+      "unit": "percent",
+      "evidence": [
+        "export:periods",
+        "ledger:events"
+      ],
+      "sql": "SELECT (P2 - P1) * 100.0 / P1 FROM (SELECT SUM(CASE WHEN period='P1' THEN amount_units ELSE 0 END) as P1, SUM(CASE WHEN period='P2' THEN amount_units ELSE 0 END) as P2 FROM events WHERE event_kind NOT IN ('mint','burn'))",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "ledger:events",
+      "export:periods"
+    ]
+  }
+}
