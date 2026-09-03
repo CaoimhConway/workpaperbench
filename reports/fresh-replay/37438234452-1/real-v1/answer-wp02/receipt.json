@@ -1,0 +1,62 @@
+{
+  "commit_sha": "caf51e7d33b7560728020d9f0bc171cf282994f5",
+  "comparison": {
+    "checks_same": null,
+    "complete_same": null,
+    "prior_available": false
+  },
+  "dataset": "real-v1",
+  "effective_task_scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+  "input_file": "submissions/reference-wp02.json",
+  "input_sha256": "7c0be3a58a5cfd99f68074bc52a20e3486434e42b20bd7a63e032fb557726f06",
+  "input_source": "user_submission",
+  "manifest_id": "real-v1-76d0ba6152ff",
+  "manifest_sha256": "550604fe9f1a3fdf975f83bff5fe0321346bc6841bfd4b5d5006696ebe1a7d02",
+  "prior_verdict": null,
+  "receipt_identity_sha256": "691601732d06a3da74711f5caba9dd48b3a573761d823052cbbeab9591500ce5",
+  "run_attempt": "1",
+  "run_id": "37438234452",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+  "slot_id": "answer-wp02",
+  "task_id": "real-v1-wp02",
+  "task_sha256": "2d984fe0156c2e33e2e6af152dc51483a68b445a0c21bae91589ac8a0141575c",
+  "verdict": {
+    "checks": {
+      "availability": true,
+      "conclusion": true,
+      "evidence_context": true,
+      "format": true,
+      "numerical": true,
+      "replay": true
+    },
+    "complete": true,
+    "details": {
+      "claims": {
+        "transfer_total": {
+          "availability": true,
+          "changed_replay": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "reason_code": null,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "reason_code": true,
+        "verdict": true
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "1.2.0"
+  },
+  "verdict_sha256": "a3e0e7e75f208d2cf70ab6ce738bb535aad617d699af08c72ec6c808843f012f"
+}
