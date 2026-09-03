@@ -1,0 +1,205 @@
+{
+  "split": "development",
+  "source_group": "authored-event-ledger",
+  "tables": {
+    "events": {
+      "schema": "CREATE TABLE events(export_row TEXT,event_id TEXT,tx_id TEXT,event_kind TEXT,amount_units INTEGER)",
+      "rows": [
+        [
+          "a",
+          "e1",
+          "txa",
+          "transfer",
+          100
+        ],
+        [
+          "b",
+          "e1",
+          "txa",
+          "transfer",
+          100
+        ],
+        [
+          "c",
+          "e2",
+          "txa",
+          "transfer",
+          200
+        ],
+        [
+          "d",
+          "e3",
+          "txb",
+          "transfer",
+          600
+        ],
+        [
+          "e",
+          "e4",
+          "txc",
+          "transfer",
+          100
+        ],
+        [
+          "f",
+          "e5",
+          "txd",
+          "mint",
+          500
+        ],
+        [
+          "g",
+          "e6",
+          "txe",
+          "burn",
+          200
+        ]
+      ]
+    }
+  },
+  "changed_tables": {
+    "events": {
+      "schema": "CREATE TABLE events(export_row TEXT,event_id TEXT,tx_id TEXT,event_kind TEXT,amount_units INTEGER)",
+      "rows": [
+        [
+          "a",
+          "e1",
+          "txa",
+          "transfer",
+          130
+        ],
+        [
+          "b",
+          "e1",
+          "txa",
+          "transfer",
+          130
+        ],
+        [
+          "c",
+          "e2",
+          "txa",
+          "transfer",
+          250
+        ],
+        [
+          "d",
+          "e3",
+          "txb",
+          "transfer",
+          710
+        ],
+        [
+          "e",
+          "e4",
+          "txc",
+          "transfer",
+          130
+        ],
+        [
+          "f",
+          "e5",
+          "txd",
+          "mint",
+          900
+        ],
+        [
+          "g",
+          "e6",
+          "txe",
+          "burn",
+          600
+        ]
+      ]
+    }
+  },
+  "instruction": "Prepare transfer_total in token_units for the supplied export. Assess the proposition: distinct eligible events in transaction txa both contribute under the supplied transfer definition.",
+  "context": "# Export dictionary\nAuthored synthetic ledger. export_row identifies a copied export record. event_id is the stable event identity. tx_id identifies the transaction containing the event. Copies of an event have identical economic fields. amount_units is an integer in whole token units, not USD.\n\nThe transfer definition counts every distinct event whose event_kind is transfer. Mint and burn events do not contribute. Event identity governs export copies. All supplied rows share one fixed population and period.\n\nThis new synthetic control includes equal amounts on different legitimate event identities. It is not observed chain data.",
+  "evidence": [
+    {
+      "id": "ledger:events",
+      "text": "Synthetic complete export, including record copies and distinct events.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "authored scenario",
+      "retrieved_at": "2026-10-05T04:07:12.427661+00:00",
+      "redistribution": "original annotation and factual extract only"
+    },
+    {
+      "id": "policy:transfer_definition",
+      "text": "Event-based amount with mint/burn excluded. See sources.md.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "authored scenario",
+      "retrieved_at": "2026-10-05T04:07:12.427661+00:00",
+      "redistribution": "original annotation and factual extract only"
+    },
+    {
+      "id": "delivery:format",
+      "text": "Synthetic export delivery uses text event and transaction identifiers, not row ordinal identity.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "authored scenario",
+      "retrieved_at": "2026-10-05T04:07:12.427661+00:00",
+      "redistribution": "original annotation and factual extract only"
+    }
+  ],
+  "reference": {
+    "task_id": "real-v1-wp02",
+    "answers": [
+      {
+        "id": "transfer_total",
+        "status": "answered",
+        "value": 1000,
+        "unit": "token_units",
+        "evidence": [
+          "ledger:events",
+          "policy:transfer_definition"
+        ],
+        "sql": "SELECT SUM(amount_units) AS value FROM (SELECT event_id,MAX(amount_units) amount_units FROM events WHERE event_kind='transfer' GROUP BY event_id)",
+        "reason_code": null
+      }
+    ],
+    "conclusion": {
+      "verdict": "supported",
+      "reason_code": "supported_by_calculation",
+      "evidence": [
+        "ledger:events",
+        "policy:transfer_definition"
+      ]
+    }
+  },
+  "gold": {
+    "answers": {
+      "transfer_total": {
+        "status": "answered",
+        "value": 1000,
+        "changed_value": 1220,
+        "unit": "token_units",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "ledger:events",
+            "policy:transfer_definition"
+          ]
+        ]
+      }
+    },
+    "conclusion": {
+      "verdict": "supported",
+      "reason_codes": [
+        "supported_by_calculation"
+      ],
+      "evidence": [
+        [
+          "ledger:events",
+          "policy:transfer_definition"
+        ]
+      ]
+    }
+  },
+  "origin": "synthetic",
+  "task_id": "real-v1-wp02",
+  "control_origin": "fully_synthetic_data",
+  "previously_exposed": "Revised previously exposed diagnostic with new equal-amount events"
+}

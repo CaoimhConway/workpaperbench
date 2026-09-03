@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "answers",
+    "conclusion"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "pattern": "^real-v1-wp0[1-8]$"
+    },
+    "answers": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "status",
+          "value",
+          "unit",
+          "evidence",
+          "sql",
+          "reason_code"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "status": {
+            "enum": [
+              "answered",
+              "insufficient_evidence"
+            ]
+          },
+          "value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "unit": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "minItems": 1,
+            "maxItems": 8,
+            "uniqueItems": true
+          },
+          "sql": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 1,
+            "maxLength": 16384
+          },
+          "reason_code": {
+            "enum": [
+              "no_eligible_observation",
+              "missing_comparable_definition",
+              "missing_required_labels",
+              "missing_required_input",
+              null
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "answered"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "number"
+                },
+                "sql": {
+                  "type": "string"
+                },
+                "reason_code": {
+                  "type": "null"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "value": {
+                  "type": "null"
+                },
+                "sql": {
+                  "type": "null"
+                },
+                "reason_code": {
+                  "enum": [
+                    "no_eligible_observation",
+                    "missing_comparable_definition",
+                    "missing_required_labels",
+                    "missing_required_input"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "conclusion": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "verdict",
+            "reason_code",
+            "evidence"
+          ],
+          "properties": {
+            "verdict": {
+              "enum": [
+                "supported",
+                "contradicted",
+                "not_established"
+              ]
+            },
+            "reason_code": {
+              "enum": [
+                "supported_by_calculation",
+                "contradicted_by_calculation",
+                "incompatible_definition",
+                "incompatible_coverage",
+                "ineligible_source",
+                "missing_required_evidence"
+              ]
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "minItems": 1,
+              "maxItems": 8,
+              "uniqueItems": true
+            }
+          }
+        }
+      ]
+    }
+  }
+}

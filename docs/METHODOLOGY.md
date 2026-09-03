@@ -1,5 +1,23 @@
 # Methodology and correction policy
 
+## Active real-v1 study
+
+`datasets/real-v1/manifest.json` defines a new experiment identity, source/task hashes, reference answers, scorer/runtime, routing, treatment, schedule and cumulative budgets. All manifest fields are canonically hashed, excluding only the two identity/hash fields. Changing inputs and rehashing them cannot preserve the old identity. The original `config/freeze.json`, correction registry, candidate packages and results remain historical.
+
+The suite has six real-source base tasks and two synthetic diagnostic tasks. All changed-input controls are synthetic counterfactuals. The Bitcoin transaction pages are predeclared first-25 samples, not whole-block datasets. Matched coverage for the fee-rate task means actual transaction versions present in both samples, with coinbase excluded. This does not match individual transactions or establish instrumentation changes. Circulating stablecoin quantities, reserve USD fair values, fees, output values and market valuation are different metrics.
+
+The evidence contract is per claim, declared in every candidate instruction before freeze. Cite the observed operands and metric definition, with relevant scope evidence allowed. Relevant timing and scope records are accepted equivalent context. A bounded conclusion cites the relevant calculation or scope evidence. There is no hidden task-specific citation repetition rule or answer-revealing reason vocabulary. Official outputs are never repaired. Scorer 1.2.0 is reused unchanged, while the new task/reference/control hashes give this suite its own scoring identity.
+
+Development uses real-v1-wp01/wp02/wp05. Evaluation uses wp03/wp04/wp06/wp07/wp08. The intervention and model are reused. At most six compatibility/pilot attempts are authorized, with two declared pilot slots in this snapshot. The final schedule is 48 slots. No evaluation output informs treatment tuning. Shared source groups never cross the split. Previously exposed filing and diagnostic cases are regression tests, not newly unseen tasks.
+
+Reporting preserves scheduled counts, assessed numerical/conclusion/evidence/replay counts and retained-answer coverage. Missing citations or reason codes are distinct from incorrect financial conclusions. New and historical study scores are never pooled. Repeated attempts and shared Bitcoin pages do not create independent datasets.
+
+Fresh [replay](REPLAY.md) executes the native separate verifier for selected retained bytes or a bounded committed engineer answer, writing immutable run/input/task/scorer receipts and comparing prior diagnostics without replacing them. Cached historical regrading is separately labeled. All submitted SQL remains Actions-only. Local tests execute only trusted authored controls and reference SQL.
+
+The preflight reads provider lifetime metadata without inference. Paid runs preserve the lower dedicated cap of USD 20 within the USD 50 project ceiling, including historical spend. Standard public Linux Actions compute is free under the current runner route. Storage/account invoices are still unknown, with the USD 10 incremental project Actions limit unchanged.
+
+## Historical study and reviewed scoring
+
 WorkpaperBench measures bounded financial work over supplied tables and evidence. It does not measure open-web retrieval, general investment judgment or cryptographic verification.
 
 ## What passes

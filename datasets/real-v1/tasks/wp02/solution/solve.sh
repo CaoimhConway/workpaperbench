@@ -1,0 +1,29 @@
+#!/bin/bash
+set -euo pipefail
+cat > /logs/artifacts/answer.json <<'ANSWER'
+{
+  "task_id": "real-v1-wp02",
+  "answers": [
+    {
+      "id": "transfer_total",
+      "status": "answered",
+      "value": 1000,
+      "unit": "token_units",
+      "evidence": [
+        "ledger:events",
+        "policy:transfer_definition"
+      ],
+      "sql": "SELECT SUM(amount_units) AS value FROM (SELECT event_id,MAX(amount_units) amount_units FROM events WHERE event_kind='transfer' GROUP BY event_id)",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "ledger:events",
+      "policy:transfer_definition"
+    ]
+  }
+}
+ANSWER

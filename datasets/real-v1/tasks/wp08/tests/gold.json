@@ -1,0 +1,69 @@
+{
+  "answers": {
+    "observed_outputs": {
+      "status": "answered",
+      "value": 27.57007836,
+      "unit": "btc",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "chain:observations",
+          "chain:definitions"
+        ],
+        [
+          "chain:observations",
+          "chain:definitions",
+          "chain:scope"
+        ]
+      ],
+      "changed_value": 27.89407836
+    },
+    "business_payments": {
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "btc",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "chain:scope"
+        ]
+      ],
+      "reason_codes": [
+        "missing_required_labels"
+      ]
+    },
+    "unique_people": {
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "count",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "chain:scope"
+        ]
+      ],
+      "reason_codes": [
+        "missing_required_labels"
+      ]
+    }
+  },
+  "conclusion": {
+    "verdict": "not_established",
+    "reason_codes": [
+      "missing_required_evidence"
+    ],
+    "evidence": [
+      [
+        "chain:scope"
+      ]
+    ]
+  },
+  "task_id": "real-v1-wp08",
+  "hashes": {
+    "data.sqlite": "a671b0c2f9a6822ef4d24691eecea380b2e75e3c952df863913467b26cbe904f",
+    "changed.sqlite": "b4c5780ab08e2a903d3117efbd6e1cb4a15615b6d5825c4ba8d93ebcbc16dd74",
+    "schema.json": "23bc6755993737dff441bf3e9544424a1873f33b3150068bf8dcd094363e7433",
+    "evidence.json": "5b66f974c1051340bc2d3a3c53540c5606627d8d817a7314d06ef8835d5ca2b2",
+    "sources.md": "f4ac065e1279548bb398e78fd62e0ac8001b57cba817cb5bd57850504c3593d9"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "answers": {
+    "circulating_end": {
+      "status": "answered",
+      "value": 53218.939728,
+      "unit": "usdc_million",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "reserve:observations",
+          "reserve:definition"
+        ],
+        [
+          "reserve:observations",
+          "reserve:definition",
+          "reserve:timing"
+        ]
+      ],
+      "changed_value": 55218.939728
+    },
+    "circulating_growth": {
+      "status": "answered",
+      "value": 16.326677370440372,
+      "unit": "percent",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "reserve:observations",
+          "reserve:definition"
+        ],
+        [
+          "reserve:observations",
+          "reserve:definition",
+          "reserve:timing"
+        ]
+      ],
+      "changed_value": 18.116498018070125
+    },
+    "reserve_headroom": {
+      "status": "answered",
+      "value": 64.86063,
+      "unit": "usd_million",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "reserve:observations",
+          "reserve:definition"
+        ],
+        [
+          "reserve:observations",
+          "reserve:definition",
+          "reserve:timing"
+        ]
+      ],
+      "changed_value": 264.86063
+    }
+  },
+  "conclusion": {
+    "verdict": "supported",
+    "reason_codes": [
+      "supported_by_calculation"
+    ],
+    "evidence": [
+      [
+        "reserve:observations",
+        "reserve:definition"
+      ],
+      [
+        "reserve:observations",
+        "reserve:definition",
+        "reserve:timing"
+      ]
+    ]
+  },
+  "task_id": "real-v1-wp04",
+  "hashes": {
+    "data.sqlite": "afdb53cf72bf57ccdb456ca2b4d9d0c63964f3419fa70201501e60d6abc813d3",
+    "changed.sqlite": "a729ff1a1bbe7c699b2da98b788af2a341bbbca3dde31e2f437f11ca07def465",
+    "schema.json": "23bc6755993737dff441bf3e9544424a1873f33b3150068bf8dcd094363e7433",
+    "evidence.json": "58321d28473fba46c5f348e92ff79062d9afd8aafd6fd50eaa4b765bf01c7455",
+    "sources.md": "17f78ff45b49dd641483b25d1cad8e21ef4ce6de4a888268e2f36b2cc1e7547e"
+  }
+}
