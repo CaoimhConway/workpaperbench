@@ -1,6 +1,6 @@
 # Real-v1 results
 
-Dataset `real-v1-c99018e04be3`, scorer 1.2.0, model `qwen/qwen3.6-35b-a3b`.
+Dataset `real-v1-76d0ba6152ff`, scorer 1.2.0, model `qwen/qwen3.6-35b-a3b`.
 
 Historical results are a separate study. No scores carry over to changed tasks.
 

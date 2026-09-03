@@ -81,7 +81,7 @@ python3 -m venv .venv
 .venv/bin/workpaperbench report
 ```
 
-The offline reconstruction checks original source hashes and rebuilds byte-identical normalized packages without a network request. Refreshing source data requires a new snapshot identity.
+Offline reconstruction checks all frozen input hashes, rebuilds the tables from original captures and compares their schemas and complete typed rows. It retains the hash-verified frozen SQLite bytes after that comparison because physical page layout can differ between SQLite builds. Other package bytes rebuild exactly. No network request is made. Refreshing source data requires a new snapshot identity.
 
 ## Fresh replay and your own workpaper
 
