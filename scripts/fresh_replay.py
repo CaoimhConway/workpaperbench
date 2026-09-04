@@ -143,7 +143,7 @@ def load_real_manifest(root=ROOT):
         raise ValueError("real_manifest_identity_missing")
     from native_run import frozen_inputs
     from select_slots import campaign_context, campaign_slots
-    manifest = frozen_inputs(manifest["manifest_id"], root)
+    manifest = frozen_inputs(manifest["manifest_id"], root, reviewed_operations=True)
     context = campaign_context(manifest["manifest_id"], root)
     campaign_slots(context, "final")
     return manifest, raw, context["tasks"]
