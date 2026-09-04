@@ -1,0 +1,53 @@
+#!/bin/bash
+set -euo pipefail
+cat > /logs/artifacts/answer.json <<'ANSWER'
+{
+  "task_id": "real-v1-wp04",
+  "answers": [
+    {
+      "id": "circulating_end",
+      "status": "answered",
+      "value": 53218.939728,
+      "unit": "usdc_million",
+      "sql": "SELECT (approved_supply-allowed_unissued-access_denied)/1000000.0 AS value FROM reserve_snapshots WHERE report_date='2025-01-31'",
+      "evidence": [
+        "reserve:observations",
+        "reserve:definition"
+      ],
+      "reason_code": null
+    },
+    {
+      "id": "circulating_growth",
+      "status": "answered",
+      "value": 16.326677370440372,
+      "unit": "percent",
+      "sql": "WITH p AS (SELECT report_date,approved_supply-allowed_unissued-access_denied quantity FROM reserve_snapshots) SELECT 100.0*((SELECT quantity FROM p WHERE report_date='2025-01-31')*1.0/(SELECT quantity FROM p WHERE report_date='2025-01-06')-1) AS value",
+      "evidence": [
+        "reserve:observations",
+        "reserve:definition"
+      ],
+      "reason_code": null
+    },
+    {
+      "id": "reserve_headroom",
+      "status": "answered",
+      "value": 64.86063,
+      "unit": "usd_million",
+      "sql": "SELECT (reserves_usd-(approved_supply-allowed_unissued-access_denied))/1000000.0 AS value FROM reserve_snapshots WHERE report_date='2025-01-31'",
+      "evidence": [
+        "reserve:observations",
+        "reserve:definition"
+      ],
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "reserve:observations",
+      "reserve:definition"
+    ]
+  }
+}
+ANSWER

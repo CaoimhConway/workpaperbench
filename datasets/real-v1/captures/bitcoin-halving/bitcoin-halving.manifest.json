@@ -1,0 +1,61 @@
+{
+  "amount_unit": "satoshi",
+  "api_base": "https://blockstream.info/api",
+  "api_documentation": "https://github.com/Blockstream/esplora/blob/bb2d9f37bdb0eb0dade45b121a1df3581d7443ea/API.md",
+  "api_documentation_commit": "bb2d9f37bdb0eb0dade45b121a1df3581d7443ea",
+  "capture_mode": "bounded_network_capture",
+  "fee_recalculation": "for each non-coinbase transaction, sum input prevout values and subtract output values, then compare to the API fee field",
+  "fixed_heights": [
+    839999,
+    840000
+  ],
+  "limitations": [
+    "Each page covers only transaction indices 0 through 24 and is not a full-block fee sample.",
+    "No inference about full-block fee totals, miner revenue trends, wallet identities, or causal effects is supported by two adjacent blocks.",
+    "Coinbase payout minus nominal subsidy is a claimed amount above subsidy and is not labeled as total block fees."
+  ],
+  "normalized_bytes": 36462,
+  "normalized_file": "bitcoin-halving-normalized.json",
+  "normalized_sha256": "9e0bcf80342fab634f5eab15088b1dc7efb3f51582f8017c1f30230807ed2085",
+  "page_size_limit": 25,
+  "page_start_index": 0,
+  "responses": [
+    {
+      "bytes": 64,
+      "file": "block-height-840000.response",
+      "request_path": "/block-height/840000",
+      "sha256": "7e5798ee96644cd190c8f1148f09721be9a9cbfad3945fb25712210420d51446"
+    },
+    {
+      "bytes": 439,
+      "file": "block-840000.response",
+      "request_path": "/block/0000000000000000000320283a032748cef8227873ff4872689bf23f1cda83a5",
+      "sha256": "c41e11b9a5e4833765f8eb31f555e8e4ac0a2f31f7bf9f1f92ce29bdfd95efc1"
+    },
+    {
+      "bytes": 439,
+      "file": "block-839999.response",
+      "request_path": "/block/0000000000000000000172014ba58d66455762add0512355ad651207918494ab",
+      "sha256": "a31eb4c03195c7d16745a906fe958210c47f6c5584ceaabf22b77a71d49de7d8"
+    },
+    {
+      "bytes": 52787,
+      "file": "transactions-first25-839999.response",
+      "request_path": "/block/0000000000000000000172014ba58d66455762add0512355ad651207918494ab/txs/0",
+      "sha256": "b0a77a4792d4f593ba30b9a0e517c76332420f5e83bba70efa1b7880556ebf56"
+    },
+    {
+      "bytes": 41492,
+      "file": "transactions-first25-840000.response",
+      "request_path": "/block/0000000000000000000320283a032748cef8227873ff4872689bf23f1cda83a5/txs/0",
+      "sha256": "5e7bd7e15b02bce748166aa8d7dde0d7dd68278e6d031dd9109b9aad70bd4b4d"
+    }
+  ],
+  "retrieved_at_utc": "2026-10-06T07:10:06+00:00",
+  "reuse_review": "The Esplora repository is MIT-licensed software, which is not asserted as a license for API data. The public Blockstream terms were reviewed and no separate public API-data redistribution grant was identified. This capture retains a bounded sample of public Bitcoin chain facts with provider attribution.",
+  "selection_rule": "the first 25 transactions by block index from each of two adjacent blocks, selected by the predeclared subsidy-halving height",
+  "source": "Bitcoin Mainnet public chain data via Blockstream Esplora",
+  "subsidy_rule": "50 BTC right-shifted by floor(block height / 210000), in satoshis",
+  "terms_reviewed": "https://blockstream.com/terms/",
+  "terms_reviewed_on": "2026-10-06"
+}

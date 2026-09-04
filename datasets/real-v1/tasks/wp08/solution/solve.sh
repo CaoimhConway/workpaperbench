@@ -1,0 +1,50 @@
+#!/bin/bash
+set -euo pipefail
+cat > /logs/artifacts/answer.json <<'ANSWER'
+{
+  "task_id": "real-v1-wp08",
+  "answers": [
+    {
+      "id": "observed_outputs",
+      "status": "answered",
+      "value": 27.57007836,
+      "unit": "btc",
+      "sql": "SELECT SUM(output_sats)/100000000.0 AS value FROM transactions WHERE height=840000 AND is_coinbase=0",
+      "evidence": [
+        "chain:observations",
+        "chain:definitions"
+      ],
+      "reason_code": null
+    },
+    {
+      "id": "business_payments",
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "btc",
+      "sql": null,
+      "evidence": [
+        "chain:scope"
+      ],
+      "reason_code": "missing_required_labels"
+    },
+    {
+      "id": "unique_people",
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "count",
+      "sql": null,
+      "evidence": [
+        "chain:scope"
+      ],
+      "reason_code": "missing_required_labels"
+    }
+  ],
+  "conclusion": {
+    "verdict": "not_established",
+    "reason_code": "missing_required_evidence",
+    "evidence": [
+      "chain:scope"
+    ]
+  }
+}
+ANSWER
