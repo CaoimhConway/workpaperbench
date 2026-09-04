@@ -1,0 +1,87 @@
+{
+  "commit_sha": "0485fa7585f3661201244da3e8d36366a7e7a338",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "real-v1",
+  "effective_task_scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "0aef7f232f4474ae4cde24877ddc6da3ed4bc5c9446e44646a63331e7ae8d2a1",
+  "input_source": "retained_artifact",
+  "manifest_id": "real-v1-76d0ba6152ff",
+  "manifest_sha256": "550604fe9f1a3fdf975f83bff5fe0321346bc6841bfd4b5d5006696ebe1a7d02",
+  "prior_verdict": {
+    "checks": {
+      "availability": true,
+      "conclusion": false,
+      "evidence_context": false,
+      "format": true,
+      "numerical": true,
+      "replay": true
+    },
+    "complete": false,
+    "sha256": "7926411aadaabaf4b25ae2e41392aeac971046582f41e355ff99cf074fb5ac9f"
+  },
+  "receipt_identity_sha256": "440df3fc4f83d60097d3d14fd885ff7d8c86a07867a5d62b6c0369c52333a7a5",
+  "record_sha256": "943565bdb09ccaf8f0815e2a92ec8f5a889ee63dab1d914f3fc1cc61de0bb1e1",
+  "run_attempt": "1",
+  "run_id": "37465514129",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+  "slot_id": "final-wp06-A-3",
+  "task_id": "real-v1-wp06",
+  "task_sha256": "a59a19016b25ccfd76b68c77e2a7e82183fc58696011abaa0fcbcbf69de7cb6f",
+  "verdict": {
+    "checks": {
+      "availability": true,
+      "conclusion": false,
+      "evidence_context": false,
+      "format": true,
+      "numerical": true,
+      "replay": true
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "matched_rate_change": {
+          "availability": true,
+          "changed_replay": true,
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "reason_code": null,
+          "unit": true
+        },
+        "sample_rate_change": {
+          "availability": true,
+          "changed_replay": true,
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "reason_code": null,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": false,
+        "reason_code": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "sample_rate_change:evidence_context",
+      "matched_rate_change:evidence_context",
+      "conclusion"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "1.2.0"
+  },
+  "verdict_sha256": "aeaafd23bde908790cbad289ec11b4c40433b3ab663ed7a95376970a665d8ce3"
+}

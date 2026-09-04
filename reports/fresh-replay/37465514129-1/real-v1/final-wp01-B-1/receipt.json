@@ -1,0 +1,79 @@
+{
+  "commit_sha": "0485fa7585f3661201244da3e8d36366a7e7a338",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "real-v1",
+  "effective_task_scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "6292281f46115a48d7d983dee88093217a250844053a367dab79542f6702e29f",
+  "input_source": "retained_artifact",
+  "manifest_id": "real-v1-76d0ba6152ff",
+  "manifest_sha256": "550604fe9f1a3fdf975f83bff5fe0321346bc6841bfd4b5d5006696ebe1a7d02",
+  "prior_verdict": {
+    "checks": {
+      "availability": true,
+      "conclusion": null,
+      "evidence_context": true,
+      "format": true,
+      "numerical": true,
+      "replay": true
+    },
+    "complete": true,
+    "sha256": "5b2579285d9cdb3fca509cf78677eb1c4e78839811feebec365954af38d9e255"
+  },
+  "receipt_identity_sha256": "7577299f6a633eb98d6ce13af09f3a3ab089f3290287e19d05123ffdc5b889cc",
+  "record_sha256": "bea67ec7ed1f08dea6602b10ea811e84e944c3b87409655ec28cb1d63c909708",
+  "run_attempt": "1",
+  "run_id": "37465514129",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+  "slot_id": "final-wp01-B-1",
+  "task_id": "real-v1-wp01",
+  "task_sha256": "3ed6fdd34375aa0a92e0ceb9f4d72a395ff7c8c248d70ac6da4586aa61ec6a03",
+  "verdict": {
+    "checks": {
+      "availability": true,
+      "conclusion": null,
+      "evidence_context": true,
+      "format": true,
+      "numerical": true,
+      "replay": true
+    },
+    "complete": true,
+    "details": {
+      "claims": {
+        "q1_rd": {
+          "availability": true,
+          "changed_replay": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "reason_code": null,
+          "unit": true
+        },
+        "sequential_change": {
+          "availability": true,
+          "changed_replay": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "reason_code": null,
+          "unit": true
+        }
+      },
+      "conclusion": null
+    },
+    "errors": [],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "1.2.0"
+  },
+  "verdict_sha256": "936db22d9499b829368892a454b7a36c80643e3f1dfcdb0e5311fc9755e8abaa"
+}

@@ -1,0 +1,78 @@
+{
+  "commit_sha": "0485fa7585f3661201244da3e8d36366a7e7a338",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "real-v1",
+  "effective_task_scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "7235a2d5641715203b588a8ccc41df7dd36b822f6e50d508a2d28ba49952431e",
+  "input_source": "retained_artifact",
+  "manifest_id": "real-v1-76d0ba6152ff",
+  "manifest_sha256": "550604fe9f1a3fdf975f83bff5fe0321346bc6841bfd4b5d5006696ebe1a7d02",
+  "prior_verdict": {
+    "checks": {
+      "availability": true,
+      "conclusion": false,
+      "evidence_context": false,
+      "format": true,
+      "numerical": true,
+      "replay": false
+    },
+    "complete": false,
+    "sha256": "3d110d29274f4bda708f4c14183d924d9b3776548f8cf56bed34572acf024608"
+  },
+  "receipt_identity_sha256": "30de73c432ad0f7fae0aa562d8b92a79529f0b309defaf1b4ce582c8dabc1726",
+  "record_sha256": "f86a4be975ad8a9673c649d75f4135c1822b9feab03956034b34e1a26df200eb",
+  "run_attempt": "1",
+  "run_id": "37465514129",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+  "slot_id": "final-wp02-B-2",
+  "task_id": "real-v1-wp02",
+  "task_sha256": "2d984fe0156c2e33e2e6af152dc51483a68b445a0c21bae91589ac8a0141575c",
+  "verdict": {
+    "checks": {
+      "availability": true,
+      "conclusion": false,
+      "evidence_context": false,
+      "format": true,
+      "numerical": true,
+      "replay": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "transfer_total": {
+          "availability": true,
+          "changed_replay": false,
+          "evidence": false,
+          "numerical": true,
+          "original_replay": false,
+          "reason_code": null,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": false,
+        "reason_code": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "transfer_total:replay",
+      "transfer_total:evidence_context",
+      "conclusion"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "1.2.0"
+  },
+  "verdict_sha256": "83219214aa2fc0d10593496b9695ba02f2c5ee2525ad4062f1b16cb1b156755f"
+}
