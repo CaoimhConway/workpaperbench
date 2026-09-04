@@ -1,0 +1,28 @@
+{
+  "task_id": "real-v1-wp02",
+  "answers": [
+    {
+      "id": "transfer_total_txa",
+      "status": "answered",
+      "value": 300,
+      "unit": "token_units",
+      "evidence": ["e1", "e2"],
+      "sql": "SELECT SUM(amount_units) FROM (SELECT DISTINCT event_id, amount_units FROM events WHERE tx_id = 'txa' AND event_kind = 'transfer')",
+      "reason_code": null
+    },
+    {
+      "id": "proposition_txa_both_contribute",
+      "status": "answered",
+      "value": 2,
+      "unit": "distinct_events",
+      "evidence": ["e1", "e2"],
+      "sql": "SELECT COUNT(DISTINCT event_id) FROM events WHERE tx_id = 'txa' AND event_kind = 'transfer'",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": ["e1", "e2"]
+  }
+}

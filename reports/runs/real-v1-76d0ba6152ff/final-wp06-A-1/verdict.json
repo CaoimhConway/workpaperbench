@@ -1,0 +1,52 @@
+{
+  "checks": {
+    "availability": true,
+    "conclusion": false,
+    "evidence_context": false,
+    "format": true,
+    "numerical": true,
+    "replay": false
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "matched_rate_change": {
+        "availability": true,
+        "changed_replay": false,
+        "evidence": false,
+        "numerical": true,
+        "original_replay": false,
+        "reason_code": null,
+        "unit": true
+      },
+      "sample_rate_change": {
+        "availability": true,
+        "changed_replay": false,
+        "evidence": false,
+        "numerical": true,
+        "original_replay": false,
+        "reason_code": null,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": false,
+      "reason_code": true,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "sample_rate_change:replay",
+    "sample_rate_change:evidence_context",
+    "matched_rate_change:replay",
+    "matched_rate_change:evidence_context",
+    "conclusion"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "1.2.0"
+}

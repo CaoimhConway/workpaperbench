@@ -1,0 +1,151 @@
+{
+  "answer_sha256": "a69f6ba1d99027cd3ab390bd55724e74f403ae12896733ab4cd79e7ac2532dc4",
+  "answer_status": "saved",
+  "arm": "A",
+  "campaign": "final",
+  "commit_sha": "d8e8fcb4c3791909317efa1c5d638d4b1b64b6ff",
+  "config_hash": "59a22f3b08165aa004c1b09ecf8e399e4a52edb5f3d1adf6b78f91e2b508aa40",
+  "dataset_hash_count": 239,
+  "dataset_id": "real-v1",
+  "dataset_manifest_id": "real-v1-76d0ba6152ff",
+  "execution_started_at": "2026-10-06T10:55:26.701614+00:00",
+  "experiment_id": "real-v1-76d0ba6152ff",
+  "finished_at": "2026-10-06T10:58:37.250861+00:00",
+  "freeze_hash_count": 239,
+  "freeze_manifest_id": "real-v1-76d0ba6152ff",
+  "github_run_attempt": "1",
+  "github_run_id": "37442577792",
+  "harbor_commit": "1e5c5c6db929a10a140d05e606882c671ae20729",
+  "harbor_metrics": {
+    "agent_execution_seconds": 46.797,
+    "agent_setup_seconds": 106.703,
+    "environment_setup_seconds": 3.036,
+    "n_input_tokens": 0,
+    "n_output_tokens": 0,
+    "verifier_seconds": 14.687
+  },
+  "harbor_native_version_fix": {
+    "change": "Two version invocations use --version. OpenRouter models use the canonical ID with explicit --provider openrouter. Session export selects the current oneshot source. Existing native adapter only, no new adapter or credential flow.",
+    "corrected_module_sha256": "02ebd73edb387091480df45fdea27b70bf37ca377ee0b68047b84d6cdbede112",
+    "original_module_sha256": "012e980302b26641dcf77f31fe71a368b2022b098619853addd015c5e18e47c6"
+  },
+  "harbor_version": "0.23.0",
+  "hermes_checkout_commit_verified": true,
+  "hermes_release_tag": "v0.21.4+canary.20261004T084456Z",
+  "hermes_resolved_release_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "hermes_runtime_version": {
+    "checked_before_solving": true,
+    "checkout_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "expected_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "matches_pin": true
+  },
+  "model": "qwen/qwen3.6-35b-a3b",
+  "model_route_policy": "OpenRouter default routing for this model. Provider may vary between compatible endpoints",
+  "native_command": "Harbor Trial.create / Trial.run with native Hermes",
+  "native_return_code": 0,
+  "previously_exposed": false,
+  "provider_after": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 18.892366539,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 18.892366539,
+    "reset_is_null": true,
+    "usage_usd": 1.107633461
+  },
+  "provider_before": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 18.892991939,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 18.902491239,
+    "reset_is_null": true,
+    "usage_usd": 1.097508761
+  },
+  "provider_cost_delta_usd": 0.0101247,
+  "raw_artifact_status": "screened_original_bytes",
+  "raw_sha256": "0f1c2dec8381df0c4bd25bd4932cf067b68cf910bebe5372284d2d69ee2d9d78",
+  "remaining_planned_slots": 47,
+  "repetition": 3,
+  "reservation_usd_per_slot": 0.2,
+  "retained_sha256": "a69f6ba1d99027cd3ab390bd55724e74f403ae12896733ab4cd79e7ac2532dc4",
+  "run_id": "37442577792",
+  "slot_id": "final-wp04-A-3",
+  "source_group": "circle-usdc-january-2025",
+  "split": "evaluation",
+  "started_at": "2026-10-06T10:51:40.632233+00:00",
+  "status": "task_failed",
+  "task": "real-v1-wp04",
+  "task_origin": "deterministic_source_derived",
+  "token_counts_status": "unreported_or_native_zero_fields",
+  "tool_event_counts": {
+    "read_file": 4,
+    "terminal": 7,
+    "write_file": 1
+  },
+  "tool_evidence": {
+    "calls": 12,
+    "observations": 12,
+    "omitted_items": 0,
+    "status": "screened_tools"
+  },
+  "verdict": {
+    "checks": {
+      "availability": true,
+      "conclusion": true,
+      "evidence_context": true,
+      "format": true,
+      "numerical": true,
+      "replay": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "circulating_end": {
+          "availability": true,
+          "changed_replay": false,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": false,
+          "reason_code": null,
+          "unit": true
+        },
+        "circulating_growth": {
+          "availability": true,
+          "changed_replay": false,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": false,
+          "reason_code": null,
+          "unit": true
+        },
+        "reserve_headroom": {
+          "availability": true,
+          "changed_replay": false,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": false,
+          "reason_code": null,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "reason_code": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "circulating_end:replay",
+      "circulating_growth:replay",
+      "reserve_headroom:replay"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "1.2.0"
+  }
+}

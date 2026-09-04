@@ -1,0 +1,35 @@
+{
+  "task_id": "real-v1-wp05",
+  "answers": [
+    {
+      "id": "naive_growth",
+      "status": "answered",
+      "value": 65.0,
+      "unit": "percent",
+      "evidence": [
+        "export:periods"
+      ],
+      "sql": "SELECT (p2 - p1) * 100.0 / p1 AS value FROM (SELECT (SELECT transfer_volume FROM exports WHERE period = 'P2') AS p2, (SELECT transfer_volume FROM exports WHERE period = 'P1') AS p1) WHERE p1 > 0;",
+      "reason_code": null
+    },
+    {
+      "id": "comparable_growth",
+      "status": "answered",
+      "value": 10.0,
+      "unit": "percent",
+      "evidence": [
+        "ledger:events"
+      ],
+      "sql": "SELECT (p2 - p1) * 100.0 / p1 AS value FROM (SELECT SUM(CASE WHEN period = 'P2' THEN amount_units ELSE 0 END) AS p2, SUM(CASE WHEN period = 'P1' THEN amount_units ELSE 0 END) AS p1 FROM events WHERE event_kind NOT IN ('mint', 'burn')) WHERE p1 > 0;",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "export:periods",
+      "ledger:events"
+    ]
+  }
+}

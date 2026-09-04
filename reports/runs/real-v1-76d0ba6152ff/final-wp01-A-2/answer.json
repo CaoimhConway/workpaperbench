@@ -1,0 +1,30 @@
+{
+  "task_id": "real-v1-wp01",
+  "answers": [
+    {
+      "id": "q1_rd",
+      "status": "answered",
+      "value": 1151,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:h1",
+        "filing:q2"
+      ],
+      "sql": "SELECT e_h1.amount_million - e_q2.amount_million AS value FROM expenses e_h1, expenses e_q2 WHERE e_h1.entity = 'Tesla' AND e_h1.period = 'H1' AND e_h1.year = 2024 AND e_h1.metric = 'R&D' AND e_q2.entity = 'Tesla' AND e_q2.period = 'Q2' AND e_q2.year = 2024 AND e_q2.metric = 'R&D'",
+      "reason_code": null
+    },
+    {
+      "id": "sequential_change",
+      "status": "answered",
+      "value": -6.689834926151173,
+      "unit": "percent",
+      "evidence": [
+        "filing:h1",
+        "filing:q2"
+      ],
+      "sql": "SELECT (e_q2.amount_million - (e_h1.amount_million - e_q2.amount_million)) * 100.0 / (e_h1.amount_million - e_q2.amount_million) AS value FROM expenses e_h1, expenses e_q2 WHERE e_h1.entity = 'Tesla' AND e_h1.period = 'H1' AND e_h1.year = 2024 AND e_h1.metric = 'R&D' AND e_q2.entity = 'Tesla' AND e_q2.period = 'Q2' AND e_q2.year = 2024 AND e_q2.metric = 'R&D'",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}

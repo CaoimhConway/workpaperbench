@@ -1,0 +1,127 @@
+{
+  "answer_sha256": "8e844174ee19cf7f1a761ff1667cd69c229e8d8705f882e1100e7c5831eb985a",
+  "answer_status": "saved",
+  "arm": "A",
+  "campaign": "final",
+  "commit_sha": "d8e8fcb4c3791909317efa1c5d638d4b1b64b6ff",
+  "config_hash": "2a1348270aa492502d10dc6645b459cf438d98d0079816c1079e5b5cd10a37e9",
+  "dataset_hash_count": 239,
+  "dataset_id": "real-v1",
+  "dataset_manifest_id": "real-v1-76d0ba6152ff",
+  "execution_started_at": "2026-10-06T09:54:25.267784+00:00",
+  "experiment_id": "real-v1-76d0ba6152ff",
+  "finished_at": "2026-10-06T09:58:22.685346+00:00",
+  "freeze_hash_count": 239,
+  "freeze_manifest_id": "real-v1-76d0ba6152ff",
+  "github_run_attempt": "1",
+  "github_run_id": "37442577792",
+  "harbor_commit": "1e5c5c6db929a10a140d05e606882c671ae20729",
+  "harbor_metrics": {
+    "agent_execution_seconds": 73.678,
+    "agent_setup_seconds": 105.373,
+    "environment_setup_seconds": 18.706,
+    "n_input_tokens": 0,
+    "n_output_tokens": 0,
+    "verifier_seconds": 17.628
+  },
+  "harbor_native_version_fix": {
+    "change": "Two version invocations use --version. OpenRouter models use the canonical ID with explicit --provider openrouter. Session export selects the current oneshot source. Existing native adapter only, no new adapter or credential flow.",
+    "corrected_module_sha256": "02ebd73edb387091480df45fdea27b70bf37ca377ee0b68047b84d6cdbede112",
+    "original_module_sha256": "012e980302b26641dcf77f31fe71a368b2022b098619853addd015c5e18e47c6"
+  },
+  "harbor_version": "0.23.0",
+  "hermes_checkout_commit_verified": true,
+  "hermes_release_tag": "v0.21.4+canary.20261004T084456Z",
+  "hermes_resolved_release_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "hermes_runtime_version": {
+    "checked_before_solving": true,
+    "checkout_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "expected_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "matches_pin": true
+  },
+  "model": "qwen/qwen3.6-35b-a3b",
+  "model_route_policy": "OpenRouter default routing for this model. Provider may vary between compatible endpoints",
+  "native_command": "Harbor Trial.create / Trial.run with native Hermes",
+  "native_return_code": 0,
+  "previously_exposed": "Revised previously exposed diagnostic with new equal-amount events",
+  "provider_after": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 19.106200069,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 19.100764919,
+    "reset_is_null": true,
+    "usage_usd": 0.899235081
+  },
+  "provider_before": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 19.110791119,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 19.110791119,
+    "reset_is_null": true,
+    "usage_usd": 0.889208881
+  },
+  "provider_cost_delta_usd": 0.0100262,
+  "raw_artifact_status": "screened_original_bytes",
+  "raw_sha256": "61c3263140a1a8e78759f04beb112cdf916986e08782800873468a8a9ec2f955",
+  "remaining_planned_slots": 48,
+  "repetition": 2,
+  "reservation_usd_per_slot": 0.2,
+  "retained_sha256": "8e844174ee19cf7f1a761ff1667cd69c229e8d8705f882e1100e7c5831eb985a",
+  "run_id": "37442577792",
+  "slot_id": "final-wp02-A-2",
+  "source_group": "authored-event-ledger",
+  "split": "development",
+  "started_at": "2026-10-06T09:54:13.449562+00:00",
+  "status": "task_failed",
+  "task": "real-v1-wp02",
+  "task_origin": "synthetic",
+  "token_counts_status": "unreported_or_native_zero_fields",
+  "tool_event_counts": {
+    "read_file": 5,
+    "terminal": 6,
+    "write_file": 1
+  },
+  "tool_evidence": {
+    "calls": 12,
+    "observations": 12,
+    "omitted_items": 0,
+    "status": "screened_tools"
+  },
+  "verdict": {
+    "checks": {
+      "availability": null,
+      "conclusion": null,
+      "evidence_context": null,
+      "format": false,
+      "numerical": true,
+      "replay": null
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "transfer_total": {
+          "availability": null,
+          "changed_replay": null,
+          "evidence": null,
+          "numerical": true,
+          "original_replay": null,
+          "reason_code": null,
+          "unit": null
+        }
+      },
+      "conclusion": null
+    },
+    "errors": [
+      "format:ValueError"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "1.2.0"
+  }
+}

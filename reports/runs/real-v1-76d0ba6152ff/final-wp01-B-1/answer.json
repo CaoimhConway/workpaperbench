@@ -1,0 +1,30 @@
+{
+  "task_id": "real-v1-wp01",
+  "answers": [
+    {
+      "id": "q1_rd",
+      "status": "answered",
+      "value": 1151,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:h1",
+        "filing:q2"
+      ],
+      "sql": "SELECT (SELECT amount_million FROM expenses WHERE entity='Tesla' AND period='H1' AND year=2024 AND metric='R&D') - (SELECT amount_million FROM expenses WHERE entity='Tesla' AND period='Q2' AND year=2024 AND metric='R&D') AS value",
+      "reason_code": null
+    },
+    {
+      "id": "sequential_change",
+      "status": "answered",
+      "value": -6.689834926151173,
+      "unit": "percent",
+      "evidence": [
+        "filing:h1",
+        "filing:q2"
+      ],
+      "sql": "SELECT ((SELECT amount_million FROM expenses WHERE entity='Tesla' AND period='Q2' AND year=2024 AND metric='R&D') - ((SELECT amount_million FROM expenses WHERE entity='Tesla' AND period='H1' AND year=2024 AND metric='R&D') - (SELECT amount_million FROM expenses WHERE entity='Tesla' AND period='Q2' AND year=2024 AND metric='R&D'))) * 100.0 / ((SELECT amount_million FROM expenses WHERE entity='Tesla' AND period='H1' AND year=2024 AND metric='R&D') - (SELECT amount_million FROM expenses WHERE entity='Tesla' AND period='Q2' AND year=2024 AND metric='R&D')) AS value",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}

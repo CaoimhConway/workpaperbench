@@ -1,0 +1,45 @@
+{
+  "task_id": "real-v1-wp08",
+  "answers": [
+    {
+      "id": "observed_outputs",
+      "status": "answered",
+      "value": 27.57007836,
+      "unit": "btc",
+      "evidence": [
+        "chain:observations"
+      ],
+      "sql": "SELECT CAST(SUM(o.value_sats) AS REAL) / 100000000.0 AS value FROM outputs o JOIN transactions t ON o.txid = t.txid AND o.page_index = t.page_index WHERE o.height = 840000 AND t.is_coinbase = 0",
+      "reason_code": null
+    },
+    {
+      "id": "business_payments",
+      "status": "answered",
+      "value": 27.57007836,
+      "unit": "btc",
+      "evidence": [
+        "chain:observations"
+      ],
+      "sql": "SELECT CAST(SUM(o.value_sats) AS REAL) / 100000000.0 AS value FROM outputs o JOIN transactions t ON o.txid = t.txid AND o.page_index = t.page_index WHERE o.height = 840000 AND t.is_coinbase = 0",
+      "reason_code": null
+    },
+    {
+      "id": "unique_people",
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "count",
+      "evidence": [
+        "chain:scope"
+      ],
+      "sql": null,
+      "reason_code": "missing_required_labels"
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "chain:observations"
+    ]
+  }
+}

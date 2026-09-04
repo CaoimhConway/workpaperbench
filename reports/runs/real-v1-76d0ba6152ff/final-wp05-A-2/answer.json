@@ -1,0 +1,40 @@
+{
+  "task_id": "real-v1-wp05",
+  "answers": [
+    {
+      "id": "naive_growth",
+      "status": "answered",
+      "value": 65.0,
+      "unit": "percent",
+      "evidence": [
+        "export:periods"
+      ],
+      "sql": "SELECT 1.0 * (ev2.transfer_volume - ev1.transfer_volume) / ev1.transfer_volume * 100 AS value FROM (SELECT transfer_volume FROM exports WHERE period = 'P1' AND definition = 'largest_eligible_per_tx') AS ev1, (SELECT transfer_volume FROM exports WHERE period = 'P2' AND definition = 'all_eligible_events') AS ev2;",
+      "reason_code": null
+    },
+    {
+      "id": "comparable_growth",
+      "status": "answered",
+      "value": 10.0,
+      "unit": "percent",
+      "evidence": [
+        "events:a",
+        "events:b",
+        "events:c",
+        "events:f",
+        "events:g",
+        "events:h",
+        "policy:definitions"
+      ],
+      "sql": "SELECT 1.0 * (p2.sum_amount - p1.sum_amount) / p1.sum_amount * 100 AS value FROM (SELECT SUM(amount_units) AS sum_amount FROM events WHERE period = 'P1' AND event_kind NOT IN ('mint', 'burn')) AS p1, (SELECT SUM(amount_units) AS sum_amount FROM events WHERE period = 'P2' AND event_kind NOT IN ('mint', 'burn')) AS p2;",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "comparable_growth"
+    ]
+  }
+}

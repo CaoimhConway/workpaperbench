@@ -8,7 +8,7 @@ WorkpaperBench is a small offline evaluation tool for engineers testing financia
 
 ## A source-backed workpaper
 
-**Authored reference, not a recorded model submission.** Circle's January 2025 reserve report defines circulating USDC as supply on approved blockchains minus tokens allowed but not issued and access-denied tokens. At **January 31, 2025, 23:59 UTC**:
+**Saved model workpaper [final-wp04-A-1](reports/runs/real-v1-76d0ba6152ff/final-wp04-A-1/answer.json), with [successful native verification](reports/runs/real-v1-76d0ba6152ff/final-wp04-A-1/verdict.json).** Circle's January 2025 reserve report defines circulating USDC as supply on approved blockchains minus tokens allowed but not issued and access-denied tokens. The captured source facts and the workpaper's derived quantities at **January 31, 2025, 23:59 UTC** are:
 
 | Observation | Amount | Unit |
 |---|---:|---|
@@ -19,14 +19,13 @@ WorkpaperBench is a small offline evaluation tool for engineers testing financia
 | Fair value of reserve assets | **53,283,800,358** | USD |
 | Reserves above circulating quantity valued at the issuer's USD 1 redemption convention | **64,860,630** | USD |
 
-That supports a narrow reserve-coverage observation at the report date. It does not establish a market price, payment volume or the number of people using USDC. The report is signed February 27, 2025. Its historical web publication time is unknown. Retrieval now does not make the report point-in-time evidence for January 31.
+The saved workpaper also calculates **16.326677% circulating-quantity growth from January 6 to January 31**. That change in a stock is not transfer volume. The reserve headroom supports a narrow reserve-coverage observation at the report date. It does not establish a market price, payment volume or the number of people using USDC. The report is signed February 27, 2025. Its historical web publication time is unknown. Retrieval now does not make the report point-in-time evidence for January 31.
 
 ```sql
-SELECT (approved_supply - allowed_unissued - access_denied) / 1000000.0 AS value
-FROM reserve_snapshots WHERE report_date = '2025-01-31'
+SELECT ((reserves_usd - circulation) / 1000000.0) AS value FROM reserve_snapshots WHERE report_date = '2025-01-31'
 ```
 
-This produces circulating quantity in millions of USDC. [Task and evidence](datasets/real-v1/tasks/wp04/instruction.md) · [Original issuer report](https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025-USDC_Examination-Report-January-25.pdf) · [Source records and terms](DATA_SOURCES.md).
+This is the saved workpaper's SQL for reserve headroom in millions of USD. [Task and evidence](datasets/real-v1/tasks/wp04/instruction.md) · [Original issuer report](https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025-USDC_Examination-Report-January-25.pdf) · [Source records and terms](DATA_SOURCES.md).
 
 ## Measured results
 
@@ -36,14 +35,18 @@ This produces circulating quantity in millions of USDC. [Task and evidence](data
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|
 | Historical v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | A | 3 / 15 | 13 / 13 | 11 / 11 | 7 / 13 | 7 / 13 | 15 / 15 | 15 / 15 |
 | Historical v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | B | 1 / 15 | 13 / 14 | 10 / 10 | 7 / 13 | 10 / 13 | 15 / 15 | 15 / 15 |
-| real-v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | A | Pending | Pending | Pending | Pending | Pending | 0 / 15 | 0 / 15 |
-| real-v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | B | Pending | Pending | Pending | Pending | Pending | 0 / 15 | 0 / 15 |
+| real-v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | A | 4 / 15 | 15 / 15 | 10 / 11 | 8 / 14 | 10 / 14 | 15 / 15 | 15 / 15 |
+| real-v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | B | 4 / 15 | 14 / 14 | 11 / 12 | 10 / 14 | 8 / 14 | 14 / 15 | 14 / 15 |
 
-Evaluation only. Development is separate. Historical skill: no improvement. Real-v1: New measured results are pending. The historical intervention outcome does not evaluate this dataset.
+Evaluation only. Development is separate. Historical skill: no improvement. Real-v1: The new campaign has incomplete verdict coverage. Strict completion counts retain the scheduled denominator and cannot establish an intervention benefit.
 
 [New study](reports/real-v1/results.md) · [Historical study and original negative results](reports/results.md). Missing evidence is distinct from an incorrect conclusion. Assessments and retained outputs may have different coverage.
 
 <!-- versioned-results:end -->
+
+The new campaign retained **47 answers and verdicts across 48 scheduled slots**. Apple B1 failed a GitHub API history check before provider access or native trial execution, with no retry. Its exact setup receipt, artifact hashes and the original importer classification remain in the [failure evidence](reports/real-v1/failure-receipts/final-wp07-B-1.json) and [reconciliation assessment](reports/real-v1/final-reconciliation.json). The importer rejected that setup-only record's missing dataset-manifest field, while authenticating and retaining A1 from the same artifact. No model verdict was fabricated for B1.
+
+All 29 retained evaluation workpapers passed the numerical diagnostic, a ceiling on these fixed supplied calculations. That diagnostic does not certify unavailable quantities or broader conclusions. For example, [wp08 A2](reports/runs/real-v1-76d0ba6152ff/final-wp08-A-2/answer.json) incorrectly treats observed Bitcoin outputs as business payments. Conversely, [wp04 B2](reports/runs/real-v1-76d0ba6152ff/final-wp04-B-2/verdict.json) has a correct conclusion verdict and reason but lacks required conclusion evidence. Both arms completed 4/15 scheduled evaluation workpapers. The missing B verdict prevents a fully covered intervention comparison.
 
 Strict completion requires the full declared workpaper contract. A correct conclusion missing a citation is a contract failure, separately diagnosed from an incorrect conclusion verdict. The original 48-trial study remains accessible with its negative intervention result and corrections. Its scores do not evaluate `real-v1`.
 

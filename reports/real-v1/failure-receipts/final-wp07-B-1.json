@@ -1,0 +1,53 @@
+{
+  "as_of": "2026-10-06T12:29:48.040012+00:00",
+  "manifest_id": "real-v1-76d0ba6152ff",
+  "slot_id": "final-wp07-B-1",
+  "run_id": 37442577792,
+  "run_attempt": 1,
+  "commit_sha": "d8e8fcb4c3791909317efa1c5d638d4b1b64b6ff",
+  "job_id": 112199742360,
+  "job_url": "https://github.com/CaoimhConway/workpaperbench/actions/runs/37442577792/job/112199742360",
+  "artifact": {
+    "id": 11411495659,
+    "size_bytes": 9862,
+    "archive_sha256": "1d9922e5bc678256938e4ca1a0dee8ddf155b6635ed7f26e19823d4cc1aeca4a",
+    "api_origin_and_digest_verified": true,
+    "bounded_regular_members_verified": true,
+    "member_count": 6
+  },
+  "setup_receipt": {
+    "path": "reports/real-v1/failure-receipts/final-wp07-B-1-setup-receipt.json",
+    "sha256": "746fde66e1dcafc2bbe2041ef154cec8de52986c76e6e5887f3608e102ef24fb",
+    "original_member": "final-wp07-B-1/record.json",
+    "bytes_preserved_exactly": true,
+    "missing_field": "dataset_manifest_id"
+  },
+  "log": {
+    "sha256": "6f8963eaba61248efbd9294de1fa4cdb8f821bade42a7de3cc89cf00b227bf54",
+    "lines": "363-391",
+    "observations": [
+      "A1 completed before B1 was launched",
+      "B1 failed in execute -> attempts.check -> select_slots.history",
+      "GitHub returned HTTP 500 for the history request on old run 37271209030"
+    ]
+  },
+  "code_stage": {
+    "path": "scripts/native_run.py",
+    "sha256": "ee0181fe3cd2b1be15618918c536ad5e3e7347a8d642a26b77aca05c61e9fdd2",
+    "failed_check_line": 472,
+    "provider_stage_line": 531,
+    "native_trial_lines": "583-591"
+  },
+  "assessment": {
+    "status": "infra_failed",
+    "verdict": null,
+    "native_trial_started": false,
+    "provider_call_started": false,
+    "underlying_http_500_cause": "unknown",
+    "note": "An authenticated setup receipt is not a model submission. The scheduled slot stays unassessed. No retry was performed."
+  },
+  "screening": {
+    "project_key_and_known_patterns": true,
+    "limitation": "Bounded screening does not guarantee detection of arbitrary obfuscation."
+  }
+}

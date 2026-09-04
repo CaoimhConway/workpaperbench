@@ -1,0 +1,30 @@
+{
+  "task_id": "real-v1-wp01",
+  "answers": [
+    {
+      "id": "q1_rd",
+      "status": "answered",
+      "value": 1151,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:h1",
+        "filing:q2"
+      ],
+      "sql": "SELECT h.amount_million - q.amount_million AS value FROM expenses h JOIN expenses q ON h.entity=q.entity WHERE h.entity='Tesla' AND h.year=2024 AND h.metric='R&D' AND h.period='H1' AND q.entity='Tesla' AND q.year=2024 AND q.metric='R&D' AND q.period='Q2'",
+      "reason_code": null
+    },
+    {
+      "id": "sequential_change",
+      "status": "answered",
+      "value": -6.689835,
+      "unit": "percent",
+      "evidence": [
+        "filing:h1",
+        "filing:q2"
+      ],
+      "sql": "SELECT (q.amount_million - (h.amount_million - q.amount_million)) * 100.0 / (h.amount_million - q.amount_million) AS value FROM expenses h JOIN expenses q ON h.entity=q.entity WHERE h.entity='Tesla' AND h.year=2024 AND h.metric='R&D' AND h.period='H1' AND q.entity='Tesla' AND q.year=2024 AND q.metric='R&D' AND q.period='Q2'",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}

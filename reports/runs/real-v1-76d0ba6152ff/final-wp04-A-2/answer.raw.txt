@@ -1,0 +1,46 @@
+{
+  "task_id": "real-v1-wp04",
+  "answers": [
+    {
+      "id": "circulating_end",
+      "status": "answered",
+      "value": 53218.939728,
+      "unit": "usdc_million",
+      "evidence": ["reserve:observations", "reserve:definition"],
+      "sql": "SELECT (approved_supply - allowed_unissued - access_denied) / 1000000.0 AS value FROM reserve_snapshots WHERE report_date = '2025-01-31';",
+      "reason_code": null
+    },
+    {
+      "id": "circulating_growth",
+      "status": "answered",
+      "value": 16.326677370440372,
+      "unit": "percent",
+      "evidence": ["reserve:observations", "reserve:definition"],
+      "sql": "SELECT ((s31.circulation - s06.circulation) * 100.0 / s06.circulation) AS value FROM reserve_snapshots s06, reserve_snapshots s31 WHERE s06.report_date = '2025-01-06' AND s31.report_date = '2025-01-31';",
+      "reason_code": null
+    },
+    {
+      "id": "reserve_headroom",
+      "status": "answered",
+      "value": 64.86063,
+      "unit": "usd_million",
+      "evidence": ["reserve:observations", "reserve:definition"],
+      "sql": "SELECT (reserves_usd - approved_supply + allowed_unissued + access_denied) / 1000000.0 AS value FROM reserve_snapshots WHERE report_date = '2025-01-31';",
+      "reason_code": null
+    },
+    {
+      "id": "coverage_assessment",
+      "status": "answered",
+      "value": 64.86063,
+      "unit": "usd_million",
+      "evidence": ["reserve:observations", "reserve:definition"],
+      "sql": "SELECT (reserves_usd - approved_supply + allowed_unissued + access_denied) / 1000000.0 AS value FROM reserve_snapshots WHERE report_date = '2025-01-31';",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": ["reserve:observations", "reserve:definition"]
+  }
+}

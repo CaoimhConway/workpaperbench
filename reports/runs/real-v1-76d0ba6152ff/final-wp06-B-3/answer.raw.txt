@@ -1,0 +1,28 @@
+{
+  "task_id": "real-v1-wp06",
+  "answers": [
+    {
+      "id": "sample_rate_change",
+      "status": "answered",
+      "value": 33448.120216,
+      "unit": "percent",
+      "evidence": ["chain:observations"],
+      "sql": "SELECT (\n  (SELECT CAST(SUM(fee_sats) AS REAL) / SUM(vsize)\n   FROM transactions WHERE height = 840000 AND is_coinbase = 0)\n  -\n  (SELECT CAST(SUM(fee_sats) AS REAL) / SUM(vsize)\n   FROM transactions WHERE height = 839999 AND is_coinbase = 0)\n) * 100.0 / (SELECT CAST(SUM(fee_sats) AS REAL) / SUM(vsize)\n   FROM transactions WHERE height = 839999 AND is_coinbase = 0)\nAS value\n",
+      "reason_code": null
+    },
+    {
+      "id": "matched_rate_change",
+      "status": "answered",
+      "value": 30692.148209,
+      "unit": "percent",
+      "evidence": ["chain:observations"],
+      "sql": "SELECT (\n  (SELECT CAST(SUM(fee_sats) AS REAL) / SUM(vsize)\n   FROM transactions WHERE height = 840000 AND is_coinbase = 0 AND version = 2)\n  -\n  (SELECT CAST(SUM(fee_sats) AS REAL) / SUM(vsize)\n   FROM transactions WHERE height = 839999 AND is_coinbase = 0 AND version = 2)\n) * 100.0 / (SELECT CAST(SUM(fee_sats) AS REAL) / SUM(vsize)\n   FROM transactions WHERE height = 839999 AND is_coinbase = 0 AND version = 2)\nAS value\n",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": ["sample_rate_change", "matched_rate_change"]
+  }
+}

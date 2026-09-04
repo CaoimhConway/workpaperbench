@@ -1,0 +1,28 @@
+{
+  "task_id": "real-v1-wp06",
+  "answers": [
+    {
+      "id": "sample_rate_change",
+      "status": "answered",
+      "value": 33448.12021582263,
+      "unit": "percent",
+      "evidence": ["chain:observations", "chain:definitions"],
+      "sql": "SELECT ((SUM(CASE WHEN height = 840000 AND is_coinbase = 0 THEN fee_sats ELSE 0 END) * 1.0 / SUM(CASE WHEN height = 840000 AND is_coinbase = 0 THEN vsize ELSE 0 END)) - (SUM(CASE WHEN height = 839999 AND is_coinbase = 0 THEN fee_sats ELSE 0 END) * 1.0 / SUM(CASE WHEN height = 839999 AND is_coinbase = 0 THEN vsize ELSE 0 END))) * 100.0 / (SUM(CASE WHEN height = 839999 AND is_coinbase = 0 THEN fee_sats ELSE 0 END) * 1.0 / NULLIF(SUM(CASE WHEN height = 839999 AND is_coinbase = 0 THEN vsize ELSE 0 END), 0)) FROM transactions",
+      "reason_code": null
+    },
+    {
+      "id": "matched_rate_change",
+      "status": "answered",
+      "value": 30692.14820891919,
+      "unit": "percent",
+      "evidence": ["chain:observations", "chain:definitions"],
+      "sql": "WITH matched_versions AS (SELECT DISTINCT version FROM (SELECT version FROM transactions WHERE height = 839999 AND is_coinbase = 0 INTERSECT SELECT version FROM transactions WHERE height = 840000 AND is_coinbase = 0)), sums AS (SELECT (SELECT COALESCE(SUM(fee_sats),0)*1.0 FROM transactions t WHERE height=839999 AND is_coinbase=0 AND t.version IN (SELECT version FROM matched_versions)) as fee_999, (SELECT COALESCE(SUM(vsize),0)*1.0 FROM transactions t WHERE height=839999 AND is_coinbase=0 AND t.version IN (SELECT version FROM matched_versions)) as vs_999, (SELECT COALESCE(SUM(fee_sats),0)*1.0 FROM transactions t WHERE height=840000 AND is_coinbase=0 AND t.version IN (SELECT version FROM matched_versions)) as fee_000, (SELECT COALESCE(SUM(vsize),0)*1.0 FROM transactions t WHERE height=840000 AND is_coinbase=0 AND t.version IN (SELECT version FROM matched_versions)) as vs_000) SELECT (fee_000 / vs_000 - fee_999 / vs_999) * 100.0 / (fee_999 / vs_999) FROM sums",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": ["chain:observations", "chain:definitions"]
+  }
+}
