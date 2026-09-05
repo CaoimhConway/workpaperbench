@@ -1,0 +1,61 @@
+{
+  "answers": [
+    {
+      "evidence": [
+        "a01:s01",
+        "a01:s04"
+      ],
+      "id": "eps_difference",
+      "reason_code": null,
+      "sql": "SELECT (SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='Non-GAAP diluted net income per share')-(SELECT high FROM guidance WHERE issue_date='2024-09-12' AND period_end='2024-11-29' AND months=3 AND measure='Diluted EPS' AND basis='non-GAAP')",
+      "status": "answered",
+      "unit": "usd_per_share",
+      "value": 0.13
+    },
+    {
+      "evidence": [
+        "a01:s02",
+        "a01:s03"
+      ],
+      "id": "adjusted_operating_income",
+      "reason_code": null,
+      "sql": "WITH x AS (SELECT (SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='GAAP operating income') g,(SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='Total revenue') r,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-29' AND months=3) a) SELECT g+a FROM x",
+      "status": "answered",
+      "unit": "usd_million",
+      "value": 2596.0
+    },
+    {
+      "evidence": [
+        "a01:s02",
+        "a01:s03"
+      ],
+      "id": "adjusted_margin",
+      "reason_code": null,
+      "sql": "WITH x AS (SELECT (SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='GAAP operating income') g,(SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='Total revenue') r,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-29' AND months=3) a) SELECT 100.0*(g+a)/r FROM x",
+      "status": "answered",
+      "unit": "percent",
+      "value": 46.307527648947556
+    },
+    {
+      "evidence": [
+        "a01:s02",
+        "a01:s03"
+      ],
+      "id": "margin_bridge",
+      "reason_code": null,
+      "sql": "WITH x AS (SELECT (SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='GAAP operating income') g,(SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='Total revenue') r,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-29' AND months=3) a) SELECT 10000.0*a/r FROM x",
+      "status": "answered",
+      "unit": "basis_points",
+      "value": 1139.8501605422762
+    }
+  ],
+  "conclusion": {
+    "evidence": [
+      "a01:s01",
+      "a01:s04"
+    ],
+    "reason_code": null,
+    "verdict": "supported"
+  },
+  "task_id": "challenge-v1-a01"
+}

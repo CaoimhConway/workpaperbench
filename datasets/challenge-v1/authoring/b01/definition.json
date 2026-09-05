@@ -1,0 +1,352 @@
+{
+  "changed_tables": {
+    "reserve_reports": {
+      "rows": [
+        [
+          "2025-05-31",
+          "2025-05-31 23:50 ET",
+          "2025-06-12",
+          "Abdo independent accountant report",
+          7093795,
+          2210784,
+          4883011,
+          7093795
+        ],
+        [
+          "2025-06-30",
+          "2025-06-30 23:50 ET",
+          "2025-07-16",
+          "Michael Coglianese CPA PC performance attestation",
+          9356516,
+          3675633,
+          5880883,
+          9556516
+        ]
+      ],
+      "schema": "CREATE TABLE reserve_reports(report_date TEXT,as_of_et TEXT,report_signed_date TEXT,examiner TEXT,issued_sbc INTEGER,cash_equivalents_usd INTEGER,us_government_debt_usd INTEGER,reported_reserve_fv_usd INTEGER)"
+    }
+  },
+  "context": "# Brale SBC reserve report dictionary\n\n## Measurement scope\nThe table contains two Brale SBC reserve report snapshots. SBC issued is the report's total SBC supply across its supported blockchains at that report date. The May and June reports list the same 13 chains: Arbitrum, Avalanche, Base, Canton, Celo, Coreum, Ethereum, Ethereum Classic, Hedera, Optimism, Polygon, Solana and Stellar. Values are whole USD and SBC units.\n\n## Reserve assets\nThe reports define fair value of reserve assets as the total balance of U.S.-denominated assets held by Brale in unencumbered accounts segregated from its other accounts. Each report lists cash and cash equivalents, U.S. government backed debt, and fair value of reserve assets. The documents do not describe a separate valuation method for each component. Their opinions compare reserve asset value with SBC in circulation.\n\n## Observation and report dates\nThe economic observation dates are May 31 and June 30, 2025, each at 11:50 p.m. Eastern Time. The reports are dated June 12 and July 16, respectively. These are report dates, not evidence of historical first-publication timestamps. Both observations are month-end stocks.\n\n## Examiner scope\nThe May document is an Abdo independent accountant report that describes examination under AICPA attestation standards. The June document is a Michael Coglianese, CPA, P.C. performance attestation. It states that the examiner relied on records supplied by Brale and was not retained to independently confirm their authenticity and accuracy. The examiner identity and described scope differ between the reports.\n\n## Interpretation boundary\nNeither report gives a secondary-market quote, a realized redemption result, a liquidation estimate, or instrument-level reserve holdings. The published asset categories are aggregates and do not independently establish each underlying record's authenticity or current marketability.\n\n## Source locators\nMay report: https://brale.xyz/assets/reports/SBC-Stable-Coin-Reserve-Attestation-Report-05-2025.pdf\nJune report: https://brale.xyz/assets/reports/SBC-Stable-Coin-Reserve-Attestation-Report-06-2025.pdf\nThe table values and criteria are on page 2. The as-of date and examiner statements are on page 1.",
+  "control_origin": "synthetic_changed_input",
+  "controls": [
+    {
+      "expected": {
+        "conclusion": "contradicted",
+        "coverage_change_pp": 0,
+        "june_assets_usd": 9356517,
+        "june_reconciliation_usd": 1
+      },
+      "name": "component_gap",
+      "tables": {
+        "reserve_reports": {
+          "rows": [
+            [
+              "2025-05-31",
+              "2025-05-31 23:50 ET",
+              "2025-06-12",
+              "Abdo independent accountant report",
+              7093795,
+              2210784,
+              4883011,
+              7093795
+            ],
+            [
+              "2025-06-30",
+              "2025-06-30 23:50 ET",
+              "2025-07-16",
+              "Michael Coglianese CPA PC performance attestation",
+              9356516,
+              3475634,
+              5880883,
+              9356516
+            ]
+          ],
+          "schema": "CREATE TABLE reserve_reports(report_date TEXT,as_of_et TEXT,report_signed_date TEXT,examiner TEXT,issued_sbc INTEGER,cash_equivalents_usd INTEGER,us_government_debt_usd INTEGER,reported_reserve_fv_usd INTEGER)"
+        }
+      }
+    },
+    {
+      "expected": {
+        "conclusion": "supported",
+        "coverage_change_pp": 2.137547779536742,
+        "june_assets_usd": 9556516,
+        "june_reconciliation_usd": 0
+      },
+      "name": "coverage_increase",
+      "tables": {
+        "reserve_reports": {
+          "rows": [
+            [
+              "2025-05-31",
+              "2025-05-31 23:50 ET",
+              "2025-06-12",
+              "Abdo independent accountant report",
+              7093795,
+              2210784,
+              4883011,
+              7093795
+            ],
+            [
+              "2025-06-30",
+              "2025-06-30 23:50 ET",
+              "2025-07-16",
+              "Michael Coglianese CPA PC performance attestation",
+              9356516,
+              3675633,
+              5880883,
+              9556516
+            ]
+          ],
+          "schema": "CREATE TABLE reserve_reports(report_date TEXT,as_of_et TEXT,report_signed_date TEXT,examiner TEXT,issued_sbc INTEGER,cash_equivalents_usd INTEGER,us_government_debt_usd INTEGER,reported_reserve_fv_usd INTEGER)"
+        }
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "capture_sha256": "6a268dbfd88d84d2f9c5f3bad8322faa4719b8d910c309917bcfa90daee4cba1",
+      "id": "b01:s01",
+      "locator": "Page 2, SBC Reserve Report table, issued, cash, U.S. government backed debt and reserve fair value rows",
+      "origin": "https://brale.xyz/assets/reports/SBC-Stable-Coin-Reserve-Attestation-Report-05-2025.pdf",
+      "period": "2025-05-31 23:50 Eastern Time",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and locator only. Full report not redistributed.",
+      "report_signed_date": "2025-06-12",
+      "retrieved_at": "2026-10-06T21:08:40Z",
+      "text": "May report table lists 7,093,795 SBC issued, USD 2,210,784 cash and cash equivalents, USD 4,883,011 U.S. government backed debt, and USD 7,093,795 reserve fair value."
+    },
+    {
+      "capture_sha256": "6a268dbfd88d84d2f9c5f3bad8322faa4719b8d910c309917bcfa90daee4cba1",
+      "id": "b01:s02",
+      "locator": "Page 2, Criteria & Notes 1-3",
+      "origin": "https://brale.xyz/assets/reports/SBC-Stable-Coin-Reserve-Attestation-Report-05-2025.pdf",
+      "period": "2025-05-31 23:50 Eastern Time",
+      "publication": "unknown",
+      "redistribution": "Concise paraphrase and locator only. Full report not redistributed.",
+      "report_signed_date": "2025-06-12",
+      "retrieved_at": "2026-10-06T21:08:40Z",
+      "text": "May report defines issued amount as total supply on supported blockchains and reserve fair value as U.S.-denominated assets in unencumbered accounts segregated from other Brale accounts."
+    },
+    {
+      "capture_sha256": "6a268dbfd88d84d2f9c5f3bad8322faa4719b8d910c309917bcfa90daee4cba1",
+      "id": "b01:s03",
+      "locator": "Page 1, report date and opinion, with management assertion date on page 2",
+      "origin": "https://brale.xyz/assets/reports/SBC-Stable-Coin-Reserve-Attestation-Report-05-2025.pdf",
+      "period": "2025-05-31 23:50 Eastern Time",
+      "publication": "unknown",
+      "redistribution": "Concise paraphrase and locator only. Full report not redistributed.",
+      "report_signed_date": "2025-06-12",
+      "retrieved_at": "2026-10-06T21:08:40Z",
+      "text": "May observation is dated May 31, 2025 at 11:50 p.m. Eastern Time. The report is dated June 12, 2025 and describes an Abdo examination under AICPA attestation standards."
+    },
+    {
+      "capture_sha256": "6a268dbfd88d84d2f9c5f3bad8322faa4719b8d910c309917bcfa90daee4cba1",
+      "id": "b01:s04",
+      "locator": "Page 2, SBC Reserve Report table, issued, cash, U.S. government backed debt and reserve fair value rows",
+      "origin": "https://brale.xyz/assets/reports/SBC-Stable-Coin-Reserve-Attestation-Report-06-2025.pdf",
+      "period": "2025-06-30 23:50 Eastern Time",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and locator only. Full report not redistributed.",
+      "report_signed_date": "2025-07-16",
+      "retrieved_at": "2026-10-06T21:08:40Z",
+      "text": "June report table lists 9,356,516 SBC issued, USD 3,475,633 cash and cash equivalents, USD 5,880,883 U.S. government backed debt, and USD 9,356,516 reserve fair value."
+    },
+    {
+      "capture_sha256": "6a268dbfd88d84d2f9c5f3bad8322faa4719b8d910c309917bcfa90daee4cba1",
+      "id": "b01:s05",
+      "locator": "Page 2, Criteria & Notes 1-3",
+      "origin": "https://brale.xyz/assets/reports/SBC-Stable-Coin-Reserve-Attestation-Report-06-2025.pdf",
+      "period": "2025-06-30 23:50 Eastern Time",
+      "publication": "unknown",
+      "redistribution": "Concise paraphrase and locator only. Full report not redistributed.",
+      "report_signed_date": "2025-07-16",
+      "retrieved_at": "2026-10-06T21:08:40Z",
+      "text": "June report uses the same stated issued-supply and segregated U.S.-denominated reserve asset definitions as May and gives the same 13-chain list."
+    },
+    {
+      "capture_sha256": "6a268dbfd88d84d2f9c5f3bad8322faa4719b8d910c309917bcfa90daee4cba1",
+      "id": "b01:s06",
+      "locator": "Page 1, report date and examiner scope, with management assertion date on page 2",
+      "origin": "https://brale.xyz/assets/reports/SBC-Stable-Coin-Reserve-Attestation-Report-06-2025.pdf",
+      "period": "2025-06-30 23:50 Eastern Time",
+      "publication": "unknown",
+      "redistribution": "Concise paraphrase and locator only. Full report not redistributed.",
+      "report_signed_date": "2025-07-16",
+      "retrieved_at": "2026-10-06T21:08:40Z",
+      "text": "June observation is dated June 30, 2025 at 11:50 p.m. Eastern Time. The report is dated July 16, 2025. Its examiner says it relied on company-provided records and did not independently confirm their authenticity or accuracy."
+    }
+  ],
+  "family": "B",
+  "gold": {
+    "answers": {
+      "coverage_change_pp": {
+        "evidence": [
+          [
+            "b01:s01",
+            "b01:s04",
+            "b01:s02"
+          ],
+          [
+            "b01:s01",
+            "b01:s04",
+            "b01:s05"
+          ]
+        ],
+        "status": "answered",
+        "tolerance": 1e-06,
+        "unit": "percentage_points",
+        "value": 0
+      },
+      "june_assets_usd": {
+        "evidence": [
+          [
+            "b01:s04",
+            "b01:s02"
+          ],
+          [
+            "b01:s04",
+            "b01:s05"
+          ]
+        ],
+        "status": "answered",
+        "tolerance": 1e-06,
+        "unit": "usd",
+        "value": 9356516
+      },
+      "june_reconciliation_usd": {
+        "evidence": [
+          [
+            "b01:s04"
+          ]
+        ],
+        "status": "answered",
+        "tolerance": 1e-06,
+        "unit": "usd",
+        "value": 0
+      }
+    },
+    "conclusion": {
+      "evidence": [
+        [
+          "b01:s01",
+          "b01:s04",
+          "b01:s02"
+        ],
+        [
+          "b01:s01",
+          "b01:s04",
+          "b01:s05"
+        ]
+      ],
+      "reason_codes": [
+        "contradicted_by_calculation"
+      ],
+      "verdict": "contradicted"
+    },
+    "context_evidence_allowed": [
+      "b01:s02",
+      "b01:s03",
+      "b01:s05",
+      "b01:s06"
+    ],
+    "controls": {
+      "component_gap": {
+        "conclusion": "contradicted",
+        "coverage_change_pp": 0,
+        "june_assets_usd": 9356517,
+        "june_reconciliation_usd": 1
+      },
+      "coverage_increase": {
+        "conclusion": "supported",
+        "coverage_change_pp": 2.137547779536742,
+        "june_assets_usd": 9556516,
+        "june_reconciliation_usd": 0
+      }
+    }
+  },
+  "instruction": "Using the May and June reserve reports, report june_assets_usd in USD for the June observation, june_reconciliation_usd in USD for the same observation, and coverage_change_pp in percentage_points across the May and June observations. Assess: reported SBC reserve coverage rose between May 31 and June 30.",
+  "origin": "primary_source_factual_extract",
+  "previously_exposed": false,
+  "reference": {
+    "answers": [
+      {
+        "evidence": [
+          "b01:s04",
+          "b01:s05"
+        ],
+        "id": "june_assets_usd",
+        "reason_code": null,
+        "sql": "SELECT cash_equivalents_usd + us_government_debt_usd AS value FROM reserve_reports WHERE report_date='2025-06-30'",
+        "status": "answered",
+        "unit": "usd",
+        "value": 9356516
+      },
+      {
+        "evidence": [
+          "b01:s04"
+        ],
+        "id": "june_reconciliation_usd",
+        "reason_code": null,
+        "sql": "SELECT cash_equivalents_usd + us_government_debt_usd - reported_reserve_fv_usd AS value FROM reserve_reports WHERE report_date='2025-06-30'",
+        "status": "answered",
+        "unit": "usd",
+        "value": 0
+      },
+      {
+        "evidence": [
+          "b01:s01",
+          "b01:s02",
+          "b01:s04",
+          "b01:s05"
+        ],
+        "id": "coverage_change_pp",
+        "reason_code": null,
+        "sql": "WITH coverage AS (SELECT report_date,100.0*reported_reserve_fv_usd/issued_sbc AS pct FROM reserve_reports WHERE report_date IN ('2025-05-31','2025-06-30')) SELECT (SELECT pct FROM coverage WHERE report_date='2025-06-30') - (SELECT pct FROM coverage WHERE report_date='2025-05-31') AS value",
+        "status": "answered",
+        "unit": "percentage_points",
+        "value": 0
+      }
+    ],
+    "conclusion": {
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s04",
+        "b01:s05"
+      ],
+      "reason_code": "contradicted_by_calculation",
+      "verdict": "contradicted"
+    },
+    "task_id": "challenge-v1-b01"
+  },
+  "source_group": "brale-sbc-reserve-reports-2025-may-june",
+  "split": "development",
+  "tables": {
+    "reserve_reports": {
+      "rows": [
+        [
+          "2025-05-31",
+          "2025-05-31 23:50 ET",
+          "2025-06-12",
+          "Abdo independent accountant report",
+          7093795,
+          2210784,
+          4883011,
+          7093795
+        ],
+        [
+          "2025-06-30",
+          "2025-06-30 23:50 ET",
+          "2025-07-16",
+          "Michael Coglianese CPA PC performance attestation",
+          9356516,
+          3475633,
+          5880883,
+          9356516
+        ]
+      ],
+      "schema": "CREATE TABLE reserve_reports(report_date TEXT,as_of_et TEXT,report_signed_date TEXT,examiner TEXT,issued_sbc INTEGER,cash_equivalents_usd INTEGER,us_government_debt_usd INTEGER,reported_reserve_fv_usd INTEGER)"
+    }
+  },
+  "task_id": "challenge-v1-b01"
+}
