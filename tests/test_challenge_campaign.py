@@ -1,18 +1,24 @@
 """Manifest, slot, reservation, and retention checks for challenge-v1."""
 import hashlib
+import importlib.util
 import io
 import json
+import os
 import re
+import shlex
 import shutil
+import subprocess
 import sys
 import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import attempts
+import check_install
 import collect_results
 import native_run
 import native_trial
@@ -114,6 +120,32 @@ def make_stage(root, stage, *, groups=None, models=None, filename=None,
 
 def pair_slots(schedule, task, repetition):
     return [slot for slot in schedule if slot["task"] == task and slot["repetition"] == repetition]
+
+
+def install_current_run_pairs(monkeypatch, manifest_id, active, completed, queued, run_id=51):
+    run = {"id": run_id, "display_title": f"WPB::{manifest_id}::pilot"}
+
+    def job(slots, status, *, runner_id=None):
+        return {
+            "id": {"completed": 100, "in_progress": 101, "queued": 102}[status],
+            "name": "pair-" + manifest_id + "-" + "--".join(slot["slot_id"] for slot in slots),
+            "status": status,
+            "conclusion": "success" if status == "completed" else None,
+            "runner_id": runner_id,
+            "run_attempt": 1,
+            "started_at": "2026-10-06T00:00:00Z" if runner_id else None,
+        }
+
+    jobs = [job(completed, "completed", runner_id=1), job(active, "in_progress", runner_id=2),
+            job(queued, "queued")]
+
+    def pages(_path, key):
+        return iter([run] if key == "workflow_runs" else jobs)
+
+    monkeypatch.setattr(select_slots, "pages", pages)
+    monkeypatch.setenv("GITHUB_RUN_ID", str(run_id))
+    monkeypatch.setenv("GITHUB_RUN_ATTEMPT", "1")
+    monkeypatch.setenv("WPB_SLOTS", json.dumps([slot["slot_id"] for slot in active]))
 
 
 def test_challenge_manifests_select_balanced_full_dossier_slots(tmp_path, monkeypatch):
@@ -251,6 +283,40 @@ def test_challenge_reservation_sums_remaining_model_costs_without_multiplier(tmp
     assert reserve == pytest.approx(4.4)
 
 
+def test_history_excludes_only_active_pair_and_keeps_started_pairs_in_same_run(tmp_path, monkeypatch):
+    manifest, schedule = make_stage(tmp_path, "development")
+    completed = pair_slots(schedule, "challenge-v1-a01", 1)
+    active = pair_slots(schedule, "challenge-v1-a01", 2)
+    queued = pair_slots(schedule, "challenge-v1-a01", 3)
+    install_current_run_pairs(monkeypatch, manifest["manifest_id"], active, completed, queued)
+
+    attempted = select_slots.history("pilot", manifest["manifest_id"])
+
+    assert set(attempted) == {slot["slot_id"] for slot in completed}
+    monkeypatch.delenv("WPB_SLOTS")
+    assert select_slots.history("pilot", manifest["manifest_id"]) == {}
+
+
+def test_clean_checkout_reservation_drops_completed_same_run_pair(tmp_path, monkeypatch):
+    manifest, schedule = make_stage(tmp_path, "development")
+    context = select_slots.challenge_dataset_context(manifest["manifest_id"], tmp_path)
+    completed = pair_slots(schedule, "challenge-v1-a01", 1)
+    active = pair_slots(schedule, "challenge-v1-a01", 2)
+    queued = pair_slots(schedule, "challenge-v1-a01", 3)
+    install_current_run_pairs(monkeypatch, manifest["manifest_id"], active, completed, queued)
+    attempted = select_slots.history("pilot", manifest["manifest_id"])
+
+    reserve, count = native_run.challenge_reservation(
+        context, "pilot", active[0]["slot_id"], attempted, records=[])
+
+    expected = sum(
+        MODELS[slot["model_key"]]["reservation_usd_per_slot"]
+        for slot in schedule if slot["slot_id"] not in {item["slot_id"] for item in completed}
+    )
+    assert count == 16
+    assert reserve == pytest.approx(expected)
+
+
 def test_challenge_attempt_receipt_and_collection_authenticate_model_condition(tmp_path, monkeypatch):
     manifest, schedule = make_stage(tmp_path, "development")
     monkeypatch.setattr(select_slots, "ROOT", tmp_path)
@@ -303,6 +369,173 @@ def test_challenge_attempt_receipt_and_collection_authenticate_model_condition(t
         collect_results.validate_record(record, tmp_path, run, manifest["manifest_id"], "pilot")
 
 
+def test_challenge_setup_failure_receipt_preserves_declared_provenance_for_collection(tmp_path, monkeypatch):
+    manifest, schedule = make_stage(tmp_path, "development")
+    monkeypatch.setattr(select_slots, "ROOT", tmp_path)
+    monkeypatch.setattr(attempts, "ROOT", tmp_path)
+    monkeypatch.setattr(select_slots, "history", lambda mode, manifest_id: {})
+    monkeypatch.setenv("GITHUB_RUN_ID", "51")
+    monkeypatch.setenv("GITHUB_RUN_ATTEMPT", "1")
+    monkeypatch.setenv("GITHUB_SHA", "a" * 40)
+
+    pair = pair_slots(schedule, "challenge-v1-a01", 1)
+    attempts.receipt("pilot", manifest["manifest_id"], [slot["slot_id"] for slot in pair])
+    attempts.finalize(manifest["manifest_id"], [slot["slot_id"] for slot in pair])
+    run = {"id": 51, "head_sha": "a" * 40, "run_attempt": 1}
+
+    for slot in pair:
+        record_path = (tmp_path / "reports/runs" / manifest["manifest_id"]
+                       / slot["slot_id"] / "record.json")
+        record = json.loads(record_path.read_text())
+        task_key = slot["task"].removeprefix("challenge-v1-")
+        task = manifest["tasks"][task_key]
+        model = manifest["models"][slot["model_key"]]
+
+        assert record["status"] == "infra_failed"
+        assert record["verdict"] is None
+        assert "native_return_code" not in record
+        assert record["model_profile_status"] == "manifest_declared_not_execution_evidence"
+        assert record["source_group"] == task["source_group"]
+        assert record["task_origin"] == task["origin"]
+        assert record["model"] == model["id"]
+        assert record["model_route_policy"] == model["route_policy"]
+        assert record["model_provider"] == model["provider"]
+        assert record["model_harbor_model"] == model["harbor_model"]
+        assert record["reservation_usd_per_slot"] == model["reservation_usd_per_slot"]
+        assert collect_results.validate_record(
+            record, tmp_path, run, manifest["manifest_id"], "pilot") == slot
+
+
+def test_native_retry_observer_records_only_bounded_metadata_and_counts_repeated_starts(tmp_path, monkeypatch):
+    plugin_path = ROOT / "config/native-api-observer/__init__.py"
+    spec = importlib.util.spec_from_file_location("native_api_observer_test", plugin_path)
+    observer = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(observer)
+    ledger = tmp_path / ".raw/native-api-observer.jsonl"
+    observer._events = 0
+    observer._request_attempts.clear()
+    monkeypatch.setattr(observer, "_ledger_path", lambda: ledger)
+    monkeypatch.setattr(native_run, "ROOT", tmp_path)
+    hooks = {}
+
+    class Context:
+        def register_hook(self, name, callback):
+            hooks[name] = callback
+
+    observer.register(Context())
+    request_id = "turn-secret-shape:api:4"
+    hooks["pre_api_request"](
+        api_request_id=request_id, api_call_count=4, retry_count=0, max_retries=5,
+        started_at=1_800_000_000.0, user_message="never retain this", request={"body": "private"})
+    hooks["api_request_error"](
+        api_request_id=request_id, api_call_count=4, retry_count=1, max_retries=5,
+        started_at=1_800_000_000.0, ended_at=1_800_000_001.0, status_code=503,
+        retryable=True, error={"message": "do not retain"}, request={"secret": "do not retain"})
+    hooks["pre_api_request"](
+        api_request_id=request_id, api_call_count=4, retry_count=0, max_retries=5,
+        started_at=1_800_000_002.0, conversation_history=["private"])
+    hooks["post_api_request"](
+        api_request_id=request_id, api_call_count=4, retry_count=0, max_retries=5,
+        started_at=1_800_000_002.0, ended_at=1_800_000_003.0,
+        assistant_message="must not be retained")
+
+    evidence = native_run.retry_observer_evidence(ledger)
+    encoded = json.dumps(evidence)
+    retained = ledger.read_text()
+    assert evidence["capture_status"] == "captured"
+    assert evidence["capture_completeness"] == "not_guaranteed"
+    assert "fail_open" in evidence["capture_limitations"]
+    assert evidence["observer_registered"] is True
+    assert evidence["pre_request_count"] == 2
+    assert evidence["observed_additional_attempts"] == 1
+    assert evidence["events"][2]["http_status"] == 503
+    assert evidence["events"][2]["retryable"] is True
+    assert evidence["events"][2]["request_id"] != request_id
+    assert "never retain this" not in encoded
+    assert "private" not in encoded
+    assert "do not retain" not in encoded
+    assert "must not be retained" not in encoded
+    assert "never retain this" not in retained
+    assert "private" not in retained
+    assert "do not retain" not in retained
+    assert "must not be retained" not in retained
+    assert request_id not in retained
+
+
+def test_native_retry_observer_rejects_unexpected_payload_fields_and_caps_events(tmp_path, monkeypatch):
+    monkeypatch.setattr(native_run, "ROOT", tmp_path)
+    ledger = tmp_path / ".raw/native-api-observer.jsonl"
+    ledger.parent.mkdir(parents=True)
+    ledger.write_text(json.dumps({"event": "observer_registered", "observed_at": 1.0,
+                                  "request": "must not survive"}) + "\n")
+    assert native_run.retry_observer_evidence(ledger)["capture_status"] == "invalid"
+
+    spec = importlib.util.spec_from_file_location(
+        "native_api_observer_cap_test", ROOT / "config/native-api-observer/__init__.py")
+    observer = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(observer)
+    observer._events = 0
+    monkeypatch.setattr(observer, "_ledger_path", lambda: ledger)
+    ledger.write_text("")
+    for _ in range(observer._MAX_EVENTS + 10):
+        observer._record("observer_registered")
+    assert len(ledger.read_text().splitlines()) == observer._MAX_EVENTS
+    evidence = native_run.retry_observer_evidence(ledger)
+    assert evidence["capture_status"] == "event_limit_reached"
+    assert evidence["capture_truncated_possible"] is True
+    assert evidence["event_count"] == observer._MAX_EVENTS
+
+
+def test_native_trial_stages_observer_and_requires_three_registered_hooks(tmp_path):
+    class AgentEnvironment:
+        def __init__(self):
+            self.calls = []
+
+        async def exec(self, *, command, env, timeout_sec):
+            self.calls.append((command, env, timeout_sec))
+            output = "registrations: 0 tool(s), 3 hook(s)" if "plugins doctor" in command else ""
+            return SimpleNamespace(return_code=0, stdout=output, stderr="")
+
+    environment = AgentEnvironment()
+    result = __import__("asyncio").run(native_trial.stage_retry_observer(
+        environment, ROOT, "/tmp/hermes", enable=True, ledger_path="/logs/agent/native-api-observer.jsonl"))
+    assert result == {"staged": True, "registration_smoke": True,
+                      "registered_hook_count": 3, "enabled": True}
+    assert "native-api-observer" in environment.calls[0][0]
+    assert "plugins doctor" in environment.calls[1][0]
+    assert "plugins enable" in environment.calls[2][0]
+    assert environment.calls[1][1]["WPB_NATIVE_RETRY_LEDGER"] == ""
+    assert environment.calls[2][1]["WPB_NATIVE_RETRY_LEDGER"].startswith("/logs/agent/")
+
+
+def test_native_trial_stage_command_copies_only_reviewed_plugin_files(tmp_path):
+    home = tmp_path / "hermes-home"
+    command = native_trial.observer_stage_command(ROOT, str(home))
+    subprocess.run(shlex.split(command), check=True, capture_output=True)
+    staged = home / "plugins/native-api-observer"
+    assert (staged / "plugin.yaml").read_bytes() == (
+        ROOT / "config/native-api-observer/plugin.yaml").read_bytes()
+    assert (staged / "__init__.py").read_bytes() == (
+        ROOT / "config/native-api-observer/__init__.py").read_bytes()
+
+
+def test_native_trial_refuses_retry_observer_without_registered_hook_smoke():
+    class AgentEnvironment:
+        def __init__(self):
+            self.calls = 0
+
+        async def exec(self, *, command, env, timeout_sec):
+            self.calls += 1
+            output = "registrations: 0 tool(s), 2 hook(s)" if "plugins doctor" in command else ""
+            return SimpleNamespace(return_code=0, stdout=output, stderr="")
+
+    environment = AgentEnvironment()
+    with pytest.raises(RuntimeError, match="native_retry_observer_registration_failed"):
+        __import__("asyncio").run(native_trial.stage_retry_observer(
+            environment, ROOT, "/tmp/hermes"))
+    assert environment.calls == 2
+
+
 def test_challenge_verdict_sanitizer_keeps_research_completion_and_diagnostics(tmp_path, monkeypatch):
     monkeypatch.setattr(native_run, "ROOT", tmp_path)
     path = tmp_path / ".raw/verdict.json"
@@ -350,6 +583,25 @@ def test_live_trials_accept_a_fork_checkout_only_with_default_branch_and_supplie
         native_run.validate_live_environment()
     with pytest.raises(SystemExit, match="supplied capped key"):
         native_trial.validate_live_environment()
+
+
+def test_key_free_install_smoke_accepts_fork_repository_and_rejects_any_supplied_key(monkeypatch):
+    for name in list(os.environ):
+        if name.endswith("API_KEY") or name in ("GH_TOKEN", "GITHUB_TOKEN"):
+            monkeypatch.delenv(name, raising=False)
+    monkeypatch.setenv("GITHUB_ACTIONS", "true")
+    monkeypatch.setenv("RUNNER_OS", "Linux")
+    monkeypatch.setenv("GITHUB_REPOSITORY", "Maintainer/workpaperbench-fork")
+
+    check_install.validate_key_free_environment()
+
+    monkeypatch.setenv("OPENROUTER_API_KEY", "unread-and-never-printed")
+    with pytest.raises(RuntimeError, match="must be key-free"):
+        check_install.validate_key_free_environment()
+    monkeypatch.delenv("OPENROUTER_API_KEY")
+    monkeypatch.setenv("GITHUB_REPOSITORY", "invalid/repo/path")
+    with pytest.raises(RuntimeError, match="Linux GitHub Actions runner"):
+        check_install.validate_key_free_environment()
 
 
 def test_github_history_api_uses_runtime_repository_and_rejects_invalid_slug(monkeypatch):

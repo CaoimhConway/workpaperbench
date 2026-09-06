@@ -44,7 +44,22 @@ CHALLENGE_RUNTIME_INPUTS = {
     "scripts/attempts.py",
     "scripts/collect_results.py",
     "scripts/fresh_replay.py",
+    "scripts/check_install.py",
+    "config/native-api-observer/plugin.yaml",
+    "config/native-api-observer/__init__.py",
     ".github/workflows/benchmark.yml",
+}
+RETRY_LEDGER_MAX_BYTES = 65_536
+RETRY_LEDGER_MAX_EVENTS = 256
+RETRY_EVENT_KEYS = {
+    "observer_registered": {"event", "observed_at"},
+    "pre_api_request": {"event", "observed_at", "request_id", "api_call_count",
+                         "retry_count", "max_retries", "started_at", "attempt_ordinal"},
+    "post_api_request": {"event", "observed_at", "request_id", "api_call_count",
+                         "retry_count", "max_retries", "started_at", "ended_at"},
+    "api_request_error": {"event", "observed_at", "request_id", "api_call_count",
+                           "retry_count", "max_retries", "started_at", "ended_at",
+                           "http_status", "retryable"},
 }
 
 
@@ -309,6 +324,115 @@ def bounded_bytes(path, limit):
     if len(content) > limit:
         return None, "oversize"
     return content, None
+
+
+def retry_observer_evidence(path):
+    """Retain only the observer's narrow metadata schema, never raw hook payloads."""
+    limitations = "hooks_fail_open_upstream_internal_retries_and_routes_unobserved"
+
+    def empty(status, *, possibly_truncated=False):
+        return {"capture_status": status, "capture_completeness": "not_guaranteed",
+                "capture_limitations": limitations,
+                "capture_truncated_possible": possibly_truncated,
+                "observer_registered": False, "event_count": 0,
+                "pre_request_count": 0, "observed_additional_attempts": 0, "events": []}
+
+    content, reason = bounded_bytes(path, RETRY_LEDGER_MAX_BYTES)
+    if reason:
+        status = "missing" if reason == "missing_or_symlink" and not path.exists() else reason
+        return empty(status)
+    try:
+        rows = [json.loads(line) for line in content.decode("utf-8").splitlines()]
+    except (UnicodeDecodeError, json.JSONDecodeError, RecursionError):
+        rows = None
+    if (not isinstance(rows, list) or not rows or len(rows) > RETRY_LEDGER_MAX_EVENTS
+            or any(not isinstance(row, dict) for row in rows)):
+        status = "event_limit_reached" if isinstance(rows, list) and len(rows) > RETRY_LEDGER_MAX_EVENTS else "invalid"
+        return empty(status, possibly_truncated=status == "event_limit_reached")
+
+    events = []
+    attempts_by_request = {}
+    additional = 0
+    for row in rows:
+        event = row.get("event")
+        if not isinstance(event, str) or event not in RETRY_EVENT_KEYS or set(row) != RETRY_EVENT_KEYS[event]:
+            events = None
+            break
+        observed_at = finite_number(row.get("observed_at"))
+        if observed_at is None or observed_at <= 0:
+            events = None
+            break
+        clean = {"event": event, "observed_at": observed_at}
+        if event != "observer_registered":
+            request_id = row.get("request_id")
+            if request_id is not None and not re.fullmatch(r"[0-9a-f]{64}", str(request_id)):
+                events = None
+                break
+            clean["request_id"] = request_id
+            for name in ("api_call_count", "retry_count", "max_retries"):
+                value = row.get(name)
+                if value is not None and (isinstance(value, bool) or not isinstance(value, int)
+                                          or not 0 <= value <= 1_000_000_000):
+                    events = None
+                    break
+                clean[name] = value
+            if events is None:
+                break
+            for name in ("started_at", "ended_at"):
+                if name in row:
+                    value = finite_number(row[name])
+                    if row[name] is not None and (value is None or not 0 < value < 10_000_000_000):
+                        events = None
+                        break
+                    clean[name] = value
+            if events is None:
+                break
+            if event == "pre_api_request":
+                ordinal = row.get("attempt_ordinal")
+                if ordinal is not None and (isinstance(ordinal, bool) or not isinstance(ordinal, int)
+                                            or not 1 <= ordinal <= RETRY_LEDGER_MAX_EVENTS):
+                    events = None
+                    break
+                if request_id is not None:
+                    expected = attempts_by_request.get(request_id, 0) + 1
+                    if ordinal != expected:
+                        events = None
+                        break
+                    attempts_by_request[request_id] = expected
+                    if expected > 1:
+                        additional += 1
+                elif ordinal is not None:
+                    events = None
+                    break
+                clean["attempt_ordinal"] = ordinal
+            elif event == "api_request_error":
+                status = row.get("http_status")
+                retryable = row.get("retryable")
+                if status is not None and (isinstance(status, bool) or not isinstance(status, int)
+                                           or not 100 <= status <= 599):
+                    events = None
+                    break
+                if retryable is not None and not isinstance(retryable, bool):
+                    events = None
+                    break
+                clean["http_status"] = status
+                clean["retryable"] = retryable
+        events.append(clean)
+    if events is None:
+        return empty("invalid")
+    pre_count = sum(event["event"] == "pre_api_request" for event in events)
+    registered = any(e["event"] == "observer_registered" for e in events)
+    hooks_observed = any(e["event"] != "observer_registered" for e in events)
+    possibly_truncated = len(rows) >= RETRY_LEDGER_MAX_EVENTS or len(content) >= RETRY_LEDGER_MAX_BYTES - 512
+    status = ("event_limit_reached" if len(rows) >= RETRY_LEDGER_MAX_EVENTS else
+              "size_limit_near" if len(content) >= RETRY_LEDGER_MAX_BYTES - 512 else
+              "captured" if registered or hooks_observed else "registration_not_observed")
+    return {"capture_status": status, "capture_completeness": "not_guaranteed",
+            "capture_limitations": limitations,
+            "capture_truncated_possible": possibly_truncated,
+            "observer_registered": registered or hooks_observed,
+            "event_count": len(events), "pre_request_count": pre_count,
+            "observed_additional_attempts": additional, "events": events}
 
 
 def sanitized_verdict(path):
@@ -697,6 +821,8 @@ def execute(mode, slot_id):
                                    "toolsets": RUNTIME["agent"]["toolsets"]},
                         "override_timeout_sec": RUNTIME["agent"]["solve_timeout_sec"],
                         "override_setup_timeout_sec": RUNTIME["agent"]["setup_timeout_sec"]}}
+    if challenge:
+        trial_config["agent"]["env"]["WPB_NATIVE_RETRY_LEDGER"] = "/logs/agent/native-api-observer.jsonl"
     if treatment:
         injected = json.loads(config_path.read_text())
         trial_config["extra_instruction_paths"] = injected["extra_instruction_paths"]
@@ -733,6 +859,9 @@ def execute(mode, slot_id):
         record["hermes_checkout_commit_verified"] = version.get("matches_pin") is True
     metrics, exception_type = result_metrics(result_path)
     record["harbor_metrics"] = metrics
+    if challenge:
+        record["native_api_retry_observer"] = retry_observer_evidence(
+            trial_dir / "agent/native-api-observer.jsonl")
     if exception_type:
         record["native_exception_type"] = exception_type
         record["native_failure_codes"] = failure_codes(trial_dir / "agent/hermes.txt")

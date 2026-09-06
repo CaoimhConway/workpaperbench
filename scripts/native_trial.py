@@ -1,5 +1,6 @@
 """Invoke the native trial with a read-only pre-solve version check."""
 import asyncio
+import base64
 import hashlib
 import json
 import os
@@ -7,6 +8,65 @@ from pathlib import Path
 import re
 import shlex
 import sys
+
+
+OBSERVER_HOOKS = ("pre_api_request", "post_api_request", "api_request_error")
+
+
+def observer_stage_command(root, hermes_home):
+    plugin = Path(root) / "config/native-api-observer"
+    files = {
+        name: base64.b64encode((plugin / name).read_bytes()).decode("ascii")
+        for name in ("plugin.yaml", "__init__.py")
+    }
+    payload = base64.b64encode(json.dumps(files, sort_keys=True).encode()).decode("ascii")
+    script = (
+        "import base64,json,pathlib,sys\n"
+        "home=pathlib.Path(sys.argv[2])\n"
+        "plugins=home/'plugins'\n"
+        "destination=plugins/'native-api-observer'\n"
+        "if any(path.is_symlink() for path in (home,plugins,destination)): raise SystemExit(2)\n"
+        "plugins.mkdir(parents=True,exist_ok=True)\n"
+        "destination.mkdir(exist_ok=True)\n"
+        "files=json.loads(base64.b64decode(sys.argv[1]))\n"
+        "for name,value in files.items():\n"
+        " target=destination/name\n"
+        " if target.is_symlink(): raise SystemExit(2)\n"
+        " target.write_bytes(base64.b64decode(value))\n"
+    )
+    return "python3 -c " + shlex.quote(script) + " " + shlex.quote(payload) + " " + shlex.quote(str(hermes_home))
+
+
+async def stage_retry_observer(agent_environment, root, hermes_home, *, enable=False, ledger_path=""):
+    """Stage the pinned hook observer and smoke its real Hermes registration path."""
+    env = {"HERMES_HOME": str(hermes_home), "WPB_NATIVE_RETRY_LEDGER": "",
+           "OPENROUTER_API_KEY": ""}
+    stage = await agent_environment.exec(
+        command=observer_stage_command(root, hermes_home), env=env, timeout_sec=30)
+    if stage.return_code:
+        raise RuntimeError("native_retry_observer_stage_failed")
+
+    doctor = await agent_environment.exec(
+        command=("export PATH=\"$HOME/.local/bin:$PATH\" && hermes plugins doctor "
+                 + shlex.quote(str(Path(hermes_home) / "plugins/native-api-observer")) + " --ci"),
+        env=env, timeout_sec=60)
+    doctor_output = (doctor.stdout or "") + (doctor.stderr or "")
+    hook_count = re.search(r"registrations:\s+\d+\s+tool\(s\),\s+(\d+)\s+hook\(s\)", doctor_output)
+    if doctor.return_code or hook_count is None or int(hook_count.group(1)) != len(OBSERVER_HOOKS):
+        raise RuntimeError("native_retry_observer_registration_failed")
+
+    if enable:
+        enable_env = {"HERMES_HOME": str(hermes_home),
+                      "WPB_NATIVE_RETRY_LEDGER": str(ledger_path),
+                      "OPENROUTER_API_KEY": ""}
+        activated = await agent_environment.exec(
+            command='export PATH="$HOME/.local/bin:$PATH" && hermes plugins enable '
+                    "native-api-observer --no-allow-tool-override",
+            env=enable_env, timeout_sec=60)
+        if activated.return_code:
+            raise RuntimeError("native_retry_observer_enable_failed")
+    return {"staged": True, "registration_smoke": True,
+            "registered_hook_count": int(hook_count.group(1)), "enabled": bool(enable)}
 
 
 async def run(config_path):
@@ -41,6 +101,12 @@ async def run(config_path):
             metadata["treatment_instruction_present"] = skill.read_text() in trial.task.instruction
             metadata["treatment_staged_skill_matches"] = check.return_code == 0 and bool(actual) and actual[0] == expected
             metadata["treatment_sha256"] = expected
+        observer_ledger = config.agent.env.get("WPB_NATIVE_RETRY_LEDGER")
+        if observer_ledger:
+            hermes_home = config.agent.env.get("HERMES_HOME", "/tmp/hermes")
+            metadata["native_api_retry_observer"] = await stage_retry_observer(
+                trial.agent_environment, root, hermes_home, enable=True,
+                ledger_path=observer_ledger)
         destination = root / ".raw/versions" / (config.trial_name + ".json")
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_text(json.dumps(metadata, indent=2) + "\n")
