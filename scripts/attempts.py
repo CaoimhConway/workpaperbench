@@ -43,14 +43,17 @@ def check(mode, manifest_id, identifiers):
                 or data.get('experiment_id') != manifest_id
                 or data.get('status') != 'setup_started'):
             raise ValueError('attempt_receipt_mismatch')
+    return attempted
 
 
 def receipt(mode, manifest_id, identifiers):
-    from select_slots import selection, real_dataset_context
+    from select_slots import challenge_dataset_context, real_dataset_context, selection
     if os.environ.get('GITHUB_RUN_ATTEMPT') != '1':
         raise ValueError('same_run_retry_disabled')
     available, _ = selection(mode, manifest_id, 'all')
-    context = real_dataset_context(manifest_id, ROOT)
+    context = challenge_dataset_context(manifest_id, ROOT)
+    if context is None:
+        context = real_dataset_context(manifest_id, ROOT)
     by_id = {s['slot_id']: s for s in available}
     if not identifiers or len(identifiers) > 2 or any(i not in by_id for i in identifiers):
         raise ValueError('slot_previously_attempted_or_invalid')

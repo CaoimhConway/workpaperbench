@@ -11,7 +11,7 @@ import subprocess
 import zipfile
 from datetime import datetime, timezone
 
-from select_slots import REPO, api, job_slots, job_started, pages, run_manifest
+from select_slots import REPO, SLOT_PATTERN, api, job_slots, job_started, pages, repository_path, run_manifest
 
 ROOT = Path(__file__).resolve().parent.parent
 FILES = {"record.json", "answer.json", "verdict.json", "answer.raw.txt", "tool-evidence.json"}
@@ -36,7 +36,7 @@ def run_campaign(run):
 
 
 def authenticate_attempt(artifact, run, manifest_id, cache, mode="final"):
-    slot = rf"{mode}-wp0[1-8]-[AB]-[1-3]"
+    slot = rf"(?:{SLOT_PATTERN})"
     prefixes = (f"slot-{run['head_sha']}-{mode}-{run['id']}-",
                 f"pair-{manifest_id}-{run['id']}-", f"provider-{run['head_sha']}-{run['id']}-")
     endings = (rf"([1-9][0-9]*)-({slot})", rf"([1-9][0-9]*)-({slot}(?:--{slot})?)", r"([1-9][0-9]*)")
@@ -84,7 +84,7 @@ def import_archive(data, artifact, root):
                     or entry.file_size > 500_000 or len(parts) not in (1, 2) or parts[-1] not in FILES):
                 raise ValueError("unexpected_archive_entry")
             group = parts[0] if len(parts) == 2 else "single"
-            if group != "single" and not re.fullmatch(rf"{campaign}-wp0[1-8]-[AB]-[1-3]", group):
+            if group != "single" and not re.fullmatch(SLOT_PATTERN, group):
                 raise ValueError("unexpected_archive_directory")
             if parts[-1] in groups.setdefault(group, {}):
                 raise ValueError("duplicate_archive_entry")
@@ -117,7 +117,7 @@ def validate_files(files, artifact, root):
     mode = artifact.get("campaign", "final")
     validate_record(record, root, artifact["workflow_run"], manifest_id, mode)
     identifier = record.get("slot_id", "")
-    if not re.fullmatch(rf"{mode}-wp0[1-8]-[AB]-[1-3]", identifier):
+    if not re.fullmatch(SLOT_PATTERN, identifier):
         raise ValueError("unexpected_slot")
     from select_slots import campaign_context
     context = campaign_context(manifest_id, root)
@@ -170,7 +170,7 @@ def validate_record(record, root, run, manifest_id=None, mode="final"):
     schedule = campaign_slots(context, mode)
     slots = {s["slot_id"]: s for s in schedule}
     slot = slots.get(record.get("slot_id"))
-    if slot is None or any(record.get(k) != slot[k] for k in ("campaign", "task", "arm", "repetition", "split")):
+    if slot is None or any(record.get(k) != value for k, value in slot.items()):
         raise ValueError("artifact_slot_identity_mismatch")
     if record.get("experiment_id") not in (None, manifest_id):
         raise ValueError("artifact_experiment_identity_mismatch")
@@ -178,6 +178,24 @@ def validate_record(record, root, run, manifest_id=None, mode="final"):
         raise ValueError("artifact_freeze_identity_mismatch")
     if context["dataset_id"] and record.get("dataset_manifest_id") != context["manifest"]["manifest_id"]:
         raise ValueError("artifact_dataset_identity_mismatch")
+    if context["dataset_id"] == "challenge-v1":
+        task_key = slot["task"].removeprefix("challenge-v1-")
+        task = context["tasks"][task_key]
+        model = context["manifest"]["models"][slot["model_key"]]
+        expected = {
+            "experiment_id": manifest_id,
+            "dataset_id": "challenge-v1",
+            "dataset_manifest_id": manifest_id,
+            "source_group": task["source_group"],
+            "task_origin": task.get("origin"),
+            "model": model["id"],
+            "model_route_policy": model["route_policy"],
+            "model_provider": model["provider"],
+            "model_harbor_model": model["harbor_model"],
+            "reservation_usd_per_slot": float(model["reservation_usd_per_slot"]),
+        }
+        if any(record.get(key) != value for key, value in expected.items()):
+            raise ValueError("artifact_challenge_provenance_mismatch")
     if str(record.get("run_id")) != str(run["id"]) or record.get("commit_sha") != run["head_sha"]:
         raise ValueError("artifact_run_identity_mismatch")
     if str(record.get("github_run_attempt", "")) != str(run.get('run_attempt', '')) or not run.get('run_attempt'):
@@ -207,6 +225,8 @@ def reconciliation_path(root, context, mode):
     reports = Path(root) / "reports"
     if context["dataset_id"] == "real-v1":
         return reports / "real-v1" / (mode + "-reconciliation.json")
+    if context["dataset_id"] == "challenge-v1":
+        return reports / "challenge-v1" / (mode + "-reconciliation.json")
     return reports / "reconciliation.json"
 
 
@@ -227,8 +247,9 @@ def provider_archive(data, artifact, run, root):
     manifest_id = artifact.get("manifest_id")
     if manifest_id:
         from select_slots import campaign_context
-        if campaign_context(manifest_id, root)["dataset_id"] == "real-v1":
-            reports = reports / "real-v1"
+        dataset_id = campaign_context(manifest_id, root)["dataset_id"]
+        if dataset_id in ("real-v1", "challenge-v1"):
+            reports = reports / dataset_id
     target = reports / "provider" / (str(run["id"]) + ".json")
     target.parent.mkdir(parents=True, exist_ok=True)
     if target.exists() and target.read_bytes() != content:
@@ -256,7 +277,8 @@ def collect(run_id, root=ROOT):
             raise ValueError("artifact_workflow_origin_mismatch")
         if artifact.get("size_in_bytes", 2_000_001) > 2_000_000:
             raise ValueError("oversized_artifact")
-        data = subprocess.check_output(["gh", "api", f"repos/{REPO}/actions/artifacts/{artifact['id']}/zip"])
+        data = subprocess.check_output(["gh", "api", repository_path(
+            f"repos/{REPO}/actions/artifacts/{artifact['id']}/zip")])
         try:
             authenticate_attempt(artifact, run, manifest_id, attempts, mode)
             if artifact["name"].startswith("provider-"):
