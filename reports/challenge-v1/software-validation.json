@@ -31,15 +31,42 @@
     "run_id": 37534910673
   },
   "native_controls": {
-    "run_id": 37535020907,
-    "status": "in_progress"
+    "archive_sha256": "8546f7fc25180d4ff2d5d50ec443339406fe2b9fffe2b55859ee24a090e5491d",
+    "artifact_id": 11449120575,
+    "commit_sha": "de1cc9b8fcda668bd5264f254e5f04444c5dd0ed",
+    "controls": 24,
+    "job_conclusion": "success",
+    "receipt_directory": "reports/challenge-v1/software-checks/37539651398-1",
+    "receipt_sha256": "b96c0cb8554ec27fa6f79a177681f5cdee775ded6e52a55feac50206613c5e7b",
+    "run_id": 37539651398,
+    "scope_note": "Passed on then-frozen inputs. PayPal synthetic control coherence subsequently corrected before exposure, affected native recheck required",
+    "workflow_conclusion": "failure",
+    "workflow_failure": "setup smoke guard, no inference"
   },
   "native_observer_installation": {
+    "archive_sha256": "a9fc85657970ddbe25596e51a2ca411f64420a5bb0e5e21936e2bfb99d65a83b",
+    "artifact_id": 11449275640,
+    "candidate_terminal_write_access": "assumed from same container permissions, not probed",
+    "capture_completeness": "not_guaranteed",
+    "commit_sha": "f18bbf7a6d8744a6d55f759518c24439f7476058",
+    "conclusion": "success",
+    "key_free": true,
+    "native_ledger_writable": true,
+    "receipt_path": "reports/challenge-v1/software-checks/37541232266-1/install.json",
+    "receipt_sha256": "9578d0b12ddc5e6e97563cda4e6621da035a6484b819ce504e1e5bfa94fe007f",
+    "run_id": 37541232266,
+    "scope": "Native plugin registration and actual synthetic hook dispatch under pinned runtime, not actual API retry-loop execution",
+    "synthetic_reset_counter_ordinals": [
+      1,
+      2
+    ]
+  },
+  "prior_native_observer_installation": {
     "archive_sha256": "2146d891b4b60b5e48fa44187a3011b1ef9b7f8a54af640c64c34a49aa99b636",
     "artifact_id": 11447253771,
     "commit_sha": "de1cc9b8fcda668bd5264f254e5f04444c5dd0ed",
     "conclusion": "failure",
-    "diagnosis": "Native CLI, three-hook registration and enable passed. Callback smoke stopped at interpreter/shebang guard42 before dispatch or inference. Fix pending",
+    "diagnosis": "Native CLI, three-hook registration and enable passed. Callback smoke stopped at interpreter/shebang guard 42 before dispatch or inference. Runtime interpreter correction committed as f18bbf7, hosted recheck 37541232266",
     "key_free": true,
     "receipt_path": "reports/challenge-v1/software-checks/37539651398-1/install.json",
     "receipt_sha256": "8a30dc47dbfd5cb9bed5b4351b36c7dc20211b6bd9dd03a3da2175265203d1e6",
@@ -50,8 +77,8 @@
     "core_and_challenge_offline_reconstruction": true,
     "key_free_demo": true,
     "publication_audit": true,
-    "run_id": 37534910673,
-    "seconds": 21.29,
-    "tests_passed": 277
+    "run_id": 37539651398,
+    "seconds": 21.12,
+    "tests_passed": 286
   }
 }

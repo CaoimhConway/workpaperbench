@@ -16,3 +16,5 @@ Independent Decimal results from factual rows:
 Controls are synthetic. Expected changed quantities are computed by the same documented financial definitions over independently altered inputs, without executing submitted SQL.
 
 The EPS-observation control changes actual EPS to 4.91 and prior upper guidance to 4.72, independently giving 0.19 USD per share. The signed bridge leaves reported adjusted income at 2,596 while its components rebuild to 2,621. This intentionally unreconciled reported comparison detects copying. All candidate source rows, including the loss-contingency and lease adjustment, are retained.
+
+The signed-bridge synthetic control carries the Q4 loss-contingency and lease-charge changes into their FY2024 annual adjustment rows, adding a net 25 USD million to annual adjusted operating income (10,019 to 10,044). This preserves the annual bridge while retaining the deliberately unreconciled Q4 reported comparison subtotal at 2,596. Annual GAAP income remains 6,741.

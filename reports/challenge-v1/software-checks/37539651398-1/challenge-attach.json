@@ -1,0 +1,91 @@
+{
+  "name": "challenge-attach",
+  "expected_complete": false,
+  "verdict": {
+    "scorer_version": "challenge-1.0.0",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "delivery": true,
+      "financial_answer": true,
+      "evidence": true,
+      "robustness": false
+    },
+    "details": {
+      "claims": {
+        "eps_difference": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": false,
+          "controls": {
+            "later_targets": false,
+            "monetary_scale": false,
+            "signed_bridge": false,
+            "eps_observations": false
+          }
+        },
+        "adjusted_operating_income": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": true,
+            "eps_observations": true
+          }
+        },
+        "adjusted_margin": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": true,
+            "eps_observations": true
+          }
+        },
+        "margin_bridge": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": true,
+            "eps_observations": true
+          }
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "evidence": true
+      }
+    },
+    "errors": [
+      "eps_difference:original_replay",
+      "eps_difference:control:later_targets",
+      "eps_difference:control:monetary_scale",
+      "eps_difference:control:signed_bridge",
+      "eps_difference:control:eps_observations"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}

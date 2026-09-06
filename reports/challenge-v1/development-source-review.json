@@ -62,6 +62,17 @@
   ],
   "dataset_id": "challenge-v1",
   "method": "Separate read-only source-first review and primary verification using Decimal arithmetic. No candidate SQL executed, no human validation asserted.",
+  "pre_exposure_control_coherence_review": {
+    "cases": [
+      "c01",
+      "a01"
+    ],
+    "changes": "Quarter reallocation and revenue propagation preserve PayPal annual, quarterly and geography totals. Adobe signed-control annual bridge carries the Q4 component changes while Q4 disclosed comparison remains deliberately unreconciled",
+    "model_exposures": 0,
+    "no_authentic_source_or_expected_answer_changes": true,
+    "scope": "Read-only independent Decimal and JSON review, not human validation or submitted SQL execution",
+    "trusted_tests": "tests/test_challenge_grading.py"
+  },
   "rights": "Only factual observations and concise definitions retained, full copyrighted issuer HTML/PDF excluded.",
   "stage": "development"
 }
