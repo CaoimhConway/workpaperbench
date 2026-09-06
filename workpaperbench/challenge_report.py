@@ -7,10 +7,27 @@ from pathlib import Path
 from statistics import mean
 
 
+def render_workpaper(answer, label, evidence_path):
+    lines = ["# " + label, "", "Task: `" + answer["task_id"] + "`. [Frozen source dossier](" + evidence_path + ").", "",
+             "| Claim | Availability | Value | Unit | Supporting sections |", "|---|---|---:|---|---|"]
+    for claim in answer["answers"]:
+        lines.append("| " + " | ".join((claim["id"], claim["status"], str(claim["value"]), claim["unit"], ", ".join(claim["evidence"]))) + " |")
+    lines += ["", "Shared context: " + (", ".join(answer.get("context_evidence", [])) or "none"), ""]
+    if answer["conclusion"]:
+        lines += ["Original-dossier proposition verdict: **" + answer["conclusion"]["verdict"] + "**. Supporting sections: " + ", ".join(answer["conclusion"]["evidence"]) + ".", ""]
+    for claim in answer["answers"]:
+        if claim["sql"]:
+            lines += ["## " + claim["id"], "", "```sql", claim["sql"], "```", ""]
+    return "\n".join(lines)
+
+
 def report_challenge(root):
     root = Path(root)
     output = root / "reports/challenge-v1"
     output.mkdir(parents=True, exist_ok=True)
+    reference = root / "datasets/challenge-v1/tasks/a01/tests/reference.json"
+    if reference.is_file():
+        (output / "reference-workpaper.md").write_text(render_workpaper(json.loads(reference.read_text()), "Authored Adobe reference workpaper", "../../datasets/challenge-v1/tasks/a01/environment/sources.md"))
     studies = []
     lines = ["# Research Challenge results", "", "Full dossiers, neutral shared instructions. Model comparisons are separate from the historical prompt-arm experiments.", ""]
     for path in sorted((root / "datasets/challenge-v1/manifests").glob("*.json")):

@@ -1,0 +1,104 @@
+{
+  "commit_sha": "ab91204a39dac24f393699ac576595eeb83a3b19",
+  "comparison": {
+    "checks_same": null,
+    "complete_same": null,
+    "prior_available": false
+  },
+  "dataset": "challenge-v1",
+  "effective_task_scorer_sha256": "d122c8c27dae7bb8bb17e8234e2b9cdaba6d0e019e711c907680b46f06d50254",
+  "input_file": "submissions/reference-a01.json",
+  "input_sha256": "67b50c83a22692ef4fba6911760b43643257ce0c0a686aa9e476c3d90c0b605f",
+  "input_source": "user_submission",
+  "manifest_id": "challenge-v1-development-41f5b75db8f4",
+  "manifest_sha256": "6f1d2a5452751ef2c6540cd2aadc3fd3a30d426a886b16e64b508f983acec408",
+  "prior_verdict": null,
+  "receipt_identity_sha256": "ed8379d49cc47c6454d03f9dc29e53175093e1d247ebb562e5fbaf8d0c2e04c0",
+  "run_attempt": "1",
+  "run_id": "37534910673",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "d122c8c27dae7bb8bb17e8234e2b9cdaba6d0e019e711c907680b46f06d50254",
+  "slot_id": "answer-a01",
+  "task_id": "challenge-v1-a01",
+  "task_sha256": "204cd4cdf7795c782e305d4d49c358ad40cdc12a4a5d4e6a4ea16553cde82db7",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": true,
+    "details": {
+      "claims": {
+        "adjusted_margin": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "adjusted_operating_income": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "eps_difference": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "margin_bridge": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.0.0",
+    "strict_delivery_completion": true,
+    "verified_research_completion": true
+  },
+  "verdict_sha256": "92b3bfa1332b029d03f106d033d34e00d197b8e84d239e0e700ff22c74002def"
+}
