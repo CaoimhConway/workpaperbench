@@ -8,7 +8,7 @@
     "retained_receipts": 37,
     "run_id": "37535020907"
   },
-  "checked_commit": "ab91204a39dac24f393699ac576595eeb83a3b19",
+  "checked_commit": "7ccd863a5ab59e1856f9094cae66d470de28afd9",
   "dataset_id": "challenge-v1",
   "fresh_replay": {
     "archive_sha256": "20e4b825f132d21e74ec5cd604a55a10e0993e322dafa56b319c1725f3d89e3c",
@@ -31,17 +31,18 @@
     "run_id": 37534910673
   },
   "native_controls": {
-    "archive_sha256": "8546f7fc25180d4ff2d5d50ec443339406fe2b9fffe2b55859ee24a090e5491d",
-    "artifact_id": 11449120575,
-    "commit_sha": "de1cc9b8fcda668bd5264f254e5f04444c5dd0ed",
+    "all_expected_verdicts_match": true,
+    "all_four_isolation_checks": true,
+    "archive_sha256": "15b859ea2f28620ba247806e96a194aa387ad69e1fac5a6cbf08eb25e773918b",
+    "artifact_id": 11448844522,
+    "commit_sha": "7ccd863a5ab59e1856f9094cae66d470de28afd9",
     "controls": 24,
     "job_conclusion": "success",
-    "receipt_directory": "reports/challenge-v1/software-checks/37539651398-1",
-    "receipt_sha256": "b96c0cb8554ec27fa6f79a177681f5cdee775ded6e52a55feac50206613c5e7b",
-    "run_id": 37539651398,
-    "scope_note": "Passed on then-frozen inputs. PayPal synthetic control coherence subsequently corrected before exposure, affected native recheck required",
-    "workflow_conclusion": "failure",
-    "workflow_failure": "setup smoke guard, no inference"
+    "receipt_directory": "reports/challenge-v1/software-checks/37542074611-1",
+    "receipt_sha256": "4db3b8b104803d5518ef6eac69252f21a8fdc35c2ed638ab6ea7f058714f02f9",
+    "run_id": 37542074611,
+    "scope": "Current three development cases and corrected synthetic controls, before inference",
+    "workflow_conclusion": "success"
   },
   "native_observer_installation": {
     "archive_sha256": "a9fc85657970ddbe25596e51a2ca411f64420a5bb0e5e21936e2bfb99d65a83b",
@@ -61,6 +62,19 @@
       2
     ]
   },
+  "prior_native_controls": {
+    "archive_sha256": "8546f7fc25180d4ff2d5d50ec443339406fe2b9fffe2b55859ee24a090e5491d",
+    "artifact_id": 11449120575,
+    "commit_sha": "de1cc9b8fcda668bd5264f254e5f04444c5dd0ed",
+    "controls": 24,
+    "job_conclusion": "success",
+    "receipt_directory": "reports/challenge-v1/software-checks/37539651398-1",
+    "receipt_sha256": "b96c0cb8554ec27fa6f79a177681f5cdee775ded6e52a55feac50206613c5e7b",
+    "run_id": 37539651398,
+    "scope_note": "Passed on then-frozen inputs. PayPal synthetic control coherence subsequently corrected before exposure, affected native recheck required",
+    "workflow_conclusion": "failure",
+    "workflow_failure": "setup smoke guard, no inference"
+  },
   "prior_native_observer_installation": {
     "archive_sha256": "2146d891b4b60b5e48fa44187a3011b1ef9b7f8a54af640c64c34a49aa99b636",
     "artifact_id": 11447253771,
@@ -77,8 +91,9 @@
     "core_and_challenge_offline_reconstruction": true,
     "key_free_demo": true,
     "publication_audit": true,
-    "run_id": 37539651398,
-    "seconds": 21.12,
-    "tests_passed": 286
+    "run_id": 37542074611,
+    "seconds": 20.96,
+    "source": "exact hosted unit job log",
+    "tests_passed": 288
   }
 }
