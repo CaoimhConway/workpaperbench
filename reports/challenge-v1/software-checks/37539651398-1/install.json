@@ -1,0 +1,38 @@
+{
+  "install_complete": true,
+  "cli_arguments_valid": false,
+  "startup": {
+    "return_code": 0,
+    "supported_flags": {
+      "--model": true,
+      "--toolsets": true,
+      "-Q": true,
+      "--query": true
+    },
+    "retry_observer_registration_smoke": {
+      "staged": true,
+      "registration_smoke": true,
+      "registered_hook_count": 3,
+      "enabled": true
+    },
+    "native_hook_smoke": {
+      "passed": false,
+      "return_code": 42,
+      "runtime_hooks_registered": {},
+      "runtime_marker_valid": false,
+      "hermes_launcher_python_shebang": false,
+      "installed_runtime_commit": null,
+      "native_process_can_write_observer_ledger": false,
+      "ledger_retained_and_readable": false,
+      "raw_request_id_absent": false,
+      "event_count": 0,
+      "repeated_request_ordinals": [],
+      "retry_count_reset_observed": false,
+      "capture_completeness": "not_guaranteed",
+      "capture_limitations": "hooks_fail_open_upstream_internal_retries_and_routes_unobserved",
+      "candidate_terminal_access_assumption": "same-container terminal permissions may allow writing the shared /logs/agent mount; not probed"
+    }
+  },
+  "key_free": true,
+  "exception_type": "RuntimeError"
+}
