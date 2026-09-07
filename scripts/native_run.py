@@ -33,6 +33,34 @@ REAL_RUNTIME_INPUTS = {
     "scripts/build_real_tasks.py",
     "scripts/real_definitions.py",
 }
+CHALLENGE_RUNTIME_INPUTS = {
+    "config/runtime.json",
+    "workpaperbench/challenge_grading.py",
+    "workpaperbench/challenge_sql_worker.py",
+    "scripts/build_challenge_tasks.py",
+    "scripts/native_run.py",
+    "scripts/native_trial.py",
+    "scripts/select_slots.py",
+    "scripts/attempts.py",
+    "scripts/collect_results.py",
+    "scripts/fresh_replay.py",
+    "scripts/check_install.py",
+    "config/native-api-observer/plugin.yaml",
+    "config/native-api-observer/__init__.py",
+    ".github/workflows/benchmark.yml",
+}
+RETRY_LEDGER_MAX_BYTES = 65_536
+RETRY_LEDGER_MAX_EVENTS = 256
+RETRY_EVENT_KEYS = {
+    "observer_registered": {"event", "observed_at"},
+    "pre_api_request": {"event", "observed_at", "request_id", "api_call_count",
+                         "retry_count", "max_retries", "started_at", "attempt_ordinal"},
+    "post_api_request": {"event", "observed_at", "request_id", "api_call_count",
+                         "retry_count", "max_retries", "started_at", "ended_at"},
+    "api_request_error": {"event", "observed_at", "request_id", "api_call_count",
+                           "retry_count", "max_retries", "started_at", "ended_at",
+                           "http_status", "retryable"},
+}
 
 
 def now():
@@ -70,8 +98,11 @@ def frozen_inputs(manifest_id=None, root=None, *, reviewed_operations=False):
         context = campaign_context(selected, root)
         manifest = context["manifest"]
         if context["dataset_id"]:
-            campaign_slots(context, "pilot")
-            campaign_slots(context, "final")
+            if context["dataset_id"] == "challenge-v1":
+                campaign_slots(context, context["stage"])
+            else:
+                campaign_slots(context, "pilot")
+                campaign_slots(context, "final")
     else:
         manifest = read_json(root / "config/freeze.json", 1_000_000)
     hashes = manifest.get("hashes")
@@ -116,6 +147,22 @@ def frozen_inputs(manifest_id=None, root=None, *, reviewed_operations=False):
                     raise ValueError("freeze_input_symlink")
                 if path.is_file():
                     required.add(path.relative_to(root).as_posix())
+            for task in context["tasks"].values():
+                task_path = root / task["path"]
+                for path in task_path.rglob("*"):
+                    if path.is_symlink():
+                        raise ValueError("freeze_input_symlink")
+                    if path.is_file():
+                        required.add(path.relative_to(root).as_posix())
+            if not required <= covered:
+                raise ValueError("freeze_input_unlisted")
+        elif manifest.get("dataset_id") == "challenge-v1":
+            context = campaign_context(selected, root)
+            required = {
+                context["schedule_path"].relative_to(root).as_posix(),
+                context["schema_path"].relative_to(root).as_posix(),
+                *CHALLENGE_RUNTIME_INPUTS,
+            }
             for task in context["tasks"].values():
                 task_path = root / task["path"]
                 for path in task_path.rglob("*"):
@@ -216,6 +263,40 @@ def final_reservation(schedule, records, manifest_id=None):
     return round(reserve, 8), remaining
 
 
+def model_profile(context, slot):
+    if context.get("dataset_id") == "challenge-v1":
+        key = slot.get("model_key")
+        profile = context["manifest"].get("models", {}).get(key)
+        if not isinstance(profile, dict):
+            raise ValueError("challenge_model_profile_missing")
+        return profile
+    return RUNTIME["model"]
+
+
+def challenge_reservation(context, mode, current_slot, attempted, records):
+    """Reserve each model's declared amount across the remaining unattempted schedule."""
+    from select_slots import campaign_slots
+    schedule = campaign_slots(context, mode)
+    manifest_id = context["manifest_id"]
+    relevant = [item for item in records
+                if item.get("experiment_id") == manifest_id
+                or item.get("dataset_manifest_id") == manifest_id]
+    by_id = {item.get("slot_id"): item for item in relevant}
+    remaining = []
+    terminal = {"complete", "task_failed", "infra_failed", "blocked", "artifact_missing"}
+    for slot in schedule:
+        identifier = slot["slot_id"]
+        if identifier != current_slot and identifier in attempted:
+            continue
+        prior = by_id.get(identifier)
+        if identifier != current_slot and prior and prior.get("status") in terminal:
+            continue
+        remaining.append(slot)
+    reserve = sum(float(model_profile(context, slot)["reservation_usd_per_slot"])
+                  for slot in remaining)
+    return round(reserve, 8), len(remaining)
+
+
 def preflight(snapshot, reserve, remaining_slots):
     limit = snapshot.get("lifetime_limit_usd")
     remaining = snapshot.get("remaining_usd")
@@ -243,6 +324,115 @@ def bounded_bytes(path, limit):
     if len(content) > limit:
         return None, "oversize"
     return content, None
+
+
+def retry_observer_evidence(path):
+    """Retain only the observer's narrow metadata schema, never raw hook payloads."""
+    limitations = "hooks_fail_open_upstream_internal_retries_and_routes_unobserved"
+
+    def empty(status, *, possibly_truncated=False):
+        return {"capture_status": status, "capture_completeness": "not_guaranteed",
+                "capture_limitations": limitations,
+                "capture_truncated_possible": possibly_truncated,
+                "observer_registered": False, "event_count": 0,
+                "pre_request_count": 0, "observed_additional_attempts": 0, "events": []}
+
+    content, reason = bounded_bytes(path, RETRY_LEDGER_MAX_BYTES)
+    if reason:
+        status = "missing" if reason == "missing_or_symlink" and not path.exists() else reason
+        return empty(status)
+    try:
+        rows = [json.loads(line) for line in content.decode("utf-8").splitlines()]
+    except (UnicodeDecodeError, json.JSONDecodeError, RecursionError):
+        rows = None
+    if (not isinstance(rows, list) or not rows or len(rows) > RETRY_LEDGER_MAX_EVENTS
+            or any(not isinstance(row, dict) for row in rows)):
+        status = "event_limit_reached" if isinstance(rows, list) and len(rows) > RETRY_LEDGER_MAX_EVENTS else "invalid"
+        return empty(status, possibly_truncated=status == "event_limit_reached")
+
+    events = []
+    attempts_by_request = {}
+    additional = 0
+    for row in rows:
+        event = row.get("event")
+        if not isinstance(event, str) or event not in RETRY_EVENT_KEYS or set(row) != RETRY_EVENT_KEYS[event]:
+            events = None
+            break
+        observed_at = finite_number(row.get("observed_at"))
+        if observed_at is None or observed_at <= 0:
+            events = None
+            break
+        clean = {"event": event, "observed_at": observed_at}
+        if event != "observer_registered":
+            request_id = row.get("request_id")
+            if request_id is not None and not re.fullmatch(r"[0-9a-f]{64}", str(request_id)):
+                events = None
+                break
+            clean["request_id"] = request_id
+            for name in ("api_call_count", "retry_count", "max_retries"):
+                value = row.get(name)
+                if value is not None and (isinstance(value, bool) or not isinstance(value, int)
+                                          or not 0 <= value <= 1_000_000_000):
+                    events = None
+                    break
+                clean[name] = value
+            if events is None:
+                break
+            for name in ("started_at", "ended_at"):
+                if name in row:
+                    value = finite_number(row[name])
+                    if row[name] is not None and (value is None or not 0 < value < 10_000_000_000):
+                        events = None
+                        break
+                    clean[name] = value
+            if events is None:
+                break
+            if event == "pre_api_request":
+                ordinal = row.get("attempt_ordinal")
+                if ordinal is not None and (isinstance(ordinal, bool) or not isinstance(ordinal, int)
+                                            or not 1 <= ordinal <= RETRY_LEDGER_MAX_EVENTS):
+                    events = None
+                    break
+                if request_id is not None:
+                    expected = attempts_by_request.get(request_id, 0) + 1
+                    if ordinal != expected:
+                        events = None
+                        break
+                    attempts_by_request[request_id] = expected
+                    if expected > 1:
+                        additional += 1
+                elif ordinal is not None:
+                    events = None
+                    break
+                clean["attempt_ordinal"] = ordinal
+            elif event == "api_request_error":
+                status = row.get("http_status")
+                retryable = row.get("retryable")
+                if status is not None and (isinstance(status, bool) or not isinstance(status, int)
+                                           or not 100 <= status <= 599):
+                    events = None
+                    break
+                if retryable is not None and not isinstance(retryable, bool):
+                    events = None
+                    break
+                clean["http_status"] = status
+                clean["retryable"] = retryable
+        events.append(clean)
+    if events is None:
+        return empty("invalid")
+    pre_count = sum(event["event"] == "pre_api_request" for event in events)
+    registered = any(e["event"] == "observer_registered" for e in events)
+    hooks_observed = any(e["event"] != "observer_registered" for e in events)
+    possibly_truncated = len(rows) >= RETRY_LEDGER_MAX_EVENTS or len(content) >= RETRY_LEDGER_MAX_BYTES - 512
+    status = ("event_limit_reached" if len(rows) >= RETRY_LEDGER_MAX_EVENTS else
+              "size_limit_near" if len(content) >= RETRY_LEDGER_MAX_BYTES - 512 else
+              "captured" if registered or hooks_observed else "registration_not_observed")
+    return {"capture_status": status, "capture_completeness": "not_guaranteed",
+            "capture_limitations": limitations,
+            "capture_truncated_possible": possibly_truncated,
+            "observer_registered": registered or hooks_observed,
+            "event_count": len(events), "pre_request_count": pre_count,
+            "observed_additional_attempts": additional, "events": events}
 
 
 def sanitized_verdict(path):
@@ -279,18 +469,31 @@ def sanitized_verdict(path):
         and key in {"network_probe_blocked", "network_namespace_none", "no_inference_key", "no_docker_socket"}
         and isinstance(state, bool)
     } if isinstance(isolation, dict) else {}
-    if isinstance(value.get("scorer_version"), str) and re.fullmatch(r"[0-9.]{1,20}", value["scorer_version"]):
+    if isinstance(value.get("verified_research_completion"), bool):
+        result["verified_research_completion"] = value["verified_research_completion"]
+    if isinstance(value.get("strict_delivery_completion"), bool):
+        result["strict_delivery_completion"] = value["strict_delivery_completion"]
+    if isinstance(value.get("scorer_version"), str) and re.fullmatch(r"[A-Za-z0-9._-]{1,40}", value["scorer_version"]):
         result["scorer_version"] = value["scorer_version"]
     detail = value.get("details")
     if isinstance(detail, dict):
-        def states(item):
-            return {k: v for k, v in item.items() if isinstance(k, str)
-                    and re.fullmatch(r"[a-z_]{1,40}", k) and (v is None or isinstance(v, bool))}
-        result["details"] = {
-            "claims": {k: states(v) for k, v in detail.get("claims", {}).items()
-                       if isinstance(k, str) and re.fullmatch(r"[a-z0-9_]{1,60}", k) and isinstance(v, dict)},
-            "conclusion": states(detail["conclusion"]) if isinstance(detail.get("conclusion"), dict) else None,
-        }
+        def safe_detail(item, depth=0):
+            if depth > 5:
+                return None
+            if item is None or isinstance(item, bool):
+                return item
+            if isinstance(item, (int, float)) and not isinstance(item, bool) and math.isfinite(item):
+                return item
+            if isinstance(item, str):
+                return item[:100] if re.fullmatch(r"[A-Za-z0-9_.:-]{1,100}", item) else None
+            if isinstance(item, list):
+                return [safe_detail(value, depth + 1) for value in item[:100]]
+            if isinstance(item, dict):
+                return {key: safe_detail(value, depth + 1)
+                        for key, value in list(item.items())[:100]
+                        if isinstance(key, str) and re.fullmatch(r"[A-Za-z0-9_.:-]{1,100}", key)}
+            return None
+        result["details"] = safe_detail(detail)
     return result
 
 
@@ -390,7 +593,7 @@ def result_metrics(path):
 
 
 def check_treatment(slot, config_path):
-    if slot["arm"] != "B":
+    if slot.get("arm") != "B":
         return None
     skill_dir = ROOT / RUNTIME["agent"]["treatment_skill_dir"]
     skill_file = skill_dir / "SKILL.md"
@@ -409,6 +612,17 @@ def check_treatment(slot, config_path):
     return {"word_count": len(words), "delivery": ["extra_instruction_paths", "agent.skills"]}
 
 
+def validate_live_environment():
+    repository = os.environ.get("GITHUB_REPOSITORY", "")
+    if (os.environ.get("GITHUB_ACTIONS") != "true"
+            or os.environ.get("RUNNER_OS") != "Linux"
+            or not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository)
+            or os.environ.get("GITHUB_REF") != "refs/heads/main"):
+        raise ValueError("live_slots_require_dedicated_default_branch_actions")
+    if not os.environ.get("OPENROUTER_API_KEY"):
+        raise ValueError("missing_openrouter_key")
+
+
 def clean_process_env(key):
     allowed = ("PATH", "HOME", "TMPDIR", "TMP", "TEMP", "LANG", "LC_ALL",
                "GITHUB_ACTIONS", "RUNNER_OS", "GITHUB_REPOSITORY", "GITHUB_REF")
@@ -420,17 +634,20 @@ def clean_process_env(key):
 
 
 def execute(mode, slot_id):
-    if os.environ.get("GITHUB_ACTIONS") != "true" or os.environ.get("RUNNER_OS") != "Linux" or os.environ.get("GITHUB_REPOSITORY") != "CaoimhConway/workpaperbench" or os.environ.get("GITHUB_REF") != "refs/heads/main":
-        raise ValueError("live_slots_require_dedicated_default_branch_actions")
+    validate_live_environment()
     if mode not in {"pilot", "final"} or not SLOT_RE.fullmatch(slot_id):
         raise ValueError("invalid_mode_or_slot_id")
     from select_slots import campaign_context, campaign_slots
     manifest_id = os.environ["WPB_MANIFEST_ID"]
     context = campaign_context(manifest_id, ROOT)
-    if context["dataset_id"] and (
+    if context["dataset_id"] == "real-v1" and (
             (mode == "pilot" and manifest_id != "real-v1-development")
             or (mode == "final" and manifest_id != context["manifest_id"])):
         raise ValueError("manifest_campaign_mismatch")
+    if context["dataset_id"] == "challenge-v1" and mode != context.get("stage"):
+        raise ValueError("manifest_campaign_mismatch")
+    if context["dataset_id"] == "challenge-v1" and os.environ.get("WPB_BATCH") != "all":
+        raise ValueError("challenge_requires_batch_all")
     slots = campaign_slots(context, mode)
     matches = [slot for slot in slots if slot.get("slot_id") == slot_id]
     if len(matches) != 1:
@@ -440,7 +657,12 @@ def execute(mode, slot_id):
         raise ValueError("slot_campaign_mismatch")
     task_id = slot.get("task")
     task_metadata = None
-    if context["dataset_id"]:
+    challenge = context["dataset_id"] == "challenge-v1"
+    if challenge:
+        task_key = task_id.removeprefix("challenge-v1-") if isinstance(task_id, str) else ""
+        task_metadata = context["tasks"].get(task_key)
+        task_dir = ROOT / task_metadata["path"] if task_metadata else ROOT / "datasets/challenge-v1/tasks/missing"
+    elif context["dataset_id"]:
         task_key = task_id.removeprefix("real-v1-") if isinstance(task_id, str) else ""
         task_metadata = context["tasks"].get(task_key)
         task_dir = ROOT / task_metadata["path"] if task_metadata else ROOT / "datasets/real-v1/tasks/missing"
@@ -472,7 +694,8 @@ def execute(mode, slot_id):
     if os.environ.get("GITHUB_RUN_ATTEMPT") != "1":
         raise ValueError("same_run_retry_disabled")
 
-    check(mode, manifest_id, [slot_id])
+    attempted = check(mode, manifest_id, [slot_id])
+    profile = model_profile(context, slot)
     record = {
         "experiment_id": manifest_id,
         "campaign": slot["campaign"],
@@ -495,10 +718,15 @@ def execute(mode, slot_id):
         "hermes_release_tag": RUNTIME["hermes"]["release_tag"],
         "hermes_resolved_release_commit": RUNTIME["hermes"]["resolved_release_commit"],
         "hermes_checkout_commit_verified": False,
-        "model": RUNTIME["model"]["id"],
-        "model_route_policy": RUNTIME["model"]["route_policy"],
-        "reservation_usd_per_slot": float(RUNTIME["cost"]["reservation_usd_per_slot"]),
+        "model": profile["id"],
+        "model_route_policy": profile["route_policy"],
+        "reservation_usd_per_slot": float(profile.get(
+        "reservation_usd_per_slot", RUNTIME["cost"]["reservation_usd_per_slot"])),
     }
+    if challenge:
+        record.update(model_key=slot["model_key"], condition=slot["condition"],
+                      model_provider=profile["provider"],
+                      model_harbor_model=profile["harbor_model"])
     if task_metadata:
         record["dataset_id"] = context["dataset_id"]
         record["dataset_manifest_id"] = context["manifest_id"]
@@ -509,7 +737,14 @@ def execute(mode, slot_id):
         definition = json.loads((ROOT / "sources" / (task_id + ".json")).read_text())
         record["source_group"] = definition["source_group"]
         record["task_origin"] = definition["origin"]
-    record["config_hash"] = hashlib.sha256((ROOT / "config/runtime.json").read_bytes() + (task_dir / "task.toml").read_bytes() + (task_dir / "instruction.md").read_bytes()).hexdigest()
+    config_payload = ((ROOT / "config/runtime.json").read_bytes()
+                      + (task_dir / "task.toml").read_bytes()
+                      + (task_dir / "instruction.md").read_bytes())
+    if challenge:
+        config_payload += json.dumps(profile, sort_keys=True, separators=(",", ":")).encode()
+        config_payload += context["schema_path"].read_bytes()
+        config_payload += str(slot.get("condition")).encode()
+    record["config_hash"] = hashlib.sha256(config_payload).hexdigest()
     try:
         freeze = frozen_inputs(manifest_id)
         if context["dataset_id"]:
@@ -538,15 +773,23 @@ def execute(mode, slot_id):
         return record
     record["provider_before"] = before
     schedule = slots if mode == "final" else []
-    if mode == "final":
+    if challenge:
+        reserved, remaining_slots = challenge_reservation(
+            context, mode, slot_id, attempted, list(all_records()))
+        record["remaining_reserved_usd"] = reserved
+        record["remaining_reserved_slots"] = remaining_slots
+        reason = preflight(before, reserved, 1)
+    elif mode == "final":
         reserve, _ = final_reservation(schedule, list(all_records()), manifest_id)
         remaining_slots = prior.get("remaining_planned_slots")
         if isinstance(remaining_slots, bool) or not isinstance(remaining_slots, int) or not 1 <= remaining_slots <= len(schedule):
             raise ValueError("remaining_reservation_receipt_missing")
+        record["reservation_usd_per_slot"] = reserve
+        reason = preflight(before, reserve, remaining_slots)
     else:
-        reserve, remaining_slots = float(RUNTIME["cost"]["reservation_usd_per_slot"]), 1
-    record["reservation_usd_per_slot"] = reserve
-    reason = preflight(before, reserve, remaining_slots)
+        reserve = float(RUNTIME["cost"]["reservation_usd_per_slot"])
+        record["reservation_usd_per_slot"] = reserve
+        reason = preflight(before, reserve, 1)
     if reason:
         record.update(status="blocked", reason_code=reason, finished_at=now())
         write_record(record_path, record)
@@ -554,12 +797,13 @@ def execute(mode, slot_id):
 
     harbor = shutil.which("harbor")
     raw_root = ROOT / ".raw/harbor"
-    trial_dir = raw_root / slot_id
+    native_trial_name = f"{manifest_id[-12:]}-{slot_id}" if challenge else slot_id
+    trial_dir = raw_root / native_trial_name
     if harbor is None or trial_dir.exists() or trial_dir.is_symlink():
         record.update(status="infra_failed", reason_code="harbor_missing_or_trial_exists", finished_at=now())
         write_record(record_path, record)
         return record
-    config_path = ROOT / ".raw/configs" / (slot_id + ".json")
+    config_path = ROOT / ".raw/configs" / (native_trial_name + ".json")
     try:
         treatment = check_treatment(slot, config_path)
     except (OSError, ValueError) as exc:
@@ -569,14 +813,16 @@ def execute(mode, slot_id):
     if treatment:
         record["treatment"] = treatment
 
-    trial_config = {"task": {"path": str(task_dir)}, "trial_name": slot_id,
+    trial_config = {"task": {"path": str(task_dir)}, "trial_name": native_trial_name,
                     "trials_dir": str(raw_root), "agent": {
-                        "name": "hermes", "model_name": RUNTIME["model"]["harbor_model"],
+                        "name": "hermes", "model_name": profile["harbor_model"],
                         "env": {"HERMES_HOME": "/tmp/hermes"},
                         "kwargs": {"version": RUNTIME["hermes"]["release_tag"],
                                    "toolsets": RUNTIME["agent"]["toolsets"]},
                         "override_timeout_sec": RUNTIME["agent"]["solve_timeout_sec"],
                         "override_setup_timeout_sec": RUNTIME["agent"]["setup_timeout_sec"]}}
+    if challenge:
+        trial_config["agent"]["env"]["WPB_NATIVE_RETRY_LEDGER"] = "/logs/agent/native-api-observer.jsonl"
     if treatment:
         injected = json.loads(config_path.read_text())
         trial_config["extra_instruction_paths"] = injected["extra_instruction_paths"]
@@ -585,7 +831,7 @@ def execute(mode, slot_id):
     config_path.write_text(json.dumps(trial_config, indent=2) + "\n")
     command = [sys.executable, str(ROOT / "scripts/native_trial.py"), str(config_path)]
     raw_root.mkdir(parents=True, exist_ok=True)
-    raw_log = ROOT / ".raw/logs" / (slot_id + ".log")
+    raw_log = ROOT / ".raw/logs" / (native_trial_name + ".log")
     raw_log.parent.mkdir(parents=True, exist_ok=True)
     record["native_command"] = "Harbor Trial.create / Trial.run with native Hermes"
     write_record(record_path, record)
@@ -606,13 +852,16 @@ def execute(mode, slot_id):
         record["native_return_code"] = None
 
     result_path = trial_dir / "result.json"
-    version_path = ROOT / ".raw/versions" / (slot_id + ".json")
+    version_path = ROOT / ".raw/versions" / (native_trial_name + ".json")
     if version_path.is_file():
         version = read_json(version_path, 2000)
         record["hermes_runtime_version"] = version
         record["hermes_checkout_commit_verified"] = version.get("matches_pin") is True
     metrics, exception_type = result_metrics(result_path)
     record["harbor_metrics"] = metrics
+    if challenge:
+        record["native_api_retry_observer"] = retry_observer_evidence(
+            trial_dir / "agent/native-api-observer.jsonl")
     if exception_type:
         record["native_exception_type"] = exception_type
         record["native_failure_codes"] = failure_codes(trial_dir / "agent/hermes.txt")
@@ -630,7 +879,10 @@ def execute(mode, slot_id):
             record["raw_artifact_status"] = "screened_original_bytes"
             (output_dir / "answer.raw.txt").write_bytes(answer)
             try:
-                from workpaperbench.grading import parse, validate
+                if challenge:
+                    from workpaperbench.challenge_grading import parse, validate
+                else:
+                    from workpaperbench.grading import parse, validate
                 parsed = parse(answer)
                 validate(parsed, json.loads(context["schema_path"].read_text()))
                 canonical = (json.dumps(parsed, indent=2) + "\n").encode()

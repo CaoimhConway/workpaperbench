@@ -43,14 +43,17 @@ def check(mode, manifest_id, identifiers):
                 or data.get('experiment_id') != manifest_id
                 or data.get('status') != 'setup_started'):
             raise ValueError('attempt_receipt_mismatch')
+    return attempted
 
 
 def receipt(mode, manifest_id, identifiers):
-    from select_slots import selection, real_dataset_context
+    from select_slots import challenge_dataset_context, real_dataset_context, selection
     if os.environ.get('GITHUB_RUN_ATTEMPT') != '1':
         raise ValueError('same_run_retry_disabled')
     available, _ = selection(mode, manifest_id, 'all')
-    context = real_dataset_context(manifest_id, ROOT)
+    context = challenge_dataset_context(manifest_id, ROOT)
+    if context is None:
+        context = real_dataset_context(manifest_id, ROOT)
     by_id = {s['slot_id']: s for s in available}
     if not identifiers or len(identifiers) > 2 or any(i not in by_id for i in identifiers):
         raise ValueError('slot_previously_attempted_or_invalid')
@@ -68,6 +71,21 @@ def receipt(mode, manifest_id, identifiers):
         if context is not None:
             data.update(dataset_id=context['dataset_id'],
                         dataset_manifest_id=context['manifest_id'])
+            if context['dataset_id'] == 'challenge-v1':
+                slot = by_id[identifier]
+                task_key = slot['task'].removeprefix('challenge-v1-')
+                task = context['tasks'][task_key]
+                model = context['manifest']['models'][slot['model_key']]
+                data.update(
+                    source_group=task['source_group'],
+                    task_origin=task.get('origin'),
+                    model=model['id'],
+                    model_route_policy=model['route_policy'],
+                    model_provider=model['provider'],
+                    model_harbor_model=model['harbor_model'],
+                    reservation_usd_per_slot=float(model['reservation_usd_per_slot']),
+                    model_profile_status='manifest_declared_not_execution_evidence',
+                )
         write(path, data)
 
 
