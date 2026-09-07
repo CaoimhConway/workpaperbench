@@ -269,6 +269,51 @@ def test_challenge_freeze_binds_current_stage_packages_and_runtime(tmp_path, mon
         native_run.frozen_inputs(manifest["manifest_id"], root=tmp_path)
 
 
+def test_future_campaign_uses_frozen_final_runtime_without_rebinding_pilot(tmp_path, monkeypatch):
+    development, _ = make_stage(tmp_path, "development")
+    runtime_name = "scripts/fix_native_version.py"
+    runtime_file = tmp_path / runtime_name
+    runtime_file.parent.mkdir(parents=True, exist_ok=True)
+    runtime_file.write_text("original pinned correction\n")
+    development["hashes"][runtime_name] = hashlib.sha256(runtime_file.read_bytes()).hexdigest()
+    development["content_hash"] = select_slots.manifest_content_hash(development)
+    development["manifest_id"] = "challenge-v1-development-" + development["content_hash"][:12]
+    development_path = tmp_path / "datasets/challenge-v1/manifests/development.json"
+    write_json(development_path, development)
+    original_bytes = development_path.read_bytes()
+    runtime_file.write_text("reviewed post-config observer correction\n")
+    evaluation, _ = make_stage(
+        tmp_path, "evaluation", development_manifest_id=development["manifest_id"])
+    evaluation["hashes"][runtime_name] = hashlib.sha256(runtime_file.read_bytes()).hexdigest()
+    evaluation["content_hash"] = select_slots.manifest_content_hash(evaluation)
+    evaluation["manifest_id"] = "challenge-v1-evaluation-" + evaluation["content_hash"][:12]
+    write_json(tmp_path / "datasets/challenge-v1/manifests/evaluation.json", evaluation)
+    profile_file = tmp_path / "models/future-profiles.json"
+    write_json(profile_file, MODELS)
+    monkeypatch.setattr(native_run, "CHALLENGE_RUNTIME_INPUTS", set())
+    import new_challenge_campaign
+
+    outputs = new_challenge_campaign.create(profile_file, tmp_path)
+    future = json.loads(outputs[0].read_text())
+    assert future["runtime_manifest_id"] == evaluation["manifest_id"]
+    assert future["runtime_changes"][runtime_name] == {
+        "original": development["hashes"][runtime_name],
+        "current": evaluation["hashes"][runtime_name],
+    }
+    assert development_path.read_bytes() == original_bytes
+    assert native_run.frozen_inputs(future["manifest_id"], tmp_path) == future
+    with pytest.raises(ValueError, match="freeze_hash_mismatch"):
+        native_run.frozen_inputs(development["manifest_id"], tmp_path)
+    runtime_file.write_text("unfrozen operational edit\n")
+    with pytest.raises(ValueError, match="freeze_hash_mismatch"):
+        new_challenge_campaign.create(profile_file, tmp_path)
+    runtime_file.write_text("reviewed post-config observer correction\n")
+    instruction = tmp_path / development["tasks"]["a01"]["path"] / "instruction.md"
+    instruction.write_text("changed candidate instructions\n")
+    with pytest.raises(ValueError, match="freeze_hash_mismatch"):
+        new_challenge_campaign.create(profile_file, tmp_path)
+
+
 def test_challenge_reservation_sums_remaining_model_costs_without_multiplier(tmp_path):
     manifest, schedule = make_stage(tmp_path, "development")
     context = select_slots.challenge_dataset_context(manifest["manifest_id"], tmp_path)
