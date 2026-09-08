@@ -1,0 +1,47 @@
+{
+  "task_id": "challenge-v1-c01",
+  "answers": [
+    {
+      "id": "yield_2024",
+      "status": "answered",
+      "value": 1.71561133747732,
+      "unit": "percent",
+      "evidence": ["c01:s01", "c01:s03", "c01:s06"],
+      "sql": "SELECT CAST((SELECT amount FROM revenues WHERE period_end = '2024-12-31' AND category = 'Transaction revenues' AND months = 12) AS REAL) / (SELECT amount FROM operating_metrics WHERE period_end = '2024-12-31' AND metric = 'Total payment volume' AND months = 12) * 100;",
+      "reason_code": null
+    },
+    {
+      "id": "yield_2023",
+      "status": "answered",
+      "value": 1.75699129714591,
+      "unit": "percent",
+      "evidence": ["c01:s01", "c01:s03", "c01:s06"],
+      "sql": "SELECT CAST((SELECT amount FROM revenues WHERE period_end = '2023-12-31' AND category = 'Transaction revenues' AND months = 12) AS REAL) / (SELECT amount FROM operating_metrics WHERE period_end = '2023-12-31' AND metric = 'Total payment volume' AND months = 12) * 100;",
+      "reason_code": null
+    },
+    {
+      "id": "yield_change",
+      "status": "answered",
+      "value": -4.137995966859,
+      "unit": "basis_points",
+      "evidence": ["c01:s01", "c01:s03"],
+      "sql": "SELECT ((SELECT CAST((SELECT amount FROM revenues WHERE period_end = '2024-12-31' AND category = 'Transaction revenues' AND months = 12) AS REAL) / (SELECT amount FROM operating_metrics WHERE period_end = '2024-12-31' AND metric = 'Total payment volume' AND months = 12) * 100) - (SELECT CAST((SELECT amount FROM revenues WHERE period_end = '2023-12-31' AND category = 'Transaction revenues' AND months = 12) AS REAL) / (SELECT amount FROM operating_metrics WHERE period_end = '2023-12-31' AND metric = 'Total payment volume' AND months = 12) * 100)) * 100;",
+      "reason_code": null
+    },
+    {
+      "id": "transaction_contribution",
+      "status": "answered",
+      "value": 97.976307996051,
+      "unit": "percent",
+      "evidence": ["c01:s01"],
+      "sql": "SELECT CAST((SELECT amount FROM revenues WHERE period_end = '2024-12-31' AND category = 'Transaction revenues' AND months = 12) - (SELECT amount FROM revenues WHERE period_end = '2023-12-31' AND category = 'Transaction revenues' AND months = 12) AS REAL) / ((SELECT amount FROM revenues WHERE period_end = '2024-12-31' AND category = 'Total net revenues (2)' AND months = 12) - (SELECT amount FROM revenues WHERE period_end = '2023-12-31' AND category = 'Total net revenues (2)' AND months = 12)) * 100;",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": ["c01:s01", "c01:s03", "c01:s07"]
+  },
+  "context_evidence": ["c01:s06"]
+}
