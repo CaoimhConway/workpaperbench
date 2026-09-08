@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from workpaperbench.challenge_report import report_challenge
+from workpaperbench.challenge_report import failure_categories, report_challenge
 
 
 def test_coverage_finance_delivery_and_receipt_integrity(tmp_path):
@@ -32,6 +32,16 @@ def test_coverage_finance_delivery_and_receipt_integrity(tmp_path):
     assert total["verified_research_completion"] == total["strict_delivery_completion"] == 0
     assert total["unknown_cost_slots"] == 9
     assert study["task_macro_completion"]["inexpensive"] == 0
+    assert study["retry_observation"]["observed_additional_attempts"] is None
+    assert study["retry_observation"]["captured_registered_slots"] == 0
     (directory / "record.json").write_bytes(raw + b" ")
     with pytest.raises(ValueError, match="provenance_unverified"):
         report_challenge(tmp_path)
+
+
+def test_failure_labels_do_not_turn_unit_or_evidence_contracts_into_reasoning_claims():
+    assert failure_categories({"verdict": {"errors": ["change:unit", "share:evidence"]}}) == [
+        "evidence_support_or_contract", "unit_representation_or_semantics"]
+    assert failure_categories({"verdict": {"errors": ["assets:control:components"]}}) == [
+        "calculation_recomputation"]
+    assert failure_categories(None) == ["infrastructure_or_missing_outcome"]
