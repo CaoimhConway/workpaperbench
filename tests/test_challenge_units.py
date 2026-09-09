@@ -1,7 +1,9 @@
 """Versioned challenge unit matching and package selection."""
 import copy
+import hashlib
 import importlib.util
 import json
+from decimal import Decimal
 from pathlib import Path
 import sys
 
@@ -112,17 +114,41 @@ def test_builder_gates_versioned_scorer_and_contract(tmp_path):
     builder.package(old, old_destination)
     old_task = old_destination / "tasks/a01"
     old_tests = old_task / "tests"
-    assert (old_tests / "workpaperbench/challenge_grading.py").read_bytes() == (
-        ROOT / "workpaperbench/challenge_grading.py"
-    ).read_bytes()
+    expected_old_task = ROOT / "datasets/challenge-v1/tasks/a01"
+    old_files = {path.relative_to(old_task) for path in old_task.rglob("*") if path.is_file()}
+    expected_old_files = {path.relative_to(expected_old_task)
+                          for path in expected_old_task.rglob("*") if path.is_file()}
+    assert old_files == expected_old_files
     old_gold = json.loads((old_tests / "gold.json").read_text())
+    expected_gold_path = expected_old_task / "tests/gold.json"
+    expected_gold = json.loads(expected_gold_path.read_text())
+    actual_gold = copy.deepcopy(old_gold)
+    actual_gold["hashes"] = expected_gold["hashes"]
+    assert actual_gold == expected_gold
+    for tests_dir, digests in ((old_tests, old_gold["hashes"]),
+                               (expected_old_task / "tests", expected_gold["hashes"])):
+        for name, digest in digests.items():
+            assert hashlib.sha256((tests_dir / name).read_bytes()).hexdigest() == digest
+    for relative in old_files:
+        if relative == Path("tests/gold.json"):
+            continue
+        actual_path, expected_path = old_task / relative, expected_old_task / relative
+        if relative.suffix == ".sqlite":
+            assert builder.sqlite_contents(actual_path) == builder.sqlite_contents(expected_path)
+        else:
+            assert actual_path.read_bytes() == expected_path.read_bytes()
     assert "scorer_version" not in old_gold
-    assert (old_task / "instruction.md").read_bytes() == (
-        ROOT / "datasets/challenge-v1/tasks/a01/instruction.md"
-    ).read_bytes()
 
     new = copy.deepcopy(old)
     new["scorer_version"] = "challenge-1.1.0"
+    declared_tolerances = {
+        "eps_difference": 0.125,
+        "adjusted_operating_income": 0.25,
+        "adjusted_margin": 0.5,
+        "margin_bridge": 1.0,
+    }
+    for identifier, tolerance in declared_tolerances.items():
+        new["gold"]["answers"][identifier]["tolerance"] = tolerance
     new_destination = tmp_path / "new"
     builder.package(new, new_destination)
     new_task = new_destination / "tasks/a01"
@@ -130,9 +156,19 @@ def test_builder_gates_versioned_scorer_and_contract(tmp_path):
     assert (new_tests / "workpaperbench/challenge_grading.py").read_bytes() == SCORER_PATH.read_bytes()
     new_gold = json.loads((new_tests / "gold.json").read_text())
     assert new_gold["scorer_version"] == "challenge-1.1.0"
-    assert "runs of ordinary whitespace or underscores as a single underscore" in (
-        new_task / "instruction.md"
-    ).read_text()
+    instruction = (new_task / "instruction.md").read_text()
+    assert "All numeric tolerances are 0.000001" not in instruction
+    tolerance_section = instruction.split(
+        "Per-claim absolute numerical tolerances in requested units:\n", 1
+    )[1].split("\nUse the public structure checker:", 1)[0]
+    expected_lines = []
+    for claim in new["reference"]["answers"]:
+        expected = new["gold"]["answers"][claim["id"]]
+        expected_lines.append(
+            f"- {claim['id']}: {expected['unit']} - {format(Decimal(str(expected['tolerance'])), 'f')}"
+        )
+    assert tolerance_section == "\n".join(expected_lines)
+    assert "runs of ordinary whitespace or underscores as a single underscore" in instruction
 
     unsupported = copy.deepcopy(old)
     unsupported["scorer_version"] = "challenge-2.0.0"
