@@ -1,11 +1,14 @@
 """Key-free native installation and CLI argument diagnostic on the hosted runner."""
 import asyncio
+import base64
 import hashlib
 import json
 import os
 from pathlib import Path
 import re
 import shlex
+import shutil
+import tempfile
 
 
 def validate_key_free_environment():
@@ -20,10 +23,14 @@ def validate_key_free_environment():
 
 def native_hook_smoke_script():
     return "\n".join((
-        "import json,os,time",
+        "import json,os,time,yaml",
+        "from pathlib import Path",
         "from hermes_cli.plugins import discover_plugins,get_plugin_manager",
         "from hermes_cli.lifecycle import invoke_hook",
         "hooks=('pre_api_request','post_api_request','api_request_error')",
+        "config=yaml.safe_load(Path('/tmp/hermes/config.yaml').read_text())",
+        "if config.get('plugins',{}).get('enabled') != ['native-api-observer']:",
+        "    raise SystemExit(43)",
         "discover_plugins()",
         "manager=get_plugin_manager()",
         "registered={name:bool(manager.has_hook(name)) for name in hooks}",
@@ -38,7 +45,7 @@ def native_hook_smoke_script():
         "invoke_hook('pre_api_request',**common)",
         "invoke_hook('post_api_request',**{**common,'ended_at':started+0.2})",
         "print('WPB_NATIVE_HOOK_SMOKE:'+json.dumps({",
-        "    'registered':registered,'dispatches':4,",
+        "    'registered':registered,'dispatches':4,'runtime_config_observer_enabled':True,",
         "    'installed_runtime_python':os.environ.get('WPB_INSTALLED_RUNTIME_PYTHON'),",
         "    'installed_runtime_commit':os.environ.get('WPB_INSTALLED_RUNTIME_COMMIT'),",
         "    'native_process_can_write_observer_ledger':os.access('/logs/agent/native-api-observer.jsonl',os.W_OK),",
@@ -46,10 +53,30 @@ def native_hook_smoke_script():
     ))
 
 
+def native_hook_smoke_wrapper_writer():
+    return "\n".join((
+        "import base64, pathlib, shlex, sys",
+        "target, runtime_python, runtime_commit, checkout, payload = sys.argv[1:]",
+        "command = 'import base64\\nexec(base64.b64decode(' + repr(payload) + '))'",
+        "wrapper = '\\n'.join((",
+        "    '#!/bin/sh',",
+        "    'if [ \"$1\" = \"--yolo\" ] && [ \"$2\" = \"chat\" ]; then',",
+        "    '  test \"$(git -C ' + shlex.quote(checkout) + ' rev-parse HEAD)\" = ' + shlex.quote(runtime_commit),",
+        "    '  cd ' + shlex.quote(checkout),",
+        "    '  WPB_INSTALLED_RUNTIME_PYTHON=' + shlex.quote(runtime_python) + ' WPB_INSTALLED_RUNTIME_COMMIT=' + shlex.quote(runtime_commit) + ' exec ' + shlex.quote(runtime_python) + ' -c ' + shlex.quote(command),",
+        "    'fi',",
+        "    'exit 0',",
+        "    '',",
+        "))",
+        "path = pathlib.Path(target)",
+        "path.parent.mkdir(parents=True, exist_ok=True)",
+        "path.write_text(wrapper)",
+        "path.chmod(0o755)",
+    ))
+
+
 def native_hook_smoke_command(checkout, expected_commit):
-    script = shlex.quote(native_hook_smoke_script())
-    checkout = shlex.quote(str(checkout))
-    expected_commit = shlex.quote(expected_commit)
+    checkout = str(checkout)
     resolver = shlex.quote(
         "import sys\n"
         "from pathlib import Path\n"
@@ -58,30 +85,56 @@ def native_hook_smoke_command(checkout, expected_commit):
         "from pm.environments import project_python\n"
         "print(project_python(root))\n"
     )
+    writer = native_hook_smoke_wrapper_writer()
+    payload = base64.b64encode(native_hook_smoke_script().encode()).decode()
     return ("set -eu\n"
             "export PATH=\"$HOME/.local/bin:$PATH\"\n"
-            f"installed_runtime_commit=\"$(git -C {checkout} rev-parse HEAD)\"\n"
-            f"test \"$installed_runtime_commit\" = {expected_commit}\n"
-            "export WPB_INSTALLED_RUNTIME_COMMIT=\"$installed_runtime_commit\"\n"
-            f"installed_runtime_python=\"$(HERMES_HOME=/tmp/hermes python3 -c {resolver} {checkout})\"\n"
+            f"installed_runtime_commit=\"$(git -C {shlex.quote(checkout)} rev-parse HEAD)\"\n"
+            f"test \"$installed_runtime_commit\" = {shlex.quote(expected_commit)}\n"
+            f"installed_runtime_python=\"$(HERMES_HOME=/tmp/hermes python3 -c {resolver} {shlex.quote(checkout)})\"\n"
             "case \"$installed_runtime_python\" in /*) ;; *) exit 42 ;; esac\n"
             "test -x \"$installed_runtime_python\"\n"
-            "export WPB_INSTALLED_RUNTIME_PYTHON=\"$installed_runtime_python\"\n"
-            f"cd {checkout}\n"
-            f"\"$installed_runtime_python\" -c {script}\n")
+            "launcher=\"$HOME/.local/bin/hermes\"\n"
+            "if [ -L \"$launcher\" ]; then\n"
+            "  rm -- \"$launcher\"\n"
+            "  launcher_disposition=symlink_unlinked\n"
+            "elif [ -f \"$launcher\" ]; then\n"
+            "  if [ -e \"$launcher.key-free-smoke-original\" ] || [ -L \"$launcher.key-free-smoke-original\" ]; then exit 44; fi\n"
+            "  mv -- \"$launcher\" \"$launcher.key-free-smoke-original\"\n"
+            "  launcher_disposition=file_renamed\n"
+            "else\n"
+            "  exit 45\n"
+            "fi\n"
+            f"python3 -c {shlex.quote(writer)} \"$launcher\" \"$installed_runtime_python\" \"$installed_runtime_commit\" {shlex.quote(checkout)} {shlex.quote(payload)}\n"
+            "printf '%s\\n' \"WPB_NATIVE_HOOK_SMOKE_WRAPPER:installed:$launcher_disposition\"\n")
 
 
-async def run_native_hook_smoke(agent_environment, root, checkout, expected_commit):
-    from native_run import retry_observer_evidence
-
+async def run_native_hook_smoke(agent_environment, checkout, expected_commit):
     result = await agent_environment.exec(
         command=native_hook_smoke_command(checkout, expected_commit),
-        env={"HERMES_HOME": "/tmp/hermes",
-             "WPB_NATIVE_RETRY_LEDGER": "/logs/agent/native-api-observer.jsonl",
-             "OPENROUTER_API_KEY": ""},
+        env={"HERMES_HOME": "/tmp/hermes", "OPENROUTER_API_KEY": ""},
         timeout_sec=60)
+    prefix = "WPB_NATIVE_HOOK_SMOKE_WRAPPER:installed:"
+    states = [line[len(prefix):] for line in (result.stdout or "").splitlines()
+              if line.startswith(prefix)]
+    disposition = states[0] if len(states) == 1 else None
+    return {"wrapper_installed": result.return_code == 0 and disposition in {
+                "symlink_unlinked", "file_renamed"},
+            "original_launcher_disposition": disposition,
+            "return_code": result.return_code}
+
+
+async def verify_native_hook_smoke(agent_environment, root, expected_commit, setup):
+    from native_run import retry_observer_evidence
+
+    # This file is read after Harbor's native Hermes.run has written config.yaml
+    # and invoked the replaced final chat command.
+    log_result = await agent_environment.exec(
+        command="cat /logs/agent/hermes.txt",
+        env={"HERMES_HOME": "/tmp/hermes", "OPENROUTER_API_KEY": ""},
+        timeout_sec=30)
     prefix = "WPB_NATIVE_HOOK_SMOKE:"
-    lines = [line[len(prefix):] for line in (result.stdout or "").splitlines()
+    lines = [line[len(prefix):] for line in (log_result.stdout or "").splitlines()
              if line.startswith(prefix)]
     try:
         runtime_check = json.loads(lines[-1]) if len(lines) == 1 else {}
@@ -110,10 +163,12 @@ async def run_native_hook_smoke(agent_environment, root, checkout, expected_comm
     expected_hooks = {"pre_api_request", "post_api_request", "api_request_error"}
     runtime_marker_valid = (
         set(runtime_check) == {"registered", "dispatches", "installed_runtime_python",
-                               "installed_runtime_commit", "native_process_can_write_observer_ledger"}
+                               "installed_runtime_commit", "native_process_can_write_observer_ledger",
+                               "runtime_config_observer_enabled"}
         and type(runtime_dispatches) is int and runtime_dispatches == 4
         and isinstance(installed_runtime_python, str) and installed_runtime_python.startswith("/")
         and installed_runtime_commit == expected_commit
+        and runtime_check.get("runtime_config_observer_enabled") is True
         and type(native_process_can_write) is bool
         and isinstance(registered, dict) and set(registered) == expected_hooks
         and all(type(value) is bool and value is True for value in registered.values())
@@ -129,7 +184,8 @@ async def run_native_hook_smoke(agent_environment, root, checkout, expected_comm
                 for event in evidence["events"])
     )
     passed = (
-        result.return_code == 0
+        setup.get("wrapper_installed") is True
+        and log_result.return_code == 0
         and runtime_marker_valid
         and native_process_can_write is True
         and evidence_shape_valid
@@ -149,7 +205,13 @@ async def run_native_hook_smoke(agent_environment, root, checkout, expected_comm
     )
     return {
         "passed": passed,
-        "return_code": result.return_code,
+        "return_code": setup.get("return_code"),
+        "native_config_write_exercised": passed,
+        "synthetic_hook_dispatch_replaced_final_chat_command": setup.get("wrapper_installed") is True,
+        "provider_calls_made": False,
+        "hook_dispatch_followed_native_config_write": (
+            runtime_marker_valid and runtime_check.get("runtime_config_observer_enabled") is True
+        ),
         "runtime_hooks_registered": registered if isinstance(registered, dict) else {},
         "runtime_marker_valid": runtime_marker_valid,
         "installed_runtime_python_resolved": (
@@ -179,11 +241,22 @@ async def check():
     validate_key_free_environment()
     root = Path(__file__).resolve().parent.parent
     runtime = json.loads((root / "config/runtime.json").read_text())
+    install_scratch = root / ".raw/install"
+    install_scratch.mkdir(parents=True, exist_ok=True)
+    task_root = Path(tempfile.mkdtemp(prefix="native-install-task-", dir=install_scratch))
+    shutil.copytree(root / "tasks/wp01", task_root, dirs_exist_ok=True)
+    task_toml = task_root / "task.toml"
+    task_source = task_toml.read_text()
+    allowlist = 'network_mode = "allowlist"\nallowed_hosts = ["openrouter.ai"]'
+    if task_source.count(allowlist) != 1:
+        raise RuntimeError("key_free_task_network_policy_unexpected")
+    task_toml.write_text(task_source.replace(allowlist, 'network_mode = "no-network"'))
     config = TrialConfig.model_validate({
-        "task": {"path": str(root / "tasks/wp01")}, "trial_name": "native-install",
+        "task": {"path": str(task_root)}, "trial_name": "native-install",
         "trials_dir": str(root / ".raw/install"), "verifier": {"disable": True},
         "agent": {"name": "hermes", "model_name": runtime["model"]["harbor_model"],
-                  "env": {"HERMES_HOME": "/tmp/hermes"},
+                  "env": {"HERMES_HOME": "/tmp/hermes",
+                          "WPB_NATIVE_RETRY_LEDGER": "/logs/agent/native-api-observer.jsonl"},
                   "kwargs": {"version": runtime["hermes"]["release_tag"]},
                   "override_setup_timeout_sec": 1200},
     })
@@ -211,22 +284,39 @@ async def check():
         if result.return_code:
             startup["key_free_cli_error"] = text[-4000:]
         observer = await stage_retry_observer(
-            trial.agent_environment, root, "/tmp/hermes", enable=True)
+            trial.agent_environment, root, "/tmp/hermes", enable=True,
+            ledger_path="/logs/agent/native-api-observer.jsonl")
         startup["retry_observer_registration_smoke"] = observer
         smoke = await run_native_hook_smoke(
-            trial.agent_environment, root, runtime["hermes"]["installed_checkout_path"],
+            trial.agent_environment, runtime["hermes"]["installed_checkout_path"],
             runtime["hermes"]["resolved_release_commit"])
-        startup["native_hook_smoke"] = smoke
-        raise RuntimeError("key_free_argument_check_complete")
+        startup["native_hook_smoke_setup"] = smoke
+        if (result.return_code or not all(startup["supported_flags"].values())
+                or observer.get("registration_smoke") is not True
+                or observer.get("enabled") is not True
+                or smoke.get("wrapper_installed") is not True):
+            raise RuntimeError("key_free_native_runtime_setup_failed")
+    async def verify_after_agent(event):
+        setup = startup.get("native_hook_smoke_setup", {})
+        if setup.get("wrapper_installed") is True:
+            startup["native_hook_smoke"] = await verify_native_hook_smoke(
+                trial.agent_environment, root, runtime["hermes"]["resolved_release_commit"], setup)
 
     trial.add_hook(TrialEvent.AGENT_START, arguments)
-    result = await trial.run()
+    trial.add_hook(TrialEvent.AGENT_END, verify_after_agent)
+    from unittest.mock import patch
+
+    # The synthetic token is only used to let the adapter build its run command.
+    # The replacement Hermes launcher dispatches local hooks and never contacts a provider.
+    with patch.dict(os.environ, {"OPENROUTER_API_KEY": "key-free-diagnostic-placeholder"}):
+        result = await trial.run()
     exception = result.exception_info
     observer = startup.get("retry_observer_registration_smoke", {})
     passed = (startup.get("return_code") == 0 and all(startup.get("supported_flags", {}).values())
               and observer.get("registration_smoke") is True
               and observer.get("enabled") is True
-              and startup.get("native_hook_smoke", {}).get("passed") is True)
+              and startup.get("native_hook_smoke", {}).get("passed") is True
+              and exception is None)
     diagnostic = {"install_complete": bool(startup), "cli_arguments_valid": passed,
                   "startup": startup, "key_free": True,
                   "exception_type": exception.exception_type if exception else None}
@@ -245,7 +335,8 @@ async def check():
     destination = root / "installation-results"
     destination.mkdir(exist_ok=True)
     (destination / "install.json").write_text(json.dumps(diagnostic, indent=2) + "\n")
-    print("Native installation and CLI arguments", "passed" if passed else "failed")
+    shutil.rmtree(task_root, ignore_errors=True)
+    print("Native installation and hook dispatch", "passed" if passed else "failed")
     return 0 if passed else 1
 
 

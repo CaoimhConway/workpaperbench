@@ -12,6 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 RUNTIME_TRANSFER_INPUTS = {
     "config/runtime.json", "scripts/fix_native_version.py",
     "scripts/native_trial.py", "scripts/check_install.py",
+    "scripts/native_run.py", "scripts/fresh_replay.py",
+    "scripts/build_challenge_tasks.py",
+    "scripts/select_slots.py",
 }
 
 
@@ -31,6 +34,9 @@ def source_manifest(original, runtime, root):
         changed[name] = {"original": expected, "current": actual}
         hashes[name] = actual
     manifest["hashes"] = hashes
+    helper = "scripts/operations_review.py"
+    if helper in runtime["hashes"]:
+        manifest["hashes"][helper] = runtime["hashes"][helper]
     if changed:
         manifest["runtime_manifest_id"] = runtime["manifest_id"]
         manifest["runtime_changes"] = changed

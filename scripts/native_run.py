@@ -111,6 +111,20 @@ def frozen_inputs(manifest_id=None, root=None, *, reviewed_operations=False):
     if reviewed_operations and manifest.get("dataset_id") == "real-v1":
         from operations_review import reviewed_hashes
         hashes = reviewed_hashes(manifest, root)
+    elif reviewed_operations and manifest.get("dataset_id") == "challenge-v1":
+        from select_slots import _repo_file
+        helper_name = "scripts/operations_review.py"
+        helper_digest = manifest["hashes"].get(helper_name)
+        if helper_digest is None:
+            review = read_json(_repo_file(root, "datasets/challenge-v1/operations-review.json"))
+            if (review.get("original_manifest_id") != manifest["manifest_id"]
+                    or review.get("original_manifest_sha256") != hashlib.sha256(context["manifest_path"].read_bytes()).hexdigest()):
+                raise ValueError("challenge_operations_review_invalid")
+            helper_digest = review.get("review_helper_sha256")
+        if hashlib.sha256(_repo_file(root, helper_name).read_bytes()).hexdigest() != helper_digest:
+            raise ValueError("challenge_review_helper_changed")
+        from operations_review import challenge_reviewed_hashes
+        hashes = challenge_reviewed_hashes(manifest, root)
     covered = set()
     for name, expected in hashes.items():
         relative = Path(name)
@@ -163,6 +177,9 @@ def frozen_inputs(manifest_id=None, root=None, *, reviewed_operations=False):
                 context["schema_path"].relative_to(root).as_posix(),
                 *CHALLENGE_RUNTIME_INPUTS,
             }
+            if manifest.get("scorer_version") == "challenge-1.1.0":
+                required.add("config/scorers/challenge-1.1.0.py")
+                required.add("scripts/operations_review.py")
             for task in context["tasks"].values():
                 task_path = root / task["path"]
                 for path in task_path.rglob("*"):

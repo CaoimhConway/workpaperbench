@@ -95,7 +95,15 @@ def tree_sha256(path):
 def scorer_hashes(task_dir):
     if (task_dir / "tests/workpaperbench/challenge_grading.py").is_file():
         names = ("grading.py", "challenge_grading.py", "challenge_sql_worker.py")
-        current = hashlib.sha256(b"".join((ROOT / "workpaperbench" / name).read_bytes() for name in names)).hexdigest()
+        gold = parse_json(read_bounded(task_dir / "tests/gold.json", MAX_JSON))
+        version = gold.get("scorer_version", "challenge-1.0.0")
+        if version not in {"challenge-1.0.0", "challenge-1.1.0"}:
+            raise ValueError("unsupported_challenge_scorer_version")
+        module = (ROOT / "config/scorers/challenge-1.1.0.py" if version == "challenge-1.1.0"
+                  else ROOT / "workpaperbench/challenge_grading.py")
+        current = hashlib.sha256((ROOT / "workpaperbench/grading.py").read_bytes()
+                                 + read_bounded(module, 1_000_000)
+                                 + (ROOT / "workpaperbench/challenge_sql_worker.py").read_bytes()).hexdigest()
         effective = hashlib.sha256(b"".join(read_bounded(task_dir / "tests/workpaperbench" / name, 1_000_000) for name in names)).hexdigest()
         return current, effective
     root_grading = (ROOT / "workpaperbench/grading.py").read_bytes()
@@ -476,7 +484,7 @@ def replay_selected(root, dataset, slot_filter, answer_path=None, task_key=None,
         from select_slots import campaign_context, campaign_slots
         path = root / "datasets/challenge-v1/manifests" / (_stage + ".json")
         manifest_bytes = read_bounded(path, MAX_JSON)
-        manifest = frozen_inputs(parse_json(manifest_bytes)["manifest_id"], root)
+        manifest = frozen_inputs(parse_json(manifest_bytes)["manifest_id"], root, reviewed_operations=True)
         context = campaign_context(manifest["manifest_id"], root)
         campaign_slots(context, context["stage"])
         tasks = context["tasks"]

@@ -201,6 +201,8 @@ def _challenge_stage_context(root, stage, manifest_id=None):
         gold = json.loads(gold_path.read_text())
         if not isinstance(gold, dict) or gold.get("task_id") != task_id:
             raise ValueError("challenge_task_package_identity_mismatch")
+        if gold.get("scorer_version", "challenge-1.0.0") != manifest.get("scorer_version", "challenge-1.0.0"):
+            raise ValueError("challenge_task_scorer_version_mismatch")
         source_groups.add(task["source_group"])
     if campaign == "final" and len(source_groups) < 6:
         raise ValueError("challenge_evaluation_source_groups_insufficient")
