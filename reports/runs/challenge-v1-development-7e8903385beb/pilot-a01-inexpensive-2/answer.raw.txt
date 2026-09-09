@@ -1,0 +1,47 @@
+{
+  "task_id": "challenge-v1-a01",
+  "answers": [
+    {
+      "id": "eps_difference",
+      "status": "answered",
+      "value": 0.13,
+      "unit": "usd_per_share",
+      "evidence": ["a01:s01", "a01:s04"],
+      "sql": "SELECT (SELECT amount FROM financials WHERE period_end='2024-11-29' AND measure='Non-GAAP diluted net income per share' AND basis='non-GAAP' AND months=3) - (SELECT high FROM guidance WHERE period_end='2024-11-29' AND measure='Diluted EPS' AND basis='non-GAAP')",
+      "reason_code": null
+    },
+    {
+      "id": "adjusted_operating_income",
+      "status": "answered",
+      "value": 2596,
+      "unit": "usd_million",
+      "evidence": ["a01:s03", "a01:s02"],
+      "sql": "SELECT amount FROM financials WHERE period_end='2024-11-29' AND measure='Non-GAAP operating income' AND basis='non-GAAP' AND months=3",
+      "reason_code": null
+    },
+    {
+      "id": "adjusted_margin",
+      "status": "answered",
+      "value": 46.307528,
+      "unit": "percent",
+      "evidence": ["a01:s03", "a01:s02"],
+      "sql": "SELECT (SELECT f.amount FROM financials f WHERE f.period_end='2024-11-29' AND f.measure='Non-GAAP operating income' AND f.basis='non-GAAP' AND f.months=3) / (SELECT f2.amount FROM financials f2 WHERE f2.period_end='2024-11-29' AND f2.measure='Total revenue' AND f2.basis='GAAP' AND f2.months=3) * 100",
+      "reason_code": null
+    },
+    {
+      "id": "margin_bridge",
+      "status": "answered",
+      "value": 1139.850161,
+      "unit": "basis_points",
+      "evidence": ["a01:s03", "a01:s02"],
+      "sql": "SELECT ((SELECT f.amount FROM financials f WHERE f.period_end='2024-11-29' AND f.measure='Non-GAAP operating income' AND f.basis='non-GAAP' AND f.months=3) - (SELECT f.amount FROM financials f WHERE f.period_end='2024-11-29' AND f.measure='GAAP operating income' AND f.basis='GAAP' AND f.months=3)) / (SELECT f.amount FROM financials f WHERE f.period_end='2024-11-29' AND f.measure='Total revenue' AND f.basis='GAAP' AND f.months=3) * 10000",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": ["a01:s01", "a01:s04"]
+  },
+  "context_evidence": ["a01:s06"]
+}
