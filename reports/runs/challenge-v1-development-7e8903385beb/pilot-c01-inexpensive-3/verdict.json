@@ -1,0 +1,77 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": false,
+    "financial_answer": true,
+    "robustness": true
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "transaction_contribution": {
+        "availability": true,
+        "controls": {
+          "monetary_scale": true,
+          "quarterly_changes": true,
+          "revenue_mix": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "yield_2023": {
+        "availability": true,
+        "controls": {
+          "monetary_scale": true,
+          "quarterly_changes": true,
+          "revenue_mix": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "yield_2024": {
+        "availability": true,
+        "controls": {
+          "monetary_scale": true,
+          "quarterly_changes": true,
+          "revenue_mix": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "yield_change": {
+        "availability": true,
+        "controls": {
+          "monetary_scale": true,
+          "quarterly_changes": true,
+          "revenue_mix": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": true,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "transaction_contribution:evidence"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.0.0",
+  "strict_delivery_completion": false,
+  "verified_research_completion": false
+}

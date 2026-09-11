@@ -1,0 +1,43 @@
+{
+  "task_id": "challenge-v1-a01",
+  "context_evidence": ["a01:s01", "a01:s02", "a01:s03", "a01:s04"],
+  "answers": [
+    {
+      "id": "eps_difference",
+      "status": "answered",
+      "value": 0.13,
+      "unit": "usd_per_share",
+      "evidence": ["a01:s01", "a01:s04"],
+      "sql": "SELECT CAST(f.amount AS REAL) - g.high FROM financials f JOIN guidance g ON f.period_end = g.period_end WHERE f.period_end = '2024-11-29' AND f.months = 3 AND f.measure = 'Non-GAAP diluted net income per share' AND g.issue_date = '2024-09-12' AND g.measure = 'Diluted EPS' AND g.basis = 'non-GAAP'"
+    },
+    {
+      "id": "adjusted_operating_income",
+      "status": "answered",
+      "value": 2596.0,
+      "unit": "usd_million",
+      "evidence": ["a01:s02", "a01:s03"],
+      "sql": "SELECT f.amount + COALESCE((SELECT SUM(a.amount) FROM adjustments a WHERE a.period_end = f.period_end AND a.months = f.months), 0) AS adjusted FROM financials f WHERE f.period_end = '2024-11-29' AND f.months = 3 AND f.measure = 'GAAP operating income'"
+    },
+    {
+      "id": "adjusted_margin",
+      "status": "answered",
+      "value": 46.307527648947556,
+      "unit": "percent",
+      "evidence": ["a01:s02", "a01:s03"],
+      "sql": "SELECT (f.amount + COALESCE((SELECT SUM(a.amount) FROM adjustments a WHERE a.period_end = f.period_end AND a.months = f.months), 0)) / rev.amount * 100.0 FROM financials f, financials rev WHERE f.period_end = '2024-11-29' AND f.months = 3 AND f.measure = 'GAAP operating income' AND rev.period_end = f.period_end AND rev.months = f.months AND rev.measure = 'Total revenue'"
+    },
+    {
+      "id": "margin_bridge",
+      "status": "answered",
+      "value": 1139.8501605422766,
+      "unit": "basis_points",
+      "evidence": ["a01:s02", "a01:s03"],
+      "sql": "SELECT (COALESCE((SELECT SUM(a.amount) FROM adjustments a WHERE a.period_end = f.period_end AND a.months = f.months), 0)) / rev.amount * 10000.0 FROM financials f, financials rev WHERE f.period_end = '2024-11-29' AND f.months = 3 AND f.measure = 'GAAP operating income' AND rev.period_end = f.period_end AND rev.months = f.months AND rev.measure = 'Total revenue'"
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": ["a01:s01", "a01:s04"]
+  }
+}
