@@ -89,4 +89,22 @@ def test_smoke_wrapper_is_syntax_checked_and_never_falls_back_to_native_cli(tmp_
     assert commit in wrapper
     assert "native-api-observer" in base64.b64decode(payload).decode()
     assert "exec /tmp/hermes/hermes-agent/.venv/bin/python" in wrapper
+    assert " 2>&1\nfi\nexit 0" in wrapper
     assert "hermes-real" not in wrapper
+
+
+def test_native_failure_diagnostics_are_bounded_and_redact_credentials():
+    secret = "sk-or-v1-" + "x" * 24
+    output = "\n".join(
+        ["Traceback (most recent call last):", f"OPENROUTER_API_KEY={secret}",
+         "ModuleNotFoundError: No module named 'yaml'"]
+        + [f"Error: diagnostic {index}" for index in range(20)]
+    )
+
+    summary = check_install.native_failure_diagnostics(output)
+
+    assert len(summary) == 12
+    assert any("Traceback" in line for line in summary)
+    assert any("ModuleNotFoundError" in line for line in summary)
+    assert all(secret not in line for line in summary)
+    assert all(len(line) <= 240 for line in summary)
