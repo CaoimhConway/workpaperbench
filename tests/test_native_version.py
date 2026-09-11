@@ -1,7 +1,7 @@
 import hashlib
 import importlib.util
 from pathlib import Path
-import base64
+import json
 import subprocess
 import sys
 
@@ -62,8 +62,9 @@ def test_key_free_smoke_dispatches_only_after_native_config_write():
     assert "plugins',{}).get('enabled') != ['native-api-observer']" in script
     assert "WPB_NATIVE_HOOK_SMOKE:" in script
     assert "--yolo" in command
-    assert "project_python(root)" in command
-    assert "WPB_RESOLVED_PROJECT_PYTHON" in check_install.native_hook_smoke_wrapper_writer()
+    assert "runtime_command(root,code=code,python=native_python" in command
+    assert "resolve_store_python(root)" in command
+    assert "WPB_NATIVE_LAUNCH_PYTHON" in check_install.native_hook_smoke_wrapper_writer()
     assert "'installed_runtime_python':sys.executable" in script
     assert "8b66a51036c1e20920a17cdd049fdf55c968d683" in command
     assert 'launcher="$HOME/.local/bin/hermes"' in command
@@ -71,17 +72,17 @@ def test_key_free_smoke_dispatches_only_after_native_config_write():
     assert "launcher_disposition=file_renamed" in command
     assert "WPB_NATIVE_HOOK_SMOKE_WRAPPER:installed:$launcher_disposition" in command
     assert "/tmp/wpb-native-hook-smoke/home" not in command
-    assert command.index("installed_runtime_python=") < command.index('if [ -L "$launcher" ]')
+    assert command.index("installed_runtime_command=") < command.index('if [ -L "$launcher" ]')
 
 
 def test_smoke_wrapper_is_syntax_checked_and_never_falls_back_to_native_cli(tmp_path):
     commit = "8b66a51036c1e20920a17cdd049fdf55c968d683"
     checkout = "/tmp/hermes/hermes-agent"
     target = tmp_path / "home/.local/bin/hermes"
-    payload = base64.b64encode(check_install.native_hook_smoke_script().encode()).decode()
+    runtime_json = json.dumps(["/tmp/hermes/store/python/bin/python3", "-I", "-c", "import hermes_bootstrap\n" + check_install.native_hook_smoke_script()])
     subprocess.run(
         [sys.executable, "-c", check_install.native_hook_smoke_wrapper_writer(),
-         str(target), "/tmp/hermes/hermes-agent/.venv/bin/python", commit, checkout, payload],
+         str(target), runtime_json, commit, checkout],
         check=True,
     )
 
@@ -91,8 +92,8 @@ def test_smoke_wrapper_is_syntax_checked_and_never_falls_back_to_native_cli(tmp_
     assert syntax.returncode == 0, syntax.stderr
     assert 'if [ "$1" = "--yolo" ] && [ "$2" = "chat" ]; then' in wrapper
     assert commit in wrapper
-    assert "native-api-observer" in base64.b64decode(payload).decode()
-    assert "exec /tmp/hermes/hermes-agent/.venv/bin/python" in wrapper
+    assert "native-api-observer" in json.loads(runtime_json)[-1]
+    assert "exec /tmp/hermes/store/python/bin/python3 -I -c" in wrapper
     assert " 2>&1\nfi\nexit 0" in wrapper
     assert "hermes-real" not in wrapper
 

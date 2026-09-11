@@ -48,7 +48,7 @@ def native_hook_smoke_script():
         "print('WPB_NATIVE_HOOK_SMOKE:'+json.dumps({",
         "    'registered':registered,'dispatches':4,'runtime_config_observer_enabled':True,",
         "    'installed_runtime_python':sys.executable,",
-        "    'resolved_project_python':os.environ.get('WPB_RESOLVED_PROJECT_PYTHON'),",
+        "    'resolved_native_launch_python':os.environ.get('WPB_NATIVE_LAUNCH_PYTHON'),",
         "    'installed_runtime_commit':os.environ.get('WPB_INSTALLED_RUNTIME_COMMIT'),",
         "    'native_process_can_write_observer_ledger':os.access('/logs/agent/native-api-observer.jsonl',os.W_OK),",
         "},sort_keys=True))",
@@ -81,15 +81,17 @@ def native_failure_diagnostics(text):
 
 def native_hook_smoke_wrapper_writer():
     return "\n".join((
-        "import base64, pathlib, shlex, sys",
-        "target, runtime_python, runtime_commit, checkout, payload = sys.argv[1:]",
-        "command = 'import base64\\nexec(base64.b64decode(' + repr(payload) + '))'",
+        "import json, pathlib, shlex, sys",
+        "target, runtime_json, runtime_commit, checkout = sys.argv[1:]",
+        "runtime_command = json.loads(runtime_json)",
+        "if not isinstance(runtime_command,list) or not runtime_command or not all(isinstance(v,str) for v in runtime_command): raise SystemExit(42)",
+        "runtime_python = runtime_command[0]",
         "wrapper = '\\n'.join((",
         "    '#!/bin/sh',",
         "    'if [ \"$1\" = \"--yolo\" ] && [ \"$2\" = \"chat\" ]; then',",
         "    '  test \"$(git -C ' + shlex.quote(checkout) + ' rev-parse HEAD)\" = ' + shlex.quote(runtime_commit),",
         "    '  cd ' + shlex.quote(checkout),",
-        "    '  WPB_RESOLVED_PROJECT_PYTHON=' + shlex.quote(runtime_python) + ' WPB_INSTALLED_RUNTIME_COMMIT=' + shlex.quote(runtime_commit) + ' exec ' + shlex.quote(runtime_python) + ' -c ' + shlex.quote(command) + ' 2>&1',",
+        "    '  WPB_NATIVE_LAUNCH_PYTHON=' + shlex.quote(runtime_python) + ' WPB_INSTALLED_RUNTIME_COMMIT=' + shlex.quote(runtime_commit) + ' exec ' + shlex.join(runtime_command) + ' 2>&1',",
         "    'fi',",
         "    'exit 0',",
         "    '',",
@@ -103,23 +105,24 @@ def native_hook_smoke_wrapper_writer():
 
 def native_hook_smoke_command(checkout, expected_commit):
     checkout = str(checkout)
+    payload = base64.b64encode(native_hook_smoke_script().encode()).decode()
     resolver = shlex.quote(
-        "import sys\n"
+        "import base64,json,sys\n"
         "from pathlib import Path\n"
         "root=Path(sys.argv[1]).resolve()\n"
         "sys.path.insert(0,str(root))\n"
-        "from pm.environments import project_python\n"
-        "print(project_python(root))\n"
+        "from hermes_cli._launchers import runtime_command,resolve_store_python\n"
+        "native_python=resolve_store_python(root)\n"
+        "if native_python is None or not native_python.is_file(): raise SystemExit(42)\n"
+        "code=base64.b64decode(sys.argv[2]).decode()\n"
+        "print(json.dumps(runtime_command(root,code=code,python=native_python,home='/tmp/hermes')))\n"
     )
     writer = native_hook_smoke_wrapper_writer()
-    payload = base64.b64encode(native_hook_smoke_script().encode()).decode()
     return ("set -eu\n"
             "export PATH=\"$HOME/.local/bin:$PATH\"\n"
             f"installed_runtime_commit=\"$(git -C {shlex.quote(checkout)} rev-parse HEAD)\"\n"
             f"test \"$installed_runtime_commit\" = {shlex.quote(expected_commit)}\n"
-            f"installed_runtime_python=\"$(HERMES_HOME=/tmp/hermes python3 -c {resolver} {shlex.quote(checkout)})\"\n"
-            "case \"$installed_runtime_python\" in /*) ;; *) exit 42 ;; esac\n"
-            "test -x \"$installed_runtime_python\"\n"
+            f"installed_runtime_command=\"$(HERMES_HOME=/tmp/hermes python3 -c {resolver} {shlex.quote(checkout)} {shlex.quote(payload)})\"\n"
             "launcher=\"$HOME/.local/bin/hermes\"\n"
             "if [ -L \"$launcher\" ]; then\n"
             "  rm -- \"$launcher\"\n"
@@ -131,7 +134,7 @@ def native_hook_smoke_command(checkout, expected_commit):
             "else\n"
             "  exit 45\n"
             "fi\n"
-            f"python3 -c {shlex.quote(writer)} \"$launcher\" \"$installed_runtime_python\" \"$installed_runtime_commit\" {shlex.quote(checkout)} {shlex.quote(payload)}\n"
+            f"python3 -c {shlex.quote(writer)} \"$launcher\" \"$installed_runtime_command\" \"$installed_runtime_commit\" {shlex.quote(checkout)}\n"
             "printf '%s\\n' \"WPB_NATIVE_HOOK_SMOKE_WRAPPER:installed:$launcher_disposition\"\n")
 
 
@@ -190,13 +193,13 @@ async def verify_native_hook_smoke(agent_environment, root, expected_commit, set
     expected_hooks = {"pre_api_request", "post_api_request", "api_request_error"}
     runtime_marker_valid = (
         set(runtime_check) == {"registered", "dispatches", "installed_runtime_python",
-                               "resolved_project_python",
+                               "resolved_native_launch_python",
                                "installed_runtime_commit", "native_process_can_write_observer_ledger",
                                "runtime_config_observer_enabled"}
         and type(runtime_dispatches) is int and runtime_dispatches == 4
         and isinstance(installed_runtime_python, str) and installed_runtime_python.startswith("/")
-        and isinstance(runtime_check.get("resolved_project_python"), str)
-        and runtime_check["resolved_project_python"].startswith("/")
+        and isinstance(runtime_check.get("resolved_native_launch_python"), str)
+        and runtime_check["resolved_native_launch_python"].startswith("/")
         and installed_runtime_commit == expected_commit
         and runtime_check.get("runtime_config_observer_enabled") is True
         and type(native_process_can_write) is bool
@@ -248,7 +251,7 @@ async def verify_native_hook_smoke(agent_environment, root, expected_commit, set
             isinstance(installed_runtime_python, str) and installed_runtime_python.startswith("/")
         ),
         "installed_runtime_python": installed_runtime_python,
-        "resolved_project_python": runtime_check.get("resolved_project_python"),
+        "resolved_native_launch_python": runtime_check.get("resolved_native_launch_python"),
         "installed_runtime_commit": installed_runtime_commit,
         "native_process_can_write_observer_ledger": native_process_can_write is True,
         "ledger_retained_and_readable": evidence_shape_valid and evidence["capture_status"] == "captured",
