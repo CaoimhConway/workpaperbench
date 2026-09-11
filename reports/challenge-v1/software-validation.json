@@ -167,8 +167,48 @@
       "run_attempt": 1,
       "run_id": 37555020555,
       "scope": "Actual native config generation and strict hook smoke, no provider calls"
+    },
+    {
+      "archive_digest_verified": true,
+      "archive_sha256": "b0e5030200d03ebb140490ec683e34af0521131a5a5132c23b9e915f98d69c9c",
+      "artifact_id": 11455295128,
+      "bounded_member_names": [
+        "install.json"
+      ],
+      "commit_sha": "0462a8c8dd3678f76eac519caa6698ffabb6c910",
+      "conclusion": "success",
+      "diagnosis": "Actual native parser and managed launch passed post-write enabled configuration, hook registration and synthetic dispatch, writable bounded ledger and hashed reset-counter identities. This is not an actual API retry-loop test or a completeness guarantee.",
+      "key_free": true,
+      "pattern_and_supplied_credential_screen": true,
+      "receipt_path": "reports/challenge-v1/software-checks/37555714507-1/install.json",
+      "retained_sha256": {
+        "install.json": "8aa5cf97b0e616ba2b993a983fe103957500ad5f04336e67ac3344460efac177"
+      },
+      "run_attempt": 1,
+      "run_id": 37555714507,
+      "scope": "Actual native config generation and strict synthetic hook smoke, no provider calls"
     }
   ],
+  "post_write_native_gate": {
+    "actual_api_retry_loop_executed": false,
+    "archive_digest_verified": true,
+    "archive_sha256": "b0e5030200d03ebb140490ec683e34af0521131a5a5132c23b9e915f98d69c9c",
+    "artifact_id": 11455295128,
+    "bounded_member_names": [
+      "install.json"
+    ],
+    "candidate_terminal_write_access": "assumed from same container permissions, not probed",
+    "capture_completeness": "not_guaranteed",
+    "commit_sha": "0462a8c8dd3678f76eac519caa6698ffabb6c910",
+    "conclusion": "success",
+    "pattern_and_supplied_credential_screen": true,
+    "receipt_path": "reports/challenge-v1/software-checks/37555714507-1/install.json",
+    "retained_sha256": {
+      "install.json": "8aa5cf97b0e616ba2b993a983fe103957500ad5f04336e67ac3344460efac177"
+    },
+    "run_attempt": 1,
+    "run_id": 37555714507
+  },
   "post_write_root_cause": {
     "actual_parser": "import hermes_yaml as yaml",
     "pinned_hermes_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
