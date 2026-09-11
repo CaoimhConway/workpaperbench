@@ -23,7 +23,8 @@ def validate_key_free_environment():
 
 def native_hook_smoke_script():
     return "\n".join((
-        "import json,os,time,yaml",
+        "import hermes_bootstrap",
+        "import json,os,sys,time,yaml",
         "from pathlib import Path",
         "from hermes_cli.plugins import discover_plugins,get_plugin_manager",
         "from hermes_cli.lifecycle import invoke_hook",
@@ -46,7 +47,8 @@ def native_hook_smoke_script():
         "invoke_hook('post_api_request',**{**common,'ended_at':started+0.2})",
         "print('WPB_NATIVE_HOOK_SMOKE:'+json.dumps({",
         "    'registered':registered,'dispatches':4,'runtime_config_observer_enabled':True,",
-        "    'installed_runtime_python':os.environ.get('WPB_INSTALLED_RUNTIME_PYTHON'),",
+        "    'installed_runtime_python':sys.executable,",
+        "    'resolved_project_python':os.environ.get('WPB_RESOLVED_PROJECT_PYTHON'),",
         "    'installed_runtime_commit':os.environ.get('WPB_INSTALLED_RUNTIME_COMMIT'),",
         "    'native_process_can_write_observer_ledger':os.access('/logs/agent/native-api-observer.jsonl',os.W_OK),",
         "},sort_keys=True))",
@@ -87,7 +89,7 @@ def native_hook_smoke_wrapper_writer():
         "    'if [ \"$1\" = \"--yolo\" ] && [ \"$2\" = \"chat\" ]; then',",
         "    '  test \"$(git -C ' + shlex.quote(checkout) + ' rev-parse HEAD)\" = ' + shlex.quote(runtime_commit),",
         "    '  cd ' + shlex.quote(checkout),",
-        "    '  WPB_INSTALLED_RUNTIME_PYTHON=' + shlex.quote(runtime_python) + ' WPB_INSTALLED_RUNTIME_COMMIT=' + shlex.quote(runtime_commit) + ' exec ' + shlex.quote(runtime_python) + ' -c ' + shlex.quote(command) + ' 2>&1',",
+        "    '  WPB_RESOLVED_PROJECT_PYTHON=' + shlex.quote(runtime_python) + ' WPB_INSTALLED_RUNTIME_COMMIT=' + shlex.quote(runtime_commit) + ' exec ' + shlex.quote(runtime_python) + ' -c ' + shlex.quote(command) + ' 2>&1',",
         "    'fi',",
         "    'exit 0',",
         "    '',",
@@ -188,10 +190,13 @@ async def verify_native_hook_smoke(agent_environment, root, expected_commit, set
     expected_hooks = {"pre_api_request", "post_api_request", "api_request_error"}
     runtime_marker_valid = (
         set(runtime_check) == {"registered", "dispatches", "installed_runtime_python",
+                               "resolved_project_python",
                                "installed_runtime_commit", "native_process_can_write_observer_ledger",
                                "runtime_config_observer_enabled"}
         and type(runtime_dispatches) is int and runtime_dispatches == 4
         and isinstance(installed_runtime_python, str) and installed_runtime_python.startswith("/")
+        and isinstance(runtime_check.get("resolved_project_python"), str)
+        and runtime_check["resolved_project_python"].startswith("/")
         and installed_runtime_commit == expected_commit
         and runtime_check.get("runtime_config_observer_enabled") is True
         and type(native_process_can_write) is bool
@@ -243,6 +248,7 @@ async def verify_native_hook_smoke(agent_environment, root, expected_commit, set
             isinstance(installed_runtime_python, str) and installed_runtime_python.startswith("/")
         ),
         "installed_runtime_python": installed_runtime_python,
+        "resolved_project_python": runtime_check.get("resolved_project_python"),
         "installed_runtime_commit": installed_runtime_commit,
         "native_process_can_write_observer_ledger": native_process_can_write is True,
         "ledger_retained_and_readable": evidence_shape_valid and evidence["capture_status"] == "captured",
