@@ -147,8 +147,36 @@
       "run_attempt": 1,
       "run_id": 37554158943,
       "scope": "Actual native config generation and strict hook smoke, no provider calls"
+    },
+    {
+      "archive_digest_verified": true,
+      "archive_sha256": "a959ba81847070223acabe1da64fe99e022582f2893b6b6fc1062b71fac6f2ea",
+      "artifact_id": 11454159685,
+      "bounded_member_names": [
+        "install.json"
+      ],
+      "commit_sha": "d17eadb74f481b7152fd40b7bf19579accbf131b",
+      "conclusion": "failure",
+      "diagnosis": "Managed native launch still fails the smoke import yaml. Exact pinned Hermes config source imports hermes_yaml, not PyYAML. Use that actual native parser and retain the strict hook/config gate. Actual hosted recheck required.",
+      "key_free": true,
+      "pattern_and_supplied_credential_screen": true,
+      "receipt_path": "reports/challenge-v1/software-checks/37555020555-1/install.json",
+      "retained_sha256": {
+        "install.json": "ea577cb8245d13058873c09ecaded8165ac179316a918096c3c916d412d00a2a"
+      },
+      "run_attempt": 1,
+      "run_id": 37555020555,
+      "scope": "Actual native config generation and strict hook smoke, no provider calls"
     }
   ],
+  "post_write_root_cause": {
+    "actual_parser": "import hermes_yaml as yaml",
+    "pinned_hermes_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "prior_interpretation": "Bootstrap and native launch corrections did not resolve the absent module. Earlier dependency-bootstrap diagnosis was incomplete.",
+    "smoke_defect": "Smoke imported PyYAML module yaml, which is not required by the pinned native CLI",
+    "strict_gate_preserved": true,
+    "upstream_source": "hermes_cli/config.py"
+  },
   "prior_native_controls": {
     "archive_sha256": "8546f7fc25180d4ff2d5d50ec443339406fe2b9fffe2b55859ee24a090e5491d",
     "artifact_id": 11449120575,

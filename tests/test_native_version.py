@@ -57,7 +57,7 @@ def test_key_free_smoke_dispatches_only_after_native_config_write():
         "/tmp/hermes/hermes-agent", "8b66a51036c1e20920a17cdd049fdf55c968d683")
 
     assert script.splitlines()[0] == "import hermes_bootstrap"
-    assert script.index("import hermes_bootstrap") < script.index("import json,os,sys,time,yaml")
+    assert script.index("import hermes_bootstrap") < script.index("import hermes_yaml as yaml")
     assert script.index("config.yaml") < script.index("discover_plugins()")
     assert "plugins',{}).get('enabled') != ['native-api-observer']" in script
     assert "WPB_NATIVE_HOOK_SMOKE:" in script
@@ -90,6 +90,9 @@ def test_smoke_wrapper_is_syntax_checked_and_never_falls_back_to_native_cli(tmp_
     syntax = subprocess.run(["sh", "-n", str(target)], capture_output=True, text=True)
 
     assert syntax.returncode == 0, syntax.stderr
+    failed_checkout = subprocess.run(["sh", str(target), "--yolo", "chat"], capture_output=True, text=True)
+    assert failed_checkout.returncode != 0
+    assert "not found" not in failed_checkout.stdout
     assert 'if [ "$1" = "--yolo" ] && [ "$2" = "chat" ]; then' in wrapper
     assert commit in wrapper
     assert "native-api-observer" in json.loads(runtime_json)[-1]

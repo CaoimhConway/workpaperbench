@@ -24,7 +24,8 @@ def validate_key_free_environment():
 def native_hook_smoke_script():
     return "\n".join((
         "import hermes_bootstrap",
-        "import json,os,sys,time,yaml",
+        "import json,os,sys,time",
+        "import hermes_yaml as yaml",
         "from pathlib import Path",
         "from hermes_cli.plugins import discover_plugins,get_plugin_manager",
         "from hermes_cli.lifecycle import invoke_hook",
@@ -88,6 +89,7 @@ def native_hook_smoke_wrapper_writer():
         "runtime_python = runtime_command[0]",
         "wrapper = '\\n'.join((",
         "    '#!/bin/sh',",
+        "    'set -e',",
         "    'if [ \"$1\" = \"--yolo\" ] && [ \"$2\" = \"chat\" ]; then',",
         "    '  test \"$(git -C ' + shlex.quote(checkout) + ' rev-parse HEAD)\" = ' + shlex.quote(runtime_commit),",
         "    '  cd ' + shlex.quote(checkout),",
