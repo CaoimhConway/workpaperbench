@@ -650,6 +650,25 @@ def clean_process_env(key):
     return result
 
 
+def native_version_fix_metadata(module_path=None):
+    from fix_native_version import ORIGINAL_MODULE_SHA256, CORRECTED_MODULE_SHA256
+    if module_path is None:
+        from importlib.metadata import distribution
+        package = distribution("harbor")
+        if package.version != RUNTIME["harbor"]["version"]:
+            raise ValueError("native_harbor_version_mismatch")
+        module_path = Path(package.locate_file("harbor/agents/installed/hermes.py"))
+    actual = hashlib.sha256(Path(module_path).read_bytes()).hexdigest()
+    if actual != CORRECTED_MODULE_SHA256:
+        raise ValueError("native_corrected_module_mismatch")
+    return {
+        "original_module_sha256": ORIGINAL_MODULE_SHA256,
+        "corrected_module_sha256": actual,
+        "checked_before_provider_access": True,
+        "change": "Pinned native CLI version, OpenRouter routing and oneshot export corrections, plus observer enablement after native config generation when its ledger is requested.",
+    }
+
+
 def execute(mode, slot_id):
     validate_live_environment()
     if mode not in {"pilot", "final"} or not SLOT_RE.fullmatch(slot_id):
@@ -731,7 +750,6 @@ def execute(mode, slot_id):
         "commit_sha": os.environ.get("GITHUB_SHA"),
         "harbor_version": RUNTIME["harbor"]["version"],
         "harbor_commit": RUNTIME["harbor"]["git_commit"],
-        "harbor_native_version_fix": RUNTIME["harbor"].get("native_version_fix"),
         "hermes_release_tag": RUNTIME["hermes"]["release_tag"],
         "hermes_resolved_release_commit": RUNTIME["hermes"]["resolved_release_commit"],
         "hermes_checkout_commit_verified": False,
@@ -764,6 +782,7 @@ def execute(mode, slot_id):
     record["config_hash"] = hashlib.sha256(config_payload).hexdigest()
     try:
         freeze = frozen_inputs(manifest_id)
+        record["harbor_native_version_fix"] = native_version_fix_metadata()
         if context["dataset_id"]:
             record["dataset_manifest_id"] = freeze["manifest_id"]
             record["dataset_hash_count"] = len(freeze["hashes"])
