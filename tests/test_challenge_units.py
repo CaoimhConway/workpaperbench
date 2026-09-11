@@ -156,6 +156,8 @@ def test_builder_gates_versioned_scorer_and_contract(tmp_path):
     assert (new_tests / "workpaperbench/challenge_grading.py").read_bytes() == SCORER_PATH.read_bytes()
     new_gold = json.loads((new_tests / "gold.json").read_text())
     assert new_gold["scorer_version"] == "challenge-1.1.0"
+    assert json.loads((old_tests / "schema.json").read_text())["properties"]["answers"]["maxItems"] == 4
+    assert json.loads((new_tests / "schema.json").read_text())["properties"]["answers"]["maxItems"] == 5
     instruction = (new_task / "instruction.md").read_text()
     assert "All numeric tolerances are 0.000001" not in instruction
     tolerance_section = instruction.split(
