@@ -1,0 +1,123 @@
+{
+  "answers": {
+    "jun30_reserves_usd": {
+      "status": "answered",
+      "value": 471227699.0,
+      "unit": "usd",
+      "tolerance": 0.5,
+      "evidence": [
+        [
+          "b04:s04"
+        ],
+        [
+          "b04:s03",
+          "b04:s04"
+        ]
+      ]
+    },
+    "jun30_reconciliation_usd": {
+      "status": "answered",
+      "value": 0.0,
+      "unit": "usd",
+      "tolerance": 0.5,
+      "evidence": [
+        [
+          "b04:s03",
+          "b04:s04"
+        ]
+      ]
+    },
+    "coverage_change_bps": {
+      "status": "answered",
+      "value": -71.35472830422277,
+      "unit": "basis_points",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "b04:s01",
+          "b04:s02",
+          "b04:s03",
+          "b04:s04"
+        ],
+        [
+          "b04:s01",
+          "b04:s02",
+          "b04:s03",
+          "b04:s04",
+          "b04:s05",
+          "b04:s06"
+        ]
+      ]
+    }
+  },
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_codes": [
+      "contradicted_by_calculation"
+    ],
+    "evidence": [
+      [
+        "b04:s01",
+        "b04:s02",
+        "b04:s03",
+        "b04:s04"
+      ],
+      [
+        "b04:s01",
+        "b04:s02",
+        "b04:s03",
+        "b04:s04",
+        "b04:s05",
+        "b04:s06"
+      ]
+    ]
+  },
+  "context_evidence_allowed": [
+    "b04:s05",
+    "b04:s06"
+  ],
+  "controls": [
+    {
+      "name": "june30_market_revaluation",
+      "database": "control-1.sqlite",
+      "expected": {
+        "jun30_reserves_usd": 472227699.0,
+        "jun30_reconciliation_usd": 0.0,
+        "coverage_change_bps": -49.38847126036354,
+        "conclusion": "contradicted"
+      }
+    },
+    {
+      "name": "june30_component_gap",
+      "database": "control-2.sqlite",
+      "expected": {
+        "jun30_reserves_usd": 471227799.0,
+        "jun30_reconciliation_usd": -100.0,
+        "coverage_change_bps": -71.35253167851839,
+        "conclusion": "contradicted"
+      }
+    },
+    {
+      "name": "may30_market_revaluation",
+      "database": "control-3.sqlite",
+      "expected": {
+        "jun30_reserves_usd": 471227699.0,
+        "jun30_reconciliation_usd": 0.0,
+        "coverage_change_bps": -136.07047535462303,
+        "conclusion": "contradicted"
+      }
+    }
+  ],
+  "task_id": "challenge-v1-b04",
+  "scorer_version": "challenge-1.1.0",
+  "hashes": {
+    "evidence.json": "d7ad90ac278cfa61e4578c8d77a18077740f41f89e226c3d6c287d2f6431b7b5",
+    "control-2.sqlite": "fbf429eef439b466f6044daebca0a913e6b50cb4a5eae14a7e5e6d89d1ee0552",
+    "sources.md": "d069596eaea45415be8ebeeca69c5321384192f1fe24cd4f1ad272059267d1c1",
+    "control-3.sqlite": "b27be5f1eb67248f886444f13805e2a4774d9f4466a8dd6b06debcb6472e8596",
+    "control-1.sqlite": "548cc17d1ba2a00e42c6037fa217275886572fe008b80a6787bfa12ccfe2542c",
+    "schema.json": "32b131ff8db1a194bd8bdba7b6e610c6e6806294bcdea28833d57f9a28eef5e5",
+    "verify.py": "a69eb6c71a44ff42df488696ecd76257c5ec1096f5ae9a5dd245cc4128a2b0e2",
+    "data.sqlite": "e5cfcb927af03445064918b12da3ff0e5d9fc2888ccc3301cd5ce8fd839f9d3f"
+  }
+}

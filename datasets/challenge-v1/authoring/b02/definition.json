@@ -1,0 +1,1621 @@
+{
+  "task_id": "challenge-v1-b02",
+  "split": "evaluation",
+  "source_group": "circle-usdc-reserve-march-2025",
+  "origin": "primary_source_factual_extract",
+  "previously_exposed": false,
+  "family": "B",
+  "scorer_version": "challenge-1.1.0",
+  "context": "# Circle USDC reserve report dictionary\n\nThe source report's observation cutoffs are March 19 and March 31, 2025 at 11:59 p.m. UTC. Each observation is a point-in-time balance. The printed report date is April 30, 2025. It is not a historical first-publication timestamp.\n\nUSDC circulation means total supply on approved chains less Tokens Allowed But Not Issued and Access Denied Tokens. The reserve fair-value definition covers USD-denominated assets in the Circle Reserve Fund and segregated accounts at regulated financial institutions for USDC holders. The reserve schedule includes component fair values and signed net timing adjustments. All reserve amounts are USD, and circulation amounts are USDC.\n\n`reserve_components` contains source line items by observation date. CUSIP identifies a Treasury security. Negative values preserve the report's parenthetical timing adjustments. `reported_reserve_totals` contains the report's stated reserve total for reconciliation. `circulation_inputs` contains the source-defined supply categories. The report's circulation definition determines their relationship.\n\nThe two observations use the same stated definitions and UTC cutoff convention. The report's asset categories are aggregated reserve values. They do not provide instrument-level maturity, yield, liquidity, or independently observed redemption evidence.\n\n## Source sections\n\nb02:s02 - PDF page 3, 2025-03-19 reserve schedule. Treasury security fair values by CUSIP in USD: 912797KJ5 3,697,340,000, 912797MU8 1,178,373,594, 912797NT0 2,461,524,350, 912797MV6 797,482,547, 912797NY9 1,496,043,353, 912797NB9 414,075,741, 912797NZ6 1,244,690,340, 912797KS5 3,146,619,595, 912797PA9 1,569,885,088, 912797NC7 597,531,624, 912797PB7 962,266,781, 912797ND5 2,863,446,371, 912797PC5 1,790,887,406. Other listed components in USD: U.S. Treasury repurchase agreements 31,040,000,000, cash held in Circle Reserve Fund 1,000,774,222, cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net -2,096,433,792, cash held at regulated financial institutions 7,067,110,474, cash due to/(owed by) Circle due to timing and settlement differences, net -84,025,566. Report-stated total reserve fair value is USD 59,147,592,128.\n\nb02:s03 - PDF page 4, 2025-03-31 reserve schedule. Treasury security fair values by CUSIP in USD: 912797NT0 2,465,000,000, 912797MV6 1,423,464,525, 912797NY9 1,498,162,080, 912797NB9 1,063,968,331, 912797NZ6 1,096,587,717, 912797KS5 2,990,827,955, 912797PA9 1,521,318,728, 912797NC7 848,597,992, 912797PB7 134,455,689, 912797ND5 2,792,780,057, 912797PC5 1,793,382,181, 912797NE3 2,058,500,917, 912797PJ0 212,966,744, 912797PK7 2,930,554,574, 912797NN3 52,042,278, 912797NW3 1,979,957,220. Other listed components in USD: U.S. Treasury repurchase agreements 30,815,000,000, cash held in Circle Reserve Fund 1,004,149,953, cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net -3,117,173,718, cash held at regulated financial institutions 6,592,595,197, cash due to/(owed by) Circle due to timing and settlement differences, net -116,431,379. Report-stated total reserve fair value is USD 60,040,707,040.\n\nb02:s01 - PDF page 2, circulation and reserve criteria. Circulation is defined from total supply and the two stated excluded-token categories. Reserve fair value is the balance of USD-denominated assets held for holders in the Circle Reserve Fund and segregated financial-institution accounts.\n\nb02:s04 - PDF page 2, March circulation table. Source inputs:\n- 2025-03-19 supply categories in USDC: total supply 60,459,258,338, Tokens Allowed But Not Issued 1,280,267,228, Access Denied Tokens 96,298,507.\n- 2025-03-31 supply categories in USDC: total supply 61,073,416,469, Tokens Allowed But Not Issued 996,628,065, Access Denied Tokens 101,016,689.\n\nb02:s05 - PDF pages 1 and 2. The report observations are at 11:59 p.m. UTC. The report is dated April 30, 2025. Historical first-publication timing is unknown.",
+  "instruction": "Using the Circle March 2025 reserve report, independently reconstruct `march31_reserves_usd` (USD) from the March 31 reserve line items, including the signed timing and settlement adjustments. Independently derive `march31_circulation_usdc` (USDC) from the March 31 supply and exclusion categories. Report `march31_residual_usd` (USD), oriented as the report-stated reserve amount less your component reconstruction. Report `coverage_change_bps` (basis_points) as March 31 coverage minus March 19 coverage, using each date’s reconstructed reserve assets and source-defined circulation. Assess whether coverage exceeded 100% at both dates.",
+  "tables": {
+    "reserve_components": {
+      "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,component_id TEXT,amount_usd INTEGER,section_id TEXT)",
+      "rows": [
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797KJ5",
+          3697340000,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797MU8",
+          1178373594,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797NT0",
+          2461524350,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797MV6",
+          797482547,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797NY9",
+          1496043353,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797NB9",
+          414075741,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797NZ6",
+          1244690340,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797KS5",
+          3146619595,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797PA9",
+          1569885088,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797NC7",
+          597531624,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797PB7",
+          962266781,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797ND5",
+          2863446371,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury security fair value",
+          "912797PC5",
+          1790887406,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "U.S. Treasury repurchase agreements",
+          "U.S. Treasury repurchase agreements",
+          31040000000,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "cash held in Circle Reserve Fund",
+          "cash held in Circle Reserve Fund",
+          1000774222,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+          "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+          -2096433792,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "cash held at regulated financial institutions",
+          "cash held at regulated financial institutions",
+          7067110474,
+          "b02:s02"
+        ],
+        [
+          "2025-03-19",
+          "cash due to/(owed by) Circle due to timing and settlement differences, net",
+          "cash due to/(owed by) Circle due to timing and settlement differences, net",
+          -84025566,
+          "b02:s02"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797NT0",
+          2465000000,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797MV6",
+          1423464525,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797NY9",
+          1498162080,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797NB9",
+          1063968331,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797NZ6",
+          1096587717,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797KS5",
+          2990827955,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797PA9",
+          1521318728,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797NC7",
+          848597992,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797PB7",
+          134455689,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797ND5",
+          2792780057,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797PC5",
+          1793382181,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797NE3",
+          2058500917,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797PJ0",
+          212966744,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797PK7",
+          2930554574,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797NN3",
+          52042278,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury security fair value",
+          "912797NW3",
+          1979957220,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "U.S. Treasury repurchase agreements",
+          "U.S. Treasury repurchase agreements",
+          30815000000,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "cash held in Circle Reserve Fund",
+          "cash held in Circle Reserve Fund",
+          1004149953,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+          "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+          -3117173718,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "cash held at regulated financial institutions",
+          "cash held at regulated financial institutions",
+          6592595197,
+          "b02:s03"
+        ],
+        [
+          "2025-03-31",
+          "cash due to/(owed by) Circle due to timing and settlement differences, net",
+          "cash due to/(owed by) Circle due to timing and settlement differences, net",
+          -116431379,
+          "b02:s03"
+        ]
+      ]
+    },
+    "reported_reserve_totals": {
+      "schema": "CREATE TABLE reported_reserve_totals(report_date TEXT,reported_total_usd INTEGER,section_id TEXT)",
+      "rows": [
+        [
+          "2025-03-19",
+          59147592128,
+          "b02:s02"
+        ],
+        [
+          "2025-03-31",
+          60040707040,
+          "b02:s03"
+        ]
+      ]
+    },
+    "circulation_inputs": {
+      "schema": "CREATE TABLE circulation_inputs(report_date TEXT,measure TEXT,amount_usdc INTEGER,section_id TEXT)",
+      "rows": [
+        [
+          "2025-03-19",
+          "total supply",
+          60459258338,
+          "b02:s04"
+        ],
+        [
+          "2025-03-19",
+          "Tokens Allowed But Not Issued",
+          1280267228,
+          "b02:s04"
+        ],
+        [
+          "2025-03-19",
+          "Access Denied Tokens",
+          96298507,
+          "b02:s04"
+        ],
+        [
+          "2025-03-31",
+          "total supply",
+          61073416469,
+          "b02:s04"
+        ],
+        [
+          "2025-03-31",
+          "Tokens Allowed But Not Issued",
+          996628065,
+          "b02:s04"
+        ],
+        [
+          "2025-03-31",
+          "Access Denied Tokens",
+          101016689,
+          "b02:s04"
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "b02:s01",
+      "text": "The report defines USDC circulation as total supply on approved chains less Tokens Allowed But Not Issued and Access Denied Tokens. Reserve assets are USD-denominated assets in the Circle Reserve Fund and segregated accounts at regulated financial institutions for holders.",
+      "locator": "PDF page 2, Definitions and report criteria",
+      "origin": "https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025%20USDC_Examination%20Report%20March%2025.pdf",
+      "period": "2025-03-19 and 2025-03-31 at 11:59 p.m. UTC",
+      "report_signed_date": "2025-04-30",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "dffb5957b0009437bb58b80906bf2ae278bee35bbd8877b496c0e410a3622057"
+    },
+    {
+      "id": "b02:s02",
+      "text": "The March 19 table lists the dated reserve asset components, signed timing and settlement adjustments, and the reported fair value of reserve assets.",
+      "locator": "PDF page 3, March 19 reserve schedule",
+      "origin": "https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025%20USDC_Examination%20Report%20March%2025.pdf",
+      "period": "2025-03-19 at 11:59 p.m. UTC",
+      "report_signed_date": "2025-04-30",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "dffb5957b0009437bb58b80906bf2ae278bee35bbd8877b496c0e410a3622057"
+    },
+    {
+      "id": "b02:s03",
+      "text": "The March 31 table lists Treasury security fair values by CUSIP, U.S. Treasury repurchase agreements, cash balances, signed timing adjustments, and the reported fair value of reserve assets.",
+      "locator": "PDF page 4, March 31 reserve schedule",
+      "origin": "https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025%20USDC_Examination%20Report%20March%2025.pdf",
+      "period": "2025-03-31 at 11:59 p.m. UTC",
+      "report_signed_date": "2025-04-30",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "dffb5957b0009437bb58b80906bf2ae278bee35bbd8877b496c0e410a3622057"
+    },
+    {
+      "id": "b02:s04",
+      "text": "The report defines USDC circulation as total supply on approved chains less Tokens Allowed But Not Issued and Access Denied Tokens. The March 19 and March 31 schedule supplies gross supply and both excluded-token categories.",
+      "locator": "PDF page 2, circulation table and definition",
+      "origin": "https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025%20USDC_Examination%20Report%20March%2025.pdf",
+      "period": "2025-03-19 and 2025-03-31 at 11:59 p.m. UTC",
+      "report_signed_date": "2025-04-30",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "dffb5957b0009437bb58b80906bf2ae278bee35bbd8877b496c0e410a3622057"
+    },
+    {
+      "id": "b02:s05",
+      "text": "The report covers the two UTC observation cutoffs and states that reserve assets are reported at fair value. Its printed date is April 30, 2025. A historical first-publication timestamp is not stated in the retained capture.",
+      "locator": "PDF page 1 report cover and page 2 criteria",
+      "origin": "https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025%20USDC_Examination%20Report%20March%2025.pdf",
+      "period": "2025-03-19 and 2025-03-31",
+      "report_signed_date": "2025-04-30",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "dffb5957b0009437bb58b80906bf2ae278bee35bbd8877b496c0e410a3622057"
+    }
+  ],
+  "reference": {
+    "task_id": "challenge-v1-b02",
+    "answers": [
+      {
+        "id": "march31_reserves_usd",
+        "status": "answered",
+        "value": 60040707041.0,
+        "unit": "usd",
+        "reason_code": null,
+        "evidence": [
+          "b02:s03"
+        ],
+        "sql": "SELECT SUM(amount_usd) AS value FROM reserve_components WHERE report_date='2025-03-31'"
+      },
+      {
+        "id": "march31_circulation_usdc",
+        "status": "answered",
+        "value": 59975771715.0,
+        "unit": "usdc",
+        "reason_code": null,
+        "evidence": [
+          "b02:s04"
+        ],
+        "sql": "SELECT SUM(CASE WHEN measure='total supply' THEN amount_usdc ELSE -amount_usdc END) AS value FROM circulation_inputs WHERE report_date='2025-03-31'"
+      },
+      {
+        "id": "march31_residual_usd",
+        "status": "answered",
+        "value": -1.0,
+        "unit": "usd",
+        "reason_code": null,
+        "evidence": [
+          "b02:s03"
+        ],
+        "sql": "SELECT (SELECT reported_total_usd FROM reported_reserve_totals WHERE report_date='2025-03-31') - SUM(amount_usd) AS value FROM reserve_components WHERE report_date='2025-03-31'"
+      },
+      {
+        "id": "coverage_change_bps",
+        "status": "answered",
+        "value": -0.15759761976517375,
+        "unit": "basis_points",
+        "reason_code": null,
+        "evidence": [
+          "b02:s01",
+          "b02:s02",
+          "b02:s03",
+          "b02:s04"
+        ],
+        "sql": "WITH a AS (SELECT report_date,SUM(amount_usd) AS assets FROM reserve_components GROUP BY report_date), c AS (SELECT report_date,SUM(CASE WHEN measure='total supply' THEN amount_usdc ELSE -amount_usdc END) AS circulation FROM circulation_inputs GROUP BY report_date) SELECT 10000.0*((SELECT assets*1.0/circulation FROM a JOIN c USING(report_date) WHERE report_date='2025-03-31')-(SELECT assets*1.0/circulation FROM a JOIN c USING(report_date) WHERE report_date='2025-03-19')) AS value"
+      }
+    ],
+    "conclusion": {
+      "verdict": "supported",
+      "reason_code": "supported_by_calculation",
+      "evidence": [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s04"
+      ]
+    }
+  },
+  "gold": {
+    "answers": {
+      "march31_reserves_usd": {
+        "status": "answered",
+        "value": 60040707041.0,
+        "unit": "usd",
+        "tolerance": 0.5,
+        "evidence": [
+          [
+            "b02:s03"
+          ],
+          [
+            "b02:s03",
+            "b02:s05"
+          ]
+        ]
+      },
+      "march31_circulation_usdc": {
+        "status": "answered",
+        "value": 59975771715.0,
+        "unit": "usdc",
+        "tolerance": 0.5,
+        "evidence": [
+          [
+            "b02:s04"
+          ],
+          [
+            "b02:s01",
+            "b02:s04"
+          ]
+        ]
+      },
+      "march31_residual_usd": {
+        "status": "answered",
+        "value": -1.0,
+        "unit": "usd",
+        "tolerance": 0.5,
+        "evidence": [
+          [
+            "b02:s03"
+          ],
+          [
+            "b02:s03",
+            "b02:s05"
+          ]
+        ]
+      },
+      "coverage_change_bps": {
+        "status": "answered",
+        "value": -0.15759761976517375,
+        "unit": "basis_points",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "b02:s02",
+            "b02:s03",
+            "b02:s04"
+          ],
+          [
+            "b02:s01",
+            "b02:s02",
+            "b02:s03",
+            "b02:s04"
+          ]
+        ]
+      }
+    },
+    "conclusion": {
+      "verdict": "supported",
+      "reason_codes": [
+        "supported_by_calculation"
+      ],
+      "evidence": [
+        [
+          "b02:s02",
+          "b02:s03",
+          "b02:s04"
+        ],
+        [
+          "b02:s01",
+          "b02:s02",
+          "b02:s03",
+          "b02:s04"
+        ]
+      ]
+    },
+    "context_evidence_allowed": [
+      "b02:s01",
+      "b02:s05"
+    ],
+    "controls": {
+      "march31_treasury_revaluation": {
+        "march31_reserves_usd": 60070707041.0,
+        "march31_circulation_usdc": 59975771715.0,
+        "march31_residual_usd": -1.0,
+        "coverage_change_bps": 4.844422219605558,
+        "conclusion": "supported"
+      },
+      "march31_supply_change": {
+        "march31_reserves_usd": 60040707041.0,
+        "march31_circulation_usdc": 59976771715.0,
+        "march31_residual_usd": -1.0,
+        "coverage_change_bps": -0.3245093530919931,
+        "conclusion": "supported"
+      },
+      "march31_component_gap": {
+        "march31_reserves_usd": 60040712041.0,
+        "march31_circulation_usdc": 59975771715.0,
+        "march31_residual_usd": -5001.0,
+        "coverage_change_bps": -0.1567639497919453,
+        "conclusion": "supported"
+      }
+    }
+  },
+  "controls": [
+    {
+      "name": "march31_treasury_revaluation",
+      "tables": {
+        "reserve_components": {
+          "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,component_id TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797KJ5",
+              3697340000,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797MU8",
+              1178373594,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NT0",
+              2461524350,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797MV6",
+              797482547,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NY9",
+              1496043353,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NB9",
+              414075741,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NZ6",
+              1244690340,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797KS5",
+              3146619595,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797PA9",
+              1569885088,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NC7",
+              597531624,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797PB7",
+              962266781,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797ND5",
+              2863446371,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797PC5",
+              1790887406,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury repurchase agreements",
+              "U.S. Treasury repurchase agreements",
+              31040000000,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash held in Circle Reserve Fund",
+              "cash held in Circle Reserve Fund",
+              1000774222,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              -2096433792,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash held at regulated financial institutions",
+              "cash held at regulated financial institutions",
+              7067110474,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              -84025566,
+              "b02:s02"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NT0",
+              2495000000,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797MV6",
+              1423464525,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NY9",
+              1498162080,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NB9",
+              1063968331,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NZ6",
+              1096587717,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797KS5",
+              2990827955,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PA9",
+              1521318728,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NC7",
+              848597992,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PB7",
+              134455689,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797ND5",
+              2792780057,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PC5",
+              1793382181,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NE3",
+              2058500917,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PJ0",
+              212966744,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PK7",
+              2930554574,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NN3",
+              52042278,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NW3",
+              1979957220,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury repurchase agreements",
+              "U.S. Treasury repurchase agreements",
+              30815000000,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash held in Circle Reserve Fund",
+              "cash held in Circle Reserve Fund",
+              1004149953,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              -3117173718,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash held at regulated financial institutions",
+              "cash held at regulated financial institutions",
+              6592595197,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              -116431379,
+              "b02:s03"
+            ]
+          ]
+        },
+        "reported_reserve_totals": {
+          "schema": "CREATE TABLE reported_reserve_totals(report_date TEXT,reported_total_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-03-19",
+              59147592128,
+              "b02:s02"
+            ],
+            [
+              "2025-03-31",
+              60070707040,
+              "b02:s03"
+            ]
+          ]
+        },
+        "circulation_inputs": {
+          "schema": "CREATE TABLE circulation_inputs(report_date TEXT,measure TEXT,amount_usdc INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-03-19",
+              "total supply",
+              60459258338,
+              "b02:s04"
+            ],
+            [
+              "2025-03-19",
+              "Tokens Allowed But Not Issued",
+              1280267228,
+              "b02:s04"
+            ],
+            [
+              "2025-03-19",
+              "Access Denied Tokens",
+              96298507,
+              "b02:s04"
+            ],
+            [
+              "2025-03-31",
+              "total supply",
+              61073416469,
+              "b02:s04"
+            ],
+            [
+              "2025-03-31",
+              "Tokens Allowed But Not Issued",
+              996628065,
+              "b02:s04"
+            ],
+            [
+              "2025-03-31",
+              "Access Denied Tokens",
+              101016689,
+              "b02:s04"
+            ]
+          ]
+        }
+      },
+      "expected": {
+        "march31_reserves_usd": 60070707041.0,
+        "march31_circulation_usdc": 59975771715.0,
+        "march31_residual_usd": -1.0,
+        "coverage_change_bps": 4.844422219605558,
+        "conclusion": "supported"
+      }
+    },
+    {
+      "name": "march31_supply_change",
+      "tables": {
+        "reserve_components": {
+          "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,component_id TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797KJ5",
+              3697340000,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797MU8",
+              1178373594,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NT0",
+              2461524350,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797MV6",
+              797482547,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NY9",
+              1496043353,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NB9",
+              414075741,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NZ6",
+              1244690340,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797KS5",
+              3146619595,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797PA9",
+              1569885088,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NC7",
+              597531624,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797PB7",
+              962266781,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797ND5",
+              2863446371,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797PC5",
+              1790887406,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury repurchase agreements",
+              "U.S. Treasury repurchase agreements",
+              31040000000,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash held in Circle Reserve Fund",
+              "cash held in Circle Reserve Fund",
+              1000774222,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              -2096433792,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash held at regulated financial institutions",
+              "cash held at regulated financial institutions",
+              7067110474,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              -84025566,
+              "b02:s02"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NT0",
+              2465000000,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797MV6",
+              1423464525,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NY9",
+              1498162080,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NB9",
+              1063968331,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NZ6",
+              1096587717,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797KS5",
+              2990827955,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PA9",
+              1521318728,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NC7",
+              848597992,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PB7",
+              134455689,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797ND5",
+              2792780057,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PC5",
+              1793382181,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NE3",
+              2058500917,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PJ0",
+              212966744,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PK7",
+              2930554574,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NN3",
+              52042278,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NW3",
+              1979957220,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury repurchase agreements",
+              "U.S. Treasury repurchase agreements",
+              30815000000,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash held in Circle Reserve Fund",
+              "cash held in Circle Reserve Fund",
+              1004149953,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              -3117173718,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash held at regulated financial institutions",
+              "cash held at regulated financial institutions",
+              6592595197,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              -116431379,
+              "b02:s03"
+            ]
+          ]
+        },
+        "reported_reserve_totals": {
+          "schema": "CREATE TABLE reported_reserve_totals(report_date TEXT,reported_total_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-03-19",
+              59147592128,
+              "b02:s02"
+            ],
+            [
+              "2025-03-31",
+              60040707040,
+              "b02:s03"
+            ]
+          ]
+        },
+        "circulation_inputs": {
+          "schema": "CREATE TABLE circulation_inputs(report_date TEXT,measure TEXT,amount_usdc INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-03-19",
+              "total supply",
+              60459258338,
+              "b02:s04"
+            ],
+            [
+              "2025-03-19",
+              "Tokens Allowed But Not Issued",
+              1280267228,
+              "b02:s04"
+            ],
+            [
+              "2025-03-19",
+              "Access Denied Tokens",
+              96298507,
+              "b02:s04"
+            ],
+            [
+              "2025-03-31",
+              "total supply",
+              61074416469,
+              "b02:s04"
+            ],
+            [
+              "2025-03-31",
+              "Tokens Allowed But Not Issued",
+              996628065,
+              "b02:s04"
+            ],
+            [
+              "2025-03-31",
+              "Access Denied Tokens",
+              101016689,
+              "b02:s04"
+            ]
+          ]
+        }
+      },
+      "expected": {
+        "march31_reserves_usd": 60040707041.0,
+        "march31_circulation_usdc": 59976771715.0,
+        "march31_residual_usd": -1.0,
+        "coverage_change_bps": -0.3245093530919931,
+        "conclusion": "supported"
+      }
+    },
+    {
+      "name": "march31_component_gap",
+      "tables": {
+        "reserve_components": {
+          "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,component_id TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797KJ5",
+              3697340000,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797MU8",
+              1178373594,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NT0",
+              2461524350,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797MV6",
+              797482547,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NY9",
+              1496043353,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NB9",
+              414075741,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NZ6",
+              1244690340,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797KS5",
+              3146619595,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797PA9",
+              1569885088,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797NC7",
+              597531624,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797PB7",
+              962266781,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797ND5",
+              2863446371,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury security fair value",
+              "912797PC5",
+              1790887406,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "U.S. Treasury repurchase agreements",
+              "U.S. Treasury repurchase agreements",
+              31040000000,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash held in Circle Reserve Fund",
+              "cash held in Circle Reserve Fund",
+              1000774222,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              -2096433792,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash held at regulated financial institutions",
+              "cash held at regulated financial institutions",
+              7067110474,
+              "b02:s02"
+            ],
+            [
+              "2025-03-19",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              -84025566,
+              "b02:s02"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NT0",
+              2465000000,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797MV6",
+              1423464525,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NY9",
+              1498162080,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NB9",
+              1063968331,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NZ6",
+              1096587717,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797KS5",
+              2990827955,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PA9",
+              1521318728,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NC7",
+              848597992,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PB7",
+              134455689,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797ND5",
+              2792780057,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PC5",
+              1793382181,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NE3",
+              2058500917,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PJ0",
+              212966744,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797PK7",
+              2930554574,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NN3",
+              52042278,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury security fair value",
+              "912797NW3",
+              1979957220,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "U.S. Treasury repurchase agreements",
+              "U.S. Treasury repurchase agreements",
+              30815000000,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash held in Circle Reserve Fund",
+              "cash held in Circle Reserve Fund",
+              1004149953,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net",
+              -3117173718,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash held at regulated financial institutions",
+              "cash held at regulated financial institutions",
+              6592600197,
+              "b02:s03"
+            ],
+            [
+              "2025-03-31",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              "cash due to/(owed by) Circle due to timing and settlement differences, net",
+              -116431379,
+              "b02:s03"
+            ]
+          ]
+        },
+        "reported_reserve_totals": {
+          "schema": "CREATE TABLE reported_reserve_totals(report_date TEXT,reported_total_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-03-19",
+              59147592128,
+              "b02:s02"
+            ],
+            [
+              "2025-03-31",
+              60040707040,
+              "b02:s03"
+            ]
+          ]
+        },
+        "circulation_inputs": {
+          "schema": "CREATE TABLE circulation_inputs(report_date TEXT,measure TEXT,amount_usdc INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-03-19",
+              "total supply",
+              60459258338,
+              "b02:s04"
+            ],
+            [
+              "2025-03-19",
+              "Tokens Allowed But Not Issued",
+              1280267228,
+              "b02:s04"
+            ],
+            [
+              "2025-03-19",
+              "Access Denied Tokens",
+              96298507,
+              "b02:s04"
+            ],
+            [
+              "2025-03-31",
+              "total supply",
+              61073416469,
+              "b02:s04"
+            ],
+            [
+              "2025-03-31",
+              "Tokens Allowed But Not Issued",
+              996628065,
+              "b02:s04"
+            ],
+            [
+              "2025-03-31",
+              "Access Denied Tokens",
+              101016689,
+              "b02:s04"
+            ]
+          ]
+        }
+      },
+      "expected": {
+        "march31_reserves_usd": 60040712041.0,
+        "march31_circulation_usdc": 59975771715.0,
+        "march31_residual_usd": -5001.0,
+        "coverage_change_bps": -0.1567639497919453,
+        "conclusion": "supported"
+      }
+    }
+  ],
+  "control_origin": "synthetic_changed_input"
+}

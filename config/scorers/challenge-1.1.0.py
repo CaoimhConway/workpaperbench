@@ -56,7 +56,9 @@ def grade(directory, trusted):
     try:
         answer = load_artifact(directory)
         validate(answer, json.loads((trusted / "schema.json").read_text()))
-        if answer["task_id"] != gold["task_id"] or {a["id"] for a in answer["answers"]} != set(gold["answers"]):
+        if (answer["task_id"] != gold["task_id"]
+                or len(answer["answers"]) != len(gold["answers"])
+                or {a["id"] for a in answer["answers"]} != set(gold["answers"])):
             raise ValueError("claim_set")
         checks["delivery"] = True
     except Exception as exc:

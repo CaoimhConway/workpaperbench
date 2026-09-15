@@ -67,7 +67,25 @@ CHECK
         if shared["conclusion"]:
             shared["conclusion"]["evidence"] = [e for e in shared["conclusion"]["evidence"] if e not in shared["context_evidence"]]
         results.append(native(control(task, name + "-shared-context", shared), name + "-shared-context", True))
-    task = ROOT / "datasets/challenge-v1/tasks/a01"
+        if gold.get("scorer_version") == "challenge-1.1.0":
+            rounded = copy.deepcopy(ref)
+            for claim in rounded["answers"]:
+                if claim["status"] == "answered" and claim["unit"] in (
+                        "percent", "percentage_points", "basis_points"):
+                    claim["value"] = round(claim["value"], 2)
+            results.append(native(control(task, name + "-rounded", rounded), name + "-rounded", True))
+        if task.name == "c02":
+            guessed = copy.deepcopy(ref)
+            count = next(claim for claim in guessed["answers"]
+                         if claim["id"] == "business_payment_count_2024")
+            count.update(status="answered", value=1, sql="SELECT 1", reason_code=None)
+            item = native(control(task, name + "-guessed-count", guessed), name + "-guessed-count", False)
+            assert item["verdict"]["checks"] == {
+                "delivery": True, "evidence": True, "robustness": True, "financial_answer": False,
+            }
+            results.append(item)
+    current = ROOT / "datasets/challenge-v1/tasks/a02"
+    task = current if current.is_dir() else ROOT / "datasets/challenge-v1/tasks/a01"
     ref = json.loads((task / "tests/reference.json").read_text())
     for label, sql in (("attach", "ATTACH DATABASE '/tmp/escape' AS other"),
                        ("write", "DELETE FROM financials"),
