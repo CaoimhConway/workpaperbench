@@ -624,6 +624,48 @@
         "pilot-b01-reference-3"
       ],
       "scorer_version": "challenge-1.0.0",
+      "showcase": {
+        "contrast": {
+          "answer_sha256": "d3e0cb0cbb4644599dc916881cd39934b1eb59da8c169dd8fc155e987e091584",
+          "checks": {
+            "delivery": true,
+            "evidence": true,
+            "financial_answer": true,
+            "robustness": true
+          },
+          "errors": [],
+          "model_key": "reference",
+          "slot_id": "pilot-a01-reference-1",
+          "task": "challenge-v1-a01",
+          "workpaper": "reports/challenge-v1/workpapers/challenge-v1-development-7e8903385beb/pilot-a01-reference-1.md"
+        },
+        "interpretation": "Automatic diagnostic selection, not an independent capability-failure diagnosis",
+        "primary": {
+          "answer_sha256": "baf0d9c39e7be7264308ad35d49dad141a202456088748d005ba9ba6cb5e4652",
+          "checks": {
+            "delivery": true,
+            "evidence": false,
+            "financial_answer": true,
+            "robustness": false
+          },
+          "errors": [
+            "eps_difference:evidence",
+            "adjusted_operating_income:evidence",
+            "adjusted_operating_income:control:signed_bridge",
+            "adjusted_margin:evidence",
+            "adjusted_margin:control:signed_bridge",
+            "margin_bridge:evidence",
+            "margin_bridge:control:signed_bridge",
+            "conclusion:evidence"
+          ],
+          "model_key": "inexpensive",
+          "slot_id": "pilot-a01-inexpensive-1",
+          "task": "challenge-v1-a01",
+          "workpaper": "reports/challenge-v1/workpapers/challenge-v1-development-7e8903385beb/pilot-a01-inexpensive-1.md"
+        },
+        "rule": "First scheduled delivered financial or robustness failure, then evidence failure, then verified completion. Contrast first same-case completion or first completion elsewhere",
+        "selection_kind": "financial_or_robustness_failure"
+      },
       "slots": [
         {
           "errors": [

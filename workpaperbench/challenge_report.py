@@ -41,6 +41,63 @@ def render_workpaper(answer, label, evidence_path):
     return "\n".join(lines)
 
 
+def select_showcase(rows):
+    """Apply the declared relevance rule in schedule order, without model preference."""
+    delivered = [r for r in rows if r["record"]
+                 and (r["record"].get("verdict") or {}).get("checks", {}).get("delivery") is True]
+    substantive = [r for r in delivered if any(
+        r["record"]["verdict"]["checks"].get(key) is False
+        for key in ("financial_answer", "robustness"))]
+    evidence = [r for r in delivered
+                if r["record"]["verdict"]["checks"].get("evidence") is False]
+    completed = [r for r in delivered
+                 if r["record"]["verdict"].get("verified_research_completion") is True]
+    candidates = substantive or evidence or completed
+    primary = candidates[0] if candidates else None
+    contrast = None
+    if primary:
+        successes = [r for r in completed if r is not primary]
+        same_case = [r for r in successes if r["slot"]["task"] == primary["slot"]["task"]]
+        contrast = next(iter(same_case or successes), None)
+    return {"primary": primary, "contrast": contrast,
+            "selection_kind": "financial_or_robustness_failure" if substantive else
+                              "evidence_failure" if evidence else
+                              "verified_completion" if completed else "no_delivered_outcome"}
+
+
+def write_showcase(root, output, manifest, rows):
+    selected = select_showcase(rows)
+    result = {"rule": manifest.get("metrics", {}).get("showcase_selection"),
+              "selection_kind": selected["selection_kind"],
+              "interpretation": "Automatic diagnostic selection, not an independent capability-failure diagnosis"}
+    for role in ("primary", "contrast"):
+        row = selected[role]
+        if row is None:
+            result[role] = None
+            continue
+        slot = row["slot"]
+        directory = root / "reports/runs" / manifest["manifest_id"] / slot["slot_id"]
+        answer_path = directory / "answer.json"
+        audit = json.loads((directory / "artifact-audit.json").read_text())
+        if (not answer_path.is_file()
+                or hashlib.sha256(answer_path.read_bytes()).hexdigest()
+                != audit["retained_file_sha256"].get("answer.json")):
+            raise ValueError("challenge_showcase_answer_provenance_unverified")
+        answer = json.loads(answer_path.read_text())
+        key = slot["task"].removeprefix("challenge-v1-")
+        target = output / "workpapers" / manifest["manifest_id"] / (slot["slot_id"] + ".md")
+        target.parent.mkdir(parents=True, exist_ok=True)
+        dossier = "../../../../datasets/challenge-v1/tasks/" + key + "/environment/sources.md"
+        target.write_text(render_workpaper(answer, "Saved " + slot["slot_id"] + " workpaper", dossier))
+        result[role] = {"slot_id": slot["slot_id"], "task": slot["task"],
+                        "model_key": slot["model_key"],
+                        "workpaper": target.relative_to(root).as_posix(),
+                        "answer_sha256": audit["retained_file_sha256"]["answer.json"],
+                        "checks": row["record"]["verdict"]["checks"],
+                        "errors": row["record"]["verdict"].get("errors", [])}
+    return result
+
+
 def report_challenge(root):
     root = Path(root)
     output = root / "reports/challenge-v1"
@@ -92,7 +149,9 @@ def report_challenge(root):
         observers = [r["record"].get("native_api_retry_observer", {}) for r in rows if r["record"]]
         observed_retries = [o["observed_additional_attempts"] for o in observers
                             if o.get("capture_status") == "captured" and o.get("observer_registered") is True]
+        showcase = write_showcase(root, output, manifest, rows) if manifest.get("metrics", {}).get("showcase_selection") else None
         studies.append({"manifest_id": manifest["manifest_id"], "stage": manifest["stage"], "models": manifest["models"], "metrics": table,
+                        "showcase": showcase,
                         "scorer_version": manifest.get("scorer_version"),
                         "retry_observation": {"retained_records": len(observers),
                                               "capture_statuses": dict(Counter(o.get("capture_status", "not_recorded") for o in observers)),
@@ -114,6 +173,10 @@ def report_challenge(root):
             lines.append("| " + " | ".join((row["scope"], row["model_key"], cell("financial_answer"), cell("evidence"), cell("robustness"), f"{row['verified_research_completion']} / {row['scheduled']}", cell("delivery"), f"{row['strict_delivery_completion']} / {row['scheduled']}", f"{row['verdict_coverage']} / {row['scheduled']}")) + " |")
         lines += ["", "Balanced repetitions give equal weight to each task in the scheduled completion proportions. Component denominators count assessed verdicts. Missing or infrastructure-failed slots remain in scheduled denominators and are not fabricated model answers.", ""]
         lines += ["Latency, actual order, per-model cost deltas, unknown counts and nonexclusive failed components are retained in scores.json. Provider metadata can lag, so slot cost deltas are not exact model allocations. Native zero token fields do not establish zero usage.", ""]
+        if showcase and showcase["primary"]:
+            lines += ["Selected example: [" + showcase["primary"]["slot_id"] + "](" + showcase["primary"]["workpaper"].removeprefix("reports/challenge-v1/") + "). Selection: `" + showcase["selection_kind"] + "`.", ""]
+            if showcase["contrast"]:
+                lines += ["Passing contrast: [" + showcase["contrast"]["slot_id"] + "](" + showcase["contrast"]["workpaper"].removeprefix("reports/challenge-v1/") + ").", ""]
     lines += ["No assisted-condition trials are recorded. These small source groups and repeated attempts do not establish population reliability or a universal model ranking. Synthetic controls test a few declared mechanisms, not universal generalization.", ""]
     result = {"dataset_id": "challenge-v1", "studies": studies}
     (output / "scores.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
