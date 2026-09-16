@@ -6,7 +6,7 @@ WorkpaperBench tests whether agents can find, reconcile, calculate and justify f
 
 A [saved Adobe pilot workpaper](reports/challenge-v1/workpapers/challenge-v1-development-7e8903385beb/pilot-a01-inexpensive-1.md) returns the correct original adjusted operating income, USD 2,596 million, by selecting the reported non-GAAP subtotal. Its SQL fails when a synthetic signed adjustment changes while the reported comparison total stays fixed. The original amount is correct, but the submitted calculation does not independently rebuild it. The [reference-model contrast](reports/challenge-v1/workpapers/challenge-v1-development-7e8903385beb/pilot-a01-reference-1.md) recomputes the components and passes. [Dossier](datasets/challenge-v1/tasks/a01/environment/sources.md) · [Original failed verdict](reports/runs/challenge-v1-development-7e8903385beb/pilot-a01-inexpensive-1/verdict.json).
 
-The initial pilot is complete. Nine separate evaluation cases are source-reviewed, with hosted software validation pending and no evaluation model exposure yet.
+The initial pilot is complete. Nine separate evaluation cases passed source review and the hosted software gate. Their 54 full-dossier slots are frozen before exposure as `challenge-v1-evaluation-d9a2fe13f6f2`, with evaluation dispatch next.
 
 | Stage / model | Financial / assessed | Evidence / assessed | Robustness / assessed | Verified / scheduled | Delivery / assessed | Verdict coverage |
 |---|---:|---:|---:|---:|---:|---:|
