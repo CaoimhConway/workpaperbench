@@ -1,0 +1,86 @@
+{
+  "name": "challenge-b03-constant",
+  "expected_complete": false,
+  "verdict": {
+    "scorer_version": "challenge-1.1.0",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "delivery": true,
+      "financial_answer": true,
+      "evidence": true,
+      "robustness": false
+    },
+    "details": {
+      "claims": {
+        "reserve_assets_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "bitcoin_fair_value_change": false,
+            "company_held_token_change": true,
+            "release_liability_alignment": true
+          }
+        },
+        "net_token_liability_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "bitcoin_fair_value_change": true,
+            "company_held_token_change": false,
+            "release_liability_alignment": true
+          }
+        },
+        "company_asset_excess_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "bitcoin_fair_value_change": false,
+            "company_held_token_change": true,
+            "release_liability_alignment": true
+          }
+        },
+        "release_liability_delta_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "bitcoin_fair_value_change": true,
+            "company_held_token_change": true,
+            "release_liability_alignment": false
+          }
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "evidence": true
+      }
+    },
+    "errors": [
+      "reserve_assets_usd:control:bitcoin_fair_value_change",
+      "net_token_liability_usd:control:company_held_token_change",
+      "company_asset_excess_usd:control:bitcoin_fair_value_change",
+      "release_liability_delta_usd:control:release_liability_alignment"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}

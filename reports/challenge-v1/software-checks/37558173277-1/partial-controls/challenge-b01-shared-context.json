@@ -1,0 +1,66 @@
+{
+  "name": "challenge-b01-shared-context",
+  "expected_complete": true,
+  "verdict": {
+    "scorer_version": "challenge-1.0.0",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "delivery": true,
+      "financial_answer": true,
+      "evidence": true,
+      "robustness": true
+    },
+    "details": {
+      "claims": {
+        "june_assets_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "component_gap": true,
+            "coverage_increase": true
+          }
+        },
+        "june_reconciliation_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "component_gap": true,
+            "coverage_increase": true
+          }
+        },
+        "coverage_change_pp": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "component_gap": true,
+            "coverage_increase": true
+          }
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "evidence": true
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}

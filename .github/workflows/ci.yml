@@ -24,6 +24,9 @@ on:
         type: choice
         options: [all, historical, real-v1, challenge-v1]
         default: all
+      challenge_tasks:
+        type: string
+        default: ''
       fresh_replay:
         type: boolean
         default: false
@@ -109,6 +112,8 @@ jobs:
         run: python -u scripts/real_controls.py
       - name: Native challenge references and isolation controls
         if: inputs.integration && (inputs.dataset == 'all' || inputs.dataset == 'challenge-v1')
+        env:
+          WPB_CHALLENGE_TASKS: ${{ inputs.challenge_tasks }}
         run: python -u scripts/challenge_controls.py
       - name: Fresh selected replay or engineer submission
         if: inputs.fresh_replay

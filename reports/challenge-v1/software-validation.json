@@ -25,6 +25,33 @@
     }
   },
   "dataset_id": "challenge-v1",
+  "evaluation_native_attempts": [
+    {
+      "all_retained_isolation_flags_true": true,
+      "archive_sha256": "a5a6befd1cf617b8b44a196c05a5be398ba8c7e6ec9a036c4ca7d1abe46f73d2",
+      "artifact_id": 11456353553,
+      "commit_sha": "74af50570fcd08aab539b86e037fceb378378362",
+      "conclusion": "failure",
+      "controls_passed": 60,
+      "controls_retained": 61,
+      "diagnosis": "C02-C04 authored reference expressions omit SELECT prefixes. Source facts, gold, candidate inputs and scoring unchanged. Correct before exposure, recheck affected cases and unexecuted hostile controls.",
+      "failed_and_remaining_case_candidate_and_gold_bytes_unchanged": true,
+      "failed_control": "challenge-c02-reference",
+      "receipt_directory": "reports/challenge-v1/software-checks/37558173277-1/partial-controls",
+      "run_id": 37558173277,
+      "unchanged_successful_packages_checked": [
+        "a01",
+        "a02",
+        "a03",
+        "a04",
+        "b01",
+        "b02",
+        "b03",
+        "b04",
+        "c01"
+      ]
+    }
+  ],
   "fresh_replay": {
     "archive_sha256": "20e4b825f132d21e74ec5cd604a55a10e0993e322dafa56b319c1725f3d89e3c",
     "artifact_id": 11446615699,
