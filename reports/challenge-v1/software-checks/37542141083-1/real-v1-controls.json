@@ -1,0 +1,1912 @@
+{
+  "dataset_id": "real-v1",
+  "run_id": "37542141083",
+  "commit_sha": "924239090945206f3179dcc4388173286ca03d0a",
+  "controls": [
+    {
+      "name": "real-v1-wp01-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp01-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp01-alternative",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp01-constant",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "q1_rd:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp02-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp02-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp02-alternative",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp02-constant",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "transfer_total:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp03-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "sample_fees": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "claimed_above_subsidy": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp03-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp03-alternative",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "sample_fees": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "claimed_above_subsidy": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp03-constant",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "sample_fees": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "claimed_above_subsidy": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "sample_fees:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp04-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "circulating_end": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "circulating_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "reserve_headroom": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp04-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp04-alternative",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "circulating_end": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "circulating_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "reserve_headroom": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp04-constant",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "circulating_end": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "circulating_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "reserve_headroom": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "circulating_end:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp05-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "naive_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "comparable_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp05-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp05-alternative",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "naive_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "comparable_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp05-constant",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "naive_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "comparable_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "naive_growth:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp06-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "sample_rate_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "matched_rate_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp06-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp06-alternative",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "sample_rate_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "matched_rate_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp06-constant",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "sample_rate_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "matched_rate_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "sample_rate_change:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp07-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_revenue": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_gross_profit": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_margin": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "margin_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp07-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp07-alternative",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_revenue": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_gross_profit": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_margin": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "margin_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp07-constant",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "q1_revenue": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "q1_gross_profit": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_margin": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "margin_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "q1_revenue:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp08-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "observed_outputs": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "business_payments": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "unique_people": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp08-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp08-alternative",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "observed_outputs": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "business_payments": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "unique_people": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-wp08-constant",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "observed_outputs": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "business_payments": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "unique_people": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "observed_outputs:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-amount-distinct",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": false,
+              "changed_replay": false
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "transfer_total:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-event-distinct",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-event-window",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-tampered-input",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-extra-artifact",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-extra-claim",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": true,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": null,
+              "availability": null,
+              "unit": null,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-forbidden-sql",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": false,
+              "changed_replay": false
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "transfer_total:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "real-v1-bounded-sql",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": false,
+              "changed_replay": false
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "transfer_total:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    }
+  ]
+}

@@ -287,6 +287,9 @@ def main():
         answer = parse(args.path.read_bytes())
         task_id = str(answer.get("task_id", ""))
         schema_path = ROOT / ("datasets/challenge-v1/schema.json" if task_id.startswith("challenge-v1-") else "datasets/real-v1/schema.json" if task_id.startswith("real-v1-") else "config/schema.json")
+        challenge_ids = {f"challenge-v1-{family}{number:02}" for family in "abc" for number in range(1, 5)}
+        if task_id in challenge_ids:
+            schema_path = ROOT / "datasets/challenge-v1/tasks" / task_id.removeprefix("challenge-v1-") / "environment/schema.json"
         validate(answer, json.loads(schema_path.read_text()))
         print("Output structure valid. Financial correctness and replay require the separate verifier on Actions.")
     elif args.command == "demo":

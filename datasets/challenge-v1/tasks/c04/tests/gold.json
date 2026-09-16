@@ -1,0 +1,122 @@
+{
+  "answers": {
+    "service_revenue_growth_pct": {
+      "status": "answered",
+      "value": 8.687440982058545,
+      "unit": "percent",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "c04:s01"
+        ],
+        [
+          "c04:s01",
+          "c04:s04"
+        ]
+      ]
+    },
+    "lagged_nominal_payment_volume_growth_pct": {
+      "status": "answered",
+      "value": 7.421196326631919,
+      "unit": "percent",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "c04:s02",
+          "c04:s04"
+        ],
+        [
+          "c04:s02",
+          "c04:s04",
+          "c04:s05"
+        ]
+      ]
+    },
+    "service_growth_minus_volume_growth_pp": {
+      "status": "answered",
+      "value": 1.2662446554266271,
+      "unit": "percentage_points",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "c04:s01",
+          "c04:s02",
+          "c04:s04"
+        ],
+        [
+          "c04:s01",
+          "c04:s02",
+          "c04:s04",
+          "c04:s05"
+        ]
+      ]
+    },
+    "service_revenue_to_lagged_volume_proxy_2024_pct": {
+      "status": "answered",
+      "value": 0.12410659272951324,
+      "unit": "percent",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "c04:s01",
+          "c04:s02",
+          "c04:s04"
+        ],
+        [
+          "c04:s01",
+          "c04:s02",
+          "c04:s04",
+          "c04:s05"
+        ]
+      ]
+    }
+  },
+  "conclusion": {
+    "verdict": "not_established",
+    "evidence": [
+      [
+        "c04:s01",
+        "c04:s02",
+        "c04:s04",
+        "c04:s05"
+      ]
+    ]
+  },
+  "context_evidence_allowed": [
+    "c04:s04",
+    "c04:s05"
+  ],
+  "task_id": "challenge-v1-c04",
+  "scorer_version": "challenge-1.1.0",
+  "controls": [
+    {
+      "name": "service_revenue_2024_shift",
+      "database": "control-1.sqlite",
+      "expected": {
+        "service_revenue_growth_pct": 12.059894779441521,
+        "lagged_nominal_payment_volume_growth_pct": 7.421196326631919,
+        "service_growth_minus_volume_growth_pp": 4.638698452809603,
+        "service_revenue_to_lagged_volume_proxy_2024_pct": 0.12795748613678373
+      }
+    },
+    {
+      "name": "lagged_volume_2023_shift",
+      "database": "control-2.sqlite",
+      "expected": {
+        "service_revenue_growth_pct": 8.687440982058545,
+        "lagged_nominal_payment_volume_growth_pct": 6.53975547714778,
+        "service_growth_minus_volume_growth_pp": 2.1476855049107653,
+        "service_revenue_to_lagged_volume_proxy_2024_pct": 0.12410659272951324
+      }
+    }
+  ],
+  "hashes": {
+    "evidence.json": "d97266b3c18fab09e5ece2109e0512b85fc168ff1a94f2c04f2ae9d9143b8877",
+    "control-2.sqlite": "2dd2507a402f8b684dc4f52488a24afcc8e5a2e8f4f12c692dd16c4d86341a1f",
+    "sources.md": "64797aec68dff4091287f01c93676998efaa1cafe70495e0af20079f75cd6bd4",
+    "control-1.sqlite": "f4c228d1d5c9a5b6b2b5afe2249fa949ea968b21370becf9bb3baa89ec54f843",
+    "schema.json": "32b131ff8db1a194bd8bdba7b6e610c6e6806294bcdea28833d57f9a28eef5e5",
+    "verify.py": "a69eb6c71a44ff42df488696ecd76257c5ec1096f5ae9a5dd245cc4128a2b0e2",
+    "data.sqlite": "92d7f9bdf8d094e2cbe57e171a37a788ca45c07ae8e7b024d7d2fc8b17e7ca07"
+  }
+}

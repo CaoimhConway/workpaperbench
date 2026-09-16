@@ -8,6 +8,41 @@ from native_run import frozen_inputs
 from select_slots import _repo_file, challenge_dataset_context, manifest_content_hash
 
 ROOT = Path(__file__).resolve().parents[1]
+# These operational files may differ between the preserved pilot and final runtime.
+RUNTIME_TRANSFER_INPUTS = {
+    "config/runtime.json", "scripts/fix_native_version.py",
+    "scripts/native_trial.py", "scripts/check_install.py",
+    "scripts/native_run.py", "scripts/fresh_replay.py",
+    "scripts/build_challenge_tasks.py",
+    "scripts/select_slots.py",
+}
+
+
+def source_manifest(original, runtime, root):
+    """Verify original cases and bind a separately frozen current runtime."""
+    challenge_dataset_context(original["manifest_id"], root)
+    manifest = dict(original)
+    hashes = dict(original["hashes"])
+    changed = {}
+    for name, expected in hashes.items():
+        actual = hashlib.sha256(_repo_file(root, name).read_bytes()).hexdigest()
+        if actual == expected:
+            continue
+        if (name not in RUNTIME_TRANSFER_INPUTS
+                or runtime["hashes"].get(name) != actual):
+            raise ValueError("freeze_hash_mismatch")
+        changed[name] = {"original": expected, "current": actual}
+        hashes[name] = actual
+    manifest["hashes"] = hashes
+    helper = "scripts/operations_review.py"
+    if helper in runtime["hashes"]:
+        manifest["hashes"][helper] = runtime["hashes"][helper]
+    if changed:
+        manifest["runtime_manifest_id"] = runtime["manifest_id"]
+        manifest["runtime_changes"] = changed
+        if "settings" in runtime:
+            manifest["settings"] = dict(runtime["settings"])
+    return manifest
 
 
 def create(model_file, root=ROOT):
@@ -17,15 +52,22 @@ def create(model_file, root=ROOT):
     profiles = json.loads(model_file.read_text())
     outputs = []
     development_id = None
+    manifests = root / "datasets/challenge-v1/manifests"
+    runtime_path = manifests / "evaluation.json"
+    if not runtime_path.is_file():
+        runtime_path = manifests / "development.json"
+    if not runtime_path.is_file():
+        raise ValueError("development_freeze_missing")
+    runtime_original = json.loads(runtime_path.read_text())
+    runtime = frozen_inputs(runtime_original["manifest_id"], root)
     for stage in ("development", "evaluation"):
-        path = root / "datasets/challenge-v1/manifests" / (stage + ".json")
+        path = manifests / (stage + ".json")
         if not path.is_file():
             if stage == "evaluation":
                 break
             raise ValueError("development_freeze_missing")
         original = json.loads(path.read_text())
-        manifest = dict(frozen_inputs(original["manifest_id"], root))
-        manifest["hashes"] = dict(manifest["hashes"])
+        manifest = source_manifest(original, runtime, root)
         manifest["models"] = profiles
         manifest["base_manifest_id"] = original["manifest_id"]
         manifest["campaign_purpose"] = "Future model run on already published source cases, not a new held-out test set"

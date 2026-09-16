@@ -1,0 +1,61 @@
+{
+  "task_id": "challenge-v1-c01",
+  "context_evidence": [
+    "c01:s01",
+    "c01:s03",
+    "c01:s06"
+  ],
+  "answers": [
+    {
+      "id": "yield_2024",
+      "status": "answered",
+      "value": 1.715611,
+      "unit": "percent",
+      "evidence": [
+        "c01:s01",
+        "c01:s03"
+      ],
+      "sql": "SELECT ROUND(SUM(tr.amount) / SUM(op.amount) * 100.0, 6) AS yield_pct FROM revenues tr JOIN operating_metrics op ON tr.period_end = op.period_end AND tr.months = op.months WHERE tr.category = 'Transaction revenues' AND op.metric = 'Total payment volume' AND tr.section_id = 'c01:s01' AND op.section_id = 'c01:s03' AND tr.period_end = '2024-12-31'"
+    },
+    {
+      "id": "yield_2023",
+      "status": "answered",
+      "value": 1.756991,
+      "unit": "percent",
+      "evidence": [
+        "c01:s01",
+        "c01:s03"
+      ],
+      "sql": "SELECT ROUND(SUM(tr.amount) / SUM(op.amount) * 100.0, 6) AS yield_pct FROM revenues tr JOIN operating_metrics op ON tr.period_end = op.period_end AND tr.months = op.months WHERE tr.category = 'Transaction revenues' AND op.metric = 'Total payment volume' AND tr.section_id = 'c01:s01' AND op.section_id = 'c01:s03' AND tr.period_end = '2023-12-31'"
+    },
+    {
+      "id": "yield_change",
+      "status": "answered",
+      "value": -4.137996,
+      "unit": "basis_points",
+      "evidence": [
+        "c01:s01",
+        "c01:s03"
+      ],
+      "sql": "SELECT ROUND((\n  (SELECT SUM(t.amount) / SUM(o.amount) * 100.0\n   FROM revenues t JOIN operating_metrics o ON t.period_end = o.period_end AND t.months = o.months\n   WHERE t.category = 'Transaction revenues' AND o.metric = 'Total payment volume'\n     AND t.section_id = 'c01:s01' AND o.section_id = 'c01:s03' AND t.period_end = '2024-12-31')\n  -\n  (SELECT SUM(t.amount) / SUM(o.amount) * 100.0\n   FROM revenues t JOIN operating_metrics o ON t.period_end = o.period_end AND t.months = o.months\n   WHERE t.category = 'Transaction revenues' AND o.metric = 'Total payment volume'\n     AND t.section_id = 'c01:s01' AND o.section_id = 'c01:s03' AND t.period_end = '2023-12-31')\n) * 100.0, 6) AS yield_change_bps"
+    },
+    {
+      "id": "transaction_contribution",
+      "status": "answered",
+      "value": 97.976308,
+      "unit": "percent",
+      "evidence": [
+        "c01:s01"
+      ],
+      "sql": "SELECT ROUND(\n  ((SELECT SUM(t.amount) FROM revenues t WHERE t.category = 'Transaction revenues' AND t.period_end = '2024-12-31' AND t.section_id = 'c01:s01')\n   - (SELECT SUM(t.amount) FROM revenues t WHERE t.category = 'Transaction revenues' AND t.period_end = '2023-12-31' AND t.section_id = 'c01:s01'))\n  /\n  ((SELECT SUM(t.amount) FROM revenues t WHERE t.category = 'Total net revenues (2)' AND t.period_end = '2024-12-31' AND t.section_id = 'c01:s01')\n   - (SELECT SUM(t.amount) FROM revenues t WHERE t.category = 'Total net revenues (2)' AND t.period_end = '2023-12-31' AND t.section_id = 'c01:s01'))\n  * 100.0, 6) AS txn_contribution_pct"
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "evidence": [
+      "c01:s01",
+      "c01:s03",
+      "c01:s07"
+    ]
+  }
+}

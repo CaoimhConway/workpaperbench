@@ -1,0 +1,101 @@
+{
+  "name": "challenge-a04-constant",
+  "expected_complete": false,
+  "verdict": {
+    "scorer_version": "challenge-1.1.0",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "delivery": true,
+      "financial_answer": true,
+      "evidence": true,
+      "robustness": false
+    },
+    "details": {
+      "claims": {
+        "guidance_upper": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "tax_adjustment_gap": true,
+            "guidance_compensation_change": false
+          }
+        },
+        "eps_gap": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "tax_adjustment_gap": true,
+            "guidance_compensation_change": false
+          }
+        },
+        "net_income_adjustment": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "compatible_monetary_scale": false,
+            "tax_adjustment_gap": false,
+            "guidance_compensation_change": true
+          }
+        },
+        "adjusted_net_income": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "compatible_monetary_scale": false,
+            "tax_adjustment_gap": false,
+            "guidance_compensation_change": true
+          }
+        },
+        "adjusted_net_margin": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "tax_adjustment_gap": false,
+            "guidance_compensation_change": true
+          }
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "evidence": true
+      }
+    },
+    "errors": [
+      "guidance_upper:control:guidance_compensation_change",
+      "eps_gap:control:guidance_compensation_change",
+      "net_income_adjustment:control:compatible_monetary_scale",
+      "net_income_adjustment:control:tax_adjustment_gap",
+      "adjusted_net_income:control:compatible_monetary_scale",
+      "adjusted_net_income:control:tax_adjustment_gap",
+      "adjusted_net_margin:control:tax_adjustment_gap"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}

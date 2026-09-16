@@ -1,0 +1,87 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": false,
+    "financial_answer": false,
+    "robustness": false
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "transaction_contribution": {
+        "availability": true,
+        "controls": {
+          "monetary_scale": true,
+          "quarterly_changes": true,
+          "revenue_mix": true
+        },
+        "evidence": false,
+        "numerical": false,
+        "original_replay": true,
+        "unit": true
+      },
+      "yield_2023": {
+        "availability": true,
+        "controls": {
+          "monetary_scale": true,
+          "quarterly_changes": true,
+          "revenue_mix": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "yield_2024": {
+        "availability": true,
+        "controls": {
+          "monetary_scale": true,
+          "quarterly_changes": true,
+          "revenue_mix": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "yield_change": {
+        "availability": true,
+        "controls": {
+          "monetary_scale": false,
+          "quarterly_changes": false,
+          "revenue_mix": false
+        },
+        "evidence": false,
+        "numerical": false,
+        "original_replay": false,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": false,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "yield_2024:evidence",
+    "yield_2023:evidence",
+    "yield_change:numerical",
+    "yield_change:evidence",
+    "yield_change:original_replay",
+    "yield_change:control:monetary_scale",
+    "yield_change:control:quarterly_changes",
+    "yield_change:control:revenue_mix",
+    "transaction_contribution:numerical",
+    "transaction_contribution:evidence",
+    "conclusion:evidence"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.0.0",
+  "strict_delivery_completion": false,
+  "verified_research_completion": false
+}

@@ -269,6 +269,101 @@ def test_challenge_freeze_binds_current_stage_packages_and_runtime(tmp_path, mon
         native_run.frozen_inputs(manifest["manifest_id"], root=tmp_path)
 
 
+def test_future_campaign_uses_frozen_final_runtime_without_rebinding_pilot(tmp_path, monkeypatch):
+    development, _ = make_stage(tmp_path, "development")
+    runtime_name = "scripts/fix_native_version.py"
+    runtime_file = tmp_path / runtime_name
+    runtime_file.parent.mkdir(parents=True, exist_ok=True)
+    runtime_file.write_text("original pinned correction\n")
+    development["hashes"][runtime_name] = hashlib.sha256(runtime_file.read_bytes()).hexdigest()
+    development["content_hash"] = select_slots.manifest_content_hash(development)
+    development["manifest_id"] = "challenge-v1-development-" + development["content_hash"][:12]
+    development_path = tmp_path / "datasets/challenge-v1/manifests/development.json"
+    write_json(development_path, development)
+    original_bytes = development_path.read_bytes()
+    runtime_file.write_text("reviewed post-config observer correction\n")
+    evaluation, _ = make_stage(
+        tmp_path, "evaluation", development_manifest_id=development["manifest_id"])
+    evaluation["hashes"][runtime_name] = hashlib.sha256(runtime_file.read_bytes()).hexdigest()
+    evaluation["content_hash"] = select_slots.manifest_content_hash(evaluation)
+    evaluation["manifest_id"] = "challenge-v1-evaluation-" + evaluation["content_hash"][:12]
+    write_json(tmp_path / "datasets/challenge-v1/manifests/evaluation.json", evaluation)
+    profile_file = tmp_path / "models/future-profiles.json"
+    write_json(profile_file, MODELS)
+    monkeypatch.setattr(native_run, "CHALLENGE_RUNTIME_INPUTS", set())
+    import new_challenge_campaign
+
+    outputs = new_challenge_campaign.create(profile_file, tmp_path)
+    future = json.loads(outputs[0].read_text())
+    assert future["runtime_manifest_id"] == evaluation["manifest_id"]
+    assert future["runtime_changes"][runtime_name] == {
+        "original": development["hashes"][runtime_name],
+        "current": evaluation["hashes"][runtime_name],
+    }
+    assert development_path.read_bytes() == original_bytes
+    assert native_run.frozen_inputs(future["manifest_id"], tmp_path) == future
+    with pytest.raises(ValueError, match="freeze_hash_mismatch"):
+        native_run.frozen_inputs(development["manifest_id"], tmp_path)
+    runtime_file.write_text("unfrozen operational edit\n")
+    with pytest.raises(ValueError, match="freeze_hash_mismatch"):
+        new_challenge_campaign.create(profile_file, tmp_path)
+    runtime_file.write_text("reviewed post-config observer correction\n")
+    instruction = tmp_path / development["tasks"]["a01"]["path"] / "instruction.md"
+    instruction.write_text("changed candidate instructions\n")
+    with pytest.raises(ValueError, match="freeze_hash_mismatch"):
+        new_challenge_campaign.create(profile_file, tmp_path)
+
+
+def test_challenge_operations_review_is_key_free_and_cannot_change_cases(tmp_path, monkeypatch):
+    manifest, _ = make_stage(tmp_path, "development")
+    relative = "scripts/fix_native_version.py"
+    runtime = tmp_path / relative
+    runtime.parent.mkdir(parents=True, exist_ok=True)
+    runtime.write_text("original native correction\n")
+    manifest["hashes"][relative] = hashlib.sha256(runtime.read_bytes()).hexdigest()
+    manifest["content_hash"] = select_slots.manifest_content_hash(manifest)
+    manifest["manifest_id"] = "challenge-v1-development-" + manifest["content_hash"][:12]
+    path = tmp_path / "datasets/challenge-v1/manifests/development.json"
+    write_json(path, manifest)
+    runtime.write_text("reviewed observer correction\n")
+    helper = tmp_path / "scripts/operations_review.py"
+    helper.write_bytes((ROOT / "scripts/operations_review.py").read_bytes())
+    review = {
+        "original_manifest_id": manifest["manifest_id"],
+        "original_manifest_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "correction_hashes": {relative: hashlib.sha256(runtime.read_bytes()).hexdigest()},
+        "review_helper_sha256": hashlib.sha256(helper.read_bytes()).hexdigest(),
+    }
+    review_path = tmp_path / "datasets/challenge-v1/operations-review.json"
+    write_json(review_path, review)
+    monkeypatch.setattr(native_run, "CHALLENGE_RUNTIME_INPUTS", set())
+
+    assert native_run.frozen_inputs(manifest["manifest_id"], tmp_path, reviewed_operations=True) == manifest
+    with pytest.raises(ValueError, match="freeze_hash_mismatch"):
+        native_run.frozen_inputs(manifest["manifest_id"], tmp_path)
+    original_helper = helper.read_bytes()
+    helper.write_bytes(original_helper + b"\n")
+    with pytest.raises(ValueError, match="challenge_review_helper_changed"):
+        native_run.frozen_inputs(manifest["manifest_id"], tmp_path, reviewed_operations=True)
+    helper.write_bytes(original_helper)
+    runtime.write_text("unreviewed native change\n")
+    with pytest.raises(ValueError, match="freeze_hash_mismatch"):
+        native_run.frozen_inputs(manifest["manifest_id"], tmp_path, reviewed_operations=True)
+    instruction = manifest["tasks"]["a01"]["path"] + "/instruction.md"
+    review["correction_hashes"][instruction] = manifest["hashes"][instruction]
+    write_json(review_path, review)
+    with pytest.raises(ValueError, match="challenge_operations_review_invalid"):
+        native_run.frozen_inputs(manifest["manifest_id"], tmp_path, reviewed_operations=True)
+
+
+def test_challenge_manifest_and_packaged_scorer_versions_must_match(tmp_path):
+    manifest, _ = make_stage(tmp_path, "development")
+    gold = tmp_path / manifest["tasks"]["a01"]["path"] / "tests/gold.json"
+    write_json(gold, {"task_id": "challenge-v1-a01", "scorer_version": "challenge-1.1.0"})
+    with pytest.raises(ValueError, match="challenge_task_scorer_version_mismatch"):
+        select_slots.challenge_dataset_context(manifest["manifest_id"], tmp_path)
+
+
 def test_challenge_reservation_sums_remaining_model_costs_without_multiplier(tmp_path):
     manifest, schedule = make_stage(tmp_path, "development")
     context = select_slots.challenge_dataset_context(manifest["manifest_id"], tmp_path)

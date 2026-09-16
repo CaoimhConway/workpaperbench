@@ -1,0 +1,88 @@
+{
+  "name": "challenge-b02-constant",
+  "expected_complete": false,
+  "verdict": {
+    "scorer_version": "challenge-1.1.0",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "delivery": true,
+      "financial_answer": true,
+      "evidence": true,
+      "robustness": false
+    },
+    "details": {
+      "claims": {
+        "march31_reserves_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "march31_treasury_revaluation": false,
+            "march31_supply_change": true,
+            "march31_component_gap": false
+          }
+        },
+        "march31_circulation_usdc": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "march31_treasury_revaluation": true,
+            "march31_supply_change": false,
+            "march31_component_gap": true
+          }
+        },
+        "march31_residual_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "march31_treasury_revaluation": true,
+            "march31_supply_change": true,
+            "march31_component_gap": false
+          }
+        },
+        "coverage_change_bps": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "march31_treasury_revaluation": false,
+            "march31_supply_change": false,
+            "march31_component_gap": true
+          }
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "evidence": true
+      }
+    },
+    "errors": [
+      "march31_reserves_usd:control:march31_treasury_revaluation",
+      "march31_reserves_usd:control:march31_component_gap",
+      "march31_circulation_usdc:control:march31_supply_change",
+      "march31_residual_usd:control:march31_component_gap",
+      "coverage_change_bps:control:march31_treasury_revaluation",
+      "coverage_change_bps:control:march31_supply_change"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}

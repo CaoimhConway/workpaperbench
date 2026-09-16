@@ -1,0 +1,50 @@
+{
+  "name": "real-v1-wp01-constant",
+  "expected_complete": false,
+  "verdict": {
+    "scorer_version": "1.2.0",
+    "complete": false,
+    "checks": {
+      "format": true,
+      "numerical": true,
+      "evidence_context": true,
+      "availability": true,
+      "conclusion": null,
+      "replay": false
+    },
+    "details": {
+      "claims": {
+        "q1_rd": {
+          "numerical": true,
+          "evidence": true,
+          "availability": true,
+          "unit": true,
+          "reason_code": null,
+          "original_replay": true,
+          "changed_replay": false
+        },
+        "sequential_change": {
+          "numerical": true,
+          "evidence": true,
+          "availability": true,
+          "unit": true,
+          "reason_code": null,
+          "original_replay": true,
+          "changed_replay": true
+        }
+      },
+      "conclusion": null
+    },
+    "errors": [
+      "q1_rd:replay"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}

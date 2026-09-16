@@ -9,7 +9,80 @@
     "run_id": "37535020907"
   },
   "checked_commit": "7ccd863a5ab59e1856f9094cae66d470de28afd9",
+  "core_regression_confirmation": {
+    "archive_sha256": "33f343c057bc91bda99347b8e7f78cd035b805be0c49db68be002968ee99ca12",
+    "artifact_id": 11448949534,
+    "commit_sha": "924239090945206f3179dcc4388173286ca03d0a",
+    "conclusion": "success",
+    "controls": 40,
+    "original_version_preserved": true,
+    "receipt_directory": "reports/challenge-v1/software-checks/37542141083-1",
+    "run_id": 37542141083,
+    "same_amount_different_event": {
+      "amount_distinct": "correct original scalar, rejects changed-input replay",
+      "event_distinct": "accepted",
+      "event_window": "accepted"
+    }
+  },
   "dataset_id": "challenge-v1",
+  "evaluation_native_attempts": [
+    {
+      "all_retained_isolation_flags_true": true,
+      "archive_sha256": "a5a6befd1cf617b8b44a196c05a5be398ba8c7e6ec9a036c4ca7d1abe46f73d2",
+      "artifact_id": 11456353553,
+      "commit_sha": "74af50570fcd08aab539b86e037fceb378378362",
+      "conclusion": "failure",
+      "controls_passed": 60,
+      "controls_retained": 61,
+      "diagnosis": "C02-C04 authored reference expressions omit SELECT prefixes. Source facts, gold, candidate inputs and scoring unchanged. Correct before exposure, recheck affected cases and unexecuted hostile controls.",
+      "failed_and_remaining_case_candidate_and_gold_bytes_unchanged": true,
+      "failed_control": "challenge-c02-reference",
+      "receipt_directory": "reports/challenge-v1/software-checks/37558173277-1/partial-controls",
+      "run_id": 37558173277,
+      "unchanged_successful_packages_checked": [
+        "a01",
+        "a02",
+        "a03",
+        "a04",
+        "b01",
+        "b02",
+        "b03",
+        "b04",
+        "c01"
+      ]
+    },
+    {
+      "all_retained_isolation_flags_true": true,
+      "archive_sha256": "feb561beece49ae480850cb447f4418290aaea2638e62362bcc3c24a515e0479",
+      "artifact_id": 11458633557,
+      "commit_sha": "f341fa4b5efa1dc41f04b1df46d1c4e6c16270d9",
+      "conclusion": "success",
+      "controls_passed": 28,
+      "receipt_directory": "reports/challenge-v1/software-checks/37564292444-1",
+      "run_attempt": 1,
+      "run_id": 37564292444,
+      "selected_tasks": [
+        "c02",
+        "c03",
+        "c04"
+      ]
+    }
+  ],
+  "evaluation_native_gate": {
+    "all_expected_verdicts_match": true,
+    "all_four_isolation_checks": true,
+    "conclusion": "success",
+    "controls": 88,
+    "failed_c02_receipt_preserved": true,
+    "runs": [
+      37558173277,
+      37564292444
+    ],
+    "scope": "All twelve cases, versioned references and alternatives, constants, unavailable-count, hostile SQL, duplicate and pristine controls",
+    "successful_current_controls": 28,
+    "successful_unchanged_controls_reused": 60,
+    "unchanged_package_proof": "evaluation_native_attempts[0].unchanged_successful_packages_checked"
+  },
   "fresh_replay": {
     "archive_sha256": "20e4b825f132d21e74ec5cd604a55a10e0993e322dafa56b319c1725f3d89e3c",
     "artifact_id": 11446615699,
@@ -53,6 +126,8 @@
     "conclusion": "success",
     "key_free": true,
     "native_ledger_writable": true,
+    "pilot_observation": "First six authenticated pilot records have missing ledgers despite passing pre-run registration. Harbor rewrites config.yaml after that check and drops plugins.enabled. Preserve receipts. Correct future runtime and test hook dispatch after the actual native config write before final inference.",
+    "post_configuration_write_tested": false,
     "receipt_path": "reports/challenge-v1/software-checks/37541232266-1/install.json",
     "receipt_sha256": "9578d0b12ddc5e6e97563cda4e6621da035a6484b819ce504e1e5bfa94fe007f",
     "run_id": 37541232266,
@@ -61,6 +136,172 @@
       1,
       2
     ]
+  },
+  "post_write_correction_unit": {
+    "commit_sha": "f018fdf2a308587a79cd2c75f503bc0df2ecb78b",
+    "core_and_challenge_offline_reconstruction": true,
+    "key_free_demo": true,
+    "publication_audit": true,
+    "run_id": 37552167834,
+    "seconds": 15.06,
+    "source": "exact hosted unit job log",
+    "tests_passed": 301
+  },
+  "post_write_installation_attempts": [
+    {
+      "archive_digest_verified": true,
+      "archive_sha256": "aed902f146262a3319ae33d3587b84c14563851fc2ff7478b8cde1b1d39e990b",
+      "artifact_id": 11452914367,
+      "artifact_name": "installation-f018fdf2a308587a79cd2c75f503bc0df2ecb78b-37552167834-1",
+      "bounded_member_names": [
+        "install.json"
+      ],
+      "commit_sha": "f018fdf2a308587a79cd2c75f503bc0df2ecb78b",
+      "conclusion": "failure",
+      "diagnosis": "Pinned CLI, pre-run registration and launcher replacement passed. Final native chat exited nonzero, runtime marker and ledger absent. Root cause investigation pending, no capture claim.",
+      "key_free": true,
+      "pattern_and_supplied_credential_screen": true,
+      "receipt_path": "reports/challenge-v1/software-checks/37552167834-1/install.json",
+      "receipt_sha256": "dea31d64a8d07ab9fc493f21d665d10072258d87deb9e633926f98c111b2df4f",
+      "run_attempt": 1,
+      "run_id": 37552167834,
+      "scope": "Actual native configuration generation with test-only no-fallback chat shim, no provider calls"
+    },
+    {
+      "archive_digest_verified": true,
+      "archive_sha256": "cb66e82e1726fb644401f9987a50ee93a03a0fb760cece39be900310589df0f8",
+      "artifact_id": 11453816027,
+      "artifact_name": "installation-f5e277b3f3b82887602b2704fc8a3b105a998c0f-37552921819-1",
+      "bounded_member_names": [
+        "install.json"
+      ],
+      "commit_sha": "f5e277b3f3b82887602b2704fc8a3b105a998c0f",
+      "conclusion": "failure",
+      "diagnosis": "Captured traceback identifies ModuleNotFoundError for yaml in the smoke script before plugin-manager import. CLI flags, pre-run registration and launcher installation passed. Correction and actual recheck pending.",
+      "key_free": true,
+      "pattern_and_supplied_credential_screen": true,
+      "receipt_path": "reports/challenge-v1/software-checks/37552921819-1/install.json",
+      "receipt_sha256": "75579e7224791a18ac0f9f603241ec64db765a4d1b02db8c7855355ee4e56aa2",
+      "run_attempt": 1,
+      "run_id": 37552921819,
+      "scope": "Strict post-write key-free hook dispatch, no provider calls"
+    },
+    {
+      "archive_digest_verified": true,
+      "archive_sha256": "efd1b68b58e52a79d3222e6b53a02a8b08da62e766cc685a48ffd7b83dbcaf91",
+      "artifact_id": 11454247644,
+      "bounded_member_names": [
+        "install.json"
+      ],
+      "commit_sha": "82674f0c2246a2c8f4cdff9a9cad86b0c2a3ee46",
+      "conclusion": "failure",
+      "diagnosis": "Importing bootstrap alone still leaves yaml unavailable using project_python. Probe now uses the exact pinned native runtime_command, managed store Python and isolated environment activation. Actual hosted recheck remains required.",
+      "key_free": true,
+      "pattern_and_supplied_credential_screen": true,
+      "receipt_path": "reports/challenge-v1/software-checks/37554158943-1/install.json",
+      "retained_sha256": {
+        "install.json": "f9aeeaaea6df6d868725932300285d1bee5779c27a2cb4faf5592ec92e67a7bf"
+      },
+      "run_attempt": 1,
+      "run_id": 37554158943,
+      "scope": "Actual native config generation and strict hook smoke, no provider calls"
+    },
+    {
+      "archive_digest_verified": true,
+      "archive_sha256": "a959ba81847070223acabe1da64fe99e022582f2893b6b6fc1062b71fac6f2ea",
+      "artifact_id": 11454159685,
+      "bounded_member_names": [
+        "install.json"
+      ],
+      "commit_sha": "d17eadb74f481b7152fd40b7bf19579accbf131b",
+      "conclusion": "failure",
+      "diagnosis": "Managed native launch still fails the smoke import yaml. Exact pinned Hermes config source imports hermes_yaml, not PyYAML. Use that actual native parser and retain the strict hook/config gate. Actual hosted recheck required.",
+      "key_free": true,
+      "pattern_and_supplied_credential_screen": true,
+      "receipt_path": "reports/challenge-v1/software-checks/37555020555-1/install.json",
+      "retained_sha256": {
+        "install.json": "ea577cb8245d13058873c09ecaded8165ac179316a918096c3c916d412d00a2a"
+      },
+      "run_attempt": 1,
+      "run_id": 37555020555,
+      "scope": "Actual native config generation and strict hook smoke, no provider calls"
+    },
+    {
+      "archive_digest_verified": true,
+      "archive_sha256": "b0e5030200d03ebb140490ec683e34af0521131a5a5132c23b9e915f98d69c9c",
+      "artifact_id": 11455295128,
+      "bounded_member_names": [
+        "install.json"
+      ],
+      "commit_sha": "0462a8c8dd3678f76eac519caa6698ffabb6c910",
+      "conclusion": "success",
+      "diagnosis": "Actual native parser and managed launch passed post-write enabled configuration, hook registration and synthetic dispatch, writable bounded ledger and hashed reset-counter identities. This is not an actual API retry-loop test or a completeness guarantee.",
+      "key_free": true,
+      "pattern_and_supplied_credential_screen": true,
+      "receipt_path": "reports/challenge-v1/software-checks/37555714507-1/install.json",
+      "retained_sha256": {
+        "install.json": "8aa5cf97b0e616ba2b993a983fe103957500ad5f04336e67ac3344460efac177"
+      },
+      "run_attempt": 1,
+      "run_id": 37555714507,
+      "scope": "Actual native config generation and strict synthetic hook smoke, no provider calls"
+    },
+    {
+      "actual_api_retry_loop_executed": false,
+      "archive_digest_verified": true,
+      "archive_sha256": "6ea546ff148c5aea9a0f24aebf712ee96e7da98b32d9b3741bfa0edadcc597b2",
+      "artifact_id": 11455761748,
+      "artifact_name": "installation-74af50570fcd08aab539b86e037fceb378378362-37558173277-1",
+      "bounded_member_names": [
+        "install.json"
+      ],
+      "candidate_terminal_write_access": "assumed from same container permissions, not probed",
+      "capture_completeness": "not_guaranteed",
+      "commit_sha": "74af50570fcd08aab539b86e037fceb378378362",
+      "conclusion": "success",
+      "key_free": true,
+      "pattern_and_supplied_credential_screen": true,
+      "receipt_path": "reports/challenge-v1/software-checks/37558173277-1/install.json",
+      "retained_sha256": {
+        "install.json": "8aa5cf97b0e616ba2b993a983fe103957500ad5f04336e67ac3344460efac177"
+      },
+      "run_attempt": 1,
+      "run_id": 37558173277,
+      "scope": "Repeated actual native configuration generation and strict synthetic hook smoke on complete evaluation authoring checkpoint, no provider calls",
+      "screening_limits": "Exact supplied key, encoded fragments and credential patterns within bounded JSON bytes, no completeness guarantee"
+    }
+  ],
+  "post_write_native_gate": {
+    "actual_api_retry_loop_executed": false,
+    "archive_digest_verified": true,
+    "archive_sha256": "6ea546ff148c5aea9a0f24aebf712ee96e7da98b32d9b3741bfa0edadcc597b2",
+    "artifact_id": 11455761748,
+    "artifact_name": "installation-74af50570fcd08aab539b86e037fceb378378362-37558173277-1",
+    "bounded_member_names": [
+      "install.json"
+    ],
+    "candidate_terminal_write_access": "assumed from same container permissions, not probed",
+    "capture_completeness": "not_guaranteed",
+    "commit_sha": "74af50570fcd08aab539b86e037fceb378378362",
+    "conclusion": "success",
+    "key_free": true,
+    "pattern_and_supplied_credential_screen": true,
+    "receipt_path": "reports/challenge-v1/software-checks/37558173277-1/install.json",
+    "retained_sha256": {
+      "install.json": "8aa5cf97b0e616ba2b993a983fe103957500ad5f04336e67ac3344460efac177"
+    },
+    "run_attempt": 1,
+    "run_id": 37558173277,
+    "scope": "Repeated actual native configuration generation and strict synthetic hook smoke on complete evaluation authoring checkpoint, no provider calls",
+    "screening_limits": "Exact supplied key, encoded fragments and credential patterns within bounded JSON bytes, no completeness guarantee"
+  },
+  "post_write_root_cause": {
+    "actual_parser": "import hermes_yaml as yaml",
+    "pinned_hermes_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "prior_interpretation": "Bootstrap and native launch corrections did not resolve the absent module. Earlier dependency-bootstrap diagnosis was incomplete.",
+    "smoke_defect": "Smoke imported PyYAML module yaml, which is not required by the pinned native CLI",
+    "strict_gate_preserved": true,
+    "upstream_source": "hermes_cli/config.py"
   },
   "prior_native_controls": {
     "archive_sha256": "8546f7fc25180d4ff2d5d50ec443339406fe2b9fffe2b55859ee24a090e5491d",
@@ -86,7 +327,7 @@
     "receipt_sha256": "8a30dc47dbfd5cb9bed5b4351b36c7dc20211b6bd9dd03a3da2175265203d1e6",
     "run_id": "37539651398"
   },
-  "scope": "Hosted validation of current development dossiers and scorer, before paid exposure. No claim that all twelve challenge cases are software-complete.",
+  "scope": "All twelve challenge cases software-complete through 88 actual hosted native controls, unchanged-package evidence reuse and actual key-free post-write installation. Evaluation inference not yet exposed.",
   "unit": {
     "core_and_challenge_offline_reconstruction": true,
     "key_free_demo": true,

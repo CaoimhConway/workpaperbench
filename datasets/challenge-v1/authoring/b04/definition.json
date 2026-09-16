@@ -1,0 +1,692 @@
+{
+  "task_id": "challenge-v1-b04",
+  "split": "evaluation",
+  "source_group": "ripple-rlusd-reserve-reports-may-june-2025",
+  "origin": "primary_source_factual_extract",
+  "previously_exposed": false,
+  "family": "B",
+  "scorer_version": "challenge-1.1.0",
+  "context": "# Ripple RLUSD reserve report dictionary\n\nThe May report observations are May 22 and May 30, 2025 at 5:00 p.m. Eastern Time. The June report observations are June 9 and June 30, 2025 at 5:00 p.m. Eastern Time. The May report was signed June 23, 2025, and the June report was signed July 24, 2025. These are report/signature dates, not observation dates or known historical publication timestamps.\n\nRLUSD outstanding means issued, outstanding, redeemable tokens currently present on XRPL and Ethereum at each report date. Reserve assets are USD-denominated accounts established for holders and segregated from proprietary company assets. Market value is determined as of trade date and fair value as of each report date. Asset classes include bank deposits, government money-market funds, and U.S. Treasury bills with maturities of three months or less.\n\n`reserve_components` contains USD asset-class amounts for all four report observations. The June 30 Treasury-bill dash is represented as zero. `reported_balances` contains the reported circulating amount and reserve value for each observation. The May 30 and June 30 observations are month-end comparisons at the same stated time of day. The reports also include observations for May 22 and June 9 at the same stated time of day.\n\n## Source sections\n\nb04:s01 - May report, PDF page 3, printed page 2. May 22 and May 30, 2025 observations at 5:00 p.m. Eastern Time.\n- May 22: circulating RLUSD 310,543,072, reported reserve USD 323,349,533.\n- May 30: circulating RLUSD 309,043,794, reported reserve USD 322,099,766.\n\nb04:s02 - May report reserve components, PDF page 3, printed page 2. USD asset-class amounts by date:\n- 2025-05-22: U.S. Treasury bills 181,273,927, government money-market funds 97,445,721, cash deposits 44,629,885.\n- 2025-05-30: U.S. Treasury bills 181,364,719, government money-market funds 97,606,162, cash deposits 43,128,885.\n\nb04:s03 - June report, PDF page 3, printed page 2. June 9 and June 30, 2025 observations at 5:00 p.m. Eastern Time.\n- June 9: circulating RLUSD 388,743,694, reported reserve USD 402,390,351.\n- June 30: circulating RLUSD 455,243,694, reported reserve USD 471,227,699.\n\nb04:s04 - June report reserve components, PDF page 3, printed page 2. USD asset-class amounts by date:\n- 2025-06-09: U.S. Treasury bills 211,474,620, government money-market funds 113,698,252, cash deposits 77,217,479.\n- 2025-06-30: U.S. Treasury bills 0, government money-market funds 400,580,147, cash deposits 70,647,552.\n\nb04:s05 - Both reports define outstanding RLUSD as issued, outstanding, redeemable tokens present on XRPL and Ethereum.\n\nb04:s06 - Reserves are USD-denominated, held for holders and segregated from company proprietary assets. Market value is determined at trade date and fair value at report date. The reports were signed June 23 and July 24, 2025. Historical publication times are unknown.",
+  "instruction": "Using the Ripple RLUSD reserve reports, independently reconstruct `jun30_reserves_usd` (USD) from the June 30 component values and `jun30_reconciliation_usd` (USD), oriented as the reported reserve amount less your reconstruction. Report `coverage_change_bps` (basis_points) as June 30 coverage minus May 30 coverage, using reconstructed component totals for both month-end dates and each date’s reported circulating RLUSD. Both observations are at 5:00 p.m. Eastern Time. Assess whether report-basis coverage increased over that interval.",
+  "tables": {
+    "reserve_components": {
+      "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,amount_usd INTEGER,section_id TEXT)",
+      "rows": [
+        [
+          "2025-05-22",
+          "U.S. Treasury bills",
+          181273927,
+          "b04:s02"
+        ],
+        [
+          "2025-05-22",
+          "government money-market funds",
+          97445721,
+          "b04:s02"
+        ],
+        [
+          "2025-05-22",
+          "cash deposits",
+          44629885,
+          "b04:s02"
+        ],
+        [
+          "2025-05-30",
+          "U.S. Treasury bills",
+          181364719,
+          "b04:s02"
+        ],
+        [
+          "2025-05-30",
+          "government money-market funds",
+          97606162,
+          "b04:s02"
+        ],
+        [
+          "2025-05-30",
+          "cash deposits",
+          43128885,
+          "b04:s02"
+        ],
+        [
+          "2025-06-09",
+          "U.S. Treasury bills",
+          211474620,
+          "b04:s04"
+        ],
+        [
+          "2025-06-09",
+          "government money-market funds",
+          113698252,
+          "b04:s04"
+        ],
+        [
+          "2025-06-09",
+          "cash deposits",
+          77217479,
+          "b04:s04"
+        ],
+        [
+          "2025-06-30",
+          "U.S. Treasury bills",
+          0,
+          "b04:s04"
+        ],
+        [
+          "2025-06-30",
+          "government money-market funds",
+          400580147,
+          "b04:s04"
+        ],
+        [
+          "2025-06-30",
+          "cash deposits",
+          70647552,
+          "b04:s04"
+        ]
+      ]
+    },
+    "reported_balances": {
+      "schema": "CREATE TABLE reported_balances(report_date TEXT,circulating_rlusd INTEGER,reported_reserve_usd INTEGER,section_id TEXT)",
+      "rows": [
+        [
+          "2025-05-22",
+          310543072,
+          323349533,
+          "b04:s01"
+        ],
+        [
+          "2025-05-30",
+          309043794,
+          322099766,
+          "b04:s01"
+        ],
+        [
+          "2025-06-09",
+          388743694,
+          402390351,
+          "b04:s03"
+        ],
+        [
+          "2025-06-30",
+          455243694,
+          471227699,
+          "b04:s03"
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "b04:s01",
+      "text": "The May report provides observations for May 22 and May 30, 2025 at 5:00 p.m. Eastern Time. Its tables state circulating RLUSD, reserve market value, and the reserve schedule by asset class. The May report was signed June 23, 2025. Historical first-publication time is unknown.",
+      "locator": "PDF page 3, printed page 2, May reserve table, PDF page 4, printed page 3, signed criteria",
+      "origin": "https://cdn.sanity.io/files/ior4a5y3/production/e5689456575be999b570160ec235451f3a77b221.pdf/Standard%20Custody%20and%20Trust%20LLC%20May%202025%20RLUSD%20Reserves%20Report%20-%20Issued.pdf",
+      "period": "2025-05-22 and 2025-05-30 at 5:00 p.m. Eastern Time",
+      "report_signed_date": "2025-06-23",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "efe409d118c40885bec1f44d4fd36b04b7f4351d926ce030b3384ac1ac0714c0"
+    },
+    {
+      "id": "b04:s02",
+      "text": "The May reserve table lists U.S. Treasury bills, government money-market funds, and cash deposits for each observation date.",
+      "locator": "May PDF page 3, printed page 2, reserve schedule",
+      "origin": "https://cdn.sanity.io/files/ior4a5y3/production/e5689456575be999b570160ec235451f3a77b221.pdf/Standard%20Custody%20and%20Trust%20LLC%20May%202025%20RLUSD%20Reserves%20Report%20-%20Issued.pdf",
+      "period": "2025-05-22 and 2025-05-30 at 5:00 p.m. Eastern Time",
+      "report_signed_date": "2025-06-23",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "efe409d118c40885bec1f44d4fd36b04b7f4351d926ce030b3384ac1ac0714c0"
+    },
+    {
+      "id": "b04:s03",
+      "text": "The June report provides observations for June 9 and June 30, 2025 at 5:00 p.m. Eastern Time. Its tables state circulating RLUSD and reported reserve market value. It was signed July 24, 2025. Historical first-publication time is unknown.",
+      "locator": "June PDF page 3, printed page 2, June reserve table, PDF page 4, printed page 3, signed criteria",
+      "origin": "https://cdn.sanity.io/files/ior4a5y3/production/33ba3e71f1bd6c0dbb6601216fc05736eddf8879.pdf/Standard%20Custody%20%26%20Trust%20Company%2C%20LLC%20-%20RLUSD%20Reserves%20Report%20June%202025.pdf",
+      "period": "2025-06-09 and 2025-06-30 at 5:00 p.m. Eastern Time",
+      "report_signed_date": "2025-07-24",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "efe409d118c40885bec1f44d4fd36b04b7f4351d926ce030b3384ac1ac0714c0"
+    },
+    {
+      "id": "b04:s04",
+      "text": "The June reserve schedule lists these USD asset-class amounts for June 9 and June 30, 2025: U.S. Treasury bills USD 211,474,620, government money-market funds USD 113,698,252, cash deposits USD 77,217,479, U.S. Treasury bills USD 0, government money-market funds USD 400,580,147, cash deposits USD 70,647,552. A dash appears for Treasury bills on June 30 and is represented as zero.",
+      "locator": "June PDF page 3, printed page 2, reserve schedule",
+      "origin": "https://cdn.sanity.io/files/ior4a5y3/production/33ba3e71f1bd6c0dbb6601216fc05736eddf8879.pdf/Standard%20Custody%20%26%20Trust%20Company%2C%20LLC%20-%20RLUSD%20Reserves%20Report%20June%202025.pdf",
+      "period": "2025-06-09 and 2025-06-30 at 5:00 p.m. Eastern Time",
+      "report_signed_date": "2025-07-24",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "efe409d118c40885bec1f44d4fd36b04b7f4351d926ce030b3384ac1ac0714c0"
+    },
+    {
+      "id": "b04:s05",
+      "text": "RLUSD outstanding means issued, outstanding, redeemable tokens currently present on XRPL and Ethereum at each report date. The reports state that only those two approved blockchains are included.",
+      "locator": "May and June PDFs page 4, printed page 3, Note 1",
+      "origin": "https://cdn.sanity.io/files/ior4a5y3/production/e5689456575be999b570160ec235451f3a77b221.pdf/Standard%20Custody%20and%20Trust%20LLC%20May%202025%20RLUSD%20Reserves%20Report%20-%20Issued.pdf and https://cdn.sanity.io/files/ior4a5y3/production/33ba3e71f1bd6c0dbb6601216fc05736eddf8879.pdf/Standard%20Custody%20%26%20Trust%20Company%2C%20LLC%20-%20RLUSD%20Reserves%20Report%20June%202025.pdf",
+      "period": "May and June 2025 report dates",
+      "report_signed_date": "2025-06-23 and 2025-07-24",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "efe409d118c40885bec1f44d4fd36b04b7f4351d926ce030b3384ac1ac0714c0"
+    },
+    {
+      "id": "b04:s06",
+      "text": "The reserve amounts are USD-denominated accounts established for the benefit of RLUSD holders and segregated from company proprietary assets. Market value is determined as of trade date and fair value as of the applicable report date.",
+      "locator": "May and June PDFs page 4, printed page 3, Note 2",
+      "origin": "https://cdn.sanity.io/files/ior4a5y3/production/e5689456575be999b570160ec235451f3a77b221.pdf/Standard%20Custody%20and%20Trust%20LLC%20May%202025%20RLUSD%20Reserves%20Report%20-%20Issued.pdf and https://cdn.sanity.io/files/ior4a5y3/production/33ba3e71f1bd6c0dbb6601216fc05736eddf8879.pdf/Standard%20Custody%20%26%20Trust%20Company%2C%20LLC%20-%20RLUSD%20Reserves%20Report%20June%202025.pdf",
+      "period": "May and June 2025 report dates",
+      "report_signed_date": "2025-06-23 and 2025-07-24",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "efe409d118c40885bec1f44d4fd36b04b7f4351d926ce030b3384ac1ac0714c0"
+    }
+  ],
+  "reference": {
+    "task_id": "challenge-v1-b04",
+    "answers": [
+      {
+        "id": "jun30_reserves_usd",
+        "status": "answered",
+        "value": 471227699.0,
+        "unit": "usd",
+        "reason_code": null,
+        "evidence": [
+          "b04:s04"
+        ],
+        "sql": "SELECT SUM(amount_usd) AS value FROM reserve_components WHERE report_date='2025-06-30'"
+      },
+      {
+        "id": "jun30_reconciliation_usd",
+        "status": "answered",
+        "value": 0.0,
+        "unit": "usd",
+        "reason_code": null,
+        "evidence": [
+          "b04:s03",
+          "b04:s04"
+        ],
+        "sql": "SELECT (SELECT reported_reserve_usd FROM reported_balances WHERE report_date='2025-06-30') - SUM(amount_usd) AS value FROM reserve_components WHERE report_date='2025-06-30'"
+      },
+      {
+        "id": "coverage_change_bps",
+        "status": "answered",
+        "value": -71.35472830422277,
+        "unit": "basis_points",
+        "reason_code": null,
+        "evidence": [
+          "b04:s01",
+          "b04:s02",
+          "b04:s03",
+          "b04:s04"
+        ],
+        "sql": "WITH a AS (SELECT report_date,SUM(amount_usd) AS assets FROM reserve_components GROUP BY report_date), b AS (SELECT report_date,circulating_rlusd FROM reported_balances) SELECT 10000.0*((SELECT assets*1.0/circulating_rlusd FROM a JOIN b USING(report_date) WHERE report_date='2025-06-30')-(SELECT assets*1.0/circulating_rlusd FROM a JOIN b USING(report_date) WHERE report_date='2025-05-30')) AS value"
+      }
+    ],
+    "conclusion": {
+      "verdict": "contradicted",
+      "reason_code": "contradicted_by_calculation",
+      "evidence": [
+        "b04:s01",
+        "b04:s02",
+        "b04:s03",
+        "b04:s04"
+      ]
+    }
+  },
+  "gold": {
+    "answers": {
+      "jun30_reserves_usd": {
+        "status": "answered",
+        "value": 471227699.0,
+        "unit": "usd",
+        "tolerance": 0.5,
+        "evidence": [
+          [
+            "b04:s04"
+          ],
+          [
+            "b04:s03",
+            "b04:s04"
+          ]
+        ]
+      },
+      "jun30_reconciliation_usd": {
+        "status": "answered",
+        "value": 0.0,
+        "unit": "usd",
+        "tolerance": 0.5,
+        "evidence": [
+          [
+            "b04:s03",
+            "b04:s04"
+          ]
+        ]
+      },
+      "coverage_change_bps": {
+        "status": "answered",
+        "value": -71.35472830422277,
+        "unit": "basis_points",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "b04:s01",
+            "b04:s02",
+            "b04:s03",
+            "b04:s04"
+          ],
+          [
+            "b04:s01",
+            "b04:s02",
+            "b04:s03",
+            "b04:s04",
+            "b04:s05",
+            "b04:s06"
+          ]
+        ]
+      }
+    },
+    "conclusion": {
+      "verdict": "contradicted",
+      "reason_codes": [
+        "contradicted_by_calculation"
+      ],
+      "evidence": [
+        [
+          "b04:s01",
+          "b04:s02",
+          "b04:s03",
+          "b04:s04"
+        ],
+        [
+          "b04:s01",
+          "b04:s02",
+          "b04:s03",
+          "b04:s04",
+          "b04:s05",
+          "b04:s06"
+        ]
+      ]
+    },
+    "context_evidence_allowed": [
+      "b04:s05",
+      "b04:s06"
+    ],
+    "controls": {
+      "june30_market_revaluation": {
+        "jun30_reserves_usd": 472227699.0,
+        "jun30_reconciliation_usd": 0.0,
+        "coverage_change_bps": -49.38847126036354,
+        "conclusion": "contradicted"
+      },
+      "june30_component_gap": {
+        "jun30_reserves_usd": 471227799.0,
+        "jun30_reconciliation_usd": -100.0,
+        "coverage_change_bps": -71.35253167851839,
+        "conclusion": "contradicted"
+      },
+      "may30_market_revaluation": {
+        "jun30_reserves_usd": 471227699.0,
+        "jun30_reconciliation_usd": 0.0,
+        "coverage_change_bps": -136.07047535462303,
+        "conclusion": "contradicted"
+      }
+    }
+  },
+  "controls": [
+    {
+      "name": "june30_market_revaluation",
+      "tables": {
+        "reserve_components": {
+          "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-05-22",
+              "U.S. Treasury bills",
+              181273927,
+              "b04:s02"
+            ],
+            [
+              "2025-05-22",
+              "government money-market funds",
+              97445721,
+              "b04:s02"
+            ],
+            [
+              "2025-05-22",
+              "cash deposits",
+              44629885,
+              "b04:s02"
+            ],
+            [
+              "2025-05-30",
+              "U.S. Treasury bills",
+              181364719,
+              "b04:s02"
+            ],
+            [
+              "2025-05-30",
+              "government money-market funds",
+              97606162,
+              "b04:s02"
+            ],
+            [
+              "2025-05-30",
+              "cash deposits",
+              43128885,
+              "b04:s02"
+            ],
+            [
+              "2025-06-09",
+              "U.S. Treasury bills",
+              211474620,
+              "b04:s04"
+            ],
+            [
+              "2025-06-09",
+              "government money-market funds",
+              113698252,
+              "b04:s04"
+            ],
+            [
+              "2025-06-09",
+              "cash deposits",
+              77217479,
+              "b04:s04"
+            ],
+            [
+              "2025-06-30",
+              "U.S. Treasury bills",
+              0,
+              "b04:s04"
+            ],
+            [
+              "2025-06-30",
+              "government money-market funds",
+              401580147,
+              "b04:s04"
+            ],
+            [
+              "2025-06-30",
+              "cash deposits",
+              70647552,
+              "b04:s04"
+            ]
+          ]
+        },
+        "reported_balances": {
+          "schema": "CREATE TABLE reported_balances(report_date TEXT,circulating_rlusd INTEGER,reported_reserve_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-05-22",
+              310543072,
+              323349533,
+              "b04:s01"
+            ],
+            [
+              "2025-05-30",
+              309043794,
+              322099766,
+              "b04:s01"
+            ],
+            [
+              "2025-06-09",
+              388743694,
+              402390351,
+              "b04:s03"
+            ],
+            [
+              "2025-06-30",
+              455243694,
+              472227699,
+              "b04:s03"
+            ]
+          ]
+        }
+      },
+      "expected": {
+        "jun30_reserves_usd": 472227699.0,
+        "jun30_reconciliation_usd": 0.0,
+        "coverage_change_bps": -49.38847126036354,
+        "conclusion": "contradicted"
+      }
+    },
+    {
+      "name": "june30_component_gap",
+      "tables": {
+        "reserve_components": {
+          "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-05-22",
+              "U.S. Treasury bills",
+              181273927,
+              "b04:s02"
+            ],
+            [
+              "2025-05-22",
+              "government money-market funds",
+              97445721,
+              "b04:s02"
+            ],
+            [
+              "2025-05-22",
+              "cash deposits",
+              44629885,
+              "b04:s02"
+            ],
+            [
+              "2025-05-30",
+              "U.S. Treasury bills",
+              181364719,
+              "b04:s02"
+            ],
+            [
+              "2025-05-30",
+              "government money-market funds",
+              97606162,
+              "b04:s02"
+            ],
+            [
+              "2025-05-30",
+              "cash deposits",
+              43128885,
+              "b04:s02"
+            ],
+            [
+              "2025-06-09",
+              "U.S. Treasury bills",
+              211474620,
+              "b04:s04"
+            ],
+            [
+              "2025-06-09",
+              "government money-market funds",
+              113698252,
+              "b04:s04"
+            ],
+            [
+              "2025-06-09",
+              "cash deposits",
+              77217479,
+              "b04:s04"
+            ],
+            [
+              "2025-06-30",
+              "U.S. Treasury bills",
+              0,
+              "b04:s04"
+            ],
+            [
+              "2025-06-30",
+              "government money-market funds",
+              400580147,
+              "b04:s04"
+            ],
+            [
+              "2025-06-30",
+              "cash deposits",
+              70647652,
+              "b04:s04"
+            ]
+          ]
+        },
+        "reported_balances": {
+          "schema": "CREATE TABLE reported_balances(report_date TEXT,circulating_rlusd INTEGER,reported_reserve_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-05-22",
+              310543072,
+              323349533,
+              "b04:s01"
+            ],
+            [
+              "2025-05-30",
+              309043794,
+              322099766,
+              "b04:s01"
+            ],
+            [
+              "2025-06-09",
+              388743694,
+              402390351,
+              "b04:s03"
+            ],
+            [
+              "2025-06-30",
+              455243694,
+              471227699,
+              "b04:s03"
+            ]
+          ]
+        }
+      },
+      "expected": {
+        "jun30_reserves_usd": 471227799.0,
+        "jun30_reconciliation_usd": -100.0,
+        "coverage_change_bps": -71.35253167851839,
+        "conclusion": "contradicted"
+      }
+    },
+    {
+      "name": "may30_market_revaluation",
+      "tables": {
+        "reserve_components": {
+          "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-05-22",
+              "U.S. Treasury bills",
+              181273927,
+              "b04:s02"
+            ],
+            [
+              "2025-05-22",
+              "government money-market funds",
+              97445721,
+              "b04:s02"
+            ],
+            [
+              "2025-05-22",
+              "cash deposits",
+              44629885,
+              "b04:s02"
+            ],
+            [
+              "2025-05-30",
+              "U.S. Treasury bills",
+              183364719,
+              "b04:s02"
+            ],
+            [
+              "2025-05-30",
+              "government money-market funds",
+              97606162,
+              "b04:s02"
+            ],
+            [
+              "2025-05-30",
+              "cash deposits",
+              43128885,
+              "b04:s02"
+            ],
+            [
+              "2025-06-09",
+              "U.S. Treasury bills",
+              211474620,
+              "b04:s04"
+            ],
+            [
+              "2025-06-09",
+              "government money-market funds",
+              113698252,
+              "b04:s04"
+            ],
+            [
+              "2025-06-09",
+              "cash deposits",
+              77217479,
+              "b04:s04"
+            ],
+            [
+              "2025-06-30",
+              "U.S. Treasury bills",
+              0,
+              "b04:s04"
+            ],
+            [
+              "2025-06-30",
+              "government money-market funds",
+              400580147,
+              "b04:s04"
+            ],
+            [
+              "2025-06-30",
+              "cash deposits",
+              70647552,
+              "b04:s04"
+            ]
+          ]
+        },
+        "reported_balances": {
+          "schema": "CREATE TABLE reported_balances(report_date TEXT,circulating_rlusd INTEGER,reported_reserve_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-05-22",
+              310543072,
+              323349533,
+              "b04:s01"
+            ],
+            [
+              "2025-05-30",
+              309043794,
+              324099766,
+              "b04:s01"
+            ],
+            [
+              "2025-06-09",
+              388743694,
+              402390351,
+              "b04:s03"
+            ],
+            [
+              "2025-06-30",
+              455243694,
+              471227699,
+              "b04:s03"
+            ]
+          ]
+        }
+      },
+      "expected": {
+        "jun30_reserves_usd": 471227699.0,
+        "jun30_reconciliation_usd": 0.0,
+        "coverage_change_bps": -136.07047535462303,
+        "conclusion": "contradicted"
+      }
+    }
+  ],
+  "control_origin": "synthetic_changed_input"
+}

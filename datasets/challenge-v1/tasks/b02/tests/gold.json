@@ -1,0 +1,138 @@
+{
+  "answers": {
+    "march31_reserves_usd": {
+      "status": "answered",
+      "value": 60040707041.0,
+      "unit": "usd",
+      "tolerance": 0.5,
+      "evidence": [
+        [
+          "b02:s03"
+        ],
+        [
+          "b02:s03",
+          "b02:s05"
+        ]
+      ]
+    },
+    "march31_circulation_usdc": {
+      "status": "answered",
+      "value": 59975771715.0,
+      "unit": "usdc",
+      "tolerance": 0.5,
+      "evidence": [
+        [
+          "b02:s04"
+        ],
+        [
+          "b02:s01",
+          "b02:s04"
+        ]
+      ]
+    },
+    "march31_residual_usd": {
+      "status": "answered",
+      "value": -1.0,
+      "unit": "usd",
+      "tolerance": 0.5,
+      "evidence": [
+        [
+          "b02:s03"
+        ],
+        [
+          "b02:s03",
+          "b02:s05"
+        ]
+      ]
+    },
+    "coverage_change_bps": {
+      "status": "answered",
+      "value": -0.15759761976517375,
+      "unit": "basis_points",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "b02:s02",
+          "b02:s03",
+          "b02:s04"
+        ],
+        [
+          "b02:s01",
+          "b02:s02",
+          "b02:s03",
+          "b02:s04"
+        ]
+      ]
+    }
+  },
+  "conclusion": {
+    "verdict": "supported",
+    "reason_codes": [
+      "supported_by_calculation"
+    ],
+    "evidence": [
+      [
+        "b02:s02",
+        "b02:s03",
+        "b02:s04"
+      ],
+      [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s04"
+      ]
+    ]
+  },
+  "context_evidence_allowed": [
+    "b02:s01",
+    "b02:s05"
+  ],
+  "controls": [
+    {
+      "name": "march31_treasury_revaluation",
+      "database": "control-1.sqlite",
+      "expected": {
+        "march31_reserves_usd": 60070707041.0,
+        "march31_circulation_usdc": 59975771715.0,
+        "march31_residual_usd": -1.0,
+        "coverage_change_bps": 4.844422219605558,
+        "conclusion": "supported"
+      }
+    },
+    {
+      "name": "march31_supply_change",
+      "database": "control-2.sqlite",
+      "expected": {
+        "march31_reserves_usd": 60040707041.0,
+        "march31_circulation_usdc": 59976771715.0,
+        "march31_residual_usd": -1.0,
+        "coverage_change_bps": -0.3245093530919931,
+        "conclusion": "supported"
+      }
+    },
+    {
+      "name": "march31_component_gap",
+      "database": "control-3.sqlite",
+      "expected": {
+        "march31_reserves_usd": 60040712041.0,
+        "march31_circulation_usdc": 59975771715.0,
+        "march31_residual_usd": -5001.0,
+        "coverage_change_bps": -0.1567639497919453,
+        "conclusion": "supported"
+      }
+    }
+  ],
+  "task_id": "challenge-v1-b02",
+  "scorer_version": "challenge-1.1.0",
+  "hashes": {
+    "evidence.json": "452170a620ee4eeb55b33a12f9db24a87b546f8063bb22343e8e09fd339d826b",
+    "control-2.sqlite": "c64335d595156f51abbfc54d0fef5141f6e68dac6997c3f93c88837532457bbc",
+    "sources.md": "f13866381ffe080a5a1ccded7b894ca1982d6d2489365662921712d921d3c41d",
+    "control-3.sqlite": "1954ab7c9f5c0da9e53c64916cf9b61c03248078508f21586b52f45e0c33872f",
+    "control-1.sqlite": "e2101cf7f53fb65513e6655d085ff50163ae91e516f6ec73d8e030e25df6a703",
+    "schema.json": "32b131ff8db1a194bd8bdba7b6e610c6e6806294bcdea28833d57f9a28eef5e5",
+    "verify.py": "a69eb6c71a44ff42df488696ecd76257c5ec1096f5ae9a5dd245cc4128a2b0e2",
+    "data.sqlite": "eca28e5191e79e1d37f05026c51b5adab7093a92c58d9e17fe73841021a490e8"
+  }
+}

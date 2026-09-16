@@ -1,0 +1,55 @@
+{
+  "task_id": "challenge-v1-a01",
+  "answers": [
+    {
+      "id": "eps_difference",
+      "status": "answered",
+      "value": 0.13,
+      "unit": "usd_per_share",
+      "evidence": [
+        "a01:s01",
+        "a01:s04"
+      ],
+      "sql": "SELECT (SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='Non-GAAP diluted net income per share') - (SELECT high FROM guidance WHERE period_end='2024-11-29' AND months=3 AND measure='Diluted EPS' AND basis='non-GAAP')"
+    },
+    {
+      "id": "adjusted_operating_income",
+      "status": "answered",
+      "value": 2596.0,
+      "unit": "usd_million",
+      "evidence": [
+        "a01:s03"
+      ],
+      "sql": "SELECT (SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='GAAP operating income') + (SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-29' AND months=3)"
+    },
+    {
+      "id": "adjusted_margin",
+      "status": "answered",
+      "value": 46.307527648947556,
+      "unit": "percent",
+      "evidence": [
+        "a01:s02",
+        "a01:s03"
+      ],
+      "sql": "SELECT ((SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='GAAP operating income') + (SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-29' AND months=3)) * 100.0 / (SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='Total revenue')"
+    },
+    {
+      "id": "margin_bridge",
+      "status": "answered",
+      "value": 1139.8501605422762,
+      "unit": "basis_points",
+      "evidence": [
+        "a01:s02",
+        "a01:s03"
+      ],
+      "sql": "SELECT (SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-29' AND months=3) * 10000.0 / (SELECT amount FROM financials WHERE period_end='2024-11-29' AND months=3 AND measure='Total revenue')"
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "evidence": [
+      "a01:s01",
+      "a01:s04"
+    ]
+  }
+}

@@ -1,0 +1,1013 @@
+{
+  "scorer_version": "challenge-1.1.0",
+  "task_id": "challenge-v1-c03",
+  "family": "C",
+  "source_group": "block-fy2024-fy2023-bitcoin-revenue-costs",
+  "split": "evaluation",
+  "origin": "primary_source_factual_extract",
+  "previously_exposed": false,
+  "control_origin": "synthetic_changed_input",
+  "instruction": "For Block FY2024 versus FY2023, calculate bitcoin_gross_profit_2024_usd_thousand and bitcoin_gross_profit_2023_usd_thousand as Bitcoin revenue less matched Bitcoin costs, bitcoin_gross_profit_growth_pct, and bitcoin_share_of_total_net_revenue_increase_pct. Assess: Bitcoin revenue growth is a faithful proxy for Bitcoin gross-profit growth.",
+  "context": "# Block FY2024 and FY2023 annual disclosures\n\nc03:s01 - Revenue by source (USD thousand)\n2024: transaction-based 6,613,680, subscription and services-based 7,164,799, hardware 143,369, Bitcoin 10,199,205, total net revenue 24,121,053.\n2023: transaction-based 6,315,301, subscription and services-based 5,944,842, hardware 157,178, Bitcoin 9,498,302, total net revenue 21,915,623.\n\nc03:s02 - Cost of revenue by source (USD thousand)\nBitcoin costs were 9,910,386 in 2024 and 9,293,113 in 2023. Total cost of revenue was 15,232,017 and 14,410,737. The filing separately reports transaction-based, subscription and services-based, hardware, Bitcoin and acquired-technology amortization costs.\n\nc03:s03 - Bitcoin revenue definition\nBitcoin revenue is the total sale amount of bitcoin sold to customers. It varies with both customer demand and bitcoin market price. The filing presents Bitcoin costs separately from Bitcoin revenue.\n\nc03:s04 - Cash App comparisons\nBitcoin represented 63% and 65% of Cash App revenue in 2024 and 2023, and 6% and 5% of Cash App gross profit. These percentages are scoped to Cash App and are not consolidated percentages.\n\nc03:s05 - Period and unit convention\nAll revenue and cost amounts are annual flows for the years ended December 31 and are reported in USD thousands. `Bitcoin gross profit` in this analysis means Bitcoin revenue less the separately reported Bitcoin costs. It is a derived analytical amount. It is not equal to Bitcoin revenue, and it is not separately captioned as a line in the filing.\n\n## Data dictionary\n`period_end` identifies the annual period end, `months` gives duration, and `amount` retains the displayed number. `unit` is USD thousand except the Cash App shares, which are percent. The source group uses the FY2024 original filing's own FY2023 comparator and financial categories.\n",
+  "tables": {
+    "revenues": {
+      "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+      "rows": [
+        [
+          "2024-12-31",
+          12,
+          "Transaction-based revenue",
+          6613680.0,
+          "usd_thousand",
+          "c03:s01"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Subscription and services-based revenue",
+          7164799.0,
+          "usd_thousand",
+          "c03:s01"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Hardware revenue",
+          143369.0,
+          "usd_thousand",
+          "c03:s01"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Bitcoin revenue",
+          10199205.0,
+          "usd_thousand",
+          "c03:s01"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Total net revenue",
+          24121053.0,
+          "usd_thousand",
+          "c03:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Transaction-based revenue",
+          6315301.0,
+          "usd_thousand",
+          "c03:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Subscription and services-based revenue",
+          5944842.0,
+          "usd_thousand",
+          "c03:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Hardware revenue",
+          157178.0,
+          "usd_thousand",
+          "c03:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Bitcoin revenue",
+          9498302.0,
+          "usd_thousand",
+          "c03:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Total net revenue",
+          21915623.0,
+          "usd_thousand",
+          "c03:s01"
+        ]
+      ]
+    },
+    "costs": {
+      "schema": "CREATE TABLE costs(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+      "rows": [
+        [
+          "2024-12-31",
+          12,
+          "Transaction-based costs",
+          3881013.0,
+          "usd_thousand",
+          "c03:s02"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Subscription and services-based costs",
+          1135813.0,
+          "usd_thousand",
+          "c03:s02"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Hardware costs",
+          236441.0,
+          "usd_thousand",
+          "c03:s02"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Bitcoin costs",
+          9910386.0,
+          "usd_thousand",
+          "c03:s02"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Amortization of acquired technology assets",
+          68364.0,
+          "usd_thousand",
+          "c03:s02"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Total cost of revenue",
+          15232017.0,
+          "usd_thousand",
+          "c03:s02"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Transaction-based costs",
+          3702016.0,
+          "usd_thousand",
+          "c03:s02"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Subscription and services-based costs",
+          1075129.0,
+          "usd_thousand",
+          "c03:s02"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Hardware costs",
+          267650.0,
+          "usd_thousand",
+          "c03:s02"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Bitcoin costs",
+          9293113.0,
+          "usd_thousand",
+          "c03:s02"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Amortization of acquired technology assets",
+          72829.0,
+          "usd_thousand",
+          "c03:s02"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Total cost of revenue",
+          14410737.0,
+          "usd_thousand",
+          "c03:s02"
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "c03:s01",
+      "title": "Block revenue categories",
+      "locator": "Item 7, Results of Operations, Revenue table, pages 71-72",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+      "publication": "2025-02-24, SEC filing accepted 16:17:17 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:43.543748+00:00",
+      "source_bytes_sha256": "1bf600370cee9bf5cafbdc6ed350c2fdbacac4ce0476d819d9301e51f2fd62bb",
+      "capture_sha256": "f988aab324a1b3e3e30e68ca162ec94b81d84e7475c33e7cde33c7345b0bf785",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Years ended December 31, 2024 and 2023",
+      "text": "USD thousand. 2024 transaction-based revenue 6,613,680, subscription and services-based revenue 7,164,799, hardware revenue 143,369, Bitcoin revenue 10,199,205, and total net revenue 24,121,053. 2023 values were 6,315,301, 5,944,842, 157,178, 9,498,302 and 21,915,623."
+    },
+    {
+      "id": "c03:s02",
+      "title": "Block cost-of-revenue categories",
+      "locator": "Item 7, Results of Operations, Cost of Revenue table, pages 71-72",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+      "publication": "2025-02-24, SEC filing accepted 16:17:17 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:43.543748+00:00",
+      "source_bytes_sha256": "1bf600370cee9bf5cafbdc6ed350c2fdbacac4ce0476d819d9301e51f2fd62bb",
+      "capture_sha256": "f988aab324a1b3e3e30e68ca162ec94b81d84e7475c33e7cde33c7345b0bf785",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Years ended December 31, 2024 and 2023",
+      "text": "USD thousand. Bitcoin costs were 9,910,386 in 2024 and 9,293,113 in 2023. Total cost of revenue was 15,232,017 and 14,410,737. The filing also separates transaction-based costs, subscription and services costs, hardware costs, and amortization of acquired technology assets."
+    },
+    {
+      "id": "c03:s03",
+      "title": "Bitcoin revenue definition",
+      "locator": "Item 7, Bitcoin revenue discussion, page 72",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+      "publication": "2025-02-24, SEC filing accepted 16:17:17 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:43.543748+00:00",
+      "source_bytes_sha256": "1bf600370cee9bf5cafbdc6ed350c2fdbacac4ce0476d819d9301e51f2fd62bb",
+      "capture_sha256": "f988aab324a1b3e3e30e68ca162ec94b81d84e7475c33e7cde33c7345b0bf785",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Annual Bitcoin resale revenue",
+      "text": "Block describes Bitcoin revenue as the total sale amount of bitcoin sold to customers. The recognized amount fluctuates with customer demand and bitcoin market price. The company reports Bitcoin revenue and Bitcoin costs as distinct lines."
+    },
+    {
+      "id": "c03:s04",
+      "title": "Cash App Bitcoin revenue and gross profit shares",
+      "locator": "Item 7, Cash App discussion, page 75",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+      "publication": "2025-02-24, SEC filing accepted 16:17:17 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:43.543748+00:00",
+      "source_bytes_sha256": "1bf600370cee9bf5cafbdc6ed350c2fdbacac4ce0476d819d9301e51f2fd62bb",
+      "capture_sha256": "f988aab324a1b3e3e30e68ca162ec94b81d84e7475c33e7cde33c7345b0bf785",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Years ended December 31, 2024 and 2023",
+      "text": "Bitcoin represented 63% and 65% of Cash App revenue in 2024 and 2023, and 6% and 5% of Cash App gross profit, respectively. These are Cash App shares, not consolidated company percentages."
+    },
+    {
+      "id": "c03:s05",
+      "title": "Block fiscal-year and unit basis",
+      "locator": "Consolidated statements and Item 7 tables, fiscal-year column headings",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+      "publication": "2025-02-24, SEC filing accepted 16:17:17 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:43.543748+00:00",
+      "source_bytes_sha256": "1bf600370cee9bf5cafbdc6ed350c2fdbacac4ce0476d819d9301e51f2fd62bb",
+      "capture_sha256": "f988aab324a1b3e3e30e68ca162ec94b81d84e7475c33e7cde33c7345b0bf785",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Fiscal years ended December 31, 2024 and 2023",
+      "text": "The comparisons are annual flows for fiscal years ended December 31. The financial tables are presented in thousands, except where noted. Bitcoin gross-profit figures in this dossier are an analytical difference between reported Bitcoin revenue and reported Bitcoin costs, not a separately captioned revenue line."
+    }
+  ],
+  "gold": {
+    "answers": {
+      "bitcoin_gross_profit_2024_usd_thousand": {
+        "status": "answered",
+        "value": 288819.0,
+        "unit": "usd_thousand",
+        "tolerance": 0.001,
+        "evidence": [
+          [
+            "c03:s01",
+            "c03:s02"
+          ],
+          [
+            "c03:s01",
+            "c03:s02",
+            "c03:s03",
+            "c03:s05"
+          ]
+        ]
+      },
+      "bitcoin_gross_profit_2023_usd_thousand": {
+        "status": "answered",
+        "value": 205189.0,
+        "unit": "usd_thousand",
+        "tolerance": 0.001,
+        "evidence": [
+          [
+            "c03:s01",
+            "c03:s02"
+          ],
+          [
+            "c03:s01",
+            "c03:s02",
+            "c03:s03",
+            "c03:s05"
+          ]
+        ]
+      },
+      "bitcoin_gross_profit_growth_pct": {
+        "status": "answered",
+        "value": 40.75754548245764,
+        "unit": "percent",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "c03:s01",
+            "c03:s02"
+          ],
+          [
+            "c03:s01",
+            "c03:s02",
+            "c03:s03",
+            "c03:s05"
+          ]
+        ]
+      },
+      "bitcoin_share_of_total_net_revenue_increase_pct": {
+        "status": "answered",
+        "value": 31.78078651328766,
+        "unit": "percent",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "c03:s01"
+          ],
+          [
+            "c03:s01",
+            "c03:s03",
+            "c03:s05"
+          ]
+        ]
+      }
+    },
+    "conclusion": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c03:s01",
+          "c03:s02"
+        ],
+        [
+          "c03:s01",
+          "c03:s02",
+          "c03:s03",
+          "c03:s05"
+        ]
+      ]
+    },
+    "context_evidence_allowed": [
+      "c03:s03",
+      "c03:s05"
+    ]
+  },
+  "reference": {
+    "task_id": "challenge-v1-c03",
+    "answers": [
+      {
+        "id": "bitcoin_gross_profit_2024_usd_thousand",
+        "status": "answered",
+        "value": 288819.0,
+        "unit": "usd_thousand",
+        "reason_code": null,
+        "evidence": [
+          "c03:s01",
+          "c03:s02"
+        ],
+        "sql": "SELECT (SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin costs')"
+      },
+      {
+        "id": "bitcoin_gross_profit_2023_usd_thousand",
+        "status": "answered",
+        "value": 205189.0,
+        "unit": "usd_thousand",
+        "reason_code": null,
+        "evidence": [
+          "c03:s01",
+          "c03:s02"
+        ],
+        "sql": "SELECT (SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin costs')"
+      },
+      {
+        "id": "bitcoin_gross_profit_growth_pct",
+        "status": "answered",
+        "value": 40.75754548245764,
+        "unit": "percent",
+        "reason_code": null,
+        "evidence": [
+          "c03:s01",
+          "c03:s02"
+        ],
+        "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin costs'))/((SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin costs'))-100.0"
+      },
+      {
+        "id": "bitcoin_share_of_total_net_revenue_increase_pct",
+        "status": "answered",
+        "value": 31.78078651328766,
+        "unit": "percent",
+        "reason_code": null,
+        "evidence": [
+          "c03:s01"
+        ],
+        "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue'))/((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total net revenue')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total net revenue'))"
+      }
+    ],
+    "conclusion": {
+      "verdict": "contradicted",
+      "reason_code": null,
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "bitcoin_sales_change",
+      "expected": {
+        "bitcoin_gross_profit_2024_usd_thousand": 338819.0,
+        "bitcoin_gross_profit_2023_usd_thousand": 205189.0,
+        "bitcoin_gross_profit_growth_pct": 65.12532348225295,
+        "bitcoin_share_of_total_net_revenue_increase_pct": 33.29311927215653
+      },
+      "tables": {
+        "revenues": {
+          "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Transaction-based revenue",
+              6613680.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Subscription and services-based revenue",
+              7164799.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Hardware revenue",
+              143369.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Bitcoin revenue",
+              10249205.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total net revenue",
+              24171053.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Transaction-based revenue",
+              6315301.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Subscription and services-based revenue",
+              5944842.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Hardware revenue",
+              157178.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Bitcoin revenue",
+              9498302.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total net revenue",
+              21915623.0,
+              "usd_thousand",
+              "c03:s01"
+            ]
+          ]
+        },
+        "costs": {
+          "schema": "CREATE TABLE costs(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Transaction-based costs",
+              3881013.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Subscription and services-based costs",
+              1135813.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Hardware costs",
+              236441.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Bitcoin costs",
+              9910386.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Amortization of acquired technology assets",
+              68364.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total cost of revenue",
+              15232017.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Transaction-based costs",
+              3702016.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Subscription and services-based costs",
+              1075129.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Hardware costs",
+              267650.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Bitcoin costs",
+              9293113.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Amortization of acquired technology assets",
+              72829.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total cost of revenue",
+              14410737.0,
+              "usd_thousand",
+              "c03:s02"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "bitcoin_cost_change_2024",
+      "expected": {
+        "bitcoin_gross_profit_2024_usd_thousand": 208819.0,
+        "bitcoin_gross_profit_2023_usd_thousand": 205189.0,
+        "bitcoin_gross_profit_growth_pct": 1.7691006827851397,
+        "bitcoin_share_of_total_net_revenue_increase_pct": 31.78078651328766
+      },
+      "tables": {
+        "revenues": {
+          "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Transaction-based revenue",
+              6613680.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Subscription and services-based revenue",
+              7164799.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Hardware revenue",
+              143369.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Bitcoin revenue",
+              10199205.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total net revenue",
+              24121053.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Transaction-based revenue",
+              6315301.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Subscription and services-based revenue",
+              5944842.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Hardware revenue",
+              157178.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Bitcoin revenue",
+              9498302.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total net revenue",
+              21915623.0,
+              "usd_thousand",
+              "c03:s01"
+            ]
+          ]
+        },
+        "costs": {
+          "schema": "CREATE TABLE costs(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Transaction-based costs",
+              3881013.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Subscription and services-based costs",
+              1135813.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Hardware costs",
+              236441.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Bitcoin costs",
+              9990386.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Amortization of acquired technology assets",
+              68364.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total cost of revenue",
+              15312017.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Transaction-based costs",
+              3702016.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Subscription and services-based costs",
+              1075129.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Hardware costs",
+              267650.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Bitcoin costs",
+              9293113.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Amortization of acquired technology assets",
+              72829.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total cost of revenue",
+              14410737.0,
+              "usd_thousand",
+              "c03:s02"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "bitcoin_cost_change_2023",
+      "expected": {
+        "bitcoin_gross_profit_2024_usd_thousand": 288819.0,
+        "bitcoin_gross_profit_2023_usd_thousand": 180189.0,
+        "bitcoin_gross_profit_growth_pct": 60.28669896608561,
+        "bitcoin_share_of_total_net_revenue_increase_pct": 31.78078651328766
+      },
+      "tables": {
+        "revenues": {
+          "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Transaction-based revenue",
+              6613680.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Subscription and services-based revenue",
+              7164799.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Hardware revenue",
+              143369.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Bitcoin revenue",
+              10199205.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total net revenue",
+              24121053.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Transaction-based revenue",
+              6315301.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Subscription and services-based revenue",
+              5944842.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Hardware revenue",
+              157178.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Bitcoin revenue",
+              9498302.0,
+              "usd_thousand",
+              "c03:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total net revenue",
+              21915623.0,
+              "usd_thousand",
+              "c03:s01"
+            ]
+          ]
+        },
+        "costs": {
+          "schema": "CREATE TABLE costs(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Transaction-based costs",
+              3881013.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Subscription and services-based costs",
+              1135813.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Hardware costs",
+              236441.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Bitcoin costs",
+              9910386.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Amortization of acquired technology assets",
+              68364.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total cost of revenue",
+              15232017.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Transaction-based costs",
+              3702016.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Subscription and services-based costs",
+              1075129.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Hardware costs",
+              267650.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Bitcoin costs",
+              9318113.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Amortization of acquired technology assets",
+              72829.0,
+              "usd_thousand",
+              "c03:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total cost of revenue",
+              14435737.0,
+              "usd_thousand",
+              "c03:s02"
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

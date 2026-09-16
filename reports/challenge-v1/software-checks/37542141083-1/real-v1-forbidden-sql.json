@@ -1,0 +1,45 @@
+{
+  "name": "real-v1-forbidden-sql",
+  "expected_complete": false,
+  "verdict": {
+    "scorer_version": "1.2.0",
+    "complete": false,
+    "checks": {
+      "format": true,
+      "numerical": true,
+      "evidence_context": true,
+      "availability": true,
+      "conclusion": true,
+      "replay": false
+    },
+    "details": {
+      "claims": {
+        "transfer_total": {
+          "numerical": true,
+          "evidence": true,
+          "availability": true,
+          "unit": true,
+          "reason_code": null,
+          "original_replay": false,
+          "changed_replay": false
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "reason_code": true,
+        "evidence": true
+      }
+    },
+    "errors": [
+      "transfer_total:replay"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}
