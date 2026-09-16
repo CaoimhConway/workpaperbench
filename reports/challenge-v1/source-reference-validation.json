@@ -246,7 +246,13 @@
     ],
     "change": "Add missing SELECT statement prefixes to authored scalar reference expressions",
     "failed_run": 37558173277,
-    "hosted_recheck": "pending"
+    "hosted_recheck": {
+      "all_expected_verdicts_match": true,
+      "all_four_isolation_checks": true,
+      "conclusion": "success",
+      "controls": 28,
+      "run_id": 37564292444
+    }
   },
   "review_basis": "Independent source-first read-only review plus trusted Decimal checks, no local submission SQL",
   "review_method": "Independent source-first agent review and trusted Decimal recomputation, no human validation"

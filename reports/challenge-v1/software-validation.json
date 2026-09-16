@@ -50,8 +50,39 @@
         "b04",
         "c01"
       ]
+    },
+    {
+      "all_retained_isolation_flags_true": true,
+      "archive_sha256": "feb561beece49ae480850cb447f4418290aaea2638e62362bcc3c24a515e0479",
+      "artifact_id": 11458633557,
+      "commit_sha": "f341fa4b5efa1dc41f04b1df46d1c4e6c16270d9",
+      "conclusion": "success",
+      "controls_passed": 28,
+      "receipt_directory": "reports/challenge-v1/software-checks/37564292444-1",
+      "run_attempt": 1,
+      "run_id": 37564292444,
+      "selected_tasks": [
+        "c02",
+        "c03",
+        "c04"
+      ]
     }
   ],
+  "evaluation_native_gate": {
+    "all_expected_verdicts_match": true,
+    "all_four_isolation_checks": true,
+    "conclusion": "success",
+    "controls": 88,
+    "failed_c02_receipt_preserved": true,
+    "runs": [
+      37558173277,
+      37564292444
+    ],
+    "scope": "All twelve cases, versioned references and alternatives, constants, unavailable-count, hostile SQL, duplicate and pristine controls",
+    "successful_current_controls": 28,
+    "successful_unchanged_controls_reused": 60,
+    "unchanged_package_proof": "evaluation_native_attempts[0].unchanged_successful_packages_checked"
+  },
   "fresh_replay": {
     "archive_sha256": "20e4b825f132d21e74ec5cd604a55a10e0993e322dafa56b319c1725f3d89e3c",
     "artifact_id": 11446615699,
@@ -296,7 +327,7 @@
     "receipt_sha256": "8a30dc47dbfd5cb9bed5b4351b36c7dc20211b6bd9dd03a3da2175265203d1e6",
     "run_id": "37539651398"
   },
-  "scope": "Hosted validation of current development dossiers and scorer, before paid exposure. No claim that all twelve challenge cases are software-complete.",
+  "scope": "All twelve challenge cases software-complete through 88 actual hosted native controls, unchanged-package evidence reuse and actual key-free post-write installation. Evaluation inference not yet exposed.",
   "unit": {
     "core_and_challenge_offline_reconstruction": true,
     "key_free_demo": true,

@@ -1,0 +1,81 @@
+{
+  "name": "challenge-c03-rounded",
+  "expected_complete": true,
+  "verdict": {
+    "scorer_version": "challenge-1.1.0",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "delivery": true,
+      "financial_answer": true,
+      "evidence": true,
+      "robustness": true
+    },
+    "details": {
+      "claims": {
+        "bitcoin_gross_profit_2024_usd_thousand": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "bitcoin_sales_change": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_cost_change_2023": true
+          }
+        },
+        "bitcoin_gross_profit_2023_usd_thousand": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "bitcoin_sales_change": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_cost_change_2023": true
+          }
+        },
+        "bitcoin_gross_profit_growth_pct": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "bitcoin_sales_change": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_cost_change_2023": true
+          }
+        },
+        "bitcoin_share_of_total_net_revenue_increase_pct": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "bitcoin_sales_change": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_cost_change_2023": true
+          }
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "evidence": true
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}

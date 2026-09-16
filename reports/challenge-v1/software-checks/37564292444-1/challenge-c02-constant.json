@@ -1,0 +1,94 @@
+{
+  "name": "challenge-c02-constant",
+  "expected_complete": false,
+  "verdict": {
+    "scorer_version": "challenge-1.1.0",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "delivery": true,
+      "financial_answer": true,
+      "evidence": true,
+      "robustness": false
+    },
+    "details": {
+      "claims": {
+        "transaction_revenue_growth_pct": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "consumer_transaction_revenue_shift": false,
+            "recast_2023_transaction_revenue_shift": false,
+            "2024_spot_volume_shift": true
+          }
+        },
+        "spot_trading_volume_growth_pct": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true,
+            "2024_spot_volume_shift": false
+          }
+        },
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "consumer_transaction_revenue_shift": false,
+            "recast_2023_transaction_revenue_shift": true,
+            "2024_spot_volume_shift": true
+          }
+        },
+        "proxy_change_bps": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "consumer_transaction_revenue_shift": false,
+            "recast_2023_transaction_revenue_shift": false,
+            "2024_spot_volume_shift": false
+          }
+        },
+        "business_payment_count_2024": {
+          "availability": true,
+          "unit": true,
+          "evidence": true
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "evidence": true
+      }
+    },
+    "errors": [
+      "transaction_revenue_growth_pct:control:consumer_transaction_revenue_shift",
+      "transaction_revenue_growth_pct:control:recast_2023_transaction_revenue_shift",
+      "spot_trading_volume_growth_pct:control:2024_spot_volume_shift",
+      "transaction_revenue_to_spot_volume_proxy_2024_pct:control:consumer_transaction_revenue_shift",
+      "proxy_change_bps:control:consumer_transaction_revenue_shift",
+      "proxy_change_bps:control:recast_2023_transaction_revenue_shift",
+      "proxy_change_bps:control:2024_spot_volume_shift"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}
