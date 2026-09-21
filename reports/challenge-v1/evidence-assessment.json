@@ -1,0 +1,65 @@
+{
+  "cases": [
+    {
+      "allowed_common_context": [
+        "b02:s01",
+        "b02:s05"
+      ],
+      "answer_sha256": "389ab8178d66b5613ab84e36a715b481d48e8b510b487bf3f6cd85e82d22e512",
+      "assessment": "All financial and recomputation checks pass, and each claim cites its supporting facts. Shared context repeats the relevant circulation section s04. The original scorer broadcasts it to sibling claims and rejects it under the hidden shared allowlist. Public instructions do not explicitly prohibit this related extra shared support. Version1.1.3 accepts task-relevant shared sections while keeping each claim's own facts mandatory.",
+      "case": "b02",
+      "gold_sha256": "2da4ae798d15358dbd8a779ad211ffaf7f31475657fd85a871f5cc63ff730fb6",
+      "record_sha256": "5ac0d33b5703d2376281e94772570c3fe49b23fc2ad22f567becd9900e8cd0fd",
+      "shared_context": [
+        "b02:s01",
+        "b02:s04",
+        "b02:s05"
+      ],
+      "slot_id": "final-b02-inexpensive-1"
+    },
+    {
+      "allowed_common_context": [
+        "b03:s01",
+        "b03:s06"
+      ],
+      "answer_sha256": "88aca4983ac08b3c50050cc9bc9a8eab2de2b01c0ff0b3ffe44be5d71ac43e95",
+      "assessment": "All financial and recomputation checks pass, and the claim citations and bounded conclusion support are valid. Shared context repeats sections s02 through s05 that support requested claims. The original broadcast rule creates an evidence-only failure. Version1.1.3 accepts the related shared references without letting them substitute for each claim's own facts.",
+      "case": "b03",
+      "gold_sha256": "c1d9fef42b78410ed74c0cb05edf43c3a536f49550b0672a37a8eae001aa742b",
+      "record_sha256": "8ad9ff1ce50c79a0b05830849e4acedc1c7b7704d88f1efe141cec6a03f49d04",
+      "shared_context": [
+        "b03:s01",
+        "b03:s02",
+        "b03:s03",
+        "b03:s04",
+        "b03:s05"
+      ],
+      "slot_id": "final-b03-inexpensive-1"
+    },
+    {
+      "allowed_common_context": [
+        "b04:s05",
+        "b04:s06"
+      ],
+      "answer_sha256": "e5e0c1337bb1a48c023cac8c8c7c54c432c96afd1fe32fb50258aa781566e1b9",
+      "assessment": "All financial and recomputation checks pass. The shared fact sections s01, s03 and s04 are related to requested claims and already cited in their fields, so version1.1.3 accepts this placement. Separately, s01 explicitly describes the same May asset-class schedule and primary page as s02, which supplies a reviewed alternate coverage/conclusion path.",
+      "case": "b04",
+      "gold_sha256": "8e309146c4aaf1e1cf0461407ffc0ec8716be39f94d9b5f6efa1719b2e0acc76",
+      "record_sha256": "8b0ac808ea8624ce7b46d620fe96aa944c37ed0adaf2baf65d5360ccc296462c",
+      "shared_context": [
+        "b04:s01",
+        "b04:s03",
+        "b04:s04",
+        "b04:s05",
+        "b04:s06"
+      ],
+      "slot_id": "final-b04-inexpensive-1"
+    }
+  ],
+  "difficulty_qualification": "These three saved answers have correct financial quantities and executable recomputation. Original evidence failures arise from a shared-placement overconstraint and one Ripple source-path alternative. They are excluded from capability-difficulty claims and receive the same versioned correction as every other final answer.",
+  "human_validation": false,
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "original_scorer_version": "challenge-1.1.0",
+  "review_kind": "source-first independent agent review",
+  "versioned_corrections": "Preliminary NVIDIA-only 1.1.1 and NVIDIA/Ripple 1.1.2 bundles and their native controls remain preserved. Final1.1.3 accepts all reviewed source paths and task-relevant shared support, while each claim must still cite its own facts. Original inputs and verdicts remain unchanged."
+}

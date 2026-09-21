@@ -1,0 +1,43 @@
+{
+  "task_id": "challenge-v1-a02",
+  "context_evidence": ["a02:s01", "a02:s06"],
+  "answers": [
+    {
+      "id": "revenue_gap",
+      "status": "answered",
+      "value": 1932.0,
+      "unit": "usd_million",
+      "evidence": ["a02:s01", "a02:s02"],
+      "sql": "SELECT f.amount - (g.midpoint * (1.0 + g.range_width / 100.0)) AS revenue_gap FROM financials f JOIN guidance g ON g.issue_date = '2024-08-28' AND g.fiscal_period = 'Q3FY2025' AND g.measure = 'Revenue' WHERE f.period_end = '2024-10-27' AND f.measure = 'Revenue' AND f.basis = 'GAAP' AND f.months = 3"
+    },
+    {
+      "id": "adjusted_gross_profit",
+      "status": "answered",
+      "value": 26322.0,
+      "unit": "usd_million",
+      "evidence": ["a02:s02", "a02:s03", "a02:s06"],
+      "sql": "SELECT fp.amount + COALESCE(SUM(a.amount), 0) AS adjusted_gross_profit FROM financials fp LEFT JOIN adjustments a ON a.period_end = fp.period_end AND a.measure = fp.measure AND a.months = fp.months WHERE fp.period_end = '2024-10-27' AND fp.measure = 'Gross profit' AND fp.basis = 'GAAP' AND fp.months = 3 GROUP BY fp.amount"
+    },
+    {
+      "id": "adjusted_gross_margin",
+      "status": "answered",
+      "value": 75.02992987857021,
+      "unit": "percent",
+      "evidence": ["a02:s03", "a02:s04", "a02:s06"],
+      "sql": "SELECT (fp.amount + COALESCE(SUM(a.amount), 0)) / rev.amount * 100.0 AS adjusted_gross_margin FROM financials fp LEFT JOIN adjustments a ON a.period_end = fp.period_end AND a.measure = fp.measure AND a.months = fp.months JOIN financials rev ON rev.period_end = fp.period_end AND rev.measure = 'Revenue' AND rev.basis = 'GAAP' AND rev.months = 3 WHERE fp.period_end = '2024-10-27' AND fp.measure = 'Gross profit' AND fp.basis = 'GAAP' AND fp.months = 3 GROUP BY fp.amount, rev.amount"
+    },
+    {
+      "id": "margin_gap",
+      "status": "answered",
+      "value": -47.00701214297851,
+      "unit": "basis_points",
+      "evidence": ["a02:s01", "a02:s03"],
+      "sql": "SELECT ((fp.amount + COALESCE(SUM(a.amount), 0)) / rev.amount * 100.0 - (g2.midpoint + g2.range_width / 100.0)) * 100.0 AS margin_gap FROM financials fp LEFT JOIN adjustments a ON a.period_end = fp.period_end AND a.measure = fp.measure AND a.months = fp.months JOIN financials rev ON rev.period_end = fp.period_end AND rev.measure = 'Revenue' AND rev.basis = 'GAAP' AND rev.months = 3 JOIN guidance g2 ON g2.issue_date = '2024-08-28' AND g2.fiscal_period = 'Q3FY2025' AND g2.measure = 'Gross margin' AND g2.basis = 'non-GAAP' WHERE fp.period_end = '2024-10-27' AND fp.measure = 'Gross profit' AND fp.basis = 'GAAP' AND fp.months = 3 GROUP BY fp.amount, rev.amount, g2.midpoint, g2.range_width"
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": ["a02:s01", "a02:s03"]
+  }
+}
