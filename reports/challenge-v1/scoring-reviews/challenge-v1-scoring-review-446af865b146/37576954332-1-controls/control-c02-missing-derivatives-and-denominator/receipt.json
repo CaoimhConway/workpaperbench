@@ -1,0 +1,120 @@
+{
+  "artifact_audit_sha256": null,
+  "base_scorer_sha256": "77f41466c3a65283481907bada217f75fa92ea0ccf92355c396e7c216e57c34c",
+  "commit_sha": "1bb2b8b8f813c0159b726dd25a59088d05cbd8e1",
+  "effective_gold_sha256": "509436de136e55ac5b79ee12dcc2d01afbef2699cc8ad1ac33cdea583916ae11",
+  "effective_task_sha256": "087af248d3c6c3651eab21b892884bacacb76be2c1ccc707ce5f97dd6cb489eb",
+  "input_file": "datasets/challenge-v1/tasks/c02/tests/reference.json",
+  "input_sha256": "753af1013e641d5ca44fe99a088be30fc5ad6aa81730c21630474ab5b3397e37",
+  "input_source": "authored_control",
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "model_key": null,
+  "prior_verdict": null,
+  "prior_verdict_sha256": null,
+  "record_path": null,
+  "record_sha256": null,
+  "repetition": null,
+  "review_bundle_sha256": "a0e142a2841857842302415b6fc6ec313cec361b349589131d0199c037bbe05f",
+  "review_content_hash": "446af865b14613e821e39e9399dd183517027de5aaf8fd8e36e2451ffbbb0db4",
+  "review_id": "challenge-v1-scoring-review-446af865b146",
+  "review_scorer_sha256": "73bbec6f4f867165df6963ffa2be371dfc218ceec1698adba46f0edef79d4006",
+  "run_attempt": "1",
+  "run_id": "37576954332",
+  "scorer_version": "challenge-1.1.3",
+  "slot_id": "control-c02-missing-derivatives-and-denominator",
+  "source_gold_sha256": "3b88beb155d6cbf2f860065b0dd181f9ce9fadf78a4fc213271a597f2c7672c9",
+  "source_task_sha256": "a88b6ea1001c1fe91dd256362ce5f3ade184e2fb206e5381b22a451e2a7ce9be",
+  "split": "evaluation",
+  "task_id": "challenge-v1-c02",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "business_payment_count_2024": {
+          "availability": true,
+          "evidence": true,
+          "unit": true
+        },
+        "proxy_change_bps": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "spot_trading_volume_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": false,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "conclusion:evidence"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.3",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verifier_bytes_sha256": "8400fa0f3732793b30d9544b25a91cbf50afb9b4c55c8f12ee9b51377504f4a9",
+  "verifier_path": "reports/challenge-v1/scoring-reviews/challenge-v1-scoring-review-446af865b146/37576954332-1-controls/control-c02-missing-derivatives-and-denominator/verifier.json"
+}
