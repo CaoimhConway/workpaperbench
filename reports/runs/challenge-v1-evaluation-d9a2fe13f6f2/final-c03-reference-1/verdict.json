@@ -1,0 +1,75 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": true,
+    "financial_answer": true,
+    "robustness": true
+  },
+  "complete": true,
+  "details": {
+    "claims": {
+      "bitcoin_gross_profit_2023_usd_thousand": {
+        "availability": true,
+        "controls": {
+          "bitcoin_cost_change_2023": true,
+          "bitcoin_cost_change_2024": true,
+          "bitcoin_sales_change": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "bitcoin_gross_profit_2024_usd_thousand": {
+        "availability": true,
+        "controls": {
+          "bitcoin_cost_change_2023": true,
+          "bitcoin_cost_change_2024": true,
+          "bitcoin_sales_change": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "bitcoin_gross_profit_growth_pct": {
+        "availability": true,
+        "controls": {
+          "bitcoin_cost_change_2023": true,
+          "bitcoin_cost_change_2024": true,
+          "bitcoin_sales_change": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "bitcoin_share_of_total_net_revenue_increase_pct": {
+        "availability": true,
+        "controls": {
+          "bitcoin_cost_change_2023": true,
+          "bitcoin_cost_change_2024": true,
+          "bitcoin_sales_change": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": true,
+      "verdict": true
+    }
+  },
+  "errors": [],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.1.0",
+  "strict_delivery_completion": true,
+  "verified_research_completion": true
+}

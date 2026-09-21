@@ -1,0 +1,53 @@
+{
+  "task_id": "challenge-v1-c04",
+  "answers": [
+    {
+      "id": "service_revenue_growth_pct",
+      "status": "answered",
+      "value": 8.687440982058536,
+      "unit": "percent",
+      "evidence": [
+        "c04:s01"
+      ],
+      "sql": "SELECT (SUM(CASE WHEN period_end = '2024-09-30' THEN amount ELSE 0 END) / SUM(CASE WHEN period_end = '2023-09-30' THEN amount ELSE 0 END) - 1.0) * 100.0 FROM revenues WHERE category = 'Service revenue' AND months = 12"
+    },
+    {
+      "id": "lagged_nominal_payment_volume_growth_pct",
+      "status": "answered",
+      "value": 7.421196326631918,
+      "unit": "percent",
+      "evidence": [
+        "c04:s02"
+      ],
+      "sql": "SELECT (SUM(CASE WHEN period_end = '2024-06-30' THEN amount ELSE 0 END) / SUM(CASE WHEN period_end = '2023-06-30' THEN amount ELSE 0 END) - 1.0) * 100.0 FROM activity_metrics WHERE metric = 'Nominal payments volume' AND months = 12"
+    },
+    {
+      "id": "service_growth_minus_volume_growth_pp",
+      "status": "answered",
+      "value": 1.2662446554266182,
+      "unit": "percentage_points",
+      "evidence": [
+        "c04:s01",
+        "c04:s02"
+      ],
+      "sql": "SELECT ((SELECT (SUM(CASE WHEN period_end = '2024-09-30' THEN amount ELSE 0 END) / SUM(CASE WHEN period_end = '2023-09-30' THEN amount ELSE 0 END) - 1.0) * 100.0 FROM revenues WHERE category = 'Service revenue' AND months = 12) - (SELECT (SUM(CASE WHEN period_end = '2024-06-30' THEN amount ELSE 0 END) / SUM(CASE WHEN period_end = '2023-06-30' THEN amount ELSE 0 END) - 1.0) * 100.0 FROM activity_metrics WHERE metric = 'Nominal payments volume' AND months = 12))"
+    },
+    {
+      "id": "service_revenue_to_lagged_volume_proxy_2024_pct",
+      "status": "answered",
+      "value": 0.12410659272951324,
+      "unit": "percent",
+      "evidence": [
+        "c04:s01",
+        "c04:s02",
+        "c04:s04"
+      ],
+      "sql": "SELECT (SELECT amount FROM revenues WHERE category = 'Service revenue' AND period_end = '2024-09-30' AND months = 12) / (SELECT amount * 10.0 FROM activity_metrics WHERE metric = 'Nominal payments volume' AND period_end = '2024-06-30' AND months = 12)"
+    }
+  ],
+  "conclusion": {
+    "verdict": "not_established",
+    "reason_code": "missing_required_evidence",
+    "evidence": []
+  }
+}
