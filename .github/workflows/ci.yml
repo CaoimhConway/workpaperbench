@@ -74,7 +74,7 @@ jobs:
       - run: python scripts/audit.py
   integration:
     needs: unit
-    if: github.event_name == 'workflow_dispatch' && (inputs.integration || inputs.fresh_replay)
+    if: github.event_name == 'workflow_dispatch' && (inputs.integration || inputs.fresh_replay || inputs.regrade)
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     permissions:
@@ -136,7 +136,22 @@ jobs:
           PY
       - name: Review retained answers in separate native verifiers without inference
         if: inputs.regrade
-        run: python scripts/regrade.py
+        env:
+          WPB_REVIEW_DATASET: ${{ inputs.dataset }}
+          WPB_ANSWER_PATH: ${{ inputs.answer_path }}
+          WPB_REPLAY_TASK: ${{ inputs.task }}
+        run: |
+          python - <<'PY'
+          import os, subprocess, sys
+          if os.environ['WPB_REVIEW_DATASET'] == 'challenge-v1':
+              subprocess.run([sys.executable, 'scripts/challenge_evidence_review.py', '--controls'], check=True)
+              command = [sys.executable, 'scripts/challenge_evidence_review.py']
+              if os.environ['WPB_ANSWER_PATH']:
+                  command += ['--answer', os.environ['WPB_ANSWER_PATH'], '--task', os.environ['WPB_REPLAY_TASK']]
+          else:
+              command = [sys.executable, 'scripts/regrade.py']
+          subprocess.run(command, check=True)
+          PY
       - name: Generate the versioned report
         if: always()
         run: |
