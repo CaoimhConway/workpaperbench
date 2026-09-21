@@ -1,0 +1,65 @@
+{
+  "cases": [
+    {
+      "allowed_common_context": [
+        "b02:s01",
+        "b02:s05"
+      ],
+      "answer_sha256": "389ab8178d66b5613ab84e36a715b481d48e8b510b487bf3f6cd85e82d22e512",
+      "assessment": "Claim citations support the numbers and all recomputation checks pass. Shared context includes the claim-specific circulation section s04, outside the explicitly permitted common-definition context. This is citation placement rather than a calculation or missing-fact failure.",
+      "case": "b02",
+      "gold_sha256": "2da4ae798d15358dbd8a779ad211ffaf7f31475657fd85a871f5cc63ff730fb6",
+      "record_sha256": "5ac0d33b5703d2376281e94772570c3fe49b23fc2ad22f567becd9900e8cd0fd",
+      "shared_context": [
+        "b02:s01",
+        "b02:s04",
+        "b02:s05"
+      ],
+      "slot_id": "final-b02-inexpensive-1"
+    },
+    {
+      "allowed_common_context": [
+        "b03:s01",
+        "b03:s06"
+      ],
+      "answer_sha256": "88aca4983ac08b3c50050cc9bc9a8eab2de2b01c0ff0b3ffe44be5d71ac43e95",
+      "assessment": "Claim citations and the bounded conclusion otherwise match accepted paths, and all financial/recomputation checks pass. Shared context includes claim-specific data sections s02 through s05. The evidence component enforces the explicit shared-common-definition contract.",
+      "case": "b03",
+      "gold_sha256": "c1d9fef42b78410ed74c0cb05edf43c3a536f49550b0672a37a8eae001aa742b",
+      "record_sha256": "8ad9ff1ce50c79a0b05830849e4acedc1c7b7704d88f1efe141cec6a03f49d04",
+      "shared_context": [
+        "b03:s01",
+        "b03:s02",
+        "b03:s03",
+        "b03:s04",
+        "b03:s05"
+      ],
+      "slot_id": "final-b03-inexpensive-1"
+    },
+    {
+      "allowed_common_context": [
+        "b04:s05",
+        "b04:s06"
+      ],
+      "answer_sha256": "e5e0c1337bb1a48c023cac8c8c7c54c432c96afd1fe32fb50258aa781566e1b9",
+      "assessment": "All financial/recomputation checks pass. Shared context contains claim data sections s01, s03 and s04. The coverage/conclusion citation also omits s02 under the frozen paths, but s01 explicitly describes the same May asset-class schedule at the same primary page. Version1.1.2 accepts this alternative May path while preserving shared-context restrictions.",
+      "case": "b04",
+      "gold_sha256": "8e309146c4aaf1e1cf0461407ffc0ec8716be39f94d9b5f6efa1719b2e0acc76",
+      "record_sha256": "8b0ac808ea8624ce7b46d620fe96aa944c37ed0adaf2baf65d5360ccc296462c",
+      "shared_context": [
+        "b04:s01",
+        "b04:s03",
+        "b04:s04",
+        "b04:s05",
+        "b04:s06"
+      ],
+      "slot_id": "final-b04-inexpensive-1"
+    }
+  ],
+  "difficulty_qualification": "Evidence or completion rates alone do not establish research difficulty. These three saved answers have correct financial quantities and executable recomputation. B02/B03 failures are citation placement, while B04 also has a source-path ambiguity corrected separately.",
+  "human_validation": false,
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "original_scorer_version": "challenge-1.1.0",
+  "review_kind": "source-first independent agent review",
+  "versioned_corrections": "The preliminary NVIDIA-only 1.1.1 bundle remains preserved. Version1.1.2 adds only the reviewed Ripple May path for coverage and conclusion. Every available evaluation answer receives the same correction, with original inputs and verdicts unchanged."
+}

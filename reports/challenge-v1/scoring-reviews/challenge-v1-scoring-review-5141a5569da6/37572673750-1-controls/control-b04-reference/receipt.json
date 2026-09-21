@@ -1,0 +1,101 @@
+{
+  "artifact_audit_sha256": null,
+  "base_scorer_sha256": "77f41466c3a65283481907bada217f75fa92ea0ccf92355c396e7c216e57c34c",
+  "commit_sha": "ef4cb8144395560435ccbd3872d3eda55595e94e",
+  "effective_gold_sha256": "bc7a4bd2040199a2a8ee2e0ab1af520e15fcffbe7d347229e65ca111a25552b4",
+  "effective_task_sha256": "157fe446e59b86a5749d83303aeee65321ed6ed4d49c03198c0d19e746cb3716",
+  "input_file": "datasets/challenge-v1/tasks/b04/tests/reference.json",
+  "input_sha256": "d27e8f0755c5c31c400c707d34691678d37d6ef64bf9558fa8e9c2f72f0d781d",
+  "input_source": "authored_control",
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "model_key": null,
+  "prior_verdict": null,
+  "prior_verdict_sha256": null,
+  "record_path": null,
+  "record_sha256": null,
+  "repetition": null,
+  "review_bundle_sha256": "8ed769240561567941f1b006f8298f29ba1dafe8987678f9abfad7b7d4da8ea5",
+  "review_content_hash": "5141a5569da6658c9449f7f50205c366a17a0b82e77952929d236369a6c66a27",
+  "review_id": "challenge-v1-scoring-review-5141a5569da6",
+  "review_scorer_sha256": "6b15bdd1fae817eec1c12980281c417d056920d6c135babc53aa4e60d993cee9",
+  "run_attempt": "1",
+  "run_id": "37572673750",
+  "scorer_version": "challenge-1.1.1",
+  "slot_id": "control-b04-reference",
+  "source_gold_sha256": "8e309146c4aaf1e1cf0461407ffc0ec8716be39f94d9b5f6efa1719b2e0acc76",
+  "source_task_sha256": "fb10fba9b3f9e761821f296326a9d98d5d2d010cc2664042a68b0883b7b888c3",
+  "split": "evaluation",
+  "task_id": "challenge-v1-b04",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": true,
+    "details": {
+      "claims": {
+        "coverage_change_bps": {
+          "availability": true,
+          "controls": {
+            "june30_component_gap": true,
+            "june30_market_revaluation": true,
+            "may30_market_revaluation": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "jun30_reconciliation_usd": {
+          "availability": true,
+          "controls": {
+            "june30_component_gap": true,
+            "june30_market_revaluation": true,
+            "may30_market_revaluation": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "jun30_reserves_usd": {
+          "availability": true,
+          "controls": {
+            "june30_component_gap": true,
+            "june30_market_revaluation": true,
+            "may30_market_revaluation": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.1",
+    "strict_delivery_completion": true,
+    "verified_research_completion": true
+  },
+  "verifier_bytes_sha256": "96d9017a6f93ac246dfd2a7294c98dc0770cd3d70c3268b34fc0bec97ca99986",
+  "verifier_path": "reports/challenge-v1/scoring-reviews/challenge-v1-scoring-review-5141a5569da6/37572673750-1-controls/control-b04-reference/verifier.json"
+}

@@ -33,31 +33,31 @@ Passing contrast: [pilot-a01-reference-1](workpapers/challenge-v1-development-7e
 
 | Scope | Model | Financial / assessed | Evidence / assessed | Robustness / assessed | Verified / scheduled | Delivery / assessed | Strict / scheduled | Verdict coverage |
 |---|---|---:|---:|---:|---:|---:|---:|---:|
-| all | inexpensive | 3 / 4 | 0 / 4 | 2 / 4 | 0 / 27 | 4 / 4 | 0 / 27 | 4 / 27 |
+| all | inexpensive | 5 / 6 | 0 / 6 | 4 / 6 | 0 / 27 | 6 / 6 | 0 / 27 | 6 / 27 |
 | a02 | inexpensive | 1 / 1 | 0 / 1 | 1 / 1 | 0 / 3 | 1 / 1 | 0 / 3 | 1 / 3 |
 | a03 | inexpensive | 0 / 1 | 0 / 1 | 0 / 1 | 0 / 3 | 1 / 1 | 0 / 3 | 1 / 3 |
 | a04 | inexpensive | 1 / 1 | 0 / 1 | 0 / 1 | 0 / 3 | 1 / 1 | 0 / 3 | 1 / 3 |
 | b02 | inexpensive | 1 / 1 | 0 / 1 | 1 / 1 | 0 / 3 | 1 / 1 | 0 / 3 | 1 / 3 |
-| b03 | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| b04 | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
+| b03 | inexpensive | 1 / 1 | 0 / 1 | 1 / 1 | 0 / 3 | 1 / 1 | 0 / 3 | 1 / 3 |
+| b04 | inexpensive | 1 / 1 | 0 / 1 | 1 / 1 | 0 / 3 | 1 / 1 | 0 / 3 | 1 / 3 |
 | c02 | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
 | c03 | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
 | c04 | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
 | family-A | inexpensive | 2 / 3 | 0 / 3 | 1 / 3 | 0 / 9 | 3 / 3 | 0 / 9 | 3 / 9 |
-| family-B | inexpensive | 1 / 1 | 0 / 1 | 1 / 1 | 0 / 9 | 1 / 1 | 0 / 9 | 1 / 9 |
+| family-B | inexpensive | 3 / 3 | 0 / 3 | 3 / 3 | 0 / 9 | 3 / 3 | 0 / 9 | 3 / 9 |
 | family-C | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 9 | 0 / 0 | 0 / 9 | 0 / 9 |
-| all | reference | 4 / 4 | 4 / 4 | 4 / 4 | 4 / 27 | 4 / 4 | 4 / 27 | 4 / 27 |
+| all | reference | 6 / 6 | 6 / 6 | 6 / 6 | 6 / 27 | 6 / 6 | 6 / 27 | 6 / 27 |
 | a02 | reference | 1 / 1 | 1 / 1 | 1 / 1 | 1 / 3 | 1 / 1 | 1 / 3 | 1 / 3 |
 | a03 | reference | 1 / 1 | 1 / 1 | 1 / 1 | 1 / 3 | 1 / 1 | 1 / 3 | 1 / 3 |
 | a04 | reference | 1 / 1 | 1 / 1 | 1 / 1 | 1 / 3 | 1 / 1 | 1 / 3 | 1 / 3 |
 | b02 | reference | 1 / 1 | 1 / 1 | 1 / 1 | 1 / 3 | 1 / 1 | 1 / 3 | 1 / 3 |
-| b03 | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| b04 | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
+| b03 | reference | 1 / 1 | 1 / 1 | 1 / 1 | 1 / 3 | 1 / 1 | 1 / 3 | 1 / 3 |
+| b04 | reference | 1 / 1 | 1 / 1 | 1 / 1 | 1 / 3 | 1 / 1 | 1 / 3 | 1 / 3 |
 | c02 | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
 | c03 | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
 | c04 | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
 | family-A | reference | 3 / 3 | 3 / 3 | 3 / 3 | 3 / 9 | 3 / 3 | 3 / 9 | 3 / 9 |
-| family-B | reference | 1 / 1 | 1 / 1 | 1 / 1 | 1 / 9 | 1 / 1 | 1 / 9 | 1 / 9 |
+| family-B | reference | 3 / 3 | 3 / 3 | 3 / 3 | 3 / 9 | 3 / 3 | 3 / 9 | 3 / 9 |
 | family-C | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 9 | 0 / 0 | 0 / 9 | 0 / 9 |
 
 Balanced repetitions give equal weight to each task in the scheduled completion proportions. Component denominators count assessed verdicts. Missing or infrastructure-failed slots remain in scheduled denominators and are not fabricated model answers.

@@ -206,7 +206,7 @@ def report_scoring_reviews(root):
     slots = {slot["slot_id"]: slot for slot in schedule}
     indexes = root / "reports/challenge-v1/scoring-reviews" / bundle["review_id"]
     studies, pending = [], []
-    lines = ["# Versioned evidence scoring review", "", "Original frozen verdicts remain unchanged. This separate review permits one additional relevant NVIDIA source alongside either complete gross-profit bridge. Finance, calculation, delivery and source inputs stay fixed. Missing answers retain the scheduled denominator.", ""]
+    lines = ["# Versioned evidence scoring review", "", "Original frozen verdicts remain unchanged. This separate review permits relevant NVIDIA income-statement support alongside a complete gross-profit bridge, and Ripple's explicit May component schedule as an alternate May citation. Finance, calculation, delivery and source inputs stay fixed. Missing answers retain the scheduled denominator.", ""]
 
     def authenticated_bytes(path, expected):
         if (any(parent.is_symlink() for parent in (path, *path.parents) if parent.is_relative_to(root))
