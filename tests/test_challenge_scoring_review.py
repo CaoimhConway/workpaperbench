@@ -45,7 +45,7 @@ def _fixture(tmp_path, monkeypatch):
         task_map[key] = {"task_id": "challenge-v1-" + key, "path": task_path,
                          "split": "evaluation", "source_group": "source-" + key}
         destination = root / task_path
-        if key in {"a02", "b04"}:
+        if key in {"a02", "b02", "b03", "b04", "c02", "c04"}:
             shutil.copytree(ROOT / task_path, destination)
         else:
             write_json(destination / "tests/gold.json", {
@@ -90,6 +90,7 @@ def _fixture(tmp_path, monkeypatch):
         "base_scorer_version": review.BASE_SCORER_VERSION,
         "scorer_version": review.SCORER_VERSION,
         "scorer_path": review.SCORER_RELATIVE,
+        "shared_context_policy": review.SHARED_CONTEXT_POLICY,
         "hashes": {relative: _hash((root / relative).read_bytes()) for relative in review.HASH_PATHS},
         "tasks": bundle_tasks,
     })
@@ -148,6 +149,13 @@ def test_bundle_is_strictly_bound_and_rejects_tamper_foreign_paths_and_scorer(re
     _set_review_identity(bundle)
     write_json(review_repo["bundle_path"], bundle)
     with pytest.raises(ValueError, match="evidence_paths_invalid"):
+        review.validate_review(root)
+
+    bundle = copy.deepcopy(review_repo["bundle"])
+    bundle["shared_context_policy"] = "all_task_support_is_global"
+    _set_review_identity(bundle)
+    write_json(review_repo["bundle_path"], bundle)
+    with pytest.raises(ValueError, match="origin_or_scorer_mismatch"):
         review.validate_review(root)
 
     bundle = copy.deepcopy(review_repo["bundle"])
@@ -234,7 +242,9 @@ def test_added_redundant_gaap_support_is_accepted_without_local_sql(
     assert calls
 
 
-@pytest.mark.parametrize("case", ["s02_only", "unrelated_s07", "missing_revenue_denominator", "invalid_shared_s01"])
+@pytest.mark.parametrize("case", ["s02_only", "unrelated_s07", "missing_revenue_denominator",
+                                   "relevant_shared_s01", "unrelated_shared_context",
+                                   "claim_facts_only_in_shared"])
 def test_review_does_not_relax_single_source_shared_or_denominator_evidence(
         review_repo, tmp_path, monkeypatch, case):
     validated = review.validate_review(review_repo["root"])
@@ -250,12 +260,45 @@ def test_review_does_not_relax_single_source_shared_or_denominator_evidence(
     elif case == "missing_revenue_denominator":
         claim = next(item for item in answer["answers"] if item["id"] == "revenue_gap")
         claim["evidence"] = ["a02:s02"]
-    else:
+    elif case == "relevant_shared_s01":
         answer["context_evidence"] = ["a02:s01"]
+    elif case == "unrelated_shared_context":
+        answer["context_evidence"] = ["a02:s07"]
+    else:
+        answer["context_evidence"] = ["a02:s03", "a02:s06"]
+        claim = next(item for item in answer["answers"] if item["id"] == "adjusted_gross_profit")
+        claim["evidence"] = []
     verdict, _ = _grade_without_sql(
         copied["task_copy"], answer, monkeypatch, tmp_path / "answer")
-    assert verdict["checks"]["evidence"] is False
-    assert verdict["complete"] is False
+    if case == "relevant_shared_s01":
+        assert verdict["checks"]["evidence"] is True
+        assert verdict["complete"] is True
+    else:
+        assert verdict["checks"]["evidence"] is False
+        assert verdict["complete"] is False
+        if case == "claim_facts_only_in_shared":
+            assert "shared_context:evidence" not in verdict["errors"]
+            assert "adjusted_gross_profit:evidence" in verdict["errors"]
+        if case == "unrelated_shared_context":
+            assert "shared_context:evidence" in verdict["errors"]
+
+
+@pytest.mark.parametrize(("task_key", "shared"), [
+    ("b02", ["b02:s03"]),
+    ("b03", ["b03:s02"]),
+])
+def test_task_relevant_shared_support_does_not_poison_sibling_claims(
+        review_repo, tmp_path, monkeypatch, task_key, shared):
+    validated = review.validate_review(review_repo["root"])
+    copied = review.prepare_task_copy(
+        review_repo["root"], task_key, validated, tmp_path / ("task-copy-" + task_key))
+    answer = json.loads((copied["task_copy"] / "tests/reference.json").read_text())
+    answer["context_evidence"] = shared
+    verdict, calls = _grade_without_sql(
+        copied["task_copy"], answer, monkeypatch, tmp_path / ("answer-" + task_key))
+    assert verdict["checks"]["evidence"] is True
+    assert verdict["complete"] is True
+    assert calls
 
 
 def test_duplicate_unsafe_submission_is_rejected_before_any_sql(review_repo, tmp_path, monkeypatch):
@@ -276,7 +319,7 @@ def test_duplicate_unsafe_submission_is_rejected_before_any_sql(review_repo, tmp
 def test_control_references_keep_exact_source_bytes_and_paths(review_repo):
     validated = review.validate_review(review_repo["root"])
     controls = review._control_answers(review_repo["root"], validated)
-    assert len(controls) == 19
+    assert len(controls) == 29
     for item in controls[:9]:
         reference = review_repo["root"] / item["input_file"]
         assert item["answer_bytes"] == reference.read_bytes()
@@ -309,7 +352,7 @@ def test_controls_then_user_review_use_separate_attempt_outputs(review_repo, mon
     controls_index = review.run_controls(root, env={})
     assert controls_index.parent.name == "123456-1-controls"
     control_payload = json.loads(controls_index.read_text())
-    assert control_payload["passed"] == control_payload["total"] == 19
+    assert control_payload["passed"] == control_payload["total"] == 29
 
     missing_denominator = next(item for item in controls
                                if item["name"] == "revenue-denominator-missing")
@@ -417,6 +460,40 @@ def test_b04_review_accepts_only_the_bounded_may_source_alternative(
         copied["task_copy"], item["answer"], monkeypatch,
         tmp_path / ("answer-" + control_name))
     assert verdict["details"]["claims"]["coverage_change_bps"]["evidence"] is evidence_passes
+    assert verdict["details"]["conclusion"]["evidence"] is evidence_passes
+    assert verdict["complete"] is evidence_passes
+    assert calls
+
+
+@pytest.mark.parametrize(("control_name", "evidence_passes"), [
+    ("c02-derivatives-source", True),
+    ("c02-metric-and-derivatives", True),
+    ("c02-missing-derivatives-source", False),
+    ("c02-missing-derivatives-and-denominator", False),
+    ("c02-unrelated-subscription-source", False),
+    ("c04-period-and-lag-support", True),
+    ("c04-missing-lagged-timing", False),
+    ("c04-volume-scope-alone", False),
+])
+def test_conclusion_source_paths_are_bounded_and_do_not_change_claims(
+        review_repo, tmp_path, monkeypatch, control_name, evidence_passes):
+    root = review_repo["root"]
+    validated = review.validate_review(root)
+    control = next(item for item in review._control_answers(root, validated)
+                   if item["name"] == control_name)
+    task_key = control["task_key"]
+    task_path = root / review_repo["tasks"][task_key]["path"]
+    original_gold = (task_path / "tests/gold.json").read_bytes()
+    copied = review.prepare_task_copy(root, task_key, validated, tmp_path / ("task-copy-" + task_key))
+    assert (task_path / "tests/gold.json").read_bytes() == original_gold
+
+    reference = json.loads((task_path / "tests/reference.json").read_text())
+    expected_answer = copy.deepcopy(reference)
+    expected_answer["conclusion"]["evidence"] = control["answer"]["conclusion"]["evidence"]
+    assert control["answer"] == expected_answer
+    verdict, calls = _grade_without_sql(
+        copied["task_copy"], control["answer"], monkeypatch,
+        tmp_path / ("answer-" + control_name))
     assert verdict["details"]["conclusion"]["evidence"] is evidence_passes
     assert verdict["complete"] is evidence_passes
     assert calls

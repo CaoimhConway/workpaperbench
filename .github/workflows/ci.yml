@@ -134,6 +134,26 @@ jobs:
               command += ['--slot', os.environ['WPB_REPLAY_SLOT']]
           subprocess.run(command, check=True)
           PY
+      - name: Preserve exact fresh verifier bytes
+        if: inputs.fresh_replay
+        run: |
+          python - <<'PYCODE'
+          import hashlib, json, os
+          from pathlib import Path
+          run = os.environ['GITHUB_RUN_ID']
+          attempt = os.environ['GITHUB_RUN_ATTEMPT']
+          for path in Path('reports/fresh-replay', run + '-' + attempt).glob('*/*/receipt.json'):
+              receipt = json.loads(path.read_text())
+              trial = 'fresh-' + receipt['dataset'] + '-' + run + '-' + attempt + '-' + receipt['slot_id']
+              source = Path('.raw/fresh-replay', run + '-' + attempt, 'trials', trial, 'verifier/verdict.json')
+              if source.is_symlink() or not source.is_file() or source.stat().st_size > 100000:
+                  raise SystemExit('Fresh verifier bytes unavailable')
+              data = source.read_bytes()
+              if hashlib.sha256(data).hexdigest() != receipt['verdict_sha256'] or json.loads(data) != receipt['verdict']:
+                  raise SystemExit('Fresh verifier source mismatch')
+              with path.with_name('verifier.json').open('xb') as output:
+                  output.write(data)
+          PYCODE
       - name: Review retained answers in separate native verifiers without inference
         if: inputs.regrade
         env:

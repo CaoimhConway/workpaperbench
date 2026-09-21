@@ -1,0 +1,74 @@
+{
+  "answers": [
+    {
+      "evidence": [
+        "c02:s01"
+      ],
+      "id": "transaction_revenue_growth_pct",
+      "reason_code": null,
+      "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total transaction revenue')-1.0)",
+      "status": "answered",
+      "unit": "percent",
+      "value": 162.30398498605604
+    },
+    {
+      "evidence": [
+        "c02:s03",
+        "c02:s04"
+      ],
+      "id": "spot_trading_volume_growth_pct",
+      "reason_code": null,
+      "sql": "SELECT 100.0*((SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume')/(SELECT amount FROM spot_volume WHERE period_end='2023-12-31' AND months=12 AND channel='Total Trading Volume')-1.0)",
+      "status": "answered",
+      "unit": "percent",
+      "value": 148.2905982905983
+    },
+    {
+      "evidence": [
+        "c02:s01",
+        "c02:s03",
+        "c02:s04"
+      ],
+      "id": "transaction_revenue_to_spot_volume_proxy_2024_pct",
+      "reason_code": null,
+      "sql": "SELECT 100.0*(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume')",
+      "status": "answered",
+      "unit": "percent",
+      "value": 0.34303898450946646
+    },
+    {
+      "evidence": [
+        "c02:s01",
+        "c02:s03",
+        "c02:s04"
+      ],
+      "id": "proxy_change_bps",
+      "reason_code": null,
+      "sql": "SELECT 100.0*((100.0*(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume'))-(100.0*(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2023-12-31' AND months=12 AND channel='Total Trading Volume')))",
+      "status": "answered",
+      "unit": "basis_points",
+      "value": 1.8326591347073276
+    },
+    {
+      "evidence": [
+        "c02:s03",
+        "c02:s04"
+      ],
+      "id": "business_payment_count_2024",
+      "reason_code": "no_eligible_observation",
+      "sql": null,
+      "status": "insufficient_evidence",
+      "unit": "count",
+      "value": null
+    }
+  ],
+  "conclusion": {
+    "evidence": [
+      "c02:s04",
+      "c02:s05"
+    ],
+    "reason_code": null,
+    "verdict": "contradicted"
+  },
+  "task_id": "challenge-v1-c02"
+}

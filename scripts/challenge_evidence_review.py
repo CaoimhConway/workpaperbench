@@ -14,8 +14,9 @@ ROOT = Path(__file__).resolve().parent.parent
 REVIEW_RELATIVE = "datasets/challenge-v1/scoring-review.json"
 EVALUATION_RELATIVE = "datasets/challenge-v1/manifests/evaluation.json"
 BASE_SCORER_VERSION = "challenge-1.1.0"
-SCORER_VERSION = "challenge-1.1.2"
-SCORER_RELATIVE = "config/scorers/challenge-1.1.2.py"
+SCORER_VERSION = "challenge-1.1.3"
+SCORER_RELATIVE = "config/scorers/challenge-1.1.3.py"
+SHARED_CONTEXT_POLICY = "common_definitions_and_task_relevant_support"
 HASH_PATHS = {
     "scripts/challenge_evidence_review.py",
     "config/scorers/challenge-1.1.0.py",
@@ -28,7 +29,9 @@ EXPECTED_ADDITIONS = {
     key: ({"adjusted_gross_profit": [["a02:s02", "a02:s03"],
                                       ["a02:s02", "a02:s04"]]} if key == "a02" else
           {"coverage_change_bps": [["b04:s01", "b04:s03", "b04:s04"]],
-           "conclusion": [["b04:s01", "b04:s03", "b04:s04"]]} if key == "b04" else {})
+           "conclusion": [["b04:s01", "b04:s03", "b04:s04"]]} if key == "b04" else
+          {"conclusion": [["c02:s05"], ["c02:s04", "c02:s05"]]} if key == "c02" else
+          {"conclusion": [["c04:s01", "c04:s02", "c04:s04"]]} if key == "c04" else {})
     for key in TASK_KEYS
 }
 ISOLATION_KEYS = ("network_namespace_none", "network_probe_blocked", "no_inference_key", "no_docker_socket")
@@ -110,7 +113,8 @@ def validate_review(root=ROOT):
             or review.get("original_manifest_sha256") != sha256(manifest_bytes)
             or review.get("base_scorer_version") != BASE_SCORER_VERSION
             or review.get("scorer_version") != SCORER_VERSION
-            or review.get("scorer_path") != SCORER_RELATIVE):
+            or review.get("scorer_path") != SCORER_RELATIVE
+            or review.get("shared_context_policy") != SHARED_CONTEXT_POLICY):
         raise ValueError("scoring_review_origin_or_scorer_mismatch")
 
     hashes = review.get("hashes")
@@ -124,10 +128,37 @@ def validate_review(root=ROOT):
 
     base = _read_repo_file(root, "config/scorers/challenge-1.1.0.py")
     corrected = _read_repo_file(root, SCORER_RELATIVE)
-    old_line = b'SCORER_VERSION = "challenge-1.1.0"'
-    new_line = b'SCORER_VERSION = "challenge-1.1.2"'
-    if base.count(old_line) != 1 or corrected != base.replace(old_line, new_line, 1):
-        raise ValueError("scoring_review_scorer_not_version_only")
+    transformations = (
+        (b'SCORER_VERSION = "challenge-1.1.0"',
+         b'SCORER_VERSION = "challenge-1.1.3"'),
+        (b'    shared = answer.get("context_evidence", [])\n'
+         b'    shared_ok = set(shared) <= set(gold.get("context_evidence_allowed", []))\n'
+         b'    finances, supports, calculations = [], [shared_ok], []',
+         b'    shared = answer.get("context_evidence", [])\n'
+         b'    common_shared = set(gold.get("context_evidence_allowed", []))\n'
+         b'    shared_allowed = set(common_shared)\n'
+         b'    for spec in gold["answers"].values():\n'
+         b'        for option in spec["evidence"]:\n'
+         b'            shared_allowed.update(option)\n'
+         b'    conclusion_spec = gold.get("conclusion")\n'
+         b'    if isinstance(conclusion_spec, dict):\n'
+         b'        for option in conclusion_spec["evidence"]:\n'
+         b'            shared_allowed.update(option)\n'
+         b'    shared_ok = set(shared) <= shared_allowed\n'
+         b'    common_shared = sorted(set(shared) & common_shared)\n'
+         b'    finances, supports, calculations = [], [shared_ok], []\n'
+         b'    if not shared_ok:\n'
+         b'        errors.append("shared_context:evidence")'),
+        (b'claim["evidence"] + shared', b'claim["evidence"] + common_shared'),
+        (b'conclusion["evidence"] + shared', b'conclusion["evidence"] + common_shared'),
+    )
+    transformed = base
+    for before, after in transformations:
+        if transformed.count(before) != 1:
+            raise ValueError("scoring_review_scorer_transform_source_invalid")
+        transformed = transformed.replace(before, after, 1)
+    if corrected != transformed:
+        raise ValueError("scoring_review_scorer_transformation_mismatch")
 
     reviewed_tasks = review.get("tasks")
     if not isinstance(reviewed_tasks, dict) or set(reviewed_tasks) != set(TASK_KEYS):
@@ -485,7 +516,21 @@ def _control_answers(root, validated):
 
     answer = json.loads(json.dumps(reference))
     answer["context_evidence"] = ["a02:s01"]
-    controls.append({"name": "invalid-shared-s01", "task_key": key,
+    controls.append({"name": "relevant-shared-s01", "task_key": key,
+                     "input_file": task_path.relative_to(root).as_posix() + "/tests/reference.json", "answer": answer,
+                     "expected": passed})
+
+    answer = json.loads(json.dumps(reference))
+    answer["context_evidence"] = ["a02:s07"]
+    controls.append({"name": "unrelated-shared-s07", "task_key": key,
+                     "input_file": task_path.relative_to(root).as_posix() + "/tests/reference.json", "answer": answer,
+                     "expected": evidence_failure})
+
+    answer = json.loads(json.dumps(reference))
+    answer["context_evidence"] = ["a02:s03", "a02:s06"]
+    next(claim for claim in answer["answers"]
+         if claim["id"] == "adjusted_gross_profit")["evidence"] = []
+    controls.append({"name": "claim-facts-only-in-shared", "task_key": key,
                      "input_file": task_path.relative_to(root).as_posix() + "/tests/reference.json", "answer": answer,
                      "expected": evidence_failure})
 
@@ -519,6 +564,30 @@ def _control_answers(root, validated):
                      ["b04:s03", "b04:s04"], evidence_failure)
     coverage_variant("coverage-missing-june-aggregate",
                      ["b04:s01", "b04:s02", "b04:s04"], evidence_failure)
+
+    def conclusion_variant(task_key, name, evidence, expected):
+        task_path = root / validated["context"]["tasks"][task_key]["path"]
+        answer = parse_json(read_bounded(task_path / "tests/reference.json", 300_000))
+        answer["conclusion"]["evidence"] = evidence
+        controls.append({"name": name, "task_key": task_key,
+                         "input_file": task_path.relative_to(root).as_posix() + "/tests/reference.json",
+                         "answer": answer, "expected": expected})
+
+    for name, evidence, expected in (
+        ("c02-derivatives-source", ["c02:s05"], passed),
+        ("c02-metric-and-derivatives", ["c02:s04", "c02:s05"], passed),
+        ("c02-missing-derivatives-source", ["c02:s04"], evidence_failure),
+        ("c02-missing-derivatives-and-denominator", ["c02:s01", "c02:s03"], evidence_failure),
+        ("c02-unrelated-subscription-source", ["c02:s05", "c02:s02"], evidence_failure),
+    ):
+        conclusion_variant("c02", name, evidence, expected)
+
+    for name, evidence, expected in (
+        ("c04-period-and-lag-support", ["c04:s01", "c04:s02", "c04:s04"], passed),
+        ("c04-missing-lagged-timing", ["c04:s01", "c04:s02"], evidence_failure),
+        ("c04-volume-scope-alone", ["c04:s05"], evidence_failure),
+    ):
+        conclusion_variant("c04", name, evidence, expected)
     return controls
 
 
