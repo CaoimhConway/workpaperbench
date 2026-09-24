@@ -1,0 +1,224 @@
+{
+  "artifact_audit_sha256": "b76dfbce807721ecb34fa3f92e0e1ff2591c1b5d4adcea87eeb98db292d4c14e",
+  "base_scorer_sha256": "77f41466c3a65283481907bada217f75fa92ea0ccf92355c396e7c216e57c34c",
+  "commit_sha": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "effective_gold_sha256": "8ad923c83a3a76d01d9f2aeed30dc1bf5e277b70490993c47434e005886c5d28",
+  "effective_task_sha256": "2284c2542b147195e2b1aa8a71df7f93221339c35029b04b4488a16e80d0c1dd",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "08aceda4056815eb67a39dd74c9fe468f60cae6e534566bad05a051b511f5256",
+  "input_source": "retained_artifact",
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "model_key": "inexpensive",
+  "prior_verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "adjusted_net_income": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "guidance_compensation_change": true,
+            "tax_adjustment_gap": false
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "adjusted_net_margin": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "guidance_compensation_change": true,
+            "tax_adjustment_gap": false
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "eps_gap": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "guidance_compensation_change": false,
+            "tax_adjustment_gap": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "guidance_upper": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "guidance_compensation_change": true,
+            "tax_adjustment_gap": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "net_income_adjustment": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "guidance_compensation_change": true,
+            "tax_adjustment_gap": true
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "eps_gap:control:guidance_compensation_change",
+      "net_income_adjustment:evidence",
+      "adjusted_net_income:evidence",
+      "adjusted_net_income:control:tax_adjustment_gap",
+      "adjusted_net_margin:evidence",
+      "adjusted_net_margin:control:tax_adjustment_gap"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "prior_verdict_sha256": "672c27430035ccd68697b6549687ca62cd6ecc36f831ce217143643c08927469",
+  "record_path": "reports/runs/challenge-v1-evaluation-d9a2fe13f6f2/final-a04-inexpensive-2/record.json",
+  "record_sha256": "f495c2bb736d154a225735e8fda980cd1c34ced3f3fa9bbf8cfba820c66b267a",
+  "repetition": 2,
+  "review_bundle_sha256": "a0e142a2841857842302415b6fc6ec313cec361b349589131d0199c037bbe05f",
+  "review_content_hash": "446af865b14613e821e39e9399dd183517027de5aaf8fd8e36e2451ffbbb0db4",
+  "review_id": "challenge-v1-scoring-review-446af865b146",
+  "review_scorer_sha256": "73bbec6f4f867165df6963ffa2be371dfc218ceec1698adba46f0edef79d4006",
+  "run_attempt": "1",
+  "run_id": "37589625073",
+  "scorer_version": "challenge-1.1.3",
+  "slot_id": "final-a04-inexpensive-2",
+  "source_gold_sha256": "4d570a46b18068c849b35abafe2af89a5f92da386d48406411b35dbecc7274cf",
+  "source_task_sha256": "1486c205d53f8064f4eaf06c4f7eee4f009eba8ff063c1f26a8625279e4e63a3",
+  "split": "evaluation",
+  "task_id": "challenge-v1-a04",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "adjusted_net_income": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "guidance_compensation_change": true,
+            "tax_adjustment_gap": false
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "adjusted_net_margin": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "guidance_compensation_change": true,
+            "tax_adjustment_gap": false
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "eps_gap": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "guidance_compensation_change": false,
+            "tax_adjustment_gap": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "guidance_upper": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "guidance_compensation_change": true,
+            "tax_adjustment_gap": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "net_income_adjustment": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "guidance_compensation_change": true,
+            "tax_adjustment_gap": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "eps_gap:control:guidance_compensation_change",
+      "adjusted_net_income:evidence",
+      "adjusted_net_income:control:tax_adjustment_gap",
+      "adjusted_net_margin:evidence",
+      "adjusted_net_margin:control:tax_adjustment_gap"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.3",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verifier_bytes_sha256": "134731eba5643d5a943e7766953ec9b15d5f849e3cdd9459a9ef92fd8c922aa7",
+  "verifier_path": "reports/challenge-v1/scoring-reviews/challenge-v1-scoring-review-446af865b146/37589625073-1/final-a04-inexpensive-2/verifier.json"
+}
