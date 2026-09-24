@@ -1,0 +1,51 @@
+{
+  "task_id": "challenge-v1-c04",
+  "context_evidence": [
+    "c04:s01: annual service revenue FY2024=16114, FY2023=14826 usd_million",
+    "c04:s02: nominal payments volume Jun-24=12984, Jun-23=12087 usd_billion",
+    "c04:s04: service revenue lag: Sept FY based on prior June 30 volume"
+  ],
+  "answers": [
+    {
+      "id": "service_revenue_growth_pct",
+      "status": "answered",
+      "value": 8.687441,
+      "unit": "percent",
+      "evidence": ["c04:s01"],
+      "sql": "SELECT (sr24.amount - sr23.amount) / sr23.amount * 100.0 FROM (SELECT amount FROM revenues WHERE category = 'Service revenue' AND period_end = '2024-09-30') sr24, (SELECT amount FROM revenues WHERE category = 'Service revenue' AND period_end = '2023-09-30') sr23",
+      "reason_code": null
+    },
+    {
+      "id": "lagged_nominal_payment_volume_growth_pct",
+      "status": "answered",
+      "value": 7.421196,
+      "unit": "percent",
+      "evidence": ["c04:s02"],
+      "sql": "SELECT (v24.amount - v23.amount) / v23.amount * 100.0 FROM (SELECT amount FROM activity_metrics WHERE metric = 'Nominal payments volume' AND period_end = '2024-06-30') v24, (SELECT amount FROM activity_metrics WHERE metric = 'Nominal payments volume' AND period_end = '2023-06-30') v23",
+      "reason_code": null
+    },
+    {
+      "id": "service_growth_minus_volume_growth_pp",
+      "status": "answered",
+      "value": 1.266245,
+      "unit": "percentage_points",
+      "evidence": ["c04:s01", "c04:s02"],
+      "sql": "SELECT ((sr24.amount - sr23.amount) / sr23.amount - (v24.amount - v23.amount) / v23.amount) * 100.0 FROM (SELECT amount FROM revenues WHERE category = 'Service revenue' AND period_end = '2024-09-30') sr24, (SELECT amount FROM revenues WHERE category = 'Service revenue' AND period_end = '2023-09-30') sr23, (SELECT amount FROM activity_metrics WHERE metric = 'Nominal payments volume' AND period_end = '2024-06-30') v24, (SELECT amount FROM activity_metrics WHERE metric = 'Nominal payments volume' AND period_end = '2023-06-30') v23",
+      "reason_code": null
+    },
+    {
+      "id": "service_revenue_to_lagged_volume_proxy_2024_pct",
+      "status": "answered",
+      "value": 0.124107,
+      "unit": "percent",
+      "evidence": ["c04:s01", "c04:s02", "c04:s04"],
+      "sql": "SELECT 100.0 * sr.amount / (v.amount * 1000.0) FROM (SELECT amount FROM revenues WHERE category = 'Service revenue' AND period_end = '2024-09-30') sr, (SELECT amount FROM activity_metrics WHERE metric = 'Nominal payments volume' AND period_end = '2024-06-30') v",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": ["c04:s01", "c04:s02", "c04:s04"]
+  }
+}

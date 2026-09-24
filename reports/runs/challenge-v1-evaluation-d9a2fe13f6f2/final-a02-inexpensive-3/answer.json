@@ -1,0 +1,61 @@
+{
+  "task_id": "challenge-v1-a02",
+  "context_evidence": [
+    "a02:s01",
+    "a02:s06"
+  ],
+  "answers": [
+    {
+      "id": "revenue_gap",
+      "status": "answered",
+      "value": 1932.0,
+      "unit": "usd_million",
+      "evidence": [
+        "a02:s01",
+        "a02:s02"
+      ],
+      "sql": "SELECT (SELECT f1.amount FROM financials f1 WHERE f1.period_end='2024-10-27' AND f1.measure='Revenue' AND f1.basis='GAAP') - (SELECT g.midpoint * (1.0 + g.range_width / 100.0) FROM guidance g WHERE g.fiscal_period='Q3FY2025' AND g.measure='Revenue' AND g.basis='GAAP') AS revenue_gap;"
+    },
+    {
+      "id": "adjusted_gross_profit",
+      "status": "answered",
+      "value": 26322.0,
+      "unit": "usd_million",
+      "evidence": [
+        "a02:s03",
+        "a02:s04"
+      ],
+      "sql": "SELECT (SELECT f.amount FROM financials f WHERE f.period_end='2024-10-27' AND f.measure='Gross profit' AND f.basis='GAAP') + (SELECT SUM(a.amount) FROM adjustments a WHERE a.period_end='2024-10-27' AND a.measure='Gross profit' AND a.months=3) AS adjusted_gross_profit;"
+    },
+    {
+      "id": "adjusted_gross_margin",
+      "status": "answered",
+      "value": 75.03,
+      "unit": "percent",
+      "evidence": [
+        "a02:s02",
+        "a02:s03"
+      ],
+      "sql": "SELECT (SELECT (f.amount + (SELECT SUM(a.amount) FROM adjustments a WHERE a.period_end='2024-10-27' AND a.measure='Gross profit' AND a.months=3)) / (SELECT f2.amount FROM financials f2 WHERE f2.period_end='2024-10-27' AND f2.measure='Revenue' AND f2.basis='GAAP') * 100.0 FROM financials f WHERE f.period_end='2024-10-27' AND f.measure='Gross profit' AND f.basis='GAAP') AS adjusted_gross_margin;"
+    },
+    {
+      "id": "margin_gap",
+      "status": "answered",
+      "value": -47.007,
+      "unit": "basis_points",
+      "evidence": [
+        "a02:s01",
+        "a02:s03"
+      ],
+      "sql": "SELECT ((SELECT (f.amount + (SELECT SUM(a.amount) FROM adjustments a WHERE a.period_end='2024-10-27' AND a.measure='Gross profit' AND a.months=3)) / (SELECT f2.amount FROM financials f2 WHERE f2.period_end='2024-10-27' AND f2.measure='Revenue' AND f2.basis='GAAP') * 100.0 FROM financials f WHERE f.period_end='2024-10-27' AND f.measure='Gross profit' AND f.basis='GAAP') - (SELECT midpoint + range_width / 100.0 FROM guidance WHERE fiscal_period='Q3FY2025' AND measure='Gross margin' AND basis='non-GAAP')) * 100.0 AS margin_gap;"
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "a02:s01",
+      "a02:s03"
+    ]
+  }
+}

@@ -9,6 +9,27 @@
     "q1_revenue_usd_million": "65585",
     "q2_minus_q1_operating_margin_basis_points": "-112.62742667169120449887662620129244043428151164410"
   },
+  "later_repetition_diagnosis": {
+    "artifact_audit_sha256": "4bdd13e78cd196321cd9337309959ebd91b5ccb0cf23a99b4859ebae67c32848",
+    "assessment": "This answer reports the correct margin change -112.62742667 basis_points and has adequate evidence. Its saved Q2-minus-Q1 SQL omits multiplication by 10000, returning -0.011262742667 as a ratio. Original replay and every changed-input control fail. This calculation-scale mismatch is separate from the first repetition quarter-identification mistake and does not change the predeclared showcase selection.",
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": true,
+      "robustness": false
+    },
+    "human_validation": false,
+    "retained_file_sha256": {
+      "answer.json": "5a745734f8e269af3d6d26ad606f7859cf5735317e5922fcd48381f66b844838",
+      "answer.raw.txt": "40f7c71b23582eb8578454a59d634fbc4214c7ae4c490c8f1047da54387a5f35",
+      "record.json": "011a6da5fb3b82443b56d9f32ad6dd75fe2ab105e1d2e19a2ae10840c4fe9b6c",
+      "tool-evidence.json": "2e2ada7116278771ebb38f50a0ef02b90d0b05ece0b50f82e744645fe0e408d6",
+      "verdict.json": "18d63655f5a456cf0870fc4d277d82bbcce4af3d048f91aff3c910c2e193623b"
+    },
+    "slot_id": "final-a03-inexpensive-3",
+    "source_first_agent_review": true,
+    "submitted_sql_executed_locally": false
+  },
   "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
   "observed_mechanism": "The inexpensive answer labels December three-month consolidated results as Q1 and treats six-month minus December as Q2. This reverses quarter identification and the sign of the operating-margin change. The reference answer derives Q1 as six-month minus December-quarter values. Both calculate the Azure guidance gap correctly.",
   "primary_sources": [
