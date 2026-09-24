@@ -1,0 +1,76 @@
+{
+  "task_id": "challenge-v1-a04",
+  "context_evidence": [
+    "a04:s01",
+    "a04:s06"
+  ],
+  "answers": [
+    {
+      "id": "guidance_upper",
+      "status": "answered",
+      "value": 1.48,
+      "unit": "usd_per_share",
+      "evidence": [
+        "a04:s01",
+        "a04:s06"
+      ],
+      "sql": "SELECT (SELECT high FROM guidance WHERE fiscal_period='Q2FY2025' AND measure='GAAP diluted EPS') + (SELECT SUM(amount) FROM guidance_adjustments WHERE fiscal_period='Q2FY2025' AND item IN ('Amortization of intangible assets','Acquisition related charges','Stock based compensation','Restructuring')) + (SELECT SUM(amount) FROM guidance_adjustments WHERE fiscal_period='Q2FY2025' AND item='Income tax effect') + (SELECT SUM(amount) FROM guidance_adjustments WHERE fiscal_period='Q2FY2025' AND item='Expected favorable currency impact');",
+      "reason_code": null
+    },
+    {
+      "id": "eps_gap",
+      "status": "answered",
+      "value": -0.01,
+      "unit": "usd_per_share",
+      "evidence": [
+        "a04:s01",
+        "a04:s04"
+      ],
+      "sql": "SELECT (SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Non-GAAP diluted EPS') - 1.48;",
+      "reason_code": null
+    },
+    {
+      "id": "net_income_adjustment",
+      "status": "answered",
+      "value": 1056.0,
+      "unit": "usd_million",
+      "evidence": [
+        "a04:s03",
+        "a04:s04"
+      ],
+      "sql": "SELECT (SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Operating expense') - (SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Income tax expense');",
+      "reason_code": null
+    },
+    {
+      "id": "adjusted_net_income",
+      "status": "answered",
+      "value": 4207.0,
+      "unit": "usd_million",
+      "evidence": [
+        "a04:s04"
+      ],
+      "sql": "SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Non-GAAP net income';",
+      "reason_code": null
+    },
+    {
+      "id": "adjusted_net_margin",
+      "status": "answered",
+      "value": 29.924,
+      "unit": "percent",
+      "evidence": [
+        "a04:s04",
+        "a04:s02"
+      ],
+      "sql": "SELECT (SELECT SUM(amount) FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Non-GAAP net income') / (SELECT SUM(amount) FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Total revenues') * 100;",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "a04:s01",
+      "a04:s04"
+    ]
+  }
+}

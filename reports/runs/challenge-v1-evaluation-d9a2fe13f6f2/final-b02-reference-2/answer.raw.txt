@@ -1,0 +1,43 @@
+{
+  "task_id": "challenge-v1-b02",
+  "context_evidence": ["b02:s01"],
+  "answers": [
+    {
+      "id": "march31_reserves_usd",
+      "status": "answered",
+      "value": 60040707041,
+      "unit": "USD",
+      "evidence": ["b02:s03"],
+      "sql": "SELECT SUM(amount_usd) FROM reserve_components WHERE report_date = '2025-03-31';"
+    },
+    {
+      "id": "march31_circulation_usdc",
+      "status": "answered",
+      "value": 59975771715,
+      "unit": "USDC",
+      "evidence": ["b02:s04"],
+      "sql": "SELECT SUM(CASE WHEN measure = 'total supply' THEN amount_usdc ELSE -amount_usdc END) FROM circulation_inputs WHERE report_date = '2025-03-31';"
+    },
+    {
+      "id": "march31_residual_usd",
+      "status": "answered",
+      "value": -1,
+      "unit": "USD",
+      "evidence": ["b02:s03"],
+      "sql": "SELECT (SELECT reported_total_usd FROM reported_reserve_totals WHERE report_date = '2025-03-31') - SUM(amount_usd) FROM reserve_components WHERE report_date = '2025-03-31';"
+    },
+    {
+      "id": "coverage_change_bps",
+      "status": "answered",
+      "value": -0.1575976,
+      "unit": "basis_points",
+      "evidence": ["b02:s02", "b02:s03", "b02:s04"],
+      "sql": "WITH r31 AS (SELECT SUM(amount_usd) AS val FROM reserve_components WHERE report_date = '2025-03-31'), c31 AS (SELECT SUM(CASE WHEN measure = 'total supply' THEN amount_usdc ELSE -amount_usdc END) AS val FROM circulation_inputs WHERE report_date = '2025-03-31'), r19 AS (SELECT SUM(amount_usd) AS val FROM reserve_components WHERE report_date = '2025-03-19'), c19 AS (SELECT SUM(CASE WHEN measure = 'total supply' THEN amount_usdc ELSE -amount_usdc END) AS val FROM circulation_inputs WHERE report_date = '2025-03-19') SELECT (CAST((SELECT val FROM r31) AS REAL) / (SELECT val FROM c31) - CAST((SELECT val FROM r19) AS REAL) / (SELECT val FROM c19)) * 10000;"
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": ["b02:s02", "b02:s03", "b02:s04"]
+  }
+}
