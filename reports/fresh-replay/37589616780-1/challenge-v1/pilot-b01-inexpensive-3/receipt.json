@@ -1,0 +1,101 @@
+{
+  "commit_sha": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "challenge-v1",
+  "effective_task_scorer_sha256": "d122c8c27dae7bb8bb17e8234e2b9cdaba6d0e019e711c907680b46f06d50254",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "4771926425338c9fe74bab7ae4fed8715da8f61c462e251ead22e3c094ca0e98",
+  "input_source": "retained_artifact",
+  "manifest_id": "challenge-v1-development-7e8903385beb",
+  "manifest_sha256": "d4deede7b91a1777e96f5552a7e5d541196aa27636c43fa94571902516112a93",
+  "prior_verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": false,
+      "robustness": false
+    },
+    "complete": false,
+    "sha256": "2a019879170b98bfa7437c890c0747acbc25f7cc9be9a370e6417c4040a0feff"
+  },
+  "receipt_identity_sha256": "4a6c50638b8c38b6ddb9b88742039c1c26e148d4e9a4aa6a085b73948f8e86dc",
+  "record_sha256": "927f57a05cb86d1e2b3d59bc51e571d3932e56832cd736a05338675033dbdaf1",
+  "run_attempt": "1",
+  "run_id": "37589616780",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "d122c8c27dae7bb8bb17e8234e2b9cdaba6d0e019e711c907680b46f06d50254",
+  "slot_id": "pilot-b01-inexpensive-3",
+  "task_id": "challenge-v1-b01",
+  "task_sha256": "973345b98c7ccfff8dd0182df3c1929de83742e63988d7f34716160f5e109421",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": false,
+      "robustness": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "coverage_change_pp": {
+          "availability": true,
+          "controls": {
+            "component_gap": true,
+            "coverage_increase": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "june_assets_usd": {
+          "availability": true,
+          "controls": {
+            "component_gap": false,
+            "coverage_increase": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": false
+        },
+        "june_reconciliation_usd": {
+          "availability": true,
+          "controls": {
+            "component_gap": false,
+            "coverage_increase": false
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": false
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "june_assets_usd:unit",
+      "june_assets_usd:control:component_gap",
+      "june_reconciliation_usd:unit",
+      "june_reconciliation_usd:control:component_gap",
+      "june_reconciliation_usd:control:coverage_increase"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.0.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verdict_sha256": "7f5726af88b4bfdc52414e2447fd718d4fd1c2024f12948864897211e626f9e9"
+}

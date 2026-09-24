@@ -1,0 +1,82 @@
+{
+  "scorer_version": "challenge-1.1.0",
+  "complete": false,
+  "verified_research_completion": false,
+  "strict_delivery_completion": false,
+  "checks": {
+    "delivery": true,
+    "financial_answer": false,
+    "evidence": false,
+    "robustness": false
+  },
+  "details": {
+    "claims": {
+      "bitcoin_gross_profit_2024_usd_thousand": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "bitcoin_sales_change": true,
+          "bitcoin_cost_change_2024": true,
+          "bitcoin_cost_change_2023": true
+        }
+      },
+      "bitcoin_gross_profit_2023_usd_thousand": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "bitcoin_sales_change": true,
+          "bitcoin_cost_change_2024": true,
+          "bitcoin_cost_change_2023": true
+        }
+      },
+      "bitcoin_gross_profit_growth_pct": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "bitcoin_sales_change": true,
+          "bitcoin_cost_change_2024": true,
+          "bitcoin_cost_change_2023": true
+        }
+      },
+      "bitcoin_share_of_total_net_revenue_increase_pct": {
+        "availability": true,
+        "unit": true,
+        "evidence": false,
+        "numerical": false,
+        "original_replay": false,
+        "controls": {
+          "bitcoin_sales_change": false,
+          "bitcoin_cost_change_2024": false,
+          "bitcoin_cost_change_2023": false
+        }
+      }
+    },
+    "conclusion": {
+      "verdict": true,
+      "evidence": true
+    }
+  },
+  "errors": [
+    "bitcoin_share_of_total_net_revenue_increase_pct:numerical",
+    "bitcoin_share_of_total_net_revenue_increase_pct:evidence",
+    "bitcoin_share_of_total_net_revenue_increase_pct:original_replay",
+    "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_sales_change",
+    "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_cost_change_2024",
+    "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_cost_change_2023"
+  ],
+  "isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  }
+}

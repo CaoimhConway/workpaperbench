@@ -1,0 +1,123 @@
+{
+  "commit_sha": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "challenge-v1",
+  "effective_task_scorer_sha256": "d122c8c27dae7bb8bb17e8234e2b9cdaba6d0e019e711c907680b46f06d50254",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "8d09a7865180f90fd54de3d89633c423d8a62fce61f489b9f2573d2974a3e46a",
+  "input_source": "retained_artifact",
+  "manifest_id": "challenge-v1-development-7e8903385beb",
+  "manifest_sha256": "d4deede7b91a1777e96f5552a7e5d541196aa27636c43fa94571902516112a93",
+  "prior_verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": false
+    },
+    "complete": false,
+    "sha256": "6c7471a3d85060092d8ef9c41f18673970132dbc2701153c93404ffd64c3502c"
+  },
+  "receipt_identity_sha256": "1aaf390108d4933c741c876e7786ed5951fcdd67f9429cd6ce2a9b2682a7bcad",
+  "record_sha256": "da641d4c2f9a947308c5dbb7e14b98a1a8541fbb6b6156c78a6ffe32c36b9113",
+  "run_attempt": "1",
+  "run_id": "37589616780",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "d122c8c27dae7bb8bb17e8234e2b9cdaba6d0e019e711c907680b46f06d50254",
+  "slot_id": "pilot-a01-inexpensive-1",
+  "task_id": "challenge-v1-a01",
+  "task_sha256": "c8461b6a9557cb2e6501d19fdd4158c0e201944c58b478978db4ad3ff47349a2",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "adjusted_margin": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": false
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "adjusted_operating_income": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": false
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "eps_difference": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": true
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "margin_bridge": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": false
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": false,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "eps_difference:evidence",
+      "adjusted_operating_income:evidence",
+      "adjusted_operating_income:control:signed_bridge",
+      "adjusted_margin:evidence",
+      "adjusted_margin:control:signed_bridge",
+      "margin_bridge:evidence",
+      "margin_bridge:control:signed_bridge",
+      "conclusion:evidence"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.0.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verdict_sha256": "b2afb3b457b3fa7f002d92ea63abaf289c5df24842a7046d0b09fea719d0d428"
+}
