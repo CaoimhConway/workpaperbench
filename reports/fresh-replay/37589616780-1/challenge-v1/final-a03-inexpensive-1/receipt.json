@@ -1,0 +1,128 @@
+{
+  "commit_sha": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "challenge-v1",
+  "effective_task_scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "8a44815aeff602fc6445608510ce157def286ee77b9c4461af5365e476ff3564",
+  "input_source": "retained_artifact",
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "prior_verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": false,
+      "robustness": false
+    },
+    "complete": false,
+    "sha256": "3ff2dc89258276180f31ee911359ef11db17a695f8c4a47756479a870321be35"
+  },
+  "receipt_identity_sha256": "fb1cb3b26a66160030493f4abc84b26ac36ec3f882d4ef1d07d27273b55282b5",
+  "record_sha256": "7b459f3451d84b697427f28aac15655e2517f7b6c0910f8f7548ce1a3f9a337a",
+  "run_attempt": "1",
+  "run_id": "37589616780",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "slot_id": "final-a03-inexpensive-1",
+  "task_id": "challenge-v1-a03",
+  "task_sha256": "fc205c9c61eb819dcf8eca02384c19a124a17825d3cff56d940bb97d09dd8e1c",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": false,
+      "robustness": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "azure_gap": {
+          "availability": true,
+          "controls": {
+            "business_growth_change": true,
+            "compatible_monetary_scale": true,
+            "quarter_expense_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "margin_change": {
+          "availability": true,
+          "controls": {
+            "business_growth_change": false,
+            "compatible_monetary_scale": false,
+            "quarter_expense_change": false
+          },
+          "evidence": true,
+          "numerical": false,
+          "original_replay": false,
+          "unit": true
+        },
+        "q1_operating_income": {
+          "availability": true,
+          "controls": {
+            "business_growth_change": false,
+            "compatible_monetary_scale": false,
+            "quarter_expense_change": false
+          },
+          "evidence": false,
+          "numerical": false,
+          "original_replay": false,
+          "unit": true
+        },
+        "q1_revenue": {
+          "availability": true,
+          "controls": {
+            "business_growth_change": false,
+            "compatible_monetary_scale": false,
+            "quarter_expense_change": false
+          },
+          "evidence": false,
+          "numerical": false,
+          "original_replay": false,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "q1_revenue:numerical",
+      "q1_revenue:evidence",
+      "q1_revenue:original_replay",
+      "q1_revenue:control:compatible_monetary_scale",
+      "q1_revenue:control:business_growth_change",
+      "q1_revenue:control:quarter_expense_change",
+      "q1_operating_income:numerical",
+      "q1_operating_income:evidence",
+      "q1_operating_income:original_replay",
+      "q1_operating_income:control:compatible_monetary_scale",
+      "q1_operating_income:control:business_growth_change",
+      "q1_operating_income:control:quarter_expense_change",
+      "margin_change:numerical",
+      "margin_change:original_replay",
+      "margin_change:control:compatible_monetary_scale",
+      "margin_change:control:business_growth_change",
+      "margin_change:control:quarter_expense_change"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verdict_sha256": "59a12780a77f2b85a3700edff242f39a75510b8cdf01b1bd66a20c514f43343f"
+}

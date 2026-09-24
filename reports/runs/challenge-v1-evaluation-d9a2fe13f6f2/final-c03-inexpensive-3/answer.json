@@ -1,0 +1,66 @@
+{
+  "task_id": "challenge-v1-c03",
+  "answers": [
+    {
+      "id": "bitcoin_gross_profit_2024_usd_thousand",
+      "status": "answered",
+      "value": 288819.0,
+      "unit": "usd_thousand",
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ],
+      "sql": "SELECT r.amount - c.amount FROM revenues r JOIN costs c ON r.period_end=c.period_end WHERE r.period_end='2024-12-31' AND r.category='Bitcoin revenue' AND c.category='Bitcoin costs'",
+      "reason_code": null
+    },
+    {
+      "id": "bitcoin_gross_profit_2023_usd_thousand",
+      "status": "answered",
+      "value": 205189.0,
+      "unit": "usd_thousand",
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ],
+      "sql": "SELECT r.amount - c.amount FROM revenues r JOIN costs c ON r.period_end=c.period_end WHERE r.period_end='2023-12-31' AND r.category='Bitcoin revenue' AND c.category='Bitcoin costs'",
+      "reason_code": null
+    },
+    {
+      "id": "bitcoin_gross_profit_growth_pct",
+      "status": "answered",
+      "value": 40.75754548245764,
+      "unit": "percent",
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ],
+      "sql": "SELECT (288819.0 - 205189.0) / 205189.0 * 100",
+      "reason_code": null
+    },
+    {
+      "id": "bitcoin_share_of_total_net_revenue_increase_pct",
+      "status": "answered",
+      "value": -1.05690869342218,
+      "unit": "percent",
+      "evidence": [
+        "c03:s01"
+      ],
+      "sql": "SELECT (10199205.0 / 24121053.0 - 9498302.0 / 21915623.0) * 100",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "c03:s01",
+      "c03:s02",
+      "c03:s05"
+    ]
+  },
+  "context_evidence": [
+    "c03:s01",
+    "c03:s02",
+    "c03:s05"
+  ]
+}

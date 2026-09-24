@@ -1,0 +1,51 @@
+{
+  "task_id": "challenge-v1-c02",
+  "answers": [
+    {
+      "id": "transaction_revenue_growth_pct",
+      "status": "answered",
+      "value": 162.3040,
+      "unit": "percent",
+      "evidence": ["c02:s01"],
+      "sql": "SELECT (r24.total - r23.total) / r23.total * 100.0 FROM (SELECT SUM(amount) AS total FROM revenues WHERE period_end = '2024-12-31' AND category = 'Total transaction revenue') r24, (SELECT SUM(amount) AS total FROM revenues WHERE period_end = '2023-12-31' AND category = 'Total transaction revenue') r23;"
+    },
+    {
+      "id": "spot_trading_volume_growth_pct",
+      "status": "answered",
+      "value": 148.2906,
+      "unit": "percent",
+      "evidence": ["c02:s03"],
+      "sql": "SELECT (v24.total - v23.total) / v23.total * 100.0 FROM (SELECT SUM(amount) AS total FROM spot_volume WHERE period_end = '2024-12-31' AND channel = 'Total Trading Volume') v24, (SELECT SUM(amount) AS total FROM spot_volume WHERE period_end = '2023-12-31' AND channel = 'Total Trading Volume') v23;"
+    },
+    {
+      "id": "transaction_revenue_to_spot_volume_proxy_2024_pct",
+      "status": "answered",
+      "value": 0.3430,
+      "unit": "percent",
+      "evidence": ["c02:s01", "c02:s03"],
+      "sql": "SELECT r.amount * 1000.0 / (v.amount * 1000000000.0) * 100.0 FROM (SELECT SUM(amount) AS amount FROM revenues WHERE period_end = '2024-12-31' AND category = 'Total transaction revenue') r, (SELECT SUM(amount) AS amount FROM spot_volume WHERE period_end = '2024-12-31' AND channel = 'Total Trading Volume') v;"
+    },
+    {
+      "id": "proxy_change_bps",
+      "status": "answered",
+      "value": 1.8327,
+      "unit": "basis_points",
+      "evidence": ["c02:s01", "c02:s03"],
+      "sql": "WITH rev_24 AS (SELECT SUM(amount) AS amount FROM revenues WHERE period_end = '2024-12-31' AND category = 'Total transaction revenue'), rev_23 AS (SELECT SUM(amount) AS amount FROM revenues WHERE period_end = '2023-12-31' AND category = 'Total transaction revenue'), vol_24 AS (SELECT SUM(amount) AS amount FROM spot_volume WHERE period_end = '2024-12-31' AND channel = 'Total Trading Volume'), vol_23 AS (SELECT SUM(amount) AS amount FROM spot_volume WHERE period_end = '2023-12-31' AND channel = 'Total Trading Volume') SELECT (rev_24.amount * 1000.0 / (vol_24.amount * 1000000000.0) - rev_23.amount * 1000.0 / (vol_23.amount * 1000000000.0)) * 10000.0 FROM rev_24, rev_23, vol_24, vol_23;"
+    },
+    {
+      "id": "business_payment_count_2024",
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "count",
+      "evidence": [],
+      "sql": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": ["c02:s01", "c02:s03", "c02:s04"]
+  },
+  "context_evidence": ["c02:s04"]
+}

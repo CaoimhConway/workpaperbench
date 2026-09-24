@@ -1,0 +1,196 @@
+{
+  "calls": [
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "sqlite3 /workspace/data.sqlite \".schema\""
+      },
+      "tool_call_id": "call_635285"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python -c \"import sqlite3; conn = sqlite3.connect('/workspace/data.sqlite'); print('\\n'.join([r[0] for r in conn.execute('SELECT sql FROM sqlite_master WHERE type=\\'table\\'')]))\""
+      },
+      "tool_call_id": "call_637334"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python -c \"import sqlite3, pandas as pd; conn = sqlite3.connect('/workspace/data.sqlite'); print(pd.read_sql_query('SELECT * FROM reserve_components', conn))\""
+      },
+      "tool_call_id": "call_548897"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python -c \"import sqlite3; conn = sqlite3.connect('/workspace/data.sqlite'); print('reserve_components:'); [print(r) for r in conn.execute('SELECT * FROM reserve_components')]; print('\\nreported_reserve_totals:'); [print(r) for r in conn.execute('SELECT * FROM reported_reserve_totals')]; print('\\ncirculation_inputs:'); [print(r) for r in conn.execute('SELECT * FROM circulation_inputs')]\""
+      },
+      "tool_call_id": "call_609639"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python -c \"import sqlite3; conn = sqlite3.connect('/workspace/data.sqlite'); print('march31_reserves_usd:', conn.execute('SELECT sum(amount_usd) FROM reserve_components WHERE report_date = \\'2025-03-31\\'').fetchone()[0])\""
+      },
+      "tool_call_id": "call_101586"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python -c \"import sqlite3; conn = sqlite3.connect('/workspace/data.sqlite'); print('march31_circulation_usdc:', conn.execute('SELECT SUM(CASE WHEN measure = \\'total supply\\' THEN amount_usdc ELSE -amount_usdc END) FROM circulation_inputs WHERE report_date = \\'2025-03-31\\'').fetchone()[0])\""
+      },
+      "tool_call_id": "call_626383"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python -c \"import sqlite3; conn = sqlite3.connect('/workspace/data.sqlite'); print('march31_residual_usd:', conn.execute('SELECT (SELECT reported_total_usd FROM reported_reserve_totals WHERE report_date = \\'2025-03-31\\') - (SELECT SUM(amount_usd) FROM reserve_components WHERE report_date = \\'2025-03-31\\')').fetchone()[0])\""
+      },
+      "tool_call_id": "call_457958"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python -c \"import sqlite3; conn = sqlite3.connect('/workspace/data.sqlite'); print('coverage_change_bps:', conn.execute('''SELECT ( (SELECT CAST(SUM(amount_usd) AS REAL) FROM reserve_components WHERE report_date = '2025-03-31') / (SELECT CAST(SUM(CASE WHEN measure = 'total supply' THEN amount_usdc ELSE -amount_usdc END) AS REAL) FROM circulation_inputs WHERE report_date = '2025-03-31') - (SELECT CAST(SUM(amount_usd) AS REAL) FROM reserve_components WHERE report_date = '2025-03-19') / (SELECT CAST(SUM(CASE WHEN measure = 'total supply' THEN amount_usdc ELSE -amount_usdc END) AS REAL) FROM circulation_inputs WHERE report_date = '2025-03-19') ) * 10000''').fetchone()[0])\""
+      },
+      "tool_call_id": "call_16539"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "cat /workspace/schema.json"
+      },
+      "tool_call_id": "call_232403"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "cat /workspace/sources.md"
+      },
+      "tool_call_id": "call_98438"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python -c \"import sqlite3; conn = sqlite3.connect('/workspace/data.sqlite'); print(conn.execute('''SELECT ( (SELECT CAST(SUM(amount_usd) AS REAL) FROM reserve_components WHERE report_date = '2025-03-31') / (SELECT CAST(SUM(CASE WHEN measure = 'total supply' THEN amount_usdc ELSE -amount_usdc END) AS REAL) FROM circulation_inputs WHERE report_date = '2025-03-31') - (SELECT CAST(SUM(amount_usd) AS REAL) FROM reserve_components WHERE report_date = '2025-03-19') / (SELECT CAST(SUM(CASE WHEN measure = 'total supply' THEN amount_usdc ELSE -amount_usdc END) AS REAL) FROM circulation_inputs WHERE report_date = '2025-03-19') ) * 10000''').fetchall())\""
+      },
+      "tool_call_id": "call_499348"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python -c \"import sqlite3; conn = sqlite3.connect('/workspace/data.sqlite'); print(conn.execute('''SELECT SUM(CASE WHEN measure = 'total supply' THEN amount_usdc ELSE -amount_usdc END) FROM circulation_inputs WHERE report_date = '2025-03-31' ''').fetchall())\""
+      },
+      "tool_call_id": "call_3521966"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python -c \"import sqlite3; conn = sqlite3.connect('/workspace/data.sqlite'); print(conn.execute('''SELECT SUM(amount_usd) FROM reserve_components WHERE report_date = '2025-03-31' ''').fetchall())\""
+      },
+      "tool_call_id": "call_457469"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python -c \"import sqlite3; conn = sqlite3.connect('/workspace/data.sqlite'); print(conn.execute('''SELECT (SELECT reported_total_usd FROM reported_reserve_totals WHERE report_date = '2025-03-31') - (SELECT SUM(amount_usd) FROM reserve_components WHERE report_date = '2025-03-31') ''').fetchall())\""
+      },
+      "tool_call_id": "call_292870"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "mkdir -p /logs/artifacts"
+      },
+      "tool_call_id": "call_123731"
+    },
+    {
+      "function_name": "write_file",
+      "arguments": {
+        "content": "{\n  \"task_id\": \"challenge-v1-b02\",\n  \"answers\": [\n    {\n      \"id\": \"march31_reserves_usd\",\n      \"status\": \"answered\",\n      \"value\": 60040707041,\n      \"unit\": \"usd\",\n      \"evidence\": [\"b02:s03\"],\n      \"sql\": \"SELECT SUM(amount_usd) FROM reserve_components WHERE report_date = '2025-03-31'\"\n    },\n    {\n      \"id\": \"march31_circulation_usdc\",\n      \"status\": \"answered\",\n      \"value\": 59975771715,\n      \"unit\": \"usdc\",\n      \"evidence\": [\"b02:s04\"],\n      \"sql\": \"SELECT SUM(CASE WHEN measure = 'total supply' THEN amount_usdc ELSE -amount_usdc END) FROM circulation_inputs WHERE report_date = '2025-03-31'\"\n    },\n    {\n      \"id\": \"march31_residual_usd\",\n      \"status\": \"answered\",\n      \"value\": -1,\n      \"unit\": \"usd\",\n      \"evidence\": [\"b02:s03\"],\n      \"sql\": \"SELECT (SELECT reported_total_usd FROM reported_reserve_totals WHERE report_date = '2025-03-31') - (SELECT SUM(amount_usd) FROM reserve_components WHERE report_date = '2025-03-31')\"\n    },\n    {\n      \"id\": \"coverage_change_bps\",\n      \"status\": \"answered\",\n      \"value\": -0.15759761976541498,\n      \"unit\": \"basis_points\",\n      \"evidence\": [\"b02:s02\", \"b02:s03\", \"b02:s04\"],\n      \"sql\": \"SELECT ( (SELECT CAST(SUM(amount_usd) AS REAL) FROM reserve_components WHERE report_date = '2025-03-31') / (SELECT CAST(SUM(CASE WHEN measure = 'total supply' THEN amount_usdc ELSE -amount_usdc END) AS REAL) FROM circulation_inputs WHERE report_date = '2025-03-31') - (SELECT CAST(SUM(amount_usd) AS REAL) FROM reserve_components WHERE report_date = '2025-03-19') / (SELECT CAST(SUM(CASE WHEN measure = 'total supply' THEN amount_usdc ELSE -amount_usdc END) AS REAL) FROM circulation_inputs WHERE report_date = '2025-03-19') ) * 10000\"\n    }\n  ],\n  \"conclusion\": {\n    \"verdict\": \"supported\",\n    \"reason_code\": \"supported_by_calculation\",\n    \"evidence\": [\"b02:s02\", \"b02:s03\", \"b02:s04\"]\n  },\n  \"context_evidence\": [\"b02:s01\"]\n}",
+        "path": "/logs/artifacts/answer.json"
+      },
+      "tool_call_id": "call_37175"
+    },
+    {
+      "function_name": "terminal",
+      "arguments": {
+        "command": "python /workspace/check_answer.py /logs/artifacts/answer.json"
+      },
+      "tool_call_id": "call_594190"
+    }
+  ],
+  "observations": [
+    {
+      "source_call_id": "call_635285",
+      "content": "{\"output\": \"/usr/bin/bash: line 5: sqlite3: command not found\", \"exit_code\": 127, \"error\": null, \"hint\": \"`sqlite3` is not installed or not on PATH. Verify with `which sqlite3`; install it or use an absolute path instead of retrying the same command.\"}"
+    },
+    {
+      "source_call_id": "call_637334",
+      "content": "{\"output\": \"CREATE TABLE reserve_components(report_date TEXT,component TEXT,component_id TEXT,amount_usd INTEGER,section_id TEXT)\\nCREATE TABLE reported_reserve_totals(report_date TEXT,reported_total_usd INTEGER,section_id TEXT)\\nCREATE TABLE circulation_inputs(report_date TEXT,measure TEXT,amount_usdc INTEGER,section_id TEXT)\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_548897",
+      "content": "{\"output\": \"Traceback (most recent call last):\\n  File \\\"<string>\\\", line 1, in <module>\\nModuleNotFoundError: No module named 'pandas'\", \"exit_code\": 1, \"error\": null, \"hint\": \"Python cannot import 'pandas'. Most often the wrong interpreter is running: activate the project venv (e.g. `source .venv/bin/activate`) or invoke its python directly. Only pip install if the package is genuinely absent from that venv.\"}"
+    },
+    {
+      "source_call_id": "call_609639",
+      "content": "{\"output\": \"reserve_components:\\n('2025-03-19', 'U.S. Treasury security fair value', '912797KJ5', 3697340000, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797MU8', 1178373594, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797NT0', 2461524350, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797MV6', 797482547, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797NY9', 1496043353, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797NB9', 414075741, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797NZ6', 1244690340, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797KS5', 3146619595, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797PA9', 1569885088, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797NC7', 597531624, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797PB7', 962266781, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797ND5', 2863446371, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury security fair value', '912797PC5', 1790887406, 'b02:s02')\\n('2025-03-19', 'U.S. Treasury repurchase agreements', 'U.S. Treasury repurchase agreements', 31040000000, 'b02:s02')\\n('2025-03-19', 'cash held in Circle Reserve Fund', 'cash held in Circle Reserve Fund', 1000774222, 'b02:s02')\\n('2025-03-19', 'cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net', 'cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net', -2096433792, 'b02:s02')\\n('2025-03-19', 'cash held at regulated financial institutions', 'cash held at regulated financial institutions', 7067110474, 'b02:s02')\\n('2025-03-19', 'cash due to/(owed by) Circle due to timing and settlement differences, net', 'cash due to/(owed by) Circle due to timing and settlement differences, net', -84025566, 'b02:s02')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797NT0', 2465000000, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797MV6', 1423464525, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797NY9', 1498162080, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797NB9', 1063968331, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797NZ6', 1096587717, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797KS5', 2990827955, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797PA9', 1521318728, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797NC7', 848597992, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797PB7', 134455689, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797ND5', 2792780057, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797PC5', 1793382181, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797NE3', 2058500917, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797PJ0', 212966744, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797PK7', 2930554574, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797NN3', 52042278, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury security fair value', '912797NW3', 1979957220, 'b02:s03')\\n('2025-03-31', 'U.S. Treasury repurchase agreements', 'U.S. Treasury repurchase agreements', 30815000000, 'b02:s03')\\n('2025-03-31', 'cash held in Circle Reserve Fund', 'cash held in Circle Reserve Fund', 1004149953, 'b02:s03')\\n('2025-03-31', 'cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net', 'cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net', -3117173718, 'b02:s03')\\n('2025-03-31', 'cash held at regulated financial institutions', 'cash held at regulated financial institutions', 6592595197, 'b02:s03')\\n('2025-03-31', 'cash due to/(owed by) Circle due to timing and settlement differences, net', 'cash due to/(owed by) Circle due to timing and settlement differences, net', -116431379, 'b02:s03')\\n\\nreported_reserve_totals:\\n('2025-03-19', 59147592128, 'b02:s02')\\n('2025-03-31', 60040707040, 'b02:s03')\\n\\ncirculation_inputs:\\n('2025-03-19', 'total supply', 60459258338, 'b02:s04')\\n('2025-03-19', 'Tokens Allowed But Not Issued', 1280267228, 'b02:s04')\\n('2025-03-19', 'Access Denied Tokens', 96298507, 'b02:s04')\\n('2025-03-31', 'total supply', 61073416469, 'b02:s04')\\n('2025-03-31', 'Tokens Allowed But Not Issued', 996628065, 'b02:s04')\\n('2025-03-31', 'Access Denied Tokens', 101016689, 'b02:s04')\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_101586",
+      "content": "{\"output\": \"march31_reserves_usd: 60040707041\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_626383",
+      "content": "{\"output\": \"march31_circulation_usdc: 59975771715\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_457958",
+      "content": "{\"output\": \"march31_residual_usd: -1\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_16539",
+      "content": "{\"output\": \"coverage_change_bps: -0.15759761976541498\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_232403",
+      "content": "{\"output\": \"{\\n  \\\"$schema\\\": \\\"https://json-schema.org/draft/2020-12/schema\\\",\\n  \\\"type\\\": \\\"object\\\",\\n  \\\"additionalProperties\\\": false,\\n  \\\"required\\\": [\\n    \\\"task_id\\\",\\n    \\\"answers\\\",\\n    \\\"conclusion\\\"\\n  ],\\n  \\\"properties\\\": {\\n    \\\"task_id\\\": {\\n      \\\"type\\\": \\\"string\\\",\\n      \\\"pattern\\\": \\\"^challenge-v1-[abc]0[1-4]$\\\"\\n    },\\n    \\\"answers\\\": {\\n      \\\"type\\\": \\\"array\\\",\\n      \\\"minItems\\\": 1,\\n      \\\"maxItems\\\": 5,\\n      \\\"items\\\": {\\n        \\\"type\\\": \\\"object\\\",\\n        \\\"additionalProperties\\\": false,\\n        \\\"required\\\": [\\n          \\\"id\\\",\\n          \\\"status\\\",\\n          \\\"value\\\",\\n          \\\"unit\\\",\\n          \\\"evidence\\\",\\n          \\\"sql\\\"\\n        ],\\n        \\\"properties\\\": {\\n          \\\"id\\\": {\\n            \\\"type\\\": \\\"string\\\",\\n            \\\"minLength\\\": 1,\\n            \\\"maxLength\\\": 64\\n          },\\n          \\\"status\\\": {\\n            \\\"enum\\\": [\\n              \\\"answered\\\",\\n              \\\"insufficient_evidence\\\"\\n            ]\\n          },\\n          \\\"value\\\": {\\n            \\\"type\\\": [\\n              \\\"number\\\",\\n              \\\"null\\\"\\n            ]\\n          },\\n          \\\"unit\\\": {\\n            \\\"type\\\": \\\"string\\\",\\n            \\\"minLength\\\": 1,\\n            \\\"maxLength\\\": 64\\n          },\\n          \\\"evidence\\\": {\\n            \\\"type\\\": \\\"array\\\",\\n            \\\"items\\\": {\\n              \\\"type\\\": \\\"string\\\",\\n              \\\"minLength\\\": 1,\\n              \\\"maxLength\\\": 100\\n            },\\n            \\\"minItems\\\": 0,\\n            \\\"maxItems\\\": 10,\\n            \\\"uniqueItems\\\": true\\n          },\\n          \\\"sql\\\": {\\n            \\\"type\\\": [\\n              \\\"string\\\",\\n              \\\"null\\\"\\n            ],\\n            \\\"minLength\\\": 1,\\n            \\\"maxLength\\\": 16384\\n          },\\n          \\\"reason_code\\\": {\\n            \\\"enum\\\": [\\n              \\\"no_eligible_observation\\\",\\n              \\\"missing_comparable_definition\\\",\\n              \\\"missing_required_labels\\\",\\n              \\\"missing_required_input\\\",\\n              null\\n            ]\\n          }\\n        },\\n        \\\"allOf\\\": [\\n          {\\n            \\\"if\\\": {\\n              \\\"properties\\\": {\\n                \\\"status\\\": {\\n                  \\\"const\\\": \\\"answered\\\"\\n                }\\n              }\\n            },\\n            \\\"then\\\": {\\n              \\\"properties\\\": {\\n                \\\"value\\\": {\\n                  \\\"type\\\": \\\"number\\\"\\n                },\\n                \\\"sql\\\": {\\n                  \\\"type\\\": \\\"string\\\"\\n                },\\n                \\\"reason_code\\\": {\\n                  \\\"type\\\": \\\"null\\\"\\n                }\\n              }\\n            },\\n            \\\"else\\\": {\\n              \\\"properties\\\": {\\n                \\\"value\\\": {\\n                  \\\"type\\\": \\\"null\\\"\\n                },\\n                \\\"sql\\\": {\\n                  \\\"type\\\": \\\"null\\\"\\n                },\\n                \\\"reason_code\\\": {\\n                  \\\"enum\\\": [\\n                    \\\"no_eligible_observation\\\",\\n                    \\\"missing_comparable_definition\\\",\\n                    \\\"missing_required_labels\\\",\\n                    \\\"missing_required_input\\\"\\n                  ]\\n                }\\n              }\\n            }\\n          }\\n        ]\\n      }\\n    },\\n    \\\"conclusion\\\": {\\n      \\\"oneOf\\\": [\\n        {\\n          \\\"type\\\": \\\"null\\\"\\n        },\\n        {\\n          \\\"type\\\": \\\"object\\\",\\n          \\\"additionalProperties\\\": false,\\n          \\\"required\\\": [\\n            \\\"verdict\\\",\\n            \\\"evidence\\\"\\n          ],\\n          \\\"properties\\\": {\\n            \\\"verdict\\\": {\\n              \\\"enum\\\": [\\n                \\\"supported\\\",\\n                \\\"contradicted\\\",\\n                \\\"not_established\\\"\\n              ]\\n            },\\n            \\\"reason_code\\\": {\\n              \\\"enum\\\": [\\n                \\\"supported_by_calculation\\\",\\n                \\\"contradicted_by_calculation\\\",\\n                \\\"incompatible_definition\\\",\\n                \\\"incompatible_coverage\\\",\\n                \\\"ineligible_source\\\",\\n                \\\"missing_required_evidence\\\",\\n                null\\n              ]\\n            },\\n            \\\"evidence\\\": {\\n              \\\"type\\\": \\\"array\\\",\\n              \\\"items\\\": {\\n                \\\"type\\\": \\\"string\\\",\\n                \\\"minLength\\\": 1,\\n                \\\"maxLength\\\": 100\\n              },\\n              \\\"minItems\\\": 0,\\n              \\\"maxItems\\\": 10,\\n              \\\"uniqueItems\\\": true\\n            }\\n          }\\n        }\\n      ]\\n    },\\n    \\\"context_evidence\\\": {\\n      \\\"type\\\": \\\"array\\\",\\n      \\\"items\\\": {\\n        \\\"type\\\": \\\"string\\\",\\n        \\\"minLength\\\": 1,\\n        \\\"maxLength\\\": 100\\n      },\\n      \\\"maxItems\\\": 10,\\n      \\\"uniqueItems\\\": true\\n    }\\n  },\\n  \\\"$id\\\": \\\"https://github.com/CaoimhConway/workpaperbench/challenge-v1/workpaper-1.1\\\"\\n}\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_98438",
+      "content": "{\"output\": \"# Circle USDC reserve report dictionary\\n\\nThe source report's observation cutoffs are March 19 and March 31, 2025 at 11:59 p.m. UTC. Each observation is a point-in-time balance. The printed report date is April 30, 2025. It is not a historical first-publication timestamp.\\n\\nUSDC circulation means total supply on approved chains less Tokens Allowed But Not Issued and Access Denied Tokens. The reserve fair-value definition covers USD-denominated assets in the Circle Reserve Fund and segregated accounts at regulated financial institutions for USDC holders. The reserve schedule includes component fair values and signed net timing adjustments. All reserve amounts are USD, and circulation amounts are USDC.\\n\\n`reserve_components` contains source line items by observation date. CUSIP identifies a Treasury security. Negative values preserve the report's parenthetical timing adjustments. `reported_reserve_totals` contains the report's stated reserve total for reconciliation. `circulation_inputs` contains the source-defined supply categories. The report's circulation definition determines their relationship.\\n\\nThe two observations use the same stated definitions and UTC cutoff convention. The report's asset categories are aggregated reserve values. They do not provide instrument-level maturity, yield, liquidity, or independently observed redemption evidence.\\n\\n## Source sections\\n\\nb02:s02 - PDF page 3, 2025-03-19 reserve schedule. Treasury security fair values by CUSIP in USD: 912797KJ5 3,697,340,000, 912797MU8 1,178,373,594, 912797NT0 2,461,524,350, 912797MV6 797,482,547, 912797NY9 1,496,043,353, 912797NB9 414,075,741, 912797NZ6 1,244,690,340, 912797KS5 3,146,619,595, 912797PA9 1,569,885,088, 912797NC7 597,531,624, 912797PB7 962,266,781, 912797ND5 2,863,446,371, 912797PC5 1,790,887,406. Other listed components in USD: U.S. Treasury repurchase agreements 31,040,000,000, cash held in Circle Reserve Fund 1,000,774,222, cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net -2,096,433,792, cash held at regulated financial institutions 7,067,110,474, cash due to/(owed by) Circle due to timing and settlement differences, net -84,025,566. Report-stated total reserve fair value is USD 59,147,592,128.\\n\\nb02:s03 - PDF page 4, 2025-03-31 reserve schedule. Treasury security fair values by CUSIP in USD: 912797NT0 2,465,000,000, 912797MV6 1,423,464,525, 912797NY9 1,498,162,080, 912797NB9 1,063,968,331, 912797NZ6 1,096,587,717, 912797KS5 2,990,827,955, 912797PA9 1,521,318,728, 912797NC7 848,597,992, 912797PB7 134,455,689, 912797ND5 2,792,780,057, 912797PC5 1,793,382,181, 912797NE3 2,058,500,917, 912797PJ0 212,966,744, 912797PK7 2,930,554,574, 912797NN3 52,042,278, 912797NW3 1,979,957,220. Other listed components in USD: U.S. Treasury repurchase agreements 30,815,000,000, cash held in Circle Reserve Fund 1,004,149,953, cash due to/(owed by) Circle Reserve Fund due to timing and settlement differences, net -3,117,173,718, cash held at regulated financial institutions 6,592,595,197, cash due to/(owed by) Circle due to timing and settlement differences, net -116,431,379. Report-stated total reserve fair value is USD 60,040,707,040.\\n\\nb02:s01 - PDF page 2, circulation and reserve criteria. Circulation is defined from total supply and the two stated excluded-token categories. Reserve fair value is the balance of USD-denominated assets held for holders in the Circle Reserve Fund and segregated financial-institution accounts.\\n\\nb02:s04 - PDF page 2, March circulation table. Source inputs:\\n- 2025-03-19 supply categories in USDC: total supply 60,459,258,338, Tokens Allowed But Not Issued 1,280,267,228, Access Denied Tokens 96,298,507.\\n- 2025-03-31 supply categories in USDC: total supply 61,073,416,469, Tokens Allowed But Not Issued 996,628,065, Access Denied Tokens 101,016,689.\\n\\nb02:s05 - PDF pages 1 and 2. The report observations are at 11:59 p.m. UTC. The report is dated April 30, 2025. Historical first-publication timing is unknown.\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_499348",
+      "content": "{\"output\": \"[(-0.15759761976541498,)]\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_3521966",
+      "content": "{\"output\": \"[(59975771715,)]\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_457469",
+      "content": "{\"output\": \"[(60040707041,)]\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_292870",
+      "content": "{\"output\": \"[(-1,)]\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_123731",
+      "content": "{\"output\": \"\", \"exit_code\": 0, \"error\": null}"
+    },
+    {
+      "source_call_id": "call_37175",
+      "content": "{\"bytes_written\": 1899, \"dirs_created\": true, \"verified\": true, \"lint\": {\"status\": \"ok\", \"output\": \"\"}, \"resolved_path\": \"/logs/artifacts/answer.json\", \"files_modified\": [\"/logs/artifacts/answer.json\"]}"
+    },
+    {
+      "source_call_id": "call_594190",
+      "content": "{\"output\": \"Structure valid. This does not check numerical, evidence, conclusion or replay correctness.\", \"exit_code\": 0, \"error\": null}"
+    }
+  ],
+  "omitted_items": 0,
+  "scope": "Bounded screened tool invocations and observations only. No assistant messages, private reasoning or claim of complete trajectories. Omitted items may exceed bounds or contain credential patterns."
+}

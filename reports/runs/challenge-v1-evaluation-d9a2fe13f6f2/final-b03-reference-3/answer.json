@@ -1,0 +1,58 @@
+{
+  "task_id": "challenge-v1-b03",
+  "answers": [
+    {
+      "id": "reserve_assets_usd",
+      "status": "answered",
+      "value": 162574933798,
+      "unit": "usd",
+      "evidence": [
+        "b03:s02"
+      ],
+      "sql": "SELECT SUM(amount_usd) FROM reserve_components WHERE report_date = '2025-06-30'"
+    },
+    {
+      "id": "net_token_liability_usd",
+      "status": "answered",
+      "value": 157100255857,
+      "unit": "usd",
+      "evidence": [
+        "b03:s04"
+      ],
+      "sql": "SELECT (SELECT amount_usd FROM liability_inputs WHERE measure = 'gross contractual redemption' AND report_date = '2025-06-30') - (SELECT amount_usd FROM liability_inputs WHERE measure = 'company-held tokens not in Treasury wallet' AND report_date = '2025-06-30')"
+    },
+    {
+      "id": "company_asset_excess_usd",
+      "status": "answered",
+      "value": 5466933324,
+      "unit": "usd",
+      "evidence": [
+        "b03:s02",
+        "b03:s03"
+      ],
+      "sql": "SELECT (SELECT SUM(amount_usd) FROM reserve_components WHERE report_date = '2025-06-30') - (SELECT amount_usd FROM liability_inputs WHERE measure = 'detailed FFR company total liabilities' AND report_date = '2025-06-30')"
+    },
+    {
+      "id": "release_liability_delta_usd",
+      "status": "answered",
+      "value": 9000,
+      "unit": "usd",
+      "evidence": [
+        "b03:s03",
+        "b03:s05"
+      ],
+      "sql": "SELECT (SELECT amount_usd FROM liability_inputs WHERE measure = 'July release company total liabilities' AND report_date = '2025-06-30') - (SELECT amount_usd FROM liability_inputs WHERE measure = 'detailed FFR company total liabilities' AND report_date = '2025-06-30')"
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "b03:s03",
+      "b03:s05"
+    ]
+  },
+  "context_evidence": [
+    "b03:s01"
+  ]
+}

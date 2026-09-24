@@ -1,0 +1,87 @@
+{
+  "scorer_version": "challenge-1.0.0",
+  "complete": false,
+  "verified_research_completion": false,
+  "strict_delivery_completion": false,
+  "checks": {
+    "delivery": true,
+    "financial_answer": false,
+    "evidence": false,
+    "robustness": false
+  },
+  "details": {
+    "claims": {
+      "yield_2024": {
+        "availability": true,
+        "unit": true,
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "monetary_scale": true,
+          "quarterly_changes": true,
+          "revenue_mix": true
+        }
+      },
+      "yield_2023": {
+        "availability": true,
+        "unit": true,
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "monetary_scale": true,
+          "quarterly_changes": true,
+          "revenue_mix": true
+        }
+      },
+      "yield_change": {
+        "availability": true,
+        "unit": true,
+        "evidence": false,
+        "numerical": false,
+        "original_replay": false,
+        "controls": {
+          "monetary_scale": false,
+          "quarterly_changes": false,
+          "revenue_mix": false
+        }
+      },
+      "transaction_contribution": {
+        "availability": true,
+        "unit": true,
+        "evidence": false,
+        "numerical": false,
+        "original_replay": true,
+        "controls": {
+          "monetary_scale": true,
+          "quarterly_changes": true,
+          "revenue_mix": true
+        }
+      }
+    },
+    "conclusion": {
+      "verdict": true,
+      "evidence": false
+    }
+  },
+  "errors": [
+    "yield_2024:evidence",
+    "yield_2023:evidence",
+    "yield_change:numerical",
+    "yield_change:evidence",
+    "yield_change:original_replay",
+    "yield_change:control:monetary_scale",
+    "yield_change:control:quarterly_changes",
+    "yield_change:control:revenue_mix",
+    "transaction_contribution:numerical",
+    "transaction_contribution:evidence",
+    "conclusion:evidence"
+  ],
+  "isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  }
+}

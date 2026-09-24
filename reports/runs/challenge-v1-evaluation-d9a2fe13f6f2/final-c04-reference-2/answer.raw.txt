@@ -1,0 +1,41 @@
+{
+  "task_id": "challenge-v1-c04",
+  "answers": [
+    {
+      "id": "service_revenue_growth_pct",
+      "status": "answered",
+      "value": 8.68744,
+      "unit": "percent",
+      "evidence": ["c04:s01"],
+      "sql": "SELECT (curr.amount * 100.0 / prev.amount) - 100.0 FROM revenues curr JOIN revenues prev ON curr.category = prev.category AND curr.months = prev.months WHERE curr.category = 'Service revenue' AND curr.period_end = '2024-09-30' AND prev.period_end = '2023-09-30'"
+    },
+    {
+      "id": "lagged_nominal_payment_volume_growth_pct",
+      "status": "answered",
+      "value": 7.42120,
+      "unit": "percent",
+      "evidence": ["c04:s02", "c04:s04"],
+      "sql": "SELECT (curr.amount * 100.0 / prev.amount) - 100.0 FROM activity_metrics curr JOIN activity_metrics prev ON curr.metric = prev.metric AND curr.months = prev.months WHERE curr.metric = 'Nominal payments volume' AND curr.period_end = '2024-06-30' AND prev.period_end = '2023-06-30'"
+    },
+    {
+      "id": "service_growth_minus_volume_growth_pp",
+      "status": "answered",
+      "value": 1.26624,
+      "unit": "percentage_points",
+      "evidence": ["c04:s01", "c04:s02", "c04:s04"],
+      "sql": "SELECT ((r_curr.amount * 100.0 / r_prev.amount) - 100.0) - ((v_curr.amount * 100.0 / v_prev.amount) - 100.0) FROM revenues r_curr JOIN revenues r_prev ON r_curr.category = r_prev.category AND r_curr.months = r_prev.months CROSS JOIN activity_metrics v_curr JOIN activity_metrics v_prev ON v_curr.metric = v_prev.metric AND v_curr.months = v_prev.months WHERE r_curr.category = 'Service revenue' AND r_curr.period_end = '2024-09-30' AND r_prev.period_end = '2023-09-30' AND v_curr.metric = 'Nominal payments volume' AND v_curr.period_end = '2024-06-30' AND v_prev.period_end = '2023-06-30'"
+    },
+    {
+      "id": "service_revenue_to_lagged_volume_proxy_2024_pct",
+      "status": "answered",
+      "value": 0.12411,
+      "unit": "percent",
+      "evidence": ["c04:s01", "c04:s02", "c04:s04"],
+      "sql": "SELECT (r_curr.amount / 10.0) / v_curr.amount FROM revenues r_curr CROSS JOIN activity_metrics v_curr WHERE r_curr.category = 'Service revenue' AND r_curr.period_end = '2024-09-30' AND v_curr.metric = 'Nominal payments volume' AND v_curr.period_end = '2024-06-30'"
+    }
+  ],
+  "conclusion": {
+    "verdict": "not_established",
+    "evidence": ["c04:s04", "c04:s05"]
+  }
+}

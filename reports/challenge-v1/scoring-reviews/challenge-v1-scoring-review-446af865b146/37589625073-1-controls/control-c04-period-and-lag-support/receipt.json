@@ -1,0 +1,109 @@
+{
+  "artifact_audit_sha256": null,
+  "base_scorer_sha256": "77f41466c3a65283481907bada217f75fa92ea0ccf92355c396e7c216e57c34c",
+  "commit_sha": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "effective_gold_sha256": "6d469bd1fee113b5fba896011272ba3c17eec1a7ef32edf5fc515f39ac1714cf",
+  "effective_task_sha256": "5178cd216598bdd372057becc3adb6439908a398121c05521a7e2a24232f5690",
+  "input_file": "datasets/challenge-v1/tasks/c04/tests/reference.json",
+  "input_sha256": "90948d84ed9bdce4fba8aa0d7f43d887e2717962fd770fabf1bc60fe41aabbbf",
+  "input_source": "authored_control",
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "model_key": null,
+  "prior_verdict": null,
+  "prior_verdict_sha256": null,
+  "record_path": null,
+  "record_sha256": null,
+  "repetition": null,
+  "review_bundle_sha256": "a0e142a2841857842302415b6fc6ec313cec361b349589131d0199c037bbe05f",
+  "review_content_hash": "446af865b14613e821e39e9399dd183517027de5aaf8fd8e36e2451ffbbb0db4",
+  "review_id": "challenge-v1-scoring-review-446af865b146",
+  "review_scorer_sha256": "73bbec6f4f867165df6963ffa2be371dfc218ceec1698adba46f0edef79d4006",
+  "run_attempt": "1",
+  "run_id": "37589625073",
+  "scorer_version": "challenge-1.1.3",
+  "slot_id": "control-c04-period-and-lag-support",
+  "source_gold_sha256": "816bb6131bfc802d45ac1c3641d2eea6ccad424c9c4503b80a0f77a6e97f7bff",
+  "source_task_sha256": "bf76ded81e249825e447ab8f45f1252e4e90c868fc0167ee2dfef380e5b2013f",
+  "split": "evaluation",
+  "task_id": "challenge-v1-c04",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": true,
+    "details": {
+      "claims": {
+        "lagged_nominal_payment_volume_growth_pct": {
+          "availability": true,
+          "controls": {
+            "lagged_volume_2023_shift": true,
+            "service_revenue_2024_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "service_growth_minus_volume_growth_pp": {
+          "availability": true,
+          "controls": {
+            "lagged_volume_2023_shift": true,
+            "service_revenue_2024_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "service_revenue_growth_pct": {
+          "availability": true,
+          "controls": {
+            "lagged_volume_2023_shift": true,
+            "service_revenue_2024_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "service_revenue_to_lagged_volume_proxy_2024_pct": {
+          "availability": true,
+          "controls": {
+            "lagged_volume_2023_shift": true,
+            "service_revenue_2024_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.3",
+    "strict_delivery_completion": true,
+    "verified_research_completion": true
+  },
+  "verifier_bytes_sha256": "d713c8faa3d29f7e5c8ae67102216f4e24f6ba529680264e030ecfe9ae77a74a",
+  "verifier_path": "reports/challenge-v1/scoring-reviews/challenge-v1-scoring-review-446af865b146/37589625073-1-controls/control-c04-period-and-lag-support/verifier.json"
+}

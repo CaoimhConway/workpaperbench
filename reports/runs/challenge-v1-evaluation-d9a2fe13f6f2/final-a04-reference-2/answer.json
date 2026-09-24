@@ -1,0 +1,69 @@
+{
+  "task_id": "challenge-v1-a04",
+  "answers": [
+    {
+      "id": "guidance_upper",
+      "status": "answered",
+      "value": 1.48,
+      "unit": "usd_per_share",
+      "evidence": [
+        "a04:s01"
+      ],
+      "sql": "SELECT (SELECT high FROM guidance WHERE fiscal_period='Q2FY2025' AND measure='GAAP diluted EPS') + (SELECT SUM(amount) FROM guidance_adjustments WHERE fiscal_period='Q2FY2025')"
+    },
+    {
+      "id": "eps_gap",
+      "status": "answered",
+      "value": -0.01,
+      "unit": "usd_per_share",
+      "evidence": [
+        "a04:s01",
+        "a04:s04"
+      ],
+      "sql": "SELECT (SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Non-GAAP diluted EPS') - ((SELECT high FROM guidance WHERE fiscal_period='Q2FY2025' AND measure='GAAP diluted EPS') + (SELECT SUM(amount) FROM guidance_adjustments WHERE fiscal_period='Q2FY2025'))"
+    },
+    {
+      "id": "net_income_adjustment",
+      "status": "answered",
+      "value": 1056.0,
+      "unit": "usd_million",
+      "evidence": [
+        "a04:s03",
+        "a04:s04"
+      ],
+      "sql": "SELECT SUM(CASE WHEN category='Operating expense' THEN amount WHEN category='Income tax expense' THEN -amount ELSE 0 END) FROM adjustments WHERE period_end='2024-11-30' AND months=3"
+    },
+    {
+      "id": "adjusted_net_income",
+      "status": "answered",
+      "value": 4207.0,
+      "unit": "usd_million",
+      "evidence": [
+        "a04:s02",
+        "a04:s03",
+        "a04:s04"
+      ],
+      "sql": "SELECT (SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Net income') + (SELECT SUM(CASE WHEN category='Operating expense' THEN amount WHEN category='Income tax expense' THEN -amount ELSE 0 END) FROM adjustments WHERE period_end='2024-11-30' AND months=3)"
+    },
+    {
+      "id": "adjusted_net_margin",
+      "status": "answered",
+      "value": 29.92389,
+      "unit": "percent",
+      "evidence": [
+        "a04:s02",
+        "a04:s03",
+        "a04:s04"
+      ],
+      "sql": "SELECT ((SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Net income') + (SELECT SUM(CASE WHEN category='Operating expense' THEN amount WHEN category='Income tax expense' THEN -amount ELSE 0 END) FROM adjustments WHERE period_end='2024-11-30' AND months=3)) * 100.0 / (SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Total revenues')"
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "a04:s01",
+      "a04:s04"
+    ]
+  }
+}
