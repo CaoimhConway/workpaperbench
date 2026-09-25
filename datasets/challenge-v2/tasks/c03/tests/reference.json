@@ -1,0 +1,60 @@
+{
+  "answers": [
+    {
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ],
+      "id": "bitcoin_gross_profit_2024_usd_thousand",
+      "reason_code": null,
+      "sql": "SELECT (SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin costs')",
+      "status": "answered",
+      "unit": "usd_thousand",
+      "value": 288819.0
+    },
+    {
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ],
+      "id": "bitcoin_gross_profit_2023_usd_thousand",
+      "reason_code": null,
+      "sql": "SELECT (SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin costs')",
+      "status": "answered",
+      "unit": "usd_thousand",
+      "value": 205189.0
+    },
+    {
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ],
+      "id": "bitcoin_gross_profit_growth_pct",
+      "reason_code": null,
+      "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin costs'))/((SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin costs'))-100.0",
+      "status": "answered",
+      "unit": "percent",
+      "value": 40.75754548245764
+    },
+    {
+      "evidence": [
+        "c03:s01"
+      ],
+      "id": "bitcoin_share_of_total_net_revenue_increase_pct",
+      "reason_code": null,
+      "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue'))/((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total net revenue')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total net revenue'))",
+      "status": "answered",
+      "unit": "percent",
+      "value": 31.78078651328766
+    }
+  ],
+  "conclusion": {
+    "evidence": [
+      "c03:s01",
+      "c03:s02"
+    ],
+    "reason_code": null,
+    "verdict": "contradicted"
+  },
+  "task_id": "challenge-v2-c03"
+}

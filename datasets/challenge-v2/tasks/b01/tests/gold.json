@@ -1,0 +1,106 @@
+{
+  "answers": {
+    "coverage_change_pp": {
+      "evidence": [
+        [
+          "b01:s01",
+          "b01:s04",
+          "b01:s02"
+        ],
+        [
+          "b01:s01",
+          "b01:s04",
+          "b01:s05"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 1e-06,
+      "unit": "percentage_points",
+      "value": 0
+    },
+    "june_assets_usd": {
+      "evidence": [
+        [
+          "b01:s04",
+          "b01:s02"
+        ],
+        [
+          "b01:s04",
+          "b01:s05"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 1e-06,
+      "unit": "usd",
+      "value": 9356516
+    },
+    "june_reconciliation_usd": {
+      "evidence": [
+        [
+          "b01:s04"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 1e-06,
+      "unit": "usd",
+      "value": 0
+    }
+  },
+  "conclusion": {
+    "evidence": [
+      [
+        "b01:s01",
+        "b01:s04",
+        "b01:s02"
+      ],
+      [
+        "b01:s01",
+        "b01:s04",
+        "b01:s05"
+      ]
+    ],
+    "reason_codes": [
+      "contradicted_by_calculation"
+    ],
+    "verdict": "contradicted"
+  },
+  "context_evidence_allowed": [
+    "b01:s02",
+    "b01:s03",
+    "b01:s05",
+    "b01:s06"
+  ],
+  "controls": [
+    {
+      "database": "control-1.sqlite",
+      "expected": {
+        "conclusion": "contradicted",
+        "coverage_change_pp": 0,
+        "june_assets_usd": 9356517,
+        "june_reconciliation_usd": 1
+      },
+      "name": "component_gap"
+    },
+    {
+      "database": "control-2.sqlite",
+      "expected": {
+        "conclusion": "supported",
+        "coverage_change_pp": 2.137547779536742,
+        "june_assets_usd": 9556516,
+        "june_reconciliation_usd": 0
+      },
+      "name": "coverage_increase"
+    }
+  ],
+  "hashes": {
+    "control-1.sqlite": "317bd0e5eb6125f46b5cba3f2d11e68bc2b65b84afde5b53ffa1373ea4407c6f",
+    "control-2.sqlite": "cf9ba20a2b4b3a33532760d0864ceeaca286a98a9f79377370407121104e5819",
+    "data.sqlite": "3945352157d91e372f9372acd70423465e0e9957ee37f96962490f99c0ec783f",
+    "evidence.json": "cfeb10ece9dbd85b95142cef69879b3e911469c9da8d7655954ce75111b42b67",
+    "schema.json": "604a67a9b071041d467a8b70bc3eadc96e8f6fddc75d9356537c537a7d6f1627",
+    "sources.md": "ee40e29e7a3a93805a0d6eae54954aef4b1a1fc56df271ba6ba54ff31c1eb0a0",
+    "verify.py": "1eadd0271b6b421bee438078d895b00b7de1f11d6b6b4197388cf51d25c81dae"
+  },
+  "scorer_version": "challenge-1.1.3",
+  "task_id": "challenge-v2-b01"
+}

@@ -1,0 +1,117 @@
+{
+  "answers": {
+    "azure_gap": {
+      "evidence": [
+        [
+          "a03:s01",
+          "a03:s04"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.005,
+      "unit": "percentage_points",
+      "value": -1.0
+    },
+    "margin_change": {
+      "evidence": [
+        [
+          "a03:s02",
+          "a03:s03"
+        ],
+        [
+          "a03:s05"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.005,
+      "unit": "basis_points",
+      "value": -112.62742667169121
+    },
+    "q1_operating_income": {
+      "evidence": [
+        [
+          "a03:s02",
+          "a03:s03"
+        ],
+        [
+          "a03:s05"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.0001,
+      "unit": "usd_million",
+      "value": 30552.0
+    },
+    "q1_revenue": {
+      "evidence": [
+        [
+          "a03:s02",
+          "a03:s03"
+        ],
+        [
+          "a03:s05"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.0001,
+      "unit": "usd_million",
+      "value": 65585.0
+    }
+  },
+  "conclusion": {
+    "evidence": [
+      [
+        "a03:s01",
+        "a03:s04"
+      ]
+    ],
+    "verdict": "contradicted"
+  },
+  "context_evidence_allowed": [
+    "a03:s06"
+  ],
+  "controls": [
+    {
+      "database": "control-1.sqlite",
+      "expected": {
+        "azure_gap": -1.0,
+        "margin_change": -112.62742667169121,
+        "q1_operating_income": 61104.0,
+        "q1_revenue": 131170.0
+      },
+      "name": "compatible_monetary_scale"
+    },
+    {
+      "database": "control-2.sqlite",
+      "expected": {
+        "azure_gap": 1.0,
+        "margin_change": -112.62742667169121,
+        "q1_operating_income": 30552.0,
+        "q1_revenue": 65585.0
+      },
+      "name": "business_growth_change"
+    },
+    {
+      "database": "control-3.sqlite",
+      "expected": {
+        "azure_gap": -1.0,
+        "margin_change": -98.26621343639708,
+        "q1_operating_income": 30552.0,
+        "q1_revenue": 65585.0
+      },
+      "name": "quarter_expense_change"
+    }
+  ],
+  "hashes": {
+    "control-1.sqlite": "e75ffaefe480e49f7eccdf4a0d07e494a690ef0f389566e78cedc3121de82ff4",
+    "control-2.sqlite": "f2c7fa93b54f498df9e10ffd315d555f1e93c485dd5fb890c5df879409c7fa20",
+    "control-3.sqlite": "ff224ab5d93ebfc1f1d66c919b4220c2d898461ba79effdf3b116cd2e820e664",
+    "data.sqlite": "d9128f11f3aa68045d9526a8ad8fe4367d29c2aac2518cf390d1c2f4b5f8b7b4",
+    "evidence.json": "5c5c3c5f1048b4cca19ba14e2c032aa76887da880c91669d400200128566a09c",
+    "schema.json": "604a67a9b071041d467a8b70bc3eadc96e8f6fddc75d9356537c537a7d6f1627",
+    "sources.md": "d817e27cbe8a0255c3b0c90a0b633db22202d0270a34078a483ac51bc463d1f5",
+    "verify.py": "1eadd0271b6b421bee438078d895b00b7de1f11d6b6b4197388cf51d25c81dae"
+  },
+  "scorer_version": "challenge-1.1.3",
+  "task_id": "challenge-v2-a03"
+}
