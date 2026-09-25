@@ -1,0 +1,37 @@
+{
+  "setup_version": "local-setup-selection-1",
+  "selected_configuration_sha256": "9444f79be682a7424de7504f095cebbf94559295427b1d02539a0f5a97892421",
+  "selected_configuration": "config/local/qwen3-4b-instruct-2507-delivery.json",
+  "attempt_id": "setup-qwen4b-instruct-files-1",
+  "task_id": "challenge-v2-c03",
+  "manifest_id": "challenge-v2-canonical-cb40dc200fda",
+  "started_at": "2026-10-09T12:44:27.477598+00:00",
+  "finished_at": "2026-10-09T12:57:10.183625+00:00",
+  "checks": {
+    "delivery": true,
+    "financial_answer": false,
+    "evidence": false,
+    "robustness": false
+  },
+  "isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  },
+  "inference": true,
+  "scored_development": false,
+  "native_generation_requests_from_completed_server_timings": 11,
+  "raw_answer_sha256": "2351c1fe1d3061e32b7b4a2da8b1a45683542c465eaf2c415dcda397d0dc8f95",
+  "normalized_answer_sha256": "53c436c1f52d513f07bb0a54f5771930b69a1176d5f92f2d647ac96930aad1b4",
+  "receipt_sha256": "0cf0d742008747a86545a7e44f074469fcb7ac2540b83c4707eb32d1ba16b6e6",
+  "native_adapter_sha256": "3e1a0011fc41e2e8f9a89ebd365202e9139c280b4eb0098eb720a5d23c60bd44",
+  "actual_route": "Pinned local CPU serving process with loopback-only outbound policy, private guest bridge endpoint. No hosted fallback.",
+  "limitations": [
+    "Financial and evidence checks fail",
+    "One successful setup delivery does not demonstrate workflow quality or repetition consistency",
+    "Slot polling can miss short requests",
+    "No mid-response server outage was injected"
+  ],
+  "external_service_spend_usd": 0
+}

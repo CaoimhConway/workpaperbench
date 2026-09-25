@@ -43,10 +43,10 @@ with delivery reported separately. A low completion rate caused by an evidence
 contract is not a financial reasoning failure. Local-model failures do not prove
 that leading hosted systems would fail.
 
-The current setup is local-only on an Intel Mac Pro. The tested serving preview
-uses Qwen3-30B-A3B **Q4_K_M**, about 30.5 billion total parameters and 3.3 billion
-active parameters, through llama.cpp b11516 on CPU. A real 65,536-token window
-uses YaRN factor 2. Native Harbor/Hermes execution runs in a dedicated Ubuntu
+The current setup is local-only on an Intel Mac Pro. The measured default
+uses Qwen3-4B-Instruct-2507 **Q4_K_M**, about four billion parameters, through
+llama.cpp b11516 on CPU with a real 65,536-token native window. Its setup smoke
+wrote a valid artifact but failed the financial checks. Native Harbor/Hermes execution runs in a dedicated Ubuntu
 24.04 guest without host mounts or owner credentials. This is a distinct
 configuration from earlier hosted routes. New external-service spending is USD
 0 and no Actions job is launched during this phase.

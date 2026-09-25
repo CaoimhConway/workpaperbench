@@ -30,7 +30,7 @@ def clean_environment():
         raise ValueError("local_trial_requires_dedicated_guest")
 
 
-def local_hermes_source(source, max_turns, generation=None):
+def local_hermes_source(source, max_turns, generation=None, system_prompt=""):
     corrected = corrected_hermes_source(source)
     installers = re.findall(rb'https://raw\.githubusercontent\.com/[^/\s]+/hermes-agent/main/scripts/install\.sh', corrected)
     if len(installers) != 1:
@@ -68,13 +68,14 @@ def local_hermes_source(source, max_turns, generation=None):
         local_config["provider"] = "custom"
         local_config["fallback_model"] = None
         local_config["agent"]["max_turns"] = MAX_TURNS
+        local_config["agent"]["system_prompt"] = SYSTEM_PROMPT
         local_config["compression"]["enabled"] = False
         local_config["auxiliary"] = {"title_generation": {"enabled": False, "model_upgrade_enabled": False}}
         for role in ("vision", "compression", "approval", "review", "skills_hub", "mcp"):
             local_config["auxiliary"][role] = {"provider": "custom", "model": model,
                 "base_url": env["OPENAI_BASE_URL"], "api_key": "local-only", "api_mode": "chat_completions"}
         config_yaml = yaml.dump(local_config, default_flow_style=False)
-'''.replace("MAX_TURNS", str(max_turns)).replace('CONTEXT_LENGTH', str(generation.pop('_context', 16384))).replace('GENERATION', repr(generation)).encode()
+'''.replace("MAX_TURNS", str(max_turns)).replace('SYSTEM_PROMPT', repr(system_prompt)).replace('CONTEXT_LENGTH', str(generation.pop('_context', 16384))).replace('GENERATION', repr(generation)).encode()
     if corrected.count(before) != 1:
         raise ValueError("local_native_config_anchor")
     return corrected.replace(before, block)
@@ -229,14 +230,14 @@ BOUNDARIES
             generation = copy_generation = dict(configuration['candidate']['generation']) if configuration else None
             if copy_generation is not None:
                 copy_generation['_context'] = configuration['serving']['context']
-            effective = local_hermes_source(original, arguments.turns, generation)
+            effective = local_hermes_source(original, arguments.turns, generation, configuration["candidate"].get("system_prompt", "") if configuration else "")
             adapter.write_bytes(effective)
             receipt["native_adapter_sha256"] = hashlib.sha256(effective).hexdigest()
             os.environ["OPENAI_API_KEY"] = "local-only"
             os.environ["OPENAI_BASE_URL"] = "http://172.17.0.1:18080/v1"
             agent = {"name": "hermes", "model_name": "custom/" + arguments.model,
                      "override_timeout_sec": arguments.wall, "override_setup_timeout_sec": 1200,
-                     "kwargs": {"version": "v0.21.4+canary.20261004T084456Z", "toolsets": "file,terminal,skills"}}
+                     "kwargs": {"version": "v0.21.4+canary.20261004T084456Z", "toolsets": configuration["candidate"].get("toolsets", "file,terminal,skills") if configuration else "file,terminal,skills"}}
         config = TrialConfig.model_validate({"task": {"path": str(task)}, "trial_name": arguments.attempt,
                                            "trials_dir": str(output / "trials"), "agent": agent,
                                            "environment": {"type": "docker"}})
