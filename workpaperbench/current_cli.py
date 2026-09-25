@@ -43,8 +43,19 @@ def main():
         return
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command',required=True)
-    sub.add_parser('demo')
-    checking = sub.add_parser('validate')
+    sub.add_parser('demo',help='Show a reference and preserved historical submissions')
+    for name,description in (
+        ('preflight','Check the local execution host and guest'),
+        ('serve','Start one pinned local model'),
+        ('run','Run selected development tasks with fresh candidate state'),
+        ('grade','Verify a bounded engineer workpaper without inference'),
+        ('replay','Freshly verify retained artifacts without inference'),
+        ('report','Write an immutable versioned result report'),
+        ('controls','Test the actual local isolation and SQL limits'),
+        ('legacy','Use the frozen historical interface'),
+    ):
+        sub.add_parser(name,help=description)
+    checking = sub.add_parser('validate',help='Check output structure without executing SQL')
     checking.add_argument('path',type=Path)
     args = parser.parse_args(arguments)
     if args.command == 'demo':
