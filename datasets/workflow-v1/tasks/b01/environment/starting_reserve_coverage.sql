@@ -1,0 +1,1 @@
+SELECT r.report_date,SUM(a.cash_equivalents_usd+a.us_government_debt_usd) reserves_usd,r.issued_sbc,100.0*SUM(a.cash_equivalents_usd+a.us_government_debt_usd)/r.issued_sbc coverage_pct,SUM(a.cash_equivalents_usd+a.us_government_debt_usd)-r.reported_reserve_fv_usd residual_usd FROM reserve_reports r CROSS JOIN reserve_reports a GROUP BY r.report_date
