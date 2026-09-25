@@ -14,7 +14,25 @@ sys.path.insert(0,str(ROOT))
 from workpaperbench.catalog import content_hash, load, tree_hash
 from build_workflow_tasks import write_json
 from workflow_development_cases import specifications, controls
-from workflow_evaluation_cases import specifications as evaluation_specifications, controls as evaluation_controls
+from workflow_evaluation_cases import specifications as original_evaluation, controls as original_controls
+from workflow_payment_cases import specifications as payment_cases, controls as payment_controls
+from workflow_capital_cases import specifications as capital_cases, controls as capital_controls
+from workflow_marketplace_cases import specifications as marketplace_cases, controls as marketplace_controls
+from workflow_attribution_cases import specifications as attribution_cases, controls as attribution_controls
+
+
+def evaluation_specifications():
+    return dict(original_evaluation(), **payment_cases(), **capital_cases(), **marketplace_cases(), **attribution_cases())
+
+
+def evaluation_controls(key,data):
+    for cases,check in ((original_evaluation,original_controls),(payment_cases,payment_controls),
+                        (capital_cases,capital_controls),(marketplace_cases,marketplace_controls),
+                        (attribution_cases,attribution_controls)):
+        if key in cases():
+            yield from check(key,data)
+            return
+    raise ValueError('unknown_evaluation_case')
 
 DATASET = 'workflow-v2'
 OBSERVATIONS = ROOT / 'datasets/workflow-v2/observations'
@@ -86,7 +104,7 @@ def package(destination,key,spec):
     split=spec.get('split','development')
     write_json(task/'authoring.json',{'rationale':spec['rationale'],'source_group':source_group,'split':split,
         'exposure':'Reference/control verification only, no candidate-model exposure' if split=='evaluation' else 'Newly authored development case, never held out','observations':'authentic primary disclosures',
-        'starting_defects':'authored synthetic work-product defects','controls':'authored synthetic counterfactuals',
+        'starting_defects':spec.get('starting_defects','authored synthetic work-product defects'),'controls':'authored synthetic counterfactuals',
         'reference_method':'Independent Python Decimal calculations from source facts, separate from submitted SQL','human_review':'pending',
         'source_snapshot_sha256':hashlib.sha256((source/'snapshot.json').read_bytes()).hexdigest(),
         'candidate_view_review':'Source headings, signs, periods and relevant definitions directly inspected before model exposure'})
@@ -119,7 +137,7 @@ def construct(destination):
         group=package(destination,key,spec)
         manifest['tasks'][key]={'task_id':DATASET+'-'+key,'path':'datasets/'+DATASET+'/tasks/'+key,
                                'task_sha256':tree_hash(destination/'tasks'/key),'split':spec.get('split','development'),'source_group':group}
-    names=['scripts/build_workflow_suite.py','scripts/workflow_development_cases.py','scripts/workflow_evaluation_cases.py',*original['hashes']]
+    names=['scripts/build_workflow_suite.py','scripts/workflow_development_cases.py','scripts/workflow_evaluation_cases.py',*('scripts/workflow_'+name+'_cases.py' for name in ('payment','capital','marketplace','attribution')),*original['hashes']]
     for name in names:manifest['hashes'][name]=hashlib.sha256((ROOT/name).read_bytes()).hexdigest()
     for name in sorted({spec['source'] for spec in current.values()}):
         for source in (OBSERVATIONS/name).rglob('*'):

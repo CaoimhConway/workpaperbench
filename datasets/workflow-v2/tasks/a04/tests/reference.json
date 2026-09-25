@@ -1,0 +1,53 @@
+{
+  "task_id": "workflow-v2-a04",
+  "tables": [
+    {
+      "id": "cash_generation",
+      "file": "cash_generation.sql",
+      "evidence": [
+        "a04:s01",
+        "a04:s02"
+      ]
+    },
+    {
+      "id": "cash_movement",
+      "file": "cash_movement.sql",
+      "evidence": [
+        "a04:s01",
+        "a04:s03"
+      ]
+    },
+    {
+      "id": "noncash_capital",
+      "file": "noncash_capital.sql",
+      "evidence": [
+        "a04:s01"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "annual_fcf_increased",
+      "verdict": "contradicted",
+      "evidence": [
+        "a04:s01",
+        "a04:s02"
+      ]
+    },
+    {
+      "id": "unpaid_property_is_cash_outflow",
+      "verdict": "contradicted",
+      "evidence": [
+        "a04:s01"
+      ]
+    },
+    {
+      "id": "exact_ai_cash_spending_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "a04:s01",
+        "a04:s02"
+      ]
+    }
+  ]
+}

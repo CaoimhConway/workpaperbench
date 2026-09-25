@@ -1,0 +1,138 @@
+{
+  "tables": {
+    "income_model": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "weeks": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "net_sales_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "membership_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "merchandise_gross_profit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "merchandise_gross_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "weeks"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "operating_growth_bridge": {
+      "columns": {
+        "weeks": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_operating_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "weeks",
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "membership_accrual_bridge": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "earned_fees_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "opening_deferred_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "closing_deferred_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "deferred_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "mechanical_accrual_bridge_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "quarter_is_one_fourth_of_year": "The supplied Q4 periods each contain one quarter of the full-year number of weeks.",
+    "membership_growth_contributes_to_operating_growth": "Higher FY2025 earned membership fees contribute positively to the operating-income increase.",
+    "exact_fee_cash_receipts_identified": "Earned fees plus the deferred balance change uniquely identifies exact cash membership collections."
+  },
+  "definitions": {
+    "income_model": "Output 16, 36 and 52 weeks for both years. Merchandise margin excludes earned membership fees from its numerator and uses net sales as denominator.",
+    "operating_growth_bridge": "Changes are FY2025 less FY2024 for each matched duration. SG&A is a signed negative contribution. Denominator is that duration operating-income change.",
+    "membership_accrual_bridge": "The mechanical bridge is FY2025 earned fees plus closing less opening deferred fees. It is not labeled observed collections."
+  }
+}

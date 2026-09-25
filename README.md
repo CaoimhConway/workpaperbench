@@ -31,7 +31,7 @@ supplied disclosure cannot identify.
 | Corrected published regression catalog | Twelve authored references pass fresh local native verification |
 | Historical challenge financial correctness | Inexpensive profile 17/27, reference profile 25/27 |
 | Historical corrected strict completion | 8/27 and 18/27 under challenge-1.1.3 |
-| New workflow software/data | Six development and three evaluation cases pass 54 native quality controls |
+| New workflow software/data | Six development and fifteen evaluation cases pass 126 native quality submissions |
 | Local development calibration | Setup smoke in progress, no scored prototype attempts yet |
 | Held-out workflow evaluation | Not run, 24-case build target not yet complete |
 | Frontier discrimination | Unmeasured on the workflow tier |
