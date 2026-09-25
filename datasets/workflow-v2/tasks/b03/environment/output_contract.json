@@ -1,0 +1,108 @@
+{
+  "tables": {
+    "annual_revenue_bridge": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_total_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "spot_revenue_proxy": {
+      "columns": {
+        "segment": {
+          "type": "text",
+          "unit": "label"
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "spot_volume_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "apparent_revenue_to_spot_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "segment"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "usdc_booked_ratio": {
+      "columns": {
+        "scope": {
+          "type": "text",
+          "unit": "label"
+        },
+        "average_usdc_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "quarter_booked_ratio_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "annualized_booked_ratio_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "scope"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "stablecoin_majority_growth": "Stablecoin revenue contributed more than half the FY2024-to-FY2025 increase in total revenue.",
+    "institutional_spot_commission_identified": "The supplied revenue and spot-volume disclosures identify the institutional spot commission rate.",
+    "custodial_missing_means_zero": "No separate custodial fee line in FY2025 means custodial revenue was zero."
+  },
+  "definitions": {
+    "annual_revenue_bridge": "Use eight mutually exclusive components. Contribution is the component change divided by reported total revenue change, with small source-rounding residuals allowed in interpretation.",
+    "spot_revenue_proxy": "Revenue is USD million, spot volume USD billion. Ratios are percent and are explicitly proxies, with no assertion of identical numerator and denominator scope.",
+    "usdc_booked_ratio": "Use the rounded Q4 USDC table amounts as supplied. Quarterly ratio is revenue/average balance, annualized ratio is four times that ratio, not an effective compounded yield or payments volume."
+  }
+}

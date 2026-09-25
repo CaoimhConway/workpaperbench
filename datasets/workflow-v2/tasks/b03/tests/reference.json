@@ -1,0 +1,50 @@
+{
+  "task_id": "workflow-v2-b03",
+  "tables": [
+    {
+      "id": "annual_revenue_bridge",
+      "file": "annual_revenue_bridge.sql",
+      "evidence": [
+        "b03:s01"
+      ]
+    },
+    {
+      "id": "spot_revenue_proxy",
+      "file": "spot_revenue_proxy.sql",
+      "evidence": [
+        "b03:s01",
+        "b03:s02"
+      ]
+    },
+    {
+      "id": "usdc_booked_ratio",
+      "file": "usdc_booked_ratio.sql",
+      "evidence": [
+        "b03:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "stablecoin_majority_growth",
+      "verdict": "supported",
+      "evidence": [
+        "b03:s01"
+      ]
+    },
+    {
+      "id": "institutional_spot_commission_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "b03:s02"
+      ]
+    },
+    {
+      "id": "custodial_missing_means_zero",
+      "verdict": "contradicted",
+      "evidence": [
+        "b03:s01"
+      ]
+    }
+  ]
+}

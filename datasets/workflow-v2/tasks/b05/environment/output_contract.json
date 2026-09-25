@@ -1,0 +1,148 @@
+{
+  "tables": {
+    "quarter_activity": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "active_accounts_million": {
+          "type": "real",
+          "unit": "million_accounts",
+          "tolerance": 1e-06
+        },
+        "transactions_million": {
+          "type": "real",
+          "unit": "million_transactions",
+          "tolerance": 1e-06
+        },
+        "quarter_transactions_per_active_account": {
+          "type": "real",
+          "unit": "transactions_per_account",
+          "tolerance": 1e-06
+        },
+        "reported_ttm_activity": {
+          "type": "real",
+          "unit": "transactions_per_account",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "margin_reconciliation": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "transaction_margin_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "tm_ex_interest_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "tm_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "tm_ex_interest_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "tm_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "ex_interest_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "annual_activity_bridge": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "transactions_million": {
+          "type": "real",
+          "unit": "million_transactions",
+          "tolerance": 1e-06
+        },
+        "recomputed_ttm_activity": {
+          "type": "real",
+          "unit": "transactions_per_account",
+          "tolerance": 1e-06
+        },
+        "rounded_activity_residual": {
+          "type": "real",
+          "unit": "transactions_per_account",
+          "tolerance": 1e-06
+        },
+        "transaction_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "ovas_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "net_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "revenue_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "tpv_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "transaction_revenue_to_tpv_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "quarter_ratio_equals_ttm": "Dividing Q4FY2025 transactions by December active accounts reproduces the issuer trailing-twelve-month activity measure.",
+    "unique_people_identifiable": "The supplied account counts identify the exact number of distinct people using PayPal.",
+    "annual_ex_interest_margin_dollars_increased": "Annual transaction margin dollars excluding customer interest increased from FY2024 to FY2025."
+  },
+  "definitions": {
+    "quarter_activity": "Quarter flows are divided by active accounts at period end. Keep the reported trailing-year ratio alongside the distinct quarterly calculation.",
+    "margin_reconciliation": "Margin dollars equal net revenue less transaction expense and transaction/credit losses. Ex-interest subtracts customer-balance interest. Percent margins use net revenue.",
+    "annual_activity_bridge": "FY2025 sums only its four quarters and uses Q4 end accounts for trailing-year activity. Activity residual is recomputed less reported rounded ratio. Revenue residual is transaction plus OVAS less net revenue."
+  }
+}

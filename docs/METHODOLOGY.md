@@ -1,6 +1,71 @@
 # Methodology and correction policy
 
-## Active real-v1 study
+## Local workflow phase
+
+The October 2026 workflow assignment supersedes the earlier study sizes and
+hosted execution policy for new work. Historical releases retain their inputs,
+scores and corrections. `challenge-v2` is the reusable corrected regression
+catalog. `workflow-v1` begins with three development prototypes over previously
+published source groups. They are not newly held-out cases. Expansion requires
+reference/control, source and contract review before a separately frozen six-case
+development and 24-case evaluation split. No candidate model receives evaluation
+cases during this local phase. Human validation and external use remain pending.
+
+Workflow artifacts contain named read-only SQL tables and bounded claim verdicts.
+Declared column types, units, unique keys and tolerances are public. Row and column
+order are irrelevant. A different valid SQL implementation is accepted when its
+outputs and behavior match. Controls test selected invariants and changed
+observations, not universal program correctness. Financial outputs, adequate
+evidence, recomputation/preservation and delivery have separate diagnostics.
+Evidence-ID matching does not validate arbitrary prose. A guessed unavailable
+quantity fails substantive correctness. Structural rejection prevents SQL execution.
+
+Reference values are calculated directly with Decimal and date arithmetic from
+source observations, separately from the tested SQL. Original captures, normalized
+source tables, authored work-product defects, synthetic controls, references and
+actual model submissions have distinct provenance. Historical retrieval is not
+proof of point-in-time availability. Publication, signature, economic observation
+and retrieval dates remain distinct.
+
+[SWE-bench's harness](https://www.swebench.com/SWE-bench/api/harness/) motivates
+testing the requested change and preserved behavior. The current
+[SWE-bench Pro V2 protocol](https://github.com/scaleapi/SWE-bench_Pro-os/blob/main/v2/README.md)
+also requires fresh verification and probes of the actual sandbox, and describes
+removing ambiguous tasks and tracing hidden assertions to public requirements.
+Its repository has an [MIT license](https://github.com/scaleapi/SWE-bench_Pro-os/blob/main/LICENSE).
+No issues, patches, questions or rankings are reused here.
+
+The current [Vals Finance Agent repository](https://github.com/vals-ai/finance-agent-v2)
+combines tool-mediated company and filing research with per-question logs. Its
+code has an [MIT license](https://github.com/vals-ai/finance-agent-v2/blob/main/LICENSE),
+while its evaluation platform is gated and several tool services require keys.
+Those services and datasets are not dependencies here. These related works inform
+artifact evaluation, source traceability and diagnostics. Their reported scores
+have not been independently reproduced by this project.
+
+All new inference is local to the Mac Pro. A local quantization/configuration is
+a separate empirical identity from historical hosted routes. Setup smokes are
+not benchmark scores. Local failures cannot establish frontier difficulty.
+The local phase spends USD 0 on external services and launches no Actions jobs.
+
+## Future opt-in comparison
+
+A future hosted comparison requires explicit authorization for inference and a
+new external-service budget. Select at least two leading tool-capable models at
+that time, recording exact provider identifiers, dated prices, reasoning settings,
+context limits and runtime pins before any scored call. Use matched dossiers,
+permitted tools and declared turn/token/wall limits, and retain every scheduled
+attempt, failure and cost delta. Repeat within a frozen configuration only to
+answer a declared consistency question, reporting coverage and infrastructure
+separately from research outcomes. The initial 24 workflow evaluation cases are
+not enough for fine-grained rankings. Review and freeze a sufficiently large
+independent source-group sample for the intended comparison, with uncertainty
+reported by case and source group. Public builder access limits contamination
+claims. No hosted probe, model selection call or prepaid-credit use is authorized
+in the current local phase. Historical paid-launch code remains closed under its
+original freezes and is not a route around this opt-in requirement.
+
+## Historical real-v1 study
 
 `datasets/real-v1/manifest.json` defines a new experiment identity, source/task hashes, reference answers, scorer/runtime, routing, treatment, schedule and cumulative budgets. All manifest fields are canonically hashed, excluding only the two identity/hash fields. Changing inputs and rehashing them cannot preserve the old identity. The original `config/freeze.json`, correction registry, candidate packages and results remain historical.
 

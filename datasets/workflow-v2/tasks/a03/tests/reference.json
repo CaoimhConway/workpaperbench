@@ -1,0 +1,51 @@
+{
+  "task_id": "workflow-v2-a03",
+  "tables": [
+    {
+      "id": "expense_model",
+      "file": "expense_model.sql",
+      "evidence": [
+        "a03:s01"
+      ]
+    },
+    {
+      "id": "operating_margins",
+      "file": "operating_margins.sql",
+      "evidence": [
+        "a03:s02",
+        "a03:s03"
+      ]
+    },
+    {
+      "id": "definition_attribution",
+      "file": "definition_attribution.sql",
+      "evidence": [
+        "a03:s01"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "new_definition_lower",
+      "verdict": "supported",
+      "evidence": [
+        "a03:s01"
+      ]
+    },
+    {
+      "id": "ebitda_margin_uses_revenue",
+      "verdict": "contradicted",
+      "evidence": [
+        "a03:s03"
+      ]
+    },
+    {
+      "id": "constant_balance_rate_effect_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "a03:s02",
+        "a03:s03"
+      ]
+    }
+  ]
+}
