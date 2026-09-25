@@ -50,6 +50,18 @@ The local phase spends USD 0 on external services and launches no Actions jobs.
 
 ## Future opt-in comparison
 
+The disabled [comparison configuration](../config/future-comparison.json) records
+the current documented `gpt-6-astra` and `claude-fable-5-1` identifiers, provider
+reasoning settings, matched resource proposals and token-cost accounting fields.
+They are candidates for a future authorized study, not observed performance
+rankings. The identifiers and USD 10 input / USD 50 output per million reference
+prices were checked on 9 October 2026 against the
+[Astra model page](https://developers.openai.com/api/docs/models/gpt-6-astra) and
+[Claude model overview](https://platform.claude.com/docs/en/models/overview).
+The illustrative 120,000 input plus 20,000 output tokens costs USD 2.20 before
+other billable items. It is arithmetic, not an actual invoice or spending grant.
+The current local launcher does not implement or accept a hosted route.
+
 A future hosted comparison requires explicit authorization for inference and a
 new external-service budget. Select at least two leading tool-capable models at
 that time, recording exact provider identifiers, dated prices, reasoning settings,

@@ -1,0 +1,51 @@
+{
+  "protocol_version": "future-workflow-comparison-1",
+  "status": "Disabled, requires a separate explicit authorization and frozen study",
+  "execution_authorized": false,
+  "new_external_service_budget_usd": 0,
+  "documentation_checked": "2026-10-09",
+  "models": [
+    {
+      "provider": "openai",
+      "model_id": "gpt-6-astra",
+      "identity_note": "Exact currently documented ID, no separate dated snapshot listed on the model page",
+      "reasoning": {"effort": "high"},
+      "reference_price_usd_per_million": {"uncached_input": 10, "output": 50},
+      "documentation": "https://developers.openai.com/api/docs/models/gpt-6-astra"
+    },
+    {
+      "provider": "anthropic",
+      "model_id": "claude-fable-5-1",
+      "identity_note": "Exact currently documented Claude API ID, recheck versioning before study freeze",
+      "reasoning": {"type": "adaptive", "effort": "high"},
+      "reference_price_usd_per_million": {"uncached_input": 10, "output": 50},
+      "documentation": "https://platform.claude.com/docs/en/models/overview"
+    }
+  ],
+  "matched_resource_proposal": {
+    "context_tokens": 65536,
+    "max_output_tokens_per_call_including_reasoning": 8192,
+    "max_turns": 18,
+    "wall_seconds": 2700,
+    "concurrent_trials": 1,
+    "tools": "Same declared file and terminal tools over frozen dossiers in isolated candidate environments",
+    "temperature": null,
+    "temperature_note": "Use a mutually supported configuration and record effective provider behavior, no invented equivalence"
+  },
+  "costing_hooks": {
+    "estimate_formula": "uncached_input_tokens / 1000000 * input_rate + output_tokens / 1000000 * output_rate",
+    "input_includes": "All repeated system, dossier, tool and history tokens in each request",
+    "output_includes": "All billed visible and reasoning tokens",
+    "record_separately": ["cache reads and writes", "tool fees", "failed calls", "retries", "provider-reconciled cumulative spending"],
+    "example_only": {"uncached_input_tokens": 120000, "output_tokens": 20000, "estimated_usd_per_attempt": 2.2},
+    "prices_are_not_a_budget": true
+  },
+  "required_before_execution": [
+    "Explicit opt-in for external inference and a new cumulative spending cap",
+    "Reverify model identifiers, account availability, prices and native harness compatibility without assuming access",
+    "Freeze a sufficiently large independent source-group sample for a declared comparison precision, beyond the initial 24 evaluation cases for fine-grained ranking claims",
+    "Freeze exact model, reasoning, resource, tool, task, scorer and runtime identities and every scheduled attempt",
+    "Validate actual candidate and verifier boundaries on the authorized execution host",
+    "Preserve every outcome and separate infrastructure, delivery, numerical, conclusion, evidence and preservation diagnostics"
+  ]
+}
