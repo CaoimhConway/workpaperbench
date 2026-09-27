@@ -32,7 +32,7 @@ supplied disclosure cannot identify.
 | Historical challenge financial correctness | Inexpensive profile 17/27, reference profile 25/27 |
 | Historical corrected strict completion | 8/27 and 18/27 under challenge-1.1.3 |
 | New workflow software/data | Six development and 24 evaluation cases pass 180 native quality submissions |
-| Local development calibration | Runnable setup selected, three scored prototype attempts declared |
+| Local development calibration | Two attempts retained, setup paused, one attempt unstarted |
 | Held-out workflow evaluation | Not run, 24 cases verified using references and controls |
 | Frontier discrimination | Unmeasured on the workflow tier |
 | Human review and external use | Pending |
@@ -46,7 +46,10 @@ that leading hosted systems would fail.
 The current setup is local-only on an Intel Mac Pro. The measured default
 uses Qwen3-4B-Instruct-2507 **Q4_K_M**, about four billion parameters, through
 llama.cpp b11516 on CPU with a real 65,536-token native window. Its setup smoke
-wrote a valid artifact but failed the financial checks. Native Harbor/Hermes execution runs in a dedicated Ubuntu
+wrote a valid regression artifact but failed the financial checks. Workflow
+calibration then encountered a timeout and incomplete SQL delivery. That
+configuration is paused while a separately labeled local setup is tested.
+Native Harbor/Hermes execution runs in a dedicated Ubuntu
 24.04 guest without host mounts or owner credentials. This is a distinct
 configuration from earlier hosted routes. New external-service spending is USD
 0 and no Actions job is launched during this phase.
