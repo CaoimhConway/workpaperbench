@@ -53,6 +53,10 @@ def request(port, route, timeout=10):
         return json.load(response)
 
 
+def server_observations(path, start=0):
+    return [parse_json(line) for line in read_bounded(path, 1000000).splitlines()[start:]]
+
+
 def preflight():
     if platform.system() != 'Darwin' or platform.machine() != 'x86_64':
         raise ValueError('this_profile_requires_the_intel_mac')
@@ -341,7 +345,7 @@ def execute(args):
                 if spec:
                     command += ['--model', spec['model']['id'], '--configuration', BUILDER + '/.local/current-profile.json',
                                 '--wall', str(spec['candidate']['wall_seconds']), '--turns', str(spec['candidate']['turns'])]
-                before = request(spec['serving']['port'], '/slots')[0].get('id_task', -1) if spec else None
+                before = len(server_observations(Path(active['settings_log']))) if spec else None
                 try:
                     guest('/home/wpb/runtime/bin/python', *command, stdout=subprocess.DEVNULL)
                 finally:
@@ -349,8 +353,7 @@ def execute(args):
                     (ROOT / '.raw/local-trials' / attempt / 'launcher-observation.json').write_text(
                         json.dumps({'attempt_id':attempt,'launcher_sha256':launcher_hash}, indent=2) + '\n')
                     if spec:
-                        observations = [parse_json(line) for line in read_bounded(Path(active['settings_log']), 1000000).splitlines()]
-                        observations = [item for item in observations if item['id_task'] > before]
+                        observations = server_observations(Path(active['settings_log']), before)
                         for item in observations:
                             for setting, expected in spec['candidate']['generation'].items():
                                 if abs(item['params'][setting] - expected) > 0.000001:

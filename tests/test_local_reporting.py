@@ -60,3 +60,16 @@ def test_report_rejects_rebound_attempt_identity(tmp_path, monkeypatch):
     monkeypatch.setattr(LOCAL, 'ROOT', tmp_path)
     with pytest.raises(ValueError, match='attempt_identity_changed'):
         LOCAL.report(['attempt-1'], tmp_path / 'report.json')
+
+
+def test_separate_attempts_exclude_prior_idle_server_observations(tmp_path):
+    path = tmp_path / 'settings.jsonl'
+    first = {'id_task': 98, 'params': {'seed': 17}}
+    second = {'id_task': 283, 'params': {'seed': 17}}
+    path.write_text(json.dumps(first) + '\n')
+    start = len(LOCAL.server_observations(path))
+    # The actual server's idle slot omits id_task, so its value cannot mark a trial.
+    with path.open('a') as output:
+        output.write(json.dumps(second) + '\n')
+    assert LOCAL.server_observations(path, start) == [second]
+    assert LOCAL.server_observations(path) == [first, second]

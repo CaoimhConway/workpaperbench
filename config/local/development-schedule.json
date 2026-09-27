@@ -1,6 +1,6 @@
 {
-  "schedule_id": "local-workflow-development-1",
-  "declared_at": "2026-10-09T12:58:36.034060+00:00",
+  "schedule_id": "local-workflow-development-2",
+  "declared_at": "2026-10-09T13:19:34.119954+00:00",
   "status": "Declared before candidate workflow calls",
   "manifest_id": "workflow-v1-canonical-522179bf57eb",
   "scorer_version": "workflow-1.0.0",
@@ -66,7 +66,7 @@
   },
   "native_adapter_sha256": "3e1a0011fc41e2e8f9a89ebd365202e9139c280b4eb0098eb720a5d23c60bd44",
   "execution_files_sha256": {
-    "scripts/local_bench.py": "b30a32f04e9cd5a654073d806971005ab436e2dc4c72cd6fa2d2dba03b823766",
+    "scripts/local_bench.py": "a3bcb07fa9707e86324eea4c7c8f0be9d0410947556bd1482c8e5ac1cb718f7e",
     "scripts/local_trial.py": "7277c83992cecddb61da726ce59fd51e7824a6d9413f8d0a6a3abb2f94eac64e",
     "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
     "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
@@ -100,5 +100,7 @@
   "expert_selected_evidence_diagnostics_used": 0,
   "held_out_candidate_model_calls": 0,
   "repeat_policy": "No score-based retry. Additional scored repeats require a concrete consistency question and a separately declared schedule.",
-  "external_service_spend_usd": 0
+  "external_service_spend_usd": 0,
+  "supersedes": "local-workflow-development-1, no attempts started",
+  "reason": "Actual idle server metadata omits id_task. Per-attempt accounting now selects observations appended during that trial instead of using an absent active request ID."
 }
