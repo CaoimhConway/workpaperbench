@@ -1,55 +1,52 @@
 # Blinded workflow source review
 
 Status: prepared, human review pending. No reviewer has been contacted.
-These three development dossiers use previously published source groups.
-No model names, submissions, scores or reference SQL are included in this pack.
+This pack contains requests, public contracts and primary-source locators.
+It contains no reference SQL, model names, submissions or scores.
 
-For each case, independently check the question against the source, identify
-the defensible outcomes and any ambiguity, and assess whether the declared
-columns and controls reward valid alternative methods. Record the review date
-and relevant financial experience only if a review actually takes place.
+For each case, independently determine defensible financial outcomes, identify
+ambiguities, and assess whether the requested columns, evidence requirements and
+controls allow valid alternatives. Record a review date and relevant financial
+experience only after an actual review.
 
-## Case A - comparable quarterly model
+## Case A - stablecoin reserve audit
 
-[Candidate request](../../datasets/workflow-v1/tasks/a01/instruction.md),
-[source dossier](../../datasets/workflow-v1/tasks/a01/environment/sources.md),
-[output contract](../../datasets/workflow-v1/tasks/a01/environment/output_contract.json).
+[Candidate request](../../datasets/workflow-v2/tasks/b02/instruction.md),
+[source dossier](../../datasets/workflow-v2/tasks/b02/environment/sources.md),
+[output contract](../../datasets/workflow-v2/tasks/b02/environment/output_contract.json).
 
-Primary source: [Microsoft FY2025 Q2 release](https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q2/press-release-webcast).
+Use the two Paxos PYUSD reserve reports linked in the dossier, including their
+management statements, accountant dates, comparative columns and Treasury
+valuation tables. Check economic dates separately from signatures and retrieval.
+How should conflicting year labels be treated without silently correcting the
+capture? Are par, cost and fair value kept separate? Does the stock bridge support
+an observed payment-flow conclusion? Assess duplicate-export versus distinct
+equal-amount observations and alternative valid joins.
 
-Check the three-month/six-month reconstruction, the fiscal-year convention and
-the preserved comparable prior-year amounts. Is the earlier Azure guidance on
-the same currency basis as the actual? Does the evidence permit attributing
-Intelligent Cloud operating income specifically to Azure? Are the segment recast
-footnotes sufficient to avoid implying an unchanged historical segment perimeter?
+## Case B - revised annual financials
 
-## Case B - stablecoin reserve-metric audit
+[Candidate request](../../datasets/workflow-v2/tasks/c07/instruction.md),
+[source dossier](../../datasets/workflow-v2/tasks/c07/environment/sources.md),
+[output contract](../../datasets/workflow-v2/tasks/c07/environment/output_contract.json).
 
-[Candidate request](../../datasets/workflow-v1/tasks/b01/instruction.md),
-[source dossier](../../datasets/workflow-v1/tasks/b01/environment/sources.md),
-[output contract](../../datasets/workflow-v1/tasks/b01/environment/output_contract.json).
+Use the Cisco earnings release and annual report linked in the dossier. Check the
+report's explicit supersession statement, the settlement recognition and tax
+benefit, and the different cash-flow adjustments. Is a signature date being
+mistaken for publication? Are the revised expense, earnings and operating-cash
+relationships consistent? Does the acquisition ownership period permit an exact
+organic growth claim? Identify equivalent evidence support and any requirement
+that lacks an observable basis.
 
-Primary sources: [May SBC report](https://brale.xyz/assets/reports/SBC-Stable-Coin-Reserve-Attestation-Report-05-2025.pdf)
-and [June SBC report](https://brale.xyz/assets/reports/SBC-Stable-Coin-Reserve-Attestation-Report-06-2025.pdf).
+## Case C - bank presentation and significant items
 
-Check which date identifies the reserve stock, which date is the signature, and
-which starting SQL calculation is already valid. Are the coverage denominator
-and asset valuation scope justified? Does a change in issued supply identify
-payments volume? Do identical exports and equal-valued different observations
-have the correct distinct treatment? Assess the difference in examiner scope
-without treating missing first-publication times as known.
+[Candidate request](../../datasets/workflow-v2/tasks/c09/instruction.md),
+[source dossier](../../datasets/workflow-v2/tasks/c09/environment/sources.md),
+[output contract](../../datasets/workflow-v2/tasks/c09/environment/output_contract.json).
 
-## Case C - growth and gross-profit attribution
-
-[Candidate request](../../datasets/workflow-v1/tasks/c01/instruction.md),
-[source dossier](../../datasets/workflow-v1/tasks/c01/environment/sources.md),
-[output contract](../../datasets/workflow-v1/tasks/c01/environment/output_contract.json).
-
-Primary source: [Block FY2024 filing](https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm).
-
-Check consolidated contribution versus annual revenue-share change, the percent
-scale, and the treatment of acquired-technology amortization in the gross-profit
-bridge. Are Cash App percentages clearly separated from consolidated amounts?
-Do the related revenue/cost disclosures identify a separate Bitcoin price effect,
-or only a combined observed change? Assess whether a nonzero component residual
-should be quantified rather than forced to zero.
+Use the JPMorgan Chase Q4/FY2025 presentation linked in the dossier, especially
+the managed-basis definition, legal-expense adjustment and significant-item
+notes. Determine which amounts are rounded slide observations, mechanical
+reconstructions or implied after-tax quantities. Do quarter and annual exclusions
+have the same scope? Does taxable-equivalent presentation change net income?
+Check that residuals are retained rather than represented as exact unpublished
+financials, and assess whether the unresolved pricing question is justified.

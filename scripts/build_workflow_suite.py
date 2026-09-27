@@ -19,16 +19,20 @@ from workflow_payment_cases import specifications as payment_cases, controls as 
 from workflow_capital_cases import specifications as capital_cases, controls as capital_controls
 from workflow_marketplace_cases import specifications as marketplace_cases, controls as marketplace_controls
 from workflow_attribution_cases import specifications as attribution_cases, controls as attribution_controls
+from workflow_remaining_model_cases import specifications as remaining_model_cases, controls as remaining_model_controls
+from workflow_final_metric_cases import specifications as final_metric_cases, controls as final_metric_controls
+from workflow_final_reconciliation_cases import specifications as final_reconciliation_cases, controls as final_reconciliation_controls
 
 
 def evaluation_specifications():
-    return dict(original_evaluation(), **payment_cases(), **capital_cases(), **marketplace_cases(), **attribution_cases())
+    return dict(original_evaluation(), **payment_cases(), **capital_cases(), **marketplace_cases(), **attribution_cases(), **remaining_model_cases(), **final_metric_cases(), **final_reconciliation_cases())
 
 
 def evaluation_controls(key,data):
     for cases,check in ((original_evaluation,original_controls),(payment_cases,payment_controls),
                         (capital_cases,capital_controls),(marketplace_cases,marketplace_controls),
-                        (attribution_cases,attribution_controls)):
+                        (attribution_cases,attribution_controls),(remaining_model_cases,remaining_model_controls),
+                        (final_metric_cases,final_metric_controls),(final_reconciliation_cases,final_reconciliation_controls)):
         if key in cases():
             yield from check(key,data)
             return
@@ -114,7 +118,7 @@ def package(destination,key,spec):
 def construct(destination):
     original=load(ROOT,'workflow-v1')
     manifest={'dataset_id':DATASET,'scorer_version':'workflow-1.0.0','execution_profile':'local-lima',
-        'status':'Expansion in progress, reference/control validation pending, no evaluation model exposure',
+        'status':'Thirty authored cases, quality evidence reported separately, no evaluation model exposure',
         'prototype_catalog':original['manifest_id'],'tasks':{},'hashes':{}}
     for key,prior in original['tasks'].items():
         _,_,source=load(ROOT,'workflow-v1',key)
@@ -137,7 +141,7 @@ def construct(destination):
         group=package(destination,key,spec)
         manifest['tasks'][key]={'task_id':DATASET+'-'+key,'path':'datasets/'+DATASET+'/tasks/'+key,
                                'task_sha256':tree_hash(destination/'tasks'/key),'split':spec.get('split','development'),'source_group':group}
-    names=['scripts/build_workflow_suite.py','scripts/workflow_development_cases.py','scripts/workflow_evaluation_cases.py',*('scripts/workflow_'+name+'_cases.py' for name in ('payment','capital','marketplace','attribution')),*original['hashes']]
+    names=['scripts/build_workflow_suite.py','scripts/workflow_development_cases.py','scripts/workflow_evaluation_cases.py',*('scripts/workflow_'+name+'_cases.py' for name in ('payment','capital','marketplace','attribution','remaining_model','final_metric','final_reconciliation')),*original['hashes']]
     for name in names:manifest['hashes'][name]=hashlib.sha256((ROOT/name).read_bytes()).hexdigest()
     for name in sorted({spec['source'] for spec in current.values()}):
         for source in (OBSERVATIONS/name).rglob('*'):

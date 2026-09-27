@@ -6,10 +6,14 @@ The October 2026 workflow assignment supersedes the earlier study sizes and
 hosted execution policy for new work. Historical releases retain their inputs,
 scores and corrections. `challenge-v2` is the reusable corrected regression
 catalog. `workflow-v1` begins with three development prototypes over previously
-published source groups. They are not newly held-out cases. Expansion requires
-reference/control, source and contract review before a separately frozen six-case
-development and 24-case evaluation split. No candidate model receives evaluation
-cases during this local phase. Human validation and external use remain pending.
+published source groups. They are not newly held-out cases. The authored
+`workflow-v2` expansion contains six development and 24 evaluation cases, with
+two/eight per family and 24 distinct evaluation source groups. No group crosses
+the split. Eight new cases concern crypto, payments or stablecoin measurement,
+seven in evaluation. Common workpaper schemas and issuer/provider templates
+remain disclosed overlap. The [source review](../reports/local/workflow-source-review.json)
+records current quality status and capture bindings. No candidate model receives
+evaluation cases during this local phase. Human validation and external use remain pending.
 
 Workflow artifacts contain named read-only SQL tables and bounded claim verdicts.
 Declared column types, units, unique keys and tolerances are public. Row and column
@@ -19,6 +23,10 @@ observations, not universal program correctness. Financial outputs, adequate
 evidence, recomputation/preservation and delivery have separate diagnostics.
 Evidence-ID matching does not validate arbitrary prose. A guessed unavailable
 quantity fails substantive correctness. Structural rejection prevents SQL execution.
+The [constant claim policies](../reports/local/workflow-claim-baselines.json)
+match only 27 to 33 of 90 reference verdicts. This analytical claim-only check
+does not execute SQL or establish completed workflows. Prototype policies have
+separate native receipts, and naturally valid starting SQL remains a valid outcome.
 
 Reference values are calculated directly with Decimal and date arithmetic from
 source observations, separately from the tested SQL. Original captures, normalized

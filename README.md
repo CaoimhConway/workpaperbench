@@ -31,9 +31,9 @@ supplied disclosure cannot identify.
 | Corrected published regression catalog | Twelve authored references pass fresh local native verification |
 | Historical challenge financial correctness | Inexpensive profile 17/27, reference profile 25/27 |
 | Historical corrected strict completion | 8/27 and 18/27 under challenge-1.1.3 |
-| New workflow software/data | Six development and fifteen evaluation cases pass 126 native quality submissions |
-| Local development calibration | Setup smoke in progress, no scored prototype attempts yet |
-| Held-out workflow evaluation | Not run, 24-case build target not yet complete |
+| New workflow software/data | Six development and 24 evaluation cases pass 180 native quality submissions |
+| Local development calibration | Runnable setup selected, three scored prototype attempts declared |
+| Held-out workflow evaluation | Not run, 24 cases verified using references and controls |
 | Frontier discrimination | Unmeasured on the workflow tier |
 | Human review and external use | Pending |
 
@@ -88,10 +88,11 @@ current default demo is `./wpb` and labels authored
 references separately from actual submissions. The original console interface
 remains available for frozen historical reproduction.
 
-The workflow build target is six development and 24 held-out cases, balanced
+The workflow suite contains six development and 24 evaluation cases, balanced
 across updating models, diagnosing metrics, and source-backed attribution.
-Expansion follows the three-prototype quality gate, with at least 16 evaluation
-source-window groups and no development overlap. Previously published inputs are
+Expansion passed the three-prototype quality gate and contains 24 evaluation
+source-window groups with no development overlap. Eight new cases concern crypto,
+payments or stablecoin measurement, seven in evaluation. Previously published inputs are
 development/regression material. Authentic observations, source-derived tables,
 authored defects, synthetic controls and references have distinct provenance.
 Stocks are not flows, signatures are not publication timestamps, and retrieval

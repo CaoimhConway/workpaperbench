@@ -1,0 +1,143 @@
+{
+  "tables": {
+    "gross_profit_bases": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "window": {
+          "type": "text",
+          "unit": "label"
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "gaap_gross_profit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "gross_adjustment_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_gross_profit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "gaap_gross_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "adjusted_gross_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "window"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "current_h20_bridge": {
+      "columns": {
+        "window": {
+          "type": "text",
+          "unit": "label"
+        },
+        "signed_charge_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "excluded_gross_profit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "excluded_gross_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "window"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "cash_generation": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "window": {
+          "type": "text",
+          "unit": "label"
+        },
+        "operating_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "property_intangible_spending_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "property_intangible_principal_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fcf_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "window"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "release_raises_excluded_margin": "Removing the Q2 inventory release raises the H20-excluded gross margin above standard non-GAAP margin.",
+    "china_zero_means_global_zero": "No current Q2 China H20 sales means current Q2 worldwide H20 sales were zero.",
+    "exact_future_china_shipments": "The Q3 guidance assumption establishes exact subsequently realized China H20 shipments."
+  },
+  "definitions": {
+    "gross_profit_bases": "Six rows: Q1, Q2 and H1 in both fiscal years. Derive Q1 from H1 less Q2. Standard adjustments are signed additions. Preserve rounding residuals.",
+    "current_h20_bridge": "Three current-year rows only. Remove the signed H20 charge or release from the standard gross-profit basis. No prior-year H20 row is requested.",
+    "cash_generation": "Same six periods. Issuer FCF subtracts property/intangible purchases and disclosed property/intangible principal. Residual compares recomputed with reported FCF on the same cumulative-difference basis."
+  }
+}
