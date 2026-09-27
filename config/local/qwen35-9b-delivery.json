@@ -1,0 +1,58 @@
+{
+  "configuration_id": "qwen35-9b-q4km-cpu-64k-files-preview",
+  "execution_profile": "local-lima",
+  "model": {
+    "id": "qwen35-9b-q4_k_m",
+    "weights": ".local/models/Qwen3.5-9B-Q4_K_M.gguf",
+    "repository": "twoody/Qwen3.5-9B-GGUF",
+    "revision": "b647a5938c8cf40d1c3553ddd9bf2892895f0110",
+    "sha256": "8c4cc24f54473f3d4e080d4ec7fd2a40d0bbec0f94f3c807cd62694905357d54",
+    "quantization": "Q4_K_M",
+    "total_parameters_billions": 9.0,
+    "active_parameters_billions": 9.0,
+    "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "native_context": 262144,
+    "base_model_declared_by_quantizer": "Qwen/Qwen3.5-9B",
+    "base_revision_declared_by_quantizer": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "conversion": "Publisher declares llama.cpp b11146 BF16 conversion followed by Q4_K_M without importance matrix, not independently reproduced",
+    "architecture": "qwen35, dense gated DeltaNet and attention hybrid, text only"
+  },
+  "runtime": {
+    "binary": ".local/runtime/llama-b11516/llama-server",
+    "sha256": "cdf2d31e4b75714ebad37ffeb8f3d51e9a7be45daa6fd884a6a360abaee04091",
+    "version": "llama.cpp b11516 d4d82d67f",
+    "backend": "cpu",
+    "hardware": "MacPro7,1 Intel Xeon W-3245, Accelerate BLAS, no GPU offload"
+  },
+  "serving": {
+    "port": 18086,
+    "context": 65536,
+    "threads": 8,
+    "parallel": 1,
+    "reasoning": "off",
+    "flash_attention": "off",
+    "cache_type_k": "f16",
+    "cache_type_v": "f16",
+    "observe_slots": true,
+    "context_shift": false
+  },
+  "candidate": {
+    "wall_seconds": 1800,
+    "turns": 12,
+    "generation": {
+      "max_tokens": 4096,
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "seed": 17,
+      "min_p": 0,
+      "presence_penalty": 1.5
+    },
+    "toolsets": "file,terminal",
+    "system_prompt": "Complete the filesystem task using the declared tools. Create and check every requested deliverable at its declared absolute path before ending. JSON in a chat reply does not create a file. Work independently within the task environment and do not ask the user to create the deliverable."
+  },
+  "harbor_version": "0.23.0",
+  "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "status": "Unscored setup preview with native filesystem delivery guidance and file/terminal tools",
+  "external_service_spend_usd": 0
+}

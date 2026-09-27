@@ -1,0 +1,145 @@
+{
+  "validation_version": "local-hybrid-setup-1",
+  "weights": {
+    "repository": "twoody/Qwen3.5-9B-GGUF",
+    "revision": "b647a5938c8cf40d1c3553ddd9bf2892895f0110",
+    "weights": ".local/models/Qwen3.5-9B-Q4_K_M.gguf",
+    "sha256": "8c4cc24f54473f3d4e080d4ec7fd2a40d0bbec0f94f3c807cd62694905357d54",
+    "bytes": 5780090688,
+    "base_model_declared_by_quantizer": "Qwen/Qwen3.5-9B",
+    "base_revision_declared_by_quantizer": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "conversion": "Publisher declares llama.cpp b11146 BF16 conversion followed by Q4_K_M without importance matrix, not independently reproduced",
+    "license": "Apache-2.0",
+    "downloaded_at": "2026-10-09T15:13:05.570131+00:00",
+    "official_model_url": "https://huggingface.co/Qwen/Qwen3.5-9B/tree/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "quantization_url": "https://huggingface.co/twoody/Qwen3.5-9B-GGUF/tree/b647a5938c8cf40d1c3553ddd9bf2892895f0110",
+    "external_service_spend_usd": 0
+  },
+  "actual_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+  "tests": [
+    {
+      "test": "greedy-two-turn",
+      "receipt_sha256": "4863c8589d77fc39a72ac5b9e95830c404dd306724af401921b36607610ba875",
+      "model_calls": 2,
+      "wall_seconds": [
+        9.677582349999284,
+        4.08892223899602
+      ],
+      "tool_names": [
+        [
+          "read_file"
+        ],
+        [
+          "read_file"
+        ]
+      ],
+      "final_content_length": 0,
+      "outcome": "Repeated file read instead of a final scalar",
+      "request_settings": {
+        "max_tokens": 256,
+        "temperature": 0,
+        "seed": 17
+      }
+    },
+    {
+      "test": "sampled-two-turn",
+      "receipt_sha256": "1466fb454c15bd4eaaca52e10e425d865fa9c7a01982860511a5aacbb035cd54",
+      "model_calls": 2,
+      "wall_seconds": [
+        2.788828286000353,
+        4.1920901220000815
+      ],
+      "tool_names": [
+        [
+          "read_file"
+        ],
+        [
+          "read_file"
+        ]
+      ],
+      "final_content_length": 0,
+      "outcome": "Repeated file read instead of a final scalar",
+      "request_settings": {
+        "max_tokens": 512,
+        "temperature": 0.7,
+        "seed": 17,
+        "top_p": 0.8,
+        "top_k": 20,
+        "min_p": 0,
+        "presence_penalty": 1.5
+      }
+    },
+    {
+      "test": "cold-prompt",
+      "receipt_sha256": "c49908acdf29e43c9792c9b38ab04cf8713de0af1056617b3eacbb3182981b6b",
+      "model_calls": 1,
+      "wall_seconds": [
+        11.095503812997777
+      ],
+      "tool_names": [
+        [
+          "read_file"
+        ]
+      ],
+      "final_content_length": 0,
+      "outcome": "Repeated file read instead of a final scalar",
+      "request_settings": {
+        "max_tokens": 512,
+        "temperature": 0.7,
+        "seed": 17,
+        "top_p": 0.8,
+        "top_k": 20,
+        "min_p": 0,
+        "presence_penalty": 1.5,
+        "cache_prompt": false
+      }
+    },
+    {
+      "test": "thinking-tool-result",
+      "receipt_sha256": "1f845f23757836f318ddfc373c46fee9e4a0964a7269b3bb5b641b80e09b896c",
+      "model_calls": 1,
+      "wall_seconds": [
+        24.35622117800085
+      ],
+      "tool_names": [
+        []
+      ],
+      "final_content_length": 28,
+      "outcome": "Correct source-derived 1151 in Markdown JSON, no written artifact",
+      "request_settings": {
+        "max_tokens": 512,
+        "temperature": 0.6,
+        "seed": 17,
+        "top_p": 0.95,
+        "top_k": 20,
+        "min_p": 0,
+        "presence_penalty": 1.5,
+        "cache_prompt": false,
+        "chat_template_kwargs": {
+          "enable_thinking": true
+        }
+      }
+    }
+  ],
+  "rendered_tool_response_contains_exact_returned_facts": true,
+  "cold_prompt_did_not_resolve_repetition": true,
+  "thinking_override_observed_generation_prompt": "<|im_start|>assistant\n<think>\n\n",
+  "native_workflow_delivery": "pending",
+  "scored_development": false,
+  "selected_task_evidence_used": false,
+  "inference_location": "Verified MacPro7,1 CPU process, private loopback-only endpoint, actual weights and runtime hashes checked",
+  "limitations": [
+    "Authored two-observation setup example, not a benchmark task",
+    "Strict JSON response requirement was not satisfied",
+    "Inference-free historical replay was active, so wall times are not an uncontended comparison",
+    "No artifact reconstructed from chat"
+  ],
+  "external_service_spend_usd": 0,
+  "authored_input_observations": {
+    "unit": "USD million",
+    "six_month_revenue": 2225,
+    "three_month_revenue": 1074,
+    "period_end": "2024-06-30"
+  },
+  "requested_transformation": "Six-month revenue minus second-quarter revenue, return q1 JSON"
+}
