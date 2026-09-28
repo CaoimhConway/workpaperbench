@@ -1,0 +1,53 @@
+{
+  "task_id": "workflow-v3-a10",
+  "tables": [
+    {
+      "id": "income_model",
+      "file": "income_model.sql",
+      "evidence": [
+        "a10:s01"
+      ]
+    },
+    {
+      "id": "currency_and_network",
+      "file": "currency_and_network.sql",
+      "evidence": [
+        "a10:s02",
+        "a10:s03"
+      ]
+    },
+    {
+      "id": "revenue_growth_bridge",
+      "file": "revenue_growth_bridge.sql",
+      "evidence": [
+        "a10:s01",
+        "a10:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "fx_restates_prior",
+      "verdict": "supported",
+      "evidence": [
+        "a10:s02",
+        "a10:s03"
+      ]
+    },
+    {
+      "id": "billed_equals_network",
+      "verdict": "contradicted",
+      "evidence": [
+        "a10:s02"
+      ]
+    },
+    {
+      "id": "exact_discount_price_effect",
+      "verdict": "unresolved",
+      "evidence": [
+        "a10:s01",
+        "a10:s02"
+      ]
+    }
+  ]
+}

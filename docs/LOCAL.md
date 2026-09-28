@@ -69,7 +69,7 @@ published regression task, or the selected development prototypes:
 
 ```sh
 ./wpb run --task c03 --attempt my-block-1
-./wpb run --dataset workflow-v1 --tasks a01 b01 c01 --attempt my-dev
+./wpb run --dataset workflow-v3 --tasks a01 b01 c01 --attempt my-dev
 ```
 
 Each identifier is unique. Existing attempt directories are rejected. The runner
@@ -81,7 +81,7 @@ Submit an engineer's JSON workpaper or workflow artifact directory:
 
 ```sh
 ./wpb grade --task c03 --answer /path/to/answer.json --attempt engineer-1
-./wpb grade --dataset workflow-v1 --task b01 --artifacts /path/to/workpaper --attempt engineer-workflow-1
+./wpb grade --dataset workflow-v3 --task b01 --artifacts /path/to/workpaper --attempt engineer-workflow-1
 ./wpb replay --task c03 --retained my-block-1 --attempt replay-block-1
 ./wpb report --attempts my-block-1 --output reports/local/my-block-report.json
 ```

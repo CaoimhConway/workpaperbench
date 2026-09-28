@@ -10,7 +10,7 @@ the evidence cannot identify.
 
 The current interface uses explicit task and scorer identities. The corrected
 `challenge-v2` catalog applies validated **challenge-1.1.3** to every new
-submission. The separately versioned workflow tier requires multiple named result tables
+submission. The current `workflow-v3` tier requires multiple named result tables
 and short structured claim verdicts. Historical releases, original answers,
 freezes and correction receipts remain accessible and unchanged.
 
@@ -68,7 +68,7 @@ In a second terminal, run one task and one attempt:
 ./wpb run --task c03 --attempt block-1
 ```
 
-Use `--dataset workflow-v1 --tasks a01 b01 c01` for a selected development batch.
+Use `--dataset workflow-v3 --tasks a01 b01 c01` for a selected development batch.
 `--tasks all` selects the current catalog where candidate exposure is permitted.
 `--repeat` chooses a bounded repetition count. Every attempt ID is unique, and
 existing attempts are rejected. Profiles pin the model, weights, runtime,

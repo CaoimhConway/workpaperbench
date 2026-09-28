@@ -1,0 +1,113 @@
+{
+  "tables": {
+    "quarter_model": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "quarter": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "operating_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "quarter"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "quarter_reconciliation": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "revenue_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "operating_income_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "margin_qoq_bps": {
+          "type": "real",
+          "unit": "basis_points",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "guidance_bridge": {
+      "columns": {
+        "business": {
+          "type": "text",
+          "unit": "label"
+        },
+        "actual_cc_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "guidance_low_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "guidance_high_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "midpoint_gap_pp": {
+          "type": "real",
+          "unit": "percentage_points",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "business"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "azure_within_earlier_range": "Azure Q2 FY2025 constant-currency growth lies within the closed range disclosed in the earlier Q1 call.",
+    "q2_operating_margin_improved_from_q1": "Microsoft consolidated Q2 FY2025 operating margin exceeded its Q1 FY2025 operating margin.",
+    "azure_operating_income_identifiable": "The supplied disclosures identify a separate amount of Azure operating income."
+  },
+  "definitions": {
+    "quarter_reconciliation": "Residuals are reconstructed quarterly sums less six-month reported totals. margin_qoq_bps is Q2 operating margin less Q1, in basis points.",
+    "guidance_bridge": "midpoint_gap_pp is actual constant-currency percent less the midpoint of the earlier guidance range."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  }
+}

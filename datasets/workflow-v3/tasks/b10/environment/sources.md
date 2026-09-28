@@ -1,0 +1,422 @@
+# berkshire-fy2025 primary factual extract
+
+https://www.berkshirehathaway.com/2025ar/2025ar.pdf
+
+Publication time unknown. Shareholder letter dated 2026-02-28. Retrieved 2026-10-09T10:15:51.997638+00:00. This retrieval does not establish historical public availability.
+
+Original units and periods: USD million, annual audited consolidated statements and separately attributed parent earnings. calendar years ended December 31, 2025, 2024 and 2023, shareholder letter dated 2026-02-28.
+
+b10:s01 - Annual report K-34, MD&A disaggregation of net earnings attributable to Berkshire shareholders
+The MD&A components are after tax and exclude noncontrolling interests. The operating-earnings presentation excludes investment gains and equity-method impairments. It is not the consolidated net-earnings starting point in the consolidated cash-flow statement.
+
+b10:s02 - Annual report consolidated statement of cash flows, operating activities
+Operating cash starts with consolidated net earnings, including noncontrolling interests, and reconciles investment gains, depreciation, Treasury discount accretion, impairment and operating assets/liabilities with their stated signs. The parent-company-only cash-flow statement elsewhere in the report has different scope and is not a substitute.
+
+b10:s03 - Annual report note 6, investment gains, and MD&A insurance float discussion
+Investment gains include unrealized changes, gains/losses on securities sold, fixed-maturity realized gains/losses and other items. Gains on securities sold are not gross sale proceeds. Approximate year-end float rose from USD 171 billion to USD 176 billion, but year-end stocks do not identify exact average float or a precise annual cost of float. The shareholder letter date is not independently verified publication time.
+
+Source-derived observations
+
+{
+  "earnings_components": [
+    {
+      "year": 2025,
+      "measure": "underwriting",
+      "aftertax_parent_usd_million": 7258
+    },
+    {
+      "year": 2025,
+      "measure": "insurance_investment_income",
+      "aftertax_parent_usd_million": 12513
+    },
+    {
+      "year": 2025,
+      "measure": "bnsf",
+      "aftertax_parent_usd_million": 5476
+    },
+    {
+      "year": 2025,
+      "measure": "bhe",
+      "aftertax_parent_usd_million": 3979
+    },
+    {
+      "year": 2025,
+      "measure": "manufacturing_service_retail",
+      "aftertax_parent_usd_million": 13647
+    },
+    {
+      "year": 2025,
+      "measure": "investment_gain",
+      "aftertax_parent_usd_million": 30737
+    },
+    {
+      "year": 2025,
+      "measure": "impairment",
+      "aftertax_parent_usd_million": -8255
+    },
+    {
+      "year": 2025,
+      "measure": "other",
+      "aftertax_parent_usd_million": 1613
+    },
+    {
+      "year": 2024,
+      "measure": "underwriting",
+      "aftertax_parent_usd_million": 9020
+    },
+    {
+      "year": 2024,
+      "measure": "insurance_investment_income",
+      "aftertax_parent_usd_million": 13670
+    },
+    {
+      "year": 2024,
+      "measure": "bnsf",
+      "aftertax_parent_usd_million": 5031
+    },
+    {
+      "year": 2024,
+      "measure": "bhe",
+      "aftertax_parent_usd_million": 3730
+    },
+    {
+      "year": 2024,
+      "measure": "manufacturing_service_retail",
+      "aftertax_parent_usd_million": 13072
+    },
+    {
+      "year": 2024,
+      "measure": "investment_gain",
+      "aftertax_parent_usd_million": 41558
+    },
+    {
+      "year": 2024,
+      "measure": "impairment",
+      "aftertax_parent_usd_million": 0
+    },
+    {
+      "year": 2024,
+      "measure": "other",
+      "aftertax_parent_usd_million": 2914
+    },
+    {
+      "year": 2023,
+      "measure": "underwriting",
+      "aftertax_parent_usd_million": 5428
+    },
+    {
+      "year": 2023,
+      "measure": "insurance_investment_income",
+      "aftertax_parent_usd_million": 9567
+    },
+    {
+      "year": 2023,
+      "measure": "bnsf",
+      "aftertax_parent_usd_million": 5087
+    },
+    {
+      "year": 2023,
+      "measure": "bhe",
+      "aftertax_parent_usd_million": 2331
+    },
+    {
+      "year": 2023,
+      "measure": "manufacturing_service_retail",
+      "aftertax_parent_usd_million": 13362
+    },
+    {
+      "year": 2023,
+      "measure": "investment_gain",
+      "aftertax_parent_usd_million": 58873
+    },
+    {
+      "year": 2023,
+      "measure": "impairment",
+      "aftertax_parent_usd_million": 0
+    },
+    {
+      "year": 2023,
+      "measure": "other",
+      "aftertax_parent_usd_million": 1575
+    }
+  ],
+  "annual_bases": [
+    {
+      "year": 2025,
+      "reported_parent_income_usd_million": 66968,
+      "consolidated_income_usd_million": 67260,
+      "reported_operating_cash_usd_million": 45969
+    },
+    {
+      "year": 2024,
+      "reported_parent_income_usd_million": 88995,
+      "consolidated_income_usd_million": 89561,
+      "reported_operating_cash_usd_million": 30592
+    },
+    {
+      "year": 2023,
+      "reported_parent_income_usd_million": 96223,
+      "consolidated_income_usd_million": 97147,
+      "reported_operating_cash_usd_million": 49196
+    }
+  ],
+  "cash_adjustments": [
+    {
+      "year": 2025,
+      "measure": "investment_gain",
+      "signed_cash_adjustment_usd_million": -39078
+    },
+    {
+      "year": 2025,
+      "measure": "depreciation",
+      "signed_cash_adjustment_usd_million": 13476
+    },
+    {
+      "year": 2025,
+      "measure": "treasury_accretion",
+      "signed_cash_adjustment_usd_million": -11964
+    },
+    {
+      "year": 2025,
+      "measure": "impairment",
+      "signed_cash_adjustment_usd_million": 10681
+    },
+    {
+      "year": 2025,
+      "measure": "other",
+      "signed_cash_adjustment_usd_million": 3239
+    },
+    {
+      "year": 2025,
+      "measure": "unpaid_losses",
+      "signed_cash_adjustment_usd_million": 3088
+    },
+    {
+      "year": 2025,
+      "measure": "retroactive_reinsurance",
+      "signed_cash_adjustment_usd_million": 693
+    },
+    {
+      "year": 2025,
+      "measure": "unearned_premiums",
+      "signed_cash_adjustment_usd_million": 432
+    },
+    {
+      "year": 2025,
+      "measure": "receivables",
+      "signed_cash_adjustment_usd_million": -2426
+    },
+    {
+      "year": 2025,
+      "measure": "other_assets",
+      "signed_cash_adjustment_usd_million": -861
+    },
+    {
+      "year": 2025,
+      "measure": "other_liabilities",
+      "signed_cash_adjustment_usd_million": 429
+    },
+    {
+      "year": 2025,
+      "measure": "income_taxes",
+      "signed_cash_adjustment_usd_million": 1000
+    },
+    {
+      "year": 2024,
+      "measure": "investment_gain",
+      "signed_cash_adjustment_usd_million": -52799
+    },
+    {
+      "year": 2024,
+      "measure": "depreciation",
+      "signed_cash_adjustment_usd_million": 12855
+    },
+    {
+      "year": 2024,
+      "measure": "treasury_accretion",
+      "signed_cash_adjustment_usd_million": -11349
+    },
+    {
+      "year": 2024,
+      "measure": "impairment",
+      "signed_cash_adjustment_usd_million": 0
+    },
+    {
+      "year": 2024,
+      "measure": "other",
+      "signed_cash_adjustment_usd_million": -892
+    },
+    {
+      "year": 2024,
+      "measure": "unpaid_losses",
+      "signed_cash_adjustment_usd_million": 2173
+    },
+    {
+      "year": 2024,
+      "measure": "retroactive_reinsurance",
+      "signed_cash_adjustment_usd_million": 698
+    },
+    {
+      "year": 2024,
+      "measure": "unearned_premiums",
+      "signed_cash_adjustment_usd_million": 376
+    },
+    {
+      "year": 2024,
+      "measure": "receivables",
+      "signed_cash_adjustment_usd_million": 626
+    },
+    {
+      "year": 2024,
+      "measure": "other_assets",
+      "signed_cash_adjustment_usd_million": -206
+    },
+    {
+      "year": 2024,
+      "measure": "other_liabilities",
+      "signed_cash_adjustment_usd_million": -2288
+    },
+    {
+      "year": 2024,
+      "measure": "income_taxes",
+      "signed_cash_adjustment_usd_million": -8163
+    },
+    {
+      "year": 2023,
+      "measure": "investment_gain",
+      "signed_cash_adjustment_usd_million": -74855
+    },
+    {
+      "year": 2023,
+      "measure": "depreciation",
+      "signed_cash_adjustment_usd_million": 12486
+    },
+    {
+      "year": 2023,
+      "measure": "treasury_accretion",
+      "signed_cash_adjustment_usd_million": -5510
+    },
+    {
+      "year": 2023,
+      "measure": "impairment",
+      "signed_cash_adjustment_usd_million": 0
+    },
+    {
+      "year": 2023,
+      "measure": "other",
+      "signed_cash_adjustment_usd_million": -513
+    },
+    {
+      "year": 2023,
+      "measure": "unpaid_losses",
+      "signed_cash_adjustment_usd_million": 2628
+    },
+    {
+      "year": 2023,
+      "measure": "retroactive_reinsurance",
+      "signed_cash_adjustment_usd_million": 375
+    },
+    {
+      "year": 2023,
+      "measure": "unearned_premiums",
+      "signed_cash_adjustment_usd_million": 1854
+    },
+    {
+      "year": 2023,
+      "measure": "receivables",
+      "signed_cash_adjustment_usd_million": -1949
+    },
+    {
+      "year": 2023,
+      "measure": "other_assets",
+      "signed_cash_adjustment_usd_million": 98
+    },
+    {
+      "year": 2023,
+      "measure": "other_liabilities",
+      "signed_cash_adjustment_usd_million": 2570
+    },
+    {
+      "year": 2023,
+      "measure": "income_taxes",
+      "signed_cash_adjustment_usd_million": 14865
+    }
+  ],
+  "investment_components": [
+    {
+      "year": 2025,
+      "measure": "equity_unrealized",
+      "pretax_gain_usd_million": 39981
+    },
+    {
+      "year": 2025,
+      "measure": "equity_sold",
+      "pretax_gain_usd_million": -18
+    },
+    {
+      "year": 2025,
+      "measure": "fixed_realized_gain",
+      "pretax_gain_usd_million": 53
+    },
+    {
+      "year": 2025,
+      "measure": "fixed_realized_loss",
+      "pretax_gain_usd_million": -83
+    },
+    {
+      "year": 2025,
+      "measure": "other",
+      "pretax_gain_usd_million": -855
+    },
+    {
+      "year": 2024,
+      "measure": "equity_unrealized",
+      "pretax_gain_usd_million": 49297
+    },
+    {
+      "year": 2024,
+      "measure": "equity_sold",
+      "pretax_gain_usd_million": 3523
+    },
+    {
+      "year": 2024,
+      "measure": "fixed_realized_gain",
+      "pretax_gain_usd_million": 28
+    },
+    {
+      "year": 2024,
+      "measure": "fixed_realized_loss",
+      "pretax_gain_usd_million": -71
+    },
+    {
+      "year": 2024,
+      "measure": "other",
+      "pretax_gain_usd_million": 22
+    },
+    {
+      "year": 2023,
+      "measure": "equity_unrealized",
+      "pretax_gain_usd_million": 69144
+    },
+    {
+      "year": 2023,
+      "measure": "equity_sold",
+      "pretax_gain_usd_million": 2698
+    },
+    {
+      "year": 2023,
+      "measure": "fixed_realized_gain",
+      "pretax_gain_usd_million": 139
+    },
+    {
+      "year": 2023,
+      "measure": "fixed_realized_loss",
+      "pretax_gain_usd_million": -86
+    },
+    {
+      "year": 2023,
+      "measure": "other",
+      "pretax_gain_usd_million": 2960
+    }
+  ]
+}

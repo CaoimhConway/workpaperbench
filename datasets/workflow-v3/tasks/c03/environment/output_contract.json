@@ -1,0 +1,134 @@
+{
+  "tables": {
+    "gross_to_net": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gross_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "incentives_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "net_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "incentive_share_of_gross_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "net_income_reconciliation": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gaap_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "after_tax_adjustments_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "litigation_adjustment_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "income_growth_bridge": {
+      "columns": {
+        "window": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gaap_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "gaap_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "adjusted_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "gap_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "window"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "q4_gaap_and_adjusted_same_direction": "Q4FY2025 GAAP and adjusted net income both grew relative to Q4FY2024.",
+    "litigation_majority_annual_gap": "Litigation accounts for more than half the FY2025 adjusted-minus-GAAP net-income gap.",
+    "same_quarter_price_effect_identified": "The supplied same-quarter volume growth identifies the exact pricing contribution to service revenue growth."
+  },
+  "definitions": {
+    "gross_to_net": "FY2025, Q4FY2025 and 9MFY2025. Gross sums four positive revenue categories, incentives keep their negative source sign. First nine months is annual less Q4.",
+    "net_income_reconciliation": "Use the net-income column of each reconciliation, already after tax. Missing categories are not separately observed adjustments.",
+    "income_growth_bridge": "Windows FY and Q4FY compare FY2025 with FY2024. Gap change is current adjusted-minus-GAAP gap less prior gap."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  }
+}

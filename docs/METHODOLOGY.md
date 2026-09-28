@@ -15,6 +15,16 @@ remain disclosed overlap. The [source review](../reports/local/workflow-source-r
 records current quality status and capture bindings. No candidate model receives
 evaluation cases during this local phase. Human validation and external use remain pending.
 
+`workflow-v3` preserves all thirty financial cases and clarifies the existing
+filesystem contract. Candidate instructions now name `/workspace/data.sqlite`,
+require all deliverables in `/logs/artifacts`, disclose SQL basenames and prohibit
+symlinks. The public schema enforces the same basename rule as the unchanged
+scorer. This uses the one allowed development revision after a native smoke
+exposed the omission. Earlier catalogs, quality receipts and model attempts keep
+their original identities. Financial controls and source observations are
+unchanged, with byte-level continuity and fresh native contract checks recorded
+in [the revision proof](../reports/local/workflow-contract-validation.json).
+
 Workflow artifacts contain named read-only SQL tables and bounded claim verdicts.
 Declared column types, units, unique keys and tolerances are public. Row and column
 order are irrelevant. A different valid SQL implementation is accepted when its

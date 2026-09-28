@@ -1,0 +1,139 @@
+{
+  "tables": {
+    "income_reconciliation": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gaap_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "signed_adjustment_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "share_basis": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gaap_shares_million": {
+          "type": "real",
+          "unit": "million_shares",
+          "tolerance": 1e-06
+        },
+        "adjusted_shares_million": {
+          "type": "real",
+          "unit": "million_shares",
+          "tolerance": 1e-06
+        },
+        "computed_gaap_eps_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        },
+        "gaap_eps_rounding_residual_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        },
+        "computed_adjusted_eps_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        },
+        "adjusted_income_over_gaap_shares_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        },
+        "denominator_effect_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "segment_growth_bridge": {
+      "columns": {
+        "window": {
+          "type": "text",
+          "unit": "label"
+        },
+        "segment": {
+          "type": "text",
+          "unit": "label"
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_total_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "window",
+        "segment"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "semiconductor_majority_annual_growth": "Semiconductor solutions contributes more than half the FY2025 total-revenue increase.",
+    "gaap_denominator_matches_adjusted": "The FY2025 GAAP diluted share denominator is the matching published denominator for adjusted net income.",
+    "exact_ai_pricing_effect_identified": "The supplied segment totals separately identify the exact AI-semiconductor pricing effect."
+  },
+  "definitions": {
+    "income_reconciliation": "Five declared periods. All net-income adjustments are signed and already expressed on the net-income reconciliation basis.",
+    "share_basis": "Computed EPS uses matching million-dollar income and million-share denominators. Report the separate hypothetical adjusted-income/GAAP-share quotient and its difference from correctly based adjusted EPS.",
+    "segment_growth_bridge": "Windows FY and Q4FY. Segment contribution is its dollar change divided by the matching total-revenue dollar change."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  }
+}

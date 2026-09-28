@@ -1,0 +1,18 @@
+{
+  "rationale": "Branded operational tables contain overlapping subtotals and program partitions. A usable attribution must preserve their hierarchy, billion/million unit conversion and rounding. Company revenue has wider scope, so purchase-size changes cannot be read as network pricing or independently separated merchant price and mix effects.",
+  "source_group": "mastercard-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "authored synthetic work-product defects",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "2fd22f84d6863174609792502b0fda821c5873447e78489608f91512ef2746e4",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "82543de82070e81097ff92e9490ea28e4e3bbfe7a2c8faa3edff054457f063ad",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  }
+}

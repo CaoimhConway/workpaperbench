@@ -1,0 +1,55 @@
+{
+  "task_id": "workflow-v3-b01",
+  "tables": [
+    {
+      "id": "reserve_coverage",
+      "file": "reserve_coverage.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s02"
+      ]
+    },
+    {
+      "id": "signature_lag",
+      "file": "signature_lag.sql",
+      "evidence": [
+        "b01:s03",
+        "b01:s04"
+      ]
+    },
+    {
+      "id": "reserve_bridge",
+      "file": "reserve_bridge.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "base_coverage_sql_is_valid",
+      "verdict": "contradicted",
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s05"
+      ]
+    },
+    {
+      "id": "signature_lag_sql_is_valid",
+      "verdict": "supported",
+      "evidence": [
+        "b01:s03",
+        "b01:s04"
+      ]
+    },
+    {
+      "id": "observations_identify_payments_volume",
+      "verdict": "unresolved",
+      "evidence": [
+        "b01:s05"
+      ]
+    }
+  ]
+}

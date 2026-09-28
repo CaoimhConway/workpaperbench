@@ -1,0 +1,53 @@
+{
+  "task_id": "workflow-v3-b08",
+  "tables": [
+    {
+      "id": "category_economics",
+      "file": "category_economics.sql",
+      "evidence": [
+        "b08:s01"
+      ]
+    },
+    {
+      "id": "cash_generation",
+      "file": "cash_generation.sql",
+      "evidence": [
+        "b08:s01",
+        "b08:s03"
+      ]
+    },
+    {
+      "id": "subscription_stock_bridge",
+      "file": "subscription_stock_bridge.sql",
+      "evidence": [
+        "b08:s02",
+        "b08:s01"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "exit_stock_is_annual_revenue",
+      "verdict": "contradicted",
+      "evidence": [
+        "b08:s02",
+        "b08:s01"
+      ]
+    },
+    {
+      "id": "merchant_margin_below_subscription",
+      "verdict": "supported",
+      "evidence": [
+        "b08:s01"
+      ]
+    },
+    {
+      "id": "exact_payments_fee_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "b08:s01",
+        "b08:s03"
+      ]
+    }
+  ]
+}
