@@ -1,0 +1,364 @@
+{
+  "diagnostic_id": "workflow-development-hybrid-diagnostics-1",
+  "schedule_id": "local-workflow-development-3",
+  "manifest_id": "workflow-v4-canonical-ab41935da3c6",
+  "scorer_sha256": "caf9b58c3e0f1c6ae34cc59546de95b0e0055f872c575db61796ad7ddd1c61aa",
+  "model_configuration_sha256": "9558e2f3769e5e7d2bd187b1c8c121dff38d82fd96de7e4a030a8204685d17b0",
+  "scored_attempts": [
+    {
+      "attempt_id": "local-hybrid-development-c01-1",
+      "task_id": "workflow-v4-c01",
+      "receipt_sha256": "6101a67a54f0c613845b9ab33726fdfc92504ce06863efc0dc6d7b07a8edeba2",
+      "status": "infrastructure_failed",
+      "started_at": "2026-10-09T17:32:27.613562+00:00",
+      "finished_at": "2026-10-09T18:16:22.396601+00:00",
+      "elapsed_seconds": 2634.783039,
+      "checks": {
+        "delivery": null,
+        "financial_answer": null,
+        "evidence": null,
+        "robustness": null
+      },
+      "isolation": null,
+      "details": null,
+      "errors": [
+        "RuntimeError"
+      ],
+      "raw_answer_sha256": null,
+      "normalized_answer_sha256": null,
+      "sql_file_sha256": {},
+      "native_metadata": {
+        "available": true,
+        "sha256": "b0a117f19542d2f5b9b94e0619668720497e50d7ec8896348a1a68c5b789f949",
+        "steps": 21,
+        "tool_calls": 23,
+        "tool_names": {
+          "terminal": 23
+        },
+        "source_file_mentions": {
+          "sources.md": 1,
+          "evidence.json": 1,
+          "schema.json": 1,
+          "output_contract.json": 1,
+          "starting_": 0
+        },
+        "sqlite_commands": 15
+      },
+      "native_artifact_supplement": {
+        "attempt_id": "local-hybrid-development-c01-1",
+        "original_receipt_sha256": "6101a67a54f0c613845b9ab33726fdfc92504ce06863efc0dc6d7b07a8edeba2",
+        "source": "Native Harbor retained artifacts/logs/artifacts/revenue_bridge.sql",
+        "sql_file_sha256": {
+          "revenue_bridge.sql": "f7eb315d0a39128142fa4e15ee9606642af6fe459278fb0be0d2ef86cf9d7a07"
+        },
+        "bytes": 415,
+        "answer_json_present": false,
+        "original_receipt_unchanged": true,
+        "inference": false,
+        "artifact_reconstructed": false,
+        "reason": "Host convenience retention gated SQL copying on answer.json. Original native archive retained the actual SQL bytes.",
+        "external_service_spend_usd": 0
+      },
+      "timings": [
+        {
+          "request_id": 232,
+          "generation_ms": 14778.56,
+          "tokens": 149,
+          "tokens_per_second": 10.01
+        },
+        {
+          "request_id": 443,
+          "generation_ms": 5714.71,
+          "tokens": 52,
+          "tokens_per_second": 8.92
+        },
+        {
+          "request_id": 580,
+          "generation_ms": 7599.94,
+          "tokens": 70,
+          "tokens_per_second": 9.08
+        },
+        {
+          "request_id": 657,
+          "generation_ms": 11132.77,
+          "tokens": 102,
+          "tokens_per_second": 9.07
+        },
+        {
+          "request_id": 769,
+          "generation_ms": 191154.97,
+          "tokens": 1691,
+          "tokens_per_second": 8.84
+        },
+        {
+          "request_id": 2571,
+          "generation_ms": 340871.44,
+          "tokens": 2650,
+          "tokens_per_second": 7.77
+        },
+        {
+          "request_id": 5395,
+          "generation_ms": 96249.09,
+          "tokens": 632,
+          "tokens_per_second": 6.56
+        },
+        {
+          "request_id": 6088,
+          "generation_ms": 98076.21,
+          "tokens": 643,
+          "tokens_per_second": 6.55
+        },
+        {
+          "request_id": 6793,
+          "generation_ms": 99310.4,
+          "tokens": 629,
+          "tokens_per_second": 6.32
+        },
+        {
+          "request_id": 7484,
+          "generation_ms": 45642.9,
+          "tokens": 289,
+          "tokens_per_second": 6.31
+        },
+        {
+          "request_id": 7808,
+          "generation_ms": 36283.13,
+          "tokens": 229,
+          "tokens_per_second": 6.28
+        },
+        {
+          "request_id": 8062,
+          "generation_ms": 104481.95,
+          "tokens": 656,
+          "tokens_per_second": 6.27
+        },
+        {
+          "request_id": 8777,
+          "generation_ms": 105818.7,
+          "tokens": 660,
+          "tokens_per_second": 6.23
+        },
+        {
+          "request_id": 9503,
+          "generation_ms": 75900.53,
+          "tokens": 585,
+          "tokens_per_second": 7.69
+        },
+        {
+          "request_id": 10132,
+          "generation_ms": 47487.46,
+          "tokens": 392,
+          "tokens_per_second": 8.23
+        },
+        {
+          "request_id": 10555,
+          "generation_ms": 84871.89,
+          "tokens": 693,
+          "tokens_per_second": 8.15
+        },
+        {
+          "request_id": 11304,
+          "generation_ms": 13855.23,
+          "tokens": 113,
+          "tokens_per_second": 8.08
+        },
+        {
+          "request_id": 11437,
+          "generation_ms": 25033.97,
+          "tokens": 203,
+          "tokens_per_second": 8.07
+        },
+        {
+          "request_id": 11657,
+          "generation_ms": 169898.71,
+          "tokens": 1367,
+          "tokens_per_second": 8.04
+        }
+      ]
+    },
+    {
+      "attempt_id": "local-hybrid-development-b01-1",
+      "task_id": "workflow-v4-b01",
+      "receipt_sha256": "0edf710b30c2af0f809cd905dc02a5036152c0f71c0df8eb93a05676bb16260d",
+      "status": "infrastructure_failed",
+      "started_at": "2026-10-09T18:17:42.405030+00:00",
+      "finished_at": "2026-10-09T18:36:32.133543+00:00",
+      "elapsed_seconds": 1129.728513,
+      "checks": {
+        "delivery": null,
+        "financial_answer": null,
+        "evidence": null,
+        "robustness": null
+      },
+      "isolation": null,
+      "details": null,
+      "errors": [
+        "RuntimeError"
+      ],
+      "raw_answer_sha256": "bf34bbed42f3fa3cd8b5b9f9c5fcac137c6af779bb5bd2f733fa27a0072ce835",
+      "normalized_answer_sha256": "4b7dd4d70ea3bff81be5c9853c49e8e71046b3aad2323a22a23e02b0b2d936b7",
+      "sql_file_sha256": {
+        "reserve_bridge.sql": "dc166aef4c9169b1fb2fbd5fd961ad8e7e2feef393f78e5e6bfb940a67e48eda",
+        "reserve_coverage.sql": "c1e0693008295a2fb68df381f79c735350e878888a2ffb092087e5a882c1b7c2",
+        "signature_lag.sql": "bb16264f03c3c022fb421ca9a4d3cc1f0f2b4dd0a9ce62dd179ce2195343d8c2"
+      },
+      "native_metadata": {
+        "available": true,
+        "sha256": "378de1f54ebe9b0e9d5fe7b73b34d2467494bbb775e9860534a6f819b6fc743b",
+        "steps": 21,
+        "tool_calls": 26,
+        "tool_names": {
+          "terminal": 26
+        },
+        "source_file_mentions": {
+          "sources.md": 1,
+          "evidence.json": 1,
+          "schema.json": 1,
+          "output_contract.json": 1,
+          "starting_": 4
+        },
+        "sqlite_commands": 10
+      },
+      "native_artifact_supplement": null,
+      "timings": [
+        {
+          "request_id": 13423,
+          "generation_ms": 26531.79,
+          "tokens": 263,
+          "tokens_per_second": 9.87
+        },
+        {
+          "request_id": 13709,
+          "generation_ms": 10078.37,
+          "tokens": 94,
+          "tokens_per_second": 9.23
+        },
+        {
+          "request_id": 13861,
+          "generation_ms": 15715.06,
+          "tokens": 145,
+          "tokens_per_second": 9.16
+        },
+        {
+          "request_id": 14018,
+          "generation_ms": 12281.24,
+          "tokens": 113,
+          "tokens_per_second": 9.12
+        },
+        {
+          "request_id": 14144,
+          "generation_ms": 35331.84,
+          "tokens": 320,
+          "tokens_per_second": 9.03
+        },
+        {
+          "request_id": 14492,
+          "generation_ms": 39523.91,
+          "tokens": 357,
+          "tokens_per_second": 9.01
+        },
+        {
+          "request_id": 14872,
+          "generation_ms": 44823.01,
+          "tokens": 405,
+          "tokens_per_second": 9.01
+        },
+        {
+          "request_id": 15303,
+          "generation_ms": 43581.34,
+          "tokens": 392,
+          "tokens_per_second": 8.97
+        },
+        {
+          "request_id": 15722,
+          "generation_ms": 51881.25,
+          "tokens": 464,
+          "tokens_per_second": 8.92
+        },
+        {
+          "request_id": 16218,
+          "generation_ms": 10698.31,
+          "tokens": 97,
+          "tokens_per_second": 8.97
+        },
+        {
+          "request_id": 16326,
+          "generation_ms": 9193.94,
+          "tokens": 83,
+          "tokens_per_second": 8.92
+        },
+        {
+          "request_id": 16417,
+          "generation_ms": 38392.15,
+          "tokens": 342,
+          "tokens_per_second": 8.88
+        },
+        {
+          "request_id": 16782,
+          "generation_ms": 8351.65,
+          "tokens": 75,
+          "tokens_per_second": 8.86
+        },
+        {
+          "request_id": 16868,
+          "generation_ms": 5899.28,
+          "tokens": 53,
+          "tokens_per_second": 8.81
+        },
+        {
+          "request_id": 16928,
+          "generation_ms": 5719.22,
+          "tokens": 51,
+          "tokens_per_second": 8.74
+        },
+        {
+          "request_id": 16986,
+          "generation_ms": 77866.06,
+          "tokens": 679,
+          "tokens_per_second": 8.71
+        },
+        {
+          "request_id": 17709,
+          "generation_ms": 6784.95,
+          "tokens": 60,
+          "tokens_per_second": 8.7
+        },
+        {
+          "request_id": 17780,
+          "generation_ms": 6143.61,
+          "tokens": 54,
+          "tokens_per_second": 8.63
+        },
+        {
+          "request_id": 17847,
+          "generation_ms": 68510.02,
+          "tokens": 590,
+          "tokens_per_second": 8.6
+        }
+      ]
+    },
+    {
+      "attempt_id": "local-hybrid-development-a01-1",
+      "task_id": "workflow-v4-a01",
+      "status": "unstarted",
+      "checks": {
+        "delivery": null,
+        "financial_answer": null,
+        "evidence": null,
+        "robustness": null
+      },
+      "reason": "Configuration paused after two native infrastructure failures"
+    }
+  ],
+  "external_service_spend_usd": 0,
+  "task_design_revisions_used": 1,
+  "grading_corrections": 1,
+  "expert_selected_evidence_diagnostics_used": 0,
+  "held_out_candidate_model_calls": 0,
+  "limitations": [
+    "Three development attempts under one fixed local quantization do not establish frontier discrimination or fine-grained rankings.",
+    "Infrastructure failures and rejected delivery leave semantic checks unassessed.",
+    "Additional known source context is accepted only with sufficient reviewed support. Evidence IDs do not validate arbitrary prose.",
+    "The setup smoke and earlier profiles/catalogs are excluded from this scored report."
+  ]
+}

@@ -30,6 +30,38 @@ def clean_environment():
         raise ValueError("local_trial_requires_dedicated_guest")
 
 
+def retain_artifacts(output, dataset, receipt):
+    artifact = output / 'trials' / receipt['attempt_id'] / 'artifacts/logs/artifacts/answer.json'
+    if dataset.startswith('workflow-') and artifact.parent.exists():
+        directory = ensure_no_symlink_ancestors(artifact.parent, ROOT)
+        receipt['sql_file_sha256'] = {}
+        raw_sql = output / 'raw-sql'
+        raw_sql.mkdir()
+        for path in sorted(directory.iterdir()):
+            if path.name == 'answer.json':
+                continue
+            if not __import__('re').fullmatch(r'[a-z][a-z0-9_]{0,40}\.sql', path.name):
+                raise ValueError('unsafe_retained_sql_name')
+            path = ensure_no_symlink_ancestors(path, ROOT)
+            data = read_bounded(path, 16384)
+            reject_credential_patterns(data)
+            (raw_sql / path.name).write_bytes(data)
+            receipt['sql_file_sha256'][path.name] = hashlib.sha256(data).hexdigest()
+    if not (artifact.exists() or artifact.is_symlink()):
+        return
+    artifact = ensure_no_symlink_ancestors(artifact, ROOT)
+    answer = read_bounded(artifact, 65536)
+    reject_credential_patterns(answer)
+    (output / 'raw-answer.json').write_bytes(answer)
+    receipt['raw_answer_sha256'] = hashlib.sha256(answer).hexdigest()
+    try:
+        normalized = (json.dumps(parse_json(answer), indent=2, allow_nan=False) + '\n').encode()
+        (output / 'answer.json').write_bytes(normalized)
+        receipt['normalized_answer_sha256'] = hashlib.sha256(normalized).hexdigest()
+    except ValueError:
+        receipt['normalized_answer_sha256'] = None
+
+
 def local_hermes_source(source, max_turns, generation=None, system_prompt=""):
     corrected = corrected_hermes_source(source)
     installers = re.findall(rb'https://raw\.githubusercontent\.com/[^/\s]+/hermes-agent/main/scripts/install\.sh', corrected)
@@ -301,33 +333,7 @@ BOUNDARIES
         raise
     finally:
         try:
-            artifact = output / "trials" / arguments.attempt / "artifacts/logs/artifacts/answer.json"
-            if artifact.exists() or artifact.is_symlink():
-                artifact = ensure_no_symlink_ancestors(artifact, ROOT)
-                answer = read_bounded(artifact, 65536)
-                reject_credential_patterns(answer)
-                (output / "raw-answer.json").write_bytes(answer)
-                receipt["raw_answer_sha256"] = hashlib.sha256(answer).hexdigest()
-                if arguments.dataset.startswith('workflow-'):
-                    receipt['sql_file_sha256'] = {}
-                    raw_sql = output / 'raw-sql'
-                    raw_sql.mkdir()
-                    for path in sorted(artifact.parent.iterdir()):
-                        if path.name == 'answer.json':
-                            continue
-                        if not __import__('re').fullmatch(r'[a-z][a-z0-9_]{0,40}\.sql', path.name):
-                            raise ValueError('unsafe_retained_sql_name')
-                        path = ensure_no_symlink_ancestors(path, ROOT)
-                        data = read_bounded(path, 16384)
-                        reject_credential_patterns(data)
-                        (raw_sql / path.name).write_bytes(data)
-                        receipt['sql_file_sha256'][path.name] = hashlib.sha256(data).hexdigest()
-                try:
-                    normalized = (json.dumps(parse_json(answer), indent=2, allow_nan=False) + "\n").encode()
-                    (output / "answer.json").write_bytes(normalized)
-                    receipt["normalized_answer_sha256"] = hashlib.sha256(normalized).hexdigest()
-                except ValueError:
-                    receipt["normalized_answer_sha256"] = None
+            retain_artifacts(output, arguments.dataset, receipt)
         except Exception as error:
             receipt["retention_error"] = str(error)[:500]
             raise
