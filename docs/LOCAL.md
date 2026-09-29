@@ -43,6 +43,8 @@ Its native three-file development smoke delivered all artifacts in 20m33s and
 reached fresh verification. Financial and preservation checks failed and remain
 visible in [the compatibility proof](../reports/local/setup-terminal-workflow-validation.json).
 The corrected evidence contract is validated separately before scored calls.
+The [frozen scored schedule](../config/local/development-schedule-3.json) records
+three fresh development attempts under this configuration.
 
 Retain the pinned Hermes installer from commit
 `8b66a51036c1e20920a17cdd049fdf55c968d683` at
