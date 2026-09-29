@@ -1,0 +1,55 @@
+{
+  "task_id": "workflow-v4-a01",
+  "tables": [
+    {
+      "id": "quarter_model",
+      "file": "quarter_model.sql",
+      "evidence": [
+        "a03:s02",
+        "a03:s03"
+      ]
+    },
+    {
+      "id": "quarter_reconciliation",
+      "file": "quarter_reconciliation.sql",
+      "evidence": [
+        "a03:s02",
+        "a03:s03"
+      ]
+    },
+    {
+      "id": "guidance_bridge",
+      "file": "guidance_bridge.sql",
+      "evidence": [
+        "a03:s01",
+        "a03:s04"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "azure_within_earlier_range",
+      "verdict": "supported",
+      "evidence": [
+        "a03:s01",
+        "a03:s04"
+      ]
+    },
+    {
+      "id": "q2_operating_margin_improved_from_q1",
+      "verdict": "contradicted",
+      "evidence": [
+        "a03:s02",
+        "a03:s03"
+      ]
+    },
+    {
+      "id": "azure_operating_income_identifiable",
+      "verdict": "unresolved",
+      "evidence": [
+        "a03:s05",
+        "a03:s06"
+      ]
+    }
+  ]
+}

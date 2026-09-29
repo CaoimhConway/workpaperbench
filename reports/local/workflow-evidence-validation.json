@@ -1,0 +1,560 @@
+{
+  "validation_id": "workflow-evidence-correction-1",
+  "manifest_id": "workflow-v4-canonical-ab41935da3c6",
+  "previous_manifest_id": "workflow-v3-canonical-78b9269c61e1",
+  "task_design_revisions_used": 1,
+  "grading_corrections": 1,
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "native_submissions": 12,
+  "receipts": [
+    {
+      "attempt_id": "workflow-evidence-a01-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "6f7da517b29b42e42e0feff9e849cdb013f778be415d63e379f36545d4b78383",
+      "task_sha256": "6af45705207ca926ce9809ca1f0258ecc0a8fc597a3e2bbccc74108857b134ba",
+      "raw_answer_sha256": "4c9a7279a47a8cb6fdefbcdb49b1d2167665f06186384be17984f7b914a348e5",
+      "normalized_answer_sha256": "4c9a7279a47a8cb6fdefbcdb49b1d2167665f06186384be17984f7b914a348e5",
+      "sql_file_sha256": {
+        "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+        "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+        "quarter_reconciliation.sql": "5d9f0e48cfc97fcf6dd05306e5d79faf9fba3e7ab82dce6375913e3b7ba97d21"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-evidence-a01-context-1",
+      "variant": "context",
+      "receipt_sha256": "e9fec1da21089fe3538c251842f4068a1e8c3dc42f99f5997315549aa7c26875",
+      "task_sha256": "6af45705207ca926ce9809ca1f0258ecc0a8fc597a3e2bbccc74108857b134ba",
+      "raw_answer_sha256": "2c0e24042314b3f9a85145225635f4e7247bb5861c88b01cecd81a5ff5d2584e",
+      "normalized_answer_sha256": "2c0e24042314b3f9a85145225635f4e7247bb5861c88b01cecd81a5ff5d2584e",
+      "sql_file_sha256": {
+        "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+        "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+        "quarter_reconciliation.sql": "5d9f0e48cfc97fcf6dd05306e5d79faf9fba3e7ab82dce6375913e3b7ba97d21"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-evidence-a01-missing-1",
+      "variant": "missing",
+      "receipt_sha256": "300985c3b36b5d65abe640f5d5bc9b99b89cc00bbd5f1358d62d8f5d0f38a6de",
+      "task_sha256": "6af45705207ca926ce9809ca1f0258ecc0a8fc597a3e2bbccc74108857b134ba",
+      "raw_answer_sha256": "3f047bc64f5d867731e755470f95af98ef2731b43884adf362efb00ebc70b8ff",
+      "normalized_answer_sha256": "3f047bc64f5d867731e755470f95af98ef2731b43884adf362efb00ebc70b8ff",
+      "sql_file_sha256": {
+        "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+        "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+        "quarter_reconciliation.sql": "5d9f0e48cfc97fcf6dd05306e5d79faf9fba3e7ab82dce6375913e3b7ba97d21"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": false,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-evidence-a01-unknown-1",
+      "variant": "unknown",
+      "receipt_sha256": "ff04742694905a60860ef65cae2d4537813f16b75fbafe1744f7475c4a74db44",
+      "task_sha256": "6af45705207ca926ce9809ca1f0258ecc0a8fc597a3e2bbccc74108857b134ba",
+      "raw_answer_sha256": "5bf66dc9027119d011464295a7e15f4e2c6b9d7d4731dd1d4e73df14bee26ff5",
+      "normalized_answer_sha256": "5bf66dc9027119d011464295a7e15f4e2c6b9d7d4731dd1d4e73df14bee26ff5",
+      "sql_file_sha256": {
+        "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+        "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+        "quarter_reconciliation.sql": "5d9f0e48cfc97fcf6dd05306e5d79faf9fba3e7ab82dce6375913e3b7ba97d21"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": false,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-evidence-b01-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "a733fdf7d7e3938af2b91dc27115a409b91cd9be3549cc7c19635ce1e17ddad5",
+      "task_sha256": "54ce0f2a2b0075355136165b785601716b89e389165f23c2c5e1a8e22c172ce0",
+      "raw_answer_sha256": "a24eb356d7c832243660055f48e20644544cad436c824fd9ab449e53f0ca8568",
+      "normalized_answer_sha256": "a24eb356d7c832243660055f48e20644544cad436c824fd9ab449e53f0ca8568",
+      "sql_file_sha256": {
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+        "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-evidence-b01-context-1",
+      "variant": "context",
+      "receipt_sha256": "a9ef853dd704809c197245cd751c9a731c366eaf496d9a66e07aabf0f54ea51f",
+      "task_sha256": "54ce0f2a2b0075355136165b785601716b89e389165f23c2c5e1a8e22c172ce0",
+      "raw_answer_sha256": "cd68e142c8f88f5d5f6809b4c1b04ce4673bf32849955355f64feececb0067a2",
+      "normalized_answer_sha256": "cd68e142c8f88f5d5f6809b4c1b04ce4673bf32849955355f64feececb0067a2",
+      "sql_file_sha256": {
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+        "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-evidence-b01-missing-1",
+      "variant": "missing",
+      "receipt_sha256": "78ce33312ce3db8f37ad0cca7bddc7d03054d43abdde9e62832bc21605df78ea",
+      "task_sha256": "54ce0f2a2b0075355136165b785601716b89e389165f23c2c5e1a8e22c172ce0",
+      "raw_answer_sha256": "d169883c67043aceb6aca82436bc81e08622aa9839fa67bea884fbff117d539e",
+      "normalized_answer_sha256": "d169883c67043aceb6aca82436bc81e08622aa9839fa67bea884fbff117d539e",
+      "sql_file_sha256": {
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+        "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": false,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-evidence-b01-unknown-1",
+      "variant": "unknown",
+      "receipt_sha256": "6a8f952d8ebc9cd5375064fb3fdb3d9658a6f008eb3dc52299599cab08e5a118",
+      "task_sha256": "54ce0f2a2b0075355136165b785601716b89e389165f23c2c5e1a8e22c172ce0",
+      "raw_answer_sha256": "b231f9b40b5bd6bf6c34f54e4e16ccd24ebecb4cb555cc9e36aa6ef3883ccbb0",
+      "normalized_answer_sha256": "b231f9b40b5bd6bf6c34f54e4e16ccd24ebecb4cb555cc9e36aa6ef3883ccbb0",
+      "sql_file_sha256": {
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+        "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": false,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-evidence-c01-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "838162b199f9131a745aa9e1cb8dffcb88738726c17ffe837ca3d098133ad08f",
+      "task_sha256": "7da61ce37cc2ebf3299fc4a847546691820d992cba2728d102c6f3ee1ce774d3",
+      "raw_answer_sha256": "127b23f8b5fdc4bc25a4bd17d93bdcc0c65790abc96e7bbd68f3ba8587c49953",
+      "normalized_answer_sha256": "127b23f8b5fdc4bc25a4bd17d93bdcc0c65790abc96e7bbd68f3ba8587c49953",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-evidence-c01-context-1",
+      "variant": "context",
+      "receipt_sha256": "fa647d8a662af613a6ebe84cf3858fe7ab5515dee5a9e987b7dffb6576c445e4",
+      "task_sha256": "7da61ce37cc2ebf3299fc4a847546691820d992cba2728d102c6f3ee1ce774d3",
+      "raw_answer_sha256": "9e9fa527bffde85c93a7813a123cb41528c5c5d004dbf9882305acb0ab02cc7f",
+      "normalized_answer_sha256": "9e9fa527bffde85c93a7813a123cb41528c5c5d004dbf9882305acb0ab02cc7f",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-evidence-c01-missing-1",
+      "variant": "missing",
+      "receipt_sha256": "40b0736aaf5e9ad096d8e7d8aa78da1f95260985e17cab667a4dea16b05b6d48",
+      "task_sha256": "7da61ce37cc2ebf3299fc4a847546691820d992cba2728d102c6f3ee1ce774d3",
+      "raw_answer_sha256": "7cfb1c0c227cbe552308d32d166dea4808e27a337cb7ccba0f9eba3c87acbe82",
+      "normalized_answer_sha256": "7cfb1c0c227cbe552308d32d166dea4808e27a337cb7ccba0f9eba3c87acbe82",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": false,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-evidence-c01-unknown-1",
+      "variant": "unknown",
+      "receipt_sha256": "43fe2ce0dce9142aa97ca5755efd9ceb0f7a19a6234345842e198bd341feea4b",
+      "task_sha256": "7da61ce37cc2ebf3299fc4a847546691820d992cba2728d102c6f3ee1ce774d3",
+      "raw_answer_sha256": "5245fc34d807915e67c31740ac85ff48ddc1162a57dc31bc9eccbb7f3a254ade",
+      "normalized_answer_sha256": "5245fc34d807915e67c31740ac85ff48ddc1162a57dc31bc9eccbb7f3a254ade",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": false,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    }
+  ],
+  "continuity": [
+    {
+      "task": "a01",
+      "previous_task_sha256": "d753539e7e014d7cb62a00e96c0bb985f0762dd6840e122e117b94a353afcd3b",
+      "task_sha256": "6af45705207ca926ce9809ca1f0258ecc0a8fc597a3e2bbccc74108857b134ba",
+      "financial_contract_sha256": "7a55accd7e9c89f5ca645f2f0b1805700c60d2578bc81e36b9b25ccc78c6a5a0",
+      "source_sha256": "352a270ef60734e0bfb82916abeece1817e1cdc5a8f0546cbde4963818cee51b",
+      "evidence_sha256": "5c5c3c5f1048b4cca19ba14e2c032aa76887da880c91669d400200128566a09c"
+    },
+    {
+      "task": "b01",
+      "previous_task_sha256": "6cc2eccaf4bef35ae24dfee91197575319e6d89343d7c4a583955dcc38c2f806",
+      "task_sha256": "54ce0f2a2b0075355136165b785601716b89e389165f23c2c5e1a8e22c172ce0",
+      "financial_contract_sha256": "7f17fe066f102a18e53898959658b16af471c34c59e3bc16677c5cfe57dd8916",
+      "source_sha256": "c2e9c814acb52a05115c8990eee1efc867c0e6c350ea8054564ace39a5cc4638",
+      "evidence_sha256": "cfeb10ece9dbd85b95142cef69879b3e911469c9da8d7655954ce75111b42b67"
+    },
+    {
+      "task": "c01",
+      "previous_task_sha256": "becd34e0d049da8c9929287023ebe6ad4cb9d8edf5512f3814af294b5e05eea0",
+      "task_sha256": "7da61ce37cc2ebf3299fc4a847546691820d992cba2728d102c6f3ee1ce774d3",
+      "financial_contract_sha256": "fd7baeabe95db3a88a6df73c180b617117ea4fe107a5ce0ae505b38d7d3680e3",
+      "source_sha256": "420523d2bab652e4bd271ae1291f88c6ca82071745c3160153cb8d749e49619b",
+      "evidence_sha256": "a238a441d37a41192a3f9cd6e623b9008e4c89f0d61916b42de309c4d13bed19"
+    },
+    {
+      "task": "a02",
+      "previous_task_sha256": "8350bf388552e86605cbe0c36faf1a6e7eee0a29f6aa8ea5375267631d79f497",
+      "task_sha256": "2cbcfcb425f27939e49a55777af60d3ec1c32ba61a2e662dbbe2c9131f23fcf9",
+      "financial_contract_sha256": "1c5e14bb577ee1c383e8190e0f1957bb11ac44de4d6d7a7fbfcb0a42f5e366d9",
+      "source_sha256": "7012ab578e78f79f48e5e5006030c00af3aa918fc8a386ee2a9fb0c0d240b309",
+      "evidence_sha256": "6e46d2488326a51cd69462c7c1ff028ae88fd044d477ed975ab30aa95c0c330b"
+    },
+    {
+      "task": "b02",
+      "previous_task_sha256": "8ae5e76878c1f3a076dfc111ad3a18cc3d025bcd040965753037ff2ac9282d54",
+      "task_sha256": "a07c03489010467b1967b239f9b916dfec47857e73e14ee199e2d1475c1ca75b",
+      "financial_contract_sha256": "fe2b3dfa869f6c70ddadc43a7e4486d394c3fd9a8dba3971ddbd91ec2ab053b3",
+      "source_sha256": "548dec14af4847453ba6af010155a06c09e05ee9b39cb27900cd00b7aac6223b",
+      "evidence_sha256": "e2c933252b0a41278c7281e66e52b19f4b84b9f1e492bf7f0d9144c30210f17c"
+    },
+    {
+      "task": "c02",
+      "previous_task_sha256": "f4226938daa4f82654db9df0c08d43e90ec26ad5731fe85ad69d8ed513b9c3c0",
+      "task_sha256": "0c144ee5249aa49eb59ec21fa191db35fb5230989dd1e00bea7ee66cff5fae86",
+      "financial_contract_sha256": "a2a903c993f669015f972e311e65c3872ab20ea9996a77480911f807f8710471",
+      "source_sha256": "38bc3923dedfdda0532fcd7b39372efc681af99a0cd126f33514ba7d1df297ed",
+      "evidence_sha256": "fb939a87c5be57a1aa0fc261c2601d96e6bab0d28a8a15662fb77dfdbc315497"
+    },
+    {
+      "task": "a03",
+      "previous_task_sha256": "7edb01623410f1cf6efba20e66dd56274da064784716b8472cd75d951cd1e37b",
+      "task_sha256": "55193fdfac34b5b54808a95ec64dd97d6d2df66055a8e40e7ed0f336fec369e2",
+      "financial_contract_sha256": "b3e857c87e2341bb3fd62bb0520504714bfb0fa971c7bd7297c98f01166daf8e",
+      "source_sha256": "016afb0ced39422494c92b1d74e06165f1a64dabbfe1b101023852275406a2bb",
+      "evidence_sha256": "f3b265f024b349d24e82933af9884e0f3767b22684124be0ae96ba728310c4d5"
+    },
+    {
+      "task": "b03",
+      "previous_task_sha256": "98a7fe600c5e815d0f8a08ab52f29ac632e536c0278931b0a2f83ee6c9c722ae",
+      "task_sha256": "33c82f24f4ca6277ddc5d2a966f86f6dbad35bf1643f68b3964932ac77b37cbd",
+      "financial_contract_sha256": "b35c356df6a3d8dfd7219ba957b8e1e0f3d1fba67319a6dcc5d34a3f5803b1f1",
+      "source_sha256": "e1dbbb161e0ebfc2446b70acb27bd047c9a29d02722667e85be5529e9ec61c3a",
+      "evidence_sha256": "94f8fa0a5d96d4f05f95d0cd940cc602a97cca653c3a81b2e1560096bd8d932b"
+    },
+    {
+      "task": "b05",
+      "previous_task_sha256": "a7f15969e9d95d4ac05238698fc515eca96ddb7e65f3785b1c3fb52b4bed5315",
+      "task_sha256": "5d9835c07e96ae34d6ecd542047c8dd114ded838d041797d752411ef95dda887",
+      "financial_contract_sha256": "f7345ab49fe6ace8630a0c4f82feefd07c994075553b6046847b7acc6e8e3d89",
+      "source_sha256": "0bf62bfb030a49d28b546a095d2c196a2c483a081fba392e7cf31b98732c4b9f",
+      "evidence_sha256": "dd2a1e145f23adf9fb6df073dfe9977829c2e97c1c5f8774ba7514ee66c20d53"
+    },
+    {
+      "task": "b04",
+      "previous_task_sha256": "064e20f9b8238993afce1d53383ad525516d1cf584f4835072e8772388eaf825",
+      "task_sha256": "e9870b0d9f27b8ba3cc79651023782c54bf053ff4cfa7c6962a6f5ce57d59361",
+      "financial_contract_sha256": "c391b7bb0c7c7a81235ab270c4c150a21722b7a61e58cb8dae52bf9d03d1a161",
+      "source_sha256": "d79f3a0aa48ee96de1e7bb92ca1d1d9fe0b46057995dd79538cd42871750cda5",
+      "evidence_sha256": "665a254bbbc24640183cff4382c0327dbc629f15b50640a2d778bca95f1fec9c"
+    },
+    {
+      "task": "c03",
+      "previous_task_sha256": "3ac5aa11193c38dee65a852005538e2340663dfd8447357c1534d3b37b1f8c0e",
+      "task_sha256": "a9cb9439dba6222d4043fcc0d6072f70f9b61e334ddcdd3ce380da16bf16a935",
+      "financial_contract_sha256": "228f76efae5787a251f6c21640d5a6c5430d6e1e35537e7dbaba2090791ea18b",
+      "source_sha256": "184fa07bdc8c0ceb0ef8fe005c6019488f9f3813d946c773d1549ecd04800225",
+      "evidence_sha256": "1fdbaad9a032c35d4b81b87baf5dc2670a0d091e11fb561cfbcaa2e483888dfc"
+    },
+    {
+      "task": "c04",
+      "previous_task_sha256": "d4b132ffe2dbc74995c5162c2cf59eae4049357ce9c7b2575538c9a2eb7dd09f",
+      "task_sha256": "d127737071665fb3f8585a182906ec18fbca113191aa6511008f573676b606ee",
+      "financial_contract_sha256": "8ed9924219884d5d8843e8bb0deb1bfbe9f89d1f687a2b5e9c453b733825e049",
+      "source_sha256": "053274b38157b774d7f7a82577cd479ab4fc334f7d31eae076bfe9d638da096f",
+      "evidence_sha256": "7d1bba05352abad1fc83fc51c78f5a5fd47e1e6c7b0a1494503f1a7f4a128936"
+    },
+    {
+      "task": "a04",
+      "previous_task_sha256": "45e0a6a38c285a09e3f9e192952a59828194350d2c4af3a0e4226fb917d571dc",
+      "task_sha256": "50b167f39ef202b272089a9e7681b1de40473337997cc1c6941c25d1c9b625e9",
+      "financial_contract_sha256": "83bb41c67f5c59657dae5128961842bca5151d6a5328414120bfea23925c6f96",
+      "source_sha256": "e8245cacee7c7a298ca68243ef0ced333de2e1dfcff019ce67091772065611d2",
+      "evidence_sha256": "77db57cf8be37cbe180819753fa45a0b7b2e5e00fc285fe6b6bc6b877b4598e2"
+    },
+    {
+      "task": "a05",
+      "previous_task_sha256": "20c3c966163ab660f6ef170273615aff4c3ee820ebbc65a1899f034b459ea7f8",
+      "task_sha256": "f02c563af79419f80d00c8697fad4820debb2d9c98296357d561ce593c1cf7cc",
+      "financial_contract_sha256": "3210bb8aecc85a69cec3617a8070c0b8cb439934f1567e18666222ca806e9ed1",
+      "source_sha256": "a40210b9ad8f7203b188b0240a5239c2b4f5dd49c74b0d9de45a75699378c67f",
+      "evidence_sha256": "4c30ad7b08ba397d9e7060c4f18a2fbe7f323201c35b76c171be7f0535e30dea"
+    },
+    {
+      "task": "a06",
+      "previous_task_sha256": "a1918d27bc164204cd0bcb976daceb509a1e45bf6bb9dc3eb8278348352a3bcf",
+      "task_sha256": "91621f99669428f43e2e08628d7b161626f5d3b7f04a915ba1e66a6fed6aee07",
+      "financial_contract_sha256": "153fdadbef43208764cfb22b2ac33d54c87541b466187ccdfab466db9f5feef7",
+      "source_sha256": "872894d48600b9d962c2b6be30acbf70b71ac1d20aa634708b45ff940f930df8",
+      "evidence_sha256": "086648aa1f8e4f8ab6a8b503fe6c5c21592ae067fe4bdc1b4a746e88da7c3340"
+    },
+    {
+      "task": "b06",
+      "previous_task_sha256": "094e8436886d184acb5417ca20b4e4d41d7382b97572e1824cdae9b56e33080e",
+      "task_sha256": "c30bcc099676aaaf32d57d5d92f18aa5cb08951670ea3bce550d95a2b2f5869c",
+      "financial_contract_sha256": "7c09b95ec0aa937f66d2026f016561e8389d028bb6fb24baf6d1cbaf0f96a6b7",
+      "source_sha256": "6b8798017553661ed91e32a0e0d81c47448f3a59fc910613c783227951fac769",
+      "evidence_sha256": "2877056d2f30b3cbd5bd2a37074fa8b0fc71542434722964c7e75623b06c137b"
+    },
+    {
+      "task": "b07",
+      "previous_task_sha256": "8f6e02f418d3c765feef97d55a88ff622bef9b80e714adc192025c586f706b8f",
+      "task_sha256": "228f1fc05f0d4a2c50f8f47cb74540abc09466d8b2af1d63b0b7354408dbe998",
+      "financial_contract_sha256": "90f67aa7292e06c8b806092416cd53741c3fe8b99f72a3a71b9bfa9f90a46219",
+      "source_sha256": "b82d90f496969015fa11bb8a3a1903af5f1039462860c5b202ab10f2404e1107",
+      "evidence_sha256": "4f12ab3b93f161aa3e8761f0237cc75f4bc05df2b984613314798d473801dde4"
+    },
+    {
+      "task": "b08",
+      "previous_task_sha256": "4b582390249ed55083c5f9ef160f8840175faff2d1ffb24494da18243d6bafb1",
+      "task_sha256": "19a26a61834c7ffb001e66347633bfcd9591f0f17c45684316f2791246ca169a",
+      "financial_contract_sha256": "e84bba858309066612ce62cd40b0634424a305be88d255ffa6fec272c482999d",
+      "source_sha256": "3b98dd6070149f4f1069b09b97f66f78dd6db99a1adb352908640cf3900bd680",
+      "evidence_sha256": "47f871bbd519b06b4afba058588cdc8e5f6dc8e07217ec8391cbf66d31dd20d4"
+    },
+    {
+      "task": "c05",
+      "previous_task_sha256": "fe0991fda965182496d733ccb33ba44fc95ea48c00d99325d2a93ce589adef4a",
+      "task_sha256": "53fe78fb64cc87963979a8517243094991540c4a68375fb7ea70038929495fc8",
+      "financial_contract_sha256": "38e46146ca53407a83bcdd060d14bce98eabf5ac014633cbac29f4f69210bbc0",
+      "source_sha256": "2235e64ecce336fa84e59ad2b5d32f0a6c31854001c135e3bde48a8741e247e4",
+      "evidence_sha256": "68507ff701ea690d272b84269e4704a8c8535a431ddc164776e70efb7295c995"
+    },
+    {
+      "task": "c06",
+      "previous_task_sha256": "f3b6550e744bd8a511301c06dc51e199ab3f8f722af2358bd3c39ec182b10a92",
+      "task_sha256": "3030d8a86deeba6f370edee52c230241e4e10b924f83227ecb47e9b2087fa1cf",
+      "financial_contract_sha256": "9510fc90e2b013b4e996e32aae200e66ee425c38dc7d5d0280eecb184936fb8a",
+      "source_sha256": "557aaf177841f354b2bacd8ae9af015c62a04cb1d0480cca86cf3d79c77763e1",
+      "evidence_sha256": "81e26d9da535d3a03f0d95a212f5c746c2186fd7e44266dda5883264ac4cf370"
+    },
+    {
+      "task": "c07",
+      "previous_task_sha256": "fb604b52ca0621ee0043df8a0e5027753807fec6ba308b5d9d0c5b48e885ec4d",
+      "task_sha256": "101d874cee62087643cc6fe8bcd29130c317a6f9603b4d384edefdea29be5b04",
+      "financial_contract_sha256": "7f33d583b49168f4989f250d16e63f748d85f5b51831f6b7343f8d042adea9bb",
+      "source_sha256": "136074ecc2e98c73bcf713eaba1cf45752df09ffa591f232f56f3f30dbe7e65d",
+      "evidence_sha256": "7547dfb3335a6be5e037286fc8dce8b4144f94a648dbf8a20921a74291f9faea"
+    },
+    {
+      "task": "a07",
+      "previous_task_sha256": "369c21b9a064f55bbcbdb0fd27cdfa3a253f775f02598d2c0f40412cf98a7370",
+      "task_sha256": "919fd2f6dba2200cd4660372a26304e26c689a99f93e8f1bddd1df435cb86e80",
+      "financial_contract_sha256": "e116f564c9d7d83b687fac6d897ccf7d3a0ab18319b57b0c3e4f3c07dc82a446",
+      "source_sha256": "439e71595d2169be63b8cbf119a2b8cca79b67469f66c8a84ba33e8c9cafef5a",
+      "evidence_sha256": "364c50a373defff566124aac5fd2d302ed90011f3f220adb178bfb178d45eeb4"
+    },
+    {
+      "task": "a08",
+      "previous_task_sha256": "f8b8de1f7c4e8a3b46e7a83fa4c78d8b1dd544d3a5b113c9aded1921b231f635",
+      "task_sha256": "e316cc459f22a5b8fd8cbd15953e015600e49d08eea51dba23d7b5ca75f7a657",
+      "financial_contract_sha256": "c8c009d6f93a650dd1ee34e3310a7e4b3948f68996b2b826015e84129355587c",
+      "source_sha256": "00710fd32dc1d9d44ceb8f3bcf592365481cefd99dff7608aa0e6b7b794e1e49",
+      "evidence_sha256": "91ad8613c223e238c54cc4fe4fb6988616ad0ad3a1a31b37c1aaa8fa08e71642"
+    },
+    {
+      "task": "a09",
+      "previous_task_sha256": "58303897ed2068e2686cd151693efa68100b3378dfe3489a2e89e7125deb0de1",
+      "task_sha256": "b1582b4cc69abff235eba95d7fb2cb8357bbdcc84ec717cacf933a4cfb2432ce",
+      "financial_contract_sha256": "009bdee8a624c5e7826476ede4fdd47019fca6f07e4bb334dbd067acac0d1236",
+      "source_sha256": "b4430008f26f7e74a99e83cb4dd244019fff8e88d279b812f2ef343b224e33e2",
+      "evidence_sha256": "8ded8997ddbec7705c5d992731a294e7ad0e84c10a91b9110933204653020641"
+    },
+    {
+      "task": "a10",
+      "previous_task_sha256": "360c8fcb3fee8efdf379edb77c916ffde8c95d6418950777c5c321a77e6cc93f",
+      "task_sha256": "60adfca8a813202a286aaf89cca9f67d64d4312eefe22990677b40d1bafb354e",
+      "financial_contract_sha256": "c4c377fac7edb162cf5ab634f413c7621c47d40da4cae4bed19b643b32b48109",
+      "source_sha256": "84bba12bd9586c0af1363ef727a5765023d9ca59608f78bccb21e2052df440e8",
+      "evidence_sha256": "799dbe69bb50e98b95b96a2e050e998d46765a55e986b667d6aef378b9683ed9"
+    },
+    {
+      "task": "b09",
+      "previous_task_sha256": "b24b7fd862078322053b7da9bfb9934f9512bf0da5e427a5e7f0576db01d5cf7",
+      "task_sha256": "08d44a36adf91b7a31ddc3f3d30f7607a3a9bd24bd3a13ba491de4b3089ef42c",
+      "financial_contract_sha256": "8070c445ff4243cdba0f3af673f4f09b0a70bc482024f4737c0f8b545d570ca1",
+      "source_sha256": "94d5ab9c2933e77576e0e23a8738f198c6db0c4c23927ac1dafd19ab97eee9e7",
+      "evidence_sha256": "c4fbbd64acf98b9fcf586308ebb865258ec19530ee26cef745bf796e0dd1cb19"
+    },
+    {
+      "task": "b10",
+      "previous_task_sha256": "4dfef41a315ff4e4f5763b67cae557ad463fc30b52c916549cfa221b1575a057",
+      "task_sha256": "d1f6fa2fa7a03b6f290e4d462bc1f4eb803f442f658d3ff6bbf7f0237ce6968e",
+      "financial_contract_sha256": "0c55519da9eb6d9db3cfba76f23f695324aa12237836a2c1ca3f4f0aa04e17ae",
+      "source_sha256": "c3a5c022e1f840a799dc530d4921f8c824b4f170768d8fb74bb3dd806a7933d4",
+      "evidence_sha256": "e4e03a97a756e1f20bef486c6f6f9897f9efaabff797ad87e96b3571443adff9"
+    },
+    {
+      "task": "c08",
+      "previous_task_sha256": "3e9d53f07bb154caf6d21c1692bbaf32d426e29ffdb01cd26b05aab2cc616c27",
+      "task_sha256": "d330f0ac98c6e54c963501c83335f9705b17fc7af18635a31eedbce2656aa757",
+      "financial_contract_sha256": "781b4ef5bf8e9ee33af0141349048eb20d2b9b77c814a00d2ae4b6b9985f1d8a",
+      "source_sha256": "396af1088625c096bd1ccc6cda6902730765b6f8c81316d86a98585c659b8d32",
+      "evidence_sha256": "a645ffc2e36c64b040ea9e3188970d6a53069e026573d3508dc7046040459c43"
+    },
+    {
+      "task": "c09",
+      "previous_task_sha256": "1c1376cb294aa45326f97cef9a1e9563fb3c87a426233deeed1380e6ec0e9b1a",
+      "task_sha256": "3b4451281e662e43622a1cf8578ad234f1615c8852e76eb4b4990287b4228dd2",
+      "financial_contract_sha256": "bda939a7ed615c687a4959357965dff6f111eebf218df285a8a947b899efa9c2",
+      "source_sha256": "9f648798621a10d368348f0a3ad113e2c7b4b4ce26e90610a36df2e74b00863a",
+      "evidence_sha256": "809355b3db329c0748785cb0e4630d58ef18895c2e03448fe0674d79279c5642"
+    },
+    {
+      "task": "c10",
+      "previous_task_sha256": "1622706a1004c879cbe4d78c64266f15ceaccad8327872a359e49f27f2e2a931",
+      "task_sha256": "beea2a71f850117cc773933c73eb385e7e2b3bf1fcfdedbe6a91b1e40395efc0",
+      "financial_contract_sha256": "b2a4a89a10d480fb0a415a507a4b5f14e7ea53a88945ee7547155ad46a50f5fd",
+      "source_sha256": "54f734aa6404d35fb64ad60589936f369008251b964f8419480673ef218d2019",
+      "evidence_sha256": "fd6fc97efd86db847bf2211e801752ce3a6724db0b16ccef2a58d4c1df2fafa0"
+    }
+  ],
+  "source_review": "Direct review of all thirty locator-to-output bundles. SBC May amounts are s01, June amounts s04, signature pages s03 and s06. Signed-date metadata in s01 and s04 provides independently checked equivalent date support. All other reviewed required bundles are unchanged.",
+  "limitations": [
+    "Known dossier context may accompany sufficient support. This checks evidence locators and cannot validate arbitrary prose.",
+    "Earlier 180 quality submissions and 36 contract submissions retain their original task identities. Their unchanged numerical, preservation and delivery evidence is reusable, but earlier strict evidence verdicts are not validation of the corrected support rule.",
+    "No human review or candidate held-out exposure"
+  ]
+}

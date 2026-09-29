@@ -21,30 +21,28 @@ profile, then install native Harbor and its verifier dependency inside it:
 ~/.local/opt/lima-2.2.0/bin/limactl shell workpaperbench-local bash -lc 'python3 -m venv ~/runtime && ~/runtime/bin/pip install harbor==0.23.0 jsonschema==4.26.0'
 ```
 
-The measured default is Qwen3-4B-Instruct-2507 **Q4_K_M** from
-[the pinned quantization repository](https://huggingface.co/unsloth/Qwen3-4B-Instruct-2507-GGUF/tree/a06e946bb6b655725eafa393f4a9745d460374c9).
-Place `Qwen3-4B-Instruct-2507-Q4_K_M.gguf` in `.local/models/`.
-The quantizer declares the official Qwen base and Apache 2.0 license. Its exact
-base conversion revision is not independently established. The profile pins the
-actual embedded tool/chat template, which differs from the official tokenizer
-configuration. Keep the license and download provenance with the weights.
+The measured default is Qwen3.5-9B **Q4_K_M** from
+[the pinned quantization repository](https://huggingface.co/twoody/Qwen3.5-9B-GGUF/tree/b647a5938c8cf40d1c3553ddd9bf2892895f0110).
+Place `Qwen3.5-9B-Q4_K_M.gguf` in `.local/models/`. The publisher declares Apache
+2.0 and official base revision `c202236235762e1c871ad0ccb60c8ee5ba337b9a`.
+Conversion is not independently reproduced. Keep the license and download provenance.
 
 The tested CPU server is [llama.cpp b11516](https://github.com/ggml-org/llama.cpp/releases/tag/b11516),
 commit `d4d82d67f`. Extract the official `llama-b11516-bin-macos-x64.tar.gz` asset
 under `.local/runtime/`, producing `.local/runtime/llama-b11516/llama-server`.
 Its archive SHA256 is `e0b7a1c44132b6b44e349a4fa9813ee2e67bd26de1325c91bfecec37daf01000`.
-The selected [profile](../config/local/qwen3-4b-instruct-2507-delivery.json) verifies
-weights, binary and actual template before launch. Weights, binaries and raw logs
-remain private local assets excluded from Git.
+The [profile](../config/local/qwen35-9b-terminal.json) verifies weights, binary and
+embedded tool/chat template before launch. Weights, binaries and raw logs remain
+private local assets excluded from Git.
 
-This profile uses eight CPU threads, one request at a time, 65,536 tokens of
-native context without YaRN, non-thinking generation and no context shifting.
-Each candidate has twelve turns, at most 4,096 generated tokens per turn and
-1,800 seconds of execution wall time. Native file and terminal tools receive
-only generic filesystem-delivery guidance. The successful compatibility smoke
-wrote a schema-valid workpaper but failed financial, evidence and preservation
-checks. That is a selected runnable setup, not a quality or frontier claim.
-The [declared scored schedule](../config/local/development-schedule.json) is separate.
+This configuration uses eight CPU threads, one request at a time, 65,536 tokens
+of native context, thinking mode and no context shifting. Each candidate has
+eighteen turns, 4,096 generated tokens per turn and 2,700 seconds of candidate
+wall time. Native terminal tools receive generic filesystem-delivery guidance.
+Its native three-file development smoke delivered all artifacts in 20m33s and
+reached fresh verification. Financial and preservation checks failed and remain
+visible in [the compatibility proof](../reports/local/setup-terminal-workflow-validation.json).
+The corrected evidence contract is validated separately before scored calls.
 
 Retain the pinned Hermes installer from commit
 `8b66a51036c1e20920a17cdd049fdf55c968d683` at
@@ -69,7 +67,7 @@ published regression task, or the selected development prototypes:
 
 ```sh
 ./wpb run --task c03 --attempt my-block-1
-./wpb run --dataset workflow-v3 --tasks a01 b01 c01 --attempt my-dev
+./wpb run --dataset workflow-v4 --tasks a01 b01 c01 --attempt my-dev
 ```
 
 Each identifier is unique. Existing attempt directories are rejected. The runner
@@ -81,7 +79,7 @@ Submit an engineer's JSON workpaper or workflow artifact directory:
 
 ```sh
 ./wpb grade --task c03 --answer /path/to/answer.json --attempt engineer-1
-./wpb grade --dataset workflow-v3 --task b01 --artifacts /path/to/workpaper --attempt engineer-workflow-1
+./wpb grade --dataset workflow-v4 --task b01 --artifacts /path/to/workpaper --attempt engineer-workflow-1
 ./wpb replay --task c03 --retained my-block-1 --attempt replay-block-1
 ./wpb report --attempts my-block-1 --output reports/local/my-block-report.json
 ```

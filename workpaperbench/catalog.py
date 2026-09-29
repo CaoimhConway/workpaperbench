@@ -43,7 +43,7 @@ def tree_hash(path):
 
 
 def load(root, dataset="challenge-v2", task=None):
-    if dataset not in ('challenge-v2', 'workflow-v1', 'workflow-v2', 'workflow-v3'):
+    if dataset not in ('challenge-v2', 'workflow-v1', 'workflow-v2', 'workflow-v3', 'workflow-v4'):
         raise ValueError("unsupported_current_dataset")
     root = Path(root)
     path = file_path(root, "datasets/" + dataset + "/manifest.json")

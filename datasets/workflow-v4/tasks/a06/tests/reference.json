@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v4-a06",
+  "tables": [
+    {
+      "id": "income_model",
+      "file": "income_model.sql",
+      "evidence": [
+        "a06:s01",
+        "a06:s02"
+      ]
+    },
+    {
+      "id": "adjustment_bridge",
+      "file": "adjustment_bridge.sql",
+      "evidence": [
+        "a06:s01",
+        "a06:s02"
+      ]
+    },
+    {
+      "id": "year_to_date_cash",
+      "file": "year_to_date_cash.sql",
+      "evidence": [
+        "a06:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "q3_gaap_and_adjusted_diverge",
+      "verdict": "supported",
+      "evidence": [
+        "a06:s01",
+        "a06:s02"
+      ]
+    },
+    {
+      "id": "headline_cash_is_q3",
+      "verdict": "contradicted",
+      "evidence": [
+        "a06:s03"
+      ]
+    },
+    {
+      "id": "exact_q3_operating_cash_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "a06:s03"
+      ]
+    }
+  ]
+}

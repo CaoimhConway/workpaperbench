@@ -1,0 +1,23 @@
+{
+  "rationale": "A research project can perform valid revenue arithmetic while mislabeling a derivatives-inclusive numerator as a spot fee. A second scope problem arises when USDC revenue is compared with balances using inconsistent units or periods. Preserve useful arithmetic and mark the non-identifiable fee inference unresolved.",
+  "source_group": "coinbase-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "authored synthetic work-product defects",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "b27fe19abfea4d0d476e1c06971fda08e9c5f89a9f5d2f5904e6c41d92e3a3b9",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "d5c0ebcdc432f08c4b2654f685dc8f0377ea141082a29aefc39608dd8365150d",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "98a7fe600c5e815d0f8a08ab52f29ac632e536c0278931b0a2f83ee6c9c722ae",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  }
+}

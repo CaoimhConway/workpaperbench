@@ -25,6 +25,14 @@ their original identities. Financial controls and source observations are
 unchanged, with byte-level continuity and fresh native contract checks recorded
 in [the revision proof](../reports/local/workflow-contract-validation.json).
 
+`workflow-v4` fixes evidence grading before revised scored calls. SBC May and June
+amounts use their actual table locators, and signature lags use both actual date
+locators or independently checked signed-date metadata. Known dossier context may
+accompany sufficient reviewed support. Missing support and invented locators still
+fail. Questions, financial values, SQL references and controls are unchanged. This
+is a grading correction rather than a second task-design revision. Earlier evidence
+verdicts retain their original rules and the diagnosed caveat.
+
 Workflow artifacts contain named read-only SQL tables and bounded claim verdicts.
 Declared column types, units, unique keys and tolerances are public. Row and column
 order are irrelevant. A different valid SQL implementation is accepted when its

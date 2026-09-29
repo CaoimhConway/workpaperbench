@@ -1,0 +1,128 @@
+{
+  "tables": {
+    "bank_basis_bridge": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "managed_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "printed_input_reported_basis_estimate_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fte_adjustment_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "overhead_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "adjusted_overhead_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "managed_revenue_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "significant_item_bridge": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "apple_pretax_reserve_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "apple_aftertax_effect_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "apple_tax_shield_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "net_income_exclusion_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "printed_input_adjusted_net_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "rounding_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "annual_exclusion_components": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "signed_aftertax_exclusion_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "origin": {
+          "type": "text",
+          "unit": "label"
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "managed_presentation_changes_net_income": "The fully taxable-equivalent managed presentation increases company net income.",
+    "annual_exclusion_less_than_q4": "The annual net-income exclusion increase is smaller than the Q4 increase because annual exclusions also remove gains and benefits.",
+    "exact_payment_fee_identified": "The supplied revenue and bank-basis totals identify an exact Payments processing fee."
+  },
+  "definitions": {
+    "bank_basis_bridge": "Reported-basis revenue is an estimate reconstructed from the rounded managed slide amounts less FTE. Overhead and adjusted overhead both use managed revenue. Retain NII plus NIR less managed-revenue residual.",
+    "significant_item_bridge": "Use after-tax reserve effect for net income. The tax shield is pretax reserve less after-tax effect. Rounded disclosure residual is recomputed adjusted net income less the printed rounded adjusted total.",
+    "annual_exclusion_components": "FY2025 only. Three signed after-tax exclusions sum to the disclosed annual change. Origin labels printed_after_tax and derived_after_tax distinguish directly disclosed from algebraically implied amounts."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  }
+}

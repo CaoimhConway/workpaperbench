@@ -10,7 +10,7 @@ the evidence cannot identify.
 
 The current interface uses explicit task and scorer identities. The corrected
 `challenge-v2` catalog applies validated **challenge-1.1.3** to every new
-submission. The current `workflow-v3` tier requires multiple named result tables
+submission. The current `workflow-v4` tier requires multiple named result tables
 and short structured claim verdicts. Historical releases, original answers,
 freezes and correction receipts remain accessible and unchanged.
 
@@ -44,15 +44,14 @@ contract is not a financial reasoning failure. Local-model failures do not prove
 that leading hosted systems would fail.
 
 The current setup is local-only on an Intel Mac Pro. The measured default
-uses Qwen3-4B-Instruct-2507 **Q4_K_M**, about four billion parameters, through
-llama.cpp b11516 on CPU with a real 65,536-token native window. Its setup smoke
-wrote a valid regression artifact but failed the financial checks. Workflow
-calibration then encountered a timeout and incomplete SQL delivery. That
-configuration is paused while a separately labeled local setup is tested.
-Native Harbor/Hermes execution runs in a dedicated Ubuntu
-24.04 guest without host mounts or owner credentials. This is a distinct
-configuration from earlier hosted routes. New external-service spending is USD
-0 and no Actions job is launched during this phase.
+uses Qwen3.5-9B **Q4_K_M**, approximately nine billion parameters, through
+llama.cpp b11516 on CPU with a real 65,536-token native window. Thinking mode and
+native terminal tools delivered all three SQL files and JSON in a 20m33s setup
+smoke. Its original table outputs matched, but claim interpretation and changed-data
+checks failed. Earlier configurations and failures remain separately labeled.
+Native Harbor/Hermes execution runs in a dedicated Ubuntu 24.04 guest without
+host mounts or owner credentials. New external-service spending is USD 0 and no
+Actions job is launched during this phase.
 
 Follow the tested setup prerequisites and pinned hashes in
 [local execution](docs/LOCAL.md). Then start one server:
@@ -68,7 +67,7 @@ In a second terminal, run one task and one attempt:
 ./wpb run --task c03 --attempt block-1
 ```
 
-Use `--dataset workflow-v3 --tasks a01 b01 c01` for a selected development batch.
+Use `--dataset workflow-v4 --tasks a01 b01 c01` for a selected development batch.
 `--tasks all` selects the current catalog where candidate exposure is permitted.
 `--repeat` chooses a bounded repetition count. Every attempt ID is unique, and
 existing attempts are rejected. Profiles pin the model, weights, runtime,

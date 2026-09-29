@@ -1,0 +1,217 @@
+{
+  "attempt_id": "setup-qwen35-contract-terminal-1",
+  "manifest_id": "workflow-v3-canonical-78b9269c61e1",
+  "task_id": "workflow-v3-b01",
+  "task_sha256": "6cc2eccaf4bef35ae24dfee91197575319e6d89343d7c4a583955dcc38c2f806",
+  "scorer_version": "workflow-1.0.0",
+  "scorer_sha256": "caf9b58c3e0f1c6ae34cc59546de95b0e0055f872c575db61796ad7ddd1c61aa",
+  "model_configuration": {
+    "configuration_id": "qwen35-9b-q4km-cpu-64k-thinking-terminal-18",
+    "execution_profile": "local-lima",
+    "model": {
+      "id": "qwen35-9b-q4_k_m",
+      "weights": ".local/models/Qwen3.5-9B-Q4_K_M.gguf",
+      "repository": "twoody/Qwen3.5-9B-GGUF",
+      "revision": "b647a5938c8cf40d1c3553ddd9bf2892895f0110",
+      "sha256": "8c4cc24f54473f3d4e080d4ec7fd2a40d0bbec0f94f3c807cd62694905357d54",
+      "quantization": "Q4_K_M",
+      "total_parameters_billions": 9.0,
+      "active_parameters_billions": 9.0,
+      "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "native_context": 262144,
+      "base_model_declared_by_quantizer": "Qwen/Qwen3.5-9B",
+      "base_revision_declared_by_quantizer": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+      "conversion": "Publisher declares llama.cpp b11146 BF16 conversion followed by Q4_K_M without importance matrix, not independently reproduced",
+      "architecture": "qwen35, dense gated DeltaNet and attention hybrid, text only",
+      "gguf_size_label": "9.2B",
+      "parameter_counts_basis": "Approximate official 9B family size, not an exact active-tensor count"
+    },
+    "runtime": {
+      "binary": ".local/runtime/llama-b11516/llama-server",
+      "sha256": "cdf2d31e4b75714ebad37ffeb8f3d51e9a7be45daa6fd884a6a360abaee04091",
+      "version": "llama.cpp b11516 d4d82d67f",
+      "backend": "cpu",
+      "hardware": "MacPro7,1 Intel Xeon W-3245, Accelerate BLAS, no GPU offload"
+    },
+    "serving": {
+      "port": 18086,
+      "context": 65536,
+      "threads": 8,
+      "parallel": 1,
+      "reasoning": "on",
+      "flash_attention": "off",
+      "cache_type_k": "f16",
+      "cache_type_v": "f16",
+      "observe_slots": true,
+      "context_shift": false
+    },
+    "candidate": {
+      "wall_seconds": 2700,
+      "turns": 18,
+      "generation": {
+        "max_tokens": 4096,
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "top_k": 20,
+        "seed": 17,
+        "min_p": 0,
+        "presence_penalty": 1.5
+      },
+      "toolsets": "terminal",
+      "system_prompt": "Complete the filesystem task using the declared tools. Create and check every requested deliverable at its declared absolute path before ending. JSON in a chat reply does not create a file. Work independently within the task environment and do not ask the user to create the deliverable."
+    },
+    "harbor_version": "0.23.0",
+    "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "status": "Bounded native terminal configuration, compatibility evidence recorded separately",
+    "external_service_spend_usd": 0
+  },
+  "model_configuration_sha256": "9558e2f3769e5e7d2bd187b1c8c121dff38d82fd96de7e4a030a8204685d17b0",
+  "native_adapter_sha256": "e16bc6cbe64ca277e81cc0f1e6fc83246d39db36a1ec3bc7af8cf06ae95a1cfa",
+  "started_at": "2026-10-09T16:53:14.755403+00:00",
+  "finished_at": "2026-10-09T17:13:47.706558+00:00",
+  "raw_answer_sha256": "18c7127c477c31149dac99e7eae46a1be104967c824535972d93094d84b9cdae",
+  "normalized_answer_sha256": "b43dbf39ea397b354b3c1b9dc9f8982d298fdad9ca33b7701598f70daa700c96",
+  "sql_file_sha256": {
+    "reserve_bridge.sql": "2499b22a4f541e365ec3141bf0f973b82718f181e0dbce176de9438a20e2be99",
+    "reserve_coverage.sql": "3fea415a616a6a2da454225f834102d9a7771ccb6553ba8a7f9211c60882265f",
+    "signature_lag.sql": "733f4c9250d6923f0297916e88a473637f3fd9a3e87a965f465a5afa17f23d3c"
+  },
+  "status": "verified",
+  "inference": true,
+  "external_service_spend_usd": 0,
+  "validation_id": "local-terminal-workflow-compatibility-1",
+  "scored_development": false,
+  "receipt_sha256": "5c3d0089de79be3e04ad549f0149bd45c3239ccdf789a95d71f9083faa95a657",
+  "elapsed_seconds": 1232.951155,
+  "checks": {
+    "financial_answer": false,
+    "evidence": false,
+    "robustness": false,
+    "delivery": true
+  },
+  "isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  },
+  "native_tool_calls": 22,
+  "native_tool_names": {
+    "terminal": 22
+  },
+  "native_trajectory_steps": 16,
+  "completed_generation_timings": 16,
+  "timings": [
+    {
+      "request_id": 750,
+      "generation_ms": 46625.19,
+      "tokens": 424,
+      "tokens_per_second": 9.07
+    },
+    {
+      "request_id": 1252,
+      "generation_ms": 10109.49,
+      "tokens": 94,
+      "tokens_per_second": 9.2
+    },
+    {
+      "request_id": 1407,
+      "generation_ms": 9551.67,
+      "tokens": 89,
+      "tokens_per_second": 9.21
+    },
+    {
+      "request_id": 1506,
+      "generation_ms": 163878.08,
+      "tokens": 1445,
+      "tokens_per_second": 8.81
+    },
+    {
+      "request_id": 3039,
+      "generation_ms": 127005.58,
+      "tokens": 1117,
+      "tokens_per_second": 8.79
+    },
+    {
+      "request_id": 4223,
+      "generation_ms": 11083.38,
+      "tokens": 102,
+      "tokens_per_second": 9.11
+    },
+    {
+      "request_id": 4335,
+      "generation_ms": 87670.49,
+      "tokens": 794,
+      "tokens_per_second": 9.05
+    },
+    {
+      "request_id": 5176,
+      "generation_ms": 18861.84,
+      "tokens": 171,
+      "tokens_per_second": 9.01
+    },
+    {
+      "request_id": 5362,
+      "generation_ms": 71334.99,
+      "tokens": 561,
+      "tokens_per_second": 7.85
+    },
+    {
+      "request_id": 5964,
+      "generation_ms": 6116.47,
+      "tokens": 56,
+      "tokens_per_second": 8.99
+    },
+    {
+      "request_id": 6033,
+      "generation_ms": 62188.06,
+      "tokens": 557,
+      "tokens_per_second": 8.94
+    },
+    {
+      "request_id": 6625,
+      "generation_ms": 5662.48,
+      "tokens": 51,
+      "tokens_per_second": 8.83
+    },
+    {
+      "request_id": 6689,
+      "generation_ms": 86386.44,
+      "tokens": 765,
+      "tokens_per_second": 8.84
+    },
+    {
+      "request_id": 7501,
+      "generation_ms": 9852.83,
+      "tokens": 88,
+      "tokens_per_second": 8.83
+    },
+    {
+      "request_id": 7604,
+      "generation_ms": 11140.53,
+      "tokens": 98,
+      "tokens_per_second": 8.71
+    },
+    {
+      "request_id": 7714,
+      "generation_ms": 13400.08,
+      "tokens": 118,
+      "tokens_per_second": 8.73
+    }
+  ],
+  "decision": "Select this configuration for bounded development calibration because it delivered actual JSON and all three SQL files and completed native separate verification. Financial outcomes were excluded from setup selection.",
+  "diagnosis": {
+    "original_table_outputs": "All three match",
+    "financial_interpretation": "Treats the repaired coverage query as proof the starting query was valid",
+    "transformation": "Bridge hardcodes observed amounts, other queries retain duplicate exports and coverage residual uses issued supply rather than reported reserve fair value",
+    "evidence": "Prior support bundles contain a source-mapping defect and reject extra context. Preserve the original verdict, correct grading separately before scoring.",
+    "unsupported_inference": "Payments-volume claim is correctly unresolved",
+    "infrastructure": "Native execution and isolation pass"
+  },
+  "limitations": [
+    "Compatibility smoke excluded from scored calibration",
+    "Prior evidence verdict has a diagnosed grading defect, corrected catalog is validated separately",
+    "No artifacts reconstructed from chat or moved from an incorrect directory",
+    "No frontier or held-out performance claim"
+  ]
+}

@@ -1,0 +1,827 @@
+{
+  "task_id": "workflow-v4-a06",
+  "scorer_version": "workflow-1.0.0",
+  "tables": {
+    "income_model": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "gaap_operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_cc_operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "gaap_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "adjusted_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "months"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "a06:s01",
+          "a06:s02"
+        ]
+      ],
+      "rows": [
+        [
+          2025,
+          3,
+          169588.0,
+          6708.0,
+          6708.0,
+          6708.0,
+          3.9554685473028752,
+          3.9554685473028752
+        ],
+        [
+          2025,
+          6,
+          330843.0,
+          14781.0,
+          15036.0,
+          15036.0,
+          4.467678022506143,
+          4.544753856058614
+        ],
+        [
+          2025,
+          9,
+          500431.0,
+          21489.0,
+          21744.0,
+          21744.0,
+          4.294098487104116,
+          4.345054562966722
+        ],
+        [
+          2026,
+          3,
+          179496.0,
+          6696.0,
+          7263.0,
+          7246.0,
+          3.730445246690734,
+          4.04632972322503
+        ],
+        [
+          2026,
+          6,
+          343011.0,
+          14421.0,
+          15011.0,
+          15277.0,
+          4.204238348041317,
+          4.376244493616823
+        ],
+        [
+          2026,
+          9,
+          522507.0,
+          21117.0,
+          22274.0,
+          22523.0,
+          4.041476956289581,
+          4.262909396429139
+        ]
+      ]
+    },
+    "adjustment_bridge": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "phonepe_sbc_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "legal_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "reorganization_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_currency_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "gaap_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "months"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "a06:s01",
+          "a06:s02"
+        ]
+      ],
+      "rows": [
+        [
+          2025,
+          3,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          2025,
+          6,
+          0.0,
+          0.0,
+          255.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          2025,
+          9,
+          0.0,
+          0.0,
+          255.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          2026,
+          3,
+          722.0,
+          -155.0,
+          0.0,
+          -17.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          2026,
+          6,
+          0.0,
+          440.0,
+          150.0,
+          266.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          2026,
+          9,
+          722.0,
+          285.0,
+          150.0,
+          249.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "year_to_date_cash": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "operating_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "capital_spending_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "free_cash_flow_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "months"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "a06:s03"
+        ]
+      ],
+      "rows": [
+        [
+          2026,
+          9,
+          27452.0,
+          18627.0,
+          8825.0,
+          0.0
+        ],
+        [
+          2025,
+          9,
+          22918.0,
+          16696.0,
+          6222.0,
+          0.0
+        ]
+      ]
+    }
+  },
+  "claims": {
+    "q3_gaap_and_adjusted_diverge": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a06:s01",
+          "a06:s02"
+        ]
+      ]
+    },
+    "headline_cash_is_q3": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "a06:s03"
+        ]
+      ]
+    },
+    "exact_q3_operating_cash_identified": {
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "a06:s03"
+        ]
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "scaled_amounts_preserve_ratios",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "income_model": [
+          [
+            2025,
+            3,
+            339176.0,
+            13416.0,
+            13416.0,
+            13416.0,
+            3.9554685473028752,
+            3.9554685473028752
+          ],
+          [
+            2025,
+            6,
+            661686.0,
+            29562.0,
+            30072.0,
+            30072.0,
+            4.467678022506143,
+            4.544753856058614
+          ],
+          [
+            2025,
+            9,
+            1000862.0,
+            42978.0,
+            43488.0,
+            43488.0,
+            4.294098487104116,
+            4.345054562966722
+          ],
+          [
+            2026,
+            3,
+            358992.0,
+            13392.0,
+            14526.0,
+            14492.0,
+            3.730445246690734,
+            4.04632972322503
+          ],
+          [
+            2026,
+            6,
+            686022.0,
+            28842.0,
+            30022.0,
+            30554.0,
+            4.204238348041317,
+            4.376244493616823
+          ],
+          [
+            2026,
+            9,
+            1045014.0,
+            42234.0,
+            44548.0,
+            45046.0,
+            4.041476956289581,
+            4.262909396429139
+          ]
+        ],
+        "adjustment_bridge": [
+          [
+            2025,
+            3,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2025,
+            6,
+            0.0,
+            0.0,
+            510.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2025,
+            9,
+            0.0,
+            0.0,
+            510.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2026,
+            3,
+            1444.0,
+            -310.0,
+            0.0,
+            -34.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2026,
+            6,
+            0.0,
+            880.0,
+            300.0,
+            532.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2026,
+            9,
+            1444.0,
+            570.0,
+            300.0,
+            498.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "year_to_date_cash": [
+          [
+            2026,
+            9,
+            54904.0,
+            37254.0,
+            17650.0,
+            0.0
+          ],
+          [
+            2025,
+            9,
+            45836.0,
+            33392.0,
+            12444.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "excluded_phonepe_charge_changes_gaap_not_adjusted",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "income_model": [
+          [
+            2025,
+            3,
+            169588.0,
+            6708.0,
+            6708.0,
+            6708.0,
+            3.9554685473028752,
+            3.9554685473028752
+          ],
+          [
+            2025,
+            6,
+            330843.0,
+            14781.0,
+            15036.0,
+            15036.0,
+            4.467678022506143,
+            4.544753856058614
+          ],
+          [
+            2025,
+            9,
+            500431.0,
+            21489.0,
+            21744.0,
+            21744.0,
+            4.294098487104116,
+            4.345054562966722
+          ],
+          [
+            2026,
+            3,
+            179496.0,
+            6686.0,
+            7263.0,
+            7246.0,
+            3.7248740919017695,
+            4.04632972322503
+          ],
+          [
+            2026,
+            6,
+            343011.0,
+            14421.0,
+            15011.0,
+            15277.0,
+            4.204238348041317,
+            4.376244493616823
+          ],
+          [
+            2026,
+            9,
+            522507.0,
+            21107.0,
+            22274.0,
+            22523.0,
+            4.03956310633159,
+            4.262909396429139
+          ]
+        ],
+        "adjustment_bridge": [
+          [
+            2025,
+            3,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2025,
+            6,
+            0.0,
+            0.0,
+            255.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2025,
+            9,
+            0.0,
+            0.0,
+            255.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2026,
+            3,
+            732.0,
+            -155.0,
+            0.0,
+            -17.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2026,
+            6,
+            0.0,
+            440.0,
+            150.0,
+            266.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2026,
+            9,
+            732.0,
+            285.0,
+            150.0,
+            249.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "year_to_date_cash": [
+          [
+            2026,
+            9,
+            27452.0,
+            18627.0,
+            8825.0,
+            0.0
+          ],
+          [
+            2025,
+            9,
+            22918.0,
+            16696.0,
+            6222.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "irrelevant_later_periods",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "income_model": [
+          [
+            2025,
+            3,
+            169588.0,
+            6708.0,
+            6708.0,
+            6708.0,
+            3.9554685473028752,
+            3.9554685473028752
+          ],
+          [
+            2025,
+            6,
+            330843.0,
+            14781.0,
+            15036.0,
+            15036.0,
+            4.467678022506143,
+            4.544753856058614
+          ],
+          [
+            2025,
+            9,
+            500431.0,
+            21489.0,
+            21744.0,
+            21744.0,
+            4.294098487104116,
+            4.345054562966722
+          ],
+          [
+            2026,
+            3,
+            179496.0,
+            6696.0,
+            7263.0,
+            7246.0,
+            3.730445246690734,
+            4.04632972322503
+          ],
+          [
+            2026,
+            6,
+            343011.0,
+            14421.0,
+            15011.0,
+            15277.0,
+            4.204238348041317,
+            4.376244493616823
+          ],
+          [
+            2026,
+            9,
+            522507.0,
+            21117.0,
+            22274.0,
+            22523.0,
+            4.041476956289581,
+            4.262909396429139
+          ]
+        ],
+        "adjustment_bridge": [
+          [
+            2025,
+            3,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2025,
+            6,
+            0.0,
+            0.0,
+            255.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2025,
+            9,
+            0.0,
+            0.0,
+            255.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2026,
+            3,
+            722.0,
+            -155.0,
+            0.0,
+            -17.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2026,
+            6,
+            0.0,
+            440.0,
+            150.0,
+            266.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            2026,
+            9,
+            722.0,
+            285.0,
+            150.0,
+            249.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "year_to_date_cash": [
+          [
+            2026,
+            9,
+            27452.0,
+            18627.0,
+            8825.0,
+            0.0
+          ],
+          [
+            2025,
+            9,
+            22918.0,
+            16696.0,
+            6222.0,
+            0.0
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "evidence.json": "086648aa1f8e4f8ab6a8b503fe6c5c21592ae067fe4bdc1b4a746e88da7c3340",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "control-2.sqlite": "b1cc051b265c19b029861acb79720f1233ecf496b96e36782977d5c7fd425a58",
+    "sources.md": "872894d48600b9d962c2b6be30acbf70b71ac1d20aa634708b45ff940f930df8",
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-3.sqlite": "fd9d918a186f8489561d5523f53bd124f9c9020398c9e9153437754292763a28",
+    "control-1.sqlite": "8a64d52d7e93769e3f29098c280ef43d80857be482535c502ed462dfe3de003f",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "data.sqlite": "53c406097a8a7804b81d8d5d9d047bed89d4f7a86bb6b17b4ce847ddbf6db81d",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_sql_worker.py": "ab5d803ac8c9f2ea34297bd6bb2d066a8ba70d0111b6ae0d4dba67d7a9b5c5b1",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/workflow_grading.py": "caf9b58c3e0f1c6ae34cc59546de95b0e0055f872c575db61796ad7ddd1c61aa"
+  },
+  "context_evidence_allowed": [
+    "a06:s01",
+    "a06:s02",
+    "a06:s03"
+  ]
+}

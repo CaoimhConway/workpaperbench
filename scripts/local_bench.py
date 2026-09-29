@@ -428,7 +428,7 @@ def main():
     control_command = sub.add_parser('controls')
     control_command.add_argument('--attempt', required=True)
     serving = sub.add_parser('serve')
-    serving.add_argument('--profile', type=Path, default=ROOT / 'config/local/qwen3-4b-instruct-2507-delivery.json')
+    serving.add_argument('--profile', type=Path, default=ROOT / 'config/local/qwen35-9b-terminal.json')
     for name in ('run', 'grade', 'replay'):
         command = sub.add_parser(name)
         command.add_argument('--dataset', default='challenge-v2')
@@ -440,7 +440,7 @@ def main():
         artifact_input = command.add_mutually_exclusive_group(required=name == 'grade')
         artifact_input.add_argument('--answer', type=Path)
         artifact_input.add_argument('--artifacts', type=Path)
-        command.add_argument('--profile', type=Path, default=ROOT / 'config/local/qwen3-4b-instruct-2507-delivery.json')
+        command.add_argument('--profile', type=Path, default=ROOT / 'config/local/qwen35-9b-terminal.json')
         if name == 'replay':
             command.add_argument('--retained', required=True)
     reporting = sub.add_parser('report')
