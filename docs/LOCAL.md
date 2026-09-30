@@ -31,20 +31,22 @@ The tested CPU server is [llama.cpp b11516](https://github.com/ggml-org/llama.cp
 commit `d4d82d67f`. Extract the official `llama-b11516-bin-macos-x64.tar.gz` asset
 under `.local/runtime/`, producing `.local/runtime/llama-b11516/llama-server`.
 Its archive SHA256 is `e0b7a1c44132b6b44e349a4fa9813ee2e67bd26de1325c91bfecec37daf01000`.
-The [profile](../config/local/qwen35-9b-terminal.json) verifies weights, binary and
+The [profile](../config/local/qwen35-9b-terminal-24.json) verifies weights, binary and
 embedded tool/chat template before launch. Weights, binaries and raw logs remain
 private local assets excluded from Git.
 
 This configuration uses eight CPU threads, one request at a time, 65,536 tokens
 of native context, thinking mode and no context shifting. Each candidate has
-eighteen turns, 4,096 generated tokens per turn and 2,700 seconds of candidate
+24 turns, 4,096 generated tokens per turn and 3,600 seconds of candidate
 wall time. Native terminal tools receive generic filesystem-delivery guidance.
-Its native three-file development smoke delivered all artifacts in 20m33s and
-reached fresh verification. Financial and preservation checks failed and remain
-visible in [the compatibility proof](../reports/local/setup-terminal-workflow-validation.json).
-The corrected evidence contract is validated separately before scored calls.
-The [frozen scored schedule](../config/local/development-schedule-3.json) records
-three fresh development attempts under this configuration.
+Its native three-file development smoke delivered all artifacts in 15m26s and
+reached fresh verification. Evidence and delivery pass. A claim about the starting
+query and duplicate-export preservation fail, as shown in
+[the compatibility proof](../reports/local/setup-terminal-budget-validation.json).
+Financial outcomes are excluded from setup selection. The earlier eighteen-turn
+profile and its paused scored schedule remain separately preserved.
+[Schedule 4](../config/local/development-schedule-4.json) pins three fresh prototype
+attempts under the selected configuration, declared before any scored call.
 
 Retain the pinned Hermes installer from commit
 `8b66a51036c1e20920a17cdd049fdf55c968d683` at
