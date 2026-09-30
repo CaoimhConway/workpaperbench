@@ -21,6 +21,32 @@ profile, then install native Harbor and its verifier dependency inside it:
 ~/.local/opt/lima-2.2.0/bin/limactl shell workpaperbench-local bash -lc 'python3 -m venv ~/runtime && ~/runtime/bin/pip install harbor==0.23.0 jsonschema==4.26.0'
 ```
 
+## Verify a workpaper without inference
+
+The project environment and guest setup above are sufficient for grading. No
+weights, model server or Hermes installer are required for this path.
+
+```sh
+./wpb grade --dataset workflow-v5 --task c01 \
+  --artifacts examples/block-workpaper --attempt block-example-1
+```
+
+The checked-in example is an authored reference. The expected checks are
+`financial_answer=true`, `evidence=true`, `robustness=true` and `delivery=true`.
+The receipt is retained under `.raw/local-trials/block-example-1/receipt.json`.
+Use a fresh attempt ID for another verification. Failed financial checks produce
+a receipt too, so inspect the verdict rather than treating process exit as a score.
+
+The `./wpb` grading wrapper transfers only the required inputs to the isolated
+guest. Its model preflight is specific to the measured Intel Mac Pro, but neither
+the task format nor the financial verifier requires that processor. The underlying
+Linux entry point is `scripts/local_trial.py`, which is also used by the wrapper.
+It requires a dedicated guest marked by the checked-in provisioning profile,
+Docker and native Harbor. A general-purpose host is not an equivalent environment.
+Other guest/platform combinations have not been validated here.
+
+## Run the measured local model
+
 The measured default is Qwen3.5-9B **Q4_K_M** from
 [the pinned quantization repository](https://huggingface.co/twoody/Qwen3.5-9B-GGUF/tree/b647a5938c8cf40d1c3553ddd9bf2892895f0110).
 Place `Qwen3.5-9B-Q4_K_M.gguf` in `.local/models/`. The publisher declares Apache
@@ -81,7 +107,7 @@ published regression task, or the selected development prototypes:
 
 ```sh
 ./wpb run --task c03 --attempt my-block-1
-./wpb run --dataset workflow-v4 --tasks a01 b01 c01 --attempt my-dev
+./wpb run --dataset workflow-v5 --tasks a01 b01 c01 --attempt my-dev
 ```
 
 Each identifier is unique. Existing attempt directories are rejected. The runner
@@ -89,11 +115,13 @@ uses fresh candidate state, and only one native trial may run at a time. A profi
 selects the exact weights, template, context, generation settings and bounds.
 Reports reject mixed profiles and task/scorer identities.
 
+## Submit replay and report
+
 Submit an engineer's JSON workpaper or workflow artifact directory:
 
 ```sh
 ./wpb grade --task c03 --answer /path/to/answer.json --attempt engineer-1
-./wpb grade --dataset workflow-v4 --task b01 --artifacts /path/to/workpaper --attempt engineer-workflow-1
+./wpb grade --dataset workflow-v5 --task b01 --artifacts /path/to/workpaper --attempt engineer-workflow-1
 ./wpb replay --task c03 --retained my-block-1 --attempt replay-block-1
 ./wpb report --attempts my-block-1 --output reports/local/my-block-report.json
 ```
@@ -104,6 +132,18 @@ verification. `--retained all` selects current-catalog retained workpapers.
 uses the original published candidate dossier with corrected challenge-1.1.3
 scoring. It does not pretend the old answer used repaired Microsoft headings.
 Use `--retained all` with `--legacy` to replay all available historical slots.
+
+For a workflow replay and report, keep the catalog and task explicit:
+
+```sh
+./wpb replay --dataset workflow-v5 --task c01 \
+  --retained block-example-1 --attempt block-example-replay-1
+./wpb report --attempts block-example-1 block-example-replay-1 \
+  --output reports/local/my-workpaper-review.json
+```
+
+Reports compare original artifact hashes and refuse to mix scorer versions or
+model configurations. Output files are created exclusively, preserving earlier reports.
 
 The original installed console command and `python -m workpaperbench.cli` remain
 frozen historical interfaces. Current usage enters through `current_cli`.
