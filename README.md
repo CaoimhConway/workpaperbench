@@ -32,7 +32,7 @@ supplied disclosure cannot identify.
 | Historical challenge financial correctness | Inexpensive profile 17/27, reference profile 25/27 |
 | Historical corrected strict completion | 8/27 and 18/27 under challenge-1.1.3 |
 | New workflow software/data | 30 cases numerically verified, plus 36 contract and 12 corrected-evidence checks |
-| Local development calibration | 24-turn setup verified, three-prototype schedule frozen |
+| Local development calibration | Three attempts, one assessed, two unassessed, further calibration paused |
 | Held-out workflow evaluation | Not run, 24 cases verified using references and controls |
 | Frontier discrimination | Unmeasured on the workflow tier |
 | Human review and external use | Pending |
@@ -47,12 +47,15 @@ The current setup is local-only on an Intel Mac Pro. The measured default
 uses Qwen3.5-9B **Q4_K_M**, approximately nine billion parameters, through
 llama.cpp b11516 on CPU with a real 65,536-token native window. Thinking mode and
 native terminal tools delivered all three SQL files and JSON in a 15m26s setup
-smoke with a 24-turn budget. Evidence and delivery pass. A claim about the starting
-query and duplicate-export checks fail. The eighteen-turn schedule remains paused
-after two native partial exits. Fresh grading of its exact retained Brale artifacts
-passes financial correctness and delivery, while evidence and preservation fail.
-That diagnostic does not change its scored infrastructure outcome. Earlier
-configurations and failures remain separately labeled.
+smoke with a budget of 24 tool iterations. The frozen three-prototype schedule
+then produced one assessable workpaper. Brale's original tables, evidence and
+delivery pass, but a starting-query claim and duplicate-export checks fail.
+Block ended with a partial native session and Microsoft timed out. Both retained
+one SQL file and no JSON, leaving their financial checks unassessed. Further
+calibration is paused. [The versioned report](reports/local/workflow-development-budget-1.json)
+and [diagnostics](reports/local/workflow-development-budget-diagnostics-1.json)
+preserve every attempt. Earlier profiles and inference-free partial diagnostics
+remain separately labeled.
 Native Harbor/Hermes execution runs in a dedicated Ubuntu 24.04 guest without
 host mounts or owner credentials. New external-service spending is USD 0 and no
 Actions job is launched during this phase.

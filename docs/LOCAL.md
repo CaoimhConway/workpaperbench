@@ -38,7 +38,10 @@ private local assets excluded from Git.
 This configuration uses eight CPU threads, one request at a time, 65,536 tokens
 of native context, thinking mode and no context shifting. Each candidate has
 24 turns, 4,096 generated tokens per turn and 3,600 seconds of candidate
-wall time. Native terminal tools receive generic filesystem-delivery guidance.
+wall time. This is the native tool-loop budget. Hermes may issue a forced final
+request at the limit, and capped partial sessions remain failures. Actual request
+counts and elapsed wall time are retained per trial. Native terminal tools receive
+generic filesystem-delivery guidance.
 Its native three-file development smoke delivered all artifacts in 15m26s and
 reached fresh verification. Evidence and delivery pass. A claim about the starting
 query and duplicate-export preservation fail, as shown in
@@ -47,6 +50,13 @@ Financial outcomes are excluded from setup selection. The earlier eighteen-turn
 profile and its paused scored schedule remain separately preserved.
 [Schedule 4](../config/local/development-schedule-4.json) pins three fresh prototype
 attempts under the selected configuration, declared before any scored call.
+All three slots are now retained. Brale reached verification, while Block ended
+with a native partial exit and Microsoft timed out at 3,600 candidate seconds.
+The latter two have no JSON and unassessed semantic checks. Further calibration
+is paused. This is a tested local integration with limited workflow coverage,
+not a guarantee that the default model completes every case.
+[Actual results](../reports/local/workflow-development-budget-1.json) preserve
+the failed attempts alongside the assessable workpaper.
 
 Retain the pinned Hermes installer from commit
 `8b66a51036c1e20920a17cdd049fdf55c968d683` at

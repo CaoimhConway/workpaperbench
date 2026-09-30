@@ -11,9 +11,9 @@ experience only after an actual review.
 
 ## Case A - stablecoin reserve audit
 
-[Candidate request](../../datasets/workflow-v2/tasks/b02/instruction.md),
-[source dossier](../../datasets/workflow-v2/tasks/b02/environment/sources.md),
-[output contract](../../datasets/workflow-v2/tasks/b02/environment/output_contract.json).
+[Candidate request](../../datasets/workflow-v4/tasks/b02/instruction.md),
+[source dossier](../../datasets/workflow-v4/tasks/b02/environment/sources.md),
+[output contract](../../datasets/workflow-v4/tasks/b02/environment/output_contract.json).
 
 Use the two Paxos PYUSD reserve reports linked in the dossier, including their
 management statements, accountant dates, comparative columns and Treasury
@@ -25,9 +25,9 @@ equal-amount observations and alternative valid joins.
 
 ## Case B - revised annual financials
 
-[Candidate request](../../datasets/workflow-v2/tasks/c07/instruction.md),
-[source dossier](../../datasets/workflow-v2/tasks/c07/environment/sources.md),
-[output contract](../../datasets/workflow-v2/tasks/c07/environment/output_contract.json).
+[Candidate request](../../datasets/workflow-v4/tasks/c07/instruction.md),
+[source dossier](../../datasets/workflow-v4/tasks/c07/environment/sources.md),
+[output contract](../../datasets/workflow-v4/tasks/c07/environment/output_contract.json).
 
 Use the Cisco earnings release and annual report linked in the dossier. Check the
 report's explicit supersession statement, the settlement recognition and tax
@@ -39,9 +39,9 @@ that lacks an observable basis.
 
 ## Case C - bank presentation and significant items
 
-[Candidate request](../../datasets/workflow-v2/tasks/c09/instruction.md),
-[source dossier](../../datasets/workflow-v2/tasks/c09/environment/sources.md),
-[output contract](../../datasets/workflow-v2/tasks/c09/environment/output_contract.json).
+[Candidate request](../../datasets/workflow-v4/tasks/c09/instruction.md),
+[source dossier](../../datasets/workflow-v4/tasks/c09/environment/sources.md),
+[output contract](../../datasets/workflow-v4/tasks/c09/environment/output_contract.json).
 
 Use the JPMorgan Chase Q4/FY2025 presentation linked in the dossier, especially
 the managed-basis definition, legal-expense adjustment and significant-item
