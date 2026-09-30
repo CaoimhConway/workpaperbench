@@ -1,0 +1,31 @@
+{
+  "rationale": "Adjusted earnings and diluted shares both change basis. Reconciling tax and discontinued operations before matching denominators avoids an apparently plausible EPS result, while segment growth supports bounded contribution rather than a price claim.",
+  "source_group": "broadcom-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "authored synthetic work-product defects",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "33738a928a117ac92cf68861fd70979360ad58314af1e67f3c1a0585e45a84ec",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "d1ce4c3f0eb0ec4ea442240625a0e61c159096b217d994bfc4fce9f21b850b77",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "3e9d53f07bb154caf6d21c1692bbaf32d426e29ffdb01cd26b05aab2cc616c27",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "d330f0ac98c6e54c963501c83335f9705b17fc7af18635a31eedbce2656aa757",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "task_id": "workflow-v5-c03",
+  "tables": [
+    {
+      "id": "gross_to_net",
+      "file": "gross_to_net.sql",
+      "evidence": [
+        "c03:s01"
+      ]
+    },
+    {
+      "id": "net_income_reconciliation",
+      "file": "net_income_reconciliation.sql",
+      "evidence": [
+        "c03:s02"
+      ]
+    },
+    {
+      "id": "income_growth_bridge",
+      "file": "income_growth_bridge.sql",
+      "evidence": [
+        "c03:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "q4_gaap_and_adjusted_same_direction",
+      "verdict": "contradicted",
+      "evidence": [
+        "c03:s02"
+      ]
+    },
+    {
+      "id": "litigation_majority_annual_gap",
+      "verdict": "supported",
+      "evidence": [
+        "c03:s02"
+      ]
+    },
+    {
+      "id": "same_quarter_price_effect_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "c03:s03"
+      ]
+    }
+  ]
+}

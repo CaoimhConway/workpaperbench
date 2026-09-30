@@ -1,0 +1,50 @@
+{
+  "task_id": "workflow-v5-a05",
+  "tables": [
+    {
+      "id": "income_model",
+      "file": "income_model.sql",
+      "evidence": [
+        "a05:s01"
+      ]
+    },
+    {
+      "id": "operating_growth_bridge",
+      "file": "operating_growth_bridge.sql",
+      "evidence": [
+        "a05:s01"
+      ]
+    },
+    {
+      "id": "membership_accrual_bridge",
+      "file": "membership_accrual_bridge.sql",
+      "evidence": [
+        "a05:s01",
+        "a05:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "quarter_is_one_fourth_of_year",
+      "verdict": "contradicted",
+      "evidence": [
+        "a05:s01"
+      ]
+    },
+    {
+      "id": "membership_growth_contributes_to_operating_growth",
+      "verdict": "supported",
+      "evidence": [
+        "a05:s01"
+      ]
+    },
+    {
+      "id": "exact_fee_cash_receipts_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "a05:s02"
+      ]
+    }
+  ]
+}

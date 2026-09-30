@@ -1,0 +1,31 @@
+{
+  "rationale": "An analyst updating a cash-conversion model must reconcile statement sections and retain lease-funded capital spending. The period bridge and segment model provide different views of economic performance, while a noncash tax adjustment alone cannot quantify a future cash benefit.",
+  "source_group": "meta-fy2025-cashflow-segments",
+  "split": "development",
+  "exposure": "Newly authored development case, never held out",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "authored synthetic work-product defects",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "05225e95ad0d134d01fc874003deb6396b411fae34cfe9809b0c8bfb63770312",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "011b734316e1b8063f3f35b11427946e1e97222b24676c49d9fe6f8df2eba26f",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "8350bf388552e86605cbe0c36faf1a6e7eee0a29f6aa8ea5375267631d79f497",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "2cbcfcb425f27939e49a55777af60d3ec1c32ba61a2e662dbbe2c9131f23fcf9",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  }
+}

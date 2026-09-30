@@ -1,0 +1,144 @@
+"""Check authored workpapers in isolated Linux verifiers without inference."""
+import argparse
+import base64
+import fcntl
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from workpaperbench.catalog import load
+from local_bench import BUILDER, digest, guest, prepare
+
+DATASET = 'workflow-v5'
+CONTAINER = '''import base64,json,pathlib,runpy,sys
+payload=json.load(sys.stdin)
+root=pathlib.Path('/logs/artifacts')
+root.mkdir(parents=True)
+for name,data in payload.items():
+ (root/name).write_bytes(base64.b64decode(data,validate=True))
+runpy.run_path('/tests/verify.py',run_name='__main__')
+print(pathlib.Path('/logs/verifier/verdict.json').read_text())
+'''
+
+
+def artifacts(task, variant, covered):
+    answer = json.loads((task / 'tests/reference.json').read_text())
+    gold = json.loads((task / 'tests/gold.json').read_text())
+    files = {entry['file']: (task / 'solution' / entry['file']).read_text() for entry in answer['tables']}
+    if variant == 'context':
+        for role in ('tables', 'claims'):
+            for entry in answer[role]:
+                spec = gold[role][entry['id']]
+                entry['evidence'] = sorted(set(spec['evidence'][-1] + spec['context_evidence_allowed']))
+        for name, spec in gold['tables'].items():
+            sql = files[name + '.sql'].strip().rstrip(';')
+            columns = ', '.join('"' + column + '"' for column in reversed(spec['columns']))
+            files[name + '.sql'] = 'SELECT ' + columns + ' FROM (\n' + sql + '\n) ORDER BY 1 DESC\n'
+    elif variant == 'citation_dump':
+        known = [entry['id'] for entry in json.loads((task / 'environment/evidence.json').read_text())]
+        for entry in answer['tables'] + answer['claims']:
+            entry['evidence'] = known
+    elif variant == 'constant_residual':
+        for name, spec in gold['tables'].items():
+            forced = {column for table, column in covered if table == name}
+            if forced:
+                sql = files[name + '.sql'].strip().rstrip(';')
+                columns = ', '.join(('0 AS ' if column in forced else '') + '"' + column + '"' for column in spec['columns'])
+                files[name + '.sql'] = 'SELECT ' + columns + ' FROM (\n' + sql + '\n)\n'
+    files['answer.json'] = json.dumps(answer, indent=2) + '\n'
+    return {name: data.encode() for name, data in files.items()}
+
+
+def expected(variant):
+    return dict(financial_answer=True, evidence=variant != 'citation_dump',
+                robustness=variant != 'constant_residual', delivery=True)
+
+
+def validate(verdict, variant, covered):
+    if verdict['checks'] != expected(variant) or not all(verdict['isolation'].values()):
+        raise ValueError('unexpected_quality_verdict:' + json.dumps(verdict))
+    if variant == 'constant_residual':
+        for name in {table for table, _ in covered}:
+            checks = verdict['details']['tables'][name]
+            assert checks['original']
+            assert checks['controls']['independent_disclosure_discrepancy'] is False
+            assert all(value for key, value in checks['controls'].items() if key != 'independent_disclosure_discrepancy')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--tasks', nargs='+', default=['a01', 'b01', 'c01'])
+    parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--native-prefix', help='Also test these cases through native Harbor before the control sweep')
+    args = parser.parse_args()
+    if args.output.exists():
+        raise ValueError('validation_report_already_exists')
+    manifest = load(ROOT, DATASET)
+    keys = list(manifest['tasks']) if args.tasks == ['all'] else args.tasks
+    review = json.loads((ROOT / 'config/workflow-quality-review.json').read_text())
+    report = {'validation_id': 'workflow-quality-1', 'manifest_id': manifest['manifest_id'],
+              'scorer_version': manifest['scorer_version'], 'scorer_sha256': manifest['scorer_sha256'],
+              'validator_sha256': digest(__file__), 'inference': False, 'external_service_spend_usd': 0,
+              'scope': 'Authored positive and negative controls, not candidate-model performance',
+              'native_receipts': [], 'isolated_verifier_checks': []}
+    if args.native_prefix:
+        for key in keys:
+            _, _, task = load(ROOT, DATASET, key)
+            variant = 'reference'
+            directory = ROOT / '.local/quality-submissions' / (args.native_prefix + '-' + key)
+            directory.mkdir(parents=True, exist_ok=False)
+            for name, data in artifacts(task, variant, []).items():
+                (directory / name).write_bytes(data)
+            attempt = args.native_prefix + '-' + key
+            subprocess.run([sys.executable, str(ROOT / 'scripts/local_bench.py'), 'grade', '--dataset', DATASET,
+                '--task', key, '--artifacts', str(directory), '--attempt', attempt], check=True)
+            path = ROOT / '.raw/local-trials' / attempt
+            receipt = json.loads((path / 'receipt.json').read_text())
+            assert receipt['manifest_id'] == manifest['manifest_id'] and not receipt['inference']
+            assert digest(path / 'verifier.json') == receipt['verdict_sha256']
+            assert digest(path / 'raw-answer.json') == receipt['raw_answer_sha256']
+            for name, checksum in receipt['sql_file_sha256'].items():
+                assert digest(path / 'raw-sql' / name) == checksum
+            validate(receipt['verdict'], variant, [])
+            report['native_receipts'].append({'receipt_sha256': digest(path / 'receipt.json'), 'receipt': receipt})
+    lock = (ROOT / '.local/local-command.lock').open('a')
+    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    prepare(DATASET, keys)
+    for key in keys:
+        _, spec, task = load(ROOT, DATASET, key)
+        tag = 'wpb-quality-' + spec['task_sha256'][:16]
+        guest('docker', 'build', '-q', '-t', tag, BUILDER + '/' + spec['path'] + '/tests', capture_output=True)
+        image_id = guest('docker', 'image', 'inspect', '--format={{.Id}}', tag, capture_output=True).stdout.decode().strip()
+        covered = review['residual_controls'].get(key, {}).get('covered', [])
+        for variant in ['reference', 'context', 'citation_dump'] + (['constant_residual'] if covered else []):
+            files = artifacts(task, variant, covered)
+            payload = json.dumps({name: base64.b64encode(data).decode() for name, data in files.items()}).encode()
+            result = guest('docker', 'run', '--rm', '--network', 'none', '--read-only', '--memory', '384m',
+                '--cpus', '1', '--pids-limit', '32', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges',
+                '--tmpfs', '/logs:rw,noexec,nosuid,size=4m', '--tmpfs', '/tmp:rw,noexec,nosuid,size=4m',
+                '-i', image_id, 'python', '-c', CONTAINER, input=payload, capture_output=True)
+            verdict = json.loads(result.stdout)
+            try:
+                validate(verdict, variant, covered)
+                failure = None
+            except (ValueError, AssertionError) as error:
+                failure = str(error) or 'control_specific_expectation_failed'
+                print(key, variant, 'FAILED', failure, flush=True)
+            report['isolated_verifier_checks'].append({'task': key, 'task_sha256': spec['task_sha256'],
+                'variant': variant, 'expectation_passed': failure is None, 'failure': failure, 'image_id': image_id, 'files_sha256': {name: hashlib.sha256(data).hexdigest() for name, data in files.items()},
+                'verdict': verdict})
+        print(key, 'authored controls checked', flush=True)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    with args.output.open('x') as output:
+        output.write(json.dumps(report, indent=2) + '\n')
+    print(args.output)
+    if any(not row['expectation_passed'] for row in report['isolated_verifier_checks']):
+        raise SystemExit('Quality validation failed, inspect the retained diagnostic report')
+
+
+if __name__ == '__main__':
+    main()

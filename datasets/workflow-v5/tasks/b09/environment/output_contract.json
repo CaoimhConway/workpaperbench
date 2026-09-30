@@ -1,0 +1,146 @@
+{
+  "tables": {
+    "operating_reconciliation": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "window": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gaap_operating_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "signed_exclusion_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_operating_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "window"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "income_reconciliation": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "window": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gaap_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "signed_exclusion_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "window"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "share_basis": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "window": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gaap_shares_million": {
+          "type": "real",
+          "unit": "million_shares",
+          "tolerance": 1e-06
+        },
+        "adjusted_shares_million": {
+          "type": "real",
+          "unit": "million_shares",
+          "tolerance": 1e-06
+        },
+        "computed_gaap_eps_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        },
+        "computed_adjusted_eps_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        },
+        "adjusted_income_over_gaap_shares_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        },
+        "denominator_effect_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "window"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "deferred_rows_cancel_exactly": "The FY2025 deferred-plan asset and liability exclusions cancel exactly in the net-income bridge.",
+    "loss_period_share_bases_differ": "The FY2024 Q4 adjusted EPS requires a different share denominator from GAAP EPS.",
+    "exact_prior_restatement_identified": "The dossier identifies exact FY2024 non-GAAP income restated to the new deferred-plan exclusion basis."
+  },
+  "definitions": {
+    "operating_reconciliation": "All ten quarter/full-year observations. Include operating-and-income rows only and preserve signed adjustments.",
+    "income_reconciliation": "All ten observations. Include operating-and-income plus income-only rows. Residual is recomputed less matching printed adjusted income.",
+    "share_basis": "Use recomputed adjusted net income and its matching adjusted diluted denominator. Also report the quotient using GAAP shares and the signed difference. Quotients use rounded source inputs, not rounded published EPS."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient facts and relevant period, unit, definition or scope context for each output. Additional unrelated sections fail evidence. Equivalent reviewed source paths are accepted, without a shortest-citation requirement.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested."
+}

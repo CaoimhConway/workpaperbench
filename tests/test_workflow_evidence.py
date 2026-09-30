@@ -58,6 +58,8 @@ def test_evidence_correction_preserves_all_financial_rules():
         assert old_gold == new_gold
         for path in old.rglob('*.sqlite'):
             assert path.read_bytes() == (new / path.relative_to(old)).read_bytes()
+        for path in (old / 'environment').glob('starting_*.sql'):
+            assert path.read_bytes() == (new / 'environment' / path.name).read_bytes()
         for path in (old / 'solution').glob('*.sql'):
             assert path.read_bytes() == (new / 'solution' / path.name).read_bytes()
         assert (old / 'environment/evidence.json').read_bytes() == (new / 'environment/evidence.json').read_bytes()

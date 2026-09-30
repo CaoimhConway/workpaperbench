@@ -1,0 +1,126 @@
+{
+  "tables": {
+    "operating_reconciliation": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gaap_operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "adjustments_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "adjusted_operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "adjustment_attribution": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "contribution_to_gap_change_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "arr_guidance_bridge": {
+      "columns": {
+        "fiscal_year": {
+          "type": "text",
+          "unit": "label"
+        },
+        "observed_exit_arr_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "revalued_opening_arr_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "revaluation_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "target_arr_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "implied_target_arr_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "adjusted_growth_slower_than_gaap": "Annual non-GAAP operating income grew more slowly than GAAP operating income from FY2024 to FY2025.",
+    "arr_revaluation_is_recognized_revenue": "The USD 460 million ARR revaluation is recognized FY2025 revenue.",
+    "exact_organic_arr_increase_identifiable": "The supplied disclosure separately quantifies the exact organic customer contribution to the ARR revaluation."
+  },
+  "definitions": {
+    "operating_reconciliation": "Include FY2024, FY2025, Q4FY2024, Q3FY2025 and Q4FY2025. Residual is GAAP plus adjustment rows less reported non-GAAP operating income.",
+    "adjustment_attribution": "Each contribution divides its FY2025 less FY2024 change by the change in the total non-GAAP minus GAAP adjustment gap. Signed contributions may exceed 100% or be negative.",
+    "arr_guidance_bridge": "Use the revalued opening FY2026 ARR basis for the 10.2% target. The implied target is arithmetic on rounded disclosure amounts, not an observed forecast outcome."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient facts and relevant period, unit, definition or scope context for each output. Additional unrelated sections fail evidence. Equivalent reviewed source paths are accepted, without a shortest-citation requirement.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested."
+}

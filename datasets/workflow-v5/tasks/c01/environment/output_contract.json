@@ -1,0 +1,132 @@
+{
+  "tables": {
+    "revenue_bridge": {
+      "columns": {
+        "category": {
+          "type": "text",
+          "unit": "label"
+        },
+        "revenue_2023_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "revenue_2024_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "contribution_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "share_2023_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "share_2024_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "share_change_pp": {
+          "type": "real",
+          "unit": "percentage_points",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "category"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "profit_bridge": {
+      "columns": {
+        "category": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gross_profit_2023_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "gross_profit_2024_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "category"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "reconciliation": {
+      "columns": {
+        "revenue_change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "gross_profit_change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "revenue_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "gross_profit_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "bitcoin_gross_profit_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "revenue_change_usd_thousand"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "bitcoin_majority_of_total_revenue_increase": "Bitcoin contributed more than half of the increase in annual consolidated Block revenue from FY2023 to FY2024.",
+    "all_components_reconcile": "The supplied revenue categories and cost categories, including acquired-technology amortization, reconcile to the reported annual consolidated totals.",
+    "bitcoin_price_effect_identifiable": "The supplied disclosures identify a separate numerical Bitcoin price contribution to the annual revenue change."
+  },
+  "definitions": {
+    "revenue_bridge": "Contribution is the category change divided by consolidated revenue change, in percent. share_change_pp is annual share in FY2024 less FY2023.",
+    "profit_bridge": "Amortization is a negative gross-profit component without a corresponding revenue category.",
+    "reconciliation": "Each residual is reported consolidated total change less summed component changes. Bitcoin gross-profit growth uses FY2023 as the base."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient facts and relevant period, unit, definition or scope context for each output. Additional unrelated sections fail evidence. Equivalent reviewed source paths are accepted, without a shortest-citation requirement.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested."
+}
