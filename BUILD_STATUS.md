@@ -80,3 +80,11 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
 - The native invocation uses `Trial.create` / `Trial.run` and its documented
   AGENT_START hook to verify installed Hermes HEAD before solving. No adapter
   or credential proxy was added. Pin enforcement awaits the development pilot.
+
+- Publication bundles are scanned before and after JSON decoding. A synthetic
+  escaped-credential control passes. Local focused checks: four budget/artifact
+  controls passed. Provider usage remains $0 before the pilot.
+- Completed private jobs through `37266025062`: 33 rounded job minutes, $0.198
+  compute upper estimate at $0.006/minute. Included account quota and actual
+  invoice charge remain unavailable. Small seven-day artifacts add negligible
+  storage at this stage, not a known zero charge.

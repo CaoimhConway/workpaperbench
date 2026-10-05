@@ -72,6 +72,13 @@ def finite_number(value):
     return number if math.isfinite(number) else None
 
 
+def credential_in(content, key):
+    exact = key.encode("utf-8")
+    variants = [exact, base64.b64encode(exact), exact.hex().encode()]
+    fragments = [variant[i:i+16] for variant in variants for i in range(0, len(variant)-15, 8)]
+    return bool(SECRET_RE.search(content) or any(fragment in content for fragment in fragments))
+
+
 def provider_snapshot(key):
     request = Request(
         RUNTIME["cost"]["provider_metadata_url"],
@@ -426,10 +433,7 @@ def execute(mode, slot_id):
     answer_path = trial_dir / "artifacts/logs/artifacts/answer.json"
     answer, answer_error = bounded_bytes(answer_path, int(RUNTIME["max_answer_bytes"]))
     if answer is not None:
-        exact_key = key.encode("utf-8")
-        variants = [exact_key, base64.b64encode(exact_key), exact_key.hex().encode()]
-        fragments = [variant[i:i+16] for variant in variants for i in range(0, len(variant)-15, 8)]
-        if SECRET_RE.search(answer) or any(fragment in answer for fragment in fragments):
+        if credential_in(answer, key):
             answer_error = "credential_pattern"
         else:
             record["answer_sha256"] = hashlib.sha256(answer).hexdigest()
@@ -437,7 +441,11 @@ def execute(mode, slot_id):
                 from workpaperbench.grading import parse, validate
                 parsed = parse(answer)
                 validate(parsed, json.loads((ROOT / "config/schema.json").read_text()))
-                (output_dir / "answer.json").write_text(json.dumps(parsed, indent=2) + "\n")
+                canonical = (json.dumps(parsed, indent=2) + "\n").encode()
+                if credential_in(canonical, key):
+                    answer_error = "credential_pattern"
+                else:
+                    (output_dir / "answer.json").write_bytes(canonical)
             except Exception:
                 answer_error = "malformed_structure_digest_only"
     record["answer_status"] = "saved" if answer is not None and answer_error is None else answer_error

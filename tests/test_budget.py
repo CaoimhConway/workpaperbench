@@ -1,5 +1,6 @@
 """Synthetic metadata controls. No network or inference calls."""
 import importlib.util
+import json
 from pathlib import Path
 import pytest
 
@@ -29,3 +30,12 @@ def test_live_driver_cannot_run_on_local_device(monkeypatch):
     monkeypatch.delenv('GITHUB_ACTIONS',raising=False)
     with pytest.raises(ValueError,match='require_dedicated'):
         runner.execute('pilot','pilot-wp01-A-1')
+
+
+def test_decoded_artifact_scan_catches_json_escaped_credential():
+    key = 'synthetic-private-value-' + '0123456789' * 4
+    escaped = ''.join('\\u' + format(ord(character), '04x') for character in key)
+    wire = ('{"sql":"' + escaped + '"}').encode()
+    assert not runner.credential_in(wire, key)
+    canonical = json.dumps(json.loads(wire)).encode()
+    assert runner.credential_in(canonical, key)
