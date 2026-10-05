@@ -1,103 +1,104 @@
-# WorkpaperBench - Reproducible evaluations for financial research agents.
+# WorkpaperBench
 
-Can an agent calculate the right number - and support the conclusion?
+### Reproducible evaluations for financial research agents
 
-Eight small native Harbor tasks test financial evidence selection, metric
-comparability and replayable SQL using Hermes Agent with one hosted model. Software is complete and the full native gate passed 64
-controls. The frozen 48-slot evaluation is running. Development exploration is recorded separately.
+**Can an agent calculate the right number - and support the conclusion?**
 
-This authored workpaper derives Tesla calendar Q1 2024 R&D from
-[its Q2 filing](https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm).
-The three-month R&D amount is 1,074 USD million and the six-month amount is 2,225.
-Q1 is **1,151 USD million**. Q2 sequential change is **-6.689834926%**. The denominator
-is Q1 and both operands use 2024 columns. This demonstration is an authored
-reference, separate from saved submissions.
+Eight compact tasks test financial evidence selection, metric comparability and replayable SQL workpapers. Built on Harbor with a reference evaluation using Hermes Agent.
 
-```sql
-WITH periods AS (
-  SELECT MAX(CASE WHEN period='Q2' THEN amount_million END) AS q2,
-         MAX(CASE WHEN period='H1' THEN amount_million END) AS h1
-  FROM expenses
-  WHERE entity='Tesla' AND year=2024 AND metric='R&D'
-)
-SELECT h1-q2 AS value FROM periods
-```
+[Read the case study](reports/case-study.md) · [Inspect results](reports/results.md) · [Methodology](docs/METHODOLOGY.md) · [Data sources](DATA_SOURCES.md)
 
-Inspect it without a key or container:
+## A correct answer can conceal the wrong calculation
 
-```sh
+In a recorded evaluation trial, the agent reported **20% growth** from 100 to 120 token units. The number was correct. Its submitted SQL implemented the wrong formula.
+
+| Same submitted calculation | Original inputs | Changed-input control |
+|---|---:|---:|
+| P1 → P2 | 100 → 120 | 120 → 150 |
+| Submitted expression: `P2 - P1 * 100 / P1` | 20 | **50** |
+| Correct growth: `(P2 - P1) * 100 / P1` | 20% | **25%** |
+
+The original denominator accidentally masked the error. A controlled input change exposed it without a new model call.
+
+This is a real saved submission on a **synthetic task**, not a staged model result. It also has missing SQL aliases and citation requirements, so its original failure cannot be attributed solely to the formula error. [The case study](reports/case-study.md) links the unchanged answer, verdict, execution record and source fixture, and separates those findings.
+
+## What gets evaluated
+
+A plausible answer is not enough. Each task requires the correct values and units, evidence that supports the bounded claims, SQL that recomputes on pristine inputs, and an appropriate conclusion or specific evidence limit.
+
+| Task | Research decision | Split |
+|---|---|---|
+| Quarterly R&D | Derive a quarter from cumulative filing figures | Development |
+| Event aggregation | Remove duplicate exports without dropping legitimate events | Development |
+| Definition migration | Separate reported growth from like-for-like growth | Development |
+| As-of releases | Choose information available at the requested cutoff | Evaluation |
+| Transfer definitions | Compare two counts without inventing a time-series conclusion | Evaluation |
+| Coverage expansion | Distinguish more coverage from growth within the same coverage | Evaluation |
+| Services margins | Reconcile fiscal periods and percentage-point changes | Evaluation |
+| Evidence limits | Report an observable statistic without inventing payment or user labels | Evaluation |
+
+Two tasks use Tesla and Apple filing facts. Six are synthetic. The bounded public RPC acquisition failed, so two evaluation tasks explicitly share a synthetic replacement. **No result here establishes observed stablecoin-payment adoption.** [Source records and limitations](DATA_SOURCES.md) are part of the deliverable.
+
+## Inspect it locally
+
+The demo needs no API key, Docker or model download. It displays the recorded calculation issue without executing a submitted program.
+
+```bash
+git clone https://github.com/CaoimhConway/workpaperbench.git
+cd workpaperbench
 python3 -m venv .venv
 .venv/bin/python -m pip install -e '.[test]'
 .venv/bin/workpaperbench demo
 .venv/bin/python -m pytest -q
 ```
 
-Development tasks are wp01/wp02/wp05. Evaluation tasks are wp03/wp04/wp06/wp07/wp08.
-The two filing tasks preserve concise source facts. Other cases are original
-synthetic fixtures. The fixed Ethereum USDC capture failed through the two
-permitted public RPC paths, so wp04/wp08 explicitly share one synthetic corpus.
-This is a materially weaker empirical case and supports no claim about observed
-chain activity. [DATA_SOURCES.md](DATA_SOURCES.md) records origins, direct source
-locators, redistribution and source overlap.
+To regenerate the tables from retained records:
 
-A uses the full common requirements and structural checker. B adds one 230-word
-contract-check skill, supplied as appended instruction and the same discoverable
-skill file. Development runs exposed extra output claims, prose citations and
-hardcoded SQL despite correct numbers. The skill targets those contract/replay
-lapses. Its one delivery check passed, without establishing causal improvement.
-Both final arms receive the same corrected common requirements.
-
-Strict completion requires every requested value, unit, evidence context,
-availability decision, bounded conclusion and SQL replay. Separate diagnostics
-remain visible. Changed-input fixtures reject remembered constants and selected
-join errors, without proving that arbitrary SQL generalizes. The checker only
-validates structure. The separate native verifier replays constrained SQL against
-pristine original and declared synthetic changed inputs. Candidate code and
-candidate databases are never executed by the host.
-
-All container tests and live slots run on standard GitHub-hosted Ubuntu 24.04 VMs.
-Each live slot gets fresh containers and a 600-second solve allowance separate
-from 1200-second cold setup. Native file/terminal/skills toolsets are enabled,
-memory and delegation are disabled, and the turn cap is 90. The model is
-`qwen/qwen3.6-35b-a3b` on OpenRouter's default route, which may vary providers.
-[config/runtime.json](config/runtime.json) records pins and effective settings.
-The timestamped Hermes revision is checked before solving. Upstream bootstrap and
-dependency downloads remain moving parts. The three genuine installed-adapter
-compatibility fixes are described in [build-notes/NATIVE_COMPATIBILITY.md](build-notes/NATIVE_COMPATIBILITY.md).
-
-The candidate environment receives the dedicated lifetime-capped inference key.
-Its terminal can read that key. Native TCP filtering allows the inference host,
-but DNS/ICMP remain residual channels. This is not absolute egress isolation or
-keyless execution. The separate verifier uses a network-none namespace and has
-no inference key or Docker socket. Candidate inputs exclude gold, project checkout and
-Git history, GitHub credentials and host sockets. No paid key is provided to
-push or pull-request CI.
-
-Remote native controls use this tested command:
-
-```sh
-gh workflow run ci.yml --repo CaoimhConway/workpaperbench --ref main -f integration=true -f scope=full -f capture=false -f setup=false
+```bash
+.venv/bin/workpaperbench report
 ```
 
-The completed development dispatch used:
+## The study and its current status
 
-```sh
-gh workflow run benchmark.yml --repo CaoimhConway/workpaperbench --ref main -f mode=pilot -f batch=treatment -f manifest_id=development-v1
+The frozen comparison has **48 scheduled trials**: eight tasks, two configurations and three fresh attempts. The main evaluation contains 30 trials. The other 18 final trials and 12 earlier exploratory attempts are reported separately.
+
+**A** receives the full task instructions and structural checker. **B** receives those same inputs plus one 230-word contract-check skill selected after development observations. The underlying model is `qwen/qwen3.6-35b-a3b` through OpenRouter. Hermes Agent is the execution framework, not a claim that a Nous model was evaluated.
+
+**The empirical comparison is not yet a finished release.** [Results](reports/results.md) state the latest imported record count, actual workflow states, original verdicts and any reviewed verdicts. Missing records are not zero-score answers, and a green Actions job can still contain a scored task failure. There is no claimed treatment improvement before the completed evidence supports it.
+
+The original experiment remains pinned to its [execution snapshot](https://github.com/CaoimhConway/workpaperbench/tree/b4e256dc8976223a8a3fdad157a6b212f49bb8e1) and [run](https://github.com/CaoimhConway/workpaperbench/actions/runs/37280454673). Scorer corrections are versioned separately. They do not rewrite its inputs, original verdicts or live jobs.
+
+## How verification works
+
+```text
+Frozen tables + source context
+              ↓
+     Hermes → answer.json
+              ↓
+Separate verifier → original + changed-input SQL replay
+              ↓
+Original verdict + independent diagnostics + retained evidence
 ```
 
-It resumes only genuinely unstarted slots. All 12 development slots are already
-attempted, so redispatch does not provide new score-based retries. Native transport
-retries remain within each slot and their individual counts are not reported.
-Run IDs, evidence, resource accounting and gate state are in
-[BUILD_STATUS.md](BUILD_STATUS.md). Evaluation-not-tuned cases have no model
-exposure before freeze. The final fixed campaign has 30 evaluation and 18
-separate development slots, with three fresh attempts per task/arm. There is no
-best-of-three or independence/significance claim. Scope-only evidence-limit
-questions can partly cue the answer and are not open-world discovery tests.
+The reviewed grader accepts valid alternative SQL, distinguishes a wrong conclusion from a missing citation, and can inspect a uniquely identifiable requested answer even when extra output makes strict format fail. It never repairs an answer to award a pass.
 
-To replace a task inside this eight-task pack, edit its original source JSON,
-review sources and direct calculations, then run `python scripts/build_tasks.py`.
-The generated task includes candidate inputs and separate trusted tests. Add
-valid alternatives and plausible wrong controls, run local tests and the native
-Actions gate, and create a new freeze before new scored exposure. Do not modify
-the released freeze or selectively retune an exposed comparison.
+The replay worker is read-only, function-restricted, resource-bounded and isolated from inference credentials. All Docker, Harbor and live execution belong on GitHub-hosted Ubuntu runners. The local machine only edits, runs lightweight tests and views results.
+
+Native tests cover reference answers, valid alternatives, wrong periods, constants, joins, abstention, malformed outputs and isolation. New run controls use experiment-scoped identities, pre-setup receipts and ordered A/B pairs. [Methodology](docs/METHODOLOGY.md) explains the supported SQL subset, original-run limitations and correction policy. [Native compatibility notes](build-notes/NATIVE_COMPATIBILITY.md) document the integration findings.
+
+## Reproduce and contribute
+
+Run the key-free native controls through Actions:
+
+```bash
+gh workflow run ci.yml --repo CaoimhConway/workpaperbench --ref main \
+  -f integration=true -f scope=full -f capture=false -f setup=false
+```
+
+The original freeze is an immutable historical record, not permission to run changed code under its old identity. A new scored experiment needs a new reviewed manifest. Do not retry individual answers for a better score.
+
+To improve a task, start with its `sources/wpXX.json`, independently check the evidence and reference calculation, and add both a legitimate alternative and a plausible wrong submission to the tests. Keep changes out of an exposed comparison. There is no need to add a dashboard, new model or evaluation framework.
+
+**Scope:** a small, partly synthetic regression study over supplied evidence. Not open-web financial research, a leaderboard, a production reliability estimate or an investment recommendation. Repeated attempts and shared source groups are not independent datasets. Provider routing and bootstrap dependencies retain documented variability.
+
+[MIT license](LICENSE) for code. Third-party source material has its own notices in [DATA_SOURCES.md](DATA_SOURCES.md).
