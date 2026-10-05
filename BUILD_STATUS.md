@@ -1,7 +1,7 @@
 # Build status
 
 Specification v3.1. Dedicated repository: https://github.com/CaoimhConway/workpaperbench.
-Confirmed owner `CaoimhConway` (ID 55163829), default branch `main`, currently private.
+Confirmed owner `CaoimhConway` (ID 55163829), default branch `main`, now public after the completed software audit.
 No genuine external blocker. No Docker, Harbor or inference ran on this device.
 
 - Stage 1 complete: three development tasks, native controls, all 12 exploratory
@@ -11,7 +11,8 @@ No genuine external blocker. No Docker, Harbor or inference ran on this device.
   native gate `37276298546` on `77f1fd8` passed all 64 controls: 25 expected
   passes, 39 expected failures, every recorded isolation check passed.
 - Stage 3: fresh read-only source-first audit complete and fixes verified locally.
-  Final 48-slot campaign and publication/release are unrun, ready under standing authorization.
+  Software prerelease published. Frozen final 48-slot campaign is running as
+  `37280454673` on `b4e256d`. Empirical release remains pending actual completion.
 - Clean checkout `3031a86` installed and passed all 128 tests, demo, validate,
   report and full-history scanner. Frozen push CI `37277179243` also passed.
 - Current freeze `wpb-v1-92baa4a72f0e`, 234 file hashes. Content digest
@@ -121,9 +122,11 @@ is $10 incremental project Actions charges.
 Tracked files, Git blobs, candidate COPY contexts and freeze hashes passed the
 publication scanner. Dependency license/notice retained. Actual logs/artifacts,
 staged history/source audit and completed software gate are required before
-visibility change. No public release yet. Existing SSH setup reused. With explicit
+visibility change. Software prerelease v0.1.0-software published after the gate. Existing SSH setup reused. With explicit
 owner permission, the work include became case-insensitive and was ordered after
 the fallback. Effective existing work identity verified. Bootstrap `da28f4a` used
 the old fallback identity before the fix, history preserved without rewriting.
 
-Software publication audit complete: 19 started live-job logs, full native and frozen-unit logs, saved sanitized JSON, full Git blobs, source/license notices and candidate COPY contexts reviewed. No credential/encoded-fragment hits. The full native control report is permanently retained. Software is complete, final evaluation remains unrun.
+Software publication audit complete: 19 started live-job logs, full native and frozen-unit logs, saved sanitized JSON, full Git blobs, source/license notices and candidate COPY contexts reviewed. No credential/encoded-fragment hits. The full native control report is permanently retained. Software is complete. Final evaluation started only after this audit and the software prerelease.
+
+Exact final dispatch: `gh workflow run benchmark.yml --repo CaoimhConway/workpaperbench --ref main -f mode=final -f batch=all -f manifest_id=wpb-v1-92baa4a72f0e`. Run37280454673. No scored reruns or changed frozen inputs. Standard public Linux compute applies after the software publication timestamp recorded in the audit, while storage/invoice charges remain unknown.
