@@ -1,0 +1,40 @@
+name: WorkpaperBench cloud preflight
+
+# Runnable starting point ONLY. Stage 1 expands this file into actual project CI.
+# No paid inference, checkout, account token, repository write or local Docker needed.
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: workpaperbench-cloud-preflight
+  cancel-in-progress: false
+
+jobs:
+  cloud-preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Verify hosted Linux Docker runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${RUNNER_OS}" = "Linux"
+          uname -m
+          free -m
+          df -h "${RUNNER_TEMP}"
+          docker version
+          docker compose version
+          test "$(docker info --format '{{.OSType}}')" = "linux"
+          docker pull alpine:3.21
+          image_id="$(docker image inspect alpine:3.21 --format '{{.Id}}')"
+          docker run --rm --network none --memory 128m --cpus 1 \
+            --cap-drop ALL --security-opt no-new-privileges --read-only \
+            "$image_id" sh -c 'test -r /etc/alpine-release && echo "isolated-container-command-ok"'
+          {
+            echo '## Cloud plumbing preflight passed'
+            echo 'A disposable Linux container ran on GitHub, not the local device.'
+            echo 'This does NOT test Harbor, financial tasks, verifier isolation or model access.'
+            printf '\nContainer image ID: `%s`\n' "$image_id"
+          } >> "$GITHUB_STEP_SUMMARY"

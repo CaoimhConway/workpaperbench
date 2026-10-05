@@ -1,0 +1,39 @@
+# Merge with existing ignore rules; never discard user rules.
+.env
+.env.*
+!.env.example
+.secrets/
+*.pem
+*.key
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.DS_Store
+*.egg-info/
+build/
+dist/
+# Unreviewed source/job artifacts are not automatically publication-safe.
+.local/
+.raw/
+jobs/
+raw-runs/
+artifacts/
+.cache/
+# Curated sanitized records under reports/runs/ are intentionally NOT ignored.
+
+# Local coding-client state must not become source or release artifacts.
+.claude/settings.local.json
+.claude/.credentials.json
+.claude/projects/
+.claude/sessions/
+.claude/transcripts/
+.codex/auth.json
+.codex/sessions/
+.codex/history.jsonl
+CLAUDE.local.md
+AGENTS.local.md
