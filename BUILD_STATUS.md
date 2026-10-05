@@ -4,9 +4,9 @@ Specification: v3.1. Started 2026-10-04 (America/Los_Angeles).
 
 - Repository: https://github.com/CaoimhConway/workpaperbench; newly created private;
   verified API login `CaoimhConway` (ID 55163829), default branch `main`.
-- Development software built for wp01/wp02/wp05. Local install/demo and 51
-  lightweight reference, alternative, negative and boundary checks pass. Native
-  Harbor integration and paid trials are still unrun.
+- Development software built for wp01/wp02/wp05. Local install/demo and 55
+  lightweight checks pass. Full native development controls passed on Actions.
+  Paid trials are still unrun.
 - Dedicated key transferred through stdin to `OPENROUTER_API_KEY`. Provider metadata
   checked 2026-10-05 UTC: lifetime cap $20, reset null, usage $0, remaining $20,
   BYOK usage $0. Project authorization ceilings remain $50 inference / $10 Actions.
@@ -22,7 +22,8 @@ Specification: v3.1. Started 2026-10-04 (America/Los_Angeles).
 
 ## Gates
 
-Stage 1 local implementation: complete. Native integration/pilot: pending. Stage 2 expansion/freeze: pending.
+Stage 1 local implementation and full native development integration: complete.
+Latest smoke correction and development pilot: pending. Stage 2 expansion/freeze: pending.
 Stage 3 audit/campaign/release: pending. No results or completion claims.
 
 ## Development checkpoint
@@ -65,3 +66,9 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   CI has a 90-minute ceiling based on observed 21-minute development integration.
 - Pinned uv 0.9.26 installed and the lightweight dependency command tested.
   Reports retain setup/solve/verifier timing, known/unknown costs and source groups.
+
+- Smoke recheck `37265511360` failed on a bare TCP probe. Source inspection shows
+  native Docker TCP is redirected to a local gost filtering proxy, so connection
+  establishment is not external egress proof. Replaced the probe with a bounded
+  authenticated TLS handshake to a numeric external address. No network policy
+  relaxed. Failed native checks now retain their sanitized control record.

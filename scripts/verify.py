@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import sys
 import socket
+import ssl
 
 sys.path.insert(0, "/tests")
 from workpaperbench.grading import grade
@@ -12,8 +13,9 @@ output = Path("/logs/verifier")
 output.mkdir(exist_ok=True, parents=True)
 network_blocked = False
 try:
-    with socket.create_connection(("1.1.1.1", 443), timeout=1):
-        pass
+    with socket.create_connection(("1.1.1.1", 443), timeout=2) as transport:
+        with ssl.create_default_context().wrap_socket(transport, server_hostname="one.one.one.one"):
+            pass
 except Exception:
     network_blocked = True
 if any(k in os.environ for k in ("OPENROUTER_API_KEY", "GITHUB_TOKEN", "GH_TOKEN")):
