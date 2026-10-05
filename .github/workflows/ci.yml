@@ -37,6 +37,15 @@ jobs:
       - run: python -m pytest -q
       - run: workpaperbench demo
       - run: python scripts/audit.py
+      - name: Archive tracked source only for review
+        if: always() && github.ref == 'refs/heads/fix/review-integrity-and-readme'
+        run: git archive --format=tar --output=/tmp/workpaperbench-source.tar HEAD
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always() && github.ref == 'refs/heads/fix/review-integrity-and-readme'
+        with:
+          name: review-source-${{ github.sha }}
+          path: /tmp/workpaperbench-source.tar
+          retention-days: 7
   integration:
     if: github.event_name == 'workflow_dispatch' && inputs.integration
     runs-on: ubuntu-24.04
