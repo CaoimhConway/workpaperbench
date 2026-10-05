@@ -212,3 +212,41 @@ def test_wp08_rejects_payment_and_human_inference_from_transfer_rows(tmp_path):
     assert "business_payment_volume:availability_or_unit" in result["errors"]
     assert "unique_humans:availability_or_unit" in result["errors"]
     assert result["checks"]["conclusion"] is False
+
+
+def test_wp06_equal_original_tag_weights_do_not_hide_wrong_recomputation(tmp_path):
+    answer = reference("wp06")
+    query = ("WITH common AS (SELECT network_asset FROM observations GROUP BY network_asset HAVING COUNT(DISTINCT period)=2), "
+             "totals AS (SELECT period,SUM(amount_units) amount FROM observations JOIN common USING(network_asset) "
+             "JOIN asset_tags USING(network_asset) GROUP BY period) "
+             "SELECT 100.0*((SELECT amount FROM totals WHERE period='P2')-(SELECT amount FROM totals WHERE period='P1'))/"
+             "(SELECT amount FROM totals WHERE period='P1') AS value")
+    assert replay(query, ROOT / 'tasks/wp06/tests/data.sqlite') == 0
+    assert replay(query, ROOT / 'tasks/wp06/tests/changed.sqlite') == 22
+    answer['answers'][1]['sql'] = query
+    result = submit(tmp_path, 'wp06', answer)
+    assert result['checks']['numerical'] is True
+    assert result['checks']['replay'] is False
+    assert not result['complete']
+
+
+def test_wp08_scope_record_alone_supports_the_missing_label_conclusion(tmp_path):
+    answer = reference('wp08')
+    answer['conclusion']['evidence'] = ['policy:scope']
+    assert submit(tmp_path, 'wp08', answer)['complete']
+
+
+def test_wp04_window_record_alone_supports_temporal_evidence_limit(tmp_path):
+    answer = reference('wp04')
+    answer['conclusion']['evidence'] = ['policy:window']
+    assert submit(tmp_path, 'wp04', answer)['complete']
+
+
+def test_wp03_correct_scalar_cannot_cite_the_post_cutoff_revision(tmp_path):
+    answer = reference('wp03')
+    answer['answers'][1]['evidence'] = ['release:20240710', 'policy:selection']
+    result = submit(tmp_path, 'wp03', answer)
+    assert result['checks']['numerical'] is True
+    assert result['checks']['replay'] is True
+    assert result['checks']['evidence_context'] is False
+    assert not result['complete']

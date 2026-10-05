@@ -5,11 +5,11 @@ Specification: v3.1. Started 2026-10-04 (America/Los_Angeles).
 - Repository: https://github.com/CaoimhConway/workpaperbench; newly created private;
   verified API login `CaoimhConway` (ID 55163829), default branch `main`.
 - All eight packages are authored, with the expanded native gate still pending.
-  Development pilot has 11 started slots and one remaining treatment check.
-  Latest integrated lightweight suite: 112 checks passed.
+  Development pilot is complete with all 12 exploratory slots recorded.
+  Latest integrated lightweight suite: 127 checks passed after audit fixes.
 - Dedicated key transferred through stdin to `OPENROUTER_API_KEY`. Provider metadata
-  checked 2026-10-05 UTC: lifetime cap $20, reset null, usage $0, remaining $20,
-  BYOK usage $0. Project authorization ceilings remain $50 inference / $10 Actions.
+  checked 2026-10-05 06:59 UTC: lifetime cap $20, reset null, usage $0.0867218,
+  remaining $19.9132782, BYOK usage $0. Project authorization ceilings remain $50 inference / $10 Actions.
 - Git identity issue resolved with explicit owner authorization: existing work
   include changed to case-insensitive `gitdir/i:~/code/work/` and moved after the
   global fallback. Verified effective work identity. The bootstrap commit
@@ -22,7 +22,7 @@ Specification: v3.1. Started 2026-10-04 (America/Los_Angeles).
 
 ## Gates
 
-Stage 1 software/native development gates complete, treatment delivery check pending.
+Stage 1 software/native development and treatment delivery gates complete.
 Stage 2 sources and controls are being completed before freeze. Stage 3 campaign
 not started. Historical observations below retain the failures and superseded pins.
 
@@ -201,3 +201,7 @@ not started. Historical observations below retain the failures and superseded pi
 - Treatment delivery check `37274770675` completed wp05 B1 with every check passed. Before solving, native runtime HEAD matched and both treatment instruction presence and staged skill SHA256 matched `651820768f6a80222f92256abd9ac58474a480fcfbdf212bda8b22fff1863bb0`. Recorded slot cost delta $0.0062061 is provisional. This exhausts the 12 exploratory slots. Pilot results do not establish causal uplift because common authoring corrections preceded the delivery check.
 - All eight tasks have explicit origin metadata. Fresh read-only source-first audit found that the previous fallback would incorrectly label wp03/wp06 as primary filings. Fixed before any evaluation execution. The dated-release catalog now rejects the late publication by its own source ID while accepting eligible preliminary context.
 - Source review, instructions/schema-only review and named evaluation controls are preserved in `reports/source-review.md` and tests. Local full suite passed 122 controls. All-eight native integration and final freeze remain pending.
+
+- Source-first audit exposed equal-tag-weight cancellation in a wrong wp06 matched query. Added a schema-compatible changed metadata observation so it returns 22% rather than 25%, plus named local/native negative controls. Accepted wp08 scope-only missing-label conclusion evidence. Native run `37275297547` was canceled as superseded, not passed. Corrected all-eight integration will rerun.
+
+- Corrected integrated local suite: 127 passed. The earlier fixture edit briefly had a wrong row width, was corrected and regenerated, and the stable final suite passed. Superseded native run retained eight actual partial controls, without a gate-pass claim. Current Actions snapshot: 140 rounded job minutes, $0.84 compute before included quota, invoice/storage charges unknown.

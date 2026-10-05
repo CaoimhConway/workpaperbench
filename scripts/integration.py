@@ -88,6 +88,10 @@ BOUNDARY
                     claim["sql"] = wrapper.format(sql=claim["sql"])
             if task.name == "wp05" and index == 0:
                 alternate["answers"][0]["evidence"] = ["export:periods"]
+            if task.name == "wp04" and index == 0:
+                alternate["conclusion"]["evidence"] = ["policy:window"]
+            if task.name == "wp08" and index == 0:
+                alternate["conclusion"]["evidence"] = ["policy:scope"]
             name = task.name + "-alternative-" + str(index)
             results.append(native(control(task, name, alternate), name, True))
         for index, mutation in enumerate(("constant", "citations", "abstain")):
@@ -101,6 +105,12 @@ BOUNDARY
                 claim.update(status="insufficient_evidence", value=None, sql=None, reason_code="missing_required_input")
             name = task.name + "-wrong-" + str(index)
             results.append(native(control(task, name, wrong), name, False))
+    if scope == "full":
+        original = ROOT / "tasks/wp06"
+        wrong = json.loads((original / "tests/reference.json").read_text())
+        wrong["answers"][1]["sql"] = "WITH common AS (SELECT network_asset FROM observations GROUP BY network_asset HAVING COUNT(DISTINCT period)=2), totals AS (SELECT period,SUM(amount_units) amount FROM observations JOIN common USING(network_asset) JOIN asset_tags USING(network_asset) GROUP BY period) SELECT 100.0*((SELECT amount FROM totals WHERE period='P2')-(SELECT amount FROM totals WHERE period='P1'))/(SELECT amount FROM totals WHERE period='P1') AS value"
+        name = "wp06-matched-tag-join"
+        results.append(native(control(original, name, wrong), name, False))
     if scope == "smoke":
         (OUTPUT / "controls.json").write_text(json.dumps({"scope": scope, "run_id": os.environ["GITHUB_RUN_ID"], "commit": os.environ["GITHUB_SHA"], "controls": results}, indent=2) + "\n")
         return
