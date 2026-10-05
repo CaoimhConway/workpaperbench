@@ -132,3 +132,11 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   a two-occurrence correction to the existing native adapter, guarded by exact
   original/corrected module hashes. This is a dependency bug fix, with no new
   adapter, proxy or execution behavior. Actual corrected gate remains pending.
+
+- Corrected-version gate `37268809048` found a native setup/runtime data-root
+  mismatch. Configured native `agent.env.HERMES_HOME=/tmp/hermes` for both setup
+  and solving, which also places the checkout at `/tmp/hermes/hermes-agent`.
+  Optional desktop-tool warnings do not require adding desktop dependencies.
+- Capture validator now checks boundary numbers, address ABI padding and hashes,
+  and records request counts on failed paths. Two synthetic protocol tests pass.
+  No source capture has run yet.

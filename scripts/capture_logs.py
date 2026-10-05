@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
+import re
 import time
 from urllib.request import Request, urlopen
 
@@ -12,12 +13,13 @@ ENDPOINTS = ["https://ethereum-rpc.publicnode.com", "https://cloudflare-eth.com/
 FIRST, LAST = 20000000, 20000031
 
 
-def acquire(endpoint):
+def acquire(endpoint, counts):
     count = 0
 
     def rpc(method, params):
         nonlocal count
         count += 1
+        counts[endpoint] = count
         if count > 6:
             raise RuntimeError("request budget exhausted")
         body = json.dumps({"jsonrpc": "2.0", "id": count, "method": method, "params": params}).encode()
@@ -37,6 +39,8 @@ def acquire(endpoint):
     code = rpc("eth_getCode", [ADDRESS, hex(LAST)])
     if int(chain, 16) != 1 or int(decimals, 16) != 6 or len(code) <= 2:
         raise ValueError("contract metadata mismatch")
+    if int(start["number"], 16) != FIRST or int(finish["number"], 16) != LAST or int(start["timestamp"], 16) > int(finish["timestamp"], 16):
+        raise ValueError("boundary metadata mismatch")
     identities = set()
     amount_sum = 0
     for log in logs:
@@ -46,6 +50,10 @@ def acquire(endpoint):
         identities.add(identity)
         if not FIRST <= int(log["blockNumber"], 16) <= LAST or len(log["topics"]) != 3 or log["topics"][0] != TOPIC or len(log["data"]) != 66:
             raise ValueError("invalid Transfer encoding")
+        if any(not re.fullmatch(r"0x0{24}[0-9a-fA-F]{40}", topic) for topic in log["topics"][1:]):
+            raise ValueError("invalid address topic encoding")
+        if any(not re.fullmatch(r"0x[0-9a-fA-F]{64}", log[name]) for name in ("blockHash", "transactionHash")):
+            raise ValueError("invalid hash encoding")
         amount_sum += int(log["data"], 16)
     if amount_sum >= 2**63:
         raise ValueError("SQLite integer sum exceeds bound")
@@ -61,15 +69,16 @@ if __name__ == "__main__":
     destination = Path("capture")
     destination.mkdir(exist_ok=True)
     failures = []
+    counts = {}
     for endpoint in ENDPOINTS:
         try:
-            result = acquire(endpoint)
+            result = acquire(endpoint, counts)
             result["failed_paths"] = failures
             (destination / "log_capture.json").write_text(json.dumps(result, indent=2) + "\n")
             print("Captured", len(result["logs"]), "Transfer logs in the fixed window")
             break
         except Exception as exc:
-            failures.append({"endpoint": endpoint, "error": type(exc).__name__})
+            failures.append({"endpoint": endpoint, "requests": counts.get(endpoint, 0), "error": type(exc).__name__})
             time.sleep(5)
     else:
         (destination / "failure.json").write_text(json.dumps(failures, indent=2) + "\n")
