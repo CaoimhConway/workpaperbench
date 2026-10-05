@@ -20,28 +20,30 @@ In a recorded evaluation trial, the agent reported **20% growth** from 100 to 12
 
 The original denominator accidentally masked the error. A controlled input change exposed it without a new model call.
 
-This is a real saved submission on a **synthetic task**, not a staged model result. It also has missing SQL aliases and citation requirements, so its original failure cannot be attributed solely to the formula error. [The case study](reports/case-study.md) links the unchanged answer, verdict, execution record and source fixture, and separates those findings.
+This is a real saved submission on a **synthetic task**, not a staged model result. It also omits required SQL aliases and evidence citations, so its original failure cannot be attributed solely to the formula error. [The case study](reports/case-study.md) links the unchanged answer, verdict, execution record and source fixture, and separates those findings.
 
 ## What gets evaluated
 
 A plausible answer is not enough. Each task requires the correct values and units, evidence that supports the bounded claims, SQL that recomputes on pristine inputs, and an appropriate conclusion or specific evidence limit.
 
-| Task | Research decision | Split |
+| Task | Research decision | Source |
 |---|---|---|
-| Quarterly R&D | Derive a quarter from cumulative filing figures | Development |
-| Event aggregation | Remove duplicate exports without dropping legitimate events | Development |
-| Definition migration | Separate reported growth from like-for-like growth | Development |
-| As-of releases | Choose information available at the requested cutoff | Evaluation |
-| Transfer definitions | Compare two counts without inventing a time-series conclusion | Evaluation |
-| Coverage expansion | Distinguish more coverage from growth within the same coverage | Evaluation |
-| Services margins | Reconcile fiscal periods and percentage-point changes | Evaluation |
-| Evidence limits | Report an observable statistic without inventing payment or user labels | Evaluation |
+| [wp01: Quarterly R&D](tasks/wp01/instruction.md) | Derive a quarter from cumulative filing figures | Tesla filing facts |
+| [wp02: Event aggregation](tasks/wp02/instruction.md) | Remove duplicate exports without dropping legitimate events | Synthetic ledger |
+| [wp03: As-of releases](tasks/wp03/instruction.md) | Use information available at the requested cutoff | Synthetic releases |
+| [wp04: Transfer definitions](tasks/wp04/instruction.md) | Compare counts without inventing a time-series conclusion | Synthetic fallback |
+| [wp05: Definition migration](tasks/wp05/instruction.md) | Separate reported growth from like-for-like growth | Synthetic migration |
+| [wp06: Coverage expansion](tasks/wp06/instruction.md) | Distinguish expanded coverage from growth within matched coverage | Synthetic observations |
+| [wp07: Services margins](tasks/wp07/instruction.md) | Reconcile fiscal periods and percentage-point changes | Apple filing facts |
+| [wp08: Evidence limits](tasks/wp08/instruction.md) | Report an observable without inventing payment or user labels | Shared synthetic fallback |
+
+Development uses **wp01, wp02 and wp05**. Evaluation uses **wp03, wp04, wp06, wp07 and wp08**, without tuning the intervention on their model outputs.
 
 Two tasks use Tesla and Apple filing facts. Six are synthetic. The bounded public RPC acquisition failed, so two evaluation tasks explicitly share a synthetic replacement. **No result here establishes observed stablecoin-payment adoption.** [Source records and limitations](DATA_SOURCES.md) are part of the deliverable.
 
 ## Inspect it locally
 
-The demo needs no API key, Docker or model download. It displays the recorded calculation issue without executing a submitted program.
+Use Python 3.12 for the demo and lightweight tests. No API key, Docker or model download is needed. It displays the recorded calculation issue without executing a submitted program.
 
 ```bash
 git clone https://github.com/CaoimhConway/workpaperbench.git

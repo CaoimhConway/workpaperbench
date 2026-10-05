@@ -38,6 +38,32 @@ The original saved verdict has `numerical: true`, `replay: false` and `complete:
 
 The takeaway is narrower and useful: checking the final scalar alone would miss a wrong calculation that happens to work on one input. Replay, controlled input changes and separate diagnostics make that difference inspectable.
 
+## Reproduce the arithmetic without containers
+
+This checks only the two authored expressions shown above against literal fixture values. It does not execute an arbitrary downloaded model program or change an official score.
+
+```python
+import sqlite3
+
+with sqlite3.connect(":memory:") as connection:
+    for p1, p2 in [(100, 120), (120, 150)]:
+        submitted, correct = connection.execute(
+            "SELECT ? - ? * 100.0 / ?, 100.0 * (? - ?) / ?",
+            (p2, p1, p1, p2, p1, p1),
+        ).fetchone()
+        print(p1, p2, submitted, correct)
+```
+
+Expected output: `100 120 20.0 20.0` and `120 150 50.0 25.0`.
+
+The test `test_authored_formula_control_exposes_accidentally_correct_number` separately confirms that the reviewed grader detects this mechanism when the authored control satisfies the other output requirements. This is a grader test, not a repaired model submission.
+
+## Evidence identity
+
+The original campaign is `wpb-v1-92baa4a72f0e`, executed at `b4e256dc8976223a8a3fdad157a6b212f49bb8e1` in [run 37280454673](https://github.com/CaoimhConway/workpaperbench/actions/runs/37280454673). Artifact `11334520085` was uploaded on 2026-10-05 at 08:45:01 UTC. Its ZIP SHA-256 is `56ebdd836fc3bfadacbfdb4b554c72a24db2288fdf0a10c6dd9ba851518da646`.
+
+The legacy runner retained normalized JSON, not the raw serialization described by its `answer_sha256`. The collected artifact audit identifies the retained-file hash separately. Missing original bytes are not reconstructed from a digest. The [previously preserved evidence copy](evidence/final-wp03-A-1/answer.json) is also retained.
+
 ## Why this case leads
 
 This was the first inspected evaluation artifact with a correct scalar and a demonstrably wrong submitted calculation. It was not selected because a treatment improved it. The full results retain all collected attempts, including successes, infrastructure failures and regressions. One failure does not establish an error rate, a general model ranking or treatment effectiveness.
