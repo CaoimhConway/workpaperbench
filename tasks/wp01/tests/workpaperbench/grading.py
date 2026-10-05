@@ -81,7 +81,8 @@ def close(value, expected, tolerance):
 
 
 def evidence_ok(given, accepted):
-    return any(set(given) == set(option) for option in accepted)
+    allowed = set().union(*(set(option) for option in accepted))
+    return set(given) <= allowed and any(set(option) <= set(given) for option in accepted)
 
 
 def grade(directory, trusted):

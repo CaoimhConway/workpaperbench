@@ -3,7 +3,7 @@ import json
 import os
 from pathlib import Path
 import sys
-from urllib.request import urlopen
+import socket
 
 sys.path.insert(0, "/tests")
 from workpaperbench.grading import grade
@@ -12,7 +12,7 @@ output = Path("/logs/verifier")
 output.mkdir(exist_ok=True, parents=True)
 network_blocked = False
 try:
-    with urlopen("https://example.com", timeout=2):
+    with socket.create_connection(("1.1.1.1", 443), timeout=1):
         pass
 except Exception:
     network_blocked = True

@@ -128,6 +128,9 @@ def test_filing_document_evidence_alternative(tmp_path):
     for claim in answer['answers']:
         claim['evidence'] = ['filing:table']
     assert grade(submission(tmp_path, answer), trusted)['complete']
+    for claim in answer['answers']:
+        claim['evidence'] = ['filing:q2', 'filing:h1']
+    assert grade(submission(tmp_path, answer), trusted)['complete']
 
 
 def test_event_identity_alternative_and_transaction_dedup_wrong(tmp_path):

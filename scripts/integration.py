@@ -27,8 +27,10 @@ def native(task, name, expected, agent="oracle"):
         print(json.dumps({"name": name, "verdict": verdict, "exception": result.get("exception_info")}))
         raise AssertionError("unexpected native result")
     print(name, "passed")
-    return {"name": name, "expected_complete": expected, "verdict": verdict,
+    summary = {"name": name, "expected_complete": expected, "verdict": verdict,
             "agent": agent, "exception_type": (result.get("exception_info") or {}).get("exception_type")}
+    (OUTPUT / (name + ".json")).write_text(json.dumps(summary, indent=2) + "\n")
+    return summary
 
 
 def control(original, name, answer, extra=""):
@@ -48,6 +50,9 @@ def main():
     RAW.mkdir(parents=True)
     OUTPUT.mkdir(exist_ok=True)
     results = []
+    scope = os.environ.get("WPB_INTEGRATION_SCOPE", "full")
+    if scope not in ("full", "smoke"):
+        raise ValueError("invalid integration scope")
     network_checks = """test ! -e /tests/gold.json
 test ! -e /var/run/docker.sock
 test ! -d /workspace/.git
@@ -74,6 +79,8 @@ BOUNDARY
         reference = control(task, task.name + "-reference", ref, network_checks)
         results.append(native(reference, task.name + "-reference", True))
         results.append(native(task, task.name + "-empty", False, "nop"))
+        if scope == "smoke":
+            continue
         for index, wrapper in enumerate(("WITH c AS ({sql}) SELECT value FROM c", "SELECT value FROM ({sql})")):
             alternate = copy.deepcopy(ref)
             for claim in alternate["answers"]:
@@ -92,6 +99,9 @@ BOUNDARY
                 claim.update(status="insufficient_evidence", value=None, sql=None, reason_code="missing_required_input")
             name = task.name + "-wrong-" + str(index)
             results.append(native(control(task, name, wrong), name, False))
+    if scope == "smoke":
+        (OUTPUT / "controls.json").write_text(json.dumps({"scope": scope, "run_id": os.environ["GITHUB_RUN_ID"], "commit": os.environ["GITHUB_SHA"], "controls": results}, indent=2) + "\n")
+        return
     task = ROOT / "tasks/wp01"
     ref = json.loads((task / "tests/reference.json").read_text())
     for name, extra, expected in (
@@ -111,7 +121,7 @@ BOUNDARY
     results.append(native(control(task, "sql-denied", forbidden), "sql-denied", False))
     forbidden["answers"][0]["sql"] = "WITH RECURSIVE t(n) AS (VALUES(1) UNION ALL SELECT n+1 FROM t) SELECT SUM(n) AS value FROM t"
     results.append(native(control(task, "sql-timeout", forbidden), "sql-timeout", False))
-    (OUTPUT / "controls.json").write_text(json.dumps({"run_id": os.environ["GITHUB_RUN_ID"], "commit": os.environ["GITHUB_SHA"], "controls": results}, indent=2) + "\n")
+    (OUTPUT / "controls.json").write_text(json.dumps({"scope": scope, "run_id": os.environ["GITHUB_RUN_ID"], "commit": os.environ["GITHUB_SHA"], "controls": results}, indent=2) + "\n")
 
 
 if __name__ == "__main__":

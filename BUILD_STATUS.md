@@ -51,7 +51,17 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
 - Development native integration dispatched: `gh workflow run ci.yml --repo
   CaoimhConway/workpaperbench --ref main -f integration=true -f capture=false`,
   Actions `37263846465`, commit `ca3c61c`. Unit job passed 51 checks and demo.
-  Native controls are still running at this checkpoint. Push CI `37263842795`.
+  Full native controls passed, 27 cases (10 expected completion passes, 17
+  expected failures). Sanitized results preserved under reports. Push CI
+  `37263842795` also passed.
 - Funded credit independently checked at provider `/api/v1/credits`: $20 total,
   $0 used. Added funded-balance checks, synthetic budget/report controls, and
   source-group run metadata. Four new focused controls pass (55 total tests).
+
+- Pre-pilot review accepted genuine operand/context citation alternatives without
+  admitting irrelevant or ineligible sources. All 55 local checks pass. The
+  updated network probe uses a bounded direct TCP connection. Added per-control
+  sanitized artifacts and explicit full/smoke integration labels. Full eight-task
+  CI has a 90-minute ceiling based on observed 21-minute development integration.
+- Pinned uv 0.9.26 installed and the lightweight dependency command tested.
+  Reports retain setup/solve/verifier timing, known/unknown costs and source groups.
