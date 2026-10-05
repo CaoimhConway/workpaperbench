@@ -19,7 +19,7 @@ async def run(config_path):
 
     async def installed_version(event):
         result = await trial.agent_environment.exec(
-            command="git -C /usr/local/lib/hermes-agent rev-parse HEAD",
+            command="git -C " + runtime["hermes"]["installed_checkout_path"] + " rev-parse HEAD",
             timeout_sec=10,
         )
         revision = (result.stdout or "").strip()

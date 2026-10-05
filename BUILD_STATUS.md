@@ -102,3 +102,20 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   are $0. Canceled the same broken setup before proceeding. Failed slots stay
   recorded. Adding a key-free native install-only diagnostic to inspect the
   controlled installer error without uploading live traces. Treatment pending.
+
+- Key-free installer diagnostic `37267321820` confirms an upstream bootstrap/tag
+  mismatch: current main installer requires `pm/lock.json` and `pm.cli`, absent
+  from the September tag. All three original pilot slots failed before solving,
+  each with measured $0 inference delta. A compatible released tag will be
+  checked key-free before supplemental development slots.
+- Actions exposes non-null job start timestamps while jobs are queued. Resume
+  selection now distinguishes allocation/started steps from a queued timestamp.
+  Two focused control-plane tests pass.
+
+- Primary tag/code inspection selected timestamped Hermes canary
+  `v0.21.4+canary.20261004T084456Z` at
+  `8b66a51036c1e20920a17cdd049fdf55c968d683`, which includes the PM package.
+  Stable latest release remains September and is incompatible with today's
+  native bootstrap. Retained tested Harbor 0.23.0. Installed checkout location
+  follows current installer `/root/.hermes/hermes-agent`. Key-free hosted
+  confirmation is required before new pilot slots.

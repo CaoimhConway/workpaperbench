@@ -13,6 +13,15 @@ def api(path):
     return json.loads(subprocess.check_output(["gh", "api", path]))
 
 
+def job_started(job):
+    if job.get("status") == "queued" or job.get("conclusion") == "skipped":
+        return False
+    if job.get("runner_id") or any(step.get("started_at") for step in job.get("steps", [])):
+        return True
+    return job.get("status") == "in_progress" or (
+        job.get("conclusion") == "failure" and bool(job.get("started_at")))
+
+
 def selection(mode, manifest_id, batch):
     if mode == "final":
         manifest = json.loads((ROOT / "config/freeze.json").read_text())
@@ -39,7 +48,7 @@ def selection(mode, manifest_id, batch):
             jobs = api(f"repos/CaoimhConway/workpaperbench/actions/runs/{run['id']}/jobs?filter=all&per_page=100")["jobs"]
             for job in jobs:
                 name = job["name"]
-                if name.startswith("trial-") and job.get("started_at"):
+                if name.startswith("trial-") and job_started(job):
                     attempted[name.removeprefix("trial-")] = {"run_id": run["id"], "conclusion": job["conclusion"], "status": job["status"]}
         if len(runs) < 100:
             break
