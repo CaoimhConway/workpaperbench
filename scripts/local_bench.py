@@ -85,6 +85,8 @@ def serve(path):
                '--ctx-size', str(settings['context']), '--parallel', '1',
                '--threads', str(settings['threads']), '--threads-batch', str(settings['threads']),
                '--gpu-layers', '0', '--fit', 'off', '--jinja', '--reasoning', settings['reasoning'], '--metrics']
+    if settings.get('chat_template_kwargs'):
+        command += ['--chat-template-kwargs', json.dumps(settings['chat_template_kwargs'], sort_keys=True)]
     if settings.get('rope_scaling'):
         command += ['--rope-scaling', settings['rope_scaling'], '--rope-scale', str(settings['rope_scale']),
                     '--yarn-orig-ctx', str(settings['yarn_original_context'])]

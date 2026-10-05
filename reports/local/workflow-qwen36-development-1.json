@@ -1,0 +1,266 @@
+{
+  "report_version": "local-1.0",
+  "attempts": [
+    {
+      "attempt_id": "qwen36-development-b01-1",
+      "execution_profile": "local-lima",
+      "manifest_id": "workflow-v5-canonical-7429612183c6",
+      "task_id": "workflow-v5-b01",
+      "task_sha256": "c3adad399c0fc576ede83cd073656546752f7e5aba81452226acd9324e9604ee",
+      "scorer_version": "workflow-1.1.0",
+      "scorer_sha256": "f8e733696dbf51923b6f751da57ca9e60ed5c5ebe565c96c998a6989bd1e924d",
+      "started_at": "2026-10-13T06:01:01.253713+00:00",
+      "external_service_spend_usd": 0,
+      "status": "verified",
+      "inference": true,
+      "execution_files_sha256": {
+        "scripts/local_trial.py": "400bcc2798de2459a10e2b75b14ed2e4cb02a838414ac6b17e42a23a20c40572",
+        "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+        "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+        "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+        "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+      },
+      "model_configuration": {
+        "configuration_id": "qwen36-35b-a3b-udq5km-cpu-64k-thinking-terminal-24",
+        "execution_profile": "local-lima",
+        "model": {
+          "id": "qwen36-35b-a3b-ud_q5_k_m",
+          "weights": ".local/models/Qwen3.6-35B-A3B-UD-Q5_K_M.gguf",
+          "repository": "unsloth/Qwen3.6-35B-A3B-GGUF",
+          "revision": "a483e9e6cbd595906af30beda3187c2663a1118c",
+          "sha256": "c13ce26253ea334df472bd8fbd2d6da66d8a41195c17f6fcbf44c4d20ece0932",
+          "quantization": "UD-Q5_K_M",
+          "total_parameters_billions": 35,
+          "active_parameters_billions": 3,
+          "chat_template_sha256": "55d4931433fe502b794226ee7f4d206a6bdd436ac9f80eb7d8ebb4c639f9ea0c",
+          "native_context": 262144,
+          "base_model_declared_by_quantizer": "Qwen/Qwen3.6-35B-A3B",
+          "official_model_revision_checked": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+          "conversion": "Publisher quantization, conversion not independently reproduced. Checked official revision is not a verified conversion input.",
+          "architecture": "qwen35moe, gated DeltaNet and attention with mixture of experts, text only",
+          "license": "Apache-2.0"
+        },
+        "runtime": {
+          "binary": ".local/runtime/llama-b11516/llama-server",
+          "sha256": "cdf2d31e4b75714ebad37ffeb8f3d51e9a7be45daa6fd884a6a360abaee04091",
+          "version": "llama.cpp b11516 d4d82d67f",
+          "backend": "cpu",
+          "hardware": "MacPro7,1 Intel Xeon W-3245, Accelerate BLAS, no GPU offload"
+        },
+        "serving": {
+          "port": 18087,
+          "context": 65536,
+          "threads": 8,
+          "parallel": 1,
+          "reasoning": "on",
+          "flash_attention": "off",
+          "cache_type_k": "f16",
+          "cache_type_v": "f16",
+          "observe_slots": true,
+          "context_shift": false
+        },
+        "candidate": {
+          "wall_seconds": 5400,
+          "turns": 24,
+          "generation": {
+            "max_tokens": 8192,
+            "temperature": 0.6,
+            "top_p": 0.95,
+            "top_k": 20,
+            "seed": 17,
+            "min_p": 0,
+            "presence_penalty": 0.0,
+            "repeat_penalty": 1.0
+          },
+          "toolsets": "terminal",
+          "system_prompt": "Complete the filesystem task using the declared tools. Create and check every requested deliverable at its declared absolute path before ending. JSON in a chat reply does not create a file. Work independently within the task environment and do not ask the user to create the deliverable."
+        },
+        "harbor_version": "0.23.0",
+        "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+        "status": "Setup candidate for the authorized 13 October local pilot. Native compatibility and scored outcomes recorded separately.",
+        "external_service_spend_usd": 0
+      },
+      "model_configuration_sha256": "061f67c0ce6778b507f6ffc06e6899b60924084760b95cbbfae4c381275e20e1",
+      "hermes_installer_sha256": "25d3c95550e5ed7c0eec180a7d78dde765721c4e33639ab257c154c0a6e7554f",
+      "effective_task_sha256": "14706b6121d7780cb6a04cb3dd6d9ec6a62d5760ce6290630976ae48059fc9c6",
+      "native_adapter_sha256": "7ca1e515aafef728787c12e52a14fe3f46243e9e6dc839bc42180f035a2a7dce",
+      "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+      "candidate_local_model_health": true,
+      "verdict": {
+        "scorer_version": "workflow-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "reserve_coverage": {
+              "original": true,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": false,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              }
+            },
+            "signature_lag": {
+              "original": true,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              }
+            },
+            "reserve_bridge": {
+              "original": true,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              }
+            }
+          },
+          "claims": {
+            "base_coverage_sql_is_valid": {
+              "verdict": true,
+              "evidence": true
+            },
+            "signature_lag_sql_is_valid": {
+              "verdict": true,
+              "evidence": true
+            },
+            "observations_identify_payments_volume": {
+              "verdict": false,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "reserve_coverage:control:identical_export_duplicate",
+          "observations_identify_payments_volume:verdict"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "verdict_sha256": "a1ef5ca3ee26b0280b78f016bae910e11d03bbefa9ed012536925f11392feca4",
+      "sql_file_sha256": {
+        "reserve_bridge.sql": "1bf583235113c58398741ef19efa67074375ea195c8ebceabefc2d45270491c7",
+        "reserve_coverage.sql": "7ea3a565a8fa11c03d29dc60f0a326858e831bf68819cdb50a88b4204d6ac11c",
+        "signature_lag.sql": "1b43413ed12d670dec7df3f9697064a0ca3ee950ed746c930fe0fb21f3f2fcbe"
+      },
+      "raw_answer_sha256": "f9ee3c35bf028448527333476d39faeef6534c4018a6c771b8abb4327dd3d485",
+      "normalized_answer_sha256": "cddf0eda14b89c15293bb712579761bff9b77f659c2c8f73ca77a641cb3f3ef1",
+      "finished_at": "2026-10-13T06:31:48.384182+00:00"
+    },
+    {
+      "attempt_id": "qwen36-development-c01-1",
+      "execution_profile": "local-lima",
+      "manifest_id": "workflow-v5-canonical-7429612183c6",
+      "task_id": "workflow-v5-c01",
+      "task_sha256": "ca99d37c4bae432e9cfa2b65314f48dbb4017646874fc6a7dff262c566f4cff3",
+      "scorer_version": "workflow-1.1.0",
+      "scorer_sha256": "f8e733696dbf51923b6f751da57ca9e60ed5c5ebe565c96c998a6989bd1e924d",
+      "started_at": "2026-10-13T06:31:54.023660+00:00",
+      "external_service_spend_usd": 0,
+      "status": "infrastructure_failed",
+      "inference": true,
+      "execution_files_sha256": {
+        "scripts/local_trial.py": "400bcc2798de2459a10e2b75b14ed2e4cb02a838414ac6b17e42a23a20c40572",
+        "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+        "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+        "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+        "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+      },
+      "model_configuration": {
+        "configuration_id": "qwen36-35b-a3b-udq5km-cpu-64k-thinking-terminal-24",
+        "execution_profile": "local-lima",
+        "model": {
+          "id": "qwen36-35b-a3b-ud_q5_k_m",
+          "weights": ".local/models/Qwen3.6-35B-A3B-UD-Q5_K_M.gguf",
+          "repository": "unsloth/Qwen3.6-35B-A3B-GGUF",
+          "revision": "a483e9e6cbd595906af30beda3187c2663a1118c",
+          "sha256": "c13ce26253ea334df472bd8fbd2d6da66d8a41195c17f6fcbf44c4d20ece0932",
+          "quantization": "UD-Q5_K_M",
+          "total_parameters_billions": 35,
+          "active_parameters_billions": 3,
+          "chat_template_sha256": "55d4931433fe502b794226ee7f4d206a6bdd436ac9f80eb7d8ebb4c639f9ea0c",
+          "native_context": 262144,
+          "base_model_declared_by_quantizer": "Qwen/Qwen3.6-35B-A3B",
+          "official_model_revision_checked": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+          "conversion": "Publisher quantization, conversion not independently reproduced. Checked official revision is not a verified conversion input.",
+          "architecture": "qwen35moe, gated DeltaNet and attention with mixture of experts, text only",
+          "license": "Apache-2.0"
+        },
+        "runtime": {
+          "binary": ".local/runtime/llama-b11516/llama-server",
+          "sha256": "cdf2d31e4b75714ebad37ffeb8f3d51e9a7be45daa6fd884a6a360abaee04091",
+          "version": "llama.cpp b11516 d4d82d67f",
+          "backend": "cpu",
+          "hardware": "MacPro7,1 Intel Xeon W-3245, Accelerate BLAS, no GPU offload"
+        },
+        "serving": {
+          "port": 18087,
+          "context": 65536,
+          "threads": 8,
+          "parallel": 1,
+          "reasoning": "on",
+          "flash_attention": "off",
+          "cache_type_k": "f16",
+          "cache_type_v": "f16",
+          "observe_slots": true,
+          "context_shift": false
+        },
+        "candidate": {
+          "wall_seconds": 5400,
+          "turns": 24,
+          "generation": {
+            "max_tokens": 8192,
+            "temperature": 0.6,
+            "top_p": 0.95,
+            "top_k": 20,
+            "seed": 17,
+            "min_p": 0,
+            "presence_penalty": 0.0,
+            "repeat_penalty": 1.0
+          },
+          "toolsets": "terminal",
+          "system_prompt": "Complete the filesystem task using the declared tools. Create and check every requested deliverable at its declared absolute path before ending. JSON in a chat reply does not create a file. Work independently within the task environment and do not ask the user to create the deliverable."
+        },
+        "harbor_version": "0.23.0",
+        "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+        "status": "Setup candidate for the authorized 13 October local pilot. Native compatibility and scored outcomes recorded separately.",
+        "external_service_spend_usd": 0
+      },
+      "model_configuration_sha256": "061f67c0ce6778b507f6ffc06e6899b60924084760b95cbbfae4c381275e20e1",
+      "hermes_installer_sha256": "25d3c95550e5ed7c0eec180a7d78dde765721c4e33639ab257c154c0a6e7554f",
+      "effective_task_sha256": "bf71dccbed1e95013f5f976de612cf61097ac1b680c8bbaf0e81d62a2cc22ba9",
+      "native_adapter_sha256": "7ca1e515aafef728787c12e52a14fe3f46243e9e6dc839bc42180f035a2a7dce",
+      "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+      "candidate_local_model_health": true,
+      "error": "Agent execution timed out after 5400.0 seconds",
+      "error_type": "RuntimeError",
+      "sql_file_sha256": {},
+      "finished_at": "2026-10-13T08:03:56.213252+00:00"
+    }
+  ],
+  "external_service_spend_usd": 0,
+  "held_out_evaluation": "not run",
+  "frontier_discrimination": "unmeasured"
+}

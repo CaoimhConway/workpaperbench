@@ -115,6 +115,85 @@ uses fresh candidate state, and only one native trial may run at a time. A profi
 selects the exact weights, template, context, generation settings and bounds.
 Reports reject mixed profiles and task/scorer identities.
 
+## Qwen3.6 development pilot
+
+A separate profile runs Qwen3.6-35B-A3B in Unsloth UD-Q5_K_M on the Mac Pro CPU.
+It uses the same pinned llama.cpp binary, Harbor installation and Hermes installer
+above. The [profile](../config/local/qwen36-35b-terminal-24.json) verifies the
+26.5 GB weights and embedded chat template. It does not change the older default
+or relabel the preserved Qwen3.5 results.
+
+Download the pinned weights and verify their checksum before serving:
+
+```sh
+mkdir -p .local/models
+curl --fail --location --output .local/models/Qwen3.6-35B-A3B-UD-Q5_K_M.gguf \
+  https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF/resolve/a483e9e6cbd595906af30beda3187c2663a1118c/Qwen3.6-35B-A3B-UD-Q5_K_M.gguf
+shasum -a 256 .local/models/Qwen3.6-35B-A3B-UD-Q5_K_M.gguf
+```
+
+Expected SHA256:
+`c13ce26253ea334df472bd8fbd2d6da66d8a41195c17f6fcbf44c4d20ece0932`.
+The quantization is published under Apache 2.0. Preserve the
+[base license](https://huggingface.co/Qwen/Qwen3.6-35B-A3B/blob/995ad96eacd98c81ed38be0c5b274b04031597b0/LICENSE)
+and [quantization card](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-GGUF/tree/a483e9e6cbd595906af30beda3187c2663a1118c).
+Conversion is not independently reproduced.
+
+```sh
+./wpb serve --profile config/local/qwen36-35b-terminal-24.json
+```
+
+In another terminal, use a fresh attempt ID for one development task:
+
+```sh
+./wpb run --dataset workflow-v5 --task b01 --attempt my-qwen36-brale-1 \
+  --profile config/local/qwen36-35b-terminal-24.json
+```
+
+The profile allows 64K context, 24 turns, 8,192 generated tokens per call and
+5,400 candidate seconds. Calls run serially with eight CPU threads. The current
+Metal build detects a W5700X but fails the representative execution probe.
+GPU acceleration and pooled VRAM are not part of this measured setup.
+
+The [setup proof](../reports/local/qwen36-setup-validation.json) records about
+12.5 generated tokens per second on a short synthetic example. It passed the
+tool roundtrip and arithmetic checks but failed strict chat JSON by adding
+Markdown fences. This example is not a financial benchmark score or a controlled
+hardware comparison. Native workpapers must still satisfy the unchanged file,
+evidence, financial and preservation checks. The
+[declared pilot](../config/local/development-schedule-qwen36-1.json) has one
+attempt each on Brale, Block and Microsoft, with evaluation cases unexposed.
+
+
+The original pilot completed Brale, timed out on Block, and stopped before
+Microsoft. Its [report](../reports/local/workflow-qwen36-development-1.json)
+retains both outcomes. Brale delivered files but failed financial and robustness
+checks. Do not interpret delivery as a passing workpaper.
+
+For the authorized continuation, use the distinct
+[non-thinking profile](../config/local/qwen36-35b-nonthinking-terminal-24.json):
+
+```sh
+./wpb serve --profile config/local/qwen36-35b-nonthinking-terminal-24.json
+```
+
+With that server running, use a fresh attempt ID:
+
+```sh
+./wpb run --dataset workflow-v5 --task c01 --attempt my-qwen36-block-recovery-1 \
+  --profile config/local/qwen36-35b-nonthinking-terminal-24.json
+```
+
+This profile explicitly sets `enable_thinking: false` in the template kwargs,
+uses the publisher's non-thinking sampling settings and allows 4,096 tokens per
+response. The 90-minute candidate limit and 24-turn limit remain.
+The [setup fixture](../reports/local/qwen36-nonthinking-setup-validation.json)
+checks the effective prompt and simulated read/write calls. It does not measure
+native task success. The [recovery schedule](../config/local/development-schedule-qwen36-2.json)
+preserves the completed Brale result and restarts Block fresh before Microsoft.
+It keeps the failed original Block attempt visible and never merges the two
+profiles into one scored condition.
+
 ## Submit replay and report
 
 Submit an engineer's JSON workpaper or workflow artifact directory:

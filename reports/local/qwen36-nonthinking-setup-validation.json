@@ -1,0 +1,65 @@
+{
+  "purpose": "Authored setup fixture with simulated file tools, no benchmark dossier and no candidate code executed",
+  "profile_sha256": "25297786336f80b8002b3f67cad3044188f6729da88a5b75e986e320da379183",
+  "checks": {
+    "template_closes_thinking_before_generation": true,
+    "no_reasoning_content": true,
+    "read_then_valid_json_write_call": true,
+    "reads_saved_output_to_check_it": true,
+    "no_response_hits_token_cap": true,
+    "ends_after_checking_delivery": true
+  },
+  "timings": [
+    {
+      "phase": 0,
+      "wall_seconds": 11.141,
+      "usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 458,
+        "total_tokens": 486,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    {
+      "phase": 1,
+      "wall_seconds": 5.456,
+      "usage": {
+        "completion_tokens": 52,
+        "prompt_tokens": 524,
+        "total_tokens": 576,
+        "prompt_tokens_details": {
+          "cached_tokens": 485
+        }
+      }
+    },
+    {
+      "phase": 2,
+      "wall_seconds": 2.964,
+      "usage": {
+        "completion_tokens": 30,
+        "prompt_tokens": 595,
+        "total_tokens": 625,
+        "prompt_tokens_details": {
+          "cached_tokens": 575
+        }
+      }
+    },
+    {
+      "phase": 3,
+      "wall_seconds": 5.247,
+      "usage": {
+        "completion_tokens": 56,
+        "prompt_tokens": 651,
+        "total_tokens": 707,
+        "prompt_tokens_details": {
+          "cached_tokens": 624
+        }
+      }
+    }
+  ],
+  "probe_correction": "The initial three-response test expected immediate finalization after writing. The model requested a valid readback, so the same conversation continued with that tool result. No failed model output was retried.",
+  "native_file_delivery": "Previously demonstrated under the original thinking profile on Brale, not remeasured by this fixture",
+  "external_service_spend_usd": 0
+}
