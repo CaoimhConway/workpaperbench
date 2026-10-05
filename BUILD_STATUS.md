@@ -119,3 +119,10 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   native bootstrap. Retained tested Harbor 0.23.0. Installed checkout location
   follows current installer `/root/.hermes/hermes-agent`. Key-free hosted
   confirmation is required before new pilot slots.
+
+- Canary install checks `37267758153` and `37268139696` isolated a missing
+  system library: managed Node requires `libatomic.so.1`. Added Debian
+  `libatomic1` to candidate images. No network policy changed. Key-free gate
+  rerun required. Six pilot slots are declared: three preserved A1 setup
+  failures and three new A2 supplemental baseline slots, not dispatched yet.
+- All 58 local tests pass, including decoded-credential and queued-job controls.
