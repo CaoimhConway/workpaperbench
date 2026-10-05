@@ -21,6 +21,7 @@ def test_partial_denominators_and_failure_causes(tmp_path):
     assert summary['gap_causes_nonexclusive']=={'evidence_requirements':1,'replay':1}
     assert result['slots'][1]['status']=='unrecorded'
     assert result['slots'][1]['verdict'] is None
+    assert '| wp03 | A | 0 / 2 | Not assessed | 0 / 2 |' in (tmp_path / 'reports/results.md').read_text()
 
 
 def test_unscheduled_or_mismatched_final_record_fails(tmp_path):

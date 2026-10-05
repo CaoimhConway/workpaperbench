@@ -22,13 +22,20 @@ def main():
     reviewed=0
     for record_path in sorted((ROOT/'reports/runs').rglob('record.json')):
         directory=record_path.parent
-        record=json.loads(record_path.read_text())
+        record_bytes=record_path.read_bytes()
+        audit_path=directory/'artifact-audit.json'
+        audit=json.loads(audit_path.read_text()) if audit_path.is_file() else None
+        if audit is not None:
+            if audit.get('archive_digest_verified') is not True:
+                raise ValueError('regrade_provenance_unverified')
+            if hashlib.sha256(record_bytes).hexdigest()!=audit['retained_file_sha256'].get('record.json'):
+                raise ValueError('regrade_original_record_hash_mismatch')
+        record=json.loads(record_bytes)
         if record.get('campaign')!='final' or record.get('freeze_manifest_id')!=manifest['manifest_id']:
             continue
-        from collect_results import validate_record
-        audit=json.loads((directory/'artifact-audit.json').read_text())
-        if audit.get('archive_digest_verified') is not True:
+        if audit is None:
             raise ValueError('regrade_provenance_unverified')
+        from collect_results import validate_record
         slot=validate_record(record, ROOT, audit['workflow_run'])
         source=(ROOT/'tasks'/slot['task']).resolve()
         if not source.is_relative_to((ROOT/'tasks').resolve()) or source.is_symlink():

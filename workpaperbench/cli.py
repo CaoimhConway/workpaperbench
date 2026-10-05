@@ -195,7 +195,7 @@ def report(root):
         errors = ", ".join(v.get("errors", [])).replace("|", "\\|")
         lines.append(f"| {row['slot_id']} | {row['status']} | {v.get('complete', 'Not assessed')} | {rv.get('complete', 'Not assessed')} | {row.get('run_id', 'Unknown')} | {errors} |")
     lines += ['', '## Task outcomes and origins', '',
-              '| Task | Arm | Original complete / 3 | Corrected complete / 3 | Corrected coverage | Origin | Source group |',
+              '| Task | Arm | Original complete / planned | Corrected complete / planned | Corrected coverage | Origin | Source group |',
               '|---|---|---:|---:|---:|---|---|']
     for task in sorted({r['task'] for r in rows}):
         for arm in ('A', 'B'):
@@ -206,7 +206,9 @@ def report(root):
             corrected = sum(bool(reviews.get(r['slot_id'], {}).get('verdict', {}).get('complete')) for r in selected)
             coverage = sum(r['slot_id'] in reviews for r in selected)
             source = selected[0]
-            lines.append(f"| {task} | {arm} | {original} / {len(selected)} | {corrected} / {len(selected)} | {coverage} / {len(selected)} | {source.get('task_origin', 'Unknown')} | {source.get('source_group', 'Unknown')} |")
+            original_cell = f"{original} / {len(selected)}" if any(r.get('verdict') is not None for r in selected) else 'Not assessed'
+            corrected_cell = f"{corrected} / {len(selected)}" if coverage else 'Not assessed'
+            lines.append(f"| {task} | {arm} | {original_cell} | {corrected_cell} | {coverage} / {len(selected)} | {source.get('task_origin', 'Unknown')} | {source.get('source_group', 'Unknown')} |")
     lines += ['', '## Score changes and retained input', '',
               f"Corrected scorer identity: `{result['reviewed_scorer']}`. Full input hashes, original diagnostics and corrected diagnostics are in [scores.json](scores.json).", '',
               f"Strict completion changes among regraded slots: **{len(changes)}**."]
