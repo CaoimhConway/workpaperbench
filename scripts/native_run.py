@@ -318,6 +318,7 @@ def execute(mode, slot_id):
         "commit_sha": os.environ.get("GITHUB_SHA"),
         "harbor_version": RUNTIME["harbor"]["version"],
         "harbor_commit": RUNTIME["harbor"]["git_commit"],
+        "harbor_native_version_fix": RUNTIME["harbor"].get("native_version_fix"),
         "hermes_release_tag": RUNTIME["hermes"]["release_tag"],
         "hermes_resolved_release_commit": RUNTIME["hermes"]["resolved_release_commit"],
         "hermes_checkout_commit_verified": False,

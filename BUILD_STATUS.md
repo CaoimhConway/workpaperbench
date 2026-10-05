@@ -126,3 +126,9 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   rerun required. Six pilot slots are declared: three preserved A1 setup
   failures and three new A2 supplemental baseline slots, not dispatched yet.
 - All 58 local tests pass, including decoded-credential and queued-job controls.
+
+- `37268358386`: libatomic fix completed installation, then native Harbor failed
+  on obsolete `hermes version`. Current CLI supports `hermes --version`. Applying
+  a two-occurrence correction to the existing native adapter, guarded by exact
+  original/corrected module hashes. This is a dependency bug fix, with no new
+  adapter, proxy or execution behavior. Actual corrected gate remains pending.
