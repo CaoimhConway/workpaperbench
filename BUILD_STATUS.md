@@ -47,3 +47,11 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   Track all project run minutes conservatively against $10 rather than assume
   account quota. Public standard compute is free after the software audit gate.
 - Inference usage remains $0. No paid trials dispatched yet.
+
+- Development native integration dispatched: `gh workflow run ci.yml --repo
+  CaoimhConway/workpaperbench --ref main -f integration=true -f capture=false`,
+  Actions `37263846465`, commit `ca3c61c`. Unit job passed 51 checks and demo.
+  Native controls are still running at this checkpoint. Push CI `37263842795`.
+- Funded credit independently checked at provider `/api/v1/credits`: $20 total,
+  $0 used. Added funded-balance checks, synthetic budget/report controls, and
+  source-group run metadata. Four new focused controls pass (55 total tests).
