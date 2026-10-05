@@ -18,8 +18,8 @@ def test_partial_denominators_and_failure_causes(tmp_path):
     assert summary['scheduled']==2
     assert summary['verified']==0
     assert summary['numerical_correct_full_failed']==1
-    assert summary['gap_causes_nonexclusive']=={'substantive':1,'replay':1}
-    assert result['slots'][1]['status']=='unstarted'
+    assert summary['gap_causes_nonexclusive']=={'evidence_requirements':1,'replay':1}
+    assert result['slots'][1]['status']=='unrecorded'
     assert result['slots'][1]['verdict'] is None
 
 

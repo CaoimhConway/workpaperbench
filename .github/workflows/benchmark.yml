@@ -1,4 +1,5 @@
 name: WorkpaperBench trials
+run-name: WPB::${{ inputs.manifest_id }}::${{ inputs.mode }}
 on:
   workflow_dispatch:
     inputs:
@@ -22,14 +23,14 @@ concurrency:
   cancel-in-progress: false
 jobs:
   schedule:
-    if: github.repository == 'CaoimhConway/workpaperbench' && github.ref == 'refs/heads/main'
+    if: github.repository == 'CaoimhConway/workpaperbench' && github.ref == 'refs/heads/main' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:
       matrix: ${{ steps.select.outputs.matrix }}
       has_slots: ${{ steps.select.outputs.has_slots }}
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
       - id: select
@@ -41,51 +42,72 @@ jobs:
         run: python scripts/select_slots.py "$WPB_MODE" "$WPB_MANIFEST_ID" --batch "$WPB_BATCH"
   trial:
     needs: schedule
-    if: needs.schedule.outputs.has_slots == 'true'
-    name: trial-${{ matrix.slot_id }}
+    if: needs.schedule.outputs.has_slots == 'true' && github.run_attempt == 1
+    name: pair-${{ inputs.manifest_id }}-${{ matrix.pair_id }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 35
+    timeout-minutes: 70
     strategy:
       max-parallel: 1
       fail-fast: false
       matrix: ${{ fromJSON(needs.schedule.outputs.matrix) }}
+    env:
+      WPB_SLOTS: ${{ toJSON(matrix.slots) }}
+      WPB_MODE: ${{ inputs.mode }}
+      WPB_MANIFEST_ID: ${{ inputs.manifest_id }}
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
-      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+      - name: Record attempts before fallible installation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/attempts.py start
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         with:
           python-version: '3.12'
       - run: python -m pip install 'uv==0.9.26'
       - run: uv pip install --system 'harbor==0.23.0' -e .
       - run: python scripts/fix_native_version.py
-      - name: Capped budget check and one native live slot
+      - name: Execute the declared within-pair order with fresh native trials
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          WPB_MODE: ${{ inputs.mode }}
-          WPB_SLOT_ID: ${{ matrix.slot_id }}
         run: |
-          stop_marker="$(python -c 'import uuid
-          print(uuid.uuid4())')"
-          echo "::stop-commands::$stop_marker"
-          set +e
-          python scripts/native_run.py "$WPB_MODE" "$WPB_SLOT_ID"
-          exit_code=$?
-          echo "::$stop_marker::"
-          exit "$exit_code"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+          python - <<'PY'
+          import json, os, subprocess, sys, uuid
+          marker = str(uuid.uuid4())
+          print('::stop-commands::' + marker, flush=True)
+          failed = False
+          for identifier in json.loads(os.environ['WPB_SLOTS']):
+              code = subprocess.run([sys.executable, 'scripts/native_run.py', os.environ['WPB_MODE'], identifier]).returncode
+              failed = failed or code != 0
+          print('::' + marker + '::', flush=True)
+          raise SystemExit(1 if failed else 0)
+          PY
+      - name: Preserve setup failures and unfinished attempt state
+        if: always()
+        run: |
+          python scripts/attempts.py finish
+          python - <<'PY'
+          import json, os, shutil
+          from pathlib import Path
+          for identifier in json.loads(os.environ['WPB_SLOTS']):
+              path = Path('reports/runs') / identifier
+              if path.is_dir():
+                  shutil.copytree(path, Path('slot-results') / identifier)
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: slot-${{ github.sha }}-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.slot_id }}
-          path: reports/runs/${{ matrix.slot_id }}/*
+          name: pair-${{ inputs.manifest_id }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.pair_id }}
+          path: slot-results/
           retention-days: 7
   reconcile:
     needs: [schedule, trial]
-    if: always() && needs.schedule.result == 'success' && github.repository == 'CaoimhConway/workpaperbench' && github.ref == 'refs/heads/main'
+    if: always() && needs.schedule.result == 'success' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
         with:
           persist-credentials: false
       - name: Reconcile provider lifetime usage without inference
@@ -93,19 +115,16 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: |
           sleep 30
-          python3 - <<'PY'
-          import json
-          import os
+          python - <<'PY'
+          import json, os
           from pathlib import Path
           from scripts.native_run import now, provider_snapshot
           output = Path('provider-results')
           output.mkdir()
-          data = {'run_id': os.environ['GITHUB_RUN_ID'], 'as_of': now(),
-                  'snapshot': provider_snapshot(os.environ['OPENROUTER_API_KEY'])}
+          data = {'run_id': os.environ['GITHUB_RUN_ID'], 'as_of': now(), 'snapshot': provider_snapshot(os.environ['OPENROUTER_API_KEY'])}
           (output / 'provider.json').write_text(json.dumps(data, indent=2) + '\n')
-          print('Provider lifetime usage reconciled without inference')
           PY
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: provider-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: provider-results/*.json

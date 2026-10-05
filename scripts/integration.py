@@ -51,7 +51,7 @@ def main():
     OUTPUT.mkdir(exist_ok=True)
     results = []
     scope = os.environ.get("WPB_INTEGRATION_SCOPE", "full")
-    if scope not in ("full", "smoke"):
+    if scope not in ("full", "smoke", "review"):
         raise ValueError("invalid integration scope")
     network_checks = """test ! -e /tests/gold.json
 test ! -e /var/run/docker.sock
@@ -79,7 +79,7 @@ BOUNDARY
         reference = control(task, task.name + "-reference", ref, network_checks)
         results.append(native(reference, task.name + "-reference", True))
         results.append(native(task, task.name + "-empty", False, "nop"))
-        if scope == "smoke":
+        if scope in ("smoke", "review"):
             continue
         for index, wrapper in enumerate(("WITH c AS ({sql}) SELECT value FROM c", "SELECT value FROM ({sql})")):
             alternate = copy.deepcopy(ref)
@@ -111,7 +111,30 @@ BOUNDARY
         wrong["answers"][1]["sql"] = "WITH common AS (SELECT network_asset FROM observations GROUP BY network_asset HAVING COUNT(DISTINCT period)=2), totals AS (SELECT period,SUM(amount_units) amount FROM observations JOIN common USING(network_asset) JOIN asset_tags USING(network_asset) GROUP BY period) SELECT 100.0*((SELECT amount FROM totals WHERE period='P2')-(SELECT amount FROM totals WHERE period='P1'))/(SELECT amount FROM totals WHERE period='P1') AS value"
         name = "wp06-matched-tag-join"
         results.append(native(control(original, name, wrong), name, False))
-    if scope == "smoke":
+    if scope == "review":
+        task = ROOT / "tasks/wp03"
+        ref = json.loads((task / "tests/reference.json").read_text())
+        for label, condition in (("date", "date(published_on)<=date('2024-07-05')"), ("lower", "published_on<='2024-07-05' AND lower(period)='p2'")):
+            alternate = copy.deepcopy(ref)
+            alternate["answers"][1]["sql"] = "SELECT transfer_units AS value FROM releases WHERE period='P2' AND " + condition + " ORDER BY published_on DESC LIMIT 1"
+            name = "review-valid-" + label
+            results.append(native(control(task, name, alternate), name, True))
+        for label, sql in (("write-denied", "ATTACH DATABASE '/tmp/escape' AS x"), ("timeout", "WITH RECURSIVE t(n) AS (VALUES(1) UNION ALL SELECT n+1 FROM t) SELECT SUM(n) AS value FROM t")):
+            wrong = copy.deepcopy(ref)
+            wrong["answers"][0]["sql"] = sql
+            name = "review-" + label
+            results.append(native(control(task, name, wrong), name, False))
+        name = "review-candidate-data-tamper"
+        results.append(native(control(task, name, ref, "rm /workspace/data.sqlite\nprintf broken > /workspace/data.sqlite\n"), name, True))
+        name = "review-extra-artifact"
+        results.append(native(control(task, name, ref, "printf unexpected > /logs/artifacts/extra.txt\n"), name, False))
+        extra = copy.deepcopy(ref)
+        extra["answers"].append({**extra["answers"][0], "id": "unrequested"})
+        name = "review-extra-claim"
+        item = native(control(task, name, extra), name, False)
+        assert item["verdict"]["checks"]["numerical"] is True
+        results.append(item)
+    if scope in ("smoke", "review"):
         (OUTPUT / "controls.json").write_text(json.dumps({"scope": scope, "run_id": os.environ["GITHUB_RUN_ID"], "commit": os.environ["GITHUB_SHA"], "controls": results}, indent=2) + "\n")
         return
     task = ROOT / "tasks/wp01"

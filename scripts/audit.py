@@ -31,10 +31,25 @@ for obj in subprocess.check_output(['git','rev-list','--objects','--all'],cwd=RO
 freeze = ROOT / 'config/freeze.json'
 if freeze.exists():
     manifest = json.loads(freeze.read_text())
-    for name, expected in manifest['hashes'].items():
-        if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected:
-            failures.append(name + ':freeze_mismatch')
+    expected_hashes = dict(manifest['hashes'])
+    review_path = ROOT / 'config/review.json'
+    if review_path.exists():
+        review = json.loads(review_path.read_text())
+        if review['original_manifest_id'] != manifest['manifest_id'] or hashlib.sha256(freeze.read_bytes()).hexdigest() != review['original_freeze_sha256']:
+            failures.append('original_freeze_changed')
+        # Candidate-facing evidence, task requests, reference answers and treatment
+        # stay fixed. Only reviewed implementation hashes can supersede code hashes.
+        for name, expected in manifest['hashes'].items():
+            immutable = name.startswith('sources/') or name.startswith('config/') or (
+                name.startswith('tasks/') and '/workpaperbench/' not in name)
+            if immutable and hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected:
+                failures.append(name + ':candidate_or_reference_changed')
+        expected_hashes.update(review['correction_hashes'])
+    for name, expected in expected_hashes.items():
+        path = ROOT / name
+        if path.is_symlink() or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+            failures.append(name + ':versioned_hash_mismatch')
 if failures:
     print('\n'.join(failures))
     raise SystemExit(1)
-print('Tracked files, Git blobs, candidate contexts and available freeze hashes passed publication checks')
+print('Publication checks passed. Original candidate inputs and versioned implementation hashes verified.')
