@@ -11,3 +11,9 @@ Primary code: [Harbor adapter](https://github.com/laude-institute/harbor/blob/1e
 The moving bootstrap also expects the PM package absent from the September stable tag. A timestamped canary tag was selected and its actual checkout is checked before solving. Native installation and execution must share `/tmp/hermes` as their data root. Managed Node needs Debian `libatomic1`. These installation constraints are recorded separately from financial task outcomes. The bootstrap URL and dependency retrieval remain moving parts.
 
 This note is ready for upstream triage. No upstream report or contact is a release dependency. Model/tool behavior and final controls are recorded in BUILD_STATUS.md and the saved slot records.
+
+Corrected routing and native terminal/file events were observed in run
+37271209030. Treatment delivery and full task completion were observed in
+37274770675, with the exact runtime revision checked before solving. Native
+session-export token fields remained zero placeholders, so usage is treated as
+unreported and provider lifetime accounting supplies the cost authority.
