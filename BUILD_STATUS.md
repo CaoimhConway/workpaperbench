@@ -1,14 +1,14 @@
 # Build status
 
-Correction release 0.2.0 is in progress on existing PR [1](https://github.com/CaoimhConway/workpaperbench/pull/1). Specification v3.1 and the original experiment remain unchanged. The dedicated repository is public. No Docker, Harbor, inference or downloaded-submission SQL ran on this device.
+Correction release 0.2.0 has passed its empirical gate and awaits merge/publication on existing PR [1](https://github.com/CaoimhConway/workpaperbench/pull/1). Specification v3.1 and the original experiment remain unchanged. The dedicated repository is public. No Docker, Harbor, inference or downloaded-submission SQL ran on this device.
 
 ## Verified state
 
 - Original campaign [37280454673](https://github.com/CaoimhConway/workpaperbench/actions/runs/37280454673) completed all 48 scheduled slots at `b4e256dc8976223a8a3fdad157a6b212f49bb8e1`. All 48 original verdicts and 47 normalized answers are retained. `final-wp05-B-3` has no retained answer. Original raw serialization and tool observations were not retained and remain unavailable.
 - Original strict completion: evaluation A 3/15, B 1/15. Final development A 4/9, B 3/9. Twelve exploratory attempts are separate, including setup/runtime failures and uncertain exposure.
 - Freeze `wpb-v1-92baa4a72f0e` has 234 original hashes. Freeze file SHA256 `8cc3e40ed42898a7ead9fce7a7bfd5c9dc955f02cdd86a1c7bf352c9f667f95b`. Candidate data, instructions/schema, model, treatment, schedule, original answers and original verdicts remain unchanged.
-- Existing correction run `37295210415` passed 156 lightweight tests and 23 native review controls. Its later workflow-edit push failed due to job-token permissions. Inspected recovery artifact `11339264449` matched ZIP SHA256 `4d3eb058c944abd2980575c00c26ca524f6d3183c44833f6a1688aa4a4304283`. Historical scorer 1.1.0 sidecars remain evidence, not final correction coverage.
-- Commits `554e67e` and `c661f59` preserve authenticated campaign evidence, correct replay boundaries and expose coverage-aware reporting. Current checkout passes 190 lightweight tests. Hosted full native controls and consistent scorer 1.2.0 regrading are running in [37373492428](https://github.com/CaoimhConway/workpaperbench/actions/runs/37373492428). Its unit gate passed. Clean Python 3.12 checkout `8324b84` passed install, demo, all 186 tests at that checkpoint, report and full-history/freeze audit. Empirical merge/release waits for actual native results.
+- Existing correction run `37295210415` passed 156 lightweight tests and 23 native review controls. Its later workflow-edit push failed due to job-token permissions. Inspected recovery artifact `11339264449` matched ZIP SHA256 `4d3eb058c944abd2980575c00c26ca524f6d3183c44833f6a1688aa4a4304283`. All 33 historical scorer 1.1.0 sidecars remain under their content hashes. Final correction coverage is 47/48, using unchanged normalized input bytes.
+- Commits `554e67e` and `c661f59` preserve authenticated campaign evidence, correct replay boundaries and expose coverage-aware reporting. Current checkout passes 190 lightweight tests. Hosted full native controls and consistent scorer 1.2.0 regrading passed in [37373492428](https://github.com/CaoimhConway/workpaperbench/actions/runs/37373492428). 71 native controls passed, including 28 expected passes and 43 expected rejections, with every isolation check true. All 47 retained answers have consistent scorer 1.2.0 sidecars. No strict score changed. Clean Python 3.12 checkout `8f884a8` passed install, demo, all 190 tests, report and full-history/freeze audit. A final hosted collection/cache-repeat check precedes merge and publication.
 
 ## Correction decisions
 
@@ -36,7 +36,7 @@ Final provider receipt `reports/provider/37280454673.json`, as of 2026-10-05 11:
 
 Refreshed actual Actions metadata confirms 182 rounded Linux job minutes for jobs started before publication at 07:55:02 UTC, conservatively USD 1.092 before included quota at USD 0.006/minute. Standard public hosted Linux compute after publication is free. Account quota, invoice and storage charges remain unknown after the existing billing API returned 404. The USD 10 incremental Actions ceiling remains in force. No account safeguards, scopes or subscriptions changed.
 
-Historical software publication audit and prerelease [v0.1.0-software](https://github.com/CaoimhConway/workpaperbench/releases/tag/v0.1.0-software) are preserved. The corrected measured release requires final source/history/log/artifact/COPY-context audit, clean-checkout usage checks and passing native controls/regrades before merge.
+Historical software publication audit and prerelease [v0.1.0-software](https://github.com/CaoimhConway/workpaperbench/releases/tag/v0.1.0-software) are preserved. The native ZIP digests, bounded members, every original record/answer, all 47 new scorer/input identities and original/final native logs were inspected. [Correction validation](reports/correction-validation.json) preserves identifiers and screening limits. Final cache-repeat and publication audit metadata will be retained before merge.
 
 ## Supplied package availability
 
