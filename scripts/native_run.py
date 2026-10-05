@@ -185,7 +185,7 @@ def sanitized_verdict(path):
         key: state
         for key, state in isolation.items()
         if isinstance(isolation, dict)
-        and key in {"network_probe_blocked", "no_inference_key", "no_docker_socket"}
+        and key in {"network_probe_blocked", "network_namespace_none", "no_inference_key", "no_docker_socket"}
         and isinstance(state, bool)
     } if isinstance(isolation, dict) else {}
     return result
@@ -258,7 +258,8 @@ def check_treatment(slot, config_path):
 
 
 def clean_process_env(key):
-    allowed = ("PATH", "HOME", "TMPDIR", "TMP", "TEMP", "LANG", "LC_ALL")
+    allowed = ("PATH", "HOME", "TMPDIR", "TMP", "TEMP", "LANG", "LC_ALL",
+               "GITHUB_ACTIONS", "RUNNER_OS", "GITHUB_REPOSITORY", "GITHUB_REF")
     result = {name: os.environ[name] for name in allowed if name in os.environ}
     result["OPENROUTER_API_KEY"] = key
     result["PYTHONUNBUFFERED"] = "1"
@@ -375,21 +376,24 @@ def execute(mode, slot_id):
     if treatment:
         record["treatment"] = treatment
 
-    command = [
-        harbor, "trial", "start", "--path", str(task_dir),
-        "--trial-name", slot_id, "--trials-dir", str(raw_root),
-        "--agent", "hermes", "--model", RUNTIME["model"]["harbor_model"],
-        "--agent-kwarg", "version=" + RUNTIME["hermes"]["release_tag"],
-        "--agent-kwarg", "toolsets=" + RUNTIME["agent"]["toolsets"],
-        "--agent-timeout", str(RUNTIME["agent"]["solve_timeout_sec"]),
-        "--agent-setup-timeout", str(RUNTIME["agent"]["setup_timeout_sec"]),
-    ]
+    trial_config = {"task": {"path": str(task_dir)}, "trial_name": slot_id,
+                    "trials_dir": str(raw_root), "agent": {
+                        "name": "hermes", "model_name": RUNTIME["model"]["harbor_model"],
+                        "kwargs": {"version": RUNTIME["hermes"]["release_tag"],
+                                   "toolsets": RUNTIME["agent"]["toolsets"]},
+                        "override_timeout_sec": RUNTIME["agent"]["solve_timeout_sec"],
+                        "override_setup_timeout_sec": RUNTIME["agent"]["setup_timeout_sec"]}}
     if treatment:
-        command.extend(["--config", str(config_path)])
+        injected = json.loads(config_path.read_text())
+        trial_config["extra_instruction_paths"] = injected["extra_instruction_paths"]
+        trial_config["agent"]["skills"] = injected["agent"]["skills"]
+    config_path.parent.mkdir(parents=True, exist_ok=True)
+    config_path.write_text(json.dumps(trial_config, indent=2) + "\n")
+    command = [sys.executable, str(ROOT / "scripts/native_trial.py"), str(config_path)]
     raw_root.mkdir(parents=True, exist_ok=True)
     raw_log = ROOT / ".raw/logs" / (slot_id + ".log")
     raw_log.parent.mkdir(parents=True, exist_ok=True)
-    record["native_command"] = "harbor trial start"
+    record["native_command"] = "Harbor Trial.create / Trial.run with native Hermes"
     write_record(record_path, record)
     try:
         with raw_log.open("wb") as log:
@@ -408,6 +412,11 @@ def execute(mode, slot_id):
         record["native_return_code"] = None
 
     result_path = trial_dir / "result.json"
+    version_path = ROOT / ".raw/versions" / (slot_id + ".json")
+    if version_path.is_file():
+        version = read_json(version_path, 2000)
+        record["hermes_runtime_version"] = version
+        record["hermes_checkout_commit_verified"] = version.get("matches_pin") is True
     metrics, exception_type = result_metrics(result_path)
     record["harbor_metrics"] = metrics
     if exception_type:

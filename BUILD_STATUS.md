@@ -72,3 +72,11 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   establishment is not external egress proof. Replaced the probe with a bounded
   authenticated TLS handshake to a numeric external address. No network policy
   relaxed. Failed native checks now retain their sanitized control record.
+
+- Corrected TLS smoke `37266025062` passed all six native reference/empty controls.
+  Harbor Docker filtering permits DNS/ICMP, so the verifier now uses native
+  `tests/docker-compose.yaml` with `main.network_mode: none`. Loopback-only
+  interfaces and failed external TLS are required. Hosted confirmation pending.
+- The native invocation uses `Trial.create` / `Trial.run` and its documented
+  AGENT_START hook to verify installed Hermes HEAD before solving. No adapter
+  or credential proxy was added. Pin enforcement awaits the development pilot.
