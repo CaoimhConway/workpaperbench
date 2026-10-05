@@ -117,3 +117,12 @@ def test_queue_finishes_after_candidate_failure_and_restart_skips_slots(tmp_path
     (tmp_path / '.raw/local-trials/first/raw-sql/result.sql').write_text('SELECT 999')
     with pytest.raises(ValueError, match='retained_sql_changed'):
         LOCAL.run_queue(path)
+
+@pytest.mark.parametrize('command, expected_flag', [('queue', '--schedule'), ('run', '--continue-from')])
+def test_public_cli_exposes_local_recovery_commands(command, expected_flag):
+    import subprocess
+    import sys
+    result = subprocess.run([sys.executable, '-m', 'workpaperbench.current_cli', command, '--help'],
+                            cwd=Path(__file__).parents[1], capture_output=True, text=True, timeout=15)
+    assert result.returncode == 0, result.stderr
+    assert expected_flag in result.stdout

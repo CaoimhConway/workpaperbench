@@ -18,7 +18,8 @@
     "queue_restart_rechecks_retained_bytes": true,
     "continuation_rejects_changed_task_or_sql": true,
     "continuation_rejects_changed_generation": true,
-    "native_adapter_compiles_with_explicit_64_turn_limit": true
+    "native_adapter_compiles_with_explicit_64_turn_limit": true,
+    "public_cli_routes_queue_and_continuation": true
   },
   "tests": {
     "full_suite_before_final_identity_checks": {
@@ -31,5 +32,6 @@
     }
   },
   "native_continuation_validation": "Native SessionDB import and restored files are checked before the candidate starts, with a continuation-ready.json receipt in the guest",
-  "external_service_spend_usd": 0
+  "external_service_spend_usd": 0,
+  "startup_correction": "Initial detached launcher exited in argument parsing because the public CLI did not route queue. Fixed and checked before any new candidate attempt began."
 }

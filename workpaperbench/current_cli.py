@@ -33,7 +33,7 @@ def demo():
 
 def main():
     arguments = sys.argv[1:] or ['demo']
-    if arguments[0] in ('local','preflight','serve','run','grade','replay','report','controls'):
+    if arguments[0] in ('local','preflight','serve','run','grade','replay','report','controls','queue'):
         arguments = arguments[1:] if arguments[0] == 'local' else arguments
         raise SystemExit(subprocess.call([sys.executable, str(ROOT / 'scripts/local_bench.py'), *arguments]))
     if arguments[0] == 'legacy':
@@ -51,6 +51,7 @@ def main():
         ('grade','Verify a bounded engineer workpaper without inference'),
         ('replay','Freshly verify retained artifacts without inference'),
         ('report','Write an immutable versioned result report'),
+        ('queue','Run a declared local development queue with checkpoints'),
         ('controls','Test the actual local isolation and SQL limits'),
         ('legacy','Use the frozen historical interface'),
     ):
