@@ -41,6 +41,7 @@ if freeze.exists():
         # stay fixed. Only reviewed implementation hashes can supersede code hashes.
         allowed = {
             '.github/workflows/benchmark.yml', '.github/workflows/ci.yml',
+            'pyproject.toml',
             'workpaperbench/cli.py', 'workpaperbench/grading.py', 'workpaperbench/sql_worker.py',
             *(f'scripts/{name}.py' for name in ('attempts', 'audit', 'collect_results', 'integration',
                                               'native_run', 'regrade', 'select_slots')),
@@ -50,6 +51,14 @@ if freeze.exists():
         for name in review['correction_hashes']:
             if name not in allowed and not re.fullmatch(r'tests/test_[a-z_]+\.py', name):
                 failures.append('unauthorized_correction_path')
+        if 'pyproject.toml' in review['correction_hashes']:
+            original = subprocess.check_output(['git', 'show', review['original_execution_commit'] + ':pyproject.toml'], cwd=ROOT)
+            current = (ROOT / 'pyproject.toml').read_bytes()
+            version = rb'(?m)^version = "[0-9]+\.[0-9]+\.[0-9]+"$'
+            if (hashlib.sha256(original).hexdigest() != manifest['hashes']['pyproject.toml']
+                    or re.sub(version, b'version = "VERSION"', original, count=1)
+                    != re.sub(version, b'version = "VERSION"', current, count=1)):
+                failures.append('package_changes_beyond_version')
         for name, expected in manifest['hashes'].items():
             immutable = name.startswith('sources/') or name.startswith('config/') or (
                 name.startswith('tasks/') and '/workpaperbench/' not in name)

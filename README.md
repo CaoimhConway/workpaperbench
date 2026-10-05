@@ -68,12 +68,12 @@ The frozen comparison has **48 scheduled trials**: eight tasks, two configuratio
 
 <!-- study-results:start -->
 
-**All scheduled attempts accounted for.** Original verdicts: **48/48**. Reviewed verdicts: **33/48**.
+**All scheduled attempts accounted for.** Original verdicts: **48/48**. Corrected verdicts: **33/48**.
 
-| Evaluation arm | Original verified / planned | Reviewed verified / planned | Reviewed coverage |
-|---|---:|---:|---:|
-| A | 3 / 15 | 0 / 15 | 8 / 15 |
-| B | 1 / 15 | 1 / 15 | 8 / 15 |
+| Evaluation arm | Original complete / planned | Corrected complete / planned | Corrected numerical / assessed | Corrected coverage |
+|---|---:|---:|---:|---:|
+| A | 3 / 15 | 0 / 15 | 7 / 7 | 8 / 15 |
+| B | 1 / 15 | 1 / 15 | 7 / 7 | 8 / 15 |
 
 Only evaluation tasks appear here. Development is reported separately. Unfinished or unreviewable trials are not observed zero-score answers. These are coverage-aware counts, not a treatment-effect claim.
 
@@ -81,7 +81,7 @@ Only evaluation tasks appear here. Development is reported separately. Unfinishe
 
 <!-- study-results:end -->
 
-Original verdicts and corrected scores are retained side by side. A green Actions job can still contain a scored task failure. The evidence-collection workflow updates the table from saved records after the campaign finishes, without another model call.
+Original verdicts and corrected scores are retained side by side. A green Actions job can still contain a scored task failure. Collection and regrading use saved records and no new model calls.
 
 The original experiment remains pinned to its [execution snapshot](https://github.com/CaoimhConway/workpaperbench/tree/b4e256dc8976223a8a3fdad157a6b212f49bb8e1) and [run](https://github.com/CaoimhConway/workpaperbench/actions/runs/37280454673). Scorer corrections are versioned separately. They do not rewrite its inputs, original verdicts or live jobs.
 
@@ -103,9 +103,25 @@ The replay worker is read-only, function-restricted, resource-bounded and isolat
 
 Native tests cover reference answers, valid alternatives, wrong periods, constants, joins, abstention, malformed outputs and isolation. New run controls use experiment-scoped identities, pre-setup receipts and ordered A/B pairs. [Methodology](docs/METHODOLOGY.md) explains the supported SQL subset, original-run limitations and correction policy. [Native compatibility notes](build-notes/NATIVE_COMPATIBILITY.md) document the integration findings.
 
-## Reproduce and contribute
+## Replay a saved submission on Actions
 
-Run the key-free native controls through Actions:
+A repository maintainer with Actions write access can dispatch these workflows. Readers cannot dispatch jobs in the owner's repository merely because it is public. Fork this repository, enable Actions and replace `YOUR_LOGIN` below with the fork owner. No inference secret is needed.
+
+Regrade every retained published submission, preserving original verdicts and input hashes:
+
+```bash
+gh workflow run ci.yml --repo YOUR_LOGIN/workpaperbench --ref main \
+  -f integration=true -f scope=full -f capture=false -f setup=false -f regrade=true
+gh run list --repo YOUR_LOGIN/workpaperbench --workflow ci.yml --limit 1
+gh run watch RUN_ID --repo YOUR_LOGIN/workpaperbench
+gh run download RUN_ID --repo YOUR_LOGIN/workpaperbench --name reviewed-results-COMMIT_SHA-RUN_ID --dir replay-results
+```
+
+Inspect `reports/runs/SLOT/regrade.json` inside the result archive for claim-level numerical, evidence, conclusion and replay diagnostics. The archive also contains the original answer and verdict, generated tables, and scorer/input hashes. Treat downloads as untrusted archives and inspect member paths before extraction. A repeated review of identical scorer/input bytes is a verified no-op and preserves the saved result. [Methodology](docs/METHODOLOGY.md) explains raw versus normalized input and the unavailable-answer limitation.
+
+## Native controls and task authoring
+
+Run the key-free native controls in the owner's repository when authorized:
 
 ```bash
 gh workflow run ci.yml --repo CaoimhConway/workpaperbench --ref main \
@@ -114,7 +130,7 @@ gh workflow run ci.yml --repo CaoimhConway/workpaperbench --ref main \
 
 The original freeze is an immutable historical record, not permission to run changed code under its old identity. A new scored experiment needs a new reviewed manifest. Do not retry individual answers for a better score.
 
-To improve a task, start with its `sources/wpXX.json`, independently check the evidence and reference calculation, and add both a legitimate alternative and a plausible wrong submission to the tests. Keep changes out of an exposed comparison. There is no need to add a dashboard, new model or evaluation framework.
+The [task-authoring guide](docs/TASK_AUTHORING.md) maps one native package and walks through source review, equivalent answers, changed inputs, native verification and a future freeze. Keep extensions out of the exposed comparison.
 
 **Scope:** a small, partly synthetic regression study over supplied evidence. Not open-web financial research, a leaderboard, a production reliability estimate or an investment recommendation. Repeated attempts and shared source groups are not independent datasets. Provider routing and bootstrap dependencies retain documented variability.
 

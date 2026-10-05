@@ -148,3 +148,24 @@ def test_receipts_are_scoped_to_experiment_and_rechecked_before_inference(tmp_pa
     monkeypatch.setenv('GITHUB_RUN_ATTEMPT', '2')
     with pytest.raises(ValueError, match='same_run'):
         attempts.receipt('final', 'newer', [identifier])
+
+
+def test_documented_demo_reads_preserved_workpaper():
+    import subprocess
+    import sys
+    result = subprocess.run([sys.executable, '-m', 'workpaperbench.cli', 'demo'],
+                            cwd=ROOT, capture_output=True, text=True, check=True)
+    assert 'P1=100, P2=120, reported growth=20%' in result.stdout
+    assert 'Original complete=False' in result.stdout
+    assert 'correct growth=25%' in result.stdout
+
+
+def test_public_reading_path_links_resolve():
+    import re
+    from urllib.parse import unquote
+    for name in ('README.md', 'docs/METHODOLOGY.md', 'docs/TASK_AUTHORING.md', 'reports/case-study.md'):
+        path = ROOT / name
+        for target in re.findall(r'\[[^\]]+\]\(([^)]+)\)', path.read_text()):
+            if '://' in target or target.startswith('#'):
+                continue
+            assert (path.parent / unquote(target.split('#')[0])).exists(), (name, target)

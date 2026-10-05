@@ -19,6 +19,7 @@ SLOT_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,95}$")
 SAFE_TOOL_RE = re.compile(r"^[A-Za-z0-9_.-]{1,80}$")
 SAFE_ERROR_RE = re.compile(r"^[a-zA-Z0-9_.:-]{1,100}$")
 SECRET_RE = re.compile(rb"sk-or-v1-[A-Za-z0-9_-]{16,}|gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}")
+PROVIDER_CEILING_USD = 20.0
 
 
 def now():
@@ -79,7 +80,7 @@ def credential_in(content, key):
     candidates = [content]
     try:
         candidates.append(json.dumps(json.loads(content), ensure_ascii=False).encode())
-    except (ValueError, UnicodeError):
+    except (ValueError, UnicodeError, RecursionError):
         pass
     # Also catch escaped credentials in incomplete or otherwise invalid JSON.
     candidates.append(re.sub(rb"\\u00([0-9a-fA-F]{2})", lambda m: bytes([int(m[1], 16)]), content))
@@ -154,7 +155,7 @@ def preflight(snapshot, reserve, remaining_slots):
     remaining = snapshot.get("remaining_usd")
     funded = snapshot.get("funded_remaining_usd")
     byok = snapshot.get("byok_usage_usd")
-    if limit is None or not 0 < limit <= 50:
+    if limit is None or not 0 < limit <= PROVIDER_CEILING_USD:
         return "invalid_lifetime_limit"
     if not snapshot.get("reset_is_null"):
         return "provider_limit_must_be_lifetime"

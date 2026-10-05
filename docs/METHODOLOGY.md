@@ -30,7 +30,7 @@ New workflows identify trials by experiment plus slot, reject same-run reruns, a
 
 Both arms for one task/repetition execute in declared order inside one short-lived job, with fresh native environments for each arm. Pairs run serially. The order between pairs remains scheduler-dependent and is recorded, not assumed. The original campaign used a serial matrix without this within-pair guarantee, so its actual order must be inspected rather than retroactively relabeled.
 
-New valid and malformed answers retain bounded, credential-screened original bytes, with a separate digest for normalized JSON. Escaped credential patterns are checked before retaining either. Legacy raw bytes discarded by the original runner cannot be recovered from a hash. Artifact audits identify normalized-only or unavailable originals. Small screened tool-invocation records exclude assistant messages and do not claim a complete trajectory.
+New valid and malformed answers retain bounded, credential-screened original bytes, with a separate digest for normalized JSON. Escaped credential patterns are checked before retaining either. Legacy raw bytes discarded by the original runner cannot be recovered from a hash. Artifact audits identify normalized-only or unavailable originals. New retention includes up to 25 screened invocations and 25 screened observations, each at most 8,000 encoded bytes, excluding assistant messages. Omitted items are counted. The original campaign retained tool counts only. Its raw trajectories and observations are unavailable, so this release makes no retrospective claim to possess them. Pattern screening catches known credentials and several common encodings but cannot guarantee that arbitrary obfuscation or private content is safe.
 
 ## Limits that matter
 
@@ -39,3 +39,7 @@ Eight tasks, one model, one intervention and three attempts per arm are a small 
 ## Results publication
 
 The key-free CI workflow collects the requested existing campaign, checks native controls and regrades retained answers without inference. It emits screened results as downloadable artifacts. Repository maintainers inspect those artifacts before committing or publishing them. No workflow writes source or Git identity. These operations do not launch, repeat or repair model answers.
+
+## Scorer 1.2.0
+
+The correction forbids SQL execution whenever structure is rejected. Only uniquely identifiable requested numerical claims are then assessed. Safe explicit-date, text and window alternatives still execute on both pristine fixtures under the existing 256 MiB Linux address-space limit, two-second CPU limit, 1.5-second progress deadline and two-second subprocess timeout. No resource limit was increased. Collection requires authenticated archive digests and validates schedule, run, attempt, commit and retained-file identities before replay. The correction registry allowlist cannot authorize candidate inputs, references, model, runtime, schedule or treatment changes. Original strict verdicts and prior 1.1.0 regrades remain historical evidence.

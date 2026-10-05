@@ -17,12 +17,17 @@ def summarize(rows):
         summaries[split] = {}
         for arm in ("A", "B"):
             selected = [r for r in rows if r["split"] == split and r["arm"] == arm]
-            checks, unknown, causes = Counter(), Counter(), Counter()
+            checks, unknown, assessed_checks, causes = Counter(), Counter(), Counter(), Counter()
             gap = 0
             for row in selected:
                 verdict = row.get("verdict") or {}
                 flags = verdict.get("checks") or {}
-                for key in ("format", "numerical", "evidence_context", "availability", "replay", "conclusion"):
+                detail = (verdict.get('details') or {}).get('conclusion') or {}
+                flags = {**flags, **{'conclusion_' + k: detail.get(k) for k in ('verdict', 'reason_code', 'evidence')}}
+                for key in ("format", "numerical", "evidence_context", "availability", "replay", "conclusion",
+                            "conclusion_verdict", "conclusion_reason_code", "conclusion_evidence"):
+                    if isinstance(flags.get(key), bool):
+                        assessed_checks[key] += 1
                     if flags.get(key) is True:
                         checks[key] += 1
                     elif flags.get(key) is None:
@@ -37,7 +42,7 @@ def summarize(rows):
                     if conclusion and conclusion.get("verdict") is False:
                         causes["wrong_conclusion_verdict"] += 1
                     elif flags.get("conclusion") is False:
-                        causes["conclusion_contract_unsplit"] += 1
+                        causes['conclusion_reason_or_evidence' if detail else 'conclusion_contract_unsplit'] += 1
                     if flags.get("replay") is False:
                         causes["replay"] += 1
                     if flags.get("format") is False:
@@ -52,6 +57,7 @@ def summarize(rows):
                 "assessed": sum(r.get("verdict") is not None for r in selected),
                 "numerical_correct_full_failed": gap,
                 "gap_causes_nonexclusive": dict(causes), "checks_passed": dict(checks),
+                "checks_assessed": dict(assessed_checks),
                 "checks_na": dict(unknown), "statuses": dict(Counter(r["status"] for r in selected)),
                 "known_slot_cost_usd": sum(known_cost) if known_cost else None,
                 "unknown_cost_slots": len(costs) - len(known_cost),
@@ -67,7 +73,8 @@ def report(root):
     records, reviews, supplemental = {}, {}, []
     for path in sorted((root / "reports/runs").glob("**/record.json")):
         record = json.loads(path.read_text())
-        if record["campaign"] != "final":
+        if record["campaign"] != "final" or (record.get('freeze_manifest_id') is not None
+                and record['freeze_manifest_id'] != manifest['manifest_id']):
             supplemental.append(record)
             continue
         if record["slot_id"] in records:
@@ -129,9 +136,21 @@ def report(root):
             "allocation_note": "Lifetime includes exploration and failures. Snapshot reporting can lag. Slot deltas are not exact per-arm costs. Native zero token fields do not establish zero usage."}
     actual_order = [r["slot_id"] for r in sorted((r for r in rows if r.get("execution_started_at") or r.get("started_at")),
                     key=lambda r: r.get("execution_started_at") or r["started_at"])]
+    expected_order = [s['slot_id'] for s in schedule]
+    changes = [{'slot_id': r['slot_id'], 'original_complete': r['verdict']['complete'],
+                'reviewed_complete': reviews[r['slot_id']]['verdict']['complete'],
+                'original_errors': r['verdict'].get('errors', []),
+                'reviewed_errors': reviews[r['slot_id']]['verdict'].get('errors', []),
+                'input_file': reviews[r['slot_id']]['input_file'],
+                'input_sha256': reviews[r['slot_id']]['input_sha256']}
+               for r in rows if r.get('verdict') and r['slot_id'] in reviews
+               and r['verdict']['complete'] != reviews[r['slot_id']]['verdict']['complete']]
     result = {"manifest": manifest, "summary": summaries, "reviewed_summary": reviewed_summary,
               "slots": rows, "reviews": reviews, "exploratory": supplemental, "cost": cost,
-              "reconciliation": reconciliation, "actual_start_order": actual_order}
+              "reconciliation": reconciliation, "actual_start_order": actual_order,
+              "order_matches_schedule": actual_order == expected_order,
+              "score_changes": changes,
+              "reviewed_scorer": list(next(iter(scorer_identities))) if scorer_identities else None}
     output = root / "reports"
     output.mkdir(exist_ok=True)
     (output / "scores.json").write_text(json.dumps(result, indent=2) + "\n")
@@ -149,6 +168,19 @@ def report(root):
             def score(s):
                 return str(s['verified']) + ' / ' + str(s['scheduled']) if s['assessed'] else 'Not available'
             lines.append(f"| {split} | {arm} | {score(summary)} | {summary['assessed']} | {score(reviewed)} | {reviewed['assessed']} |")
+    lines += ['', '## Numerical and independent checks', '',
+              'Passes / assessed checks are shown beside the planned counts above. Null checks are unassessed or inapplicable. Legacy conclusions cannot be split retrospectively without regrading.', '',
+              '| Scorer | Split | Arm | Numbers | Format | Evidence | Units/availability | SQL replay | Conclusion verdict | Conclusion reason | Conclusion evidence |',
+              '|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|']
+    for label, table in (('Original', summaries), ('Corrected', reviewed_summary)):
+        for split, arms in table.items():
+            for arm, summary in arms.items():
+                cells = []
+                for key in ('numerical', 'format', 'evidence_context', 'availability', 'replay',
+                            'conclusion_verdict', 'conclusion_reason_code', 'conclusion_evidence'):
+                    n = summary['checks_assessed'].get(key, 0)
+                    cells.append(f"{summary['checks_passed'].get(key, 0)} / {n}" if n else 'Unassessed')
+                lines.append('| ' + ' | '.join([label, split, arm, *cells]) + ' |')
     lines += ["", "## Diagnose the failure, not just the score", "",
               "`None` means not assessed or not applicable, never a failed calculation. Evidence-ID requirements are distinct from semantic truth. Legacy conclusion checks combine verdict, reason and citations.", "",
               "| Scorer | Split | Arm | Numbers correct, full task failed | Observed causes (nonexclusive) |", "|---|---|---|---:|---|"]
@@ -162,11 +194,42 @@ def report(root):
         rv = reviews.get(row["slot_id"], {}).get("verdict") or {}
         errors = ", ".join(v.get("errors", [])).replace("|", "\\|")
         lines.append(f"| {row['slot_id']} | {row['status']} | {v.get('complete', 'Not assessed')} | {rv.get('complete', 'Not assessed')} | {row.get('run_id', 'Unknown')} | {errors} |")
+    lines += ['', '## Task outcomes and origins', '',
+              '| Task | Arm | Original complete / 3 | Corrected complete / 3 | Corrected coverage | Origin | Source group |',
+              '|---|---|---:|---:|---:|---|---|']
+    for task in sorted({r['task'] for r in rows}):
+        for arm in ('A', 'B'):
+            selected = [r for r in rows if r['task'] == task and r['arm'] == arm]
+            if not selected:
+                continue
+            original = sum(bool((r.get('verdict') or {}).get('complete')) for r in selected)
+            corrected = sum(bool(reviews.get(r['slot_id'], {}).get('verdict', {}).get('complete')) for r in selected)
+            coverage = sum(r['slot_id'] in reviews for r in selected)
+            source = selected[0]
+            lines.append(f"| {task} | {arm} | {original} / {len(selected)} | {corrected} / {len(selected)} | {coverage} / {len(selected)} | {source.get('task_origin', 'Unknown')} | {source.get('source_group', 'Unknown')} |")
+    lines += ['', '## Score changes and retained input', '',
+              f"Corrected scorer identity: `{result['reviewed_scorer']}`. Full input hashes, original diagnostics and corrected diagnostics are in [scores.json](scores.json).", '',
+              f"Strict completion changes among regraded slots: **{len(changes)}**."]
+    for change in changes:
+        lines.append(f"- {change['slot_id']}: {change['original_complete']} to {change['reviewed_complete']}. Original errors {change['original_errors']}. Corrected errors {change['reviewed_errors']}.")
+    unavailable = [r['slot_id'] for r in rows if r['slot_id'] not in reviews]
+    lines += ['', 'Not regraded: ' + (', '.join(unavailable) if unavailable else 'None') + '.',
+              'Historical normalized JSON is the input where original bytes are missing. It is never relabeled as original serialization. Missing answer bytes cannot yield a corrected verdict. Previous regrades remain under their content hashes.']
     lines += ["", "## Cost and interpretation", "", f"Provider snapshot lifetime use: **{lifetime if lifetime is not None else 'Unknown'} USD**.",
               f"Snapshot time: {latest['as_of'] if latest else 'Unknown'}. Original verified completions recorded by that snapshot: {verified_all}.",
               cost['allocation_note'], "", "A and B use the same model. This is a small regression study, not a model leaderboard, significance test or production-reliability estimate.",
               "The original matrix limited concurrency but did not enforce pair order. Actual start order and per-slot latency/cost/diagnostic fields are preserved in scores.json.",
               "Five evaluation tasks are not five independent datasets. Two share the synthetic acquisition fallback. Development and evaluation remain separate."]
+    lines += ['', '| Split | Arm | Mean solve seconds | Recorded snapshot deltas USD | Unknown delta slots |',
+              '|---|---|---:|---:|---:|']
+    for split, arms in summaries.items():
+        for arm, summary in arms.items():
+            timing = summary['agent_execution_mean_seconds']
+            delta = summary['known_slot_cost_usd']
+            lines.append(f"| {split} | {arm} | {timing:.2f} | {delta:.6f} | {summary['unknown_cost_slots']} |" if timing is not None and delta is not None
+                         else f"| {split} | {arm} | Unknown | Unknown | {summary['unknown_cost_slots']} |")
+    lines += ['', f"Actual start order matches the preserved schedule: **{result['order_matches_schedule']}**. Recorded order: " + ', '.join(actual_order) + '.',
+              '', f"Supplementary records: **{len(supplemental)}**. Their statuses, costs and original verdicts remain in scores.json. No additional inference was used for correction."]
     (output / "results.md").write_text("\n".join(lines) + "\n")
     update_readme(root, result)
     return result
@@ -189,15 +252,17 @@ def update_readme(root, result):
     reviewed = len(result["reviews"])
     terminal = sum(r["status"] in TERMINAL | {"infra_failed", "blocked", "artifact_missing"} for r in rows)
     state = "All scheduled attempts accounted for" if terminal == len(rows) else "Partial campaign"
-    lines = [begin, "", f"**{state}.** Original verdicts: **{assessed}/{len(rows)}**. Reviewed verdicts: **{reviewed}/{len(rows)}**.", "",
-             "| Evaluation arm | Original verified / planned | Reviewed verified / planned | Reviewed coverage |",
-             "|---|---:|---:|---:|"]
+    lines = [begin, "", f"**{state}.** Original verdicts: **{assessed}/{len(rows)}**. Corrected verdicts: **{reviewed}/{len(rows)}**.", "",
+             "| Evaluation arm | Original complete / planned | Corrected complete / planned | Corrected numerical / assessed | Corrected coverage |",
+             "|---|---:|---:|---:|---:|"]
     for arm in ("A", "B"):
         original = result["summary"]["evaluation"][arm]
         correction = result["reviewed_summary"]["evaluation"][arm]
         def cell(summary):
             return f"{summary['verified']} / {summary['scheduled']}" if summary["assessed"] else "Not assessed"
-        lines.append(f"| {arm} | {cell(original)} | {cell(correction)} | {correction['assessed']} / {correction['scheduled']} |")
+        numerical = correction.get('checks_assessed', {}).get('numerical', 0)
+        numbers = f"{correction.get('checks_passed', {}).get('numerical', 0)} / {numerical}" if numerical else 'Unassessed'
+        lines.append(f"| {arm} | {cell(original)} | {cell(correction)} | {numbers} | {correction['assessed']} / {correction['scheduled']} |")
     lines += ["", "Only evaluation tasks appear here. Development is reported separately. Unfinished or unreviewable trials are not observed zero-score answers. These are coverage-aware counts, not a treatment-effect claim.", "",
               "[Full results, failures, costs and original records](reports/results.md)", "", end]
     prefix, remainder = text.split(begin, 1)
@@ -217,8 +282,12 @@ def main():
         validate(answer, json.loads((ROOT / "config/schema.json").read_text()))
         print("Output structure valid. Financial correctness and replay require the separate verifier on Actions.")
     elif args.command == "demo":
+        saved = json.loads((ROOT / 'reports/runs/final-wp03-A-1/answer.json').read_text())
+        record = json.loads((ROOT / 'reports/runs/final-wp03-A-1/record.json').read_text())
+        claims = {c['id']: c for c in saved['answers']}
         print("A correct answer can conceal an incorrect formula.")
-        print("Recorded wp03 A1: P1=100, P2=120, reported growth=20%.")
+        print(f"Recorded wp03 A1: P1={claims['p1_total']['value']:g}, P2={claims['p2_total']['value']:g}, reported growth={claims['as_of_growth']['value']:g}%.")
+        print(f"Original complete={record['verdict']['complete']}. Original checks={record['verdict']['checks']}.")
         print("Submitted expression: P2 - P1 * 100.0 / P1.")
         print("Changed fixture: P1=120, P2=150. Expression=50%, correct growth=25%.")
         print("This display does not execute submitted SQL. See reports/case-study.md for the unchanged artifact and qualifications.")
