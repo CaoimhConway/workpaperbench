@@ -198,7 +198,7 @@ def sanitized_verdict(path):
     return result
 
 
-def tool_counts(path):
+def tool_counts(path, key=None):
     try:
         trajectory = read_json(path, 5_000_000)
     except (OSError, ValueError, json.JSONDecodeError):
@@ -207,7 +207,7 @@ def tool_counts(path):
     for step in trajectory.get("steps", []) if isinstance(trajectory, dict) else []:
         for call in step.get("tool_calls", []) if isinstance(step, dict) else []:
             name = call.get("function_name") if isinstance(call, dict) else None
-            if isinstance(name, str) and SAFE_TOOL_RE.fullmatch(name):
+            if isinstance(name, str) and SAFE_TOOL_RE.fullmatch(name) and not (key and credential_in(name.encode(), key)):
                 counts[name] = counts.get(name, 0) + 1
     return dict(sorted(counts.items())[:50])
 
@@ -448,7 +448,7 @@ def execute(mode, slot_id):
     if exception_type:
         record["native_exception_type"] = exception_type
         record["native_failure_codes"] = failure_codes(trial_dir / "agent/hermes.txt")
-    record["tool_event_counts"] = tool_counts(trial_dir / "agent/trajectory.json")
+    record["tool_event_counts"] = tool_counts(trial_dir / "agent/trajectory.json", key)
 
     answer_path = trial_dir / "artifacts/logs/artifacts/answer.json"
     answer, answer_error = bounded_bytes(answer_path, int(RUNTIME["max_answer_bytes"]))
@@ -489,6 +489,8 @@ def execute(mode, slot_id):
     except (OSError, ValueError, URLError, json.JSONDecodeError):
         record["provider_after"] = None
         record["provider_cost_delta_usd"] = None
+    tokens = [metrics.get(name) for name in ("n_input_tokens", "n_output_tokens")] if metrics else []
+    record["token_counts_status"] = "native_reported_positive" if any(value and value > 0 for value in tokens) else "unreported_or_native_zero_fields"
     return_code = record.get("native_return_code")
     if return_code != 0 or record.get("native_exception_type") or verdict is None:
         record["status"] = "infra_failed"

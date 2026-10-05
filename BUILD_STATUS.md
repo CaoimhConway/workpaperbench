@@ -4,9 +4,9 @@ Specification: v3.1. Started 2026-10-04 (America/Los_Angeles).
 
 - Repository: https://github.com/CaoimhConway/workpaperbench; newly created private;
   verified API login `CaoimhConway` (ID 55163829), default branch `main`.
-- Development software built for wp01/wp02/wp05. Local install/demo and 55
-  lightweight checks pass. Full native development controls passed on Actions.
-  Paid trials are still unrun.
+- All eight packages are authored, with the expanded native gate still pending.
+  Development pilot has 11 started slots and one remaining treatment check.
+  Latest integrated lightweight suite: 112 checks passed.
 - Dedicated key transferred through stdin to `OPENROUTER_API_KEY`. Provider metadata
   checked 2026-10-05 UTC: lifetime cap $20, reset null, usage $0, remaining $20,
   BYOK usage $0. Project authorization ceilings remain $50 inference / $10 Actions.
@@ -22,9 +22,9 @@ Specification: v3.1. Started 2026-10-04 (America/Los_Angeles).
 
 ## Gates
 
-Stage 1 local implementation and full native development integration: complete.
-Latest native namespace smoke: complete. Development pilot: running. Stage 2 expansion/freeze: pending.
-Stage 3 audit/campaign/release: pending. No results or completion claims.
+Stage 1 software/native development gates complete, treatment delivery check pending.
+Stage 2 sources and controls are being completed before freeze. Stage 3 campaign
+not started. Historical observations below retain the failures and superseded pins.
 
 ## Development checkpoint
 
@@ -191,3 +191,9 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   rounded minutes, $0.528 compute estimate before included quota. Invoice and
   storage charges remain unknown. A post-dispatch metadata-only job will
   reconcile lifetime usage without additional inference.
+
+- Corrected-route pilot wp02 A3 failed the output contract despite computing 1200: extra claim, prose evidence and missing SQL column alias. Baseline run `37272511333` finished wp01 A4 complete, wp02 A4 contract failure, wp05 A3 numbers correct/full failed. The migration submission used hardcoded naive-growth SQL and prose evidence IDs. Its comparable SQL and 10% scalar were correct. No substantive financial miscalculation is inferred from those failures.
+- Chosen intervention: one 230-word contract-check skill, aimed at requested fields, exact evidence IDs and data-dependent SQL. Its causal benefit is unconfirmed. Both final arms receive the same explicit common contract. One B delivery check on wp05 brings the exploration manifest to the 12-slot ceiling. No further exploratory calls are allowed.
+- Added native pre-solve assertions for the exact skill text in the instruction and its staged file hash. Actual delivery remains a hosted gate. Native zero token fields are recorded as unreported rather than measured zero usage.
+- `37272514161` passed the six native development smoke controls. Canonical sanitized pilot bundles and integration result are retained. Reconciled provider snapshot `37272511333` reports lifetime usage $0.06977975, remaining/funded $19.93022025, cap $20, reset null and BYOK usage zero. Per-slot snapshots lag and are not the total-spend authority.
+- Bounded capture `37273047665` tried the fixed window through PublicNode (one request, HTTPError) and documented Cloudflare (one request, RPC error). Both failed. Applied the authorized synthetic shared-corpus downgrade to wp04/wp08, retaining the acquisition failure record. No observed on-chain amounts or behavior are claimed.

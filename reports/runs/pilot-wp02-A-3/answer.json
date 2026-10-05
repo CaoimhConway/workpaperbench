@@ -1,0 +1,49 @@
+{
+  "task_id": "wp01",
+  "answers": [
+    {
+      "id": "transfer_total",
+      "status": "answered",
+      "value": 1200,
+      "unit": "token_units",
+      "evidence": [
+        "event e1: txa, transfer, 100 (copied in row b, distinct identity e1)",
+        "event e2: txa, transfer, 200",
+        "event e3: txb, transfer, 600",
+        "event e4: txc, transfer, 300",
+        "events e5 (mint) and e6 (burn) excluded per policy",
+        "policy:transfer_definition excludes mint and burn",
+        "sources: event_id is stable identity, copies ignored"
+      ],
+      "sql": "SELECT SUM(amount_units) FROM (SELECT DISTINCT event_id, amount_units FROM events WHERE event_kind='transfer')",
+      "reason_code": null
+    },
+    {
+      "id": "txa_distinct_contributing_events",
+      "status": "answered",
+      "value": 2,
+      "unit": "distinct_events",
+      "evidence": [
+        "event e1: txa, transfer, 100 (distinct, contributes)",
+        "event e2: txa, transfer, 200 (distinct, contributes)",
+        "both are distinct event_ids with event_kind=transfer",
+        "row b is a copy of e1, not a separate distinct event",
+        "policy:transfer_definition counts distinct transfer events",
+        "delivery:format uses event identity not row ordinal"
+      ],
+      "sql": "SELECT COUNT(*) FROM (SELECT DISTINCT event_id FROM events WHERE tx_id='txa' AND event_kind='transfer')",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "txa has two distinct transfer events: e1 (100) and e2 (200)",
+      "Both events are eligible under transfer definition",
+      "Both contribute to txa transfer total of 300 token_units",
+      "policy:transfer_definition confirms mint/burn exclusion",
+      "sources.md confirms distinct event_id identity governs"
+    ]
+  }
+}

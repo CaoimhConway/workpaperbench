@@ -1,5 +1,6 @@
 """Invoke the native trial with a read-only pre-solve version check."""
 import asyncio
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -30,11 +31,23 @@ async def run(config_path):
                     "expected_commit": runtime["hermes"]["resolved_release_commit"],
                     "checked_before_solving": True}
         metadata["matches_pin"] = revision == metadata["expected_commit"]
+        if config.agent.skills:
+            skill = root / runtime["agent"]["treatment_skill_dir"] / "SKILL.md"
+            expected = hashlib.sha256(skill.read_bytes()).hexdigest()
+            staged = str(trial.agent.skills_dir) + "/contract-check/SKILL.md"
+            check = await trial.agent_environment.exec(
+                command="sha256sum " + shlex.quote(staged), timeout_sec=10)
+            actual = (check.stdout or "").split()
+            metadata["treatment_instruction_present"] = skill.read_text() in trial.task.instruction
+            metadata["treatment_staged_skill_matches"] = check.return_code == 0 and bool(actual) and actual[0] == expected
+            metadata["treatment_sha256"] = expected
         destination = root / ".raw/versions" / (config.trial_name + ".json")
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_text(json.dumps(metadata, indent=2) + "\n")
         if not metadata["matches_pin"]:
             raise RuntimeError("installed_revision_mismatch")
+        if config.agent.skills and not (metadata["treatment_instruction_present"] and metadata["treatment_staged_skill_matches"]):
+            raise RuntimeError("native_treatment_not_delivered")
 
     trial.add_hook(TrialEvent.AGENT_START, installed_version)
     await trial.run()

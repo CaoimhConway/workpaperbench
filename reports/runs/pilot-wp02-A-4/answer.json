@@ -1,0 +1,40 @@
+{
+  "task_id": "wp02",
+  "answers": [
+    {
+      "id": "transfer_total",
+      "status": "answered",
+      "value": 1200,
+      "unit": "token_units",
+      "evidence": [
+        "e1: transfer, txa, 100 (distinct)",
+        "e2: transfer, txa, 200 (distinct)",
+        "e3: transfer, txb, 600 (distinct)",
+        "e4: transfer, txc, 300 (distinct)"
+      ],
+      "sql": "SELECT SUM(amount_units) FROM (SELECT DISTINCT event_id, amount_units FROM events WHERE event_kind = 'transfer')",
+      "reason_code": null
+    },
+    {
+      "id": "txa_events_contributing",
+      "status": "answered",
+      "value": 2,
+      "unit": "distinct_events",
+      "evidence": [
+        "e1: txa, transfer, 100 (distinct)",
+        "e2: txa, transfer, 200 (distinct)"
+      ],
+      "sql": "SELECT COUNT(DISTINCT event_id) FROM events WHERE tx_id = 'txa' AND event_kind = 'transfer'",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "e1: txa transfer event contributes",
+      "e2: txa transfer event contributes",
+      "transfer_total = 1200 token_units across 4 distinct transfer events"
+    ]
+  }
+}

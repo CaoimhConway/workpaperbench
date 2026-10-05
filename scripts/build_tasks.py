@@ -57,7 +57,7 @@ def build(identifier):
     common += 'For each answered claim include a single read-only SQLite statement returning one numeric column named value. '
     common += 'Queries are replayed on pristine data and a declared schema-compatible synthetic changed-data control. '
     common += 'The control varies amounts or observations without changing metric definitions, covered populations or source eligibility rules. '
-    common += 'Evidence lists must identify the supporting records and definitions for each claim. '
+    common += 'Evidence lists must contain exact record IDs from evidence.json for the supporting records and definitions of each claim. '
     common += 'If an input is unavailable, use insufficient_evidence with null value and SQL and a reason code. '
     common += 'Values must be finite. Numerical tolerance is 0.000001 in the requested unit. '
     common += 'The common checker verifies structure only: python /workspace/check_answer.py /logs/artifacts/answer.json. '
