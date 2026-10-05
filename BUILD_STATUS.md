@@ -1,209 +1,126 @@
 # Build status
 
-Specification: v3.1. Started 2026-10-04 (America/Los_Angeles).
+Specification v3.1. Dedicated repository: https://github.com/CaoimhConway/workpaperbench.
+Confirmed owner `CaoimhConway` (ID 55163829), default branch `main`, currently private.
+No genuine external blocker. No Docker, Harbor or inference ran on this device.
 
-- Repository: https://github.com/CaoimhConway/workpaperbench; newly created private;
-  verified API login `CaoimhConway` (ID 55163829), default branch `main`.
-- All eight packages are authored, with the expanded native gate still pending.
-  Development pilot is complete with all 12 exploratory slots recorded.
-  Latest integrated lightweight suite: 127 checks passed after audit fixes.
-- Dedicated key transferred through stdin to `OPENROUTER_API_KEY`. Provider metadata
-  checked 2026-10-05 06:59 UTC: lifetime cap $20, reset null, usage $0.0867218,
-  remaining $19.9132782, BYOK usage $0. Project authorization ceilings remain $50 inference / $10 Actions.
-- Git identity issue resolved with explicit owner authorization: existing work
-  include changed to case-insensitive `gitdir/i:~/code/work/` and moved after the
-  global fallback. Verified effective work identity. The bootstrap commit
-  `da28f4a` used the fallback before the ordering correction. History preserved.
-- Initial key-free Docker plumbing preflight passed: Actions `37261618709` on
-  bootstrap `da28f4a`. This is not native Harbor isolation evidence.
-- Sandbox network access initially made `gh auth status` look invalid; an authorized
-  network-enabled API request succeeded. Existing CLI account switched normally.
-- No Docker, Harbor or model inference executed on this device.
+- Stage 1 complete: three development tasks, native controls, all 12 exploratory
+  slots preserved, one selected skill and actual hosted delivery verified.
+- Stage 2: all eight sources/packages, direct reference review, balanced controls,
+  candidate-instructions/schema-only review and freeze complete. Corrected full
+  native gate `37276298546` on `77f1fd8` is running, not passed yet.
+- Stage 3: fresh read-only source-first audit complete and fixes verified locally.
+  Final 48-slot campaign and publication/release are unrun, pending the native gate.
+- Local integrated suite passed 127 tests after audit fixes. Five focused
+  schedule/report tests pass, including the new fixed-schedule invariant.
+- Current freeze `wpb-v1-92baa4a72f0e`, 234 file hashes. Content digest
+  `92baa4a72f0e` is the manifest ID suffix, full digest is in `config/freeze.json`.
+  Freeze file SHA256 `8cc3e40ed42898a7ead9fce7a7bfd5c9dc955f02cdd86a1c7bf352c9f667f95b`.
+  Sources, tasks, grader, scripts, tests, runtime/skill, schedule and workflows
+  are frozen before any evaluation model exposure. Status/results/README remain
+  editable. Model, treatment and task inputs cannot change silently after exposure.
 
-## Gates
+## Configuration and boundaries
 
-Stage 1 software/native development and treatment delivery gates complete.
-Stage 2 sources and controls are being completed before freeze. Stage 3 campaign
-not started. Historical observations below retain the failures and superseded pins.
+Harbor 0.23.0 at `1e5c5c6db929a10a140d05e606882c671ae20729`.
+Hermes `v0.21.4+canary.20261004T084456Z` resolves to
+`8b66a51036c1e20920a17cdd049fdf55c968d683`, checked before every solve.
+The native installer uses a moving upstream bootstrap. Three genuine native
+compatibility corrections have exact original/corrected module SHA256 guards in
+`config/runtime.json` and an upstream-ready note. No custom adapter or proxy.
 
-## Development checkpoint
+Hosted model `qwen/qwen3.6-35b-a3b` uses OpenRouter default routing, with residual
+provider variation. Actual terminal/file events and completed workpapers confirm
+compatibility. Toolsets file/terminal/skills, turn cap 90, memory/profile/checkpoints
+false, compression 0.85, terminal 180 seconds. Setup 1200, solve 600, verifier 180
+seconds, candidate 2 CPUs/4096MiB. Base Python3.12 manifest/amd64 digests are pinned.
+One slot per Ubuntu 24.04 full-VM job, max-parallel 1, no outer score-based retries.
+Native transport retries remain in-slot and their individual counts are unknown.
 
-- Native source pins: Harbor 0.23.0 at `1e5c5c6db929a10a140d05e606882c671ae20729`,
-  Hermes `v2026.9.24` resolves to `f97608f178d1ffeca59860195ab7da295f7c8e5f`.
-  Native installer still fetches upstream main bootstrap and pins a tag. No
-  immutable per-container checkout claim until runtime verification.
-- Model selected from current OpenRouter catalogue: `qwen/qwen3.6-35b-a3b`,
-  open-weight, tool-capable. OpenRouter native default route may vary providers.
-  Compatibility and actual tool use remain pilot gates.
-- Candidate Python base image pinned by manifest digest in `config/runtime.json`.
-  Native toolsets file/terminal/skills, max turns 90 fixed by adapter. Cold setup
-  1200 seconds, solving 600 seconds, separate verifier 180 seconds and no network.
-- Tesla filing headers and 2023/2024 values independently checked. Synthetic event
-  and migration fixtures preserve positive propositions. SQL replay also checks
-  explicit synthetic amount changes.
-- Tested local: `.venv/bin/python -m pip install -e '.[test]'`, `.venv/bin/workpaperbench demo`,
-  `.venv/bin/python -m pytest -q` (51 passed).
-- GitHub billing summary unavailable to existing token (404, user scope absent).
-  No token scopes changed. Standard private Linux rate currently $0.006/minute.
-  Track all project run minutes conservatively against $10 rather than assume
-  account quota. Public standard compute is free after the software audit gate.
-- Inference usage remains $0. No paid trials dispatched yet.
+The candidate can read its dedicated capped inference key. Native TCP allowlisting
+has DNS/ICMP residual channels. The separate verifier uses network-none and checks
+loopback-only interfaces, blocked external TLS, absent key and Docker socket.
+Candidate inputs exclude gold, checkout/Git history, GitHub credentials and host
+sockets. SQL alone runs in a constrained, bounded, key-free trusted subprocess.
+Raw live traces are ephemeral. Only scanned/allowlisted small evidence is retained.
+Runtime growth reviewed at 1534 hand-written lines, three runtime modules and thin
+scripts, excluding tests/assets/config. No minification or framework was added.
 
-- Development native integration dispatched: `gh workflow run ci.yml --repo
-  CaoimhConway/workpaperbench --ref main -f integration=true -f capture=false`,
-  Actions `37263846465`, commit `ca3c61c`. Unit job passed 51 checks and demo.
-  Full native controls passed, 27 cases (10 expected completion passes, 17
-  expected failures). Sanitized results preserved under reports. Push CI
-  `37263842795` also passed.
-- Funded credit independently checked at provider `/api/v1/credits`: $20 total,
-  $0 used. Added funded-balance checks, synthetic budget/report controls, and
-  source-group run metadata. Four new focused controls pass (55 total tests).
+## Sources and development findings
 
-- Pre-pilot review accepted genuine operand/context citation alternatives without
-  admitting irrelevant or ineligible sources. All 55 local checks pass. The
-  updated network probe uses a bounded direct TCP connection. Added per-control
-  sanitized artifacts and explicit full/smoke integration labels. Full eight-task
-  CI has a 90-minute ceiling based on observed 21-minute development integration.
-- Pinned uv 0.9.26 installed and the lightweight dependency command tested.
-  Reports retain setup/solve/verifier timing, known/unknown costs and source groups.
+[DATA_SOURCES.md](DATA_SOURCES.md) and [source review](reports/source-review.md)
+record factual extracts, original synthetic fixtures, independent direct
+calculations and valid/invalid alternatives. wp04/wp08 share one synthetic corpus.
+Capture `37273047665` used the fixed window through PublicNode and documented
+Cloudflare, one request each. HTTPError/RPC error prevented acquisition. The
+explicit fallback preserves failure evidence and makes no observed-chain claim.
+Artemis methodology motivates a question, without proving a product defect.
 
-- Smoke recheck `37265511360` failed on a bare TCP probe. Source inspection shows
-  native Docker TCP is redirected to a local gost filtering proxy, so connection
-  establishment is not external egress proof. Replaced the probe with a bounded
-  authenticated TLS handshake to a numeric external address. No network policy
-  relaxed. Failed native checks now retain their sanitized control record.
+Pilot 12 statuses: preserved under `reports/runs`, including installation/runtime
+failures and unknown costs. wp01 A3/A4 and wp05 B1 completed. wp02 A3/A4 had correct
+transfer arithmetic but violated requested fields/evidence/SQL output contracts.
+wp05 A2 guessed an omitted task identifier and omitted SQL aliases. That unfair
+prompt and a valid naive-growth citation alternative were fixed. wp05 A3 had
+correct 65% naive/10% comparable values but hardcoded naive SQL and prose citations.
+No substantive financial miscalculation is inferred from those contract failures.
 
-- Corrected TLS smoke `37266025062` passed all six native reference/empty controls.
-  Harbor Docker filtering permits DNS/ICMP, so the verifier now uses native
-  `tests/docker-compose.yaml` with `main.network_mode: none`. Loopback-only
-  interfaces and failed external TLS are required. Hosted confirmation pending.
-- The native invocation uses `Trial.create` / `Trial.run` and its documented
-  AGENT_START hook to verify installed Hermes HEAD before solving. No adapter
-  or credential proxy was added. Pin enforcement awaits the development pilot.
+Selected one 230-word contract-check skill, without task IDs/formulas/answers or
+new evidence. B delivery run `37274770675` proved exact appended text and staged
+skill hash `651820768f6a80222f92256abd9ac58474a480fcfbdf212bda8b22fff1863bb0`,
+plus runtime pin and complete verification. Pilot corrections preceded this check,
+so it establishes delivery, not causal uplift. All 12 slots are exhausted.
 
-- Publication bundles are scanned before and after JSON decoding. A synthetic
-  escaped-credential control passes. Local focused checks: four budget/artifact
-  controls passed. Provider usage remains $0 before the pilot.
-- Completed private jobs through `37266025062`: 33 rounded job minutes, $0.198
-  compute upper estimate at $0.006/minute. Included account quota and actual
-  invoice charge remain unavailable. Small seven-day artifacts add negligible
-  storage at this stage, not a known zero charge.
+Fresh audit corrected synthetic-origin labeling, attached Circle metadata
+locators, accepted genuine scope-only citations, and caught wrong matched joins
+whose equal tag weights canceled. The wp06 changed metadata observation exposes
+22% from the bad query against 25% correct growth, with local/native controls.
+The candidate-only review found no direct answers but noted scope-cued limits in
+wp04/wp08. No external human validation or contamination-proof claim.
 
-- Native namespace smoke `37266518124` on `3a87fa9` passed all six controls,
-  including loopback-only verifier interfaces, blocked external TLS and absent
-  inference key/socket. Permanent sanitized report retained.
-- Baseline exploration dispatched on `0c725b5`: Actions `37266930239`, command
-  `gh workflow run benchmark.yml --repo CaoimhConway/workpaperbench --ref main
-  -f mode=pilot -f batch=baseline -f manifest_id=development-v1`. Slots are
-  wp01/wp02/wp05 A1, serial. Outcomes and costs pending.
+## Actual execution evidence
 
-- Pilot `37266930239`: wp01 A1 and wp02 A1 failed during native installation
-  (`NonZeroAgentExitCodeError`), before solving. Both measured provider deltas
-  are $0. Canceled the same broken setup before proceeding. Failed slots stay
-  recorded. Adding a key-free native install-only diagnostic to inspect the
-  controlled installer error without uploading live traces. Treatment pending.
+| Runs | Actual result |
+|---|---|
+| 37261618709 | Docker plumbing preflight passed, not native proof |
+| 37263846465 | Full3-development native controls passed 27 cases |
+| 37265511360 | Bare TCP probe failed to prove egress blocking, corrected to TLS |
+| 37266025062 / 37266518124 | Corrected native smoke passed 6 each, then verifier namespace-none proof |
+| 37266930239 | Three A1 setup failures, retained |
+| 37267321820 / 37267758153 / 37268139696 / 37268358386 / 37268809048 | Key-free installation diagnostics failed, motivating actual compatibility/library/data-root fixes |
+| 37269174132 / 37270674684 | Key-free installation and CLI gates passed |
+| 37269765974 | wp01 A2 runtime failure, wp02 A2 started/canceled with unknown cost, wp05 A2 genuinely unstarted and later resumed |
+| 37271209030 | Actual tools and submissions, wp01 A3 complete, wp02 A3/wp05 A2 failed contract |
+| 37272511333 / 37274770675 | Remaining baselines and single B check completed, canonical evidence retained |
+| 37272514161 | Development smoke passed 6 |
+| 37275297547 | Canceled as superseded after audit finding,8 partial controls retained, gate not passed |
+| 37276298546 | Corrected all-eight full native gate currently running |
 
-- Key-free installer diagnostic `37267321820` confirms an upstream bootstrap/tag
-  mismatch: current main installer requires `pm/lock.json` and `pm.cli`, absent
-  from the September tag. All three original pilot slots failed before solving,
-  each with measured $0 inference delta. A compatible released tag will be
-  checked key-free before supplemental development slots.
-- Actions exposes non-null job start timestamps while jobs are queued. Resume
-  selection now distinguishes allocation/started steps from a queued timestamp.
-  Two focused control-plane tests pass.
+Tested commands: editable lightweight install, `python -m pytest -q`,
+`workpaperbench demo`, structural `validate`, report generation, native CI dispatch,
+pilot dispatch/watch/download, and exact final 48 resume selection against actual
+Actions history. The final selector found 48 truly unstarted,0 previously started.
+Remote commands use `--repo CaoimhConway/workpaperbench --ref main`.
 
-- Primary tag/code inspection selected timestamped Hermes canary
-  `v0.21.4+canary.20261004T084456Z` at
-  `8b66a51036c1e20920a17cdd049fdf55c968d683`, which includes the PM package.
-  Stable latest release remains September and is incompatible with today's
-  native bootstrap. Retained tested Harbor 0.23.0. Installed checkout location
-  follows current installer `/root/.hermes/hermes-agent`. Key-free hosted
-  confirmation is required before new pilot slots.
+## Resource and publication accounting
 
-- Canary install checks `37267758153` and `37268139696` isolated a missing
-  system library: managed Node requires `libatomic.so.1`. Added Debian
-  `libatomic1` to candidate images. No network policy changed. Key-free gate
-  rerun required. Six pilot slots are declared: three preserved A1 setup
-  failures and three new A2 supplemental baseline slots, not dispatched yet.
-- All 58 local tests pass, including decoded-credential and queued-job controls.
+The dedicated key was supplied explicitly and transferred to the repository secret
+through stdin. Provider reconciliation `37274770675` as of 2026-10-05 06:59:02 UTC:
+lifetime usage $0.0867218, cap $20, reset null, remaining/funded $19.9132782, BYOK 0.
+This actual cap is below the authorized $50 ceiling and is never reset or raised.
+Per-slot snapshots lag, so their sum is not total spend. Native zero token fields
+are unreported usage. Full 48 reserve $9.60 fits current funds.
 
-- `37268358386`: libatomic fix completed installation, then native Harbor failed
-  on obsolete `hermes version`. Current CLI supports `hermes --version`. Applying
-  a two-occurrence correction to the existing native adapter, guarded by exact
-  original/corrected module hashes. This is a dependency bug fix, with no new
-  adapter, proxy or execution behavior. Actual corrected gate remains pending.
+Actions snapshot as of 07:03 UTC: 140 rounded Linux job minutes, conservative compute
+$0.84 before included quota at $0.006/minute. It includes the then-running job and
+will be refreshed after gates. Invoice, included account quota and storage charges
+are unknown because the existing billing API returned 404 without user scope.
+No scope, subscription, cap or account safeguards changed. Authorization ceiling
+is $10 incremental project Actions charges.
 
-- Corrected-version gate `37268809048` found a native setup/runtime data-root
-  mismatch. Configured native `agent.env.HERMES_HOME=/tmp/hermes` for both setup
-  and solving, which also places the checkout at `/tmp/hermes/hermes-agent`.
-  Optional desktop-tool warnings do not require adding desktop dependencies.
-- Capture validator now checks boundary numbers, address ABI padding and hashes,
-  and records request counts on failed paths. Two synthetic protocol tests pass.
-  No source capture has run yet.
-
-- Key-free native installation gate `37269174132` passed on `d7c0517`.
-  The corrected native version command and consistent data root are working.
-  Independent native solve/tool/model compatibility remains to be observed.
-- Dispatched supplemental baseline `37269765974` on the same commit. Resume
-  selected only wp01/wp02/wp05 A2, preserving all three A1 setup failures.
-  Paid findings, costs and treatment choice pending these observations.
-- Supplemental run `37269765974` wp01 A2 installed and verified the exact
-  Hermes revision before solving, then exited in 12.864 seconds without tool
-  events or an answer. Provider lifetime usage remained $0. This is a runtime
-  compatibility failure, not evidence of financial reasoning failure.
-- Canceled that run. wp02 A2 had started installation and its uploaded start
-  record is retained as an infrastructure failure with unknown slot cost.
-  wp05 A2 never received a runner and remains resumable. Five live slots have
-  actually started across the two pilot runs. A key-free CLI argument check
-  is added before another live attempt. Model-route source inspection ongoing.
-- Pinned primary source inspection found native compatibility defects: the
-  OpenRouter provider prefix is not a canonical model ID in this Hermes route,
-  and finite-query sessions are now labeled `oneshot` rather than `cli`.
-  Correcting the existing native adapter's provider flag and export filter,
-  guarded by the exact original and corrected module hashes. This preserves
-  the selected model, key flow, terminal tools and separate verification.
-- Key-free CLI gate `37270674684` passed: model, toolset, finite-query and
-  query arguments are accepted. The recorded RuntimeError is the intentional
-  hook stop before the native solver, not an installation failure.
-- Native corrected module SHA256 is now
-  `02ebd73edb387091480df45fdea27b70bf37ca377ee0b68047b84d6cdbede112`.
-  Full lightweight suite passed 60 tests, plus a focused new diagnostic
-  redaction control passed. Pending baseline slots are wp05 A2, wp01 A3,
-  wp02 A3. Their future records will include allowlisted failure codes only.
-- Corrected-route run `37271209030` produced real submissions and native
-  terminal events. wp05 A2 submitted 65% naive and 10% comparable growth,
-  but the old instruction omitted the required task identifier. It guessed
-  wp01, causing a format rejection. Both submitted SQL queries also omit the
-  explicitly required `value` column alias. Key-usage delta: $0.01121775.
-- Independent read-only source review confirmed the missing identifier and
-  a valid citation alternative: export:periods alone supports naive export
-  growth. Added explicit task identifiers to all candidate instructions and
-  accepted that citation set. Comparable growth/conclusion still need the
-  counting policy. Added a named valid/invalid citation test and a native
-  regrade control preserving the old failed record. These are fairness fixes,
-  not treatment or measured financial weaknesses.
-- wp01 A3 passed every applicable check with native terminal/file events.
-  Key-usage delta: $0.00304445. wp02 A3 remains in progress.
-- Three supplemental baselines after the authoring corrections are declared,
-  bringing the pilot manifest to 11 slots. One development treatment check
-  remains possible inside the 12-slot ceiling. No treatment is chosen yet.
-- Completed private Actions accounting through the earlier snapshot: 88
-  rounded minutes, $0.528 compute estimate before included quota. Invoice and
-  storage charges remain unknown. A post-dispatch metadata-only job will
-  reconcile lifetime usage without additional inference.
-
-- Corrected-route pilot wp02 A3 failed the output contract despite computing 1200: extra claim, prose evidence and missing SQL column alias. Baseline run `37272511333` finished wp01 A4 complete, wp02 A4 contract failure, wp05 A3 numbers correct/full failed. The migration submission used hardcoded naive-growth SQL and prose evidence IDs. Its comparable SQL and 10% scalar were correct. No substantive financial miscalculation is inferred from those failures.
-- Chosen intervention: one 230-word contract-check skill, aimed at requested fields, exact evidence IDs and data-dependent SQL. Its causal benefit is unconfirmed. Both final arms receive the same explicit common contract. One B delivery check on wp05 brings the exploration manifest to the 12-slot ceiling. No further exploratory calls are allowed.
-- Added native pre-solve assertions for the exact skill text in the instruction and its staged file hash. Actual delivery remains a hosted gate. Native zero token fields are recorded as unreported rather than measured zero usage.
-- `37272514161` passed the six native development smoke controls. Canonical sanitized pilot bundles and integration result are retained. Reconciled provider snapshot `37272511333` reports lifetime usage $0.06977975, remaining/funded $19.93022025, cap $20, reset null and BYOK usage zero. Per-slot snapshots lag and are not the total-spend authority.
-- Bounded capture `37273047665` tried the fixed window through PublicNode (one request, HTTPError) and documented Cloudflare (one request, RPC error). Both failed. Applied the authorized synthetic shared-corpus downgrade to wp04/wp08, retaining the acquisition failure record. No observed on-chain amounts or behavior are claimed.
-
-- Treatment delivery check `37274770675` completed wp05 B1 with every check passed. Before solving, native runtime HEAD matched and both treatment instruction presence and staged skill SHA256 matched `651820768f6a80222f92256abd9ac58474a480fcfbdf212bda8b22fff1863bb0`. Recorded slot cost delta $0.0062061 is provisional. This exhausts the 12 exploratory slots. Pilot results do not establish causal uplift because common authoring corrections preceded the delivery check.
-- All eight tasks have explicit origin metadata. Fresh read-only source-first audit found that the previous fallback would incorrectly label wp03/wp06 as primary filings. Fixed before any evaluation execution. The dated-release catalog now rejects the late publication by its own source ID while accepting eligible preliminary context.
-- Source review, instructions/schema-only review and named evaluation controls are preserved in `reports/source-review.md` and tests. Local full suite passed 122 controls. All-eight native integration and final freeze remain pending.
-
-- Source-first audit exposed equal-tag-weight cancellation in a wrong wp06 matched query. Added a schema-compatible changed metadata observation so it returns 22% rather than 25%, plus named local/native negative controls. Accepted wp08 scope-only missing-label conclusion evidence. Native run `37275297547` was canceled as superseded, not passed. Corrected all-eight integration will rerun.
-
-- Corrected integrated local suite: 127 passed. The earlier fixture edit briefly had a wrong row width, was corrected and regenerated, and the stable final suite passed. Superseded native run retained eight actual partial controls, without a gate-pass claim. Current Actions snapshot: 140 rounded job minutes, $0.84 compute before included quota, invoice/storage charges unknown.
-
-- Corrected all-eight native gate dispatched as `37276298546` on `77f1fd8`, full scope. The fresh source-first reviewer concluded no additional material defect after the source, citation and join-control fixes. Main verification passed 127 local tests. Runtime growth reviewed at 1,534 hand-written lines across three ordinary runtime modules and thin scripts, excluding tests/assets/config. No framework or minification was introduced.
+Tracked files, Git blobs, candidate COPY contexts and freeze hashes passed the
+publication scanner. Dependency license/notice retained. Actual logs/artifacts,
+staged history/source audit and completed software gate are required before
+visibility change. No public release yet. Existing SSH setup reused. With explicit
+owner permission, the work include became case-insensitive and was ordered after
+the fallback. Effective existing work identity verified. Bootstrap `da28f4a` used
+the old fallback identity before the fix, history preserved without rewriting.
