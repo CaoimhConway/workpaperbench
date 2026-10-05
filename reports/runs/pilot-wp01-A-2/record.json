@@ -1,0 +1,87 @@
+{
+  "answer_status": "missing_or_symlink",
+  "arm": "A",
+  "campaign": "pilot",
+  "commit_sha": "d7c0517bb53b0e8a64498d13006d0e2d81364a21",
+  "config_hash": "94bc7bc4d972483dea115f937dd4788a5d5b1070d6ffc60ad5b85f6652f23b4a",
+  "finished_at": "2026-10-05T05:56:48.567839+00:00",
+  "github_run_attempt": "1",
+  "github_run_id": "37269765974",
+  "harbor_commit": "1e5c5c6db929a10a140d05e606882c671ae20729",
+  "harbor_metrics": {
+    "agent_execution_seconds": 12.864,
+    "agent_setup_seconds": 114.258,
+    "environment_setup_seconds": 17.782,
+    "verifier_seconds": 17.847
+  },
+  "harbor_native_version_fix": {
+    "change": "Two native Hermes CLI version invocations use the supported --version flag. No agent behavior, adapter class or credential flow changed.",
+    "corrected_module_sha256": "c80026a637135f3accfbc1534f77767f65269a0fcbbdc094355af3a8af5d498e",
+    "original_module_sha256": "012e980302b26641dcf77f31fe71a368b2022b098619853addd015c5e18e47c6"
+  },
+  "harbor_version": "0.23.0",
+  "hermes_checkout_commit_verified": true,
+  "hermes_release_tag": "v0.21.4+canary.20261004T084456Z",
+  "hermes_resolved_release_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "hermes_runtime_version": {
+    "checked_before_solving": true,
+    "checkout_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "expected_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "matches_pin": true
+  },
+  "model": "qwen/qwen3.6-35b-a3b",
+  "model_route_policy": "OpenRouter default routing for this model. Provider may vary between compatible endpoints",
+  "native_command": "Harbor Trial.create / Trial.run with native Hermes",
+  "native_exception_type": "NonZeroAgentExitCodeError",
+  "native_return_code": 0,
+  "provider_after": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 20.0,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 20.0,
+    "reset_is_null": true,
+    "usage_usd": 0.0
+  },
+  "provider_before": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 20.0,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 20.0,
+    "reset_is_null": true,
+    "usage_usd": 0.0
+  },
+  "provider_cost_delta_usd": 0.0,
+  "repetition": 2,
+  "reservation_usd_per_slot": 0.2,
+  "run_id": "37269765974",
+  "slot_id": "pilot-wp01-A-2",
+  "source_group": "tesla-2024-q2",
+  "split": "development",
+  "started_at": "2026-10-05T05:53:42.975042+00:00",
+  "status": "infra_failed",
+  "task": "wp01",
+  "task_origin": "primary_filing_facts",
+  "tool_event_counts": {},
+  "verdict": {
+    "checks": {
+      "availability": false,
+      "conclusion": null,
+      "evidence_context": false,
+      "format": false,
+      "numerical": null,
+      "replay": null
+    },
+    "complete": false,
+    "errors": [
+      "format:ValueError"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    }
+  }
+}

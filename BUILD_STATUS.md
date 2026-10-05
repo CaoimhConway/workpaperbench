@@ -140,3 +140,19 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
 - Capture validator now checks boundary numbers, address ABI padding and hashes,
   and records request counts on failed paths. Two synthetic protocol tests pass.
   No source capture has run yet.
+
+- Key-free native installation gate `37269174132` passed on `d7c0517`.
+  The corrected native version command and consistent data root are working.
+  Independent native solve/tool/model compatibility remains to be observed.
+- Dispatched supplemental baseline `37269765974` on the same commit. Resume
+  selected only wp01/wp02/wp05 A2, preserving all three A1 setup failures.
+  Paid findings, costs and treatment choice pending these observations.
+- Supplemental run `37269765974` wp01 A2 installed and verified the exact
+  Hermes revision before solving, then exited in 12.864 seconds without tool
+  events or an answer. Provider lifetime usage remained $0. This is a runtime
+  compatibility failure, not evidence of financial reasoning failure.
+- Canceled that run. wp02 A2 had started installation and its uploaded start
+  record is retained as an infrastructure failure with unknown slot cost.
+  wp05 A2 never received a runner and remains resumable. Five live slots have
+  actually started across the two pilot runs. A key-free CLI argument check
+  is added before another live attempt. Model-route source inspection ongoing.
