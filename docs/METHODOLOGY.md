@@ -1,0 +1,47 @@
+# Methodology and correction policy
+
+WorkpaperBench measures bounded financial work over supplied tables and evidence. It does not measure open-web retrieval, general investment judgment or cryptographic verification.
+
+## What passes
+
+A task is complete only when every requested answer has the right value, unit, supporting evidence and availability decision, its SQL recomputes correctly, and any requested conclusion is supported. Correct JSON alone is not enough. Neither is a correct scalar.
+
+The reviewed scorer accepts ordinary safe SQLite arithmetic, CTEs, joins, subqueries and aggregates. Its bounded function set includes `sum`, `total`, `count`, `min`, `max`, `avg`, `round`, `abs`, `coalesce`, `ifnull`, `nullif`, `lower`, `upper`, `length`, `substr`, `substring`, `trim`, `ltrim`, `rtrim`, `replace`, `instr`, `typeof`, `iif`, `like` and `glob`. Window functions such as `row_number`, `rank`, `lag`, `lead`, `first_value` and `last_value` are supported under the same resource limits. Date/time functions accept explicit text or numeric values: `date`, `time`, `datetime`, `julianday`, `unixepoch` and `strftime`. Wall-clock defaults, `now`, timezone-dependent modifiers and implicit-current-time subsecond forms are rejected. Writes, attached databases, extensions and arbitrary candidate Python remain prohibited.
+
+Read-only inputs, an authorizer, a bounded subprocess, resource limits and a native separate verifier are complementary controls. A statement-prefix check is not the security boundary.
+
+## Independent diagnostics
+
+Strict format failures still fail the task. Uniquely identifiable requested answers can nevertheless be inspected without repairing the submission. Extra claims do not erase a correct requested number. Duplicate requested claims are not resolved by picking a favorable one.
+
+The reviewed scorer records numerical correctness, units, source-ID requirements, availability, original replay, changed-input replay, and conclusion verdict/reason/evidence separately. A correct conclusion with a missing citation is not reported as a wrong conclusion verdict. An unexecuted check is `null`, not a failure. Evidence requirements are reviewed task-local contracts, not an automatic proof of arbitrary prose.
+
+## Frozen experiment versus reviewed scoring
+
+`config/freeze.json` remains the original, immutable experiment manifest `wpb-v1-92baa4a72f0e`. Its execution snapshot is commit `b4e256dc8976223a8a3fdad157a6b212f49bb8e1`, and its completed run is `37280454673`. The review changes neither its candidate inputs, model, skill nor historical jobs.
+
+`config/review.json` hashes the correction implementation. The publication audit separately checks that original candidate-facing inputs are unchanged. Original records and verdicts are never overwritten. Native, inference-free rescoring of retained answers writes `regrade.json`, identifying scorer version, code hash, input hash and Actions run. Results show original and reviewed scores separately. Repeating a review with the same scorer and input is a no-op. A changed review preserves the prior sidecar under its content hash. A report cannot silently mix scorer versions.
+
+The working tree intentionally no longer matches every code hash of the old execution snapshot. Dispatching a new paid final campaign under that old freeze fails closed. Reproduce the old implementation from its commit. Any new scored experiment requires an explicitly new immutable manifest, not a silent refresh of old hashes or retries selected for better scores.
+
+The correction registry authorizes publication of reviewed code, never paid execution under the old freeze. The launcher checks every original frozen hash without consulting that registry. Attempt receipts and new imports use experiment/slot directories. Published legacy evidence keeps its flat paths. Collection authenticates each named attempt against Actions metadata, including earlier attempts when a run has since been rerun.
+
+## Attempts, ordering and missing data
+
+New workflows identify trials by experiment plus slot, reject same-run reruns, and recheck history before installation. An older Actions run retains its original workflow definition, so these protections cannot retrofit a rerun of the legacy campaign. Never rerun that original run. Receipts in new workflows are written before setup and incomplete receipts become infrastructure failures. Reconciliation distinguishes queued, running, missing-artifact and completed states. Missing evidence is never fabricated.
+
+Both arms for one task/repetition execute in declared order inside one short-lived job, with fresh native environments for each arm. Pairs run serially. The order between pairs remains scheduler-dependent and is recorded, not assumed. The original campaign used a serial matrix without this within-pair guarantee, so its actual order must be inspected rather than retroactively relabeled.
+
+New valid and malformed answers retain bounded, credential-screened original bytes, with a separate digest for normalized JSON. Escaped credential patterns are checked before retaining either. Legacy raw bytes discarded by the original runner cannot be recovered from a hash. Artifact audits identify normalized-only or unavailable originals. New retention includes up to 25 screened invocations and 25 screened observations, each at most 8,000 encoded bytes, excluding assistant messages. Omitted items are counted. The original campaign retained tool counts only. Its raw trajectories and observations are unavailable, so this release makes no retrospective claim to possess them. Pattern screening catches known credentials and several common encodings but cannot guarantee that arbitrary obfuscation or private content is safe.
+
+## Limits that matter
+
+Eight tasks, one model, one intervention and three attempts per arm are a small engineering study. Five evaluation tasks are not five independent datasets. Two filing tasks use public facts, the other six cases are synthetic, and two share the same fallback corpus. Some evidence-limit tasks are explicitly cued by supplied scope notes. Changed-input controls expose selected mistakes, not all possible programs. Provider routing and upstream installation dependencies retain disclosed variability. Per-slot cost snapshots can lag and are not exact A/B cost allocations.
+
+## Results publication
+
+The key-free CI workflow collects the requested existing campaign, checks native controls and regrades retained answers without inference. It emits screened results as downloadable artifacts. Repository maintainers inspect those artifacts before committing or publishing them. No workflow writes source or Git identity. These operations do not launch, repeat or repair model answers.
+
+## Scorer 1.2.0
+
+The correction forbids SQL execution whenever structure is rejected. Only uniquely identifiable requested numerical claims are then assessed. Safe explicit-date, text and window alternatives still execute on both pristine fixtures under the existing 256 MiB Linux address-space limit, two-second CPU limit, 1.5-second progress deadline and two-second subprocess timeout. No resource limit was increased. Collection requires authenticated archive digests and validates schedule, run, attempt, commit and retained-file identities before replay. The correction registry allowlist cannot authorize candidate inputs, references, model, runtime, schedule or treatment changes. Original strict verdicts and prior 1.1.0 regrades remain historical evidence.

@@ -1,7 +1,21 @@
-"""Synthetic report controls. These are not trial records."""
+"""Synthetic report controls and checks of retained campaign receipts."""
 import json
+from decimal import Decimal
 from pathlib import Path
-from workpaperbench.cli import report
+from workpaperbench.cli import report, summarize
+
+
+def test_retained_campaign_cost_totals_match_decimal_receipts():
+    root = Path(__file__).resolve().parents[1]
+    rows = [json.loads(path.read_text()) for path in
+            sorted((root / 'reports/runs').glob('final-*/record.json'))]
+    assert len(rows) == 48
+    summary = summarize(rows)
+    for split in ('evaluation', 'development'):
+        for arm in ('A', 'B'):
+            receipts = [Decimal(str(row['provider_cost_delta_usd'])) for row in rows
+                        if row['split'] == split and row['arm'] == arm]
+            assert summary[split][arm]['known_slot_cost_usd'] == float(sum(receipts, Decimal(0)))
 
 
 def test_partial_denominators_and_failure_causes(tmp_path):
@@ -18,9 +32,10 @@ def test_partial_denominators_and_failure_causes(tmp_path):
     assert summary['scheduled']==2
     assert summary['verified']==0
     assert summary['numerical_correct_full_failed']==1
-    assert summary['gap_causes_nonexclusive']=={'substantive':1,'replay':1}
-    assert result['slots'][1]['status']=='unstarted'
+    assert summary['gap_causes_nonexclusive']=={'evidence_requirements':1,'replay':1}
+    assert result['slots'][1]['status']=='unrecorded'
     assert result['slots'][1]['verdict'] is None
+    assert '| wp03 | A | 0 / 2 | Not assessed | 0 / 2 |' in (tmp_path / 'reports/results.md').read_text()
 
 
 def test_unscheduled_or_mismatched_final_record_fails(tmp_path):

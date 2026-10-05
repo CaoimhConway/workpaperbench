@@ -1,0 +1,3808 @@
+{
+  "scope": "full",
+  "run_id": "37373492428",
+  "commit": "554e67ef4b8304c341ff21316b4f9a3b5933e639",
+  "controls": [
+    {
+      "name": "wp01-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp01-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "wp01-alternative-0",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp01-alternative-1",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp01-wrong-0",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "q1_rd:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp01-wrong-1",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": false,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": true,
+              "evidence": false,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "q1_rd:evidence_context"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp01-wrong-2",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": null,
+          "evidence_context": true,
+          "availability": false,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": null,
+              "evidence": true,
+              "availability": false,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "q1_rd:replay",
+          "q1_rd:availability_or_unit"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp02-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp02-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "wp02-alternative-0",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp02-alternative-1",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp02-wrong-0",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "transfer_total:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp02-wrong-1",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": false,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": false,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "transfer_total:evidence_context"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp02-wrong-2",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": null,
+          "evidence_context": true,
+          "availability": false,
+          "conclusion": true,
+          "replay": null
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": null,
+              "evidence": true,
+              "availability": false,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "transfer_total:replay",
+          "transfer_total:availability_or_unit"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp03-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp03-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "wp03-alternative-0",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp03-alternative-1",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp03-wrong-0",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "p1_total:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp03-wrong-1",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": false,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": true,
+              "evidence": false,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "p1_total:evidence_context"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp03-wrong-2",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": null,
+          "evidence_context": true,
+          "availability": false,
+          "conclusion": true,
+          "replay": null
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": null,
+              "evidence": true,
+              "availability": false,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "p1_total:replay",
+          "p1_total:availability_or_unit"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp04-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "all_events": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "max_per_tx": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "difference": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp04-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "wp04-alternative-0",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "all_events": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "max_per_tx": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "difference": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp04-alternative-1",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "all_events": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "max_per_tx": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "difference": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp04-wrong-0",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "all_events": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "max_per_tx": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "difference": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "all_events:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp04-wrong-1",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": false,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "all_events": {
+              "numerical": true,
+              "evidence": false,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "max_per_tx": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "difference": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "all_events:evidence_context"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp04-wrong-2",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": null,
+          "evidence_context": true,
+          "availability": false,
+          "conclusion": true,
+          "replay": null
+        },
+        "details": {
+          "claims": {
+            "all_events": {
+              "numerical": null,
+              "evidence": true,
+              "availability": false,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "max_per_tx": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "difference": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "all_events:replay",
+          "all_events:availability_or_unit"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp05-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "naive_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "comparable_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp05-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "wp05-alternative-0",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "naive_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "comparable_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp05-alternative-1",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "naive_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "comparable_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp05-wrong-0",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "naive_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "comparable_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "naive_growth:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp05-wrong-1",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": false,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "naive_growth": {
+              "numerical": true,
+              "evidence": false,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "comparable_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "naive_growth:evidence_context"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp05-wrong-2",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": null,
+          "evidence_context": true,
+          "availability": false,
+          "conclusion": true,
+          "replay": null
+        },
+        "details": {
+          "claims": {
+            "naive_growth": {
+              "numerical": null,
+              "evidence": true,
+              "availability": false,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "comparable_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "naive_growth:replay",
+          "naive_growth:availability_or_unit"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp06-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "reported_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "matched_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp06-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "wp06-alternative-0",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "reported_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "matched_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp06-alternative-1",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "reported_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "matched_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp06-wrong-0",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "reported_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "matched_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "reported_growth:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp06-wrong-1",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": false,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "reported_growth": {
+              "numerical": true,
+              "evidence": false,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "matched_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "reported_growth:evidence_context"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp06-wrong-2",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": null,
+          "evidence_context": true,
+          "availability": false,
+          "conclusion": true,
+          "replay": null
+        },
+        "details": {
+          "claims": {
+            "reported_growth": {
+              "numerical": null,
+              "evidence": true,
+              "availability": false,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "matched_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "reported_growth:replay",
+          "reported_growth:availability_or_unit"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp07-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_revenue": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_gross_profit": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_margin": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "margin_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp07-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "wp07-alternative-0",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_revenue": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_gross_profit": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_margin": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "margin_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp07-alternative-1",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_revenue": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_gross_profit": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_margin": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "margin_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp07-wrong-0",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "q1_revenue": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "q1_gross_profit": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_margin": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "margin_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "q1_revenue:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp07-wrong-1",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": false,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_revenue": {
+              "numerical": true,
+              "evidence": false,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_gross_profit": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_margin": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "margin_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "q1_revenue:evidence_context"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp07-wrong-2",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": null,
+          "evidence_context": true,
+          "availability": false,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {
+            "q1_revenue": {
+              "numerical": null,
+              "evidence": true,
+              "availability": false,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "q1_gross_profit": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "q1_margin": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "margin_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "q1_revenue:replay",
+          "q1_revenue:availability_or_unit"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp08-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "business_payment_volume": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "unique_humans": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp08-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "wp08-alternative-0",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "business_payment_volume": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "unique_humans": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp08-alternative-1",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "business_payment_volume": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "unique_humans": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp08-wrong-0",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            },
+            "business_payment_volume": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "unique_humans": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "transfer_total:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp08-wrong-1",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": false,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": true,
+              "evidence": false,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "business_payment_volume": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "unique_humans": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "transfer_total:evidence_context"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp08-wrong-2",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": null,
+          "evidence_context": true,
+          "availability": false,
+          "conclusion": true,
+          "replay": null
+        },
+        "details": {
+          "claims": {
+            "transfer_total": {
+              "numerical": null,
+              "evidence": true,
+              "availability": false,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "business_payment_volume": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "unique_humans": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "transfer_total:replay",
+          "transfer_total:availability_or_unit"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp06-matched-tag-join",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "reported_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "matched_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": false
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "matched_growth:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "review-valid-date",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "review-valid-lower",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "review-write-denied",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": false,
+              "changed_replay": false
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "p1_total:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "review-timeout",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": false,
+              "changed_replay": false
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "p1_total:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "review-candidate-data-tamper",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": true,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "reason_code": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "review-extra-artifact",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "review-extra-claim",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": true,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {
+            "p1_total": {
+              "numerical": true,
+              "evidence": null,
+              "availability": null,
+              "unit": null,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "p2_total": {
+              "numerical": true,
+              "evidence": null,
+              "availability": null,
+              "unit": null,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "as_of_growth": {
+              "numerical": true,
+              "evidence": null,
+              "availability": null,
+              "unit": null,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            },
+            "p2_usd_value": {
+              "numerical": null,
+              "evidence": null,
+              "availability": null,
+              "unit": null,
+              "reason_code": null,
+              "original_replay": null,
+              "changed_replay": null
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValidationError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "candidate-data-tamper",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "artifact-db-injection",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "artifact-symlink",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:OSError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "artifact-oversize",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "sql-denied",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": false,
+              "changed_replay": false
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "q1_rd:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "sql-timeout",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": false
+        },
+        "details": {
+          "claims": {
+            "q1_rd": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": false,
+              "changed_replay": false
+            },
+            "sequential_change": {
+              "numerical": true,
+              "evidence": true,
+              "availability": true,
+              "unit": true,
+              "reason_code": null,
+              "original_replay": true,
+              "changed_replay": true
+            }
+          },
+          "conclusion": null
+        },
+        "errors": [
+          "q1_rd:replay"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "pilot-wp05-A-2-citation-regrade",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "1.2.0",
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": null,
+          "availability": null,
+          "conclusion": null,
+          "replay": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    }
+  ]
+}

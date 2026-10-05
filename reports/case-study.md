@@ -1,41 +1,46 @@
-# A correct growth figure can hide an incorrect formula
+# A correct 20% answer with an incorrect growth formula
 
-## The observation
+In recorded trial **`final-wp03-A-1`**, Hermes Agent using the configured Qwen model returned the correct period totals and growth. Its submitted SQL did not implement the growth formula. The original data happened to conceal that error.
 
-In the first frozen campaign, Hermes Agent using `qwen/qwen3.6-35b-a3b` returned the correct period totals and growth figure for task `wp03`. Its submitted growth calculation was nevertheless wrong.
+[Unchanged retained answer](runs/final-wp03-A-1/answer.json) · [Original verdict](runs/final-wp03-A-1/verdict.json) · [Execution record](runs/final-wp03-A-1/record.json) · [Task and reference data](../sources/wp03.json)
 
-This is an actual saved model submission on an **explicitly synthetic dated-release fixture**. It is not evidence of a defect in a financial product or an observed on-chain series. It is one inspectable failure, not an estimate of how often the model fails.
+## The work request
 
-| Input | P1 | P2 | Correct growth | Submitted expression |
+Select releases eligible at the July 5, 2024 cutoff, calculate P1-to-P2 transfer growth on the same supplied token/network coverage, and identify whether a USD value is supported. This is an explicitly synthetic dated-release case, not observed USDC activity.
+
+The eligible totals are 100 and 120 token units. The agent reported both and reported 20% growth. It also correctly declined a USD value without a supplied valuation input.
+
+## The submitted calculation
+
+The growth expression below preserves the submitted SQL with line breaks added for readability:
+
+```sql
+SELECT (SELECT transfer_units FROM releases WHERE release_id='r-p2-20240703')
+     - (SELECT transfer_units FROM releases WHERE release_id='r-p1-20240701')
+     * 100.0
+     / (SELECT transfer_units FROM releases WHERE release_id='r-p1-20240701')
+```
+
+Multiplication and division apply before subtraction. The expression computes `P2 - P1 * 100 / P1`, not `(P2 - P1) * 100 / P1`.
+
+| Input | P1 | P2 | Submitted expression | Correct growth |
 |---|---:|---:|---:|---:|
-| Original fixture | 100 | 120 | 20% | 20 |
-| Declared changed-input control | 120 | 150 | 25% | 50 |
+| Original task | 100 | 120 | 20 | 20% |
+| Declared changed-input control | 120 | 150 | 50 | 25% |
 
-The submitted expression, with its two source selections abbreviated, is:
+With P1 equal to 100, the wrong expression and the correct formula coincide. Changing the operands reveals the error without another model call.
 
-```sql
-P2 - P1 * 100.0 / P1
-```
+## What the verdict does and does not establish
 
-The required calculation is:
+The original saved verdict has `numerical: true`, `replay: false` and `complete: false`. It also reports failed evidence and conclusion checks. The submitted SQL lacks the required `AS value` alias, so the strict original replay fails before it can isolate the changed-input error. Its citations also omit the selection-rule identifier.
 
-```sql
-100.0 * (P2 - P1) / P1
-```
+**This case is not proof that the original grader rejected the answer solely because it detected the formula error.** The formula diagnosis follows from inspecting the recorded expression and independently calculating it on both fixtures. Neither the submission nor its original score has been repaired. The supported conclusion verdict is correct even though its full citation contract fails.
 
-Multiplication and division occur before subtraction. In the original fixture, the submitted expression accidentally agrees with percentage growth because P1 is 100. When P1 changes to 120, that agreement disappears.
+The takeaway is narrower and useful: checking the final scalar alone would miss a wrong calculation that happens to work on one input. Replay, controlled input changes and separate diagnostics make that difference inspectable.
 
-## What the original grader actually reported
+## Reproduce the arithmetic without containers
 
-The original saved verdict has `numerical: true` and `replay: false`. It also reports failed evidence and conclusion checks. The submission omits the required `AS value` column alias from its numerical queries and does not supply every required evidence identifier.
-
-Consequently, **the changed-input formula error was not isolated as the sole cause of the original replay failure**. The original worker can reject the query at its column-name check before assessing the changed result. The table above is a separate arithmetic inspection of the submitted expression, not a repaired submission or replacement score.
-
-The conclusion's proposition was `supported`, as required. Its aggregate conclusion check also includes reason-code and citation requirements. A failed aggregate flag must not automatically be described as a wrong financial verdict.
-
-## Reproduce the arithmetic without credentials or containers
-
-This short example evaluates only the two authored expressions shown above against literal fixture values. It does not execute an arbitrary downloaded model program.
+This checks only the two authored expressions shown above against literal fixture values. It does not execute an arbitrary downloaded model program or change an official score.
 
 ```python
 import sqlite3
@@ -49,29 +54,18 @@ with sqlite3.connect(":memory:") as connection:
         print(p1, p2, submitted, correct)
 ```
 
-Expected output:
+Expected output: `100 120 20.0 20.0` and `120 150 50.0 25.0`.
 
-```text
-100 120 20.0 20.0
-120 150 50.0 25.0
-```
+The test `test_authored_formula_control_exposes_accidentally_correct_number` separately confirms that the reviewed grader detects this mechanism when the authored control satisfies the other output requirements. This is a grader test, not a repaired model submission.
 
-## Evidence and identity
+## Evidence identity
 
-- Slot: `final-wp03-A-1`, baseline, first repetition.
-- Campaign: `wpb-v1-92baa4a72f0e`.
-- Executed commit: `b4e256dc8976223a8a3fdad157a6b212f49bb8e1`.
-- [Original Actions run](https://github.com/CaoimhConway/workpaperbench/actions/runs/37280454673).
-- Artifact ID: `11334520085`, uploaded 2026-10-05 at 08:45:01 UTC.
-- Artifact ZIP SHA-256: `56ebdd836fc3bfadacbfdb4b554c72a24db2288fdf0a10c6dd9ba851518da646`.
-- [Frozen task and reference values](https://github.com/CaoimhConway/workpaperbench/blob/b4e256dc8976223a8a3fdad157a6b212f49bb8e1/sources/wp03.json).
+The original campaign is `wpb-v1-92baa4a72f0e`, executed at `b4e256dc8976223a8a3fdad157a6b212f49bb8e1` in [run 37280454673](https://github.com/CaoimhConway/workpaperbench/actions/runs/37280454673). Artifact `11334520085` was uploaded on 2026-10-05 at 08:45:01 UTC. Its ZIP SHA-256 is `56ebdd836fc3bfadacbfdb4b554c72a24db2288fdf0a10c6dd9ba851518da646`.
 
-The historical collector retained normalized `answer.json`, not the original raw answer bytes. Its recorded `answer_sha256` describes the missing raw serialization. It must not be represented as the hash of the normalized file. The artifact ZIP digest identifies the downloaded evidence bundle, and the distinction remains part of the provenance record.
+The legacy runner retained normalized JSON, not the raw serialization described by its `answer_sha256`. The collected artifact audit identifies the retained-file hash separately. Missing original bytes are not reconstructed from a digest. The [previously preserved evidence copy](evidence/final-wp03-A-1/answer.json) is also retained.
 
-## Why this matters
+## Why this case leads
 
-Checking a reported number asks whether one output matches one reference. Replaying the calculation on changed inputs asks an additional question: does the submitted method actually recompute the requested quantity?
+This retained evaluation artifact has a correct scalar and a demonstrably wrong submitted calculation. It illustrates a verification failure without relying on a treatment improvement. The full results retain all collected attempts, including successes, infrastructure failures and regressions. One failure does not establish an error rate, a general model ranking or treatment effectiveness.
 
-This example supports the second check. It does not prove that two fixtures establish general SQL correctness, that a prompt intervention improves performance, or that this small suite measures production financial-research reliability.
-
-The next requirement is a complete, consistently graded campaign with original and corrected verdicts kept separate. No favorable trial is substituted for a failed one, and no model call is needed merely to inspect this example.
+[Results and completeness status](results.md) · [Scoring and correction policy](../docs/METHODOLOGY.md)

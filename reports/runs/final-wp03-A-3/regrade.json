@@ -1,0 +1,81 @@
+{
+  "manifest_id": "wpb-v1-92baa4a72f0e",
+  "scorer_version": "1.2.0",
+  "scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+  "input_file": "answer.json",
+  "input_sha256": "a1ae51726955227769b8fbf42eb41f54d21cbe7bd3bf909e668ec85cbd245008",
+  "verdict": {
+    "scorer_version": "1.2.0",
+    "complete": false,
+    "checks": {
+      "format": true,
+      "numerical": true,
+      "evidence_context": false,
+      "availability": true,
+      "conclusion": true,
+      "replay": false
+    },
+    "details": {
+      "claims": {
+        "p1_total": {
+          "numerical": true,
+          "evidence": false,
+          "availability": true,
+          "unit": true,
+          "reason_code": null,
+          "original_replay": false,
+          "changed_replay": false
+        },
+        "p2_total": {
+          "numerical": true,
+          "evidence": false,
+          "availability": true,
+          "unit": true,
+          "reason_code": null,
+          "original_replay": false,
+          "changed_replay": false
+        },
+        "as_of_growth": {
+          "numerical": true,
+          "evidence": false,
+          "availability": true,
+          "unit": true,
+          "reason_code": null,
+          "original_replay": false,
+          "changed_replay": false
+        },
+        "p2_usd_value": {
+          "numerical": null,
+          "evidence": true,
+          "availability": true,
+          "unit": true,
+          "reason_code": true,
+          "original_replay": null,
+          "changed_replay": null
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "reason_code": true,
+        "evidence": true
+      }
+    },
+    "errors": [
+      "p1_total:replay",
+      "p1_total:evidence_context",
+      "p2_total:replay",
+      "p2_total:evidence_context",
+      "as_of_growth:replay",
+      "as_of_growth:evidence_context"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "run_id": "37373492428",
+  "commit_sha": "554e67ef4b8304c341ff21316b4f9a3b5933e639",
+  "scope": "Same retained answer, pristine inputs, no answer repairs and no model call. Original verdict preserved."
+}

@@ -1,0 +1,30 @@
+{
+  "task_id": "wp01",
+  "answers": [
+    {
+      "id": "q1_rd",
+      "status": "answered",
+      "value": 1151,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:h1",
+        "filing:q2"
+      ],
+      "sql": "SELECT (SELECT amount_million FROM expenses WHERE entity='Tesla' AND metric='R&D' AND year=2024 AND period='H1') - (SELECT amount_million FROM expenses WHERE entity='Tesla' AND metric='R&D' AND year=2024 AND period='Q2') AS value",
+      "reason_code": null
+    },
+    {
+      "id": "sequential_change",
+      "status": "answered",
+      "value": -6.689835,
+      "unit": "percent",
+      "evidence": [
+        "filing:h1",
+        "filing:q2"
+      ],
+      "sql": "SELECT (CAST((SELECT amount_million FROM expenses WHERE entity='Tesla' AND metric='R&D' AND year=2024 AND period='Q2') AS REAL) - (CAST((SELECT amount_million FROM expenses WHERE entity='Tesla' AND metric='R&D' AND year=2024 AND period='H1') AS REAL) - CAST((SELECT amount_million FROM expenses WHERE entity='Tesla' AND metric='R&D' AND year=2024 AND period='Q2') AS REAL))) / (CAST((SELECT amount_million FROM expenses WHERE entity='Tesla' AND metric='R&D' AND year=2024 AND period='H1') AS REAL) - CAST((SELECT amount_million FROM expenses WHERE entity='Tesla' AND metric='R&D' AND year=2024 AND period='Q2') AS REAL)) * 100 AS value",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}

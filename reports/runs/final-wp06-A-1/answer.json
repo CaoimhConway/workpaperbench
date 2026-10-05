@@ -1,0 +1,35 @@
+{
+  "task_id": "wp06",
+  "answers": [
+    {
+      "id": "reported_growth",
+      "status": "answered",
+      "value": 100.0,
+      "unit": "percent",
+      "evidence": [
+        "observations:amounts"
+      ],
+      "sql": "SELECT (CAST((SELECT SUM(amount_units) FROM observations WHERE period = 'P2') AS REAL) - CAST((SELECT SUM(amount_units) FROM observations WHERE period = 'P1') AS REAL)) * 100.0 / CAST((SELECT SUM(amount_units) FROM observations WHERE period = 'P1') AS REAL) AS value",
+      "reason_code": null
+    },
+    {
+      "id": "matched_growth",
+      "status": "answered",
+      "value": 0.0,
+      "unit": "percent",
+      "evidence": [
+        "observations:amounts"
+      ],
+      "sql": "SELECT (CAST((SELECT SUM(amount_units) FROM observations WHERE period = 'P2' AND network_asset IN (SELECT DISTINCT network_asset FROM observations WHERE period = 'P1')) AS REAL) - CAST((SELECT SUM(amount_units) FROM observations WHERE period = 'P1' AND network_asset IN (SELECT DISTINCT network_asset FROM observations WHERE period = 'P2')) AS REAL)) * 100.0 / CAST((SELECT SUM(amount_units) FROM observations WHERE period = 'P1' AND network_asset IN (SELECT DISTINCT network_asset FROM observations WHERE period = 'P2')) AS REAL) AS value",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "observations:amounts",
+      "policy:coverage"
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-"""Task-local evidence and reference checks. Replay only constrained SQL."""
+"""Versioned task grading with strict completion and independent diagnostics."""
 import hashlib
 import json
 import math
@@ -11,6 +11,7 @@ import sys
 from jsonschema import Draft202012Validator
 
 MAX_ARTIFACT = 65536
+SCORER_VERSION = "1.2.0"
 
 
 def digest(path):
@@ -64,7 +65,7 @@ def load_artifact(directory):
 def replay(sql, db):
     worker = Path(__file__).with_name("sql_worker.py").resolve()
     try:
-        result = subprocess.run([sys.executable, "-I", str(worker)],
+        result = subprocess.run([sys.executable, "-I", "-S", str(worker)],
                                 input=json.dumps({"db": str(Path(db).resolve()), "sql": sql}),
                                 text=True, capture_output=True, timeout=2,
                                 cwd=worker.parent, env={"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8"})
@@ -77,69 +78,137 @@ def replay(sql, db):
 
 
 def close(value, expected, tolerance):
-    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and abs(value - expected) <= tolerance
+    try:
+        return all(isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v) for v in (value, expected)) and abs(value - expected) <= tolerance
+    except (OverflowError, ValueError):
+        return False
 
 
 def evidence_ok(given, accepted):
+    if not isinstance(given, list) or not all(isinstance(x, str) for x in given):
+        return False
     allowed = set().union(*(set(option) for option in accepted))
     return set(given) <= allowed and any(set(option) <= set(given) for option in accepted)
+
+
+def aggregate(values):
+    """False means an observed failure. None means at least one check was not assessed."""
+    if any(value is False for value in values):
+        return False
+    if not values or any(value is None for value in values):
+        return None
+    return True
 
 
 def grade(directory, trusted):
     trusted = Path(trusted)
     gold = json.loads((trusted / "gold.json").read_text())
-    flags = {"format": False, "numerical": None, "evidence_context": False,
-             "availability": False, "conclusion": None, "replay": None}
+    flags = dict.fromkeys(("format", "numerical", "evidence_context", "availability", "conclusion", "replay"))
+    details = {"claims": {}, "conclusion": None}
     errors = []
-    for name in gold["hashes"]:
-        if digest(trusted / name) != gold["hashes"][name]:
-            return {"complete": False, "checks": flags, "errors": ["trusted_input_changed"]}
+
+    def result(complete=False):
+        return {"scorer_version": SCORER_VERSION, "complete": complete,
+                "checks": flags, "details": details, "errors": errors}
+
+    for name, expected_hash in gold["hashes"].items():
+        if digest(trusted / name) != expected_hash:
+            errors.append("trusted_input_changed")
+            return result()
     try:
         answer = load_artifact(directory)
+    except Exception as exc:
+        flags["format"] = False
+        errors.append("format:" + type(exc).__name__)
+        return result()
+    try:
         validate(answer, json.loads((trusted / "schema.json").read_text()))
-        claims = {a["id"]: a for a in answer["answers"]}
-        if answer["task_id"] != gold["task_id"] or set(claims) != set(gold["answers"]):
+        if answer["task_id"] != gold["task_id"] or {a["id"] for a in answer["answers"]} != set(gold["answers"]):
             raise ValueError("claim_set")
         flags["format"] = True
     except Exception as exc:
-        return {"complete": False, "checks": flags, "errors": ["format:" + type(exc).__name__]}
+        flags["format"] = False
+        errors.append("format:" + type(exc).__name__)
+
+    # Observe uniquely identifiable requested claims even if an extra field/claim
+    # made strict format fail. Never repair the submission or choose among duplicates.
+    if not isinstance(answer, dict) or answer.get("task_id") != gold["task_id"] or not isinstance(answer.get("answers"), list):
+        return result()
+    if len(answer["answers"]) > 32:
+        return result()
     numbers, citations, availability, queries = [], [], [], []
     for identifier, expected in gold["answers"].items():
-        claim = claims[identifier]
-        citation = evidence_ok(claim["evidence"], expected["evidence"])
-        citations.append(citation)
-        available = claim["status"] == expected["status"] and claim["unit"] == expected["unit"]
+        found = [a for a in answer["answers"] if isinstance(a, dict) and a.get("id") == identifier]
+        item = dict.fromkeys(("numerical", "evidence", "availability", "unit", "reason_code", "original_replay", "changed_replay"))
+        details["claims"][identifier] = item
+        if len(found) != 1:
+            citations.append(None)
+            availability.append(None)
+            if expected["status"] == "answered":
+                numbers.append(None)
+                queries.append(None)
+            errors.append(identifier + ":not_assessed")
+            continue
+        claim = found[0]
+        if flags["format"] is False:
+            if expected["status"] == "answered":
+                if claim.get("status") == "answered" and "value" in claim:
+                    item["numerical"] = close(claim["value"], expected["value"], expected["tolerance"])
+                numbers.append(item["numerical"])
+            continue
+        item["evidence"] = evidence_ok(claim.get("evidence"), expected["evidence"])
+        item["availability"] = claim.get("status") == expected["status"]
+        item["unit"] = claim.get("unit") == expected["unit"]
+        available = item["availability"] and item["unit"]
         if expected["status"] == "insufficient_evidence":
-            available = available and claim["reason_code"] in expected["reason_codes"]
+            item["reason_code"] = claim.get("reason_code") in expected["reason_codes"]
+            available = available and item["reason_code"]
         else:
-            numerical = claim["status"] == "answered" and close(claim["value"], expected["value"], expected["tolerance"])
-            numbers.append(numerical)
-            if claim["status"] == "answered":
-                original = replay(claim["sql"], trusted / "data.sqlite")
-                changed = replay(claim["sql"], trusted / "changed.sqlite")
-                recomputed = close(original, expected["value"], expected["tolerance"]) and close(original, claim["value"], expected["tolerance"]) and close(changed, expected["changed_value"], expected["tolerance"])
-            else:
-                recomputed = False
-            queries.append(recomputed)
-            if not numerical:
+            if claim.get("status") == "answered":
+                item["numerical"] = close(claim.get("value"), expected["value"], expected["tolerance"])
+                sql = claim.get("sql")
+                if isinstance(sql, str) and len(sql.encode()) <= 16384:
+                    original = replay(sql, trusted / "data.sqlite")
+                    changed = replay(sql, trusted / "changed.sqlite")
+                    item["original_replay"] = close(original, expected["value"], expected["tolerance"])
+                    item["changed_replay"] = close(changed, expected["changed_value"], expected["tolerance"])
+                    # Matching submitted value is also required, not only matching gold.
+                    item["original_replay"] = item["original_replay"] and close(original, claim.get("value"), expected["tolerance"])
+            numbers.append(item["numerical"])
+            queries.append(aggregate([item["original_replay"], item["changed_replay"]]))
+            if item["numerical"] is False:
                 errors.append(identifier + ":numerical")
-            if not recomputed:
+            if queries[-1] is not True:
                 errors.append(identifier + ":replay")
+        citations.append(item["evidence"])
         availability.append(available)
-        if not citation:
+        if not item["evidence"]:
             errors.append(identifier + ":evidence_context")
         if not available:
             errors.append(identifier + ":availability_or_unit")
-    flags.update(numerical=all(numbers) if numbers else None, replay=all(queries) if queries else None,
-                 evidence_context=all(citations), availability=all(availability))
+    if flags["format"] is False:
+        flags["numerical"] = aggregate(numbers)
+        return result()
+    flags.update(numerical=aggregate(numbers), replay=aggregate(queries),
+                 evidence_context=aggregate(citations), availability=aggregate(availability))
     expected = gold["conclusion"]
-    conclusion = answer["conclusion"]
+    conclusion = answer.get("conclusion")
     if expected is None:
         valid_conclusion = conclusion is None
     else:
-        valid_conclusion = conclusion is not None and conclusion["verdict"] == expected["verdict"] and conclusion["reason_code"] in expected["reason_codes"] and evidence_ok(conclusion["evidence"], expected["evidence"])
+        if isinstance(conclusion, dict):
+            details["conclusion"] = {
+                "verdict": conclusion.get("verdict") == expected["verdict"],
+                "reason_code": conclusion.get("reason_code") in expected["reason_codes"],
+                "evidence": evidence_ok(conclusion.get("evidence"), expected["evidence"]),
+            }
+            valid_conclusion = all(details["conclusion"].values())
+        else:
+            valid_conclusion = False
         flags["conclusion"] = valid_conclusion
     if not valid_conclusion:
         errors.append("conclusion")
-    return {"complete": all(v is not False for v in flags.values()) and valid_conclusion,
-            "checks": flags, "errors": errors}
+    required = [flags[name] for name in ("format", "evidence_context", "availability")]
+    if numbers:
+        required.extend([flags["numerical"], flags["replay"]])
+    return result(all(value is True for value in required) and valid_conclusion)
