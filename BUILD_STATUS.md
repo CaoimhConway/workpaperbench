@@ -96,3 +96,9 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   `gh workflow run benchmark.yml --repo CaoimhConway/workpaperbench --ref main
   -f mode=pilot -f batch=baseline -f manifest_id=development-v1`. Slots are
   wp01/wp02/wp05 A1, serial. Outcomes and costs pending.
+
+- Pilot `37266930239`: wp01 A1 and wp02 A1 failed during native installation
+  (`NonZeroAgentExitCodeError`), before solving. Both measured provider deltas
+  are $0. Canceled the same broken setup before proceeding. Failed slots stay
+  recorded. Adding a key-free native install-only diagnostic to inspect the
+  controlled installer error without uploading live traces. Treatment pending.
