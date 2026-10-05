@@ -73,3 +73,47 @@ def test_separate_attempts_exclude_prior_idle_server_observations(tmp_path):
         output.write(json.dumps(second) + '\n')
     assert LOCAL.server_observations(path, start) == [second]
     assert LOCAL.server_observations(path) == [first, second]
+
+@pytest.mark.parametrize('candidate_error', ['NonZeroAgentExitCodeError', 'AgentTimeoutError'])
+def test_queue_finishes_after_candidate_failure_and_restart_skips_slots(tmp_path, monkeypatch, candidate_error):
+    from types import SimpleNamespace
+    (tmp_path / '.local').mkdir()
+    (tmp_path / 'profile.json').write_text('{}')
+    profile_hash = hashlib.sha256(b'{}').hexdigest()
+    schedule = {
+        'schedule_id': 'fixture-queue', 'model_configuration': 'profile.json',
+        'model_configuration_sha256': profile_hash, 'execution_files_sha256': {},
+        'manifest_id': 'manifest-1', 'scorer_sha256': 'scorer-1', 'report': 'report.json',
+        'attempts': [{'attempt_id': name, 'task_id': 'workflow-v5-' + name, 'task_sha256': name}
+                     for name in ('first', 'second')]}
+    path = tmp_path / 'schedule.json'
+    path.write_text(json.dumps(schedule))
+    monkeypatch.setattr(LOCAL, 'ROOT', tmp_path)
+    monkeypatch.setattr(LOCAL, 'load', lambda root, dataset, task: (
+        {'manifest_id': 'manifest-1', 'scorer_sha256': 'scorer-1'},
+        {'split': 'development', 'task_sha256': task}, None))
+    invoked = []
+
+    def run(command, **kwargs):
+        name = command[command.index('--attempt') + 1]
+        invoked.append(name)
+        directory = receipt(tmp_path, name, profile_hash)
+        record = json.loads((directory / 'receipt.json').read_text())
+        record.update(task_id='workflow-v5-' + name, task_sha256=name, status='candidate_failed' if name == 'first' else 'verified')
+        if name == 'first':
+            record['candidate_error_type'] = candidate_error
+        (directory / 'receipt.json').write_text(json.dumps(record))
+        return SimpleNamespace(returncode=0)
+
+    monkeypatch.setattr(LOCAL.subprocess, 'run', run)
+    LOCAL.run_queue(path)
+    LOCAL.run_queue(path)
+    assert invoked == ['first', 'second']
+    result = json.loads((tmp_path / 'report.json').read_text())
+    assert [row['status'] for row in result['attempts']] == ['candidate_failed', 'verified']
+    status = json.loads((tmp_path / '.local/fixture-queue-status.json').read_text())
+    assert status['status'] == 'completed'
+    assert len(status['outcomes']) == 2
+    (tmp_path / '.raw/local-trials/first/raw-sql/result.sql').write_text('SELECT 999')
+    with pytest.raises(ValueError, match='retained_sql_changed'):
+        LOCAL.run_queue(path)

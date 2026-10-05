@@ -1,0 +1,63 @@
+{
+  "configuration_id": "qwen36-35b-a3b-udq5km-cpu-64k-nonthinking-terminal-64",
+  "execution_profile": "local-lima",
+  "model": {
+    "id": "qwen36-35b-a3b-ud_q5_k_m",
+    "weights": ".local/models/Qwen3.6-35B-A3B-UD-Q5_K_M.gguf",
+    "repository": "unsloth/Qwen3.6-35B-A3B-GGUF",
+    "revision": "a483e9e6cbd595906af30beda3187c2663a1118c",
+    "sha256": "c13ce26253ea334df472bd8fbd2d6da66d8a41195c17f6fcbf44c4d20ece0932",
+    "quantization": "UD-Q5_K_M",
+    "total_parameters_billions": 35,
+    "active_parameters_billions": 3,
+    "chat_template_sha256": "55d4931433fe502b794226ee7f4d206a6bdd436ac9f80eb7d8ebb4c639f9ea0c",
+    "native_context": 262144,
+    "base_model_declared_by_quantizer": "Qwen/Qwen3.6-35B-A3B",
+    "official_model_revision_checked": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "conversion": "Publisher quantization, conversion not independently reproduced. Checked official revision is not a verified conversion input.",
+    "architecture": "qwen35moe, gated DeltaNet and attention with mixture of experts, text only",
+    "license": "Apache-2.0"
+  },
+  "runtime": {
+    "binary": ".local/runtime/llama-b11516/llama-server",
+    "sha256": "cdf2d31e4b75714ebad37ffeb8f3d51e9a7be45daa6fd884a6a360abaee04091",
+    "version": "llama.cpp b11516 d4d82d67f",
+    "backend": "cpu",
+    "hardware": "MacPro7,1 Intel Xeon W-3245, Accelerate BLAS, no GPU offload"
+  },
+  "serving": {
+    "port": 18087,
+    "context": 65536,
+    "threads": 8,
+    "parallel": 1,
+    "reasoning": "off",
+    "flash_attention": "off",
+    "cache_type_k": "f16",
+    "cache_type_v": "f16",
+    "observe_slots": true,
+    "context_shift": false,
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "candidate": {
+    "wall_seconds": 5400,
+    "turns": 64,
+    "generation": {
+      "max_tokens": 4096,
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "seed": 17,
+      "min_p": 0,
+      "presence_penalty": 1.5,
+      "repeat_penalty": 1.0
+    },
+    "toolsets": "terminal",
+    "system_prompt": "Complete the filesystem task using the declared tools. Create and check every requested deliverable at its declared absolute path before ending. JSON in a chat reply does not create a file. Work independently within the task environment and do not ask the user to create the deliverable. Save each deliverable as soon as it is ready, then check the saved files. Keep explanations concise and use tool calls to make progress."
+  },
+  "harbor_version": "0.23.0",
+  "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "status": "Development recovery after the 24-turn native limit, with original failures retained and Block restored from its candidate session and SQL",
+  "external_service_spend_usd": 0
+}

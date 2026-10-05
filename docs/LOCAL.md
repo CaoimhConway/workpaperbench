@@ -194,6 +194,43 @@ preserves the completed Brale result and restarts Block fresh before Microsoft.
 It keeps the failed original Block attempt visible and never merges the two
 profiles into one scored condition.
 
+
+The second Block attempt reached the native 24-tool-call limit before it wrote
+JSON. The current continuation uses the distinct
+[64-turn profile](../config/local/qwen36-35b-nonthinking-terminal-64.json) and
+[new schedule](../config/local/development-schedule-qwen36-3.json):
+
+```sh
+./wpb serve --profile config/local/qwen36-35b-nonthinking-terminal-64.json
+```
+
+In another terminal:
+
+```sh
+./wpb queue --schedule config/local/development-schedule-qwen36-3.json
+```
+
+The schedule continues Block from its retained native session and SQL, then runs
+Microsoft fresh. Completed slots are skipped on queue restart. Candidate exits
+or timeouts retain an isolated verifier result and do not prevent the next slot
+from running. Infrastructure or isolation failures still stop the queue.
+The status file is `.local/local-workflow-qwen36-development-3-status.json`.
+
+For an individual continuation, use a fresh attempt ID and the same task:
+
+```sh
+./wpb run --dataset workflow-v5 --task c01 --attempt my-block-continuation-1 \
+  --continue-from qwen36-development-c01-2 \
+  --profile config/local/qwen36-35b-nonthinking-terminal-64.json
+```
+
+Continuation requires the private prior receipt, native session export and saved
+SQL in the dedicated guest. It validates their identities, restores the candidate
+conversation and SQL, and starts a fresh container with pristine source inputs.
+Other temporary files do not persist. It allows only the declared turn-budget
+change in inference settings. Continuations must remain distinct from fresh
+attempts in any comparison.
+
 ## Submit replay and report
 
 Submit an engineer's JSON workpaper or workflow artifact directory:

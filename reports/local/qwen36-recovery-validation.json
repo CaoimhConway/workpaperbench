@@ -1,0 +1,35 @@
+{
+  "purpose": "Recovery engineering validation, not new candidate performance",
+  "interrupted_attempt": "qwen36-development-c01-2",
+  "diagnosis": {
+    "native_max_iterations": 24,
+    "observed_tool_calls": 24,
+    "native_error_type": "NonZeroAgentExitCodeError",
+    "required_answer_file_missing": true,
+    "retained_sql_files": 3,
+    "verifier_actually_ran": true
+  },
+  "checks": {
+    "actual_native_failure_retains_separate_verdict": true,
+    "candidate_failure_is_not_infrastructure_failure": true,
+    "queue_advances_after_nonzero_candidate_exit": true,
+    "queue_advances_after_candidate_timeout": true,
+    "queue_restart_skips_finished_slots": true,
+    "queue_restart_rechecks_retained_bytes": true,
+    "continuation_rejects_changed_task_or_sql": true,
+    "continuation_rejects_changed_generation": true,
+    "native_adapter_compiles_with_explicit_64_turn_limit": true
+  },
+  "tests": {
+    "full_suite_before_final_identity_checks": {
+      "passed": 421,
+      "seconds": 43.78
+    },
+    "final_focused_reporting_and_retention": {
+      "passed": 17,
+      "seconds": 0.33
+    }
+  },
+  "native_continuation_validation": "Native SessionDB import and restored files are checked before the candidate starts, with a continuation-ready.json receipt in the guest",
+  "external_service_spend_usd": 0
+}

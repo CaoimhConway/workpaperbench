@@ -9,6 +9,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -20,6 +21,29 @@ from workpaperbench.catalog import load, tree_hash
 from fresh_replay import ensure_no_symlink_ancestors, parse_json, read_bounded, reject_credential_patterns
 from fix_native_version import corrected_hermes_source
 
+
+RESUME_COMMAND = """export PATH="$HOME/.local/bin:$PATH" &&
+mkdir -p /logs/artifacts &&
+cp /opt/workpaperbench-runtime/resume-input/sql/*.sql /logs/artifacts/ &&
+. /tmp/hermes/hermes-agent/scripts/_activation.sh &&
+wpb_resume_env="$(hermes_compose_env /tmp/hermes/hermes-agent sh)" &&
+hermes_apply_env "$wpb_resume_env" &&
+python - <<'WPB_RESUME'
+import json
+from pathlib import Path
+from hermes_state import SessionDB
+
+rows = [json.loads(line) for line in Path('/opt/workpaperbench-runtime/resume-input/session.jsonl').read_text().splitlines() if line.strip()]
+db = SessionDB()
+try:
+    result = db.import_sessions(rows)
+    assert result['ok'] and result['imported_ids'] == [rows[0]['id']], result
+    saved = db.export_session(rows[0]['id'])
+    assert len(saved['messages']) == len(rows[0]['messages'])
+finally:
+    db.close()
+WPB_RESUME
+"""
 
 def clean_environment():
     allowed = {"PATH", "HOME", "LANG", "LC_ALL", "TMPDIR", "PYTHONUNBUFFERED"}
@@ -62,6 +86,90 @@ def retain_artifacts(output, dataset, receipt):
         receipt['normalized_answer_sha256'] = None
 
 
+def record_verification(output, receipt, exception_info=None):
+    """Retain the separate verdict even when the candidate exhausts its budget."""
+    verifier = output / 'trials' / receipt['attempt_id'] / 'verifier/verdict.json'
+    raw = read_bounded(verifier, 100000)
+    verdict = parse_json(raw)
+    isolation = verdict.get('isolation', {})
+    required = {'network_probe_blocked', 'network_namespace_none',
+                'no_inference_key', 'no_docker_socket'}
+    if set(isolation) != required or not all(value is True for value in isolation.values()):
+        raise ValueError('local_verifier_boundary_failed')
+    (output / 'verifier.json').write_bytes(raw)
+    receipt.update(verdict=verdict, verdict_sha256=hashlib.sha256(raw).hexdigest())
+    if exception_info is None:
+        receipt['status'] = 'verified'
+    elif exception_info.exception_type in {'NonZeroAgentExitCodeError', 'AgentTimeoutError'}:
+        receipt.update(status='candidate_failed',
+                       candidate_error_type=exception_info.exception_type,
+                       candidate_error=exception_info.exception_message[:500])
+    else:
+        raise RuntimeError(exception_info.exception_message)
+
+
+def prepare_continuation(task, receipt, previous, configuration):
+    """Copy only a matching candidate's native session and retained SQL."""
+    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,50}', previous):
+        raise ValueError('invalid_continuation_attempt')
+    directory = ensure_no_symlink_ancestors(ROOT / '.raw/local-trials' / previous, ROOT)
+    raw = read_bounded(directory / 'receipt.json', 150000)
+    prior = parse_json(raw)
+    for key in ('task_id', 'task_sha256', 'manifest_id', 'scorer_sha256'):
+        if prior[key] != receipt[key]:
+            raise ValueError('continuation_task_changed')
+    if not prior.get('inference'):
+        raise ValueError('continuation_requires_candidate_history')
+    prior_profile = prior['model_configuration']
+    for key in ('model', 'runtime', 'serving', 'harbor_version', 'hermes_revision'):
+        if prior_profile[key] != configuration[key]:
+            raise ValueError('continuation_profile_changed:' + key)
+    old_candidate, new_candidate = dict(prior_profile['candidate']), dict(configuration['candidate'])
+    old_candidate.pop('turns')
+    new_candidate.pop('turns')
+    if old_candidate != new_candidate:
+        raise ValueError('continuation_profile_changed:candidate')
+    session_path = directory / 'trials' / previous / 'agent/hermes-session.jsonl'
+    session = read_bounded(ensure_no_symlink_ancestors(session_path, ROOT), 2000000)
+    reject_credential_patterns(session)
+    rows = [parse_json(line) for line in session.splitlines() if line.strip()]
+    if len(rows) != 1 or not re.fullmatch(r'[A-Za-z0-9_-]{1,100}', rows[0]['id']):
+        raise ValueError('invalid_native_continuation_session')
+    if rows[0].get('model') != configuration['model']['id']:
+        raise ValueError('continuation_session_model_changed')
+    target = task / 'environment/resume-input'
+    target.mkdir()
+    (target / 'session.jsonl').write_bytes(session)
+    sql = target / 'sql'
+    sql.mkdir()
+    if not prior.get('sql_file_sha256'):
+        raise ValueError('continuation_sql_missing')
+    for filename, expected in prior['sql_file_sha256'].items():
+        if not re.fullmatch(r'[a-z][a-z0-9_]{0,40}\.sql', filename):
+            raise ValueError('invalid_continuation_sql_name')
+        path = ensure_no_symlink_ancestors(directory / 'raw-sql' / filename, ROOT)
+        data = read_bounded(path, 16384)
+        reject_credential_patterns(data)
+        if hashlib.sha256(data).hexdigest() != expected:
+            raise ValueError('continuation_sql_changed')
+        (sql / filename).write_bytes(data)
+    dockerfile = task / 'environment/Dockerfile'
+    dockerfile.write_text(dockerfile.read_text() +
+                         'COPY resume-input /opt/workpaperbench-runtime/resume-input\n')
+    receipt['continuation'] = {
+        'attempt_id': previous, 'receipt_sha256': hashlib.sha256(raw).hexdigest(),
+        'session_id': rows[0]['id'], 'session_sha256': hashlib.sha256(session).hexdigest(),
+        'sql_file_sha256': prior['sql_file_sha256'],
+        'condition': 'Native session and saved SQL restored in a fresh isolated environment'}
+    instruction = task / 'instruction.md'
+    if instruction.exists():
+        instruction.write_text(instruction.read_text() +
+            '\nContinue the restored conversation and saved SQL in /logs/artifacts. '
+            'Other temporary files may not persist. Complete and check the requested '
+            'answer.json and SQL deliverables before ending.\n')
+    return rows[0]['id']
+
+
 def local_hermes_source(source, max_turns, generation=None, system_prompt=""):
     corrected = corrected_hermes_source(source)
     installers = re.findall(rb'https://raw\.githubusercontent\.com/[^/\s]+/hermes-agent/main/scripts/install\.sh', corrected)
@@ -75,6 +183,11 @@ def local_hermes_source(source, max_turns, generation=None, system_prompt=""):
         raise ValueError('local_install_environment_anchor')
     corrected = corrected.replace(install_environment,
         b'\'set -euo pipefail; export HERMES_HOME="/tmp/hermes" HERMES_INSTALL_DIR="/tmp/hermes/hermes-agent"; apt-get update && apt-get install -y sqlite3; \'\n')
+    cli_anchor = b'            "hermes --yolo chat",\n'
+    if corrected.count(cli_anchor) != 1:
+        raise ValueError('local_cli_turn_limit_anchor')
+    corrected = corrected.replace(cli_anchor,
+        ('            "hermes --yolo chat --max-turns ' + str(max_turns) + '",\n').encode())
     corrected = corrected.replace(b'--skip-setup{branch_flag}', b'--skip-setup --skip-browser --skip-computer-use{branch_flag}')
     warmup = b'                "hermes --version"\n'
     if corrected.count(warmup) != 1:
@@ -246,6 +359,11 @@ assert all(checks.values()), checks
 BOUNDARIES
 '''
         (task / "solution/solve.sh").write_text(original_solution.replace('set -euo pipefail\n', 'set -euo pipefail\n' + probe, 1))
+    continuation_id = None
+    if getattr(arguments, 'continue_from', None):
+        if not configuration or spec.get('split') != 'development':
+            raise ValueError('continuation_requires_development_inference')
+        continuation_id = prepare_continuation(task, receipt, arguments.continue_from, configuration)
     receipt['effective_task_sha256'] = tree_hash(task)
     try:
         from harbor.models.trial.config import TrialConfig
@@ -315,16 +433,22 @@ BOUNDARIES
                 if result.return_code or result.stdout.strip() != "8b66a51036c1e20920a17cdd049fdf55c968d683":
                     raise ValueError("local_hermes_revision_mismatch")
             trial.add_hook(TrialEvent.AGENT_START, check_version)
+            if continuation_id:
+                async def restore_candidate(event):
+                    await trial.agent.exec_as_agent(
+                        trial.agent_environment,
+                        command=RESUME_COMMAND,
+                        env={'HERMES_HOME': '/tmp/hermes'}, timeout_sec=60)
+                    trial.agent._resume = True
+                    trial.agent._native_session_id = continuation_id
+                    receipt['native_session_restored'] = True
+                    (output / 'continuation-ready.json').write_text(
+                        json.dumps(receipt['continuation'], indent=2) + '\n')
+                trial.add_hook(TrialEvent.AGENT_START, restore_candidate)
         result = await trial.run()
-        if result.exception_info is not None:
-            raise RuntimeError(result.exception_info.exception_message)
-        verifier = output / "trials" / arguments.attempt / "verifier/verdict.json"
-        raw = read_bounded(verifier, 100000)
-        verdict = parse_json(raw)
-        if not all(verdict.get("isolation", {}).values()) or len(verdict.get("isolation", {})) != 4:
-            raise ValueError("local_verifier_boundary_failed")
-        receipt.update(status="verified", verdict=verdict, verdict_sha256=hashlib.sha256(raw).hexdigest())
-        (output / "verifier.json").write_bytes(raw)
+        if continuation_id and not receipt.get('native_session_restored'):
+            raise RuntimeError('native_continuation_not_restored')
+        record_verification(output, receipt, result.exception_info)
     except asyncio.CancelledError:
         receipt.update(status='cancelled', error='Local trial cancelled before a completed verifier receipt')
         raise
@@ -353,6 +477,7 @@ if __name__ == "__main__":
     parser.add_argument("--answer", type=Path)
     parser.add_argument('--artifacts', type=Path)
     parser.add_argument('--legacy', action='store_true')
+    parser.add_argument("--continue-from")
     parser.add_argument("--model")
     parser.add_argument('--configuration', type=Path)
     parser.add_argument("--boundaries", action="store_true")

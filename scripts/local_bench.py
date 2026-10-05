@@ -344,6 +344,8 @@ def execute(args):
                     command += ['--artifacts', BUILDER + '/.local/submitted-artifacts']
                 if args.legacy:
                     command += ['--legacy']
+                if getattr(args, 'continue_from', None):
+                    command += ['--continue-from', args.continue_from]
                 if spec:
                     command += ['--model', spec['model']['id'], '--configuration', BUILDER + '/.local/current-profile.json',
                                 '--wall', str(spec['candidate']['wall_seconds']), '--turns', str(spec['candidate']['turns'])]
@@ -372,7 +374,7 @@ def execute(args):
                 process.wait(timeout=15)
 
 
-def report(attempts, destination):
+def report_rows(attempts):
     rows = [parse_json(read_bounded(ROOT / '.raw/local-trials' / name / 'receipt.json', 150000)) for name in attempts]
     for name, row in zip(attempts, rows):
         directory = file_path(ROOT / '.raw/local-trials', name)
@@ -393,11 +395,97 @@ def report(attempts, destination):
         raise ValueError('report_model_configurations_differ')
     if rows[0]['inference'] and not rows[0].get('model_configuration_sha256'):
         raise ValueError('report_model_configuration_unpinned')
+    return rows
+
+
+def report(attempts, destination):
+    rows = report_rows(attempts)
     result = {'report_version': 'local-1.0', 'attempts': rows, 'external_service_spend_usd': 0,
               'held_out_evaluation': 'not run', 'frontier_discrimination': 'unmeasured'}
     with destination.open('x') as output:
         output.write(json.dumps(result, indent=2) + '\n')
 
+
+
+def run_queue(schedule_path):
+    """Run each declared development slot once and retain unsuccessful candidates."""
+    schedule = parse_json(read_bounded(schedule_path, 30000))
+    identifier = schedule['schedule_id']
+    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,80}', identifier):
+        raise ValueError('invalid_queue_identity')
+    status_path = ROOT / '.local' / (identifier + '-status.json')
+    outcomes = []
+
+    def save(status, **fields):
+        value = {'status': status, 'updated_at': datetime.now(timezone.utc).isoformat(),
+                 'outcomes': outcomes, **fields}
+        temporary = status_path.with_suffix('.tmp')
+        temporary.write_text(json.dumps(value, indent=2) + '\n')
+        temporary.replace(status_path)
+
+    profile_path = file_path(ROOT, schedule['model_configuration'])
+    profile_hash = schedule['model_configuration_sha256']
+    expected = {schedule['model_configuration']: profile_hash, **schedule['execution_files_sha256']}
+    for name, sha in expected.items():
+        if digest(file_path(ROOT, name)) != sha:
+            raise ValueError('queue_input_changed:' + name)
+    attempts = schedule['attempts']
+    if not attempts or len({row['attempt_id'] for row in attempts}) != len(attempts):
+        raise ValueError('invalid_queue_attempts')
+    with (ROOT / '.local/local-queue.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        try:
+            for row in attempts:
+                attempt = row['attempt_id']
+                dataset, task = row['task_id'].rsplit('-', 1)
+                if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,50}', attempt):
+                    raise ValueError('invalid_queue_attempt')
+                manifest, spec, _ = load(ROOT, dataset, task)
+                if (spec['split'] != 'development' or spec['task_sha256'] != row['task_sha256']
+                        or manifest['manifest_id'] != schedule['manifest_id']
+                        or manifest['scorer_sha256'] != schedule['scorer_sha256']):
+                    raise ValueError('queue_task_changed')
+                receipt_path = ROOT / '.raw/local-trials' / attempt / 'receipt.json'
+                save('running', attempt=attempt)
+                returncode = None
+                if not receipt_path.exists():
+                    command = [str(ROOT / 'wpb'), 'run', '--dataset', dataset, '--task', task,
+                               '--attempt', attempt, '--profile', str(profile_path)]
+                    if row.get('continue_from'):
+                        command += ['--continue-from', row['continue_from']]
+                    with (ROOT / '.local' / (attempt + '.log')).open('a') as log:
+                        result = subprocess.run(command, cwd=ROOT, stdin=subprocess.DEVNULL,
+                                                stdout=log, stderr=subprocess.STDOUT)
+                    returncode = result.returncode
+                receipt = parse_json(read_bounded(receipt_path, 150000))
+                if (receipt['attempt_id'] != attempt or receipt['task_id'] != row['task_id']
+                        or receipt['task_sha256'] != row['task_sha256']
+                        or receipt['manifest_id'] != schedule['manifest_id']
+                        or receipt['scorer_sha256'] != schedule['scorer_sha256']
+                        or receipt.get('continuation', {}).get('attempt_id') != row.get('continue_from')
+                        or receipt['model_configuration_sha256'] != profile_hash):
+                    raise ValueError('queue_receipt_identity_changed')
+                outcome = {'attempt_id': attempt, 'status': receipt['status'],
+                           'checks': receipt.get('verdict', {}).get('checks'),
+                           'candidate_error_type': receipt.get('candidate_error_type'),
+                           'returncode': returncode}
+                outcomes.append(outcome)
+                save('attempt_finished', attempt=attempt)
+                if returncode not in (None, 0) or receipt['status'] not in ('verified', 'candidate_failed'):
+                    raise RuntimeError('Local infrastructure failed for ' + attempt)
+            destination = file_path(ROOT, schedule['report'])
+            if destination.exists():
+                saved = parse_json(read_bounded(destination, 1000000))
+                current = report_rows([row['attempt_id'] for row in attempts])
+                if saved['attempts'] != current:
+                    raise ValueError('queue_report_changed')
+            else:
+                report([row['attempt_id'] for row in attempts], destination)
+            save('completed', report=str(destination),
+                 note='All slots finished. Consult each verdict for passing or failing checks.')
+        except Exception as error:
+            save('blocked', error=str(error))
+            raise
 
 
 def controls(attempt):
@@ -439,12 +527,16 @@ def main():
         command.add_argument('--attempt', required=True)
         command.add_argument('--repeat', type=int, default=1)
         command.add_argument('--legacy', action='store_true')
+        if name == 'run':
+            command.add_argument('--continue-from')
         artifact_input = command.add_mutually_exclusive_group(required=name == 'grade')
         artifact_input.add_argument('--answer', type=Path)
         artifact_input.add_argument('--artifacts', type=Path)
         command.add_argument('--profile', type=Path, default=ROOT / 'config/local/qwen35-9b-terminal-24.json')
         if name == 'replay':
             command.add_argument('--retained', required=True)
+    queue_command = sub.add_parser('queue')
+    queue_command.add_argument('--schedule', type=Path, required=True)
     reporting = sub.add_parser('report')
     reporting.add_argument('--attempts', nargs='+', required=True)
     reporting.add_argument('--output', type=Path, required=True)
@@ -452,6 +544,10 @@ def main():
     if args.command in ('run', 'grade', 'replay', 'controls'):
         if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,50}', args.attempt) or not 1 <= getattr(args, 'repeat', 1) <= 6:
             raise ValueError('invalid_local_attempt_or_repeat')
+        if getattr(args, 'continue_from', None):
+            if (not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,50}', args.continue_from)
+                    or args.repeat != 1 or args.tasks):
+                raise ValueError('one_task_per_continuation')
         if args.command == 'replay' and args.retained != 'all' and not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,80}', args.retained):
             raise ValueError('invalid_retained_attempt')
         if args.command in ('grade', 'replay') and (args.repeat != 1 or args.tasks):
@@ -460,6 +556,8 @@ def main():
         with (ROOT / '.local/local-command.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
             controls(args.attempt) if args.command == 'controls' else execute(args)
+    elif args.command == 'queue':
+        run_queue(args.schedule)
     elif args.command == 'serve':
         serve(args.profile)
     elif args.command == 'report':
