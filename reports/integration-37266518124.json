@@ -1,0 +1,157 @@
+{
+  "scope": "smoke",
+  "run_id": "37266518124",
+  "commit": "3a87fa98509732059a422dd08965ecfce2dcf9a6",
+  "controls": [
+    {
+      "name": "wp01-reference",
+      "expected_complete": true,
+      "verdict": {
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": null,
+          "replay": true
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp01-empty",
+      "expected_complete": false,
+      "verdict": {
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": false,
+          "availability": false,
+          "conclusion": null,
+          "replay": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "wp02-reference",
+      "expected_complete": true,
+      "verdict": {
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp02-empty",
+      "expected_complete": false,
+      "verdict": {
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": false,
+          "availability": false,
+          "conclusion": null,
+          "replay": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "wp05-reference",
+      "expected_complete": true,
+      "verdict": {
+        "complete": true,
+        "checks": {
+          "format": true,
+          "numerical": true,
+          "evidence_context": true,
+          "availability": true,
+          "conclusion": true,
+          "replay": true
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "wp05-empty",
+      "expected_complete": false,
+      "verdict": {
+        "complete": false,
+        "checks": {
+          "format": false,
+          "numerical": null,
+          "evidence_context": false,
+          "availability": false,
+          "conclusion": null,
+          "replay": null
+        },
+        "errors": [
+          "format:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    }
+  ]
+}

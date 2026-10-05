@@ -23,7 +23,7 @@ Specification: v3.1. Started 2026-10-04 (America/Los_Angeles).
 ## Gates
 
 Stage 1 local implementation and full native development integration: complete.
-Latest smoke correction and development pilot: pending. Stage 2 expansion/freeze: pending.
+Latest native namespace smoke: complete. Development pilot: running. Stage 2 expansion/freeze: pending.
 Stage 3 audit/campaign/release: pending. No results or completion claims.
 
 ## Development checkpoint
@@ -88,3 +88,11 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   compute upper estimate at $0.006/minute. Included account quota and actual
   invoice charge remain unavailable. Small seven-day artifacts add negligible
   storage at this stage, not a known zero charge.
+
+- Native namespace smoke `37266518124` on `3a87fa9` passed all six controls,
+  including loopback-only verifier interfaces, blocked external TLS and absent
+  inference key/socket. Permanent sanitized report retained.
+- Baseline exploration dispatched on `0c725b5`: Actions `37266930239`, command
+  `gh workflow run benchmark.yml --repo CaoimhConway/workpaperbench --ref main
+  -f mode=pilot -f batch=baseline -f manifest_id=development-v1`. Slots are
+  wp01/wp02/wp05 A1, serial. Outcomes and costs pending.
