@@ -170,3 +170,24 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   Full lightweight suite passed 60 tests, plus a focused new diagnostic
   redaction control passed. Pending baseline slots are wp05 A2, wp01 A3,
   wp02 A3. Their future records will include allowlisted failure codes only.
+- Corrected-route run `37271209030` produced real submissions and native
+  terminal events. wp05 A2 submitted 65% naive and 10% comparable growth,
+  but the old instruction omitted the required task identifier. It guessed
+  wp01, causing a format rejection. Both submitted SQL queries also omit the
+  explicitly required `value` column alias. Key-usage delta: $0.01121775.
+- Independent read-only source review confirmed the missing identifier and
+  a valid citation alternative: export:periods alone supports naive export
+  growth. Added explicit task identifiers to all candidate instructions and
+  accepted that citation set. Comparable growth/conclusion still need the
+  counting policy. Added a named valid/invalid citation test and a native
+  regrade control preserving the old failed record. These are fairness fixes,
+  not treatment or measured financial weaknesses.
+- wp01 A3 passed every applicable check with native terminal/file events.
+  Key-usage delta: $0.00304445. wp02 A3 remains in progress.
+- Three supplemental baselines after the authoring corrections are declared,
+  bringing the pilot manifest to 11 slots. One development treatment check
+  remains possible inside the 12-slot ceiling. No treatment is chosen yet.
+- Completed private Actions accounting through the earlier snapshot: 88
+  rounded minutes, $0.528 compute estimate before included quota. Invoice and
+  storage charges remain unknown. A post-dispatch metadata-only job will
+  reconcile lifetime usage without additional inference.

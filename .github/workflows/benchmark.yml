@@ -79,3 +79,34 @@ jobs:
           name: slot-${{ github.sha }}-${{ inputs.mode }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.slot_id }}
           path: reports/runs/${{ matrix.slot_id }}/*
           retention-days: 7
+  reconcile:
+    needs: [schedule, trial]
+    if: always() && needs.schedule.result == 'success' && github.repository == 'CaoimhConway/workpaperbench' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - name: Reconcile provider lifetime usage without inference
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          sleep 30
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from scripts.native_run import now, provider_snapshot
+          output = Path('provider-results')
+          output.mkdir()
+          data = {'run_id': os.environ['GITHUB_RUN_ID'], 'as_of': now(),
+                  'snapshot': provider_snapshot(os.environ['OPENROUTER_API_KEY'])}
+          (output / 'provider.json').write_text(json.dumps(data, indent=2) + '\n')
+          print('Provider lifetime usage reconciled without inference')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: provider-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: provider-results/*.json
+          retention-days: 7

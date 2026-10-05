@@ -149,3 +149,12 @@ def test_definition_mismatch(tmp_path):
     answer['answers'][1]['value'] = 65
     answer['answers'][1]['sql'] = answer['answers'][0]['sql']
     assert not grade(submission(tmp_path, answer), trusted)['complete']
+
+
+def test_naive_export_growth_needs_export_evidence_without_counting_policy(tmp_path):
+    trusted = ROOT / 'tasks/wp05/tests'
+    answer = json.loads((trusted / 'reference.json').read_text())
+    answer['answers'][0]['evidence'] = ['export:periods']
+    assert grade(submission(tmp_path, answer), trusted)['complete']
+    answer['answers'][1]['evidence'] = ['export:periods']
+    assert not grade(submission(tmp_path, answer), trusted)['complete']
