@@ -1,0 +1,108 @@
+{
+  "answers": {
+    "all_events": {
+      "status": "answered",
+      "value": 775,
+      "changed_value": 920,
+      "unit": "token_units",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "corpus:events",
+          "policy:counting",
+          "metadata:token"
+        ],
+        [
+          "corpus:events",
+          "policy:counting",
+          "metadata:token",
+          "policy:window"
+        ],
+        [
+          "corpus:events",
+          "policy:counting",
+          "metadata:token",
+          "policy:scope"
+        ]
+      ]
+    },
+    "max_per_tx": {
+      "status": "answered",
+      "value": 675,
+      "changed_value": 800,
+      "unit": "token_units",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "corpus:events",
+          "policy:counting",
+          "metadata:token"
+        ],
+        [
+          "corpus:events",
+          "policy:counting",
+          "metadata:token",
+          "policy:window"
+        ],
+        [
+          "corpus:events",
+          "policy:counting",
+          "metadata:token",
+          "policy:scope"
+        ]
+      ]
+    },
+    "difference": {
+      "status": "answered",
+      "value": 100,
+      "changed_value": 120,
+      "unit": "token_units",
+      "tolerance": 1e-06,
+      "evidence": [
+        [
+          "corpus:events",
+          "policy:counting",
+          "metadata:token"
+        ],
+        [
+          "corpus:events",
+          "policy:counting",
+          "metadata:token",
+          "policy:window"
+        ],
+        [
+          "corpus:events",
+          "policy:counting",
+          "metadata:token",
+          "policy:scope"
+        ]
+      ]
+    }
+  },
+  "conclusion": {
+    "verdict": "not_established",
+    "reason_codes": [
+      "missing_required_evidence",
+      "incompatible_definition"
+    ],
+    "evidence": [
+      [
+        "corpus:events",
+        "policy:window"
+      ],
+      [
+        "corpus:events",
+        "policy:window",
+        "policy:counting"
+      ]
+    ]
+  },
+  "task_id": "wp04",
+  "hashes": {
+    "data.sqlite": "44bc3ff3fa2fe49e4147054bedaf8db5df79733ade83ef8dcce4396541d1bcfb",
+    "changed.sqlite": "42359de4a7e89beb096ace349c8f60f17b8675a9d53a0b8e856c8dbf9e3f8a6c",
+    "schema.json": "72ec4ad819d5f5a67b25b7707b7630e603333d95f3e23330e215b9b7af14ee77",
+    "evidence.json": "860c6f5c3f1b368776c44b1f4ba96a6fbaf88d5e41ea676cf4480f32464260b2",
+    "sources.md": "6df9ae93dc0ee8600229f3fb120cab028a18d13f3c68a26e007a62e259db1117"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "task_id": "wp05",
+  "answers": [
+    {
+      "id": "naive_growth",
+      "status": "answered",
+      "value": 65.0,
+      "unit": "percent",
+      "evidence": [
+        "export:periods"
+      ],
+      "sql": "SELECT (MAX(CASE WHEN definition='all_eligible_events' THEN transfer_volume ELSE NULL END) - MAX(CASE WHEN definition='largest_eligible_per_tx' THEN transfer_volume ELSE NULL END)) * 100.0 / MAX(CASE WHEN definition='largest_eligible_per_tx' THEN transfer_volume ELSE NULL END) AS value FROM exports",
+      "reason_code": null
+    },
+    {
+      "id": "comparable_growth",
+      "status": "answered",
+      "value": 10.0,
+      "unit": "percent",
+      "evidence": [
+        "export:periods",
+        "ledger:events",
+        "policy:definitions"
+      ],
+      "sql": "SELECT (COALESCE((SELECT SUM(amount_units) FROM events WHERE period='P2' AND event_kind NOT IN ('mint','burn')),0) - COALESCE((SELECT SUM(amount_units) FROM events WHERE period='P1' AND event_kind NOT IN ('mint','burn')),0)) * 100.0 / COALESCE((SELECT SUM(amount_units) FROM events WHERE period='P1' AND event_kind NOT IN ('mint','burn')),0) AS value",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "export:periods",
+      "ledger:events",
+      "policy:definitions"
+    ]
+  }
+}

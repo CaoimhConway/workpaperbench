@@ -1,0 +1,284 @@
+{
+  "split": "evaluation",
+  "source_group": "synthetic-coverage-expansion",
+  "tables": {
+    "observations": {
+      "schema": "CREATE TABLE observations(period TEXT,network_asset TEXT,amount_units INTEGER,evidence_id TEXT)",
+      "rows": [
+        [
+          "P1",
+          "ethereum:USDC",
+          100,
+          "observations:amounts"
+        ],
+        [
+          "P1",
+          "solana:USDC",
+          100,
+          "observations:amounts"
+        ],
+        [
+          "P2",
+          "ethereum:USDC",
+          110,
+          "observations:amounts"
+        ],
+        [
+          "P2",
+          "solana:USDC",
+          90,
+          "observations:amounts"
+        ],
+        [
+          "P2",
+          "arbitrum:USDC",
+          200,
+          "observations:amounts"
+        ]
+      ]
+    },
+    "asset_tags": {
+      "schema": "CREATE TABLE asset_tags(network_asset TEXT,tag TEXT,published_on TEXT,evidence_id TEXT)",
+      "rows": [
+        [
+          "ethereum:USDC",
+          "stablecoin",
+          "2024-06-29",
+          "metadata:tags"
+        ],
+        [
+          "ethereum:USDC",
+          "issuer-backed",
+          "2024-06-29",
+          "metadata:tags"
+        ],
+        [
+          "solana:USDC",
+          "stablecoin",
+          "2024-06-29",
+          "metadata:tags"
+        ],
+        [
+          "solana:USDC",
+          "issuer-backed",
+          "2024-06-29",
+          "metadata:tags"
+        ],
+        [
+          "arbitrum:USDC",
+          "stablecoin",
+          "2024-07-02",
+          "metadata:tags"
+        ],
+        [
+          "arbitrum:USDC",
+          "issuer-backed",
+          "2024-07-02",
+          "metadata:tags"
+        ],
+        [
+          "arbitrum:USDC",
+          "rollup-network",
+          "2024-07-02",
+          "metadata:tags"
+        ]
+      ]
+    }
+  },
+  "changed_tables": {
+    "observations": {
+      "schema": "CREATE TABLE observations(period TEXT,network_asset TEXT,amount_units INTEGER,evidence_id TEXT)",
+      "rows": [
+        [
+          "P1",
+          "ethereum:USDC",
+          100,
+          "observations:amounts"
+        ],
+        [
+          "P1",
+          "solana:USDC",
+          100,
+          "observations:amounts"
+        ],
+        [
+          "P2",
+          "ethereum:USDC",
+          140,
+          "observations:amounts"
+        ],
+        [
+          "P2",
+          "solana:USDC",
+          110,
+          "observations:amounts"
+        ],
+        [
+          "P2",
+          "arbitrum:USDC",
+          300,
+          "observations:amounts"
+        ]
+      ]
+    },
+    "asset_tags": {
+      "schema": "CREATE TABLE asset_tags(network_asset TEXT,tag TEXT,published_on TEXT,evidence_id TEXT)",
+      "rows": [
+        [
+          "ethereum:USDC",
+          "stablecoin",
+          "2024-06-29",
+          "metadata:tags"
+        ],
+        [
+          "ethereum:USDC",
+          "issuer-backed",
+          "2024-06-29",
+          "metadata:tags"
+        ],
+        [
+          "solana:USDC",
+          "stablecoin",
+          "2024-06-29",
+          "metadata:tags"
+        ],
+        [
+          "solana:USDC",
+          "issuer-backed",
+          "2024-06-29",
+          "metadata:tags"
+        ],
+        [
+          "arbitrum:USDC",
+          "stablecoin",
+          "2024-07-02",
+          "metadata:tags"
+        ],
+        [
+          "arbitrum:USDC",
+          "issuer-backed",
+          "2024-07-02",
+          "metadata:tags"
+        ],
+        [
+          "arbitrum:USDC",
+          "rollup-network",
+          "2024-07-02",
+          "metadata:tags"
+        ]
+      ]
+    }
+  },
+  "instruction": "Using the supplied observations and source notes, calculate reported_growth and matched_growth in percent from P1 to P2. Assess the proposition: reported growth equals like-for-like growth for the matched coverage population.",
+  "context": "# Observation dictionary and feed notes\n\nThis is an explicitly synthetic coverage-expansion case. Each row in `observations` is an amount in whole token units for one `network_asset` key in one period. The key identifies a network and asset together. There is one observation per key and period. No USD valuation input is supplied.\n\nA reported period total is the sum of every observation row in that period. Matched coverage is the intersection of `network_asset` keys present in both P1 and P2. For matched growth, sum observations for those same keys in each period. Keys newly observed in only one period remain in the reported total and are not part of the matched-coverage total.\n\n`asset_tags` is a one-to-many metadata catalog. Its tags describe asset context and do not define the measurement population or amount. `published_on` dates when a synthetic tag entry was published, not the economic observation period. Use `observations` and the coverage definition for the calculations.\n",
+  "evidence": [
+    {
+      "id": "observations:amounts",
+      "text": "Explicitly synthetic complete row-level token-unit observations for P1 and P2, keyed by network and asset.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "P1 and P2 synthetic feed periods",
+      "retrieved_at": "2026-10-05T06:35:43Z",
+      "redistribution": "original synthetic records and concise factual extract only"
+    },
+    {
+      "id": "policy:coverage",
+      "text": "Authored synthetic rule for reported totals and matched coverage. Reported totals include all observed network_asset keys per period. Matched coverage uses the intersection of keys observed in both periods.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "P1 and P2 synthetic feed coverage",
+      "retrieved_at": "2026-10-05T06:35:43Z",
+      "redistribution": "original annotation and factual extract only"
+    },
+    {
+      "id": "metadata:tags",
+      "text": "Explicitly synthetic one-to-many asset tag catalog. Publication dates apply to tag entries and do not identify amount observations or define coverage.",
+      "origin": "synthetic:workpaperbench",
+      "publication": "Per-row authored dates in the tag catalog",
+      "period": "Synthetic tag metadata, not an economic observation period",
+      "retrieved_at": "2026-10-05T06:35:43Z",
+      "redistribution": "original synthetic records and concise factual extract only"
+    }
+  ],
+  "reference": {
+    "task_id": "wp06",
+    "answers": [
+      {
+        "id": "reported_growth",
+        "status": "answered",
+        "value": 100,
+        "unit": "percent",
+        "evidence": [
+          "observations:amounts",
+          "policy:coverage"
+        ],
+        "sql": "SELECT 100.0*((SELECT SUM(amount_units) FROM observations WHERE period='P2')-(SELECT SUM(amount_units) FROM observations WHERE period='P1'))/(SELECT SUM(amount_units) FROM observations WHERE period='P1') AS value",
+        "reason_code": null
+      },
+      {
+        "id": "matched_growth",
+        "status": "answered",
+        "value": 0,
+        "unit": "percent",
+        "evidence": [
+          "observations:amounts",
+          "policy:coverage"
+        ],
+        "sql": "WITH matched_keys AS (SELECT network_asset FROM observations GROUP BY network_asset HAVING COUNT(DISTINCT period)=2), totals AS (SELECT period,SUM(o.amount_units) AS amount FROM observations AS o JOIN matched_keys AS m USING(network_asset) GROUP BY period) SELECT 100.0*((SELECT amount FROM totals WHERE period='P2')-(SELECT amount FROM totals WHERE period='P1'))/(SELECT amount FROM totals WHERE period='P1') AS value",
+        "reason_code": null
+      }
+    ],
+    "conclusion": {
+      "verdict": "contradicted",
+      "reason_code": "incompatible_coverage",
+      "evidence": [
+        "observations:amounts",
+        "policy:coverage"
+      ]
+    }
+  },
+  "gold": {
+    "answers": {
+      "reported_growth": {
+        "status": "answered",
+        "value": 100,
+        "changed_value": 175,
+        "unit": "percent",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "observations:amounts",
+            "policy:coverage"
+          ]
+        ]
+      },
+      "matched_growth": {
+        "status": "answered",
+        "value": 0,
+        "changed_value": 25,
+        "unit": "percent",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "observations:amounts",
+            "policy:coverage"
+          ]
+        ]
+      }
+    },
+    "conclusion": {
+      "verdict": "contradicted",
+      "reason_codes": [
+        "contradicted_by_calculation",
+        "incompatible_coverage"
+      ],
+      "evidence": [
+        [
+          "observations:amounts",
+          "policy:coverage"
+        ]
+      ]
+    }
+  },
+  "origin": "synthetic"
+}

@@ -1,0 +1,373 @@
+{
+  "split": "evaluation",
+  "origin": "synthetic_acquisition_downgrade",
+  "source_group": "synthetic-usdc-window",
+  "shared_source": "sources/shared/usdc_window.json",
+  "tables": {
+    "events": {
+      "schema": "CREATE TABLE events(chain_id INTEGER,block_number INTEGER,block_id TEXT,log_index INTEGER,tx_id TEXT,sender TEXT,recipient TEXT,amount_base_units INTEGER)",
+      "rows": [
+        [
+          1,
+          20000000,
+          "synthetic:block:20000000",
+          0,
+          "synthetic:tx1",
+          "synthetic:a",
+          "synthetic:b",
+          100000000
+        ],
+        [
+          1,
+          20000000,
+          "synthetic:block:20000000",
+          1,
+          "synthetic:tx1",
+          "synthetic:a",
+          "synthetic:c",
+          250000000
+        ],
+        [
+          1,
+          20000001,
+          "synthetic:block:20000001",
+          0,
+          "synthetic:tx2",
+          "synthetic:b",
+          "synthetic:c",
+          300000000
+        ],
+        [
+          1,
+          20000000,
+          "synthetic:block:20000000",
+          2,
+          "synthetic:tx1",
+          "0x0000000000000000000000000000000000000000",
+          "synthetic:b",
+          500000000
+        ],
+        [
+          1,
+          20000003,
+          "synthetic:block:20000003",
+          0,
+          "synthetic:tx4",
+          "synthetic:c",
+          "0x0000000000000000000000000000000000000000",
+          200000000
+        ],
+        [
+          1,
+          20000004,
+          "synthetic:block:20000004",
+          0,
+          "synthetic:tx5",
+          "synthetic:c",
+          "synthetic:d",
+          0
+        ],
+        [
+          1,
+          20000031,
+          "synthetic:block:20000031",
+          0,
+          "synthetic:tx6",
+          "synthetic:c",
+          "synthetic:e",
+          125000000
+        ]
+      ]
+    }
+  },
+  "changed_tables": {
+    "events": {
+      "schema": "CREATE TABLE events(chain_id INTEGER,block_number INTEGER,block_id TEXT,log_index INTEGER,tx_id TEXT,sender TEXT,recipient TEXT,amount_base_units INTEGER)",
+      "rows": [
+        [
+          1,
+          20000000,
+          "synthetic:block:20000000",
+          0,
+          "synthetic:tx1",
+          "synthetic:a",
+          "synthetic:b",
+          120000000
+        ],
+        [
+          1,
+          20000000,
+          "synthetic:block:20000000",
+          1,
+          "synthetic:tx1",
+          "synthetic:a",
+          "synthetic:c",
+          230000000
+        ],
+        [
+          1,
+          20000001,
+          "synthetic:block:20000001",
+          0,
+          "synthetic:tx2",
+          "synthetic:b",
+          "synthetic:c",
+          420000000
+        ],
+        [
+          1,
+          20000000,
+          "synthetic:block:20000000",
+          2,
+          "synthetic:tx1",
+          "0x0000000000000000000000000000000000000000",
+          "synthetic:b",
+          600000000
+        ],
+        [
+          1,
+          20000003,
+          "synthetic:block:20000003",
+          0,
+          "synthetic:tx4",
+          "synthetic:c",
+          "0x0000000000000000000000000000000000000000",
+          300000000
+        ],
+        [
+          1,
+          20000004,
+          "synthetic:block:20000004",
+          0,
+          "synthetic:tx5",
+          "synthetic:c",
+          "synthetic:d",
+          0
+        ],
+        [
+          1,
+          20000031,
+          "synthetic:block:20000031",
+          0,
+          "synthetic:tx6",
+          "synthetic:c",
+          "synthetic:e",
+          150000000
+        ]
+      ]
+    }
+  },
+  "context": "# Shared USDC window fixture\nThis is an explicitly synthetic downgrade after both bounded public-RPC acquisition paths failed in Actions run 37273047665. It contains original authored events, symbolic block/transaction identifiers and participant labels. It is not an observed chain capture. Both tasks reuse this same source group.\n\nThe scenario covers chain 1, blocks 20000000 through 20000031 inclusive, and the Ethereum USDC contract 0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48. Amounts are integer base units. The supplied decimal scale is 6, so token-unit amounts scale by 1000000. No dollar valuation is provided.\n\nEvent identity is (chain_id, block_id, log_index). Each listed event is unique. A transaction may contain several distinct events. First exclude events whose sender or recipient is the zero address 0x0000000000000000000000000000000000000000. These represent mint/burn in this fixture. all_events then sums all remaining event amounts. max_per_tx retains only the largest remaining event amount in each transaction. Both aggregates cover the same window. They are two counting definitions, not two temporal observations. max_per_tx does not reproduce the full prior Artemis-adjusted metric or its proprietary labels.\n\nThe delivered columns are event identity, block number, transaction, symbolic sender/recipient and amount. There are no other time windows, business-purpose classifications, actor/entity-type labels or links from accounts to natural persons. Participants are symbolic account labels, without wallet attribution.\n\nPrimary metadata/definition locators: https://developers.circle.com/stablecoins/usdc-contract-addresses and https://eips.ethereum.org/EIPS/eip-20 . Public methodology motivation only: https://www.artemis.ai/docs/data-reference/stablecoin-methodology . All fixture amounts, identities and labels are original synthetic data. Changed controls are also synthetic.\n",
+  "evidence": [
+    {
+      "id": "corpus:events",
+      "text": "Seven original synthetic event records for the declared fixed window. Integer amount_base_units, unique event identity and transaction identifiers are preserved.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "authored chain-1 window 20000000-20000031",
+      "retrieved_at": "2026-10-05T06:39:14.696589+00:00",
+      "redistribution": "original annotation and fixture or concise metadata fact only"
+    },
+    {
+      "id": "policy:counting",
+      "text": "Zero-address exclusion precedes all_events and max_per_tx counting as defined in sources.md.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "authored chain-1 window 20000000-20000031",
+      "retrieved_at": "2026-10-05T06:39:14.697051+00:00",
+      "redistribution": "original annotation and fixture or concise metadata fact only"
+    },
+    {
+      "id": "metadata:token",
+      "text": "Ethereum USDC address and supplied decimal scale 6, based on Circle metadata. Fixture amounts are synthetic, not observed or valued in USD.",
+      "origin": "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+      "publication": null,
+      "period": "authored chain-1 window 20000000-20000031",
+      "retrieved_at": "2026-10-05T06:39:14.697055+00:00",
+      "redistribution": "original annotation and fixture or concise metadata fact only",
+      "metadata_locators": [
+        "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+        "https://github.com/circlefin/stablecoin-evm/blob/master/.env.example",
+        "https://github.com/circlefin/stablecoin-evm/blob/master/contracts/v1/FiatTokenV1.sol"
+      ]
+    },
+    {
+      "id": "policy:window",
+      "text": "The fixture covers only blocks 20000000 through 20000031. Both counting definitions use this identical window.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "authored chain-1 window 20000000-20000031",
+      "retrieved_at": "2026-10-05T06:39:14.697057+00:00",
+      "redistribution": "original annotation and fixture or concise metadata fact only"
+    },
+    {
+      "id": "policy:scope",
+      "text": "The delivered column inventory includes account labels and event amounts, without business-purpose, actor-type or account-to-person labels.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "authored chain-1 window 20000000-20000031",
+      "retrieved_at": "2026-10-05T06:39:14.697059+00:00",
+      "redistribution": "original annotation and fixture or concise metadata fact only"
+    },
+    {
+      "id": "methodology:context",
+      "text": "Public methodology motivation only. It is not the source of fixture values, identities, classifications or historical observations.",
+      "origin": "https://www.artemis.ai/docs/data-reference/stablecoin-methodology",
+      "publication": "2026-07",
+      "period": "authored chain-1 window 20000000-20000031",
+      "retrieved_at": "2026-10-05T06:39:14.697061+00:00",
+      "redistribution": "original annotation and fixture or concise metadata fact only"
+    }
+  ],
+  "instruction": "For the supplied window, report transfer_total in token_units under all_events, business_payment_volume in token_units, and unique_humans in humans. Assess whether the observable transfer total establishes that the eligible amount consists of business payments between unique humans.",
+  "reference": {
+    "task_id": "wp08",
+    "answers": [
+      {
+        "id": "transfer_total",
+        "status": "answered",
+        "value": 775,
+        "unit": "token_units",
+        "evidence": [
+          "corpus:events",
+          "policy:counting",
+          "metadata:token"
+        ],
+        "sql": "SELECT SUM(amount_base_units)/1000000.0 AS value FROM events WHERE sender!='0x0000000000000000000000000000000000000000' AND recipient!='0x0000000000000000000000000000000000000000'",
+        "reason_code": null
+      },
+      {
+        "id": "business_payment_volume",
+        "status": "insufficient_evidence",
+        "value": null,
+        "unit": "token_units",
+        "evidence": [
+          "corpus:events",
+          "policy:scope"
+        ],
+        "sql": null,
+        "reason_code": "missing_required_labels"
+      },
+      {
+        "id": "unique_humans",
+        "status": "insufficient_evidence",
+        "value": null,
+        "unit": "humans",
+        "evidence": [
+          "corpus:events",
+          "policy:scope"
+        ],
+        "sql": null,
+        "reason_code": "missing_required_labels"
+      }
+    ],
+    "conclusion": {
+      "verdict": "not_established",
+      "reason_code": "missing_required_evidence",
+      "evidence": [
+        "corpus:events",
+        "policy:scope"
+      ]
+    }
+  },
+  "gold": {
+    "answers": {
+      "transfer_total": {
+        "status": "answered",
+        "value": 775,
+        "changed_value": 920,
+        "unit": "token_units",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "corpus:events",
+            "policy:counting",
+            "metadata:token"
+          ],
+          [
+            "corpus:events",
+            "policy:counting",
+            "metadata:token",
+            "policy:window"
+          ],
+          [
+            "corpus:events",
+            "policy:counting",
+            "metadata:token",
+            "policy:scope"
+          ]
+        ]
+      },
+      "business_payment_volume": {
+        "status": "insufficient_evidence",
+        "unit": "token_units",
+        "reason_codes": [
+          "missing_required_labels"
+        ],
+        "evidence": [
+          [
+            "policy:scope"
+          ],
+          [
+            "corpus:events",
+            "policy:scope"
+          ],
+          [
+            "corpus:events",
+            "policy:scope",
+            "metadata:token"
+          ],
+          [
+            "corpus:events",
+            "policy:scope",
+            "policy:window"
+          ]
+        ]
+      },
+      "unique_humans": {
+        "status": "insufficient_evidence",
+        "unit": "humans",
+        "reason_codes": [
+          "missing_required_labels"
+        ],
+        "evidence": [
+          [
+            "policy:scope"
+          ],
+          [
+            "corpus:events",
+            "policy:scope"
+          ],
+          [
+            "corpus:events",
+            "policy:scope",
+            "metadata:token"
+          ],
+          [
+            "corpus:events",
+            "policy:scope",
+            "policy:window"
+          ]
+        ]
+      }
+    },
+    "conclusion": {
+      "verdict": "not_established",
+      "reason_codes": [
+        "missing_required_evidence",
+        "incompatible_definition"
+      ],
+      "evidence": [
+        [
+          "corpus:events",
+          "policy:scope"
+        ],
+        [
+          "corpus:events",
+          "policy:scope",
+          "policy:counting"
+        ]
+      ]
+    }
+  }
+}

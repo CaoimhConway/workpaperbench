@@ -1,0 +1,168 @@
+{
+  "origin": "synthetic_acquisition_downgrade",
+  "source_group": "synthetic-usdc-window",
+  "first_block": 20000000,
+  "last_block": 20000031,
+  "chain_id": 1,
+  "contract": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+  "decimals": 6,
+  "capture_run_id": "37273047665",
+  "failed_paths": [
+    {
+      "endpoint": "https://ethereum-rpc.publicnode.com",
+      "requests": 1,
+      "error": "HTTPError"
+    },
+    {
+      "endpoint": "https://cloudflare-eth.com/v1/mainnet",
+      "requests": 1,
+      "error": "RuntimeError"
+    }
+  ],
+  "synthetic_rows": [
+    [
+      1,
+      20000000,
+      "synthetic:block:20000000",
+      0,
+      "synthetic:tx1",
+      "synthetic:a",
+      "synthetic:b",
+      100000000
+    ],
+    [
+      1,
+      20000000,
+      "synthetic:block:20000000",
+      1,
+      "synthetic:tx1",
+      "synthetic:a",
+      "synthetic:c",
+      250000000
+    ],
+    [
+      1,
+      20000001,
+      "synthetic:block:20000001",
+      0,
+      "synthetic:tx2",
+      "synthetic:b",
+      "synthetic:c",
+      300000000
+    ],
+    [
+      1,
+      20000000,
+      "synthetic:block:20000000",
+      2,
+      "synthetic:tx1",
+      "0x0000000000000000000000000000000000000000",
+      "synthetic:b",
+      500000000
+    ],
+    [
+      1,
+      20000003,
+      "synthetic:block:20000003",
+      0,
+      "synthetic:tx4",
+      "synthetic:c",
+      "0x0000000000000000000000000000000000000000",
+      200000000
+    ],
+    [
+      1,
+      20000004,
+      "synthetic:block:20000004",
+      0,
+      "synthetic:tx5",
+      "synthetic:c",
+      "synthetic:d",
+      0
+    ],
+    [
+      1,
+      20000031,
+      "synthetic:block:20000031",
+      0,
+      "synthetic:tx6",
+      "synthetic:c",
+      "synthetic:e",
+      125000000
+    ]
+  ],
+  "changed_control_origin": "synthetic:workpaperbench",
+  "changed_rows": [
+    [
+      1,
+      20000000,
+      "synthetic:block:20000000",
+      0,
+      "synthetic:tx1",
+      "synthetic:a",
+      "synthetic:b",
+      120000000
+    ],
+    [
+      1,
+      20000000,
+      "synthetic:block:20000000",
+      1,
+      "synthetic:tx1",
+      "synthetic:a",
+      "synthetic:c",
+      230000000
+    ],
+    [
+      1,
+      20000001,
+      "synthetic:block:20000001",
+      0,
+      "synthetic:tx2",
+      "synthetic:b",
+      "synthetic:c",
+      420000000
+    ],
+    [
+      1,
+      20000000,
+      "synthetic:block:20000000",
+      2,
+      "synthetic:tx1",
+      "0x0000000000000000000000000000000000000000",
+      "synthetic:b",
+      600000000
+    ],
+    [
+      1,
+      20000003,
+      "synthetic:block:20000003",
+      0,
+      "synthetic:tx4",
+      "synthetic:c",
+      "0x0000000000000000000000000000000000000000",
+      300000000
+    ],
+    [
+      1,
+      20000004,
+      "synthetic:block:20000004",
+      0,
+      "synthetic:tx5",
+      "synthetic:c",
+      "synthetic:d",
+      0
+    ],
+    [
+      1,
+      20000031,
+      "synthetic:block:20000031",
+      0,
+      "synthetic:tx6",
+      "synthetic:c",
+      "synthetic:e",
+      150000000
+    ]
+  ],
+  "note": "Original symbolic events and participants. No authentic RPC capture or wallet identity is claimed."
+}

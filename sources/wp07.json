@@ -1,0 +1,285 @@
+{
+  "split": "evaluation",
+  "origin": "primary_filing_facts",
+  "source_group": "apple-2024-q2",
+  "tables": {
+    "services": {
+      "schema": "CREATE TABLE services(entity TEXT,fiscal_year INTEGER,period TEXT,revenue_million INTEGER,gross_profit_million INTEGER,evidence_id TEXT)",
+      "rows": [
+        [
+          "Apple",
+          2024,
+          "Q2",
+          23867,
+          17809,
+          "filing:services2024"
+        ],
+        [
+          "Apple",
+          2024,
+          "H1",
+          46984,
+          34646,
+          "filing:services2024"
+        ],
+        [
+          "Apple",
+          2023,
+          "Q2",
+          20907,
+          14842,
+          "filing:comparative"
+        ],
+        [
+          "Apple",
+          2023,
+          "H1",
+          41673,
+          29551,
+          "filing:comparative"
+        ]
+      ]
+    }
+  },
+  "changed_tables": {
+    "services": {
+      "schema": "CREATE TABLE services(entity TEXT,fiscal_year INTEGER,period TEXT,revenue_million INTEGER,gross_profit_million INTEGER,evidence_id TEXT)",
+      "rows": [
+        [
+          "Apple",
+          2024,
+          "Q2",
+          25000,
+          18500,
+          "filing:services2024"
+        ],
+        [
+          "Apple",
+          2024,
+          "H1",
+          49000,
+          36000,
+          "filing:services2024"
+        ],
+        [
+          "Apple",
+          2023,
+          "Q2",
+          20907,
+          14842,
+          "filing:comparative"
+        ],
+        [
+          "Apple",
+          2023,
+          "H1",
+          41673,
+          29551,
+          "filing:comparative"
+        ]
+      ]
+    }
+  },
+  "instruction": "For Apple FY2024, report q1_revenue and q1_gross_profit for Services in usd_million, q1_margin in percent, and margin_change as Q2 margin minus Q1 margin in percentage_points. Use the supplied filing. Set conclusion to null.",
+  "context": "# Apple Services extracts\nOriginal factual extracts from Apple Inc. FY2024 Q2 Form 10-Q, filed 2024-05-03, quarter ended 2024-03-30. Source: https://www.sec.gov/Archives/edgar/data/320193/000032019324000069/aapl-20240330.htm\nRevenue and gross margin tables have separate three-month (Q2) and six-month (H1) columns, with 2024 and 2023 comparisons. Dollar amounts are USD millions. The services table preserves these headers. gross_profit_million is the dollar gross margin amount, not a percentage. Fiscal Q1 is the part of H1 preceding Q2. Ratios should be derived from reported dollar amounts rather than the filing's rounded margin percentages. A percentage-point difference subtracts the two percentage levels.\nThis fixture contains concise factual extracts and original annotations, not the full issuer document. Changed-data controls are synthetic.\n",
+  "evidence": [
+    {
+      "id": "filing:services2024",
+      "text": "FY2024 Services revenue Q2/H1 is 23867/46984 USD million, and gross profit is 17809/34646 USD million. Separate three/six-month headers apply.",
+      "origin": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000069/aapl-20240330.htm",
+      "publication": "2024-05-03",
+      "period": "FY2024 Q2/H1 ending 2024-03-30",
+      "retrieved_at": "2026-10-05T06:35:08.761982+00:00",
+      "redistribution": "original annotation and concise factual extract only"
+    },
+    {
+      "id": "filing:revenue",
+      "text": "FY2024 Services net-sales table with Q2 and H1 columns and USD-million header.",
+      "origin": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000069/aapl-20240330.htm",
+      "publication": "2024-05-03",
+      "period": "FY2024 Q2/H1 ending 2024-03-30",
+      "retrieved_at": "2026-10-05T06:35:08.762480+00:00",
+      "redistribution": "original annotation and concise factual extract only"
+    },
+    {
+      "id": "filing:profit",
+      "text": "FY2024 Services gross-margin dollar table with Q2 and H1 columns and USD-million header.",
+      "origin": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000069/aapl-20240330.htm",
+      "publication": "2024-05-03",
+      "period": "FY2024 Q2/H1 ending 2024-03-30",
+      "retrieved_at": "2026-10-05T06:35:08.762485+00:00",
+      "redistribution": "original annotation and concise factual extract only"
+    },
+    {
+      "id": "filing:context",
+      "text": "Apple fiscal calendar, entity, period and table-header context in sources.md.",
+      "origin": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000069/aapl-20240330.htm",
+      "publication": "2024-05-03",
+      "period": "FY2024 Q2/H1 ending 2024-03-30",
+      "retrieved_at": "2026-10-05T06:35:08.762489+00:00",
+      "redistribution": "original annotation and concise factual extract only"
+    },
+    {
+      "id": "filing:comparative",
+      "text": "Separate FY2023 Services comparison columns, not FY2024 observations.",
+      "origin": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000069/aapl-20240330.htm",
+      "publication": "2024-05-03",
+      "period": "FY2023 comparison",
+      "retrieved_at": "2026-10-05T06:35:08.762493+00:00",
+      "redistribution": "original annotation and concise factual extract only"
+    }
+  ],
+  "reference": {
+    "task_id": "wp07",
+    "answers": [
+      {
+        "id": "q1_revenue",
+        "status": "answered",
+        "value": 23117,
+        "unit": "usd_million",
+        "evidence": [
+          "filing:revenue"
+        ],
+        "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN revenue_million END) r2,MAX(CASE WHEN period='H1' THEN revenue_million END) rh,MAX(CASE WHEN period='Q2' THEN gross_profit_million END) g2,MAX(CASE WHEN period='H1' THEN gross_profit_million END) gh FROM services WHERE entity='Apple' AND fiscal_year=2024) SELECT rh-r2 AS value FROM p",
+        "reason_code": null
+      },
+      {
+        "id": "q1_gross_profit",
+        "status": "answered",
+        "value": 16837,
+        "unit": "usd_million",
+        "evidence": [
+          "filing:profit"
+        ],
+        "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN revenue_million END) r2,MAX(CASE WHEN period='H1' THEN revenue_million END) rh,MAX(CASE WHEN period='Q2' THEN gross_profit_million END) g2,MAX(CASE WHEN period='H1' THEN gross_profit_million END) gh FROM services WHERE entity='Apple' AND fiscal_year=2024) SELECT gh-g2 AS value FROM p",
+        "reason_code": null
+      },
+      {
+        "id": "q1_margin",
+        "status": "answered",
+        "value": 72.8338452221309,
+        "unit": "percent",
+        "evidence": [
+          "filing:revenue",
+          "filing:profit"
+        ],
+        "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN revenue_million END) r2,MAX(CASE WHEN period='H1' THEN revenue_million END) rh,MAX(CASE WHEN period='Q2' THEN gross_profit_million END) g2,MAX(CASE WHEN period='H1' THEN gross_profit_million END) gh FROM services WHERE entity='Apple' AND fiscal_year=2024) SELECT 100.0*(gh-g2)/(rh-r2) AS value FROM p",
+        "reason_code": null
+      },
+      {
+        "id": "margin_change",
+        "status": "answered",
+        "value": 1.783827715397905,
+        "unit": "percentage_points",
+        "evidence": [
+          "filing:revenue",
+          "filing:profit"
+        ],
+        "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN revenue_million END) r2,MAX(CASE WHEN period='H1' THEN revenue_million END) rh,MAX(CASE WHEN period='Q2' THEN gross_profit_million END) g2,MAX(CASE WHEN period='H1' THEN gross_profit_million END) gh FROM services WHERE entity='Apple' AND fiscal_year=2024) SELECT 100.0*g2/r2-100.0*(gh-g2)/(rh-r2) AS value FROM p",
+        "reason_code": null
+      }
+    ],
+    "conclusion": null
+  },
+  "gold": {
+    "answers": {
+      "q1_revenue": {
+        "status": "answered",
+        "value": 23117,
+        "changed_value": 24000,
+        "unit": "usd_million",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "filing:revenue"
+          ],
+          [
+            "filing:services2024"
+          ],
+          [
+            "filing:revenue",
+            "filing:context"
+          ],
+          [
+            "filing:services2024",
+            "filing:context"
+          ]
+        ]
+      },
+      "q1_gross_profit": {
+        "status": "answered",
+        "value": 16837,
+        "changed_value": 17500,
+        "unit": "usd_million",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "filing:profit"
+          ],
+          [
+            "filing:services2024"
+          ],
+          [
+            "filing:profit",
+            "filing:context"
+          ],
+          [
+            "filing:services2024",
+            "filing:context"
+          ]
+        ]
+      },
+      "q1_margin": {
+        "status": "answered",
+        "value": 72.8338452221309,
+        "changed_value": 72.91666666666667,
+        "unit": "percent",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "filing:revenue",
+            "filing:profit"
+          ],
+          [
+            "filing:services2024"
+          ],
+          [
+            "filing:revenue",
+            "filing:profit",
+            "filing:context"
+          ],
+          [
+            "filing:services2024",
+            "filing:context"
+          ]
+        ]
+      },
+      "margin_change": {
+        "status": "answered",
+        "value": 1.783827715397905,
+        "changed_value": 1.0833333333333286,
+        "unit": "percentage_points",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "filing:revenue",
+            "filing:profit"
+          ],
+          [
+            "filing:services2024"
+          ],
+          [
+            "filing:revenue",
+            "filing:profit",
+            "filing:context"
+          ],
+          [
+            "filing:services2024",
+            "filing:context"
+          ]
+        ]
+      }
+    },
+    "conclusion": null
+  }
+}
