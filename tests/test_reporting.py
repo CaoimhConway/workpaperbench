@@ -1,7 +1,21 @@
-"""Synthetic report controls. These are not trial records."""
+"""Synthetic report controls and checks of retained campaign receipts."""
 import json
+from decimal import Decimal
 from pathlib import Path
-from workpaperbench.cli import report
+from workpaperbench.cli import report, summarize
+
+
+def test_retained_campaign_cost_totals_match_decimal_receipts():
+    root = Path(__file__).resolve().parents[1]
+    rows = [json.loads(path.read_text()) for path in
+            sorted((root / 'reports/runs').glob('final-*/record.json'))]
+    assert len(rows) == 48
+    summary = summarize(rows)
+    for split in ('evaluation', 'development'):
+        for arm in ('A', 'B'):
+            receipts = [Decimal(str(row['provider_cost_delta_usd'])) for row in rows
+                        if row['split'] == split and row['arm'] == arm]
+            assert summary[split][arm]['known_slot_cost_usd'] == float(sum(receipts, Decimal(0)))
 
 
 def test_partial_denominators_and_failure_causes(tmp_path):
