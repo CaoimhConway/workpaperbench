@@ -156,3 +156,17 @@ Stage 3 audit/campaign/release: pending. No results or completion claims.
   wp05 A2 never received a runner and remains resumable. Five live slots have
   actually started across the two pilot runs. A key-free CLI argument check
   is added before another live attempt. Model-route source inspection ongoing.
+- Pinned primary source inspection found native compatibility defects: the
+  OpenRouter provider prefix is not a canonical model ID in this Hermes route,
+  and finite-query sessions are now labeled `oneshot` rather than `cli`.
+  Correcting the existing native adapter's provider flag and export filter,
+  guarded by the exact original and corrected module hashes. This preserves
+  the selected model, key flow, terminal tools and separate verification.
+- Key-free CLI gate `37270674684` passed: model, toolset, finite-query and
+  query arguments are accepted. The recorded RuntimeError is the intentional
+  hook stop before the native solver, not an installation failure.
+- Native corrected module SHA256 is now
+  `02ebd73edb387091480df45fdea27b70bf37ca377ee0b68047b84d6cdbede112`.
+  Full lightweight suite passed 60 tests, plus a focused new diagnostic
+  redaction control passed. Pending baseline slots are wp05 A2, wp01 A3,
+  wp02 A3. Their future records will include allowlisted failure codes only.

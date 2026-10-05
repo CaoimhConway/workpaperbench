@@ -212,6 +212,23 @@ def tool_counts(path):
     return dict(sorted(counts.items())[:50])
 
 
+def failure_codes(path):
+    content, reason = bounded_bytes(path, 1_000_000)
+    if reason:
+        return []
+    text = content.decode("utf-8", errors="replace").lower()
+    markers = {
+        "invalid_model_id": ("not a valid model", "model not found", "invalid model"),
+        "missing_provider_key": ("no api key", "no provider configured"),
+        "unsupported_cli_arguments": ("unrecognized arguments", "unknown option"),
+        "runtime_import_failure": ("importerror", "modulenotfounderror"),
+        "noninteractive_model_guard": ("refusing this startup model override",),
+        "provider_authentication": ("unauthorized", "authenticationerror"),
+        "provider_rate_limit": ("ratelimiterror", "rate limit exceeded"),
+    }
+    return [code for code, phrases in markers.items() if any(phrase in text for phrase in phrases)]
+
+
 def result_metrics(path):
     try:
         result = read_json(path)
@@ -430,6 +447,7 @@ def execute(mode, slot_id):
     record["harbor_metrics"] = metrics
     if exception_type:
         record["native_exception_type"] = exception_type
+        record["native_failure_codes"] = failure_codes(trial_dir / "agent/hermes.txt")
     record["tool_event_counts"] = tool_counts(trial_dir / "agent/trajectory.json")
 
     answer_path = trial_dir / "artifacts/logs/artifacts/answer.json"
