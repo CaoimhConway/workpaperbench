@@ -8,11 +8,12 @@ No genuine external blocker. No Docker, Harbor or inference ran on this device.
   slots preserved, one selected skill and actual hosted delivery verified.
 - Stage 2: all eight sources/packages, direct reference review, balanced controls,
   candidate-instructions/schema-only review and freeze complete. Corrected full
-  native gate `37276298546` on `77f1fd8` is running, not passed yet.
+  native gate `37276298546` on `77f1fd8` passed all 64 controls: 25 expected
+  passes, 39 expected failures, every recorded isolation check passed.
 - Stage 3: fresh read-only source-first audit complete and fixes verified locally.
-  Final 48-slot campaign and publication/release are unrun, pending the native gate.
-- Local integrated suite passed 127 tests after audit fixes. Five focused
-  schedule/report tests pass, including the new fixed-schedule invariant.
+  Final 48-slot campaign and publication/release are unrun, ready under standing authorization.
+- Clean checkout `3031a86` installed and passed all 128 tests, demo, validate,
+  report and full-history scanner. Frozen push CI `37277179243` also passed.
 - Current freeze `wpb-v1-92baa4a72f0e`, 234 file hashes. Content digest
   `92baa4a72f0e` is the manifest ID suffix, full digest is in `config/freeze.json`.
   Freeze file SHA256 `8cc3e40ed42898a7ead9fce7a7bfd5c9dc955f02cdd86a1c7bf352c9f667f95b`.
@@ -40,7 +41,7 @@ Native transport retries remain in-slot and their individual counts are unknown.
 The candidate can read its dedicated capped inference key. Native TCP allowlisting
 has DNS/ICMP residual channels. The separate verifier uses network-none and checks
 loopback-only interfaces, blocked external TLS, absent key and Docker socket.
-Candidate inputs exclude gold, checkout/Git history, GitHub credentials and host
+Candidate inputs exclude gold, project checkout/Git history, GitHub credentials and host
 sockets. SQL alone runs in a constrained, bounded, key-free trusted subprocess.
 Raw live traces are ephemeral. Only scanned/allowlisted small evidence is retained.
 Runtime growth reviewed at 1534 hand-written lines, three runtime modules and thin
@@ -93,7 +94,7 @@ wp04/wp08. No external human validation or contamination-proof claim.
 | 37272511333 / 37274770675 | Remaining baselines and single B check completed, canonical evidence retained |
 | 37272514161 | Development smoke passed 6 |
 | 37275297547 | Canceled as superseded after audit finding,8 partial controls retained, gate not passed |
-| 37276298546 | Corrected all-eight full native gate currently running |
+| 37276298546 | Corrected all-eight full native gate passed64 controls |
 
 Tested commands: editable lightweight install, `python -m pytest -q`,
 `workpaperbench demo`, structural `validate`, report generation, native CI dispatch,
@@ -110,8 +111,8 @@ This actual cap is below the authorized $50 ceiling and is never reset or raised
 Per-slot snapshots lag, so their sum is not total spend. Native zero token fields
 are unreported usage. Full 48 reserve $9.60 fits current funds.
 
-Actions snapshot as of 07:03 UTC: 140 rounded Linux job minutes, conservative compute
-$0.84 before included quota at $0.006/minute. It includes the then-running job and
+Actions snapshot as of 07:52 UTC: 182 rounded Linux job minutes, conservative compute
+$1.092 before included quota at $0.006/minute. It includes the then-running job and
 will be refreshed after gates. Invoice, included account quota and storage charges
 are unknown because the existing billing API returned 404 without user scope.
 No scope, subscription, cap or account safeguards changed. Authorization ceiling
@@ -124,3 +125,5 @@ visibility change. No public release yet. Existing SSH setup reused. With explic
 owner permission, the work include became case-insensitive and was ordered after
 the fallback. Effective existing work identity verified. Bootstrap `da28f4a` used
 the old fallback identity before the fix, history preserved without rewriting.
+
+Software publication audit complete: 19 started live-job logs, full native and frozen-unit logs, saved sanitized JSON, full Git blobs, source/license notices and candidate COPY contexts reviewed. No credential/encoded-fragment hits. The full native control report is permanently retained. Software is complete, final evaluation remains unrun.
