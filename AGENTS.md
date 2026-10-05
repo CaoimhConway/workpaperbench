@@ -1,5 +1,13 @@
 # WorkpaperBench — agent authority and working rules
 
+## Project writing rules
+
+- Never use semicolons unless absolutely necessary.
+- Use `-` instead of an em dash in project text.
+- Never state or imply that this project was created by AI. Do not add AI
+  co-authorship, co-author trailers, signatures or generation notices to code,
+  documentation, commits or other project artifacts.
+
 The user has authorized autonomous completion of this project. `SPEC.md` v3.1 is the sole product authority; `SETUP.md` and `build-notes/ACTIONS.md` define execution. Follow the three stages in `BUILD_PROMPTS.md` continuously. Do not ask for routine permission or present a new plan instead of implementing.
 
 ## Tool-neutral implementation

@@ -9,8 +9,11 @@ Specification: v3.1. Started 2026-10-04 (America/Los_Angeles).
   checked 2026-10-05 UTC: lifetime cap $20, reset null, usage $0, remaining $20,
   BYOK usage $0. Project authorization ceilings remain $50 inference / $10 Actions.
 - Git identity issue resolved with explicit owner authorization: existing work
-  include changed to case-insensitive `gitdir/i:~/code/work/`. Effective identity
-  verified against the existing work configuration before first commit.
+  include changed to case-insensitive `gitdir/i:~/code/work/` and moved after the
+  global fallback. Verified effective work identity. The bootstrap commit
+  `da28f4a` used the fallback before the ordering correction. History preserved.
+- Initial key-free Docker plumbing preflight passed: Actions `37261618709` on
+  bootstrap `da28f4a`. This is not native Harbor isolation evidence.
 - Sandbox network access initially made `gh auth status` look invalid; an authorized
   network-enabled API request succeeded. Existing CLI account switched normally.
 - No Docker, Harbor or model inference executed on this device.
