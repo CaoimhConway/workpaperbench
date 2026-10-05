@@ -41,7 +41,7 @@ if freeze.exists():
         # stay fixed. Only reviewed implementation hashes can supersede code hashes.
         allowed = {
             '.github/workflows/benchmark.yml', '.github/workflows/ci.yml',
-            'pyproject.toml',
+            'pyproject.toml', 'build-notes/SOURCES.md',
             'workpaperbench/cli.py', 'workpaperbench/grading.py', 'workpaperbench/sql_worker.py',
             *(f'scripts/{name}.py' for name in ('attempts', 'audit', 'collect_results', 'integration',
                                               'native_run', 'regrade', 'select_slots')),

@@ -16,6 +16,34 @@ from select_slots import REPO, api, job_slots, job_started, pages, run_manifest
 ROOT = Path(__file__).resolve().parent.parent
 FILES = {"record.json", "answer.json", "verdict.json", "answer.raw.txt", "tool-evidence.json"}
 SECRET = re.compile(rb"sk-or-v1-[A-Za-z0-9_-]{16,}|gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}")
+LEGACY_MANIFEST = "wpb-v1-92baa4a72f0e"
+
+
+def retained_directory(root, manifest_id, identifier):
+    from attempts import record_directory
+    scoped = record_directory(manifest_id, identifier, root)
+    # Published legacy evidence retains its original paths.
+    return scoped.parent.parent / identifier if manifest_id == LEGACY_MANIFEST else scoped
+
+
+def authenticate_attempt(artifact, run, manifest_id, cache):
+    slot = r"final-wp0[1-8]-[AB]-[1-3]"
+    prefixes = (f"slot-{run['head_sha']}-final-{run['id']}-",
+                f"pair-{manifest_id}-{run['id']}-", f"provider-{run['head_sha']}-{run['id']}-")
+    endings = (rf"([1-9][0-9]*)-({slot})", rf"([1-9][0-9]*)-({slot}(?:--{slot})?)", r"([1-9][0-9]*)")
+    match = next((m for p, e in zip(prefixes, endings)
+                  if (m := re.fullmatch(re.escape(p) + e, artifact['name']))), None)
+    if match is None:
+        raise ValueError('artifact_attempt_name_mismatch')
+    attempt = int(match[1])
+    if attempt not in cache:
+        cache[attempt] = run if attempt == run['run_attempt'] else api(
+            f"repos/{REPO}/actions/runs/{run['id']}/attempts/{attempt}")
+    actual = cache[attempt]
+    if (actual['id'] != run['id'] or actual['head_sha'] != run['head_sha']
+            or actual['run_attempt'] != attempt):
+        raise ValueError('artifact_attempt_identity_mismatch')
+    artifact['workflow_run'] = {**artifact['workflow_run'], 'run_attempt': attempt}
 
 
 def screened(data):
@@ -68,8 +96,8 @@ def save_files(files, artifact, archive_sha256, root):
     manifest = json.loads((root / "config/freeze.json").read_text())
     if record.get("freeze_manifest_id") != manifest["manifest_id"]:
         raise ValueError("artifact_experiment_mismatch")
-    destination = root / "reports/runs" / identifier
-    if any(p.is_symlink() for p in (root / "reports", root / "reports/runs", destination)):
+    destination = retained_directory(root, manifest['manifest_id'], identifier)
+    if any(p.is_symlink() for p in (destination, *destination.parents) if p != root and p.is_relative_to(root)):
         raise ValueError("unsafe_artifact_destination")
     destination.mkdir(parents=True, exist_ok=True)
     for name, content in files.items():
@@ -105,8 +133,8 @@ def validate_record(record, root, run):
         raise ValueError("artifact_slot_identity_mismatch")
     if str(record.get("run_id")) != str(run["id"]) or record.get("commit_sha") != run["head_sha"]:
         raise ValueError("artifact_run_identity_mismatch")
-    if not str(record.get("github_run_attempt", "")).isdigit():
-        raise ValueError("artifact_run_attempt_missing")
+    if str(record.get("github_run_attempt", "")) != str(run.get('run_attempt', '')) or not run.get('run_attempt'):
+        raise ValueError("artifact_run_attempt_identity_mismatch")
     return slot
 
 
@@ -154,7 +182,7 @@ def collect(run_id, root=ROOT):
     manifest_id = json.loads((root / "config/freeze.json").read_text())["manifest_id"]
     if run_manifest(run, "final", {}) != manifest_id:
         raise ValueError("run_experiment_mismatch")
-    imported, withheld, provider = [], [], None
+    imported, withheld, provider, attempts = [], [], None, {}
     for artifact in pages(f"repos/{REPO}/actions/runs/{run_id}/artifacts", "artifacts"):
         if not artifact["name"].startswith(("slot-", "pair-", "provider-")) or artifact.get("expired"):
             continue
@@ -165,6 +193,7 @@ def collect(run_id, root=ROOT):
             raise ValueError("oversized_artifact")
         data = subprocess.check_output(["gh", "api", f"repos/{REPO}/actions/artifacts/{artifact['id']}/zip"])
         try:
+            authenticate_attempt(artifact, run, manifest_id, attempts)
             if artifact["name"].startswith("provider-"):
                 provider = provider_archive(data, artifact, run, root)
             else:
@@ -177,7 +206,7 @@ def collect(run_id, root=ROOT):
     for job in pages(f"repos/{REPO}/actions/runs/{run_id}/jobs?filter=all", "jobs"):
         for identifier in job_slots(job):
             state = missing_state(job)
-            retained = root / 'reports/runs' / identifier / 'record.json'
+            retained = retained_directory(root, manifest_id, identifier) / 'record.json'
             if identifier in imported and retained.is_file():
                 state = json.loads(retained.read_text())['status']
             states[identifier] = {"status": state, "run_id": run_id, "job_id": job["id"],

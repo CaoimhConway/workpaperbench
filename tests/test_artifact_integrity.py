@@ -30,7 +30,7 @@ def archive(tmp_path, member=None, update=None):
         z.writestr(member or 'answer.json', '{}\n')
     data = buffer.getvalue()
     artifact = {'id': 1, 'digest': 'sha256:' + hashlib.sha256(data).hexdigest(),
-                'workflow_run': {'id': 5, 'head_sha': 'a' * 40}}
+                'workflow_run': {'id': 5, 'head_sha': 'a' * 40, 'run_attempt': 1}}
     return data, artifact
 
 
@@ -45,7 +45,7 @@ def test_archive_paths_cannot_escape_or_overwrite_inputs(tmp_path, member):
 
 
 @pytest.mark.parametrize('update', [{'task': '../../config'}, {'arm': 'B'}, {'run_id': '6'},
-                                    {'commit_sha': 'b' * 40}])
+                                    {'commit_sha': 'b' * 40}, {'github_run_attempt': '2'}])
 def test_record_identity_is_verified_before_saving(tmp_path, update):
     data, artifact = archive(tmp_path, update=update)
     with pytest.raises(ValueError, match='identity'):
@@ -133,3 +133,35 @@ def test_correction_registry_cannot_authorize_experiment_inputs(tmp_path, name):
 def test_deep_malformed_original_can_be_screened_without_json_parse_success():
     original = b'[' * 3000 + b'0' + b']' * 3000
     assert native_run.credential_in(original, 'synthetic-private-' + '12345678' * 4) is False
+
+
+def test_attempt_number_is_authenticated_against_actions(monkeypatch):
+    run = {'id': 5, 'head_sha': 'a' * 40, 'run_attempt': 2}
+    artifact = {'name': 'slot-' + 'a' * 40 + '-final-5-1-final-wp03-A-1',
+                'workflow_run': {'id': 5, 'head_sha': 'a' * 40}}
+    paths = []
+    def actual(path):
+        paths.append(path)
+        return {**run, 'run_attempt': 1}
+    monkeypatch.setattr(collect_results, 'api', actual)
+    collect_results.authenticate_attempt(artifact, run, 'test', {})
+    assert paths == ['repos/CaoimhConway/workpaperbench/actions/runs/5/attempts/1']
+    assert artifact['workflow_run']['run_attempt'] == 1
+    monkeypatch.setattr(collect_results, 'api', lambda path: run)
+    with pytest.raises(ValueError, match='attempt_identity'):
+        collect_results.authenticate_attempt(artifact, run, 'test', {})
+
+
+def test_new_experiment_import_cannot_overwrite_legacy_slot(tmp_path):
+    data, artifact = archive(tmp_path)
+    legacy = collect_results.retained_directory(tmp_path, collect_results.LEGACY_MANIFEST, 'final-wp03-A-1')
+    legacy.mkdir(parents=True)
+    (legacy / 'record.json').write_text('preserved legacy')
+    collect_results.import_archive(data, artifact, tmp_path)
+    assert (legacy / 'record.json').read_text() == 'preserved legacy'
+    assert (tmp_path / 'reports/runs/test/final-wp03-A-1/record.json').is_file()
+
+
+def test_actual_corrected_checkout_cannot_launch_old_paid_freeze():
+    with pytest.raises(ValueError, match='freeze_hash_mismatch'):
+        native_run.frozen_inputs()

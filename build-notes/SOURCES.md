@@ -28,8 +28,7 @@ Additional references for the final pre-build review:
 | Key | Primary source | How it informs this patch |
 |---|---|---|
 | R17 | Anthropic, Demystifying evals for AI agents: https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents | Clear task requirements, balanced cases, output-focused grading, transcript inspection and honest saturation reporting. Not evidence that WorkpaperBench itself is valid. |
-| R18 | Nous, Machine Learning Engineer, Evals: https://nousresearch.com/careers/machine-learning-engineer-evals | Current explicit demand for benchmark extensions, graders, failure analysis and reproducible engineering. Role fit, not a hiring guarantee. |
-| R19 | Artemis product homepage: https://about.artemis.ai/ | Current financial-research and dataset-reconciliation workflows. Does not disclose internal hiring priorities or prove any production failure. |
+| R19 | Artemis product homepage: https://about.artemis.ai/ | Current financial-research and dataset-reconciliation workflows. Does not prove any production failure. |
 
 ## Source review boundary in this handoff
 
@@ -37,7 +36,7 @@ The financial-document URLs, Artemis methodology, Circle address documentation, 
 
 The exact Harbor/Hermes version pair, effective network isolation, provider/model runtime and GitHub account state have not been exercised. They are stage-1 checks. No live result, prototype measurement, repository creation or remote Actions run is bundled in this pack.
 
-For v3.1, R1, the R7 upstream Hermes adapter, separate-verifier documentation, the ToolPerf repository, and R17–R19 were re-opened. R7 explicitly forwards the inference key into the installed agent environment; v3.1 removes the contradictory blanket “no key in candidate” stage gate without allowing gold/GitHub secrets/host access. Previously recorded source and runtime limitations remain. No cloud runtime, new source capture or model trial was executed for this patch.
+For v3.1, R1, the R7 upstream Hermes adapter, separate-verifier documentation, the ToolPerf repository, and R17 and R19 were re-opened. R7 explicitly forwards the inference key into the installed agent environment; v3.1 removes the contradictory blanket “no key in candidate” stage gate without allowing gold/GitHub secrets/host access. Previously recorded source and runtime limitations remain. No cloud runtime, new source capture or model trial was executed for this patch.
 
 ## Retained subscription-setup references (recorded in v3.2)
 

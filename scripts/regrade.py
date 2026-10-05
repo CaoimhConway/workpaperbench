@@ -20,10 +20,8 @@ def main():
     raw=ROOT/'.raw/regrade'
     raw.mkdir(parents=True,exist_ok=True)
     reviewed=0
-    for directory in sorted((ROOT/'reports/runs').iterdir()):
-        record_path=directory/'record.json'
-        if not record_path.is_file():
-            continue
+    for record_path in sorted((ROOT/'reports/runs').rglob('record.json')):
+        directory=record_path.parent
         record=json.loads(record_path.read_text())
         if record.get('campaign')!='final' or record.get('freeze_manifest_id')!=manifest['manifest_id']:
             continue
