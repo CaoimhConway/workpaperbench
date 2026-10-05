@@ -130,3 +130,17 @@ the old fallback identity before the fix, history preserved without rewriting.
 Software publication audit complete: 19 started live-job logs, full native and frozen-unit logs, saved sanitized JSON, full Git blobs, source/license notices and candidate COPY contexts reviewed. No credential/encoded-fragment hits. The full native control report is permanently retained. Software is complete. Final evaluation started only after this audit and the software prerelease.
 
 Exact final dispatch: `gh workflow run benchmark.yml --repo CaoimhConway/workpaperbench --ref main -f mode=final -f batch=all -f manifest_id=wpb-v1-92baa4a72f0e`. Run37280454673. No scored reruns or changed frozen inputs. Standard public Linux compute applies after the software publication timestamp recorded in the audit, while storage/invoice charges remain unknown.
+
+
+## Review correction validation
+
+156 Python tests and the native review controls passed on Actions run 37295210415. Existing answers were regraded without inference. Original task inputs, model, treatment, freeze and verdicts remain unchanged. The README results block is derived from the retained evidence. See reports/results.md for completeness, reviewed coverage and current counts.
+
+
+## Correction recovery - 2026-10-05
+
+Reused PR 1 and its existing branch. Original campaign 37280454673 completed all 48 slots. Authenticated artifact 11339264449 from 37295210415 matched ZIP SHA256 4d3eb058c944abd2980575c00c26ca524f6d3183c44833f6a1688aa4a4304283. The previous run passed its tests/native checks but could not push workflow changes with its job token. Recovered code and historical regrades were inspected in an isolated directory, with a fresh read-only security review.
+
+Scorer 1.2.0 stops SQL on structural rejection while retaining unambiguous numerical diagnostics. Full schedule/run/archive/hash checks protect collection and task lookup. Experiment-scoped receipts and a final history check prevent repeated inference. CI now validates committed source and emits artifacts with read-only permissions. Original candidate assets/freeze/model/treatment remain unchanged. 179 lightweight tests passed. Final key-free hosted validation is pending. No inference was added. Final provider receipt records lifetime USD 0.769789131 and remaining USD 19.230210869 under the unchanged USD 20 cap. One original slot has no retained answer and cannot be regraded.
+
+The named workpaperbench-corrections package was not present in supplied local locations. Existing PR/source artifacts were inspected and completed directly. This does not establish validation of an unavailable package.

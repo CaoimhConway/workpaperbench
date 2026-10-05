@@ -18,9 +18,9 @@ In a recorded evaluation trial, the agent reported **20% growth** from 100 to 12
 | Submitted expression: `P2 - P1 * 100 / P1` | 20 | **50** |
 | Correct growth: `(P2 - P1) * 100 / P1` | 20% | **25%** |
 
-The original denominator accidentally masked the error. A controlled input change exposed it without a new model call.
+The original baseline of 100 accidentally masked the error. A controlled input change exposed it without a new model call.
 
-This is a real saved submission on a **synthetic task**, not a staged model result. It also omits required SQL aliases and evidence citations, so its original failure cannot be attributed solely to the formula error. [The case study](reports/case-study.md) links the unchanged answer, verdict, execution record and source fixture, and separates those findings.
+This is a real saved submission on a **synthetic task**, not a staged model result. It also omits required SQL aliases and evidence citations, so its original failure cannot be attributed solely to the formula error. [The case study](reports/case-study.md) links the unchanged answer, execution record with its original verdict, and source fixture, and separates those findings.
 
 ## What gets evaluated
 
@@ -43,7 +43,7 @@ Two tasks use Tesla and Apple filing facts. Six are synthetic. The bounded publi
 
 ## Inspect it locally
 
-Use Python 3.12 for the demo and lightweight tests. No API key, Docker or model download is needed. It displays the recorded calculation issue without executing a submitted program.
+Use Python 3.12 for the demo and lightweight tests. No API key, Docker or model download is needed. The demo displays the recorded calculation issue without executing a submitted program.
 
 ```bash
 git clone https://github.com/CaoimhConway/workpaperbench.git
@@ -66,7 +66,22 @@ The frozen comparison has **48 scheduled trials**: eight tasks, two configuratio
 
 **A** receives the full task instructions and structural checker. **B** receives those same inputs plus one 230-word contract-check skill selected after development observations. The underlying model is `qwen/qwen3.6-35b-a3b` through OpenRouter. Hermes Agent is the execution framework, not a claim that a Nous model was evaluated.
 
-**The empirical comparison is not yet a finished release.** [Results](reports/results.md) state the latest imported record count, actual workflow states, original verdicts and any reviewed verdicts. Missing records are not zero-score answers, and a green Actions job can still contain a scored task failure. There is no claimed treatment improvement before the completed evidence supports it.
+<!-- study-results:start -->
+
+**All scheduled attempts accounted for.** Original verdicts: **48/48**. Reviewed verdicts: **33/48**.
+
+| Evaluation arm | Original verified / planned | Reviewed verified / planned | Reviewed coverage |
+|---|---:|---:|---:|
+| A | 3 / 15 | 0 / 15 | 8 / 15 |
+| B | 1 / 15 | 1 / 15 | 8 / 15 |
+
+Only evaluation tasks appear here. Development is reported separately. Unfinished or unreviewable trials are not observed zero-score answers. These are coverage-aware counts, not a treatment-effect claim.
+
+[Full results, failures, costs and original records](reports/results.md)
+
+<!-- study-results:end -->
+
+Original verdicts and corrected scores are retained side by side. A green Actions job can still contain a scored task failure. The evidence-collection workflow updates the table from saved records after the campaign finishes, without another model call.
 
 The original experiment remains pinned to its [execution snapshot](https://github.com/CaoimhConway/workpaperbench/tree/b4e256dc8976223a8a3fdad157a6b212f49bb8e1) and [run](https://github.com/CaoimhConway/workpaperbench/actions/runs/37280454673). Scorer corrections are versioned separately. They do not rewrite its inputs, original verdicts or live jobs.
 

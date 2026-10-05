@@ -12,6 +12,8 @@ SAFE_FUNCTIONS = {
     "sum", "total", "count", "min", "max", "avg", "round", "abs", "coalesce",
     "ifnull", "nullif", "lower", "upper", "length", "substr", "substring",
     "trim", "ltrim", "rtrim", "replace", "instr", "typeof", "iif", "like", "glob",
+    "row_number", "rank", "dense_rank", "percent_rank", "cume_dist", "ntile",
+    "lag", "lead", "first_value", "last_value", "nth_value",
 }
 DATE_FUNCTIONS = {"date", "time", "datetime", "julianday", "unixepoch", "strftime"}
 
@@ -24,6 +26,8 @@ def install_dates(connection):
         def call(*args):
             if len(args) < (2 if name == "strftime" else 1):
                 raise ValueError("date_requires_explicit_input")
+            if any(isinstance(a, (bytes, bytearray)) for a in args):
+                raise ValueError("date_requires_text_or_numeric_input")
             forbidden = {"now", "localtime", "utc", "subsec", "subsecond"}
             if any(isinstance(a, str) and a.strip().lower() in forbidden for a in args):
                 raise ValueError("nondeterministic_date")

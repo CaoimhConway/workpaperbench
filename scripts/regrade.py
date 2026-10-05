@@ -27,17 +27,44 @@ def main():
         record=json.loads(record_path.read_text())
         if record.get('campaign')!='final' or record.get('freeze_manifest_id')!=manifest['manifest_id']:
             continue
+        from collect_results import validate_record
+        audit=json.loads((directory/'artifact-audit.json').read_text())
+        if audit.get('archive_digest_verified') is not True:
+            raise ValueError('regrade_provenance_unverified')
+        slot=validate_record(record, ROOT, audit['workflow_run'])
+        source=(ROOT/'tasks'/slot['task']).resolve()
+        if not source.is_relative_to((ROOT/'tasks').resolve()) or source.is_symlink():
+            raise ValueError('unsafe_regrade_task')
         submission=directory/'answer.raw.txt'
         if not submission.is_file():
             submission=directory/'answer.json'
         if not submission.is_file():
             continue  # Legacy discarded bytes stay unavailable, never invented.
-        content=submission.read_bytes()
-        if submission.is_symlink() or len(content)>65536:
+        if submission.is_symlink() or not submission.is_file() or submission.stat().st_size>65536:
             raise ValueError('unsafe_regrade_input')
+        content=submission.read_bytes()
+        if len(content)>65536:
+            raise ValueError('unsafe_regrade_input')
+        if hashlib.sha256(content).hexdigest()!=audit['retained_file_sha256'].get(submission.name):
+            raise ValueError('regrade_retained_hash_mismatch')
+        review_path=directory/'regrade.json'
+        input_hash=hashlib.sha256(content).hexdigest()
+        if review_path.is_file():
+            previous=json.loads(review_path.read_text())
+            if (previous.get('scorer_sha256')==scorer and previous.get('input_sha256')==input_hash
+                    and previous.get('manifest_id')==manifest['manifest_id']):
+                print(record['slot_id'],'already reviewed with this scorer and input')
+                continue
+            from workpaperbench.grading import SCORER_VERSION
+            if previous.get('scorer_version') == SCORER_VERSION:
+                raise ValueError('published_scorer_version_conflict')
+            archived=directory/('regrade-'+hashlib.sha256(review_path.read_bytes()).hexdigest()[:16]+'.json')
+            if archived.exists() and archived.read_bytes()!=review_path.read_bytes():
+                raise ValueError('review_history_conflict')
+            archived.write_bytes(review_path.read_bytes())
         name='regrade-'+record['slot_id']
         task=raw/'tasks'/name
-        shutil.copytree(ROOT/'tasks'/record['task'],task)
+        shutil.copytree(source,task)
         encoded=base64.b64encode(content).decode()
         script="#!/bin/bash\nset -euo pipefail\npython - <<'WRITE'\nimport base64\nfrom pathlib import Path\nPath('/logs/artifacts/answer.json').write_bytes(base64.b64decode("+repr(encoded)+"))\nWRITE\n"
         (task/'solution/solve.sh').write_text(script)

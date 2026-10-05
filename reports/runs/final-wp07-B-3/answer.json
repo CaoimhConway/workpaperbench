@@ -1,0 +1,58 @@
+{
+  "task_id": "wp07",
+  "answers": [
+    {
+      "id": "q1_revenue",
+      "status": "answered",
+      "value": 23117,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:services2024",
+        "filing:revenue",
+        "filing:context"
+      ],
+      "sql": "SELECT (SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2') AS value",
+      "reason_code": null
+    },
+    {
+      "id": "q1_gross_profit",
+      "status": "answered",
+      "value": 16837,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:services2024",
+        "filing:profit",
+        "filing:context"
+      ],
+      "sql": "SELECT (SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2') AS value",
+      "reason_code": null
+    },
+    {
+      "id": "q1_margin",
+      "status": "answered",
+      "value": 72.83,
+      "unit": "percent",
+      "evidence": [
+        "filing:services2024",
+        "filing:revenue",
+        "filing:profit"
+      ],
+      "sql": "SELECT CAST((SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2') AS REAL) / ((SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2')) * 100.0 AS value",
+      "reason_code": null
+    },
+    {
+      "id": "margin_change",
+      "status": "answered",
+      "value": 1.78,
+      "unit": "percentage_points",
+      "evidence": [
+        "filing:services2024",
+        "filing:revenue",
+        "filing:profit"
+      ],
+      "sql": "SELECT (CAST(17809 AS REAL) / 23867 * 100.0) - (CAST((SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT gross_profit_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2') AS REAL) / ((SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='H1') - (SELECT revenue_million FROM services WHERE entity='Apple' AND fiscal_year=2024 AND period='Q2')) * 100.0) AS value",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}

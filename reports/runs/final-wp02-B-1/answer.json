@@ -1,0 +1,26 @@
+{
+  "task_id": "wp02",
+  "answers": [
+    {
+      "id": "transfer_total",
+      "status": "answered",
+      "value": 1200,
+      "unit": "token_units",
+      "evidence": [
+        "ledger:events",
+        "policy:transfer_definition"
+      ],
+      "sql": "SELECT SUM(amount_units) AS value FROM (SELECT DISTINCT event_id, amount_units FROM events WHERE event_kind = 'transfer')",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "ledger:events",
+      "policy:transfer_definition",
+      "delivery:format"
+    ]
+  }
+}

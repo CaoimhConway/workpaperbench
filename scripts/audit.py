@@ -39,6 +39,17 @@ if freeze.exists():
             failures.append('original_freeze_changed')
         # Candidate-facing evidence, task requests, reference answers and treatment
         # stay fixed. Only reviewed implementation hashes can supersede code hashes.
+        allowed = {
+            '.github/workflows/benchmark.yml', '.github/workflows/ci.yml',
+            'workpaperbench/cli.py', 'workpaperbench/grading.py', 'workpaperbench/sql_worker.py',
+            *(f'scripts/{name}.py' for name in ('attempts', 'audit', 'collect_results', 'integration',
+                                              'native_run', 'regrade', 'select_slots')),
+            *(f'tasks/wp0{i}/tests/workpaperbench/{name}.py'
+              for i in range(1, 9) for name in ('grading', 'sql_worker')),
+        }
+        for name in review['correction_hashes']:
+            if name not in allowed and not re.fullmatch(r'tests/test_[a-z_]+\.py', name):
+                failures.append('unauthorized_correction_path')
         for name, expected in manifest['hashes'].items():
             immutable = name.startswith('sources/') or name.startswith('config/') or (
                 name.startswith('tasks/') and '/workpaperbench/' not in name)

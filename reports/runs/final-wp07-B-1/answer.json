@@ -1,0 +1,50 @@
+{
+  "task_id": "wp07",
+  "answers": [
+    {
+      "id": "q1_revenue",
+      "status": "answered",
+      "value": 23117,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT (s_h.revenue_million - s_q.revenue_million) FROM services s_q JOIN services s_h ON s_q.entity = s_h.entity AND s_q.fiscal_year = s_h.fiscal_year WHERE s_q.entity = \"Apple\" AND s_q.fiscal_year = 2024 AND s_q.period = \"Q2\" AND s_h.entity = \"Apple\" AND s_h.fiscal_year = 2024 AND s_h.period = \"H1\"",
+      "reason_code": null
+    },
+    {
+      "id": "q1_gross_profit",
+      "status": "answered",
+      "value": 16837,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT (s_h.gross_profit_million - s_q.gross_profit_million) FROM services s_q JOIN services s_h ON s_q.entity = s_h.entity AND s_q.fiscal_year = s_h.fiscal_year WHERE s_q.entity = \"Apple\" AND s_q.fiscal_year = 2024 AND s_q.period = \"Q2\" AND s_h.entity = \"Apple\" AND s_h.fiscal_year = 2024 AND s_h.period = \"H1\"",
+      "reason_code": null
+    },
+    {
+      "id": "q1_margin",
+      "status": "answered",
+      "value": 72.8338452221309,
+      "unit": "percent",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT (s_h.gross_profit_million - s_q.gross_profit_million) * 100.0 / (s_h.revenue_million - s_q.revenue_million) FROM services s_q JOIN services s_h ON s_q.entity = s_h.entity AND s_q.fiscal_year = s_h.fiscal_year WHERE s_q.entity = \"Apple\" AND s_q.fiscal_year = 2024 AND s_q.period = \"Q2\" AND s_h.entity = \"Apple\" AND s_h.fiscal_year = 2024 AND s_h.period = \"H1\"",
+      "reason_code": null
+    },
+    {
+      "id": "margin_change",
+      "status": "answered",
+      "value": 1.783827715397905,
+      "unit": "percentage_points",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT (s_q2.gross_profit_million * 100.0 / s_q2.revenue_million) - ((s_h.gross_profit_million - s_q2.gross_profit_million) * 100.0 / (s_h.revenue_million - s_q2.revenue_million)) FROM services s_q2 JOIN services s_h ON s_q2.entity = s_h.entity AND s_q2.fiscal_year = s_h.fiscal_year WHERE s_q2.entity = \"Apple\" AND s_q2.fiscal_year = 2024 AND s_q2.period = \"Q2\" AND s_h.entity = \"Apple\" AND s_h.fiscal_year = 2024 AND s_h.period = \"H1\"",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}

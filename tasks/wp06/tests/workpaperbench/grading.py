@@ -11,7 +11,7 @@ import sys
 from jsonschema import Draft202012Validator
 
 MAX_ARTIFACT = 65536
-SCORER_VERSION = "1.1.0"
+SCORER_VERSION = "1.2.0"
 
 
 def digest(path):
@@ -65,7 +65,7 @@ def load_artifact(directory):
 def replay(sql, db):
     worker = Path(__file__).with_name("sql_worker.py").resolve()
     try:
-        result = subprocess.run([sys.executable, "-I", str(worker)],
+        result = subprocess.run([sys.executable, "-I", "-S", str(worker)],
                                 input=json.dumps({"db": str(Path(db).resolve()), "sql": sql}),
                                 text=True, capture_output=True, timeout=2,
                                 cwd=worker.parent, env={"PATH": "/usr/bin:/bin", "LANG": "C.UTF-8"})
@@ -78,7 +78,10 @@ def replay(sql, db):
 
 
 def close(value, expected, tolerance):
-    return all(isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v) for v in (value, expected)) and abs(value - expected) <= tolerance
+    try:
+        return all(isinstance(v, (int, float)) and not isinstance(v, bool) and math.isfinite(v) for v in (value, expected)) and abs(value - expected) <= tolerance
+    except (OverflowError, ValueError):
+        return False
 
 
 def evidence_ok(given, accepted):
@@ -147,6 +150,12 @@ def grade(directory, trusted):
             errors.append(identifier + ":not_assessed")
             continue
         claim = found[0]
+        if flags["format"] is False:
+            if expected["status"] == "answered":
+                if claim.get("status") == "answered" and "value" in claim:
+                    item["numerical"] = close(claim["value"], expected["value"], expected["tolerance"])
+                numbers.append(item["numerical"])
+            continue
         item["evidence"] = evidence_ok(claim.get("evidence"), expected["evidence"])
         item["availability"] = claim.get("status") == expected["status"]
         item["unit"] = claim.get("unit") == expected["unit"]
@@ -177,6 +186,9 @@ def grade(directory, trusted):
             errors.append(identifier + ":evidence_context")
         if not available:
             errors.append(identifier + ":availability_or_unit")
+    if flags["format"] is False:
+        flags["numerical"] = aggregate(numbers)
+        return result()
     flags.update(numerical=aggregate(numbers), replay=aggregate(queries),
                  evidence_context=aggregate(citations), availability=aggregate(availability))
     expected = gold["conclusion"]

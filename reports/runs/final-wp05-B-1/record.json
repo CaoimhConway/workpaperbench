@@ -1,0 +1,107 @@
+{
+  "answer_sha256": "2884634af2a60c702f9e86716b94e20637303b575c6f351520f0748da61ecf15",
+  "answer_status": "saved",
+  "arm": "B",
+  "campaign": "final",
+  "commit_sha": "b4e256dc8976223a8a3fdad157a6b212f49bb8e1",
+  "config_hash": "548a1ae4604ba47de8470d94aa7dad4c4c8ea16fe9d3901b771f8c4d923cbdd5",
+  "finished_at": "2026-10-05T09:39:03.533539+00:00",
+  "freeze_hash_count": 234,
+  "freeze_manifest_id": "wpb-v1-92baa4a72f0e",
+  "github_run_attempt": "1",
+  "github_run_id": "37280454673",
+  "harbor_commit": "1e5c5c6db929a10a140d05e606882c671ae20729",
+  "harbor_metrics": {
+    "agent_execution_seconds": 41.183,
+    "agent_setup_seconds": 109.782,
+    "environment_setup_seconds": 17.716,
+    "n_input_tokens": 0,
+    "n_output_tokens": 0,
+    "verifier_seconds": 17.724
+  },
+  "harbor_native_version_fix": {
+    "change": "Two version invocations use --version. OpenRouter models use the canonical ID with explicit --provider openrouter. Session export selects the current oneshot source. Existing native adapter only, no new adapter or credential flow.",
+    "corrected_module_sha256": "02ebd73edb387091480df45fdea27b70bf37ca377ee0b68047b84d6cdbede112",
+    "original_module_sha256": "012e980302b26641dcf77f31fe71a368b2022b098619853addd015c5e18e47c6"
+  },
+  "harbor_version": "0.23.0",
+  "hermes_checkout_commit_verified": true,
+  "hermes_release_tag": "v0.21.4+canary.20261004T084456Z",
+  "hermes_resolved_release_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "hermes_runtime_version": {
+    "checked_before_solving": true,
+    "checkout_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "expected_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "matches_pin": true,
+    "treatment_instruction_present": true,
+    "treatment_sha256": "651820768f6a80222f92256abd9ac58474a480fcfbdf212bda8b22fff1863bb0",
+    "treatment_staged_skill_matches": true
+  },
+  "model": "qwen/qwen3.6-35b-a3b",
+  "model_route_policy": "OpenRouter default routing for this model. Provider may vary between compatible endpoints",
+  "native_command": "Harbor Trial.create / Trial.run with native Hermes",
+  "native_return_code": 0,
+  "provider_after": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 19.539986469,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 19.539986469,
+    "reset_is_null": true,
+    "usage_usd": 0.460013531
+  },
+  "provider_before": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 19.543120178,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 19.543120178,
+    "reset_is_null": true,
+    "usage_usd": 0.456879822
+  },
+  "provider_cost_delta_usd": 0.00313371,
+  "repetition": 1,
+  "reservation_usd_per_slot": 0.2,
+  "run_id": "37280454673",
+  "slot_id": "final-wp05-B-1",
+  "source_group": "authored-migration",
+  "split": "development",
+  "started_at": "2026-10-05T09:35:34.464950+00:00",
+  "status": "task_failed",
+  "task": "wp05",
+  "task_origin": "synthetic",
+  "token_counts_status": "unreported_or_native_zero_fields",
+  "tool_event_counts": {
+    "read_file": 5,
+    "terminal": 7,
+    "write_file": 1
+  },
+  "treatment": {
+    "delivery": [
+      "extra_instruction_paths",
+      "agent.skills"
+    ],
+    "word_count": 230
+  },
+  "verdict": {
+    "checks": {
+      "availability": true,
+      "conclusion": true,
+      "evidence_context": true,
+      "format": true,
+      "numerical": true,
+      "replay": false
+    },
+    "complete": false,
+    "errors": [
+      "naive_growth:replay",
+      "comparable_growth:replay"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    }
+  }
+}

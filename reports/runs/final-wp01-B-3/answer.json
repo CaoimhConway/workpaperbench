@@ -1,0 +1,30 @@
+{
+  "task_id": "wp01",
+  "answers": [
+    {
+      "id": "q1_rd",
+      "status": "answered",
+      "value": 1151,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:h1",
+        "filing:q2"
+      ],
+      "sql": "SELECT CAST(h1.amount_million AS REAL) - q2.amount_million AS value FROM expenses h1, expenses q2 WHERE h1.entity = 'Tesla' AND h1.period = 'H1' AND h1.year = 2024 AND h1.metric = 'R&D' AND q2.entity = 'Tesla' AND q2.period = 'Q2' AND q2.year = 2024 AND q2.metric = 'R&D'",
+      "reason_code": null
+    },
+    {
+      "id": "sequential_change",
+      "status": "answered",
+      "value": -6.689835,
+      "unit": "percent",
+      "evidence": [
+        "filing:h1",
+        "filing:q2"
+      ],
+      "sql": "SELECT CAST(q2.amount_million - (h1.amount_million - q2_sub.amount_million) AS REAL) / (h1.amount_million - q2_sub.amount_million) * 100 AS value FROM expenses h1, expenses q2, expenses q2_sub WHERE h1.entity = 'Tesla' AND h1.period = 'H1' AND h1.year = 2024 AND h1.metric = 'R&D' AND q2.entity = 'Tesla' AND q2.period = 'Q2' AND q2.year = 2024 AND q2.metric = 'R&D' AND q2_sub.entity = 'Tesla' AND q2_sub.period = 'Q2' AND q2_sub.year = 2024 AND q2_sub.metric = 'R&D'",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}
