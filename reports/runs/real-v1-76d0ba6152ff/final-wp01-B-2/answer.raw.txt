@@ -1,0 +1,30 @@
+{
+  "task_id": "real-v1-wp01",
+  "answers": [
+    {
+      "id": "q1_rd",
+      "status": "answered",
+      "value": 1151,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:q2",
+        "filing:h1"
+      ],
+      "sql": "SELECT (SUM(CASE WHEN period = 'H1' THEN amount_million ELSE 0 END) - SUM(CASE WHEN period = 'Q2' AND year = 2024 THEN amount_million ELSE 0 END)) AS value FROM expenses WHERE entity = 'Tesla' AND metric = 'R&D' AND year = 2024;",
+      "reason_code": null
+    },
+    {
+      "id": "sequential_change",
+      "status": "answered",
+      "value": -6.6898349262,
+      "unit": "percent",
+      "evidence": [
+        "filing:q2",
+        "filing:h1"
+      ],
+      "sql": "SELECT ((CAST(Q2_Q24 AS REAL) - CAST(Q1_Q24 AS REAL)) / CAST(Q1_Q24 AS REAL) * 100.0) AS value FROM (SELECT (SELECT amount_million FROM expenses WHERE entity = 'Tesla' AND metric = 'R&D' AND year = 2024 AND period = 'Q2') AS Q2_Q24, ((SELECT amount_million FROM expenses WHERE entity = 'Tesla' AND metric = 'R&D' AND year = 2024 AND period = 'H1') - (SELECT amount_million FROM expenses WHERE entity = 'Tesla' AND metric = 'R&D' AND year = 2024 AND period = 'Q2')) AS Q1_Q24) AS calc;",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}

@@ -1,0 +1,28 @@
+{
+  "task_id": "real-v1-wp06",
+  "answers": [
+    {
+      "id": "sample_rate_change",
+      "status": "answered",
+      "value": 33448.120216,
+      "unit": "percent",
+      "evidence": ["chain:observations"],
+      "sql": "SELECT (rate_840000 - rate_839999) / rate_839999 * 100.0 AS value FROM (SELECT SUM(fee_sats) * 1.0 / SUM(vsize) AS rate_839999 FROM transactions WHERE height = 839999 AND is_coinbase = 0), (SELECT SUM(fee_sats) * 1.0 / SUM(vsize) AS rate_840000 FROM transactions WHERE height = 840000 AND is_coinbase = 0)",
+      "reason_code": null
+    },
+    {
+      "id": "matched_rate_change",
+      "status": "answered",
+      "value": 30692.148209,
+      "unit": "percent",
+      "evidence": ["chain:observations"],
+      "sql": "SELECT (rate_840000 - rate_839999) / rate_839999 * 100.0 AS value FROM (SELECT SUM(fee_sats) * 1.0 / SUM(vsize) AS rate_839999 FROM transactions WHERE height = 839999 AND is_coinbase = 0 AND version = 2), (SELECT SUM(fee_sats) * 1.0 / SUM(vsize) AS rate_840000 FROM transactions WHERE height = 840000 AND is_coinbase = 0 AND version = 2)",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": ["sample_rate_change", "matched_rate_change"]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "task_id": "real-v1-wp03",
+  "answers": [
+    {
+      "id": "sample_fees",
+      "status": "answered",
+      "value": 20.80158845,
+      "unit": "btc",
+      "evidence": [
+        "chain:observations",
+        "chain:definitions"
+      ],
+      "sql": "SELECT CAST(SUM(fee_sats) AS REAL) / 100000000.0 FROM transactions WHERE height = 840000 AND is_coinbase = 0",
+      "reason_code": null
+    },
+    {
+      "id": "claimed_above_subsidy",
+      "status": "answered",
+      "value": 37.62561499,
+      "unit": "btc",
+      "evidence": [
+        "chain:observations",
+        "chain:definitions"
+      ],
+      "sql": "SELECT (CAST(SUM(o.value_sats) AS REAL) - b.subsidy_sats) / 100000000.0 FROM outputs o JOIN blocks b ON o.height = b.height WHERE o.height = 840000 AND o.page_index = 0",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "chain:observations",
+      "chain:definitions"
+    ]
+  }
+}

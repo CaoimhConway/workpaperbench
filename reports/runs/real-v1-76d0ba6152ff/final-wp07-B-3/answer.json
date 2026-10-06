@@ -1,0 +1,50 @@
+{
+  "task_id": "real-v1-wp07",
+  "answers": [
+    {
+      "id": "q1_revenue",
+      "status": "answered",
+      "value": 23117,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT h1.revenue_million - q2.revenue_million AS value FROM services h1 JOIN services q2 ON h1.entity=q2.entity AND h1.fiscal_year=q2.fiscal_year WHERE h1.period=\"H1\" AND q2.period=\"Q2\" AND h1.entity=\"Apple\" AND h1.fiscal_year=2024",
+      "reason_code": null
+    },
+    {
+      "id": "q1_gross_profit",
+      "status": "answered",
+      "value": 16837,
+      "unit": "usd_million",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT h1.gross_profit_million - q2.gross_profit_million AS value FROM services h1 JOIN services q2 ON h1.entity=q2.entity AND h1.fiscal_year=q2.fiscal_year WHERE h1.period=\"H1\" AND q2.period=\"Q2\" AND h1.entity=\"Apple\" AND h1.fiscal_year=2024",
+      "reason_code": null
+    },
+    {
+      "id": "q1_margin",
+      "status": "answered",
+      "value": 72.833845,
+      "unit": "percent",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT (h1.gross_profit_million - q2.gross_profit_million) * 100.0 / (h1.revenue_million - q2.revenue_million) AS value FROM services h1 JOIN services q2 ON h1.entity=q2.entity AND h1.fiscal_year=q2.fiscal_year WHERE h1.period=\"H1\" AND q2.period=\"Q2\" AND h1.entity=\"Apple\" AND h1.fiscal_year=2024",
+      "reason_code": null
+    },
+    {
+      "id": "margin_change",
+      "status": "answered",
+      "value": 1.783828,
+      "unit": "percentage_points",
+      "evidence": [
+        "filing:services2024"
+      ],
+      "sql": "SELECT (q2.gross_profit_million * 100.0 / q2.revenue_million) - ((h1.gross_profit_million - q2.gross_profit_million) * 100.0 / (h1.revenue_million - q2.revenue_million)) AS value FROM services h1 JOIN services q2 ON h1.entity=q2.entity AND h1.fiscal_year=q2.fiscal_year WHERE h1.period=\"H1\" AND q2.period=\"Q2\" AND h1.entity=\"Apple\" AND h1.fiscal_year=2024",
+      "reason_code": null
+    }
+  ],
+  "conclusion": null
+}

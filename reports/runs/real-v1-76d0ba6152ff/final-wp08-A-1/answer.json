@@ -1,0 +1,47 @@
+{
+  "task_id": "real-v1-wp08",
+  "answers": [
+    {
+      "id": "observed_outputs",
+      "status": "answered",
+      "value": 27.57007836,
+      "unit": "btc",
+      "evidence": [
+        "chain:observations",
+        "chain:definitions",
+        "chain:scope"
+      ],
+      "sql": "SELECT SUM(o.value_sats) * 1.0 / 100000000.0\nFROM outputs o\nJOIN transactions t ON o.txid = t.txid\nWHERE t.height = 840000\n  AND t.is_coinbase = 0;",
+      "reason_code": null
+    },
+    {
+      "id": "business_payments",
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "btc",
+      "evidence": [
+        "chain:scope"
+      ],
+      "sql": null,
+      "reason_code": "missing_required_input"
+    },
+    {
+      "id": "unique_people",
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "count",
+      "evidence": [
+        "chain:scope"
+      ],
+      "sql": null,
+      "reason_code": "missing_required_input"
+    }
+  ],
+  "conclusion": {
+    "verdict": "not_established",
+    "reason_code": "incompatible_coverage",
+    "evidence": [
+      "chain:scope"
+    ]
+  }
+}

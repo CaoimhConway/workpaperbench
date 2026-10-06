@@ -1,0 +1,60 @@
+{
+  "checks": {
+    "availability": true,
+    "conclusion": false,
+    "evidence_context": false,
+    "format": true,
+    "numerical": true,
+    "replay": false
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "business_payments": {
+        "availability": true,
+        "changed_replay": null,
+        "evidence": false,
+        "numerical": null,
+        "original_replay": null,
+        "reason_code": true,
+        "unit": true
+      },
+      "observed_outputs": {
+        "availability": true,
+        "changed_replay": false,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": false,
+        "reason_code": null,
+        "unit": true
+      },
+      "unique_people": {
+        "availability": true,
+        "changed_replay": null,
+        "evidence": false,
+        "numerical": null,
+        "original_replay": null,
+        "reason_code": true,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": true,
+      "reason_code": false,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "observed_outputs:replay",
+    "business_payments:evidence_context",
+    "unique_people:evidence_context",
+    "conclusion"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "1.2.0"
+}

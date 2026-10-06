@@ -1,0 +1,41 @@
+{
+  "checks": {
+    "availability": true,
+    "conclusion": true,
+    "evidence_context": false,
+    "format": true,
+    "numerical": false,
+    "replay": false
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "transfer_total": {
+        "availability": true,
+        "changed_replay": false,
+        "evidence": false,
+        "numerical": false,
+        "original_replay": false,
+        "reason_code": null,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": true,
+      "reason_code": true,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "transfer_total:numerical",
+    "transfer_total:replay",
+    "transfer_total:evidence_context"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "1.2.0"
+}

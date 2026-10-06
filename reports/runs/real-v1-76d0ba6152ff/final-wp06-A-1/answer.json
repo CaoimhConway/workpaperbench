@@ -1,0 +1,43 @@
+{
+  "task_id": "real-v1-wp06",
+  "answers": [
+    {
+      "id": "sample_rate_change",
+      "status": "answered",
+      "value": 33448.120216,
+      "unit": "percent",
+      "evidence": [
+        "chain:observations",
+        "chain:definitions",
+        "chain:scope",
+        "269f3908dab32b8e31cfc706869d9b27b667c17f94ddf68b21c854b682204ba3",
+        "2bb85f4b004be6da54f766c17c1e855187327112c231ef2ff35ebad0ea67c69e"
+      ],
+      "sql": "WITH rates AS (\n  SELECT height, CAST(SUM(fee_sats) AS REAL) / SUM(vsize) AS rate\n  FROM transactions\n  WHERE height IN (839999, 840000) AND is_coinbase=0\n  GROUP BY height\n)\nSELECT (r840000.rate - r839999.rate) / r839999.rate * 100.0\nFROM (SELECT rate FROM rates WHERE height=839999) r839999,\n     (SELECT rate FROM rates WHERE height=840000) r840000;",
+      "reason_code": null
+    },
+    {
+      "id": "matched_rate_change",
+      "status": "answered",
+      "value": 30692.148209,
+      "unit": "percent",
+      "evidence": [
+        "chain:observations",
+        "chain:definitions",
+        "chain:scope",
+        "269f3908dab32b8e31cfc706869d9b27b667c17f94ddf68b21c854b682204ba3",
+        "2bb85f4b004be6da54f766c17c1e855187327112c231ef2ff35ebad0ea67c69e"
+      ],
+      "sql": "WITH common_versions AS (\n  SELECT version FROM transactions\n  WHERE height IN (839999, 840000) AND is_coinbase=0\n  GROUP BY version\n  HAVING COUNT(DISTINCT height) = 2\n),\nmatched AS (\n  SELECT height, CAST(SUM(fee_sats) AS REAL) / SUM(vsize) AS rate\n  FROM transactions, common_versions\n  WHERE height IN (839999, 840000) AND is_coinbase=0 AND transactions.version = common_versions.version\n  GROUP BY height\n)\nSELECT (r840000.rate - r839999.rate) / r839999.rate * 100.0\nFROM (SELECT rate FROM matched WHERE height=839999) r839999,\n     (SELECT rate FROM matched WHERE height=840000) r840000;",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "sample_rate_change",
+      "matched_rate_change"
+    ]
+  }
+}

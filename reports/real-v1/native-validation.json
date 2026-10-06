@@ -205,5 +205,42 @@
     "member_paths_bounded": true,
     "credential_screen": "passed on archive bytes and every bounded member",
     "screening_limits": "Known credential patterns only. Raw logs remain in ignored .raw."
+  },
+  "final_campaign_logs": {
+    "run_id": "37442577792",
+    "run_attempt": 1,
+    "commit_sha": "d8e8fcb4c3791909317efa1c5d638d4b1b64b6ff",
+    "branch": "main",
+    "status": "completed",
+    "conclusion": "failure",
+    "manifest_id": "real-v1-76d0ba6152ff",
+    "local_archive_sha256": "3f95f5b37e0ea4773f8b16550e32182b7faa34040a12e0342d86303d1d0cb4ad",
+    "archive_bytes": 329515,
+    "member_count": 161,
+    "uncompressed_bytes": 1026014,
+    "member_paths_bounded": true,
+    "credential_screen": "passed on archive bytes and every bounded member",
+    "screening_limits": "Known credential patterns only. This scan cannot prove absence of arbitrary unknown secret formats.",
+    "pair_jobs": {
+      "total": 24,
+      "success": 23,
+      "failure": 1
+    },
+    "failed_pair": {
+      "job_id": 112199742360,
+      "name": "pair-real-v1-76d0ba6152ff-final-wp07-A-1--final-wp07-B-1",
+      "failed_step": "Execute the declared within-pair order with fresh native trials",
+      "observed_stage": "HTTP 500 during the old-run history check before the B1 provider and native trial stage",
+      "wp07_a1_completed_before_b1": true,
+      "b1_provider_or_native_stage_reached": false,
+      "step_log_markers": {
+        "http_500": true,
+        "old_run_history": true,
+        "wp07_a1": true,
+        "wp07_b1": true,
+        "provider_stage_absent": true,
+        "native_trial_absent": true
+      }
+    }
   }
 }
