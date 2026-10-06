@@ -1,0 +1,37 @@
+{
+  "kind": "operational-fix-validation",
+  "software_commit": "6c592fde2573453ebe953b4f91aafc711896f9cf",
+  "push_ci_run_id": 37521311857,
+  "fresh_replay_run_id": 37521330083,
+  "run_attempt": 1,
+  "artifact_id": 11440586816,
+  "artifact_name": "reviewed-results-6c592fde2573453ebe953b4f91aafc711896f9cf-37521330083",
+  "archive_sha256": "b2074f4880a482a099ccb9852145425738b38281ad1e55d31bad41622157e053",
+  "archive_bytes": 576227,
+  "operations_review_sha256": "562ef0ff5379b9efdb9cd180916c4c837fe4a0410c023ff6dae95612e2041926",
+  "receipt_path": "reports/fresh-replay/37521330083-1/real-v1/final-wp07-A-1/receipt.json",
+  "receipt_sha256": "13f8f284523d35591ea851ddd76565ba6b65d012b1b1ec4d397a4d91a5e0f3ca",
+  "input_matches_original": true,
+  "prior_verdict_and_checks_match": true,
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "inference_calls": 0,
+  "scope": "One new native verification of the retained Apple A1 answer. Published results and the original failed B1 receipt are unchanged.",
+  "screening": "The retained receipt was screened for the supplied dedicated key and known credential patterns. The enclosing archive digest and selected regular file were verified before retention.",
+  "screened_logs": {
+    "37521311857": {
+      "sha256": "1dfefaa70a4ddc10ca8c74066421995cdf5808c4ee8132facb7592e99f67ac48",
+      "bytes": 44185,
+      "unit_result": "260 passed in 21.26s"
+    },
+    "37521330083": {
+      "sha256": "ca795f80f214efe257f9f0e7d06c94b9d367fbb4c3b3bd5885a67381412cc5e7",
+      "bytes": 126078,
+      "unit_result": "260 passed in 21.11s"
+    }
+  }
+}
