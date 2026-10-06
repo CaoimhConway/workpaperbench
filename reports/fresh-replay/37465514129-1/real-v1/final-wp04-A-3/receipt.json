@@ -1,0 +1,96 @@
+{
+  "commit_sha": "0485fa7585f3661201244da3e8d36366a7e7a338",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "real-v1",
+  "effective_task_scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "0f1c2dec8381df0c4bd25bd4932cf067b68cf910bebe5372284d2d69ee2d9d78",
+  "input_source": "retained_artifact",
+  "manifest_id": "real-v1-76d0ba6152ff",
+  "manifest_sha256": "550604fe9f1a3fdf975f83bff5fe0321346bc6841bfd4b5d5006696ebe1a7d02",
+  "prior_verdict": {
+    "checks": {
+      "availability": true,
+      "conclusion": true,
+      "evidence_context": true,
+      "format": true,
+      "numerical": true,
+      "replay": false
+    },
+    "complete": false,
+    "sha256": "5b30b1b2de647652d8f19ad1242cb73fbadf6c16b77a643684df41228e39dacb"
+  },
+  "receipt_identity_sha256": "372bf14927921e37cd819d3877fd750c186ef62d6f2c552ea7a17c9380edb26c",
+  "record_sha256": "f669a00834f534be9b5760fc4af87da66371b9fdfdb4a045b47f10b00af0e4b9",
+  "run_attempt": "1",
+  "run_id": "37465514129",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+  "slot_id": "final-wp04-A-3",
+  "task_id": "real-v1-wp04",
+  "task_sha256": "c443c7b2797eb2ba03198eb5bbaca7242a5bafb40213a7c3beffda7eb95b2cf9",
+  "verdict": {
+    "checks": {
+      "availability": true,
+      "conclusion": true,
+      "evidence_context": true,
+      "format": true,
+      "numerical": true,
+      "replay": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "circulating_end": {
+          "availability": true,
+          "changed_replay": false,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": false,
+          "reason_code": null,
+          "unit": true
+        },
+        "circulating_growth": {
+          "availability": true,
+          "changed_replay": false,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": false,
+          "reason_code": null,
+          "unit": true
+        },
+        "reserve_headroom": {
+          "availability": true,
+          "changed_replay": false,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": false,
+          "reason_code": null,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "reason_code": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "circulating_end:replay",
+      "circulating_growth:replay",
+      "reserve_headroom:replay"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "1.2.0"
+  },
+  "verdict_sha256": "46f0cdb6330c7a66e9bd94f6469d520403e07ab5d492e8a57957bd29df66fbf3"
+}

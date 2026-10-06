@@ -83,6 +83,6 @@ A has full common instructions. B adds only the preserved contract-check skill. 
 
 Actual order and original per-slot records are retained in [scores.json](scores.json). No official answer is repaired or retried for a better score.
 
-Provider receipt as of 2026-10-06T12:36:29.823154+00:00: cumulative USD 1.508940909, including historical USD 0.769789131. New campaign increment USD 0.739151778. The unchanged dedicated lifetime cap is USD 20, below the USD 50 authorization.
+Provider receipt as of 2026-10-06T13:13:14.000503+00:00: cumulative USD 1.508940909, including historical USD 0.769789131. New campaign increment USD 0.739151778. The unchanged dedicated lifetime cap is USD 20, below the USD 50 authorization.
 
 Provider lifetime includes development and failed calls. Reporting can lag. Per-arm allocation and Actions invoice/storage charges are unknown.

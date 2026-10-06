@@ -242,5 +242,90 @@
         "native_trial_absent": true
       }
     }
+  },
+  "fresh_all": {
+    "run_id": 37465514129,
+    "run_attempt": 1,
+    "commit_sha": "0485fa7585f3661201244da3e8d36366a7e7a338",
+    "branch": "main",
+    "workflow_event": "workflow_dispatch",
+    "workflow_result": "success",
+    "dataset": "real-v1",
+    "slot_selector": "all",
+    "manifest_id": "real-v1-76d0ba6152ff",
+    "manifest_sha256": "550604fe9f1a3fdf975f83bff5fe0321346bc6841bfd4b5d5006696ebe1a7d02",
+    "harbor_version": "0.23.0",
+    "execution_steps": {
+      "unit": "success",
+      "setup_job": "skipped",
+      "capture_job": "skipped",
+      "fresh_selected_replay": "success",
+      "native_historical_controls": "skipped",
+      "native_real_v1_controls": "skipped",
+      "retained_answer_regrade": "skipped",
+      "original_campaign_collection": "skipped",
+      "versioned_report": "success"
+    },
+    "artifact": {
+      "id": 11415539096,
+      "name": "reviewed-results-0485fa7585f3661201244da3e8d36366a7e7a338-37465514129",
+      "api_digest": "sha256:74b368d8627fb41593018b5f1972cb971dd7855833c8147e2c549473c897f34a",
+      "verified_archive_sha256": "74b368d8627fb41593018b5f1972cb971dd7855833c8147e2c549473c897f34a",
+      "archive_bytes": 573888,
+      "zip_member_count": 1,
+      "results_tar_sha256": "906835eb84b45e5b820b950a5667a7bdf223f64fd69baecc6f56d8501db24297",
+      "tar_member_count": 830,
+      "tar_file_count": 659,
+      "tar_directory_count": 171,
+      "tar_uncompressed_bytes": 3239267,
+      "member_paths": "bounded relative paths only, no duplicates, links, encrypted members, or special files",
+      "credential_screen": "passed on compressed archives and every bounded decompressed member using the supplied project key and known patterns"
+    },
+    "logs": {
+      "local_archive_sha256": "b6869b049fd919d6f76d163b7f96efa8c643ee62cdad98ca1675f1b8ad09cd22",
+      "archive_bytes": 47207,
+      "member_count": 31,
+      "uncompressed_bytes": 158794,
+      "unique_receipt_markers": 47,
+      "marker_occurrences_in_step_and_combined_logs": 94,
+      "fresh_replay_complete_47_marker": true,
+      "failure_and_traceback_markers_absent": true,
+      "credential_screen": "passed on compressed archive and every bounded log member"
+    },
+    "retained_coverage": {
+      "scheduled_slots": 48,
+      "retained_answer_records": 47,
+      "fresh_receipts": 47,
+      "receipt_path_prefix": "reports/fresh-replay/37465514129-1/real-v1/",
+      "receipt_inputs": {
+        "answer.raw.txt": 47
+      },
+      "unavailable_slot": "final-wp07-B-1",
+      "unavailable_slot_has_receipt": false,
+      "all_receipts_preserved_byte_for_byte": true,
+      "receipt_set_sha256": "6d147d03de38d54f13de271e9dddf2c6d3337a17e75901550af5d1953f58f60a",
+      "receipt_set_digest_method": "SHA-256 of sorted UTF-8 lines <slot_id><space><receipt_sha256><newline>"
+    },
+    "verified_results": {
+      "all_47_run_attempt_head_manifest_task_and_scorer_identities_match": true,
+      "all_47_keyed_receipt_identity_hashes_match": true,
+      "all_47_fresh_native_verdicts_have_required_isolation_flags": true,
+      "all_47_prior_verdict_hashes_and_comparison_payloads_match": true,
+      "prior_comparisons": {
+        "checks_same_false": 0,
+        "checks_same_true": 47,
+        "complete_same_false": 0,
+        "complete_same_true": 47
+      },
+      "all_input_source_values": "retained_artifact",
+      "all_input_files": "answer.raw.txt",
+      "all_prior_receipts_preserved_exactly": true,
+      "original_retained_files_compared_to_dispatched_commit": 282,
+      "original_retained_bytes_compared": 1798757,
+      "original_record_answer_audit_tool_evidence_and_verdict_bytes_unchanged": true,
+      "all_47_entire_parsed_verdicts_equal_to_prior": true
+    },
+    "screening_limits": "Known credential patterns and the exact supplied project key were checked in compressed archives and bounded decompressed members. The scan cannot prove absence of arbitrary unknown secret formats.",
+    "verdict_digest_limit": "Receipts retain each fresh verdict SHA-256 and parsed verdict, but the runner did not export the original verifier JSON bytes separately, so the source-byte digest cannot be recomputed from the serialized receipt."
   }
 }

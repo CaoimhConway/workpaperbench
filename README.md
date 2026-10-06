@@ -71,7 +71,7 @@ Artemis was skipped because no project data credential was available. DefiLlama'
 
 ## Run the key-free local demo
 
-Use Python 3.12. No Docker, model or data key is needed. The demo reads a saved source-backed workpaper and displays its calculation without executing submitted SQL.
+Use Python 3.11 or 3.12. Hosted validation uses Python 3.12. No Docker, model or data key is needed. The demo reads a saved source-backed workpaper and displays its calculation without executing submitted SQL.
 
 ```bash
 git clone https://github.com/CaoimhConway/workpaperbench.git
@@ -92,16 +92,18 @@ A maintainer with Actions write permission can replay a selected retained submis
 
 ```bash
 gh workflow run ci.yml --repo YOUR_LOGIN/workpaperbench --ref main \
-  -f integration=false -f fresh_replay=true -f dataset=historical \
-  -f replay_slot=final-wp03-A-1
+  -f integration=false -f fresh_replay=true -f dataset=real-v1 \
+  -f replay_slot=all
 gh run watch RUN_ID --repo YOUR_LOGIN/workpaperbench --exit-status
 gh run download RUN_ID --repo YOUR_LOGIN/workpaperbench \
   --name reviewed-results-COMMIT_SHA-RUN_ID --dir replay-results
 ```
 
-Use `dataset=real-v1` to replay the new study, or `replay_slot=all` for every retained answer. Fresh receipts identify executed native verification, run identity and input/task/scorer hashes, compare earlier diagnostics and preserve them. `regrade=true` is the separate cached historical convenience.
+Use `replay_slot=final-wp04-A-1` for one new retained answer. Use `dataset=historical` with `replay_slot=final-wp03-A-1` for the tested historical example. Fresh receipts identify executed native verification, run identity and input/task/scorer hashes, compare earlier diagnostics and preserve them. `regrade=true` is the separate cached historical convenience.
 
 An engineer can commit a bounded `submissions/answer.json` to their fork, following the task's schema, then dispatch the same workflow with `dataset=real-v1`, `answer_path=submissions/answer.json` and `task=wp02`. The supplied [authored reference submission](submissions/reference-wp02.json) demonstrates this path. The submitted SQL executes only in the separate verifier on Actions. [Replay contract and commands](docs/REPLAY.md) · [Task-authoring guide](docs/TASK_AUTHORING.md).
+
+Validation includes 234 lightweight tests, 111 hosted native controls and [fresh verification of all 47 retained answers](https://github.com/CaoimhConway/workpaperbench/actions/runs/37465514129). Every fresh verdict/check comparison matched its retained result. Selected historical replay and the engineer-answer path were also exercised. [Immutable receipts and provenance](reports/real-v1/native-validation.json) retain the run identities, hashes and screening limits.
 
 ## Methodology and limits
 
