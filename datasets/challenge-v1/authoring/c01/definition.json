@@ -1,0 +1,1441 @@
+{
+  "context": "# PayPal annual and quarterly disclosures\n\nc01:s01 - PayPal 2024 10-K - net revenue categories\n[[\"Total net revenues (2)\", \"$\", \"31,797\", \"$\", \"29,771\", \"$\", \"27,518\"], [\"Transaction revenues\", \"$\", \"28,842\", \"$\", \"26,857\", \"$\", \"25,206\"], [\"Revenues from other value added services\", \"2,955\", \"2,914\", \"2,312\"], [\"Total net revenues (2)\", \"$\", \"31,797\", \"$\", \"29,771\", \"$\", \"27,518\"]]\nUSD million. Columns: FY2024,FY2023,FY2022.\n\nc01:s02 - PayPal Q4 release - quarterly net revenue categories\n[[\"Transaction revenues\", \"$\", \"7,588\", \"$\", \"7,067\", \"$\", \"7,153\", \"$\", \"7,034\", \"$\", \"7,283\"], [\"Revenues from other value added services\", \"$\", \"778\", \"$\", \"780\", \"$\", \"732\", \"$\", \"665\", \"$\", \"743\"], [\"Total net revenues\", \"$\", \"8,366\", \"$\", \"7,847\", \"$\", \"7,885\", \"$\", \"7,699\", \"$\", \"8,026\"]]\nUSD million. Columns: quarters Dec2024,Sep2024,Jun2024,Mar2024,Dec2023.\n\nc01:s03 - PayPal FY2024 operating results\n[[\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\"], [\"Presented in millions, except per share data and percentages\", \"FY'24\", \"FY'23\", \"YoY Growth\", \"FXN YoY Growth\"], [\"Total payment volume\", \"1,681,150\", \"1,528,579\", \"10%\", \"10%\"], [\"GAAP\", \"\", \"\", \"\", \"\"]]\nPresented in millions. FY2024 and FY2023. Nominal and FX-neutral growth columns are distinct.\n\nc01:s04 - PayPal Q4 operating results\n[[\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\"], [\"Presented in millions, except per share data and percentages\", \"4Q'24\", \"4Q'23\", \"YoY Growth\", \"FXN YoY Growth\"], [\"Total payment volume\", \"$437,836\", \"$409,832\", \"7%\", \"7%\"], [\"GAAP\", \"\", \"\", \"\", \"\"]]\nPresented in millions. Q4FY2024 and Q4FY2023.\n\nc01:s05 - PayPal 2024 10-K - revenue geography\n[[\"U.S.\", \"$\", \"18,267\", \"$\", \"17,253\", \"$\", \"15,807\"], [\"Other countries (1)\", \"13,530\", \"12,518\", \"11,711\"]]\nUSD million. Columns FY2024,FY2023,FY2022. Geography is primarily based on merchant or consumer billing location.\n\nc01:s06 - PayPal key metric definitions\nTPV is the value of payments, net of payment reversals, successfully completed on the platform or enabled by partner solutions, excluding gateway-exclusive transactions. Transaction revenues comprise net transaction fees and other fees such as currency conversion. Other value added services include partnerships, interest and credit fees, referrals, subscriptions and gateway services. Active accounts can include multiple accounts per user.\n\nc01:s07 - PayPal revenue drivers\nThe source reports that transaction revenue growth was lower than TPV growth in 2024 primarily due to changes in merchant mix, with higher volume from large merchants having lower pricing. Both metrics concern the consolidated platform and are annual flows. The aggregate ratio does not identify any individual contract rate.\n\n## Data dictionary\nperiod_end and months identify the economic period. amount and unit preserve the displayed precision. category and metric retain source headings. Section IDs identify source locations. Nominal USD amounts have not been adjusted for exchange rates. Geography is a separate disaggregation, not additional revenue.",
+  "control_origin": "synthetic_changed_input",
+  "controls": [
+    {
+      "expected": {
+        "transaction_contribution": 97.97630799605133,
+        "yield_2023": 1.7569912971459114,
+        "yield_2024": 1.715611337477322,
+        "yield_change": -4.137995966858926
+      },
+      "name": "monetary_scale",
+      "tables": {
+        "geography": {
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "U.S.",
+              36534.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "U.S.",
+              34506.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "U.S.",
+              31614.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Other countries (1)",
+              27060.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Other countries (1)",
+              25036.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "Other countries (1)",
+              23422.0,
+              "usd_million",
+              "c01:s05"
+            ]
+          ],
+          "schema": "CREATE TABLE geography(period_end TEXT,months INTEGER,region TEXT,amount REAL,unit TEXT,section_id TEXT)"
+        },
+        "operating_metrics": {
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Total payment volume",
+              3362300.0,
+              "usd_million",
+              "c01:s03"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total payment volume",
+              3057158.0,
+              "usd_million",
+              "c01:s03"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Total payment volume",
+              875672.0,
+              "usd_million",
+              "c01:s04"
+            ],
+            [
+              "2023-12-31",
+              3,
+              "Total payment volume",
+              819664.0,
+              "usd_million",
+              "c01:s04"
+            ]
+          ],
+          "schema": "CREATE TABLE operating_metrics(period_end TEXT,months INTEGER,metric TEXT,amount REAL,unit TEXT,section_id TEXT)"
+        },
+        "revenues": {
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Transaction revenues",
+              57684.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Transaction revenues",
+              53714.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "Transaction revenues",
+              50412.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Revenues from other value added services",
+              5910.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Revenues from other value added services",
+              5828.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "Revenues from other value added services",
+              4624.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total net revenues (2)",
+              63594.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total net revenues (2)",
+              59542.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "Total net revenues (2)",
+              55036.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Transaction revenues",
+              15176.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-09-30",
+              3,
+              "Transaction revenues",
+              14134.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-06-30",
+              3,
+              "Transaction revenues",
+              14306.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-03-31",
+              3,
+              "Transaction revenues",
+              14068.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2023-12-31",
+              3,
+              "Transaction revenues",
+              14566.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Revenues from other value added services",
+              1556.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-09-30",
+              3,
+              "Revenues from other value added services",
+              1560.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-06-30",
+              3,
+              "Revenues from other value added services",
+              1464.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-03-31",
+              3,
+              "Revenues from other value added services",
+              1330.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2023-12-31",
+              3,
+              "Revenues from other value added services",
+              1486.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Total net revenues",
+              16732.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-09-30",
+              3,
+              "Total net revenues",
+              15694.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-06-30",
+              3,
+              "Total net revenues",
+              15770.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-03-31",
+              3,
+              "Total net revenues",
+              15398.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2023-12-31",
+              3,
+              "Total net revenues",
+              16052.0,
+              "usd_million",
+              "c01:s02"
+            ]
+          ],
+          "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)"
+        }
+      }
+    },
+    {
+      "expected": {
+        "transaction_contribution": 97.97630799605133,
+        "yield_2023": 1.7569912971459114,
+        "yield_2024": 1.715611337477322,
+        "yield_change": -4.137995966858926
+      },
+      "name": "quarterly_changes",
+      "tables": {
+        "geography": {
+          "rows": [
+            [
+              "2022-12-31",
+              12,
+              "Other countries (1)",
+              11711.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Other countries (1)",
+              12518.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Other countries (1)",
+              13530.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "U.S.",
+              15807.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "U.S.",
+              17253.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "U.S.",
+              18267.0,
+              "usd_million",
+              "c01:s05"
+            ]
+          ],
+          "schema": "CREATE TABLE geography(period_end TEXT,months INTEGER,region TEXT,amount REAL,unit TEXT,section_id TEXT)"
+        },
+        "operating_metrics": {
+          "rows": [
+            [
+              "2023-12-31",
+              3,
+              "Total payment volume",
+              1229496.0,
+              "usd_million",
+              "c01:s04"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Total payment volume",
+              1313508.0,
+              "usd_million",
+              "c01:s04"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total payment volume",
+              1528579.0,
+              "usd_million",
+              "c01:s03"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total payment volume",
+              1681150.0,
+              "usd_million",
+              "c01:s03"
+            ]
+          ],
+          "schema": "CREATE TABLE operating_metrics(period_end TEXT,months INTEGER,metric TEXT,amount REAL,unit TEXT,section_id TEXT)"
+        },
+        "revenues": {
+          "rows": [
+            [
+              "2023-12-31",
+              3,
+              "Total net revenues",
+              24078.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-03-31",
+              3,
+              "Total net revenues",
+              23097.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-06-30",
+              3,
+              "Total net revenues",
+              23655.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-09-30",
+              3,
+              "Total net revenues",
+              23541.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Total net revenues",
+              25098.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2023-12-31",
+              3,
+              "Revenues from other value added services",
+              2229.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-03-31",
+              3,
+              "Revenues from other value added services",
+              1995.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-06-30",
+              3,
+              "Revenues from other value added services",
+              2196.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-09-30",
+              3,
+              "Revenues from other value added services",
+              2340.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Revenues from other value added services",
+              2334.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2023-12-31",
+              3,
+              "Transaction revenues",
+              21849.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-03-31",
+              3,
+              "Transaction revenues",
+              21102.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-06-30",
+              3,
+              "Transaction revenues",
+              21459.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-09-30",
+              3,
+              "Transaction revenues",
+              21201.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Transaction revenues",
+              22764.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "Total net revenues (2)",
+              27518.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total net revenues (2)",
+              29771.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total net revenues (2)",
+              31797.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "Revenues from other value added services",
+              2312.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Revenues from other value added services",
+              2914.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Revenues from other value added services",
+              2955.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "Transaction revenues",
+              25206.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Transaction revenues",
+              26857.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Transaction revenues",
+              28842.0,
+              "usd_million",
+              "c01:s01"
+            ]
+          ],
+          "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)"
+        }
+      }
+    },
+    {
+      "expected": {
+        "transaction_contribution": 97.81449893390192,
+        "yield_2023": 1.7831593918273114,
+        "yield_2024": 1.7304821104601018,
+        "yield_change": -5.267728136720979
+      },
+      "name": "revenue_mix",
+      "tables": {
+        "geography": {
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "U.S.",
+              18267.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "U.S.",
+              17253.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "U.S.",
+              15807.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Other countries (1)",
+              13530.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Other countries (1)",
+              12518.0,
+              "usd_million",
+              "c01:s05"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "Other countries (1)",
+              11711.0,
+              "usd_million",
+              "c01:s05"
+            ]
+          ],
+          "schema": "CREATE TABLE geography(period_end TEXT,months INTEGER,region TEXT,amount REAL,unit TEXT,section_id TEXT)"
+        },
+        "operating_metrics": {
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Total payment volume",
+              1681150.0,
+              "usd_million",
+              "c01:s03"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total payment volume",
+              1528579.0,
+              "usd_million",
+              "c01:s03"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Total payment volume",
+              437836.0,
+              "usd_million",
+              "c01:s04"
+            ],
+            [
+              "2023-12-31",
+              3,
+              "Total payment volume",
+              409832.0,
+              "usd_million",
+              "c01:s04"
+            ]
+          ],
+          "schema": "CREATE TABLE operating_metrics(period_end TEXT,months INTEGER,metric TEXT,amount REAL,unit TEXT,section_id TEXT)"
+        },
+        "revenues": {
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Transaction revenues",
+              29092.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Transaction revenues",
+              27257.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "Transaction revenues",
+              25206.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Revenues from other value added services",
+              2955.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Revenues from other value added services",
+              2914.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "Revenues from other value added services",
+              2312.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total net revenues (2)",
+              32047.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total net revenues (2)",
+              30171.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2022-12-31",
+              12,
+              "Total net revenues (2)",
+              27518.0,
+              "usd_million",
+              "c01:s01"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Transaction revenues",
+              7588.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-09-30",
+              3,
+              "Transaction revenues",
+              7067.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-06-30",
+              3,
+              "Transaction revenues",
+              7153.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-03-31",
+              3,
+              "Transaction revenues",
+              7034.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2023-12-31",
+              3,
+              "Transaction revenues",
+              7283.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Revenues from other value added services",
+              778.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-09-30",
+              3,
+              "Revenues from other value added services",
+              780.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-06-30",
+              3,
+              "Revenues from other value added services",
+              732.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-03-31",
+              3,
+              "Revenues from other value added services",
+              665.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2023-12-31",
+              3,
+              "Revenues from other value added services",
+              743.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-12-31",
+              3,
+              "Total net revenues",
+              8366.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-09-30",
+              3,
+              "Total net revenues",
+              7847.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-06-30",
+              3,
+              "Total net revenues",
+              7885.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2024-03-31",
+              3,
+              "Total net revenues",
+              7699.0,
+              "usd_million",
+              "c01:s02"
+            ],
+            [
+              "2023-12-31",
+              3,
+              "Total net revenues",
+              8026.0,
+              "usd_million",
+              "c01:s02"
+            ]
+          ],
+          "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)"
+        }
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "capture_sha256": "14c4f7a1776e082155a372121fcb9f67f1a31f9fabf88e0a59c934b30b877804",
+      "id": "c01:s01",
+      "locator": "Note2 Revenues, annual disaggregation table",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000019/pypl-20241231.htm",
+      "period": "PayPal 2024 10-K - net revenue categories",
+      "publication": "2025-02-04",
+      "redistribution": "Factual table amounts, headings and concise source definitions. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T21:08:11.774493+00:00",
+      "source_bytes_sha256": "d12f5d69aadb7e524d289ccfc2702f78a45a73a9ca9607ecc7c1503e55f0c6df",
+      "text": "[[\"Total net revenues (2)\", \"$\", \"31,797\", \"$\", \"29,771\", \"$\", \"27,518\"], [\"Transaction revenues\", \"$\", \"28,842\", \"$\", \"26,857\", \"$\", \"25,206\"], [\"Revenues from other value added services\", \"2,955\", \"2,914\", \"2,312\"], [\"Total net revenues (2)\", \"$\", \"31,797\", \"$\", \"29,771\", \"$\", \"27,518\"]]\nUSD million. Columns: FY2024,FY2023,FY2022.",
+      "title": "PayPal 2024 10-K - net revenue categories"
+    },
+    {
+      "capture_sha256": "14c4f7a1776e082155a372121fcb9f67f1a31f9fabf88e0a59c934b30b877804",
+      "id": "c01:s02",
+      "locator": "Unaudited Summary of Consolidated Net Revenues, Net Revenues by Type",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000017/pypl4q-24earningsrelease.htm",
+      "period": "PayPal Q4 release - quarterly net revenue categories",
+      "publication": "2025-02-04",
+      "redistribution": "Factual table amounts, headings and concise source definitions. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T21:08:58.461250+00:00",
+      "source_bytes_sha256": "4c14cdca0c9358f9d56c300eb866e8a240b24ceb94d4dd4e202106a8fc5d5bd8",
+      "text": "[[\"Transaction revenues\", \"$\", \"7,588\", \"$\", \"7,067\", \"$\", \"7,153\", \"$\", \"7,034\", \"$\", \"7,283\"], [\"Revenues from other value added services\", \"$\", \"778\", \"$\", \"780\", \"$\", \"732\", \"$\", \"665\", \"$\", \"743\"], [\"Total net revenues\", \"$\", \"8,366\", \"$\", \"7,847\", \"$\", \"7,885\", \"$\", \"7,699\", \"$\", \"8,026\"]]\nUSD million. Columns: quarters Dec2024,Sep2024,Jun2024,Mar2024,Dec2023.",
+      "title": "PayPal Q4 release - quarterly net revenue categories"
+    },
+    {
+      "capture_sha256": "14c4f7a1776e082155a372121fcb9f67f1a31f9fabf88e0a59c934b30b877804",
+      "id": "c01:s03",
+      "locator": "FY24 Financial Results, TPV row",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000017/pypl4q-24earningsrelease.htm",
+      "period": "PayPal FY2024 operating results",
+      "publication": "2025-02-04",
+      "redistribution": "Factual table amounts, headings and concise source definitions. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T21:08:58.461250+00:00",
+      "source_bytes_sha256": "4c14cdca0c9358f9d56c300eb866e8a240b24ceb94d4dd4e202106a8fc5d5bd8",
+      "text": "[[\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\"], [\"Presented in millions, except per share data and percentages\", \"FY'24\", \"FY'23\", \"YoY Growth\", \"FXN YoY Growth\"], [\"Total payment volume\", \"1,681,150\", \"1,528,579\", \"10%\", \"10%\"], [\"GAAP\", \"\", \"\", \"\", \"\"]]\nPresented in millions. FY2024 and FY2023. Nominal and FX-neutral growth columns are distinct.",
+      "title": "PayPal FY2024 operating results"
+    },
+    {
+      "capture_sha256": "14c4f7a1776e082155a372121fcb9f67f1a31f9fabf88e0a59c934b30b877804",
+      "id": "c01:s04",
+      "locator": "4Q24 Financial Results, TPV row",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000017/pypl4q-24earningsrelease.htm",
+      "period": "PayPal Q4 operating results",
+      "publication": "2025-02-04",
+      "redistribution": "Factual table amounts, headings and concise source definitions. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T21:08:58.461250+00:00",
+      "source_bytes_sha256": "4c14cdca0c9358f9d56c300eb866e8a240b24ceb94d4dd4e202106a8fc5d5bd8",
+      "text": "[[\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\"], [\"Presented in millions, except per share data and percentages\", \"4Q'24\", \"4Q'23\", \"YoY Growth\", \"FXN YoY Growth\"], [\"Total payment volume\", \"$437,836\", \"$409,832\", \"7%\", \"7%\"], [\"GAAP\", \"\", \"\", \"\", \"\"]]\nPresented in millions. Q4FY2024 and Q4FY2023.",
+      "title": "PayPal Q4 operating results"
+    },
+    {
+      "capture_sha256": "14c4f7a1776e082155a372121fcb9f67f1a31f9fabf88e0a59c934b30b877804",
+      "id": "c01:s05",
+      "locator": "Note2 Revenues, primary geographical markets",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000019/pypl-20241231.htm",
+      "period": "PayPal 2024 10-K - revenue geography",
+      "publication": "2025-02-04",
+      "redistribution": "Factual table amounts, headings and concise source definitions. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T21:08:11.774493+00:00",
+      "source_bytes_sha256": "d12f5d69aadb7e524d289ccfc2702f78a45a73a9ca9607ecc7c1503e55f0c6df",
+      "text": "[[\"U.S.\", \"$\", \"18,267\", \"$\", \"17,253\", \"$\", \"15,807\"], [\"Other countries (1)\", \"13,530\", \"12,518\", \"11,711\"]]\nUSD million. Columns FY2024,FY2023,FY2022. Geography is primarily based on merchant or consumer billing location.",
+      "title": "PayPal 2024 10-K - revenue geography"
+    },
+    {
+      "capture_sha256": "14c4f7a1776e082155a372121fcb9f67f1a31f9fabf88e0a59c934b30b877804",
+      "id": "c01:s06",
+      "locator": "Item7 Key Performance Metrics and Net Revenues",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000019/pypl-20241231.htm",
+      "period": "PayPal key metric definitions",
+      "publication": "2025-02-04",
+      "redistribution": "Factual table amounts, headings and concise source definitions. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T21:08:11.774493+00:00",
+      "source_bytes_sha256": "d12f5d69aadb7e524d289ccfc2702f78a45a73a9ca9607ecc7c1503e55f0c6df",
+      "text": "TPV is the value of payments, net of payment reversals, successfully completed on the platform or enabled by partner solutions, excluding gateway-exclusive transactions. Transaction revenues comprise net transaction fees and other fees such as currency conversion. Other value added services include partnerships, interest and credit fees, referrals, subscriptions and gateway services. Active accounts can include multiple accounts per user.",
+      "title": "PayPal key metric definitions"
+    },
+    {
+      "capture_sha256": "14c4f7a1776e082155a372121fcb9f67f1a31f9fabf88e0a59c934b30b877804",
+      "id": "c01:s07",
+      "locator": "Item7 Net Revenue Analysis, FY2024 transaction revenues",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1633917/000163391725000019/pypl-20241231.htm",
+      "period": "PayPal revenue drivers",
+      "publication": "2025-02-04",
+      "redistribution": "Factual table amounts, headings and concise source definitions. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T21:08:11.774493+00:00",
+      "source_bytes_sha256": "d12f5d69aadb7e524d289ccfc2702f78a45a73a9ca9607ecc7c1503e55f0c6df",
+      "text": "The source reports that transaction revenue growth was lower than TPV growth in 2024 primarily due to changes in merchant mix, with higher volume from large merchants having lower pricing. Both metrics concern the consolidated platform and are annual flows. The aggregate ratio does not identify any individual contract rate.",
+      "title": "PayPal revenue drivers"
+    }
+  ],
+  "family": "C",
+  "gold": {
+    "answers": {
+      "transaction_contribution": {
+        "evidence": [
+          [
+            "c01:s01",
+            "c01:s06"
+          ]
+        ],
+        "status": "answered",
+        "tolerance": 1e-06,
+        "unit": "percent",
+        "value": 97.97630799605133
+      },
+      "yield_2023": {
+        "evidence": [
+          [
+            "c01:s01",
+            "c01:s03",
+            "c01:s06"
+          ],
+          [
+            "c01:s01",
+            "c01:s03",
+            "c01:s07"
+          ]
+        ],
+        "status": "answered",
+        "tolerance": 1e-06,
+        "unit": "percent",
+        "value": 1.7569912971459114
+      },
+      "yield_2024": {
+        "evidence": [
+          [
+            "c01:s01",
+            "c01:s03",
+            "c01:s06"
+          ],
+          [
+            "c01:s01",
+            "c01:s03",
+            "c01:s07"
+          ]
+        ],
+        "status": "answered",
+        "tolerance": 1e-06,
+        "unit": "percent",
+        "value": 1.715611337477322
+      },
+      "yield_change": {
+        "evidence": [
+          [
+            "c01:s01",
+            "c01:s03",
+            "c01:s06"
+          ],
+          [
+            "c01:s01",
+            "c01:s03",
+            "c01:s07"
+          ]
+        ],
+        "status": "answered",
+        "tolerance": 1e-06,
+        "unit": "basis_points",
+        "value": -4.137995966858926
+      }
+    },
+    "conclusion": {
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s03",
+          "c01:s06"
+        ],
+        [
+          "c01:s07"
+        ]
+      ],
+      "verdict": "contradicted"
+    },
+    "context_evidence_allowed": [
+      "c01:s06",
+      "c01:s07"
+    ]
+  },
+  "instruction": "For PayPal FY2024 versus FY2023, report the effective annual transaction-revenue-to-TPV ratios yield_2024 and yield_2023 in percent, their 2024-minus-2023 change yield_change in basis points, and transaction_contribution as transaction revenue's percentage contribution to the total net revenue increase. Use compatible consolidated annual observations. Assess: an increase in the effective transaction-revenue-to-TPV ratio explains the reported net revenue growth.",
+  "origin": "primary_source_factual_extract",
+  "previously_exposed": false,
+  "reference": {
+    "answers": [
+      {
+        "evidence": [
+          "c01:s01",
+          "c01:s03",
+          "c01:s06"
+        ],
+        "id": "yield_2024",
+        "reason_code": null,
+        "sql": "SELECT 100.0*(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Transaction revenues')/(SELECT amount FROM operating_metrics WHERE period_end='2024-12-31' AND months=12 AND metric='Total payment volume')",
+        "status": "answered",
+        "unit": "percent",
+        "value": 1.715611337477322
+      },
+      {
+        "evidence": [
+          "c01:s01",
+          "c01:s03",
+          "c01:s06"
+        ],
+        "id": "yield_2023",
+        "reason_code": null,
+        "sql": "SELECT 100.0*(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Transaction revenues')/(SELECT amount FROM operating_metrics WHERE period_end='2023-12-31' AND months=12 AND metric='Total payment volume')",
+        "status": "answered",
+        "unit": "percent",
+        "value": 1.7569912971459114
+      },
+      {
+        "evidence": [
+          "c01:s01",
+          "c01:s03",
+          "c01:s06"
+        ],
+        "id": "yield_change",
+        "reason_code": null,
+        "sql": "SELECT 10000.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Transaction revenues')/(SELECT amount FROM operating_metrics WHERE period_end='2024-12-31' AND months=12 AND metric='Total payment volume')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Transaction revenues')/(SELECT amount FROM operating_metrics WHERE period_end='2023-12-31' AND months=12 AND metric='Total payment volume'))",
+        "status": "answered",
+        "unit": "basis_points",
+        "value": -4.137995966858926
+      },
+      {
+        "evidence": [
+          "c01:s01",
+          "c01:s06"
+        ],
+        "id": "transaction_contribution",
+        "reason_code": null,
+        "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Transaction revenues')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Transaction revenues'))/((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total net revenues (2)')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total net revenues (2)'))",
+        "status": "answered",
+        "unit": "percent",
+        "value": 97.97630799605133
+      }
+    ],
+    "conclusion": {
+      "evidence": [
+        "c01:s01",
+        "c01:s03",
+        "c01:s06"
+      ],
+      "reason_code": null,
+      "verdict": "contradicted"
+    },
+    "task_id": "challenge-v1-c01"
+  },
+  "source_group": "paypal-2024-platform-metrics",
+  "split": "development",
+  "tables": {
+    "geography": {
+      "rows": [
+        [
+          "2024-12-31",
+          12,
+          "U.S.",
+          18267.0,
+          "usd_million",
+          "c01:s05"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "U.S.",
+          17253.0,
+          "usd_million",
+          "c01:s05"
+        ],
+        [
+          "2022-12-31",
+          12,
+          "U.S.",
+          15807.0,
+          "usd_million",
+          "c01:s05"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Other countries (1)",
+          13530.0,
+          "usd_million",
+          "c01:s05"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Other countries (1)",
+          12518.0,
+          "usd_million",
+          "c01:s05"
+        ],
+        [
+          "2022-12-31",
+          12,
+          "Other countries (1)",
+          11711.0,
+          "usd_million",
+          "c01:s05"
+        ]
+      ],
+      "schema": "CREATE TABLE geography(period_end TEXT,months INTEGER,region TEXT,amount REAL,unit TEXT,section_id TEXT)"
+    },
+    "operating_metrics": {
+      "rows": [
+        [
+          "2024-12-31",
+          12,
+          "Total payment volume",
+          1681150.0,
+          "usd_million",
+          "c01:s03"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Total payment volume",
+          1528579.0,
+          "usd_million",
+          "c01:s03"
+        ],
+        [
+          "2024-12-31",
+          3,
+          "Total payment volume",
+          437836.0,
+          "usd_million",
+          "c01:s04"
+        ],
+        [
+          "2023-12-31",
+          3,
+          "Total payment volume",
+          409832.0,
+          "usd_million",
+          "c01:s04"
+        ]
+      ],
+      "schema": "CREATE TABLE operating_metrics(period_end TEXT,months INTEGER,metric TEXT,amount REAL,unit TEXT,section_id TEXT)"
+    },
+    "revenues": {
+      "rows": [
+        [
+          "2024-12-31",
+          12,
+          "Transaction revenues",
+          28842.0,
+          "usd_million",
+          "c01:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Transaction revenues",
+          26857.0,
+          "usd_million",
+          "c01:s01"
+        ],
+        [
+          "2022-12-31",
+          12,
+          "Transaction revenues",
+          25206.0,
+          "usd_million",
+          "c01:s01"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Revenues from other value added services",
+          2955.0,
+          "usd_million",
+          "c01:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Revenues from other value added services",
+          2914.0,
+          "usd_million",
+          "c01:s01"
+        ],
+        [
+          "2022-12-31",
+          12,
+          "Revenues from other value added services",
+          2312.0,
+          "usd_million",
+          "c01:s01"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Total net revenues (2)",
+          31797.0,
+          "usd_million",
+          "c01:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Total net revenues (2)",
+          29771.0,
+          "usd_million",
+          "c01:s01"
+        ],
+        [
+          "2022-12-31",
+          12,
+          "Total net revenues (2)",
+          27518.0,
+          "usd_million",
+          "c01:s01"
+        ],
+        [
+          "2024-12-31",
+          3,
+          "Transaction revenues",
+          7588.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2024-09-30",
+          3,
+          "Transaction revenues",
+          7067.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2024-06-30",
+          3,
+          "Transaction revenues",
+          7153.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2024-03-31",
+          3,
+          "Transaction revenues",
+          7034.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2023-12-31",
+          3,
+          "Transaction revenues",
+          7283.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2024-12-31",
+          3,
+          "Revenues from other value added services",
+          778.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2024-09-30",
+          3,
+          "Revenues from other value added services",
+          780.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2024-06-30",
+          3,
+          "Revenues from other value added services",
+          732.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2024-03-31",
+          3,
+          "Revenues from other value added services",
+          665.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2023-12-31",
+          3,
+          "Revenues from other value added services",
+          743.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2024-12-31",
+          3,
+          "Total net revenues",
+          8366.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2024-09-30",
+          3,
+          "Total net revenues",
+          7847.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2024-06-30",
+          3,
+          "Total net revenues",
+          7885.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2024-03-31",
+          3,
+          "Total net revenues",
+          7699.0,
+          "usd_million",
+          "c01:s02"
+        ],
+        [
+          "2023-12-31",
+          3,
+          "Total net revenues",
+          8026.0,
+          "usd_million",
+          "c01:s02"
+        ]
+      ],
+      "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)"
+    }
+  },
+  "task_id": "challenge-v1-c01"
+}

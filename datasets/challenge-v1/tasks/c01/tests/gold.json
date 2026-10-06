@@ -1,0 +1,130 @@
+{
+  "answers": {
+    "transaction_contribution": {
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s06"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 1e-06,
+      "unit": "percent",
+      "value": 97.97630799605133
+    },
+    "yield_2023": {
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s03",
+          "c01:s06"
+        ],
+        [
+          "c01:s01",
+          "c01:s03",
+          "c01:s07"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 1e-06,
+      "unit": "percent",
+      "value": 1.7569912971459114
+    },
+    "yield_2024": {
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s03",
+          "c01:s06"
+        ],
+        [
+          "c01:s01",
+          "c01:s03",
+          "c01:s07"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 1e-06,
+      "unit": "percent",
+      "value": 1.715611337477322
+    },
+    "yield_change": {
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s03",
+          "c01:s06"
+        ],
+        [
+          "c01:s01",
+          "c01:s03",
+          "c01:s07"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 1e-06,
+      "unit": "basis_points",
+      "value": -4.137995966858926
+    }
+  },
+  "conclusion": {
+    "evidence": [
+      [
+        "c01:s01",
+        "c01:s03",
+        "c01:s06"
+      ],
+      [
+        "c01:s07"
+      ]
+    ],
+    "verdict": "contradicted"
+  },
+  "context_evidence_allowed": [
+    "c01:s06",
+    "c01:s07"
+  ],
+  "task_id": "challenge-v1-c01",
+  "controls": [
+    {
+      "name": "monetary_scale",
+      "database": "control-1.sqlite",
+      "expected": {
+        "transaction_contribution": 97.97630799605133,
+        "yield_2023": 1.7569912971459114,
+        "yield_2024": 1.715611337477322,
+        "yield_change": -4.137995966858926
+      }
+    },
+    {
+      "name": "quarterly_changes",
+      "database": "control-2.sqlite",
+      "expected": {
+        "transaction_contribution": 97.97630799605133,
+        "yield_2023": 1.7569912971459114,
+        "yield_2024": 1.715611337477322,
+        "yield_change": -4.137995966858926
+      }
+    },
+    {
+      "name": "revenue_mix",
+      "database": "control-3.sqlite",
+      "expected": {
+        "transaction_contribution": 97.81449893390192,
+        "yield_2023": 1.7831593918273114,
+        "yield_2024": 1.7304821104601018,
+        "yield_change": -5.267728136720979
+      }
+    }
+  ],
+  "hashes": {
+    "evidence.json": "2b085af079e0f3dce2d296111ff33e674ffd0acb6eb49753807942efb9318dd8",
+    "control-2.sqlite": "0d5ff532d6fc86883b0ab216122ce9b89abcdbf9397ea9f84b61cc9833bbd679",
+    "sources.md": "2c890967656d76574cfe47d97af60018e24ccee8fd726c0909a3a0f0c2b39ce6",
+    "control-3.sqlite": "dd7693de543d2f34ed9fb1dd94a6d2f80351072ef7bdc143a19dc6a6e49d0829",
+    "control-1.sqlite": "6233532f81e36dbc781d75a0154a2294944f554092b1841a4d00b5ea98130b77",
+    "schema.json": "78c6f7adbcb3424274471253c38d137a9c84adba154aeeac68031b2f5125937c",
+    "verify.py": "a69eb6c71a44ff42df488696ecd76257c5ec1096f5ae9a5dd245cc4128a2b0e2",
+    "data.sqlite": "ca6fdadda99e80f064275211e333f4c4a6db9821a82bf0a428291856165a7acf"
+  }
+}
