@@ -23,7 +23,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   schedule:
-    if: github.repository == 'CaoimhConway/workpaperbench' && github.ref == 'refs/heads/main' && github.run_attempt == 1
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:
@@ -42,7 +42,7 @@ jobs:
         run: python scripts/select_slots.py "$WPB_MODE" "$WPB_MANIFEST_ID" --batch "$WPB_BATCH"
   trial:
     needs: schedule
-    if: needs.schedule.outputs.has_slots == 'true' && github.run_attempt == 1
+    if: needs.schedule.outputs.has_slots == 'true' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && github.run_attempt == 1
     name: pair-${{ inputs.manifest_id }}-${{ matrix.pair_id }}
     runs-on: ubuntu-24.04
     timeout-minutes: 70
@@ -53,6 +53,7 @@ jobs:
     env:
       WPB_SLOTS: ${{ toJSON(matrix.slots) }}
       WPB_MODE: ${{ inputs.mode }}
+      WPB_BATCH: ${{ inputs.batch }}
       WPB_MANIFEST_ID: ${{ inputs.manifest_id }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
@@ -62,6 +63,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python scripts/attempts.py start
+      - name: Require the supplied capped inference key
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: test -n "$OPENROUTER_API_KEY"
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
         with:
           python-version: '3.12'
@@ -104,7 +109,7 @@ jobs:
           retention-days: 7
   reconcile:
     needs: [schedule, trial]
-    if: always() && needs.schedule.result == 'success' && github.run_attempt == 1
+    if: always() && needs.schedule.result == 'success' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:

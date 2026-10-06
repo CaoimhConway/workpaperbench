@@ -76,3 +76,11 @@ def test_equivalent_evidence_and_shared_context():
     assert scorer.support(["combined", "definition"], paths, ["definition"])
     assert not scorer.support(["facts", "unrelated"], paths, ["definition"])
     assert not scorer.support(["facts"], paths, ["definition"])
+
+
+def test_every_calculated_claim_has_a_changed_observation_control():
+    for key in ("a01", "b01", "c01"):
+        task = definition(key)
+        for claim in task["reference"]["answers"]:
+            if claim["status"] == "answered":
+                assert any(abs(control["expected"][claim["id"]] - claim["value"]) > 0.000001 for control in task["controls"])

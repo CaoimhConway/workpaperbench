@@ -53,7 +53,16 @@ async def run(config_path):
     await trial.run()
 
 
+def validate_live_environment():
+    repository = os.environ.get("GITHUB_REPOSITORY", "")
+    if (os.environ.get("GITHUB_ACTIONS") != "true"
+            or os.environ.get("RUNNER_OS") != "Linux"
+            or not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository)
+            or os.environ.get("GITHUB_REF") != "refs/heads/main"
+            or not os.environ.get("OPENROUTER_API_KEY")):
+        raise SystemExit("Native trials require a supplied capped key on the Linux main-branch Actions runner")
+
+
 if __name__ == "__main__":
-    if os.environ.get("GITHUB_ACTIONS") != "true" or os.environ.get("RUNNER_OS") != "Linux" or os.environ.get("GITHUB_REPOSITORY") != "CaoimhConway/workpaperbench":
-        raise SystemExit("Native trials require the dedicated hosted Actions repository")
+    validate_live_environment()
     asyncio.run(run(Path(sys.argv[1])))

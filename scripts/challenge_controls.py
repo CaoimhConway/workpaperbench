@@ -53,6 +53,13 @@ CHECK
         if equivalent["conclusion"]:
             equivalent["conclusion"]["evidence"] = gold["conclusion"]["evidence"][-1]
         results.append(native(control(task, name + "-evidence", equivalent), name + "-evidence", True))
+        shared = copy.deepcopy(ref)
+        shared["context_evidence"] = gold.get("context_evidence_allowed", [])
+        for claim in shared["answers"]:
+            claim["evidence"] = [e for e in claim["evidence"] if e not in shared["context_evidence"]]
+        if shared["conclusion"]:
+            shared["conclusion"]["evidence"] = [e for e in shared["conclusion"]["evidence"] if e not in shared["context_evidence"]]
+        results.append(native(control(task, name + "-shared-context", shared), name + "-shared-context", True))
     task = ROOT / "datasets/challenge-v1/tasks/a01"
     ref = json.loads((task / "tests/reference.json").read_text())
     for label, sql in (("attach", "ATTACH DATABASE '/tmp/escape' AS other"),

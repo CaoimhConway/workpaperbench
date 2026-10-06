@@ -1,5 +1,15 @@
 # Build status
 
+## Research Challenge development checkpoint
+
+Source-backed Adobe, Brale SBC and PayPal development dossiers are committed at `6ef6c65`. All original core sources, tasks, scorers, manifests, records and releases remain unchanged. Independent source-first read-only review and trusted Decimal arithmetic verified original and 2-4 synthetic control values. Adobe's complete operating bridge is retained, its copied subtotal fails the signed control, and changed EPS and annual yield observations reject constants. Review is not human validation.
+
+Pilot freeze `challenge-v1-development-41f5b75db8f4` binds three tasks, sources, candidate/test packages, scorer `challenge-1.0.0`, native execution, model routes and 18 full-dossier slots. Qwen 3.6 35B A3B and Gemini 3.1 Pro Preview receive identical native tools and time limits. No assisted runs are scheduled. Evaluation cases are not yet authored or exposed. Hosted native/fresh replay validation and pilot dispatch are pending.
+
+The lower dedicated lifetime limit remains USD 20. Metadata at 2026-10-06 21:04:19 UTC reports cumulative USD 1.508940909, remaining/funded USD 18.491059091, zero BYOK and no reset. Pilot reservation is USD 4.50. Future final reservation is USD 13.50 and affordability will be checked again after the pilot. No new inference has run. Runtime remains Harbor 0.23.0 and Hermes `v0.21.4+canary.20261004T084456Z`. New delivery accepts scalar aliases, every requested financial quantity is required, and structural rejection executes no SQL.
+
+Fork runtime history uses `GITHUB_REPOSITORY`. Live runs require a manual main-branch Linux Actions dispatch, attempt 1 and the supplied capped key. Source/scorer hashes are never bypassed. New model comparisons use separate content-hash manifests. Core key-free operations use `datasets/challenge-v1/core-review.json`, while old paid freezes stay closed.
+
 ## Post-release operational fix
 
 The published Apple B1 failure was a GitHub history API HTTP 500 before provider access. Read-only API requests now retry transient 500/502/503/504 responses at most three times, with one- and two-second waits. Real-v1 history skips unrelated named and historical campaign jobs. Authentication, rate-limit, malformed-response and exhausted transient failures still stop execution. Setup receipts include the dataset identity before installation or inference. Collection validates every member of a pair before writing either, rejects duplicate slot groups and preserves strict archive, run and original-byte checks.

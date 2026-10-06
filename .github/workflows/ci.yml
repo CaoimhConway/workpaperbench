@@ -22,7 +22,7 @@ on:
         default: ''
       dataset:
         type: choice
-        options: [all, historical, real-v1]
+        options: [all, historical, real-v1, challenge-v1]
         default: all
       fresh_replay:
         type: boolean
@@ -67,6 +67,7 @@ jobs:
       - run: python -m pytest -q
       - run: workpaperbench demo
       - run: python scripts/build_real_tasks.py --check
+      - run: python scripts/build_challenge_tasks.py --check
       - run: python scripts/audit.py
   integration:
     needs: unit
@@ -99,13 +100,16 @@ jobs:
           WPB_RESULTS_RUN: ${{ inputs.results_run_id }}
         run: python scripts/collect_results.py --run-id "$WPB_RESULTS_RUN"
       - name: Native historical reference and isolation controls
-        if: inputs.integration && inputs.dataset != 'real-v1'
+        if: inputs.integration && (inputs.dataset == 'all' || inputs.dataset == 'historical')
         env:
           WPB_INTEGRATION_SCOPE: ${{ inputs.scope }}
         run: python -u scripts/integration.py
       - name: Native real-data reference and isolation controls
-        if: inputs.integration && inputs.dataset != 'historical'
+        if: inputs.integration && (inputs.dataset == 'all' || inputs.dataset == 'real-v1')
         run: python -u scripts/real_controls.py
+      - name: Native challenge references and isolation controls
+        if: inputs.integration && (inputs.dataset == 'all' || inputs.dataset == 'challenge-v1')
+        run: python -u scripts/challenge_controls.py
       - name: Fresh selected replay or engineer submission
         if: inputs.fresh_replay
         env:
@@ -135,6 +139,7 @@ jobs:
           tar -cf /tmp/workpaperbench-results.tar reports/runs reports/results.md reports/scores.json README.md
           if [ -f reports/reconciliation.json ]; then tar -rf /tmp/workpaperbench-results.tar reports/reconciliation.json; fi
           if [ -d reports/real-v1 ]; then tar -rf /tmp/workpaperbench-results.tar reports/real-v1; fi
+          if [ -d reports/challenge-v1 ]; then tar -rf /tmp/workpaperbench-results.tar reports/challenge-v1; fi
           if [ -d reports/fresh-replay ]; then tar -rf /tmp/workpaperbench-results.tar reports/fresh-replay; fi
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()

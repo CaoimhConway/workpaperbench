@@ -93,6 +93,11 @@ def tree_sha256(path):
 
 
 def scorer_hashes(task_dir):
+    if (task_dir / "tests/workpaperbench/challenge_grading.py").is_file():
+        names = ("grading.py", "challenge_grading.py", "challenge_sql_worker.py")
+        current = hashlib.sha256(b"".join((ROOT / "workpaperbench" / name).read_bytes() for name in names)).hexdigest()
+        effective = hashlib.sha256(b"".join(read_bounded(task_dir / "tests/workpaperbench" / name, 1_000_000) for name in names)).hexdigest()
+        return current, effective
     root_grading = (ROOT / "workpaperbench/grading.py").read_bytes()
     root_sql = (ROOT / "workpaperbench/sql_worker.py").read_bytes()
     current = hashlib.sha256(root_grading + root_sql).hexdigest()
@@ -208,9 +213,11 @@ def validate_real_record(root, record_path, record, record_bytes, manifest, task
     from collect_results import validate_record
     slot = validate_record(record, root, run, manifest_id, mode)
     task_id = slot.get("task")
-    task_key = task_id.removeprefix("real-v1-") if isinstance(task_id, str) else ""
+    prefix = "challenge-v1-" if manifest.get("dataset_id") == "challenge-v1" else "real-v1-"
+    task_key = task_id.removeprefix(prefix) if isinstance(task_id, str) else ""
     spec = tasks.get(task_key)
-    if (not TASK_RE.fullmatch(task_key) or task_id != "real-v1-" + task_key
+    pattern = r"[abc]0[1-4]" if prefix == "challenge-v1-" else TASK_RE.pattern
+    if (not re.fullmatch(pattern, task_key) or task_id != prefix + task_key
             or not isinstance(spec, dict) or spec.get("task_id") != task_id):
         raise ValueError("real_record_task_identity_mismatch")
     if "task_id" in record and record["task_id"] != spec["task_id"]:
@@ -267,7 +274,8 @@ def check_answer_identity(content, expected_task_id):
 
 
 def user_answer(root, answer_path, task_id, dataset, tasks=None):
-    if not TASK_RE.fullmatch(task_id):
+    pattern = r"[abc]0[1-4]" if dataset == "challenge-v1" else TASK_RE.pattern
+    if not re.fullmatch(pattern, task_id):
         raise ValueError("invalid_task_selector")
     lexical = Path(answer_path)
     if not lexical.is_absolute():
@@ -285,8 +293,8 @@ def user_answer(root, answer_path, task_id, dataset, tasks=None):
         expected_task_id = task_id
     else:
         spec = tasks.get(task_id) if isinstance(tasks, dict) else None
-        expected_path = f"datasets/real-v1/tasks/{task_id}"
-        if (not isinstance(spec, dict) or spec.get("task_id") != "real-v1-" + task_id
+        expected_path = f"datasets/{dataset}/tasks/{task_id}"
+        if (not isinstance(spec, dict) or spec.get("task_id") != dataset + "-" + task_id
                 or spec.get("path") != expected_path):
             raise ValueError("real_task_manifest_identity_mismatch")
         task_root = ensure_no_symlink_ancestors(root / expected_path, root)
@@ -422,15 +430,16 @@ def discover_records(root, dataset, manifest):
 
 
 def selected_task(root, dataset, task_key, tasks=None):
-    if not isinstance(task_key, str) or not TASK_RE.fullmatch(task_key):
+    pattern = r"[abc]0[1-4]" if dataset == "challenge-v1" else TASK_RE.pattern
+    if not isinstance(task_key, str) or not re.fullmatch(pattern, task_key):
         raise ValueError("invalid_task_identity")
     if dataset == "historical":
         task_dir = ensure_no_symlink_ancestors(root / "tasks" / task_key, root)
         expected_task_id = task_key
     else:
         spec = tasks.get(task_key) if isinstance(tasks, dict) else None
-        expected_path = f"datasets/real-v1/tasks/{task_key}"
-        if (not isinstance(spec, dict) or spec.get("task_id") != "real-v1-" + task_key
+        expected_path = f"datasets/{dataset}/tasks/{task_key}"
+        if (not isinstance(spec, dict) or spec.get("task_id") != dataset + "-" + task_key
                 or spec.get("path") != expected_path):
             raise ValueError("real_task_manifest_identity_mismatch")
         task_dir = ensure_no_symlink_ancestors(root / expected_path, root)
@@ -442,13 +451,35 @@ def selected_task(root, dataset, task_key, tasks=None):
     return task_dir, expected_task_id
 
 
-def replay_selected(root, dataset, slot_filter, answer_path=None, task_key=None, env=None):
+def replay_selected(root, dataset, slot_filter, answer_path=None, task_key=None, env=None, _stage=None):
     run_id, attempt, commit = require_hosted_linux(env)
-    if dataset not in {"historical", "real-v1"}:
+    if dataset not in {"historical", "real-v1", "challenge-v1"}:
         raise ValueError("invalid_dataset")
+    if dataset == "challenge-v1" and _stage is None:
+        stages = ["development", "evaluation"]
+        if answer_path:
+            stages = ["development" if task_key in {"a01", "b01", "c01"} else "evaluation"]
+        elif slot_filter != "all":
+            stages = ["development" if str(slot_filter).startswith("pilot-") else "evaluation"]
+        receipts = []
+        for stage in stages:
+            if (root / "datasets/challenge-v1/manifests" / (stage + ".json")).is_file():
+                receipts.extend(replay_selected(root, dataset, slot_filter, answer_path, task_key, env, stage))
+        if not receipts:
+            raise ValueError("no_challenge_manifest_or_retained_answer")
+        return receipts
     if dataset == "historical":
         manifest, manifest_bytes = historical_context(root)
         tasks = None
+    elif dataset == "challenge-v1":
+        from native_run import frozen_inputs
+        from select_slots import campaign_context, campaign_slots
+        path = root / "datasets/challenge-v1/manifests" / (_stage + ".json")
+        manifest_bytes = read_bounded(path, MAX_JSON)
+        manifest = frozen_inputs(parse_json(manifest_bytes)["manifest_id"], root)
+        context = campaign_context(manifest["manifest_id"], root)
+        campaign_slots(context, context["stage"])
+        tasks = context["tasks"]
     else:
         manifest, manifest_bytes, tasks = load_real_manifest(root)
     manifest_id = manifest.get("manifest_id")
@@ -491,8 +522,8 @@ def replay_selected(root, dataset, slot_filter, answer_path=None, task_key=None,
                 continue
             raise ValueError("retained_answer_unavailable")
         task_key = slot.get("task")
-        if dataset == "real-v1" and isinstance(task_key, str):
-            task_key = task_key.removeprefix("real-v1-")
+        if dataset in {"real-v1", "challenge-v1"} and isinstance(task_key, str):
+            task_key = task_key.removeprefix(dataset + "-")
         task_dir, expected_task_id = selected_task(root, dataset, task_key, tasks)
         gold_path = ensure_no_symlink_ancestors(task_dir / "tests/gold.json", root)
         gold = parse_json(read_bounded(gold_path, 300_000))
@@ -513,7 +544,7 @@ def replay_selected(root, dataset, slot_filter, answer_path=None, task_key=None,
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--dataset", choices=("historical", "real-v1"), required=True)
+    parser.add_argument("--dataset", choices=("historical", "real-v1", "challenge-v1"), required=True)
     parser.add_argument("--slot", help="Retained slot id or all")
     parser.add_argument("--answer", help="Committed answer.json below submissions/")
     parser.add_argument("--task", help="Task key such as wp03 for --answer")

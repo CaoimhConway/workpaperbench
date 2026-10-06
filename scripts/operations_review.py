@@ -9,13 +9,38 @@ OPERATIONS = {f'scripts/{name}.py' for name in (
     'native_run', 'operations_review', 'select_slots',
 )}
 
+CORE_PUBLICATION_PATHS = OPERATIONS | {
+    '.github/workflows/ci.yml', '.github/workflows/benchmark.yml',
+    'workpaperbench/cli.py', 'pyproject.toml', 'DATA_SOURCES.md',
+    'scripts/native_trial.py',
+}
+
+
+def publication_hashes(manifest, root, hashes):
+    """Bind shared operational additions while preserving published task/scorer bytes."""
+    path = root / 'datasets/challenge-v1/core-review.json'
+    if not path.exists():
+        return hashes
+    from select_slots import _repo_file
+    path = _repo_file(root, 'datasets/challenge-v1/core-review.json')
+    review = json.loads(path.read_text())
+    original = _repo_file(root, 'datasets/real-v1/manifest.json')
+    corrections = review.get('correction_hashes', {})
+    if (review.get('original_manifest_id') != manifest.get('manifest_id')
+            or review.get('original_manifest_sha256') != hashlib.sha256(original.read_bytes()).hexdigest()
+            or not isinstance(corrections, dict) or not corrections.keys() <= CORE_PUBLICATION_PATHS
+            or any(not isinstance(value, str) or not re.fullmatch(r'[0-9a-f]{64}', value) for value in corrections.values())):
+        raise ValueError('challenge_core_review_invalid')
+    hashes.update(corrections)
+    return hashes
+
 
 def reviewed_hashes(manifest, root):
     root = Path(root)
     hashes = dict(manifest['hashes'])
     review_path = root / 'datasets/real-v1/operations-review.json'
     if not review_path.exists():
-        return hashes
+        return publication_hashes(manifest, root, hashes)
     from select_slots import _repo_file
     review_path = _repo_file(root, 'datasets/real-v1/operations-review.json')
     review = json.loads(review_path.read_text())
@@ -31,4 +56,4 @@ def reviewed_hashes(manifest, root):
                 or not isinstance(digest, str) or not re.fullmatch(r'[0-9a-f]{64}', digest)):
             raise ValueError('invalid_operations_correction')
     hashes.update(corrections)
-    return hashes
+    return publication_hashes(manifest, root, hashes)
