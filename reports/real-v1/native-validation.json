@@ -193,5 +193,17 @@
     }
   ],
   "screening_limits": "Known credential patterns were checked in compressed archive bytes and bounded decompressed members. This scan cannot prove absence of arbitrary unknown secret formats. Raw log and artifact archives remain in ignored .raw and are not included here.",
-  "validation": "All 111 native controls matched their expected completion verdicts. Every control reported network_namespace_none, network_probe_blocked, no_inference_key, and no_docker_socket as true."
+  "validation": "All 111 native controls matched their expected completion verdicts. Every control reported network_namespace_none, network_probe_blocked, no_inference_key, and no_docker_socket as true.",
+  "pilot_logs": {
+    "run_id": "37440431666",
+    "commit_sha": "97c1bd29347a9eb691e4d9678b5aeccd5a204d0d",
+    "workflow_result": "success",
+    "local_archive_sha256": "b5c0380d396228a1916cd40a70ee43e225129dd1663bb9801dc23167e690ec89",
+    "archive_bytes": 41859,
+    "member_count": 30,
+    "uncompressed_bytes": 114213,
+    "member_paths_bounded": true,
+    "credential_screen": "passed on archive bytes and every bounded member",
+    "screening_limits": "Known credential patterns only. Raw logs remain in ignored .raw."
+  }
 }
