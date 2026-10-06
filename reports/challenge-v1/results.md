@@ -2,7 +2,7 @@
 
 Full dossiers, neutral shared instructions. Model comparisons are separate from the historical prompt-arm experiments.
 
-## pilot - challenge-v1-development-41f5b75db8f4
+## pilot - challenge-v1-development-7e8903385beb
 
 | Scope | Model | Financial / assessed | Evidence / assessed | Robustness / assessed | Verified / scheduled | Delivery / assessed | Strict / scheduled | Verdict coverage |
 |---|---|---:|---:|---:|---:|---:|---:|---:|
