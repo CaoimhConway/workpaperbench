@@ -84,3 +84,29 @@ def test_every_calculated_claim_has_a_changed_observation_control():
         for claim in task["reference"]["answers"]:
             if claim["status"] == "answered":
                 assert any(abs(control["expected"][claim["id"]] - claim["value"]) > 0.000001 for control in task["controls"])
+
+
+def test_paypal_controls_preserve_revenue_disaggregations():
+    task = definition("c01")
+    for tables in [task["tables"], *(c["tables"] for c in task["controls"])]:
+        revenues = tables["revenues"]["rows"]
+        for year in ("2024-12-31", "2023-12-31", "2022-12-31"):
+            annual = {r[2]: Decimal(str(r[3])) for r in revenues if r[:2] == [year, 12]}
+            total = annual["Total net revenues (2)"]
+            assert annual["Transaction revenues"] + annual["Revenues from other value added services"] == total
+            assert sum(Decimal(str(r[3])) for r in tables["geography"]["rows"] if r[:2] == [year, 12]) == total
+        for category in ("Transaction revenues", "Revenues from other value added services", "Total net revenues"):
+            quarters = sum(Decimal(str(r[3])) for r in revenues if r[0].startswith("2024-") and r[1] == 3 and r[2] == category)
+            annual_category = "Total net revenues (2)" if category == "Total net revenues" else category
+            annual = next(Decimal(str(r[3])) for r in revenues if r[:3] == ["2024-12-31", 12, annual_category])
+            assert quarters == annual
+        volumes = {tuple(r[:2]): Decimal(str(r[3])) for r in tables["operating_metrics"]["rows"]}
+        assert 0 < volumes[("2024-12-31", 3)] < volumes[("2024-12-31", 12)]
+
+
+def test_adobe_signed_control_preserves_annual_bridge():
+    task = definition("a01")
+    tables = next(c["tables"] for c in task["controls"] if c["name"] == "signed_bridge")
+    income = {r[2]: Decimal(str(r[4])) for r in tables["financials"]["rows"] if r[:2] == ["2024-11-29", 12]}
+    bridge = sum(Decimal(str(r[3])) for r in tables["adjustments"]["rows"] if r[:2] == ["2024-11-29", 12])
+    assert income["GAAP operating income"] + bridge == income["Non-GAAP operating income"] == 10044

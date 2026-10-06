@@ -1,0 +1,71 @@
+{
+  "name": "challenge-b01-constant",
+  "expected_complete": false,
+  "verdict": {
+    "scorer_version": "challenge-1.0.0",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "delivery": true,
+      "financial_answer": true,
+      "evidence": true,
+      "robustness": false
+    },
+    "details": {
+      "claims": {
+        "june_assets_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "component_gap": false,
+            "coverage_increase": false
+          }
+        },
+        "june_reconciliation_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "component_gap": false,
+            "coverage_increase": true
+          }
+        },
+        "coverage_change_pp": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "component_gap": true,
+            "coverage_increase": false
+          }
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "evidence": true
+      }
+    },
+    "errors": [
+      "june_assets_usd:control:component_gap",
+      "june_assets_usd:control:coverage_increase",
+      "june_reconciliation_usd:control:component_gap",
+      "coverage_change_pp:control:coverage_increase"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}
