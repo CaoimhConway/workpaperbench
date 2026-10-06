@@ -170,7 +170,8 @@ def build(check=False):
     manifest_path = DATASET / 'manifest.json'
     if manifest_path.is_file():
         manifest = json.loads(manifest_path.read_text())
-        for name, expected in manifest['hashes'].items():
+        from operations_review import reviewed_hashes
+        for name, expected in reviewed_hashes(manifest, ROOT).items():
             path = ROOT / name
             if not path.is_file() or path.is_symlink() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
                 raise ValueError('Frozen input hash mismatch: ' + name)

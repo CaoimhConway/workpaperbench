@@ -1,5 +1,13 @@
 # Build status
 
+## Post-release operational fix
+
+The published Apple B1 failure was a GitHub history API HTTP 500 before provider access. Read-only API requests now retry transient 500/502/503/504 responses at most three times, with one- and two-second waits. Real-v1 history skips unrelated named and historical campaign jobs. Authentication, rate-limit, malformed-response and exhausted transient failures still stop execution. Setup receipts include the dataset identity before installation or inference. Collection validates every member of a pair before writing either, rejects duplicate slot groups and preserves strict archive, run and original-byte checks.
+
+`datasets/real-v1/operations-review.json` binds the exact published manifest and the corrected operational hashes. Only key-free reconstruction, audit and fresh replay use that receipt. Paid launch still verifies the original frozen hashes and rejects this corrected checkout. Sources, candidate packages, references, scorer, model, treatment, schedule, results and published tags are unchanged. Original campaign coverage remains 47/48, with no replacement inference or score-selected retry.
+
+Final full local suite passed 260 tests in 20.19 seconds, including both the bare `gh: HTTP 500` form in the actual failure log and the parenthesized form. Offline reconstruction, key-free demo and full-history publication audit passed. An actual GitHub history inspection returned zero truly unstarted slots and 48 preserved attempts, including failed B1. The original authenticated pair archive `11411495659`, SHA256 `1d9922e5bc678256938e4ca1a0dee8ddf155b6635ed7f26e19823d4cc1aeca4a`, still rejects its malformed B1 receipt, now without leaving partial files in a temporary collection root. Hosted checks of the final fix are pending. No inference spending was added.
+
 ## Real-data upgrade - v0.3.0 published
 
 The new authorized suite is `real-v1`, merged to main at `97c1bd29347a9eb691e4d9678b5aeccd5a204d0d` through PR 2, package version 0.3.0. The original freeze, tasks, results and correction manifests remain unchanged. Initial checkout `0885b2c` passed all 191 lightweight tests. Existing Git identity resolves from `.gitconfig-work` and the authenticated project account is `CaoimhConway`. Published v0.2.0 and both asset digests were verified through the API.

@@ -60,7 +60,7 @@ def list_slots(path):
     return data
 
 
-def frozen_inputs(manifest_id=None, root=None):
+def frozen_inputs(manifest_id=None, root=None, *, reviewed_operations=False):
     root = ROOT if root is None else Path(root)
     selected = manifest_id or os.environ.get("WPB_MANIFEST_ID")
     if selected == "development-v1":
@@ -77,6 +77,9 @@ def frozen_inputs(manifest_id=None, root=None):
     hashes = manifest.get("hashes")
     if not isinstance(hashes, dict) or not hashes:
         raise ValueError("freeze_hashes_missing")
+    if reviewed_operations and manifest.get("dataset_id") == "real-v1":
+        from operations_review import reviewed_hashes
+        hashes = reviewed_hashes(manifest, root)
     covered = set()
     for name, expected in hashes.items():
         relative = Path(name)

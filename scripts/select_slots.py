@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import time
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "CaoimhConway/workpaperbench"
@@ -195,7 +196,17 @@ def campaign_slots(context, mode):
 
 
 def api(path):
-    return json.loads(subprocess.check_output(["gh", "api", path]))
+    for attempt in range(3):
+        try:
+            response = subprocess.check_output(["gh", "api", "--method", "GET", path],
+                                               stderr=subprocess.PIPE)
+        except subprocess.CalledProcessError as error:
+            status = re.search(rb'\bHTTP (\d{3})\b', error.stderr or b'')
+            if attempt == 2 or status is None or status[1] not in (b'500', b'502', b'503', b'504'):
+                raise
+            time.sleep(attempt + 1)
+        else:
+            return json.loads(response)
 
 
 def pages(path, key):
@@ -246,9 +257,15 @@ def history(mode, manifest_id):
     current = int(os.environ.get("GITHUB_RUN_ID", "0"))
     attempt = int(os.environ.get("GITHUB_RUN_ATTEMPT", "1"))
     for run in pages(f"repos/{REPO}/actions/workflows/benchmark.yml/runs", "workflow_runs"):
+        named = run.get('display_title', '').startswith('WPB::')
+        if named and run_manifest(run, mode, cache) != manifest_id:
+            continue
+        # Legacy workflow definitions only read the historical config freeze.
+        if not named and manifest_id.startswith('real-v1'):
+            continue
         jobs = list(pages(f"repos/{REPO}/actions/runs/{run['id']}/jobs?filter=all", "jobs"))
         jobs = [job for job in jobs if any(s.startswith(mode + "-") for s in job_slots(job))]
-        if not jobs or run_manifest(run, mode, cache) != manifest_id:
+        if not jobs or (not named and run_manifest(run, mode, cache) != manifest_id):
             continue
         for job in jobs:
             # Exclude this invocation only, never older attempts of the same run.

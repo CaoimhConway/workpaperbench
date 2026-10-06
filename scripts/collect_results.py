@@ -89,7 +89,8 @@ def import_archive(data, artifact, root):
             if parts[-1] in groups.setdefault(group, {}):
                 raise ValueError("duplicate_archive_entry")
             groups[group][parts[-1]] = archive.read(entry)
-    imported = []
+    prepared = []
+    identifiers = set()
     for group, files in groups.items():
         if not all(screened(b) for b in files.values()):
             raise ValueError("credential_pattern_in_artifact")
@@ -100,11 +101,15 @@ def import_archive(data, artifact, root):
             raise ValueError('artifact_declared_slot_identity_mismatch')
         if group != "single" and record.get("slot_id") != group:
             raise ValueError("archive_slot_mismatch")
-        imported.append(save_files(files, artifact, hashlib.sha256(data).hexdigest(), root))
-    return imported
+        if record['slot_id'] in identifiers:
+            raise ValueError('duplicate_archive_slot')
+        identifiers.add(record['slot_id'])
+        prepared.append((files, validate_files(files, artifact, root)))
+    return [save_files(files, artifact, hashlib.sha256(data).hexdigest(), destination, record)
+            for files, (destination, record) in prepared]
 
 
-def save_files(files, artifact, archive_sha256, root):
+def validate_files(files, artifact, root):
     record = json.loads(files["record.json"])
     manifest_id = artifact.get("manifest_id")
     if not manifest_id:
@@ -126,7 +131,6 @@ def save_files(files, artifact, archive_sha256, root):
     destination = retained_directory(root, manifest_id, identifier)
     if any(p.is_symlink() for p in (destination, *destination.parents) if p != root and p.is_relative_to(root)):
         raise ValueError("unsafe_artifact_destination")
-    destination.mkdir(parents=True, exist_ok=True)
     for name, content in files.items():
         target = destination / name
         if target.is_symlink() or (target.exists() and target.read_bytes() != content):
@@ -135,6 +139,11 @@ def save_files(files, artifact, archive_sha256, root):
         raise ValueError("original_bytes_hash_mismatch")
     if "retained_sha256" in record and ("answer.json" not in files or hashlib.sha256(files["answer.json"]).hexdigest() != record["retained_sha256"]):
         raise ValueError("normalized_bytes_hash_mismatch")
+    return destination, record
+
+
+def save_files(files, artifact, archive_sha256, destination, record):
+    destination.mkdir(parents=True, exist_ok=True)
     for name, content in files.items():
         target = destination / name
         target.write_bytes(content)
@@ -148,7 +157,7 @@ def save_files(files, artifact, archive_sha256, root):
         "note": "Legacy answer_sha256 describes pre-normalization bytes, not the retained normalized file. No missing original is reconstructed.",
     }
     (destination / "artifact-audit.json").write_text(json.dumps(audit, indent=2) + "\n")
-    return identifier
+    return record['slot_id']
 
 
 def validate_record(record, root, run, manifest_id=None, mode="final"):

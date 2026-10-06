@@ -68,15 +68,17 @@ if freeze.exists():
     upgrade_path = ROOT / 'datasets/real-v1/manifest.json'
     if upgrade_path.is_file():
         upgrade = json.loads(upgrade_path.read_text())
+        from operations_review import reviewed_hashes
+        upgrade_hashes = reviewed_hashes(upgrade, ROOT)
         permitted = {
             '.github/workflows/benchmark.yml', '.github/workflows/ci.yml',
             'pyproject.toml', 'DATA_SOURCES.md', 'workpaperbench/cli.py',
             *(f'scripts/{name}.py' for name in ('audit', 'attempts', 'collect_results',
                                               'native_run', 'select_slots')),
         }
-        for name in permitted & expected_hashes.keys() & upgrade['hashes'].keys():
-            expected_hashes[name] = upgrade['hashes'][name]
-        for name, expected in upgrade['hashes'].items():
+        for name in permitted & expected_hashes.keys() & upgrade_hashes.keys():
+            expected_hashes[name] = upgrade_hashes[name]
+        for name, expected in upgrade_hashes.items():
             path = ROOT / name
             if path.is_symlink() or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
                 failures.append(name + ':real_dataset_hash_mismatch')

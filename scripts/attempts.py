@@ -46,10 +46,11 @@ def check(mode, manifest_id, identifiers):
 
 
 def receipt(mode, manifest_id, identifiers):
-    from select_slots import selection
+    from select_slots import selection, real_dataset_context
     if os.environ.get('GITHUB_RUN_ATTEMPT') != '1':
         raise ValueError('same_run_retry_disabled')
     available, _ = selection(mode, manifest_id, 'all')
+    context = real_dataset_context(manifest_id, ROOT)
     by_id = {s['slot_id']: s for s in available}
     if not identifiers or len(identifiers) > 2 or any(i not in by_id for i in identifiers):
         raise ValueError('slot_previously_attempted_or_invalid')
@@ -64,6 +65,9 @@ def receipt(mode, manifest_id, identifiers):
                 'run_id': os.environ['GITHUB_RUN_ID'],
                 'github_run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
                 'commit_sha': os.environ['GITHUB_SHA']}
+        if context is not None:
+            data.update(dataset_id=context['dataset_id'],
+                        dataset_manifest_id=context['manifest_id'])
         write(path, data)
 
 
