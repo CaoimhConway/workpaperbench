@@ -6,6 +6,7 @@ from pathlib import Path
 import shutil
 import tempfile
 import re
+import sqlite3
 from html.parser import HTMLParser
 
 from build_tasks import database, write_json
@@ -92,6 +93,16 @@ def package(identifier, definition, destination):
         directory.mkdir(parents=True, exist_ok=True)
     database(environment / 'data.sqlite', definition['tables'])
     database(tests / 'changed.sqlite', definition['changed_tables'])
+    if (DATASET / 'manifest.json').is_file():
+        for path in (environment / 'data.sqlite', tests / 'changed.sqlite'):
+            retained = DATASET / path.relative_to(destination)
+            if sqlite_contents(retained) != sqlite_contents(path):
+                raise ValueError('Source-derived table reconstruction mismatch: ' + str(retained.relative_to(ROOT)))
+            if retained.read_bytes() != path.read_bytes():
+                old, rebuilt = retained.read_bytes(), path.read_bytes()
+                offset = next((i for i, pair in enumerate(zip(old, rebuilt)) if pair[0] != pair[1]), min(len(old), len(rebuilt)))
+                print(f'SQLite layout differs at byte {offset}: ' + str(retained.relative_to(ROOT)) + f', lengths {len(old)}/{len(rebuilt)}. Schema and complete typed rows match. Retaining frozen SQLite bytes.')
+            shutil.copyfile(retained, path)
     shutil.copyfile(environment / 'data.sqlite', tests / 'data.sqlite')
     for directory in (environment, tests):
         shutil.copyfile(DATASET / 'schema.json', directory / 'schema.json')
@@ -141,7 +152,28 @@ def definitions():
     return {**{name: legacy_definition(name) for name in ('wp01', 'wp02', 'wp05', 'wp07')}, **crypto_definitions()}
 
 
+def sqlite_contents(path):
+    """Compare trusted generated tables without relying on SQLite page layout."""
+    with sqlite3.connect(path.resolve().as_uri() + '?mode=ro', uri=True) as db:
+        schema = db.execute('SELECT type,name,tbl_name,sql FROM sqlite_schema ORDER BY type,name').fetchall()
+        tables = {}
+        for kind, name, _, _ in schema:
+            if kind != 'table':
+                continue
+            quoted = '"' + name.replace('"', '""') + '"'
+            rows = db.execute('SELECT * FROM ' + quoted + ' ORDER BY rowid').fetchall()
+            tables[name] = [[(type(value).__name__, value) for value in row] for row in rows]
+        return schema, tables
+
+
 def build(check=False):
+    manifest_path = DATASET / 'manifest.json'
+    if manifest_path.is_file():
+        manifest = json.loads(manifest_path.read_text())
+        for name, expected in manifest['hashes'].items():
+            path = ROOT / name
+            if not path.is_file() or path.is_symlink() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+                raise ValueError('Frozen input hash mismatch: ' + name)
     with tempfile.TemporaryDirectory() as temporary:
         staged = Path(temporary)
         (staged / 'sources').mkdir()
@@ -153,11 +185,14 @@ def build(check=False):
             target = DATASET / path.relative_to(staged)
             if check or (DATASET / 'manifest.json').is_file():
                 if not target.is_file() or target.read_bytes() != path.read_bytes():
-                    raise ValueError('Offline reconstruction mismatch: ' + str(target.relative_to(ROOT)))
+                    expected = target.read_bytes() if target.is_file() else b''
+                    actual = path.read_bytes()
+                    offset = next((i for i, pair in enumerate(zip(expected, actual)) if pair[0] != pair[1]), min(len(expected), len(actual)))
+                    raise ValueError('Offline reconstruction mismatch: ' + str(target.relative_to(ROOT)) + f' at byte {offset}, expected {expected[offset:offset+8].hex()}, rebuilt {actual[offset:offset+8].hex()}, lengths {len(expected)}/{len(actual)}')
             else:
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_bytes(path.read_bytes())
-    print('Eight real-v1 packages reconstructed offline' + (' and byte-verified' if check else ''))
+    print('Eight real-v1 packages reconstructed offline' + (' with exact non-SQLite bytes, complete typed table equality and frozen input hashes' if check else ''))
 
 
 if __name__ == '__main__':

@@ -90,8 +90,25 @@ def test_original_dataset_remains_frozen():
             assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest
 
 
-def test_offline_reconstruction_is_byte_identical():
+def test_offline_reconstruction_preserves_frozen_package_bytes():
     subprocess.run([sys.executable, str(ROOT / 'scripts/build_real_tasks.py'), '--check'], check=True, cwd=ROOT)
+
+
+def test_reconstruction_compares_rows_and_duplicates_across_page_layouts(tmp_path):
+    import sqlite3
+    sys.path.insert(0, str(ROOT / 'scripts'))
+    import build_real_tasks
+    paths = [tmp_path / 'small.sqlite', tmp_path / 'large.sqlite']
+    for path, page_size in zip(paths, (4096, 8192)):
+        with sqlite3.connect(path) as db:
+            db.execute(f'PRAGMA page_size={page_size}')
+            db.execute('CREATE TABLE events(event_id TEXT,amount INTEGER)')
+            db.executemany('INSERT INTO events VALUES (?,?)', [('e1', 100), ('e1', 100), ('e2', 100)])
+    assert paths[0].read_bytes() != paths[1].read_bytes()
+    assert build_real_tasks.sqlite_contents(paths[0]) == build_real_tasks.sqlite_contents(paths[1])
+    with sqlite3.connect(paths[1]) as db:
+        db.execute('DELETE FROM events WHERE rowid=1')
+    assert build_real_tasks.sqlite_contents(paths[0]) != build_real_tasks.sqlite_contents(paths[1])
 
 
 def test_new_contract_is_per_claim_before_evaluation():
