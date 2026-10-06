@@ -1,5 +1,11 @@
 # Build status
 
+## Real-data upgrade in progress
+
+The new authorized suite is `real-v1`, on branch `codex/real-data-release`. The original freeze, tasks, results and correction manifests remain unchanged. Initial checkout `0885b2c` passes all 191 lightweight tests. Existing Git identity resolves from `.gitconfig-work` and the authenticated project account is `CaoimhConway`. Published v0.2.0 and both asset digests were verified through the API.
+
+No `ARTEMIS_API_KEY` repository secret is present. DefiLlama free responses are reachable, but current redistribution terms prevent bundling them without permission. Primary-source alternatives are being acquired. The SEC accession-specific Tesla and Apple tables were fetched successfully and retained as exact factual HTML table slices with original-document and extract hashes. The old PublicNode HTTP failure and Cloudflare RPC error remain in their original failure record. No paid inference has run for this upgrade.
+
 Measured release [v0.2.0](https://github.com/CaoimhConway/workpaperbench/releases/tag/v0.2.0) is published at `23fb28555eaec5e10b738a1ebcccdcebaa32c541`, after [PR 1](https://github.com/CaoimhConway/workpaperbench/pull/1) merged and all correction gates passed. Specification v3.1 and the original experiment remain unchanged. The dedicated repository is public. No Docker, Harbor, inference or downloaded-submission SQL ran on this device.
 
 ## Verified state
