@@ -39,7 +39,7 @@ def native_hook_smoke_script():
         "invoke_hook('post_api_request',**{**common,'ended_at':started+0.2})",
         "print('WPB_NATIVE_HOOK_SMOKE:'+json.dumps({",
         "    'registered':registered,'dispatches':4,",
-        "    'launcher_python':os.environ.get('WPB_HERMES_LAUNCHER_PYTHON') == '1',",
+        "    'installed_runtime_python':os.environ.get('WPB_INSTALLED_RUNTIME_PYTHON'),",
         "    'installed_runtime_commit':os.environ.get('WPB_INSTALLED_RUNTIME_COMMIT'),",
         "    'native_process_can_write_observer_ledger':os.access('/logs/agent/native-api-observer.jsonl',os.W_OK),",
         "},sort_keys=True))",
@@ -50,26 +50,25 @@ def native_hook_smoke_command(checkout, expected_commit):
     script = shlex.quote(native_hook_smoke_script())
     checkout = shlex.quote(str(checkout))
     expected_commit = shlex.quote(expected_commit)
+    resolver = shlex.quote(
+        "import sys\n"
+        "from pathlib import Path\n"
+        "root=Path(sys.argv[1]).resolve()\n"
+        "sys.path.insert(0,str(root))\n"
+        "from pm.environments import project_python\n"
+        "print(project_python(root))\n"
+    )
     return ("set -eu\n"
             "export PATH=\"$HOME/.local/bin:$PATH\"\n"
-            "hermes_bin=\"$(command -v hermes)\"\n"
-            "shebang=\"$(head -n 1 \"$hermes_bin\")\"\n"
-            "case \"$shebang\" in\n"
-            "  '#!/usr/bin/env python'|'#!/usr/bin/env python3'|'#!/usr/bin/env python3.'*)\n"
-            "    interpreter=\"${shebang#\\#!/usr/bin/env }\"\n"
-            "    hermes_python=\"$(command -v \"$interpreter\")\"\n"
-            "    ;;\n"
-            "  '#!'*/python|'#!'*/python[0-9]|'#!'*/python[0-9].*) hermes_python=\"${shebang#\\#!}\" ;;\n"
-            "  *) exit 42 ;;\n"
-            "esac\n"
-            "case \"${hermes_python##*/}\" in python|python[0-9]|python[0-9].*) ;; *) exit 42 ;; esac\n"
-            "test -x \"$hermes_python\"\n"
-            "export WPB_HERMES_LAUNCHER_PYTHON=1\n"
             f"installed_runtime_commit=\"$(git -C {checkout} rev-parse HEAD)\"\n"
             f"test \"$installed_runtime_commit\" = {expected_commit}\n"
             "export WPB_INSTALLED_RUNTIME_COMMIT=\"$installed_runtime_commit\"\n"
+            f"installed_runtime_python=\"$(HERMES_HOME=/tmp/hermes python3 -c {resolver} {checkout})\"\n"
+            "case \"$installed_runtime_python\" in /*) ;; *) exit 42 ;; esac\n"
+            "test -x \"$installed_runtime_python\"\n"
+            "export WPB_INSTALLED_RUNTIME_PYTHON=\"$installed_runtime_python\"\n"
             f"cd {checkout}\n"
-            f"\"$hermes_python\" -c {script}\n")
+            f"\"$installed_runtime_python\" -c {script}\n")
 
 
 async def run_native_hook_smoke(agent_environment, root, checkout, expected_commit):
@@ -106,14 +105,14 @@ async def run_native_hook_smoke(agent_environment, root, checkout, expected_comm
     registered = runtime_check.get("registered")
     runtime_dispatches = runtime_check.get("dispatches")
     native_process_can_write = runtime_check.get("native_process_can_write_observer_ledger")
-    launcher_python = runtime_check.get("launcher_python")
+    installed_runtime_python = runtime_check.get("installed_runtime_python")
     installed_runtime_commit = runtime_check.get("installed_runtime_commit")
     expected_hooks = {"pre_api_request", "post_api_request", "api_request_error"}
     runtime_marker_valid = (
-        set(runtime_check) == {"registered", "dispatches", "launcher_python",
+        set(runtime_check) == {"registered", "dispatches", "installed_runtime_python",
                                "installed_runtime_commit", "native_process_can_write_observer_ledger"}
         and type(runtime_dispatches) is int and runtime_dispatches == 4
-        and type(launcher_python) is bool and launcher_python is True
+        and isinstance(installed_runtime_python, str) and installed_runtime_python.startswith("/")
         and installed_runtime_commit == expected_commit
         and type(native_process_can_write) is bool
         and isinstance(registered, dict) and set(registered) == expected_hooks
@@ -153,7 +152,10 @@ async def run_native_hook_smoke(agent_environment, root, checkout, expected_comm
         "return_code": result.return_code,
         "runtime_hooks_registered": registered if isinstance(registered, dict) else {},
         "runtime_marker_valid": runtime_marker_valid,
-        "hermes_launcher_python_shebang": launcher_python is True,
+        "installed_runtime_python_resolved": (
+            isinstance(installed_runtime_python, str) and installed_runtime_python.startswith("/")
+        ),
+        "installed_runtime_python": installed_runtime_python,
         "installed_runtime_commit": installed_runtime_commit,
         "native_process_can_write_observer_ledger": native_process_can_write is True,
         "ledger_retained_and_readable": evidence_shape_valid and evidence["capture_status"] == "captured",
@@ -164,7 +166,7 @@ async def run_native_hook_smoke(agent_environment, root, checkout, expected_comm
         "capture_completeness": evidence["capture_completeness"],
         "capture_limitations": evidence["capture_limitations"],
         "candidate_terminal_access_assumption": (
-            "same-container terminal permissions may allow writing the shared /logs/agent mount; not probed"
+            "same-container terminal permissions may allow writing the shared /logs/agent mount - not probed"
         ),
     }
 
