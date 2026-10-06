@@ -430,6 +430,16 @@ def history(mode, manifest_id):
     attempted, cache = {}, {}
     current = int(os.environ.get("GITHUB_RUN_ID", "0"))
     attempt = int(os.environ.get("GITHUB_RUN_ATTEMPT", "1"))
+    active_slots = None
+    raw_active_slots = os.environ.get("WPB_SLOTS")
+    if raw_active_slots:
+        parsed_active_slots = json.loads(raw_active_slots)
+        if (not isinstance(parsed_active_slots, list)
+                or any(not isinstance(slot_id, str)
+                       or not re.fullmatch(SLOT_PATTERN, slot_id)
+                       for slot_id in parsed_active_slots)):
+            raise ValueError("active_slot_identifiers_invalid")
+        active_slots = set(parsed_active_slots)
     for run in pages(f"repos/{REPO}/actions/workflows/benchmark.yml/runs", "workflow_runs"):
         named = run.get('display_title', '').startswith('WPB::')
         if named and run_manifest(run, mode, cache) != manifest_id:
@@ -442,9 +452,14 @@ def history(mode, manifest_id):
         if not jobs or (not named and run_manifest(run, mode, cache) != manifest_id):
             continue
         for job in jobs:
-            # Exclude this invocation only, never older attempts of the same run.
             if run["id"] == current and job.get("run_attempt", 1) == attempt:
-                continue
+                job_slots_for_history = set(job_slots(job))
+                if (active_slots is None
+                        or job_slots_for_history.intersection(active_slots)):
+                    # Keep selection behavior when no slot pair is supplied. In a trial job,
+                    # exclude only its active pair so completed pairs in this run reserve
+                    # no additional provider balance.
+                    continue
             if not job_started(job):
                 continue
             for slot_id in job_slots(job):

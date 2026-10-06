@@ -12,7 +12,7 @@ OPERATIONS = {f'scripts/{name}.py' for name in (
 CORE_PUBLICATION_PATHS = OPERATIONS | {
     '.github/workflows/ci.yml', '.github/workflows/benchmark.yml',
     'workpaperbench/cli.py', 'pyproject.toml', 'DATA_SOURCES.md',
-    'scripts/native_trial.py',
+    'scripts/native_trial.py', 'scripts/check_install.py',
 }
 
 

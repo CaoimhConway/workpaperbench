@@ -5,8 +5,8 @@
     "provider_lifetime_cap_usd": 20,
     "reservation_usd": 4.5
   },
-  "content_hash": "41f5b75db8f47c2ff26f29cd116918cc7cb967b086a20af75fb5a539a4ef9c0e",
-  "created_at": "2026-10-06T21:31:24.078172+00:00",
+  "content_hash": "5af8ab341b8395a33c257f1a6913a503e02042dbdbacad2111354ebba990ac1d",
+  "created_at": "2026-10-06T21:58:40.256773+00:00",
   "dataset_id": "challenge-v1",
   "exposure": {
     "core_results_relabelled": false,
@@ -15,6 +15,8 @@
   },
   "hashes": {
     ".github/workflows/benchmark.yml": "038e839027990cbe622a2b5d55a3886112d2c7c1513f732e2bf0ba5d24bf8a6d",
+    "config/native-api-observer/__init__.py": "82623d944da62415a28d0446e91dae0a9d156b5cbfc6b1b0d3ac71adb28c83e8",
+    "config/native-api-observer/plugin.yaml": "41b6c9bb50c022dc1139dc26017633ce9e26cd4ca5d51e0baecfc9c57ecf0de9",
     "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5",
     "datasets/challenge-v1/authoring/a01/authoring-note.md": "3df6b24f32f26bbd958fc0117ded93679b45334e2e5c375b06f53d30ed85aa3d",
     "datasets/challenge-v1/authoring/a01/definition.json": "470bcf8d5359259f785906e15f57a9f3a08f0e4975e512245fa9e1e2b3de2835",
@@ -109,20 +111,21 @@
     "datasets/challenge-v1/tasks/c01/tests/workpaperbench/challenge_grading.py": "c32ab86f11e874109101d6bcad6c5d4b7b465579f13ac4691bc3300aa87945c3",
     "datasets/challenge-v1/tasks/c01/tests/workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
     "datasets/challenge-v1/tasks/c01/tests/workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
-    "scripts/attempts.py": "0d81eeaf6f4ac6c47eeabe7322d69231700b3d20904efa644be5a0f0f169d2d0",
+    "scripts/attempts.py": "bad6e6ab689e6075aea116a0724eb2f4bc5025dbe5373c52f5d810788d1f3b23",
     "scripts/build_challenge_tasks.py": "e89c4b48089829ecb1ac17b5364a589189a5860bcbbcae018f71ecb21da555f8",
     "scripts/check_answer.py": "fc29f09dd61d2fe924e560a7c575fc27cb1a8b25cd37c8dfbdd0dbda21e4f0f9",
+    "scripts/check_install.py": "5eba18a4ee2270342a375a2b8c2a4b4790b5acb05256846ca3c82b5a2d09af84",
     "scripts/collect_results.py": "2ee8e84d4f6e94fd4c90f855e6eb880764ec0b188d3eeda6e5c56edf02c0bb61",
     "scripts/fix_native_version.py": "8f7d7f87a5e670d1423ae212cd5db81534ab479dfe2de68c184866c98031c545",
     "scripts/fresh_replay.py": "4e4c57fb2f385505deb2dcd10dc7765c3e9ff53783bf7164ff08eb538378d130",
-    "scripts/native_run.py": "80ac4ff2294a3be955891ff1cdfcc36a6405272173a5ad59b14fb5d26ff7f505",
-    "scripts/native_trial.py": "cad326a3d5a90895009a72f019b940855fde89deb686484e9efb4024291913a0",
-    "scripts/select_slots.py": "85964e94df1c968edbf3c9fb1b54f896b2ed4e74f2a717e89df9c0ff79779790",
+    "scripts/native_run.py": "f2976bb7224be01de935829a50bfaf0074e6e7beda7d4c6cd17326b89bf83ab6",
+    "scripts/native_trial.py": "d7207d92b139392cb88d42a6c2b60394f93db256e9691435c6755fc78b32025c",
+    "scripts/select_slots.py": "344f12bea39ed51ee65811b7761825406d96f19651d231b04aad767aa0e76e44",
     "workpaperbench/challenge_grading.py": "c32ab86f11e874109101d6bcad6c5d4b7b465579f13ac4691bc3300aa87945c3",
     "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
     "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5"
   },
-  "manifest_id": "challenge-v1-development-41f5b75db8f4",
+  "manifest_id": "challenge-v1-development-5af8ab341b83",
   "metrics": {
     "assisted": "none scheduled",
     "completion_denominator": "all scheduled slots",
@@ -136,6 +139,7 @@
       "evidence",
       "robustness"
     ],
+    "showcase_selection": "First scheduled delivered financial or robustness failure, then evidence failure, then verified completion. Contrast first same-case completion or first completion elsewhere",
     "strict_additionally_requires": "delivery",
     "task_macro": "mean of per-case scheduled proportions, three repetitions each",
     "unavailable_quantity": "status and unit required, value and SQL null"
@@ -165,6 +169,7 @@
     "condition": "full",
     "native_max_turns": 90,
     "native_provider_retry": "native pinned implementation, retries remain in original slot",
+    "native_provider_retry_observation": "Bounded content-free native hook events, capture completeness not guaranteed, provider-internal retries unobserved",
     "repetitions_per_case_model": 3,
     "seed": null,
     "setup_or_transport_failure": "retained missing outcome, never favorable replacement",
@@ -174,6 +179,11 @@
     "temperature": "provider/native default",
     "tools": "file,terminal,skills",
     "treatment_skill": null
+  },
+  "software_predecessor": {
+    "manifest_id": "challenge-v1-development-41f5b75db8f4",
+    "reason": "Pre-exposure retry telemetry and attempt accounting fixes, candidate evidence and scorer unchanged",
+    "scheduled_model_exposures": 0
   },
   "stage": "pilot",
   "tasks": {

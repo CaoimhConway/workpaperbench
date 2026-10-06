@@ -73,7 +73,7 @@ if freeze.exists():
         permitted = {
             '.github/workflows/benchmark.yml', '.github/workflows/ci.yml',
             'pyproject.toml', 'DATA_SOURCES.md', 'workpaperbench/cli.py',
-            'scripts/native_trial.py',
+            'scripts/native_trial.py', 'scripts/check_install.py',
             *(f'scripts/{name}.py' for name in ('audit', 'attempts', 'collect_results',
                                               'native_run', 'select_slots')),
         }

@@ -71,6 +71,21 @@ def receipt(mode, manifest_id, identifiers):
         if context is not None:
             data.update(dataset_id=context['dataset_id'],
                         dataset_manifest_id=context['manifest_id'])
+            if context['dataset_id'] == 'challenge-v1':
+                slot = by_id[identifier]
+                task_key = slot['task'].removeprefix('challenge-v1-')
+                task = context['tasks'][task_key]
+                model = context['manifest']['models'][slot['model_key']]
+                data.update(
+                    source_group=task['source_group'],
+                    task_origin=task.get('origin'),
+                    model=model['id'],
+                    model_route_policy=model['route_policy'],
+                    model_provider=model['provider'],
+                    model_harbor_model=model['harbor_model'],
+                    reservation_usd_per_slot=float(model['reservation_usd_per_slot']),
+                    model_profile_status='manifest_declared_not_execution_evidence',
+                )
         write(path, data)
 
 
