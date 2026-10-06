@@ -1,0 +1,170 @@
+{
+  "reviewed_on": "2026-10-06",
+  "routes": [
+    {
+      "source": "Blockstream Esplora public Bitcoin API",
+      "status": "captured",
+      "attribution": "Blockstream Esplora, Bitcoin Mainnet public API, https://blockstream.info/api",
+      "documentation": "https://github.com/Blockstream/esplora/blob/bb2d9f37bdb0eb0dade45b121a1df3581d7443ea/API.md",
+      "documentation_commit": "bb2d9f37bdb0eb0dade45b121a1df3581d7443ea",
+      "terms_reviewed": "https://blockstream.com/terms/",
+      "terms_assessment": "The Esplora repository is MIT-licensed software. That license is not treated as a license for the API data. The public Blockstream terms were reviewed and no separate public API-data redistribution grant was identified. The retained data are a small, attributed sample of public Bitcoin chain facts.",
+      "capture_directory": "captures/bitcoin-halving",
+      "normalized_file": "captures/bitcoin-halving/bitcoin-halving-normalized.json",
+      "manifest_file": "captures/bitcoin-halving/bitcoin-halving.manifest.json",
+      "request_count": 5,
+      "request_paths": [
+        "/block-height/840000",
+        "/block/{hash}",
+        "/block/{hash}/txs/0"
+      ],
+      "schema_and_units": {
+        "block": ["id", "height", "timestamp", "previousblockhash", "merkle_root", "tx_count"],
+        "transaction": ["txid", "size", "weight", "fee", "vin[].prevout.value", "vout[].value", "status"],
+        "amount_unit": "satoshi",
+        "fee_rate_unit": "satoshi per virtual byte"
+      },
+      "method_checks": [
+        "The first page contains 25 transactions at indices 0 through 24 and begins with the single coinbase transaction.",
+        "For each of the 48 sample non-coinbase transactions, the API fee equals the sum of input prevout values minus output values.",
+        "The blocks at heights 839999 and 840000 are adjacent, confirmed by their previous-block hash link."
+      ],
+      "observed_values": [
+        {
+          "height": 839999,
+          "timestamp_unix_seconds": 1713571533,
+          "block_transaction_count": 2328,
+          "sample_transaction_count": 25,
+          "sample_noncoinbase_count": 24,
+          "sample_noncoinbase_fee_sum_sats": 8273372,
+          "sample_noncoinbase_fee_median_sats": 215284.5,
+          "sample_noncoinbase_fee_rate_median_sats_per_vbyte": 949.5,
+          "sample_noncoinbase_output_sum_sats": 434012319,
+          "nominal_subsidy_sats": 625000000,
+          "coinbase_payout_sats": 729455386,
+          "coinbase_payout_minus_subsidy_sats": 104455386
+        },
+        {
+          "height": 840000,
+          "timestamp_unix_seconds": 1713571767,
+          "block_transaction_count": 3050,
+          "sample_transaction_count": 25,
+          "sample_noncoinbase_count": 24,
+          "sample_noncoinbase_fee_sum_sats": 2080158845,
+          "sample_noncoinbase_fee_median_sats": 6587,
+          "sample_noncoinbase_fee_rate_median_sats_per_vbyte": 47.14854288950674,
+          "sample_noncoinbase_output_sum_sats": 2757007836,
+          "nominal_subsidy_sats": 312500000,
+          "coinbase_payout_sats": 4075061499,
+          "coinbase_payout_minus_subsidy_sats": 3762561499
+        }
+      ],
+      "limitations": [
+        "Only first-page transactions were fetched. These are not full-block fee totals.",
+        "Coinbase payout above nominal subsidy is not labeled as total block fees.",
+        "The two adjacent blocks do not establish a causal effect of the subsidy halving or a trend.",
+        "No wallet attribution or identity research was performed."
+      ]
+    },
+    {
+      "source": "Circle USDC Reserve Report",
+      "status": "factual_extract_captured",
+      "attribution": "Circle Internet Group, Inc., USDC Reserve Report for January 6 and January 31, 2025, with independent accountants' report dated February 27, 2025.",
+      "capture_file": "captures/circle-usdc-jan2025.json",
+      "source_sha256": "aba5d96d691e28e6c9c4ff280954dba92e3fa40b3854ab79557d0d477b2651f6",
+      "source_pdf_bytes": 240271,
+      "retrieved_on": "2026-10-06",
+      "retrieval_date_precision": "date",
+      "http_last_modified": "2025-02-28T14:24:39Z",
+      "http_last_modified_note": "HTTP response header, not the report publication date.",
+      "source_url": "https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025-USDC_Examination-Report-January-25.pdf",
+      "terms_assessment": "The official report is publicly accessible, but no report-specific reuse license was identified. The capture contains a short attributed factual extract and source hash, not the PDF or its underlying securities schedules.",
+      "observations": [
+        {
+          "report_date": "2025-01-06T23:59:00Z",
+          "circulation_usdc": 45749557136,
+          "reserve_fair_value_usd": 45814301624,
+          "recalculated_reserve_headroom_usd": 64744488
+        },
+        {
+          "report_date": "2025-01-31T23:59:00Z",
+          "circulation_usdc": 53218939728,
+          "reserve_fair_value_usd": 53283800358,
+          "recalculated_reserve_headroom_usd": 64860630
+        }
+      ],
+      "limitations": [
+        "The reserve report supplies two point-in-time observations, not a daily series or transfer-volume evidence.",
+        "USDC circulation is supply less allowed-but-not-issued and access-denied tokens under the report criteria."
+      ]
+    },
+    {
+      "source": "DefiLlama API and adapter repository",
+      "status": "rejected_for_redistribution",
+      "documentation": "https://defillama.com/docs/api",
+      "terms": "https://defillama.com/terms",
+      "adapter_repository": "https://github.com/DefiLlama/DefiLlama-Adapters/tree/f150d7bfb5a6e5e4eb190bd0371341d048ee2983",
+      "adapter_commit": "f150d7bfb5a6e5e4eb190bd0371341d048ee2983",
+      "review": "The no-key free API route shape was checked read-only. Current API terms effective 2025-06-24 prohibit copying, mirroring, or republishing service data without permission. The adapter repository is ISC-licensed, but the inspected repository had no historical response fixtures suitable for this window. No API values or original response bytes were retained for the suite.",
+      "preselected_window": "2025-01-01 through 2025-01-14 UTC",
+      "observed_route_shapes": {
+        "/summary/fees/{protocol}?dataType=dailyFees": {
+          "response_fields": ["id", "name", "total24h", "totalAllTime", "change_1d", "totalDataChart", "totalDataChartBreakdown", "chains"],
+          "chart_point_shape": "two-item timestamp and numeric-value points",
+          "documented_data_types": ["dailyFees", "dailyRevenue", "dailyHoldersRevenue"],
+          "time_unit": "Unix timestamp in seconds",
+          "metric_unit": "USD-valued daily amount, as reflected by official protocol metric pages",
+          "metric_distinction": "Fees are user-paid total fees. Revenue is the subset collected by the protocol and excludes fees paid to liquidity providers."
+        },
+        "/stablecoin/{asset}": {
+          "response_fields": ["id", "name", "symbol", "totalCirculating", "chainCirculating"],
+          "documented_measure": "Historical market capitalization and chain distribution",
+          "unit_caveat": "No values were retained, and no supply-versus-market-cap conversion was made."
+        }
+      },
+      "candidate_metric_distinctions": [
+        "Protocol fees are total user fees, while protocol revenue is the subset collected by the protocol after excluding liquidity-provider fees.",
+        "Stablecoin supply is a token stock and does not by itself establish transfers or user adoption."
+      ]
+    },
+    {
+      "source": "dRPC public Ethereum JSON-RPC endpoint",
+      "status": "historical_log_access_denied",
+      "endpoint": "https://eth.drpc.org",
+      "partial_capture_directory": "captures/ethereum-usdc-window",
+      "successful_fields": [
+        "eth_chainId returned 0x1",
+        "USDC decimals eth_call returned 6",
+        "start and end block headers for the fixed 20,000,000 through 20,000,031 window were retrieved"
+      ],
+      "failure": "The fixed-window eth_getLogs request did not return logs. The provider returned HTTP 400, and a diagnostic request returned HTTP 403 with Cloudflare error code 1010.",
+      "impact": "No Ethereum transfer counts, amounts, or gas-cost dataset was retained from this route."
+    }
+  ],
+  "viable_calculation_briefs": [
+    {
+      "task": "wp03",
+      "brief": "Compare the first 24 non-coinbase transactions' fee rates in sat/vB around block 840000 and separately calculate the coinbase payout above nominal subsidy for each fixed block.",
+      "evidence": "captures/bitcoin-halving/bitcoin-halving-normalized.json",
+      "scope_limit": "Sample-only fee arithmetic and separate coinbase payout measure. No total block fee or causal halving inference."
+    },
+    {
+      "task": "wp04",
+      "brief": "Recalculate USDC circulation from supply and the two exclusions, then compute reported reserve headroom at Circle's January 6 and January 31 report dates.",
+      "evidence": "captures/circle-usdc-jan2025.json",
+      "scope_limit": "Two reported snapshots, not daily balances, transfers, or adoption."
+    },
+    {
+      "task": "wp06",
+      "brief": "Compare total and median fees for the fixed first 24 eligible non-coinbase transactions in the two adjacent blocks using satoshis and sat/vB.",
+      "evidence": "captures/bitcoin-halving/bitcoin-halving-normalized.json",
+      "scope_limit": "The fixed prefix is only a small subset of each block. No full-block comparison or causal claim."
+    },
+    {
+      "task": "wp08",
+      "brief": "Calculate sample output-value totals and fee-rate spread while stating what the first 25 transactions can and cannot establish about block activity.",
+      "evidence": "captures/bitcoin-halving/bitcoin-halving-normalized.json",
+      "scope_limit": "A public-chain output is not evidence of a person, business purpose, unique user, or product adoption."
+    }
+  ]
+}

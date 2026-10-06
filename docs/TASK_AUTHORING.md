@@ -1,3 +1,19 @@
+# Task authoring
+
+The active suite is `datasets/real-v1`, with dataset-scoped task IDs and separate manifests. Keep published historical task identities and source bytes unchanged. A new snapshot is a separate directory and reviewed manifest, not a refresh in place.
+
+Rebuild and verify the retained real-v1 packages offline:
+
+```sh
+.venv/bin/python scripts/build_real_tasks.py --check
+```
+
+Source-derived definitions are in `scripts/real_definitions.py`. Native packages use the same bounded JSON/SQL contract and unchanged scorer. Review independently calculated reference values, relevant evidence alternatives, positive and negative conclusions, source permissions and synthetic changed-input controls before freezing. Add no provider framework or arbitrary-code runner.
+
+For a bounded engineer answer to an existing task, use the [fresh replay path](REPLAY.md). The local structure checker is safe, but submitted SQL must run only on Actions. A frozen dataset rejects reconstruction differences, and new acquisition output must use a distinct empty capture directory.
+
+The original authoring guide follows for historical package layout.
+
 # Author one native task
 
 Extend a future version of the suite in a new branch. The published eight-task experiment remains immutable. A changed task requires new source review, controls and freeze before scored exposure. Adding more examples does not retroactively change the released comparison.

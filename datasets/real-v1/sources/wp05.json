@@ -1,0 +1,333 @@
+{
+  "split": "development",
+  "source_group": "authored-migration",
+  "tables": {
+    "events": {
+      "schema": "CREATE TABLE events(period TEXT,event_id TEXT,tx_id TEXT,event_kind TEXT,amount_units INTEGER)",
+      "rows": [
+        [
+          "P1",
+          "a",
+          "t1",
+          "transfer",
+          100
+        ],
+        [
+          "P1",
+          "b",
+          "t1",
+          "transfer",
+          100
+        ],
+        [
+          "P1",
+          "c",
+          "t2",
+          "transfer",
+          100
+        ],
+        [
+          "P1",
+          "d",
+          "t3",
+          "mint",
+          900
+        ],
+        [
+          "P1",
+          "e",
+          "t4",
+          "burn",
+          500
+        ],
+        [
+          "P2",
+          "f",
+          "t5",
+          "transfer",
+          110
+        ],
+        [
+          "P2",
+          "g",
+          "t5",
+          "transfer",
+          110
+        ],
+        [
+          "P2",
+          "h",
+          "t6",
+          "transfer",
+          110
+        ],
+        [
+          "P2",
+          "i",
+          "t7",
+          "mint",
+          600
+        ],
+        [
+          "P2",
+          "j",
+          "t8",
+          "burn",
+          800
+        ]
+      ]
+    },
+    "exports": {
+      "schema": "CREATE TABLE exports(period TEXT,definition TEXT,transfer_volume INTEGER,evidence_id TEXT)",
+      "rows": [
+        [
+          "P1",
+          "largest_eligible_per_tx",
+          200,
+          "export:periods"
+        ],
+        [
+          "P2",
+          "all_eligible_events",
+          330,
+          "export:periods"
+        ]
+      ]
+    }
+  },
+  "changed_tables": {
+    "events": {
+      "schema": "CREATE TABLE events(period TEXT,event_id TEXT,tx_id TEXT,event_kind TEXT,amount_units INTEGER)",
+      "rows": [
+        [
+          "P1",
+          "a",
+          "t1",
+          "transfer",
+          120
+        ],
+        [
+          "P1",
+          "b",
+          "t1",
+          "transfer",
+          90
+        ],
+        [
+          "P1",
+          "c",
+          "t2",
+          "transfer",
+          140
+        ],
+        [
+          "P1",
+          "d",
+          "t3",
+          "mint",
+          1000
+        ],
+        [
+          "P1",
+          "e",
+          "t4",
+          "burn",
+          700
+        ],
+        [
+          "P2",
+          "f",
+          "t5",
+          "transfer",
+          120
+        ],
+        [
+          "P2",
+          "g",
+          "t5",
+          "transfer",
+          130
+        ],
+        [
+          "P2",
+          "h",
+          "t6",
+          "transfer",
+          150
+        ],
+        [
+          "P2",
+          "i",
+          "t7",
+          "mint",
+          900
+        ],
+        [
+          "P2",
+          "j",
+          "t8",
+          "burn",
+          1000
+        ]
+      ]
+    },
+    "exports": {
+      "schema": "CREATE TABLE exports(period TEXT,definition TEXT,transfer_volume INTEGER,evidence_id TEXT)",
+      "rows": [
+        [
+          "P1",
+          "largest_eligible_per_tx",
+          260,
+          "export:periods"
+        ],
+        [
+          "P2",
+          "all_eligible_events",
+          400,
+          "export:periods"
+        ]
+      ]
+    }
+  },
+  "instruction": "Report naive_growth in percent from the two exported transfer_volume values. Recalculate comparable_growth in percent with both periods on the requested all_eligible_events definition. Assess: eligible transfer amount grew between P1 and P2 on that same definition and supplied coverage.",
+  "context": "# Export delivery note\nThis is an explicitly synthetic metric-migration case. Every period covers the same authored token/network population and complete event window. Amounts are whole token units with no valuation data.\n\nFirst exclude mint and burn. largest_eligible_per_tx then retains the largest remaining event amount per transaction. all_eligible_events instead counts all remaining event amounts. The exports table states the definition used by each delivery. The requested comparable series is all_eligible_events. event_id is unique here.\n\nThe public Artemis July 2026 note motivates this scenario, but the rows, definitions and numbers are authored. These simplified definitions do not reconstruct Artemis labels, its full prior adjusted metric or a historical export. Methodology locator: https://www.artemis.ai/docs/data-reference/stablecoin-methodology",
+  "evidence": [
+    {
+      "id": "export:periods",
+      "text": "Synthetic dated deliveries with explicit definitions.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "authored scenario",
+      "retrieved_at": "2026-10-05T04:07:12.427661+00:00",
+      "redistribution": "original annotation and factual extract only"
+    },
+    {
+      "id": "ledger:events",
+      "text": "Synthetic complete row-level events for P1 and P2.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "authored scenario",
+      "retrieved_at": "2026-10-05T04:07:12.427661+00:00",
+      "redistribution": "original annotation and factual extract only"
+    },
+    {
+      "id": "policy:definitions",
+      "text": "Synthetic exclusion order and counting rules in sources.md.",
+      "origin": "synthetic:workpaperbench",
+      "publication": null,
+      "period": "authored scenario",
+      "retrieved_at": "2026-10-05T04:07:12.427661+00:00",
+      "redistribution": "original annotation and factual extract only"
+    },
+    {
+      "id": "methodology:context",
+      "text": "Public migration motivation only, not the source of fixture amounts.",
+      "origin": "https://www.artemis.ai/docs/data-reference/stablecoin-methodology",
+      "publication": "2026-07",
+      "period": "July 2026 methodology",
+      "retrieved_at": "2026-10-05T04:07:12.427661+00:00",
+      "redistribution": "original annotation and factual extract only"
+    }
+  ],
+  "reference": {
+    "task_id": "real-v1-wp05",
+    "answers": [
+      {
+        "id": "naive_growth",
+        "status": "answered",
+        "value": 65,
+        "unit": "percent",
+        "evidence": [
+          "export:periods",
+          "policy:definitions"
+        ],
+        "sql": "SELECT 100.0*((SELECT transfer_volume FROM exports WHERE period='P2')/(1.0*(SELECT transfer_volume FROM exports WHERE period='P1'))-1) AS value",
+        "reason_code": null
+      },
+      {
+        "id": "comparable_growth",
+        "status": "answered",
+        "value": 10,
+        "unit": "percent",
+        "evidence": [
+          "ledger:events",
+          "policy:definitions"
+        ],
+        "sql": "WITH totals AS (SELECT period,SUM(amount_units) amount FROM events WHERE event_kind='transfer' GROUP BY period) SELECT 100.0*((SELECT amount FROM totals WHERE period='P2')/(1.0*(SELECT amount FROM totals WHERE period='P1'))-1) AS value",
+        "reason_code": null
+      }
+    ],
+    "conclusion": {
+      "verdict": "supported",
+      "reason_code": "supported_by_calculation",
+      "evidence": [
+        "ledger:events",
+        "policy:definitions"
+      ]
+    }
+  },
+  "gold": {
+    "answers": {
+      "naive_growth": {
+        "status": "answered",
+        "value": 65,
+        "changed_value": 53.846153846153854,
+        "unit": "percent",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "export:periods"
+          ],
+          [
+            "export:periods",
+            "policy:definitions"
+          ],
+          [
+            "export:periods",
+            "ledger:events",
+            "policy:definitions"
+          ]
+        ]
+      },
+      "comparable_growth": {
+        "status": "answered",
+        "value": 10,
+        "changed_value": 14.28571428571428,
+        "unit": "percent",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "ledger:events",
+            "policy:definitions"
+          ],
+          [
+            "ledger:events",
+            "export:periods",
+            "policy:definitions"
+          ]
+        ]
+      }
+    },
+    "conclusion": {
+      "verdict": "supported",
+      "reason_codes": [
+        "supported_by_calculation"
+      ],
+      "evidence": [
+        [
+          "ledger:events",
+          "policy:definitions"
+        ],
+        [
+          "ledger:events",
+          "export:periods",
+          "policy:definitions"
+        ]
+      ]
+    }
+  },
+  "origin": "synthetic",
+  "task_id": "real-v1-wp05",
+  "control_origin": "fully_synthetic_data",
+  "previously_exposed": true
+}

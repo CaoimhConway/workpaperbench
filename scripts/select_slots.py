@@ -1,6 +1,7 @@
 """Select experiment-scoped slots without repeating an attempted execution."""
 import argparse
 import base64
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -10,6 +11,187 @@ import subprocess
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "CaoimhConway/workpaperbench"
 SLOT_PATTERN = r"(?:pilot-wp0[1-8]-[AB]-[1-9]|final-wp0[1-8]-[AB]-[1-3])"
+REAL_DATASET_ID = "real-v1"
+REAL_PILOT_MANIFEST_ID = "real-v1-development"
+
+
+def manifest_content_hash(manifest):
+    """Hash every manifest field except the hash and identifier derived from it."""
+    if not isinstance(manifest, dict):
+        raise ValueError("dataset_manifest_invalid")
+    payload = {key: value for key, value in manifest.items()
+               if key not in ("manifest_id", "content_hash")}
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"),
+                           ensure_ascii=False, allow_nan=False).encode("utf-8")
+    return hashlib.sha256(canonical).hexdigest()
+
+
+def _repo_file(root, value, fallback=None):
+    """Resolve a repository-relative manifest path without following symlinks."""
+    if value is None:
+        value = fallback
+    if not isinstance(value, str) or not value:
+        raise ValueError("dataset_input_path_missing")
+    relative = Path(value)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError("unsafe_dataset_path")
+    path = Path(root)
+    for part in relative.parts:
+        path = path / part
+        if path.is_symlink():
+            raise ValueError("dataset_input_symlink")
+    if not path.is_file():
+        raise ValueError("dataset_input_missing")
+    return path
+
+
+def _repo_directory(root, value):
+    if not isinstance(value, str) or not value:
+        raise ValueError("dataset_task_path_missing")
+    relative = Path(value)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError("unsafe_dataset_path")
+    path = Path(root)
+    for part in relative.parts:
+        path = path / part
+        if path.is_symlink():
+            raise ValueError("dataset_task_path_symlink")
+    if not path.is_dir():
+        raise ValueError("dataset_task_path_invalid")
+    return path
+
+
+def real_dataset_context(manifest_id, root=None):
+    """Return the selected real-v1 files and task metadata, if this is that campaign."""
+    root = ROOT if root is None else Path(root)
+    manifest_path = root / "datasets/real-v1/manifest.json"
+    if manifest_path.is_symlink() or not manifest_path.is_file():
+        return None
+    manifest = json.loads(manifest_path.read_text())
+    if not isinstance(manifest, dict) or manifest.get("dataset_id") != REAL_DATASET_ID:
+        raise ValueError("dataset_identity_mismatch")
+    if manifest_id not in (manifest.get("manifest_id"), REAL_PILOT_MANIFEST_ID):
+        return None
+    if not re.fullmatch(r"real-v1-[0-9a-f]{12,64}", str(manifest.get("manifest_id", ""))):
+        raise ValueError("dataset_manifest_identifier_invalid")
+    content_hash = manifest.get("content_hash")
+    if (not isinstance(content_hash, str) or not re.fullmatch(r"[0-9a-f]{64}", content_hash)
+            or manifest_content_hash(manifest) != content_hash):
+        raise ValueError("dataset_content_hash_mismatch")
+    if manifest["manifest_id"] != "real-v1-" + content_hash[:12]:
+        raise ValueError("dataset_manifest_id_mismatch")
+    schedule_path = _repo_file(root, manifest.get("schedule"), "datasets/real-v1/schedule.json")
+    pilot_path = _repo_file(root, manifest.get("pilot"), "datasets/real-v1/pilot.json")
+    schema_path = _repo_file(root, manifest.get("schema"), "datasets/real-v1/schema.json")
+    tasks = manifest.get("tasks")
+    groups = manifest.get("source_groups")
+    if not isinstance(tasks, dict) or set(tasks) != {f"wp{i:02}" for i in range(1, 9)}:
+        raise ValueError("dataset_task_map_invalid")
+    if not isinstance(groups, dict) or set(groups) != set(tasks):
+        raise ValueError("dataset_source_groups_invalid")
+    group_splits = {"development": set(), "evaluation": set()}
+    for task_key, task in tasks.items():
+        expected_id = "real-v1-" + task_key
+        if (not isinstance(task, dict) or task.get("task_id") != expected_id
+                or task.get("split") not in group_splits
+                or not isinstance(task.get("source_group"), str)
+                or not task.get("source_group")
+                or groups.get(task_key) != task.get("source_group")):
+            raise ValueError("dataset_task_identity_invalid")
+        expected_path = "datasets/real-v1/tasks/" + task_key
+        if task.get("path") != expected_path:
+            raise ValueError("dataset_task_path_mismatch")
+        _repo_directory(root, expected_path)
+        gold_path = _repo_file(root, expected_path + "/tests/gold.json")
+        instruction_path = _repo_file(root, expected_path + "/instruction.md")
+        gold = json.loads(gold_path.read_text())
+        instruction = instruction_path.read_text()
+        if (not isinstance(gold, dict) or gold.get("task_id") != expected_id
+                or not re.search(rf"(?m)^Task identifier: {re.escape(expected_id)}\.", instruction)):
+            raise ValueError("dataset_task_package_identity_mismatch")
+        group_splits[task["split"]].add(task["source_group"])
+    if group_splits["development"] & group_splits["evaluation"]:
+        raise ValueError("dataset_source_group_cross_split")
+    return {
+        "dataset_id": REAL_DATASET_ID,
+        "manifest_id": manifest["manifest_id"],
+        "selected_manifest_id": manifest_id,
+        "manifest": manifest,
+        "manifest_path": manifest_path,
+        "schedule_path": schedule_path,
+        "pilot_path": pilot_path,
+        "schema_path": schema_path,
+        "tasks": tasks,
+        "root": root,
+    }
+
+
+def campaign_context(manifest_id, root=None):
+    """Resolve a manifest id to its dataset without changing the legacy frozen files."""
+    root = ROOT if root is None else Path(root)
+    context = real_dataset_context(manifest_id, root)
+    if context is not None:
+        return context
+    root = Path(root)
+    freeze_path = root / "config/freeze.json"
+    manifest = json.loads(freeze_path.read_text())
+    if manifest.get("manifest_id") != manifest_id:
+        raise ValueError("manifest_mismatch")
+    return {
+        "dataset_id": None,
+        "manifest_id": manifest_id,
+        "selected_manifest_id": manifest_id,
+        "manifest": manifest,
+        "manifest_path": freeze_path,
+        "schedule_path": root / "config/schedule.json",
+        "pilot_path": root / "config/pilot.json",
+        "schema_path": root / "config/schema.json",
+        "tasks": None,
+        "root": root,
+    }
+
+
+def campaign_slots(context, mode):
+    """Load and bind one campaign's slots to the manifest's declared task split."""
+    path = context["schedule_path"] if mode == "final" else context["pilot_path"]
+    slots = json.loads(path.read_text())
+    if isinstance(slots, dict):
+        slots = slots.get("slots")
+    if not isinstance(slots, list) or not all(isinstance(slot, dict) for slot in slots):
+        raise ValueError("invalid_slot_manifest")
+    if context["dataset_id"] is None:
+        return slots
+    if mode not in ("pilot", "final"):
+        raise ValueError("invalid_campaign")
+    if mode == "final" and len(slots) != 48:
+        raise ValueError("real_schedule_must_have_48_slots")
+    if mode == "pilot" and len(slots) > 6:
+        raise ValueError("real_pilot_ceiling")
+    seen = set()
+    task_map = context["tasks"]
+    for slot in slots:
+        identifier = slot.get("slot_id")
+        task_id = slot.get("task")
+        if (not isinstance(identifier, str) or not re.fullmatch(SLOT_PATTERN, identifier)
+                or identifier in seen or slot.get("campaign") != mode):
+            raise ValueError("real_slot_identity_invalid")
+        seen.add(identifier)
+        match = re.fullmatch(r"(?:pilot|final)-(wp0[1-8])-([AB])-([1-3])", identifier)
+        task = task_map.get(task_id.removeprefix("real-v1-")) if isinstance(task_id, str) else None
+        if (match is None or task is None or task.get("task_id") != task_id
+                or match[1] != task_id.removeprefix("real-v1-")
+                or match[2] != slot.get("arm")
+                or isinstance(slot.get("repetition"), bool)
+                or not isinstance(slot.get("repetition"), int)
+                or int(match[3]) != slot.get("repetition")
+                or slot.get("split") != task.get("split")):
+            raise ValueError("real_slot_task_split_mismatch")
+        if mode == "pilot" and task.get("split") != "development":
+            raise ValueError("real_pilot_must_use_development_tasks")
+    if mode == "pilot" and any(
+            s["task"] not in {"real-v1-wp01", "real-v1-wp02", "real-v1-wp05"} for s in slots):
+        raise ValueError("real_pilot_task_not_allowed")
+    return slots
 
 
 def api(path):
@@ -86,7 +268,16 @@ def history(mode, manifest_id):
 
 
 def selection(mode, manifest_id, batch):
-    if mode == "final":
+    context = real_dataset_context(manifest_id)
+    if context is not None:
+        if mode == "pilot" and manifest_id != REAL_PILOT_MANIFEST_ID:
+            raise ValueError("pilot_manifest_mismatch")
+        if mode == "final" and manifest_id != context["manifest_id"]:
+            raise ValueError("final_manifest_mismatch")
+        slots = campaign_slots(context, mode)
+        if mode == "pilot":
+            slots = [s for s in slots if batch == "all" or (s["arm"] == "A" if batch == "baseline" else s["arm"] == "B")]
+    elif mode == "final":
         manifest = json.loads((ROOT / "config/freeze.json").read_text())
         if manifest_id != manifest["manifest_id"]:
             raise ValueError("manifest_mismatch")
@@ -123,9 +314,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if int(os.environ.get("GITHUB_RUN_ATTEMPT", "1")) != 1 and not args.inspect:
         raise SystemExit("Same-run retries are disabled. Dispatch again to select genuinely unstarted slots.")
-    if args.mode == "final" and not args.inspect:
+    if not args.inspect:
         from native_run import frozen_inputs
-        frozen_inputs()
+        frozen_inputs(args.manifest_id)
     slots, attempted = selection(args.mode, args.manifest_id, args.batch)
     if args.inspect:
         print(json.dumps({"truly_unstarted": slots, "previously_started": attempted}, indent=2))

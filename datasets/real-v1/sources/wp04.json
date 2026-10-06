@@ -1,0 +1,212 @@
+{
+  "task_id": "real-v1-wp04",
+  "split": "evaluation",
+  "source_group": "circle-usdc-january-2025",
+  "origin": "deterministic_source_derived",
+  "previously_exposed": false,
+  "tables": {
+    "reserve_snapshots": {
+      "schema": "CREATE TABLE reserve_snapshots(report_date TEXT,approved_supply INTEGER,allowed_unissued INTEGER,access_denied INTEGER,circulation INTEGER,reserves_usd INTEGER)",
+      "rows": [
+        [
+          "2025-01-06",
+          47147191329,
+          1303360624,
+          94273569,
+          45749557136,
+          45814301624
+        ],
+        [
+          "2025-01-31",
+          54604305445,
+          1291092148,
+          94273569,
+          53218939728,
+          53283800358
+        ]
+      ]
+    }
+  },
+  "changed_tables": {
+    "reserve_snapshots": {
+      "schema": "CREATE TABLE reserve_snapshots(report_date TEXT,approved_supply INTEGER,allowed_unissued INTEGER,access_denied INTEGER,circulation INTEGER,reserves_usd INTEGER)",
+      "rows": [
+        [
+          "2025-01-06",
+          48147191329,
+          1303360624,
+          94273569,
+          46749557136,
+          46914301624
+        ],
+        [
+          "2025-01-31",
+          56604305445,
+          1291092148,
+          94273569,
+          55218939728,
+          55483800358
+        ]
+      ]
+    }
+  },
+  "instruction": "Using Circle's January 2025 report, recalculate circulating_end in usdc_million at January 31 from the supply components, circulating_growth in percent from January 6 to January 31, and reserve_headroom in usd_million at January 31 under the issuer par redemption convention. Assess: January 31 reserve fair value covers the defined circulating quantity at that convention.",
+  "context": "# Circle January 2025 report dictionary\nUSDC in circulation equals total USDC supply on approved blockchains less tokens allowed but not issued and access-denied tokens.\n\nFair value of assets held in the USDC reserve is the total balance of US-dollar-denominated assets in the Circle Reserve Fund and segregated accounts held by Circle with regulated financial institutions on behalf of USDC holders.\n\nThe two observations are point-in-time report dates, not daily balances or transfer flows.\n\nThe table contains report dates January 6 and January 31, 2025 at 23:59 UTC. USDC quantities are tokens and reserves are USD fair value. The independent accountants opinion and management signature are dated February 27, 2025. First historical web publication is unknown. Capture retrieval is a separate 2026 date, not contemporaneous availability.\n\nSource: https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025-USDC_Examination-Report-January-25.pdf\n\n\nOne million USDC is 1000000 tokens. USD reserve headroom compares assets with circulation at the report's issuer par redemption convention of USD 1 per USDC. This is not a supplied market price, USD market capitalization or period transfer volume. Daily or dated stock observations are not summed to obtain flow. The changed control is synthetic.",
+  "evidence": [
+    {
+      "id": "reserve:observations",
+      "text": "Source-reported approved supply, allowed-but-unissued, access-denied, circulation and reserve fair value snapshots.",
+      "origin": "https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025-USDC_Examination-Report-January-25.pdf",
+      "period": "2025-01-06/2025-01-31 at 23:59 UTC",
+      "publication": null,
+      "retrieved_at": "2026-10-06",
+      "capture_sha256": "c26d2abbae615649680a55785e4cc990a0bdfd7e67775f7e497ba2be2998ae47",
+      "redistribution": "Attributed public-chain facts or limited issuer factual extracts, not a license to third-party documents"
+    },
+    {
+      "id": "reserve:definition",
+      "text": "USDC in circulation equals total USDC supply on approved blockchains less tokens allowed but not issued and access-denied tokens. Fair value of assets held in the USDC reserve is the total balance of US-dollar-denominated assets in the Circle Reserve Fund and segregated accounts held by Circle with regulated financial institutions on behalf of USDC holders.",
+      "origin": "https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025-USDC_Examination-Report-January-25.pdf",
+      "period": "2025-01-06/2025-01-31 at 23:59 UTC",
+      "publication": null,
+      "retrieved_at": "2026-10-06",
+      "capture_sha256": "c26d2abbae615649680a55785e4cc990a0bdfd7e67775f7e497ba2be2998ae47",
+      "redistribution": "Attributed public-chain facts or limited issuer factual extracts, not a license to third-party documents"
+    },
+    {
+      "id": "reserve:timing",
+      "text": "Report dates are January 6 and January 31, 2025 at 23:59 UTC. Independent accountants report and management signature are dated February 27, 2025. Historical first web publication is unknown.",
+      "origin": "https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025-USDC_Examination-Report-January-25.pdf",
+      "period": "2025-01-06/2025-01-31 at 23:59 UTC",
+      "publication": null,
+      "retrieved_at": "2026-10-06",
+      "capture_sha256": "c26d2abbae615649680a55785e4cc990a0bdfd7e67775f7e497ba2be2998ae47",
+      "redistribution": "Attributed public-chain facts or limited issuer factual extracts, not a license to third-party documents"
+    }
+  ],
+  "reference": {
+    "task_id": "real-v1-wp04",
+    "answers": [
+      {
+        "id": "circulating_end",
+        "status": "answered",
+        "value": 53218.939728,
+        "unit": "usdc_million",
+        "sql": "SELECT (approved_supply-allowed_unissued-access_denied)/1000000.0 AS value FROM reserve_snapshots WHERE report_date='2025-01-31'",
+        "evidence": [
+          "reserve:observations",
+          "reserve:definition"
+        ],
+        "reason_code": null
+      },
+      {
+        "id": "circulating_growth",
+        "status": "answered",
+        "value": 16.326677370440372,
+        "unit": "percent",
+        "sql": "WITH p AS (SELECT report_date,approved_supply-allowed_unissued-access_denied quantity FROM reserve_snapshots) SELECT 100.0*((SELECT quantity FROM p WHERE report_date='2025-01-31')*1.0/(SELECT quantity FROM p WHERE report_date='2025-01-06')-1) AS value",
+        "evidence": [
+          "reserve:observations",
+          "reserve:definition"
+        ],
+        "reason_code": null
+      },
+      {
+        "id": "reserve_headroom",
+        "status": "answered",
+        "value": 64.86063,
+        "unit": "usd_million",
+        "sql": "SELECT (reserves_usd-(approved_supply-allowed_unissued-access_denied))/1000000.0 AS value FROM reserve_snapshots WHERE report_date='2025-01-31'",
+        "evidence": [
+          "reserve:observations",
+          "reserve:definition"
+        ],
+        "reason_code": null
+      }
+    ],
+    "conclusion": {
+      "verdict": "supported",
+      "reason_code": "supported_by_calculation",
+      "evidence": [
+        "reserve:observations",
+        "reserve:definition"
+      ]
+    }
+  },
+  "gold": {
+    "answers": {
+      "circulating_end": {
+        "status": "answered",
+        "value": 53218.939728,
+        "unit": "usdc_million",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "reserve:observations",
+            "reserve:definition"
+          ],
+          [
+            "reserve:observations",
+            "reserve:definition",
+            "reserve:timing"
+          ]
+        ],
+        "changed_value": 55218.939728
+      },
+      "circulating_growth": {
+        "status": "answered",
+        "value": 16.326677370440372,
+        "unit": "percent",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "reserve:observations",
+            "reserve:definition"
+          ],
+          [
+            "reserve:observations",
+            "reserve:definition",
+            "reserve:timing"
+          ]
+        ],
+        "changed_value": 18.116498018070125
+      },
+      "reserve_headroom": {
+        "status": "answered",
+        "value": 64.86063,
+        "unit": "usd_million",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "reserve:observations",
+            "reserve:definition"
+          ],
+          [
+            "reserve:observations",
+            "reserve:definition",
+            "reserve:timing"
+          ]
+        ],
+        "changed_value": 264.86063
+      }
+    },
+    "conclusion": {
+      "verdict": "supported",
+      "reason_codes": [
+        "supported_by_calculation"
+      ],
+      "evidence": [
+        [
+          "reserve:observations",
+          "reserve:definition"
+        ],
+        [
+          "reserve:observations",
+          "reserve:definition",
+          "reserve:timing"
+        ]
+      ]
+    }
+  },
+  "control_origin": "deliberately_perturbed_real_data"
+}

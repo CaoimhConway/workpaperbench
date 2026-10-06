@@ -16,7 +16,7 @@ for raw in tracked:
     data = path.read_bytes()
     if any(re.search(pattern, data) for pattern in patterns):
         failures.append(str(path.relative_to(ROOT)) + ':credential_pattern')
-for dockerfile in (ROOT / 'tasks').glob('*/environment/Dockerfile'):
+for dockerfile in list((ROOT / 'tasks').glob('*/environment/Dockerfile')) + list((ROOT / 'datasets/real-v1/tasks').glob('*/environment/Dockerfile')):
     text = dockerfile.read_text()
     if 'COPY . ' in text or 'gold' in text or '.git' in text or 'OPENROUTER_API_KEY' in text:
         failures.append(str(dockerfile.relative_to(ROOT)) + ':candidate_context')
@@ -65,6 +65,21 @@ if freeze.exists():
             if immutable and hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected:
                 failures.append(name + ':candidate_or_reference_changed')
         expected_hashes.update(review['correction_hashes'])
+    upgrade_path = ROOT / 'datasets/real-v1/manifest.json'
+    if upgrade_path.is_file():
+        upgrade = json.loads(upgrade_path.read_text())
+        permitted = {
+            '.github/workflows/benchmark.yml', '.github/workflows/ci.yml',
+            'pyproject.toml', 'DATA_SOURCES.md', 'workpaperbench/cli.py',
+            *(f'scripts/{name}.py' for name in ('audit', 'attempts', 'collect_results',
+                                              'native_run', 'select_slots')),
+        }
+        for name in permitted & expected_hashes.keys() & upgrade['hashes'].keys():
+            expected_hashes[name] = upgrade['hashes'][name]
+        for name, expected in upgrade['hashes'].items():
+            path = ROOT / name
+            if path.is_symlink() or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+                failures.append(name + ':real_dataset_hash_mismatch')
     for name, expected in expected_hashes.items():
         path = ROOT / name
         if path.is_symlink() or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:

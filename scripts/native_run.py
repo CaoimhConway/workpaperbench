@@ -20,6 +20,19 @@ SAFE_TOOL_RE = re.compile(r"^[A-Za-z0-9_.-]{1,80}$")
 SAFE_ERROR_RE = re.compile(r"^[a-zA-Z0-9_.:-]{1,100}$")
 SECRET_RE = re.compile(rb"sk-or-v1-[A-Za-z0-9_-]{16,}|gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}")
 PROVIDER_CEILING_USD = 20.0
+REAL_RUNTIME_INPUTS = {
+    "config/runtime.json",
+    "config/skills/contract-check/SKILL.md",
+    "workpaperbench/grading.py",
+    "workpaperbench/sql_worker.py",
+    "scripts/native_run.py",
+    "scripts/native_trial.py",
+    "scripts/fix_native_version.py",
+    "scripts/select_slots.py",
+    "scripts/attempts.py",
+    "scripts/build_real_tasks.py",
+    "scripts/real_definitions.py",
+}
 
 
 def now():
@@ -47,21 +60,68 @@ def list_slots(path):
     return data
 
 
-def frozen_inputs():
-    manifest = read_json(ROOT / "config/freeze.json", 1_000_000)
+def frozen_inputs(manifest_id=None, root=None):
+    root = ROOT if root is None else Path(root)
+    selected = manifest_id or os.environ.get("WPB_MANIFEST_ID")
+    if selected == "development-v1":
+        raise ValueError("legacy_campaign_closed")
+    if selected:
+        from select_slots import campaign_context, campaign_slots
+        context = campaign_context(selected, root)
+        manifest = context["manifest"]
+        if context["dataset_id"]:
+            campaign_slots(context, "pilot")
+            campaign_slots(context, "final")
+    else:
+        manifest = read_json(root / "config/freeze.json", 1_000_000)
     hashes = manifest.get("hashes")
     if not isinstance(hashes, dict) or not hashes:
         raise ValueError("freeze_hashes_missing")
+    covered = set()
     for name, expected in hashes.items():
         relative = Path(name)
         if relative.is_absolute() or ".." in relative.parts:
             raise ValueError("unsafe_freeze_path")
-        target = ROOT / relative
-        if target.is_symlink() or not target.is_file():
+        target = root
+        for part in relative.parts:
+            target = target / part
+            if target.is_symlink():
+                raise ValueError("freeze_input_symlink")
+        if not target.is_file():
             raise ValueError("freeze_input_missing")
         actual = hashlib.sha256(target.read_bytes()).hexdigest()
         if not isinstance(expected, str) or actual != expected:
             raise ValueError("freeze_hash_mismatch")
+        covered.add(relative.as_posix())
+    if selected:
+        if manifest.get("manifest_id") != selected and selected != "real-v1-development":
+            raise ValueError("manifest_mismatch")
+        if manifest.get("dataset_id") == "real-v1":
+            from select_slots import real_dataset_context
+            context = real_dataset_context(selected, root)
+            required = {
+                context["schedule_path"].relative_to(root).as_posix(),
+                context["pilot_path"].relative_to(root).as_posix(),
+                context["schema_path"].relative_to(root).as_posix(),
+                *REAL_RUNTIME_INPUTS,
+            }
+            captures = root / "datasets/real-v1/captures"
+            if captures.is_symlink() or not captures.is_dir():
+                raise ValueError("freeze_capture_inputs_missing")
+            for path in captures.rglob("*"):
+                if path.is_symlink():
+                    raise ValueError("freeze_input_symlink")
+                if path.is_file():
+                    required.add(path.relative_to(root).as_posix())
+            for task in context["tasks"].values():
+                task_path = root / task["path"]
+                for path in task_path.rglob("*"):
+                    if path.is_symlink():
+                        raise ValueError("freeze_input_symlink")
+                    if path.is_file():
+                        required.add(path.relative_to(root).as_posix())
+            if not required <= covered:
+                raise ValueError("freeze_input_unlisted")
     return manifest
 
 
@@ -130,8 +190,11 @@ def all_records():
             continue
 
 
-def final_reservation(schedule, records):
+def final_reservation(schedule, records, manifest_id=None):
     base = float(RUNTIME["cost"]["reservation_usd_per_slot"])
+    if manifest_id is not None:
+        records = [item for item in records if item.get("experiment_id") == manifest_id
+                   or item.get("dataset_manifest_id") == manifest_id]
     pilot_costs = [
         value
         for item in records
@@ -358,8 +421,14 @@ def execute(mode, slot_id):
         raise ValueError("live_slots_require_dedicated_default_branch_actions")
     if mode not in {"pilot", "final"} or not SLOT_RE.fullmatch(slot_id):
         raise ValueError("invalid_mode_or_slot_id")
-    source = ROOT / ("config/pilot.json" if mode == "pilot" else "config/schedule.json")
-    slots = list_slots(source)
+    from select_slots import campaign_context, campaign_slots
+    manifest_id = os.environ["WPB_MANIFEST_ID"]
+    context = campaign_context(manifest_id, ROOT)
+    if context["dataset_id"] and (
+            (mode == "pilot" and manifest_id != "real-v1-development")
+            or (mode == "final" and manifest_id != context["manifest_id"])):
+        raise ValueError("manifest_campaign_mismatch")
+    slots = campaign_slots(context, mode)
     matches = [slot for slot in slots if slot.get("slot_id") == slot_id]
     if len(matches) != 1:
         raise ValueError("slot_not_unique_in_manifest")
@@ -367,15 +436,20 @@ def execute(mode, slot_id):
     if slot.get("campaign") != mode:
         raise ValueError("slot_campaign_mismatch")
     task_id = slot.get("task")
-    if not isinstance(task_id, str) or not re.fullmatch(r"wp[0-9]{2}", task_id):
-        raise ValueError("invalid_task_id")
-    task_dir = ROOT / "tasks" / task_id
+    task_metadata = None
+    if context["dataset_id"]:
+        task_key = task_id.removeprefix("real-v1-") if isinstance(task_id, str) else ""
+        task_metadata = context["tasks"].get(task_key)
+        task_dir = ROOT / task_metadata["path"] if task_metadata else ROOT / "datasets/real-v1/tasks/missing"
+    else:
+        if not isinstance(task_id, str) or not re.fullmatch(r"wp[0-9]{2}", task_id):
+            raise ValueError("invalid_task_id")
+        task_dir = ROOT / "tasks" / task_id
     if not task_dir.is_dir() or task_dir.is_symlink():
         raise ValueError("task_directory_missing")
 
     from attempts import check, record_directory
-    manifest_id = os.environ["WPB_MANIFEST_ID"]
-    if mode == "pilot" and manifest_id != "development-v1":
+    if mode == "pilot" and context["dataset_id"] is None:
         raise ValueError("pilot_manifest_mismatch")
     output_dir = record_directory(manifest_id, slot_id)
     for directory in (ROOT / "reports", ROOT / "reports/runs", output_dir):
@@ -422,21 +496,30 @@ def execute(mode, slot_id):
         "model_route_policy": RUNTIME["model"]["route_policy"],
         "reservation_usd_per_slot": float(RUNTIME["cost"]["reservation_usd_per_slot"]),
     }
-    definition = json.loads((ROOT / "sources" / (task_id + ".json")).read_text())
-    record["source_group"] = definition["source_group"]
-    record["task_origin"] = definition["origin"]
+    if task_metadata:
+        record["dataset_id"] = context["dataset_id"]
+        record["dataset_manifest_id"] = context["manifest_id"]
+        record["source_group"] = task_metadata["source_group"]
+        record["task_origin"] = task_metadata["origin"]
+        record["previously_exposed"] = task_metadata.get("previously_exposed")
+    else:
+        definition = json.loads((ROOT / "sources" / (task_id + ".json")).read_text())
+        record["source_group"] = definition["source_group"]
+        record["task_origin"] = definition["origin"]
     record["config_hash"] = hashlib.sha256((ROOT / "config/runtime.json").read_bytes() + (task_dir / "task.toml").read_bytes() + (task_dir / "instruction.md").read_bytes()).hexdigest()
-    if mode == "final":
-        try:
-            freeze = frozen_inputs()
+    try:
+        freeze = frozen_inputs(manifest_id)
+        if context["dataset_id"]:
+            record["dataset_manifest_id"] = freeze["manifest_id"]
+            record["dataset_hash_count"] = len(freeze["hashes"])
+        if mode == "final":
             record["freeze_manifest_id"] = freeze.get("manifest_id")
-            record["experiment_id"] = freeze.get("manifest_id")
             record["freeze_hash_count"] = len(freeze["hashes"])
-        except (OSError, ValueError, json.JSONDecodeError) as exc:
-            record.update(status="blocked", reason_code=str(exc))
-            record["finished_at"] = now()
-            write_record(record_path, record)
-            return record
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        record.update(status="blocked", reason_code=str(exc))
+        record["finished_at"] = now()
+        write_record(record_path, record)
+        return record
     write_record(record_path, record)
 
     key = os.environ.get("OPENROUTER_API_KEY")
@@ -453,8 +536,7 @@ def execute(mode, slot_id):
     record["provider_before"] = before
     schedule = slots if mode == "final" else []
     if mode == "final":
-        schedule = list_slots(ROOT / "config/schedule.json")
-        reserve, _ = final_reservation(schedule, list(all_records()))
+        reserve, _ = final_reservation(schedule, list(all_records()), manifest_id)
         remaining_slots = prior.get("remaining_planned_slots")
         if isinstance(remaining_slots, bool) or not isinstance(remaining_slots, int) or not 1 <= remaining_slots <= len(schedule):
             raise ValueError("remaining_reservation_receipt_missing")
@@ -547,7 +629,7 @@ def execute(mode, slot_id):
             try:
                 from workpaperbench.grading import parse, validate
                 parsed = parse(answer)
-                validate(parsed, json.loads((ROOT / "config/schema.json").read_text()))
+                validate(parsed, json.loads(context["schema_path"].read_text()))
                 canonical = (json.dumps(parsed, indent=2) + "\n").encode()
                 if credential_in(canonical, key):
                     answer_error = "credential_pattern"
