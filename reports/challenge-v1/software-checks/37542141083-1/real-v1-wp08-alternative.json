@@ -1,0 +1,61 @@
+{
+  "name": "real-v1-wp08-alternative",
+  "expected_complete": true,
+  "verdict": {
+    "scorer_version": "1.2.0",
+    "complete": true,
+    "checks": {
+      "format": true,
+      "numerical": true,
+      "evidence_context": true,
+      "availability": true,
+      "conclusion": true,
+      "replay": true
+    },
+    "details": {
+      "claims": {
+        "observed_outputs": {
+          "numerical": true,
+          "evidence": true,
+          "availability": true,
+          "unit": true,
+          "reason_code": null,
+          "original_replay": true,
+          "changed_replay": true
+        },
+        "business_payments": {
+          "numerical": null,
+          "evidence": true,
+          "availability": true,
+          "unit": true,
+          "reason_code": true,
+          "original_replay": null,
+          "changed_replay": null
+        },
+        "unique_people": {
+          "numerical": null,
+          "evidence": true,
+          "availability": true,
+          "unit": true,
+          "reason_code": true,
+          "original_replay": null,
+          "changed_replay": null
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "reason_code": true,
+        "evidence": true
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}

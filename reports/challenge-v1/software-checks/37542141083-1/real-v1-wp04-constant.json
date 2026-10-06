@@ -1,0 +1,63 @@
+{
+  "name": "real-v1-wp04-constant",
+  "expected_complete": false,
+  "verdict": {
+    "scorer_version": "1.2.0",
+    "complete": false,
+    "checks": {
+      "format": true,
+      "numerical": true,
+      "evidence_context": true,
+      "availability": true,
+      "conclusion": true,
+      "replay": false
+    },
+    "details": {
+      "claims": {
+        "circulating_end": {
+          "numerical": true,
+          "evidence": true,
+          "availability": true,
+          "unit": true,
+          "reason_code": null,
+          "original_replay": true,
+          "changed_replay": false
+        },
+        "circulating_growth": {
+          "numerical": true,
+          "evidence": true,
+          "availability": true,
+          "unit": true,
+          "reason_code": null,
+          "original_replay": true,
+          "changed_replay": true
+        },
+        "reserve_headroom": {
+          "numerical": true,
+          "evidence": true,
+          "availability": true,
+          "unit": true,
+          "reason_code": null,
+          "original_replay": true,
+          "changed_replay": true
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "reason_code": true,
+        "evidence": true
+      }
+    },
+    "errors": [
+      "circulating_end:replay"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}
