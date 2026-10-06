@@ -1,0 +1,78 @@
+{
+  "as_of": "2026-10-06T21:27:02.214342+00:00",
+  "candidate_audit": {
+    "blanket_refusal_passes": false,
+    "blind_copied_subtotal_passes_controls": false,
+    "gold_or_authoring_in_candidate_context": false,
+    "question_contains_reference_values": false,
+    "single_computed_field_answers_every_claim": false
+  },
+  "cases": {
+    "a01": {
+      "controls": 4,
+      "controls_independently_recomputed": true,
+      "original_conclusion": "supported",
+      "publication_unknown": false,
+      "reference_values": {
+        "adjusted_margin": 46.307527648947556,
+        "adjusted_operating_income": 2596.0,
+        "eps_difference": 0.13,
+        "margin_bridge": 1139.8501605422762
+      },
+      "retained_extract_sha256": "9b788c7da27c8191c61b73c02af60c555926c20af407d134c377bdf02c43b44e",
+      "sections": 6,
+      "source_group": "adobe-fy2024-q3-q4"
+    },
+    "b01": {
+      "controls": 2,
+      "controls_independently_recomputed": true,
+      "original_conclusion": "contradicted",
+      "publication_unknown": true,
+      "reference_values": {
+        "coverage_change_pp": 0,
+        "june_assets_usd": 9356516,
+        "june_reconciliation_usd": 0
+      },
+      "retained_extract_sha256": "6a268dbfd88d84d2f9c5f3bad8322faa4719b8d910c309917bcfa90daee4cba1",
+      "sections": 6,
+      "source_group": "brale-sbc-reserve-reports-2025-may-june"
+    },
+    "c01": {
+      "controls": 3,
+      "controls_independently_recomputed": true,
+      "original_conclusion": "contradicted",
+      "publication_unknown": false,
+      "reference_values": {
+        "transaction_contribution": 97.97630799605133,
+        "yield_2023": 1.7569912971459114,
+        "yield_2024": 1.715611337477322,
+        "yield_change": -4.137995966858926
+      },
+      "retained_extract_sha256": "14c4f7a1776e082155a372121fcb9f67f1a31f9fabf88e0a59c934b30b877804",
+      "sections": 7,
+      "source_group": "paypal-2024-platform-metrics"
+    }
+  },
+  "corrections": [
+    "Added omitted Adobe operating adjustment rows to the retained extract",
+    "Added EPS observation control to detect copied constants",
+    "Changed PayPal FY2023 and FY2024 revenue components consistently in the mix control",
+    "Corrected Brale authoring-note transcription",
+    "Empty calculation sets remain unassessed"
+  ],
+  "dataset_id": "challenge-v1",
+  "method": "Separate read-only source-first review and primary verification using Decimal arithmetic. No candidate SQL executed, no human validation asserted.",
+  "pre_exposure_control_coherence_review": {
+    "cases": [
+      "c01",
+      "a01"
+    ],
+    "changes": "Quarter reallocation and revenue propagation preserve PayPal annual, quarterly and geography totals. Adobe signed-control annual bridge carries the Q4 component changes while Q4 disclosed comparison remains deliberately unreconciled",
+    "model_exposures": 0,
+    "no_authentic_source_or_expected_answer_changes": true,
+    "scope": "Read-only independent Decimal and JSON review, not human validation or submitted SQL execution",
+    "trusted_tests": "tests/test_challenge_grading.py"
+  },
+  "rights": "Only factual observations and concise definitions retained, full copyrighted issuer HTML/PDF excluded.",
+  "stage": "development"
+}

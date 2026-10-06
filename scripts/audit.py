@@ -16,7 +16,7 @@ for raw in tracked:
     data = path.read_bytes()
     if any(re.search(pattern, data) for pattern in patterns):
         failures.append(str(path.relative_to(ROOT)) + ':credential_pattern')
-for dockerfile in list((ROOT / 'tasks').glob('*/environment/Dockerfile')) + list((ROOT / 'datasets/real-v1/tasks').glob('*/environment/Dockerfile')):
+for dockerfile in list((ROOT / 'tasks').glob('*/environment/Dockerfile')) + list((ROOT / 'datasets').glob('*/tasks/*/environment/Dockerfile')):
     text = dockerfile.read_text()
     if 'COPY . ' in text or 'gold' in text or '.git' in text or 'OPENROUTER_API_KEY' in text:
         failures.append(str(dockerfile.relative_to(ROOT)) + ':candidate_context')
@@ -73,6 +73,7 @@ if freeze.exists():
         permitted = {
             '.github/workflows/benchmark.yml', '.github/workflows/ci.yml',
             'pyproject.toml', 'DATA_SOURCES.md', 'workpaperbench/cli.py',
+            'scripts/native_trial.py', 'scripts/check_install.py',
             *(f'scripts/{name}.py' for name in ('audit', 'attempts', 'collect_results',
                                               'native_run', 'select_slots')),
         }
@@ -89,4 +90,13 @@ if freeze.exists():
 if failures:
     print('\n'.join(failures))
     raise SystemExit(1)
+for manifest_path in (ROOT / 'datasets/challenge-v1/manifests').glob('*.json'):
+    from select_slots import manifest_content_hash
+    manifest = json.loads(manifest_path.read_text())
+    if manifest_content_hash(manifest) != manifest['content_hash']:
+        raise SystemExit('challenge_manifest_changed')
+    for name, expected in manifest['hashes'].items():
+        path = ROOT / name
+        if path.is_symlink() or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+            raise SystemExit('challenge_input_changed:' + name)
 print('Publication checks passed. Original candidate inputs and versioned implementation hashes verified.')

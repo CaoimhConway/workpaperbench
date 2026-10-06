@@ -1,0 +1,86 @@
+{
+  "name": "challenge-c01-constant",
+  "expected_complete": false,
+  "verdict": {
+    "scorer_version": "challenge-1.0.0",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "delivery": true,
+      "financial_answer": true,
+      "evidence": true,
+      "robustness": false
+    },
+    "details": {
+      "claims": {
+        "yield_2024": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "monetary_scale": true,
+            "quarterly_changes": true,
+            "revenue_mix": false
+          }
+        },
+        "yield_2023": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "monetary_scale": true,
+            "quarterly_changes": true,
+            "revenue_mix": false
+          }
+        },
+        "yield_change": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "monetary_scale": true,
+            "quarterly_changes": true,
+            "revenue_mix": false
+          }
+        },
+        "transaction_contribution": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "monetary_scale": true,
+            "quarterly_changes": true,
+            "revenue_mix": false
+          }
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "evidence": true
+      }
+    },
+    "errors": [
+      "yield_2024:control:revenue_mix",
+      "yield_2023:control:revenue_mix",
+      "yield_change:control:revenue_mix",
+      "transaction_contribution:control:revenue_mix"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}

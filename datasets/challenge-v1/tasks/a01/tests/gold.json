@@ -1,0 +1,121 @@
+{
+  "answers": {
+    "adjusted_margin": {
+      "evidence": [
+        [
+          "a01:s02",
+          "a01:s03"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 1e-06,
+      "unit": "percent",
+      "value": 46.307527648947556
+    },
+    "adjusted_operating_income": {
+      "evidence": [
+        [
+          "a01:s03"
+        ],
+        [
+          "a01:s02",
+          "a01:s03"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 1e-06,
+      "unit": "usd_million",
+      "value": 2596.0
+    },
+    "eps_difference": {
+      "evidence": [
+        [
+          "a01:s01",
+          "a01:s04"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 1e-06,
+      "unit": "usd_per_share",
+      "value": 0.13
+    },
+    "margin_bridge": {
+      "evidence": [
+        [
+          "a01:s02",
+          "a01:s03"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 1e-06,
+      "unit": "basis_points",
+      "value": 1139.8501605422762
+    }
+  },
+  "conclusion": {
+    "evidence": [
+      [
+        "a01:s01",
+        "a01:s04"
+      ]
+    ],
+    "verdict": "supported"
+  },
+  "context_evidence_allowed": [
+    "a01:s06"
+  ],
+  "task_id": "challenge-v1-a01",
+  "controls": [
+    {
+      "name": "later_targets",
+      "database": "control-1.sqlite",
+      "expected": {
+        "adjusted_margin": 46.307527648947556,
+        "adjusted_operating_income": 2596.0,
+        "eps_difference": 0.13,
+        "margin_bridge": 1139.8501605422762
+      }
+    },
+    {
+      "name": "monetary_scale",
+      "database": "control-2.sqlite",
+      "expected": {
+        "adjusted_margin": 46.307527648947556,
+        "adjusted_operating_income": 5192.0,
+        "eps_difference": 0.13,
+        "margin_bridge": 1139.8501605422762
+      }
+    },
+    {
+      "name": "signed_bridge",
+      "database": "control-3.sqlite",
+      "expected": {
+        "adjusted_margin": 46.753478415982876,
+        "adjusted_operating_income": 2621.0,
+        "eps_difference": 0.13,
+        "margin_bridge": 1184.4452372458081
+      }
+    },
+    {
+      "name": "eps_observations",
+      "database": "control-4.sqlite",
+      "expected": {
+        "adjusted_margin": 46.307527648947556,
+        "adjusted_operating_income": 2596.0,
+        "eps_difference": 0.19,
+        "margin_bridge": 1139.8501605422762
+      }
+    }
+  ],
+  "hashes": {
+    "evidence.json": "bbfd7f8fe98a870b733295a0d405341e4e8ee4e1476125285a1276699dc1d3ec",
+    "control-2.sqlite": "0beeae29180b90784c7adf798f516072ef3aa56206246357fe8b2ab4cc613e9b",
+    "sources.md": "ff218809b30a314754eee7fabe4dfbab4c0145ec2ae7913593320a5a523301f8",
+    "control-4.sqlite": "09d086a23ac5cfc4928843f84ab76e681846b9facd5525157e3b5f61130c8e5a",
+    "control-3.sqlite": "35ac8e15c2005888aaf070981165845c6b9dc1821b1bea20bfa1497dca981635",
+    "control-1.sqlite": "e44e84ca1f71cd51114be7f22369d5a2c5514a9067c6672eb100811f6000cd58",
+    "schema.json": "78c6f7adbcb3424274471253c38d137a9c84adba154aeeac68031b2f5125937c",
+    "verify.py": "a69eb6c71a44ff42df488696ecd76257c5ec1096f5ae9a5dd245cc4128a2b0e2",
+    "data.sqlite": "a7fbee59c886a6a785b59968612b09683fccb97b996301e1d4f2d83d5f412239"
+  }
+}

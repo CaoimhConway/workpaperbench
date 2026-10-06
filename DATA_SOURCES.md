@@ -91,3 +91,12 @@ coverage or eligibility. References are authored outputs, distinct from actual
 saved submissions. Review records and independently recalculated values appear in
 [reports/source-review.md](reports/source-review.md). No external human validation
 is claimed. Dependency notices are in [third-party/NOTICE.md](third-party/NOTICE.md).
+
+
+## Research Challenge development snapshot
+
+The `challenge-v1` pilots retain authentic numerical facts from accession-specific Adobe Q3/Q4 FY2024 releases, PayPal FY2024 filing and earnings supplement, and Brale SBC May/June 2025 issuer reserve reports. Their exact URLs, source sections, capture time, original-response hashes where available and retained-extract hashes are in each `datasets/challenge-v1/authoring/*/source_capture.json`. Full issuer HTML/PDF documents are not redistributed. Retained material is factual table amounts, headings and concise definitions with attribution. Code and original annotations are MIT, while issuer source rights are not relicensed as project code. No benchmark questions are copied.
+
+Brale PDF bytes were read through the PDF reader but not captured locally, so only retained-extract hashes are claimed. Printed examiner/management dates are report dates, and historical first publication remains unknown. Both dates are month-end stocks. May and June list the same chains and reserve definition but have different examiner scope. No daily flow, token market price, observed redemption outcome or payment population is inferred. Synthetic controls are labeled and never described as authentic financial observations.
+
+Artemis acquisition is skipped because no explicitly supplied project data credential or verified redistribution grant exists. The prior RPC and DefiLlama failures/rights limitations remain historical. This snapshot uses direct primary issuer evidence instead of repeating those failed acquisition paths.

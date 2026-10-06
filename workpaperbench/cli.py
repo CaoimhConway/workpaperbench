@@ -74,7 +74,7 @@ def report(root):
     records, reviews, supplemental = {}, {}, []
     for path in sorted((root / "reports/runs").glob("**/record.json")):
         record = json.loads(path.read_text())
-        if str(record.get("experiment_id", "")).startswith("real-v1"):
+        if str(record.get("experiment_id", "")).startswith(("real-v1", "challenge-v1")):
             continue
         if record["campaign"] != "final" or (record.get('freeze_manifest_id') is not None
                 and record['freeze_manifest_id'] != manifest['manifest_id']):
@@ -281,14 +281,23 @@ def main():
     inspect.add_argument("path", type=Path)
     sub.add_parser("demo")
     reporting = sub.add_parser("report")
-    reporting.add_argument("--dataset", choices=("all", "historical", "real-v1"), default="all")
+    reporting.add_argument("--dataset", choices=("all", "historical", "real-v1", "challenge-v1"), default="all")
     args = parser.parse_args()
     if args.command == "validate":
         answer = parse(args.path.read_bytes())
-        schema_path = ROOT / ("datasets/real-v1/schema.json" if str(answer.get("task_id", "")).startswith("real-v1-") else "config/schema.json")
+        task_id = str(answer.get("task_id", ""))
+        schema_path = ROOT / ("datasets/challenge-v1/schema.json" if task_id.startswith("challenge-v1-") else "datasets/real-v1/schema.json" if task_id.startswith("real-v1-") else "config/schema.json")
         validate(answer, json.loads(schema_path.read_text()))
         print("Output structure valid. Financial correctness and replay require the separate verifier on Actions.")
     elif args.command == "demo":
+        challenge = ROOT / 'datasets/challenge-v1/tasks/a01/tests/reference.json'
+        if challenge.is_file():
+            workpaper = json.loads(challenge.read_text())
+            print('Authored Research Challenge reference: Adobe Q4 FY2024 guidance and reconciliation')
+            for claim in workpaper['answers']:
+                print(f"{claim['id']}: {claim['value']} {claim['unit']}. Evidence: {claim['evidence']}")
+            print('Evidence: datasets/challenge-v1/tasks/a01/environment/sources.md. No submitted SQL executes in this demo.')
+            print()
         reference_path = ROOT / 'datasets/real-v1/tasks/wp04/tests/reference.json'
         if reference_path.is_file():
             workpaper = json.loads(reference_path.read_text())
@@ -327,6 +336,10 @@ def main():
             result = report_real(ROOT)
             if result is not None:
                 print(json.dumps(result['summary'], indent=2))
+        if args.dataset in ('all', 'challenge-v1') and (ROOT / 'datasets/challenge-v1').is_dir():
+            from .challenge_report import report_challenge
+            result = report_challenge(ROOT)
+            print('Research Challenge report regenerated for', len(result['studies']), 'frozen stages')
 
 
 if __name__ == "__main__":

@@ -65,3 +65,18 @@ The key-free CI workflow collects the requested existing campaign, checks native
 ## Scorer 1.2.0
 
 The correction forbids SQL execution whenever structure is rejected. Only uniquely identifiable requested numerical claims are then assessed. Safe explicit-date, text and window alternatives still execute on both pristine fixtures under the existing 256 MiB Linux address-space limit, two-second CPU limit, 1.5-second progress deadline and two-second subprocess timeout. No resource limit was increased. Collection requires authenticated archive digests and validates schedule, run, attempt, commit and retained-file identities before replay. The correction registry allowlist cannot authorize candidate inputs, references, model, runtime, schedule or treatment changes. Original strict verdicts and prior 1.1.0 regrades remain historical evidence.
+
+
+## Research Challenge related work
+
+The new suite borrows design practices, not task questions, software stacks or historical scores. [Hermes ToolPerf](https://github.com/NousResearch/hermes-toolperf-evals) links sandbox cases to observed tool-error classes and retains tool traces. It motivates diagnosis of source selection, scope, calculation, evidence and infrastructure separately here, without claiming a financial product defect. No root redistribution license was identified, so no materials are copied.
+
+[FinanceBench](https://github.com/patronus-ai/financebench/tree/cc39aeb4afdf33909ee1412188bf89035950c2eb) separates financial questions, source document/page evidence and justification. That motivates dossier source locators and claim-linked support. Its authors' manual review is not validation of this suite. No repository license was identified and no questions or source corpus are copied.
+
+[FinQA](https://github.com/czyssrs/FinQA/tree/0f16e2867befa6840783e58be38c9efb9229d742) supplies executable arithmetic programs and supporting table/text facts. Its MIT repository and execution-versus-program checks motivate explicit reproducible calculations here. This suite uses constrained SQL with changed-input checks rather than program-token matching. Its documented earlier label leakage reinforces candidate-only leakage audits.
+
+[Spider2](https://github.com/xlang-ai/Spider2/tree/cafb867313aab4e674652054198f383cf4018943) tests schema/document navigation and execution results in enterprise SQL workflows. Its MIT repository motivates ordinary dossier navigation and valid SQL alternatives. WorkpaperBench uses small offline SQLite inputs, with no Snowflake/BigQuery service or enterprise breadth claim. Dataset and external-source terms are separate from code licensing.
+
+[Vals Finance Agent](https://github.com/vals-ai/finance-agent/tree/8ba65f81ab759a8e0d44e72aabc5a47cf839d563) uses web/EDGAR search and HTML retrieval and retains tool/token/error logs. Its MIT implementation motivates analyst-shaped requests and source-path observations. WorkpaperBench freezes evidence and grades deterministic financial propositions instead of depending on a live search service or a platform judge. The README does not document its platform scoring formula, so no scoring comparison is inferred.
+
+The three development dossiers and their controls received a separate source-first review before exposure. Review status and actual validation are in BUILD_STATUS.md. No human validation or historical score comparison is claimed.

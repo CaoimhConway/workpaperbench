@@ -108,8 +108,10 @@ def package(identifier, definition, destination):
         shutil.copyfile(DATASET / 'schema.json', directory / 'schema.json')
     shutil.copyfile(ROOT / 'scripts/check_answer.py', environment / 'check_answer.py')
     shutil.copyfile(ROOT / 'scripts/verify.py', tests / 'verify.py')
-    shutil.copytree(ROOT / 'workpaperbench', tests / 'workpaperbench',
-                    ignore=shutil.ignore_patterns('__pycache__', 'cli.py', 'real_report.py'))
+    modules = tests / 'workpaperbench'
+    modules.mkdir()
+    for name in ('__init__.py', 'grading.py', 'sql_worker.py'):
+        shutil.copyfile(ROOT / 'workpaperbench' / name, modules / name)
     evidence = copy.deepcopy(definition['evidence'])
     for record in evidence:
         record['content_sha256'] = hashlib.sha256(record['text'].encode()).hexdigest()

@@ -2,6 +2,23 @@
 
 ### Reproducible evaluations for financial research agents
 
+**Research Challenge development snapshot - measurement pending.** WorkpaperBench tests whether agents can find, reconcile, calculate and justify financial analysis from frozen evidence dossiers. A verified pass requires every requested financial answer, adequate source support and successful changed-input recomputation. Delivery is reported separately.
+
+The new `challenge-v1` layer currently contains three source-backed development cases, one per family. The required nine separate evaluation cases will be authored after the pilot. The published eight-case `real-v1` and historical suites remain **Core Regression**, with their original identities and results.
+
+| Challenge stage | Base cases | Models | Planned attempts | Retained verdicts | Verified research |
+|---|---:|---:|---:|---:|---|
+| Development pilot, full dossiers | 3 | 2 | 18 | 0 | Pending |
+| Separate evaluation | Not yet authored | 2 | 54 | 0 | Pending |
+
+No difficulty or model-ranking claim is supported yet. No assisted runs have been performed.
+
+An [explicitly authored Adobe workpaper](reports/challenge-v1/reference-workpaper.md) illustrates the new contract. Against guidance issued with Q3 FY2024 results, Q4 disclosed non-GAAP diluted EPS exceeded the upper bound by USD 0.13 per share. Independently rebuilding the operating bridge gives USD 2,596 million adjusted operating income, a 46.307528% margin and a 1,139.850161-basis-point adjusted-versus-GAAP margin gap. The task retains annual and nearby-quarter columns, later guidance and separate income/EPS reconciliations. [Read the dossier without installation](datasets/challenge-v1/tasks/a01/environment/sources.md). This is a reference, not an observed model success.
+
+The other pilots reconcile Brale SBC reserves across month-end reports with different examiner scope, and compare PayPal annual revenue composition and volume-weighted monetization. Brale's unchanged reported coverage is a retained null finding. Authentic observations and synthetic controls are labeled separately. [Challenge measurement contract](docs/CHALLENGE.md) · [Challenge records](reports/challenge-v1/results.md).
+
+## Core Regression
+
 **Can an agent calculate the right number - and support the conclusion?**
 
 WorkpaperBench is a small offline evaluation tool for engineers testing financial research agents. Eight native Harbor tasks require a JSON workpaper with numerical answers, source evidence, reproducible SQL and a bounded conclusion. The active `real-v1` suite uses six source-backed tasks and two controlled synthetic diagnostics. It evaluates work over supplied evidence, with separate numerical, conclusion, evidence and replay diagnostics. It is not an open-web research benchmark or a production reliability estimate.

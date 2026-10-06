@@ -1,0 +1,56 @@
+#!/bin/bash
+set -euo pipefail
+cat > /logs/artifacts/answer.json <<'ANSWER'
+{
+  "answers": [
+    {
+      "evidence": [
+        "b01:s04",
+        "b01:s05"
+      ],
+      "id": "june_assets_usd",
+      "reason_code": null,
+      "sql": "SELECT cash_equivalents_usd + us_government_debt_usd AS value FROM reserve_reports WHERE report_date='2025-06-30'",
+      "status": "answered",
+      "unit": "usd",
+      "value": 9356516
+    },
+    {
+      "evidence": [
+        "b01:s04"
+      ],
+      "id": "june_reconciliation_usd",
+      "reason_code": null,
+      "sql": "SELECT cash_equivalents_usd + us_government_debt_usd - reported_reserve_fv_usd AS value FROM reserve_reports WHERE report_date='2025-06-30'",
+      "status": "answered",
+      "unit": "usd",
+      "value": 0
+    },
+    {
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s04",
+        "b01:s05"
+      ],
+      "id": "coverage_change_pp",
+      "reason_code": null,
+      "sql": "WITH coverage AS (SELECT report_date,100.0*reported_reserve_fv_usd/issued_sbc AS pct FROM reserve_reports WHERE report_date IN ('2025-05-31','2025-06-30')) SELECT (SELECT pct FROM coverage WHERE report_date='2025-06-30') - (SELECT pct FROM coverage WHERE report_date='2025-05-31') AS value",
+      "status": "answered",
+      "unit": "percentage_points",
+      "value": 0
+    }
+  ],
+  "conclusion": {
+    "evidence": [
+      "b01:s01",
+      "b01:s02",
+      "b01:s04",
+      "b01:s05"
+    ],
+    "reason_code": "contradicted_by_calculation",
+    "verdict": "contradicted"
+  },
+  "task_id": "challenge-v1-b01"
+}
+ANSWER

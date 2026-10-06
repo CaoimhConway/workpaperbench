@@ -1,0 +1,46 @@
+{
+  "install_complete": true,
+  "cli_arguments_valid": true,
+  "startup": {
+    "return_code": 0,
+    "supported_flags": {
+      "--model": true,
+      "--toolsets": true,
+      "-Q": true,
+      "--query": true
+    },
+    "retry_observer_registration_smoke": {
+      "staged": true,
+      "registration_smoke": true,
+      "registered_hook_count": 3,
+      "enabled": true
+    },
+    "native_hook_smoke": {
+      "passed": true,
+      "return_code": 0,
+      "runtime_hooks_registered": {
+        "api_request_error": true,
+        "post_api_request": true,
+        "pre_api_request": true
+      },
+      "runtime_marker_valid": true,
+      "installed_runtime_python_resolved": true,
+      "installed_runtime_python": "/tmp/hermes/installs/9e37fb62e5f15382/environments/d0918f84e95246de8a3097d7261f893f/venv/bin/python",
+      "installed_runtime_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+      "native_process_can_write_observer_ledger": true,
+      "ledger_retained_and_readable": true,
+      "raw_request_id_absent": true,
+      "event_count": 5,
+      "repeated_request_ordinals": [
+        1,
+        2
+      ],
+      "retry_count_reset_observed": true,
+      "capture_completeness": "not_guaranteed",
+      "capture_limitations": "hooks_fail_open_upstream_internal_retries_and_routes_unobserved",
+      "candidate_terminal_access_assumption": "same-container terminal permissions may allow writing the shared /logs/agent mount - not probed"
+    }
+  },
+  "key_free": true,
+  "exception_type": "RuntimeError"
+}

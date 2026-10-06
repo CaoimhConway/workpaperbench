@@ -1,0 +1,56 @@
+{
+  "human_validation": false,
+  "limitations": [
+    "Hooks fail open",
+    "Provider-internal retries and downstream routing unobserved",
+    "Candidate-accessible ledger is best-effort telemetry",
+    "Registration and callback behavior still require hosted installed-runtime validation"
+  ],
+  "native_hermes_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "review": "Independent read-only check of exact pinned public source bytes, hook signatures, repeated logical request IDs, disabled SDK retries and content-free projection",
+  "source_files": [
+    {
+      "path": "agent/api_request_hooks.py",
+      "remote_bytes_match_retained": true,
+      "sha256": "0f205b08a859eeca2d433dc619897c3eaba7f92a196b6e8cbae36c37633b5abd",
+      "url": "https://raw.githubusercontent.com/NousResearch/hermes-agent/8b66a51036c1e20920a17cdd049fdf55c968d683/agent/api_request_hooks.py"
+    },
+    {
+      "path": "agent/turn_api_request.py",
+      "remote_bytes_match_retained": true,
+      "sha256": "fae43abf285e6f2b82d1820b7bd62ee10214676a48d6af552b8d62530e59dd15",
+      "url": "https://raw.githubusercontent.com/NousResearch/hermes-agent/8b66a51036c1e20920a17cdd049fdf55c968d683/agent/turn_api_request.py"
+    },
+    {
+      "path": "agent/turn_response_intake.py",
+      "rechecked_at_utc": "2026-10-06 22:11:32 UTC",
+      "remote_bytes_match_retained": true,
+      "sha256": "ab98da48e437f23ac81c3e9c83309d50d5d0b1200712990fce85c419d315efe9",
+      "url": "https://raw.githubusercontent.com/NousResearch/hermes-agent/8b66a51036c1e20920a17cdd049fdf55c968d683/agent/turn_response_intake.py"
+    },
+    {
+      "path": "agent/turn_api_error.py",
+      "remote_bytes_match_retained": true,
+      "sha256": "4290cb91411abec9aa804e5bc8e5454caf6fca5f0eaea86ba2b2c332db3198ec",
+      "url": "https://raw.githubusercontent.com/NousResearch/hermes-agent/8b66a51036c1e20920a17cdd049fdf55c968d683/agent/turn_api_error.py"
+    },
+    {
+      "path": "agent/client_lifecycle.py",
+      "remote_bytes_match_retained": true,
+      "sha256": "5333b2dd5c96427996f060e9c01f6ca86d882cb89a59f60482e2281de8b66d5f",
+      "url": "https://raw.githubusercontent.com/NousResearch/hermes-agent/8b66a51036c1e20920a17cdd049fdf55c968d683/agent/client_lifecycle.py"
+    },
+    {
+      "path": "hermes_cli/plugins_loader.py",
+      "remote_bytes_match_retained": true,
+      "sha256": "4c30636dd1229cb04b4065867478a4bec79abd824a182c8cbe3a583aaac67b35",
+      "url": "https://raw.githubusercontent.com/NousResearch/hermes-agent/8b66a51036c1e20920a17cdd049fdf55c968d683/hermes_cli/plugins_loader.py"
+    },
+    {
+      "path": "hermes_cli/plugin_dev.py",
+      "remote_bytes_match_retained": true,
+      "sha256": "023caf70b08911993507d9b541edfa8eaab6514be35842a6efff3b01d232aa1e",
+      "url": "https://raw.githubusercontent.com/NousResearch/hermes-agent/8b66a51036c1e20920a17cdd049fdf55c968d683/hermes_cli/plugin_dev.py"
+    }
+  ]
+}
