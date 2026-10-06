@@ -74,6 +74,8 @@ def report(root):
     records, reviews, supplemental = {}, {}, []
     for path in sorted((root / "reports/runs").glob("**/record.json")):
         record = json.loads(path.read_text())
+        if str(record.get("experiment_id", "")).startswith("real-v1"):
+            continue
         if record["campaign"] != "final" or (record.get('freeze_manifest_id') is not None
                 and record['freeze_manifest_id'] != manifest['manifest_id']):
             supplemental.append(record)
@@ -278,13 +280,35 @@ def main():
     inspect = sub.add_parser("validate")
     inspect.add_argument("path", type=Path)
     sub.add_parser("demo")
-    sub.add_parser("report")
+    reporting = sub.add_parser("report")
+    reporting.add_argument("--dataset", choices=("all", "historical", "real-v1"), default="all")
     args = parser.parse_args()
     if args.command == "validate":
         answer = parse(args.path.read_bytes())
-        validate(answer, json.loads((ROOT / "config/schema.json").read_text()))
+        schema_path = ROOT / ("datasets/real-v1/schema.json" if str(answer.get("task_id", "")).startswith("real-v1-") else "config/schema.json")
+        validate(answer, json.loads(schema_path.read_text()))
         print("Output structure valid. Financial correctness and replay require the separate verifier on Actions.")
     elif args.command == "demo":
+        reference_path = ROOT / 'datasets/real-v1/tasks/wp04/tests/reference.json'
+        if reference_path.is_file():
+            workpaper = json.loads(reference_path.read_text())
+            label = 'Authored reference'
+            manifest_path = ROOT / 'datasets/real-v1/manifest.json'
+            if manifest_path.is_file():
+                manifest = json.loads(manifest_path.read_text())
+                for directory in sorted((ROOT / 'reports/runs' / manifest['manifest_id']).glob('final-wp04-*')):
+                    if (directory / 'answer.json').is_file() and (directory / 'verdict.json').is_file():
+                        verdict = json.loads((directory / 'verdict.json').read_text())
+                        if verdict.get('complete') is True:
+                            workpaper = json.loads((directory / 'answer.json').read_text())
+                            label = 'Recorded source-backed submission ' + directory.name
+                            break
+            print(label + ': Circle January 2025 reserve workpaper')
+            for claim in workpaper['answers']:
+                print(f"{claim['id']}: {claim['value']} {claim['unit']}. Evidence: {claim['evidence']}")
+            print('See README for source dates, definitions and SQL. This display executes no submitted SQL.')
+            print()
+        print('Historical synthetic formula case:')
         saved = json.loads((ROOT / 'reports/runs/final-wp03-A-1/answer.json').read_text())
         record = json.loads((ROOT / 'reports/runs/final-wp03-A-1/record.json').read_text())
         claims = {c['id']: c for c in saved['answers']}
@@ -295,8 +319,14 @@ def main():
         print("Changed fixture: P1=120, P2=150. Expression=50%, correct growth=25%.")
         print("This display does not execute submitted SQL. See reports/case-study.md for the unchanged artifact and qualifications.")
     else:
-        result = report(ROOT)
-        print(json.dumps(result["summary"], indent=2))
+        if args.dataset == 'historical' or (args.dataset == 'all' and not (ROOT / 'datasets/real-v1/manifest.json').is_file()):
+            result = report(ROOT)
+            print(json.dumps(result['summary'], indent=2))
+        if args.dataset in ('all', 'real-v1'):
+            from .real_report import report_real
+            result = report_real(ROOT)
+            if result is not None:
+                print(json.dumps(result['summary'], indent=2))
 
 
 if __name__ == "__main__":

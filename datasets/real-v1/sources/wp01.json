@@ -1,0 +1,219 @@
+{
+  "split": "development",
+  "source_group": "tesla-2024-q2",
+  "tables": {
+    "expenses": {
+      "schema": "CREATE TABLE expenses(entity TEXT, period TEXT, year INTEGER, metric TEXT, amount_million INTEGER, evidence_id TEXT)",
+      "rows": [
+        [
+          "Tesla",
+          "Q2",
+          2024,
+          "R&D",
+          1074,
+          "filing:q2"
+        ],
+        [
+          "Tesla",
+          "H1",
+          2024,
+          "R&D",
+          2225,
+          "filing:h1"
+        ],
+        [
+          "Tesla",
+          "Q2",
+          2023,
+          "R&D",
+          943,
+          "filing:comparative"
+        ],
+        [
+          "Tesla",
+          "H1",
+          2023,
+          "R&D",
+          1714,
+          "filing:comparative"
+        ]
+      ]
+    }
+  },
+  "changed_tables": {
+    "expenses": {
+      "schema": "CREATE TABLE expenses(entity TEXT, period TEXT, year INTEGER, metric TEXT, amount_million INTEGER, evidence_id TEXT)",
+      "rows": [
+        [
+          "Tesla",
+          "Q2",
+          2024,
+          "R&D",
+          1200,
+          "filing:q2"
+        ],
+        [
+          "Tesla",
+          "H1",
+          2024,
+          "R&D",
+          2600,
+          "filing:h1"
+        ],
+        [
+          "Tesla",
+          "Q2",
+          2023,
+          "R&D",
+          980,
+          "filing:comparative"
+        ],
+        [
+          "Tesla",
+          "H1",
+          2023,
+          "R&D",
+          1770,
+          "filing:comparative"
+        ]
+      ]
+    }
+  },
+  "instruction": "For Tesla calendar 2024, report Q1 R&D as q1_rd in usd_million and Q2 sequential R&D change as sequential_change in percent. Use the supplied filing. Set conclusion to null.",
+  "context": "# Filing extract\nTesla, Inc. Form 10-Q, quarter ended June 30, 2024, filed July 24, 2024. Dollars in millions. Three-month and six-month columns each have separate 2024 and 2023 comparisons. Q2 means three months ended June 30. H1 means six months ended June 30. The expenses table preserves these column labels. R&D is a period expense.\n\nSource: https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm\n\nObserved accession-specific factual table extract, deterministically normalized. This is a previously exposed regression question, not a newly unseen evaluation.",
+  "evidence": [
+    {
+      "id": "filing:q2",
+      "text": "2024 three months ended June 30 R&D: 1074 USD million.",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm",
+      "publication": "2024-07-24",
+      "period": "2024-04-01/2024-06-30",
+      "retrieved_at": "2026-10-06T06:56:52.954367+00:00",
+      "redistribution": "original annotation and factual extract only",
+      "capture_sha256": "ed0541e30563b4cea6a61434c42dc241ce5b0e4c7869bf699acf5353dc7c6e95"
+    },
+    {
+      "id": "filing:h1",
+      "text": "2024 six months ended June 30 R&D: 2225 USD million.",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm",
+      "publication": "2024-07-24",
+      "period": "2024-01-01/2024-06-30",
+      "retrieved_at": "2026-10-06T06:56:52.954367+00:00",
+      "redistribution": "original annotation and factual extract only",
+      "capture_sha256": "ed0541e30563b4cea6a61434c42dc241ce5b0e4c7869bf699acf5353dc7c6e95"
+    },
+    {
+      "id": "filing:context",
+      "text": "Tesla Inc. Reporting periods and units are as documented in sources.md.",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm",
+      "publication": "2024-07-24",
+      "period": "calendar H1 2024",
+      "retrieved_at": "2026-10-06T06:56:52.954367+00:00",
+      "redistribution": "original annotation and factual extract only",
+      "capture_sha256": "ed0541e30563b4cea6a61434c42dc241ce5b0e4c7869bf699acf5353dc7c6e95"
+    },
+    {
+      "id": "filing:comparative",
+      "text": "2023 comparative three/six-month R&D: 943/1714 USD million.",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm",
+      "publication": "2024-07-24",
+      "period": "calendar H1 2023",
+      "retrieved_at": "2026-10-06T06:56:52.954367+00:00",
+      "redistribution": "original annotation and factual extract only",
+      "capture_sha256": "ed0541e30563b4cea6a61434c42dc241ce5b0e4c7869bf699acf5353dc7c6e95"
+    },
+    {
+      "id": "filing:table",
+      "text": "Tesla Inc. 2024 R&D, USD million. Three months ended June 30: 1074. Six months ended June 30: 2225. See period headers in sources.md.",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm",
+      "publication": "2024-07-24",
+      "period": "2024-04-01/2024-06-30",
+      "retrieved_at": "2026-10-06T06:56:52.954367+00:00",
+      "redistribution": "original annotation and factual extract only",
+      "capture_sha256": "ed0541e30563b4cea6a61434c42dc241ce5b0e4c7869bf699acf5353dc7c6e95"
+    }
+  ],
+  "reference": {
+    "task_id": "real-v1-wp01",
+    "answers": [
+      {
+        "id": "q1_rd",
+        "status": "answered",
+        "value": 1151,
+        "unit": "usd_million",
+        "evidence": [
+          "filing:q2",
+          "filing:h1",
+          "filing:context"
+        ],
+        "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN amount_million END) q2, MAX(CASE WHEN period='H1' THEN amount_million END) h1 FROM expenses WHERE entity='Tesla' AND year=2024 AND metric='R&D') SELECT h1-q2 AS value FROM p",
+        "reason_code": null
+      },
+      {
+        "id": "sequential_change",
+        "status": "answered",
+        "value": -6.689834926151173,
+        "unit": "percent",
+        "evidence": [
+          "filing:q2",
+          "filing:h1",
+          "filing:context"
+        ],
+        "sql": "WITH p AS (SELECT MAX(CASE WHEN period='Q2' THEN amount_million END) q2, MAX(CASE WHEN period='H1' THEN amount_million END) h1 FROM expenses WHERE entity='Tesla' AND year=2024 AND metric='R&D') SELECT 100.0*(q2-(h1-q2))/(h1-q2) AS value FROM p",
+        "reason_code": null
+      }
+    ],
+    "conclusion": null
+  },
+  "gold": {
+    "answers": {
+      "q1_rd": {
+        "status": "answered",
+        "value": 1151,
+        "changed_value": 1400,
+        "unit": "usd_million",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "filing:q2",
+            "filing:h1",
+            "filing:context"
+          ],
+          [
+            "filing:table"
+          ],
+          [
+            "filing:q2",
+            "filing:h1"
+          ]
+        ]
+      },
+      "sequential_change": {
+        "status": "answered",
+        "value": -6.689834926151173,
+        "changed_value": -14.285714285714285,
+        "unit": "percent",
+        "tolerance": 1e-06,
+        "evidence": [
+          [
+            "filing:q2",
+            "filing:h1",
+            "filing:context"
+          ],
+          [
+            "filing:table"
+          ],
+          [
+            "filing:q2",
+            "filing:h1"
+          ]
+        ]
+      }
+    },
+    "conclusion": null
+  },
+  "origin": "deterministic_source_derived",
+  "task_id": "real-v1-wp01",
+  "control_origin": "deliberately_perturbed_real_data",
+  "previously_exposed": true
+}

@@ -1,0 +1,197 @@
+{
+  "run_id": "37431401130",
+  "run_attempt": 1,
+  "commit_sha": "caf51e7d33b7560728020d9f0bc171cf282994f5",
+  "branch": "codex/real-data-release",
+  "workflow_event": "workflow_dispatch",
+  "workflow_result": "success",
+  "runner": "ubuntu-24.04",
+  "harbor_version": "0.23.0",
+  "dataset": {
+    "dataset_id": "real-v1",
+    "manifest_id": "real-v1-76d0ba6152ff",
+    "verified_hash_count": 239
+  },
+  "artifact": {
+    "id": 11399996316,
+    "name": "integration-caf51e7d33b7560728020d9f0bc171cf282994f5-37431401130-1",
+    "api_digest": "sha256:20345952baa222870de4899e9d764ffbc1978a61f0ef4013801ebdb18b303710",
+    "verified_archive_sha256": "20345952baa222870de4899e9d764ffbc1978a61f0ef4013801ebdb18b303710",
+    "archive_bytes": 59393,
+    "member_count": 113,
+    "uncompressed_bytes": 286959,
+    "member_paths": "113 unique single-level JSON files, no traversal, links, directories, or encrypted members",
+    "credential_screen": "passed on archive bytes and every bounded member",
+    "member_aggregates_match": true,
+    "screening_limits": "The scan checks known credential patterns in archive bytes and bounded member contents. It cannot prove absence of arbitrary unknown secret formats."
+  },
+  "workflow_steps": {
+    "unit": "success",
+    "historical_controls": "success",
+    "real_v1_controls": "success",
+    "fresh_replay": "skipped",
+    "retained_regrade": "skipped",
+    "retained_collection": "skipped"
+  },
+  "native_logs": {
+    "run_id": "37431401130",
+    "local_archive_sha256": "58966b7a7a6d2865dfccb2244bbee530220464022a13503221ce3da0264445f9",
+    "archive_bytes": 36373,
+    "member_count": 19,
+    "uncompressed_bytes": 121941,
+    "member_paths_bounded": true,
+    "credential_screen": "passed on archive bytes and every bounded member",
+    "historical_control_step_named": true,
+    "real_v1_control_step_named": true,
+    "screening_limits": "Known credential patterns only. This scan cannot prove absence of arbitrary unknown secret formats."
+  },
+  "controls": {
+    "historical": {
+      "count": 71,
+      "expected_results_met": 71,
+      "all_isolation_flags_true": true,
+      "empty_answers_rejected": 8,
+      "constant_queries_rejected": 8,
+      "candidate_data_tampering_passed": true,
+      "extra_artifact_rejected": true,
+      "write_and_timeout_queries_rejected": true,
+      "structural_extra_claim": {
+        "complete": false,
+        "numerical": true,
+        "replay": null
+      }
+    },
+    "real_v1": {
+      "count": 40,
+      "expected_results_met": 40,
+      "all_isolation_flags_true": true,
+      "empty_answers_rejected": 8,
+      "constant_queries_rejected": 8,
+      "amount_distinct": {
+        "complete": false,
+        "numerical": true,
+        "replay": false
+      },
+      "event_distinct_passed": true,
+      "event_window_passed": true,
+      "structural_extra_claim": {
+        "complete": false,
+        "format": false,
+        "numerical": true,
+        "replay": null
+      },
+      "candidate_data_tampering_passed": true,
+      "extra_artifact_rejected": true,
+      "forbidden_and_bounded_queries_rejected": true
+    }
+  },
+  "fresh_replays": [
+    {
+      "run_id": "37433899700",
+      "run_attempt": 1,
+      "commit_sha": "caf51e7d33b7560728020d9f0bc171cf282994f5",
+      "workflow_result": "success",
+      "fresh_replay_step": "success",
+      "regrade_step": "skipped",
+      "artifact": {
+        "id": 11399159674,
+        "name": "reviewed-results-caf51e7d33b7560728020d9f0bc171cf282994f5-37433899700",
+        "api_digest": "sha256:2028bc0a675e551eade20816463fd71ac7ec0774db88e081e0fa75ea6ddaf985",
+        "verified_archive_sha256": "sha256:2028bc0a675e551eade20816463fd71ac7ec0774db88e081e0fa75ea6ddaf985",
+        "archive_bytes": 93028,
+        "tar_sha256": "bed386c8003ec050954ba3768a579b57681b7f4953fb94a344d787c3d0da997d",
+        "tar_member_count": 372,
+        "tar_uncompressed_bytes": 942275,
+        "credential_screen": "passed on archive bytes and every bounded member"
+      },
+      "logs": {
+        "local_archive_sha256": "f4637d113ea2bb0d5ad8e3b5fa3aa9cf0fd31e00af479639a272f9a086ef66b9",
+        "archive_bytes": 44329,
+        "member_count": 31,
+        "uncompressed_bytes": 136558,
+        "credential_screen": "passed on archive bytes and every bounded member",
+        "receipt_written_marker": true,
+        "fresh_replay_complete_marker": true,
+        "completion_failure_marker_absent": true
+      },
+      "receipt": {
+        "path": "reports/fresh-replay/37433899700-1/historical/final-wp03-A-1/receipt.json",
+        "sha256": "8ee75b56b54471e85c96a0faf08f02dcd15f3e207bf0fd011c3aa27f20eb0532",
+        "receipt_identity_sha256": "60090b7575689331f5f2e0c36fa04c6be3ae0d6494cb4932cfb625da0ae5dc19",
+        "fresh_verdict_sha256": "741360f5eb203c95f63e83792893db4d6d573a0974f6b1d3c680d7a8e6911b43",
+        "preserved_byte_for_byte": true,
+        "dataset": "historical",
+        "slot_id": "final-wp03-A-1",
+        "task_id": "wp03",
+        "input_file": "answer.json",
+        "input_sha256": "096c450dc1ad2f4632fcda15bc1cbc971de954017761f0e5b4c78c1bb87ee6e3",
+        "record_sha256": "39a1d10c9781654d6b16ff6de7d8bc4d88ea264b7fa85d7c788d4c651d26ebc6",
+        "task_sha256": "2828926c39effc9bf364f7dfaf8b48d050f4b7e9853f0ed860fe5e99d8c0c97c",
+        "manifest_id": "wpb-v1-92baa4a72f0e",
+        "manifest_sha256": "8cc3e40ed42898a7ead9fce7a7bfd5c9dc955f02cdd86a1c7bf352c9f667f95b",
+        "scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+        "effective_task_scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+        "input_record_and_scorer_hashes_verified": true,
+        "prior_verdict_sha256": "386b65cbf742e1428af2db55df2d2297da590aa6bf338600f6a9280c946902a3",
+        "prior_comparison_verified": {
+          "complete_same": true,
+          "checks_same": true
+        },
+        "fresh_complete": false,
+        "isolation_flags_true": true
+      }
+    },
+    {
+      "run_id": "37438234452",
+      "run_attempt": 1,
+      "commit_sha": "caf51e7d33b7560728020d9f0bc171cf282994f5",
+      "workflow_result": "success",
+      "fresh_replay_step": "success",
+      "regrade_step": "skipped",
+      "artifact": {
+        "id": 11400450614,
+        "name": "reviewed-results-caf51e7d33b7560728020d9f0bc171cf282994f5-37438234452",
+        "api_digest": "sha256:0b2acd385200d0be0cdff8d3e505a47ed538819d1dd271472fbcc1bf4fa51f43",
+        "verified_archive_sha256": "sha256:0b2acd385200d0be0cdff8d3e505a47ed538819d1dd271472fbcc1bf4fa51f43",
+        "archive_bytes": 92868,
+        "tar_sha256": "95db688d057705cb03539e408ffd2ba595df89beed95b05bacf1930407a7140d",
+        "tar_member_count": 372,
+        "tar_uncompressed_bytes": 940962,
+        "credential_screen": "passed on archive bytes and every bounded member"
+      },
+      "logs": {
+        "local_archive_sha256": "7a680b76567761aed09ad15a3c029ca9b2c6522f244128d94e64b0e346bd0398",
+        "archive_bytes": 44428,
+        "member_count": 31,
+        "uncompressed_bytes": 136576,
+        "credential_screen": "passed on archive bytes and every bounded member",
+        "receipt_written_marker": true,
+        "fresh_replay_complete_marker": true,
+        "completion_failure_marker_absent": true
+      },
+      "receipt": {
+        "path": "reports/fresh-replay/37438234452-1/real-v1/answer-wp02/receipt.json",
+        "sha256": "681cd35ee57f277242e3544ae9bced7704e2d4d0a0ea5bbe02469318a01f4a8d",
+        "receipt_identity_sha256": "691601732d06a3da74711f5caba9dd48b3a573761d823052cbbeab9591500ce5",
+        "fresh_verdict_sha256": "a3e0e7e75f208d2cf70ab6ce738bb535aad617d699af08c72ec6c808843f012f",
+        "preserved_byte_for_byte": true,
+        "dataset": "real-v1",
+        "slot_id": "answer-wp02",
+        "task_id": "real-v1-wp02",
+        "input_file": "submissions/reference-wp02.json",
+        "input_sha256": "7c0be3a58a5cfd99f68074bc52a20e3486434e42b20bd7a63e032fb557726f06",
+        "task_sha256": "2d984fe0156c2e33e2e6af152dc51483a68b445a0c21bae91589ac8a0141575c",
+        "manifest_id": "real-v1-76d0ba6152ff",
+        "manifest_sha256": "550604fe9f1a3fdf975f83bff5fe0321346bc6841bfd4b5d5006696ebe1a7d02",
+        "scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+        "effective_task_scorer_sha256": "a8072598d2ff7475ef6358236b1cbde45e290465dd0675939bb82e8a4c02e455",
+        "input_task_manifest_and_scorer_hashes_verified": true,
+        "prior_verdict_available": false,
+        "fresh_complete": true,
+        "isolation_flags_true": true
+      }
+    }
+  ],
+  "screening_limits": "Known credential patterns were checked in compressed archive bytes and bounded decompressed members. This scan cannot prove absence of arbitrary unknown secret formats. Raw log and artifact archives remain in ignored .raw and are not included here.",
+  "validation": "All 111 native controls matched their expected completion verdicts. Every control reported network_namespace_none, network_probe_blocked, no_inference_key, and no_docker_socket as true."
+}

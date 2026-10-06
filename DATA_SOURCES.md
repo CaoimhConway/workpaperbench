@@ -1,5 +1,44 @@
 # Sources and redistribution
 
+## Active real-v1 snapshot
+
+Six base tasks use authentic external numerical observations, normalized without changing their amounts. Two base tasks are deliberately synthetic. Real-task changed-input replay controls are deliberately perturbed real data. Diagnostic controls are fully synthetic. Neither counts as an observed base dataset.
+
+| Task | Base provenance | Source group | Economic period or sample | Split |
+|---|---|---|---|---|
+| real-v1-wp01 | Deterministic source-derived filing facts | tesla-2024-q2 | Tesla calendar Q2/H1 2024 | Development |
+| real-v1-wp02 | Fully synthetic event ledger, new equal-amount control | authored-event-ledger | Authored diagnostic | Development |
+| real-v1-wp03 | Deterministic source-derived Bitcoin observations | bitcoin-halving-prefix | Block 840000, first 25 transactions | Evaluation |
+| real-v1-wp04 | Deterministic source-derived issuer observations | circle-usdc-january-2025 | January 6 and January 31, 2025 at 23:59 UTC | Evaluation |
+| real-v1-wp05 | Fully synthetic methodology migration | authored-migration | Authored diagnostic | Development |
+| real-v1-wp06 | Deterministic source-derived Bitcoin observations | bitcoin-halving-prefix | Blocks 839999/840000, first 25 transactions each | Evaluation |
+| real-v1-wp07 | Deterministic source-derived filing facts | apple-2024-q2 | Apple fiscal Q2/H1 FY2024 | Evaluation |
+| real-v1-wp08 | Deterministic source-derived Bitcoin observations | bitcoin-halving-prefix | Block 840000, first 25 transactions | Evaluation |
+
+Bitcoin supplies three tasks from one shared corpus. Circle supplies one crypto task. The two filing questions and migration diagnostic were previously exposed. The revised event task adds a new synthetic control to a previously exposed family. No source group crosses the development/evaluation split. This is not an independent-dataset or contamination-free study.
+
+### Retained primary captures
+
+[Capture metadata](datasets/real-v1/source-review.json) records access and rights decisions. [Bitcoin original responses and manifest](datasets/real-v1/captures/bitcoin-halving/bitcoin-halving.manifest.json) retain exact response bodies, request paths, SHA-256, retrieval time, units and fixed inclusion rules. [Circle factual extract](datasets/real-v1/captures/circle-usdc-jan2025.json) retains issuer facts, criteria paraphrases, PDF hash and date precision. [Tesla](datasets/real-v1/captures/tesla-filing-tables.json) and [Apple](datasets/real-v1/captures/apple-filing-tables.json) retain accession-specific table byte slices with full-document and extract hashes.
+
+Blockstream's [Esplora specification pinned to a commit](https://github.com/Blockstream/esplora/blob/bb2d9f37bdb0eb0dade45b121a1df3581d7443ea/API.md) documents the actual API and its 25-transaction pagination. The source is factual Bitcoin public ledger data delivered by that service. The Esplora software license does not grant a blanket license to unrelated service content. The limited public-chain factual capture has attribution and is excluded from the project's MIT claims. There is no claimed provider endorsement or commercial data-service license.
+
+The predetermined block pair spans the fourth subsidy halving. Both pages are partial: 25 of 2328 transactions in block 839999, and 25 of 3050 in block 840000. The captured noncoinbase population is the first 24 transactions after coinbase in each block. Selection occurred before model evaluation, based on the documented protocol boundary. Do not treat sampled fees as whole-block fees, outputs as payments, or two adjacent blocks as a causal or representative time-series result. Source block timestamps are April 20, 2024 at 00:05:33 and 00:09:27 UTC. Retrieval occurred October 6, 2026.
+
+Circle's [January report](https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025-USDC_Examination-Report-January-25.pdf) is an issuer report with an independent accountants opinion, not this project's own attestation. The report dates, signature/opinion date, HTTP Last-Modified header and retrieval are separate fields. Historical first publication time is unknown. The PDF is not bundled and no MIT license is claimed for it. Only limited attributed numerical facts and original explanatory annotations are retained. Circulation is a stock, reserves are USD fair value, and the report's par comparison does not provide market prices or transfer volume.
+
+Issuer and SEC filing documents remain third-party material. Limited factual tables and locators are retained for offline reproduction, with no MIT claim over the original document. The two accession references are in the historical inventory below. Code and original annotations/synthetic diagnostics use [MIT](LICENSE).
+
+### Sources inspected but not used
+
+No `ARTEMIS_API_KEY` repository secret or supplied Artemis data credential was available. Current [API access documentation](https://www.artemis.ai/docs/artemis-api/api-key) says API access is plan-dependent. The unauthenticated catalog does not establish numerical entitlement. No paid plan, upgrade or private data integration was used.
+
+DefiLlama's [current free specification](https://api-docs.defillama.com/llms-free.txt) and an actual fees response were inspected. Its [terms](https://defillama.com/terms) restrict copying/mirroring and republication of its data without permission. A code repository license is not a data redistribution grant. No DefiLlama numerical capture is bundled and no hypothetical provider integration is advertised. Coin Metrics' community archive has CC BY-NC 4.0 restrictions and was not needed.
+
+The old PublicNode and Cloudflare failures remain in [their original record](sources/shared/capture_failure-37273047665.json). The third documented dRPC historical log path also failed with HTTP access errors, recorded in the new source review. Basic chain/header responses did not establish log access. Acquisition stopped at the bounded policy and adapted to a different real dataset. No synthetic fallback counts as an observed source here.
+
+## Historical v1 snapshot
+
 Original code, annotations and synthetic fixtures use MIT. Issuer filings and
 third-party methodology remain with their owners. Full documents are not bundled.
 Each evidence record supplies a locator or synthetic origin, publication precision,

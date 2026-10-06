@@ -4,46 +4,71 @@
 
 **Can an agent calculate the right number - and support the conclusion?**
 
-Eight compact tasks test financial evidence selection, metric comparability and replayable SQL workpapers. Built on Harbor with a reference evaluation using Hermes Agent.
+WorkpaperBench is a small offline evaluation tool for engineers testing financial research agents. Eight native Harbor tasks require a JSON workpaper with numerical answers, source evidence, reproducible SQL and a bounded conclusion. The active `real-v1` suite uses six source-backed tasks and two controlled synthetic diagnostics. It evaluates work over supplied evidence, with separate numerical, conclusion, evidence and replay diagnostics. It is not an open-web research benchmark or a production reliability estimate.
 
-[Read the case study](reports/case-study.md) · [Inspect results](reports/results.md) · [Methodology](docs/METHODOLOGY.md) · [Data sources](DATA_SOURCES.md)
+## A source-backed workpaper
 
-## A correct answer can conceal the wrong calculation
+**Authored reference, not a recorded model submission.** Circle's January 2025 reserve report defines circulating USDC as supply on approved blockchains minus tokens allowed but not issued and access-denied tokens. At **January 31, 2025, 23:59 UTC**:
 
-In a recorded evaluation trial, the agent reported **20% growth** from 100 to 120 token units. The number was correct. Its submitted SQL implemented the wrong formula.
+| Observation | Amount | Unit |
+|---|---:|---|
+| Total supply on approved blockchains | 54,604,305,445 | USDC |
+| Allowed but not issued | 1,291,092,148 | USDC |
+| Access denied | 94,273,569 | USDC |
+| Derived circulating quantity | **53,218,939,728** | USDC |
+| Fair value of reserve assets | **53,283,800,358** | USD |
+| Reserves above circulating quantity valued at the issuer's USD 1 redemption convention | **64,860,630** | USD |
 
-| Same submitted calculation | Original inputs | Changed-input control |
-|---|---:|---:|
-| P1 → P2 | 100 → 120 | 120 → 150 |
-| Submitted expression: `P2 - P1 * 100 / P1` | 20 | **50** |
-| Correct growth: `(P2 - P1) * 100 / P1` | 20% | **25%** |
+That supports a narrow reserve-coverage observation at the report date. It does not establish a market price, payment volume or the number of people using USDC. The report is signed February 27, 2025. Its historical web publication time is unknown. Retrieval now does not make the report point-in-time evidence for January 31.
 
-The original baseline of 100 accidentally masked the error. A controlled input change exposed it without a new model call.
+```sql
+SELECT (approved_supply - allowed_unissued - access_denied) / 1000000.0 AS value
+FROM reserve_snapshots WHERE report_date = '2025-01-31'
+```
 
-This is a real saved submission on a **synthetic task**, not a staged model result. It also omits required SQL aliases and evidence citations, so its original failure cannot be attributed solely to the formula error. [The case study](reports/case-study.md) links the unchanged answer, execution record with its original verdict, and source fixture, and separates those findings.
+This produces circulating quantity in millions of USDC. [Task and evidence](datasets/real-v1/tasks/wp04/instruction.md) · [Original issuer report](https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025-USDC_Examination-Report-January-25.pdf) · [Source records and terms](DATA_SOURCES.md).
 
-## What gets evaluated
+## Measured results
 
-A plausible answer is not enough. Each task requires the correct values and units, evidence that supports the bounded claims, SQL that recomputes on pristine inputs, and an appropriate conclusion or specific evidence limit.
+<!-- versioned-results:start -->
 
-| Task | Research decision | Source |
-|---|---|---|
-| [wp01: Quarterly R&D](tasks/wp01/instruction.md) | Derive a quarter from cumulative filing figures | Tesla filing facts |
-| [wp02: Event aggregation](tasks/wp02/instruction.md) | Remove duplicate exports without dropping legitimate events | Synthetic ledger |
-| [wp03: As-of releases](tasks/wp03/instruction.md) | Use information available at the requested cutoff | Synthetic releases |
-| [wp04: Transfer definitions](tasks/wp04/instruction.md) | Compare counts without inventing a time-series conclusion | Synthetic fallback |
-| [wp05: Definition migration](tasks/wp05/instruction.md) | Separate reported growth from like-for-like growth | Synthetic migration |
-| [wp06: Coverage expansion](tasks/wp06/instruction.md) | Distinguish expanded coverage from growth within matched coverage | Synthetic observations |
-| [wp07: Services margins](tasks/wp07/instruction.md) | Reconcile fiscal periods and percentage-point changes | Apple filing facts |
-| [wp08: Evidence limits](tasks/wp08/instruction.md) | Report an observable without inventing payment or user labels | Shared synthetic fallback |
+| Dataset / scorer | Model | Arm | Strict / scheduled | Numbers / assessed | Conclusion verdict / assessed | Evidence / assessed | Replay / assessed | Verdict / scheduled | Retained / scheduled |
+|---|---|---|---:|---:|---:|---:|---:|---:|---:|
+| Historical v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | A | 3 / 15 | 13 / 13 | 11 / 11 | 7 / 13 | 7 / 13 | 15 / 15 | 15 / 15 |
+| Historical v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | B | 1 / 15 | 13 / 14 | 10 / 10 | 7 / 13 | 10 / 13 | 15 / 15 | 15 / 15 |
+| real-v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | A | Pending | Pending | Pending | Pending | Pending | 0 / 15 | 0 / 15 |
+| real-v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | B | Pending | Pending | Pending | Pending | Pending | 0 / 15 | 0 / 15 |
 
-Development uses **wp01, wp02 and wp05**. Evaluation uses **wp03, wp04, wp06, wp07 and wp08**, without tuning the intervention on their model outputs.
+Evaluation only. Development is separate. Historical skill: no improvement. Real-v1: New measured results are pending. The historical intervention outcome does not evaluate this dataset.
 
-Two tasks use Tesla and Apple filing facts. Six are synthetic. The bounded public RPC acquisition failed, so two evaluation tasks explicitly share a synthetic replacement. **No result here establishes observed stablecoin-payment adoption.** [Source records and limitations](DATA_SOURCES.md) are part of the deliverable.
+[New study](reports/real-v1/results.md) · [Historical study and original negative results](reports/results.md). Missing evidence is distinct from an incorrect conclusion. Assessments and retained outputs may have different coverage.
 
-## Inspect it locally
+<!-- versioned-results:end -->
 
-Use Python 3.12 for the demo and lightweight tests. No API key, Docker or model download is needed. The demo displays the recorded calculation issue without executing a submitted program.
+Strict completion requires the full declared workpaper contract. A correct conclusion missing a citation is a contract failure, separately diagnosed from an incorrect conclusion verdict. The original 48-trial study remains accessible with its negative intervention result and corrections. Its scores do not evaluate `real-v1`.
+
+## Task inventory
+
+| Task identity | Decision | Provenance | Source group / split |
+|---|---|---|---|
+| real-v1-wp01 | Quarterly R&D from cumulative filing columns | Source-derived Tesla facts, previously exposed regression | Tesla 2024 Q2 / development |
+| real-v1-wp02 | Event identity versus equal amounts and duplicate exports | Synthetic diagnostic with a new control | Authored ledger / development |
+| real-v1-wp03 | Sample transaction fees versus coinbase compensation | Source-derived Bitcoin observations | Fixed Bitcoin block samples / evaluation |
+| real-v1-wp04 | Circulating stock, change and reserve coverage | Source-derived Circle reserve facts | Circle January 2025 / evaluation |
+| real-v1-wp05 | Compare periods under a common metric definition | Synthetic migration, previously exposed regression | Authored migration / development |
+| real-v1-wp06 | Compare fee rates on declared transaction coverage | Source-derived Bitcoin observations | Fixed Bitcoin block samples / evaluation |
+| real-v1-wp07 | Fiscal-quarter Services margin and percentage-point change | Source-derived Apple facts, previously exposed regression | Apple FY2024 Q2 / evaluation |
+| real-v1-wp08 | Output amounts and a bounded evidence limit | Source-derived Bitcoin observations | Fixed Bitcoin block samples / evaluation |
+
+There are **six source-backed base tasks, including four substantive crypto tasks, and two synthetic base tasks**. Three crypto tasks share the same Bitcoin sample bundle. Six tasks do not represent six independent datasets. Deterministic normalization preserves source numerical observations. Every task also has a separately labeled synthetic changed-input replay control. Real-task controls deliberately perturb captured amounts. Diagnostic controls remain fully synthetic. These controls are not observed economic data.
+
+The event diagnostic tests whether export copies are deduplicated without dropping distinct equal-amount events. The migration diagnostic isolates metric comparability under explicit authored definitions. Neither is marketed as observed activity.
+
+Artemis was skipped because no project data credential was available. DefiLlama's free endpoint was inspected but its redistribution terms did not permit this public bundle. The bounded Ethereum log paths failed. The active suite uses SEC accession-specific filing extracts, Circle's issuer report and Bitcoin observations delivered by Blockstream's documented Esplora API. [Source review and exact scope](DATA_SOURCES.md) explain the substitution.
+
+## Run the key-free local demo
+
+Use Python 3.12. No Docker, model or data key is needed. The demo reads a saved source-backed workpaper and displays its calculation without executing submitted SQL.
 
 ```bash
 git clone https://github.com/CaoimhConway/workpaperbench.git
@@ -51,89 +76,36 @@ cd workpaperbench
 python3 -m venv .venv
 .venv/bin/python -m pip install -e '.[test]'
 .venv/bin/workpaperbench demo
+.venv/bin/python scripts/build_real_tasks.py --check
 .venv/bin/python -m pytest -q
-```
-
-To regenerate the tables from retained records:
-
-```bash
 .venv/bin/workpaperbench report
 ```
 
-## The study and its current status
+Offline reconstruction checks all frozen input hashes, rebuilds the tables from original captures and compares their schemas and complete typed rows. It retains the hash-verified frozen SQLite bytes after that comparison because physical page layout can differ between SQLite builds. Other package bytes rebuild exactly. No network request is made. Refreshing source data requires a new snapshot identity.
 
-The frozen comparison has **48 scheduled trials**: eight tasks, two configurations and three fresh attempts. The main evaluation contains 30 trials. The other 18 final trials and 12 earlier exploratory attempts are reported separately.
+## Fresh replay and your own workpaper
 
-**A** receives the full task instructions and structural checker. **B** receives those same inputs plus one 230-word contract-check skill selected after development observations. The underlying model is `qwen/qwen3.6-35b-a3b` through OpenRouter. Hermes Agent is the execution framework, not a claim that a Nous model was evaluated.
-
-<!-- study-results:start -->
-
-**All scheduled attempts accounted for.** Original verdicts: **48/48**. Corrected verdicts: **47/48**.
-
-| Evaluation arm | Original complete / planned | Corrected complete / planned | Corrected numerical / assessed | Corrected coverage |
-|---|---:|---:|---:|---:|
-| A | 3 / 15 | 3 / 15 | 13 / 13 | 15 / 15 |
-| B | 1 / 15 | 1 / 15 | 13 / 14 | 15 / 15 |
-
-Only evaluation tasks appear here. Development is reported separately. Unfinished or unreviewable trials are not observed zero-score answers. These are coverage-aware counts, not a treatment-effect claim.
-
-[Full results, failures, costs and original records](reports/results.md)
-
-<!-- study-results:end -->
-
-Scalar accuracy was already high. The contract-check skill did not improve verified completion in this recorded comparison. Failures frequently concerned evidence, SQL replay and conclusion contracts. The small, partly synthetic sample supports no causal or significance claim.
-
-Original verdicts and corrected scores are retained side by side. A green Actions job can still contain a scored task failure. Collection and regrading use saved records and no new model calls.
-
-The original experiment remains pinned to its [execution snapshot](https://github.com/CaoimhConway/workpaperbench/tree/b4e256dc8976223a8a3fdad157a6b212f49bb8e1) and [run](https://github.com/CaoimhConway/workpaperbench/actions/runs/37280454673). Scorer corrections are versioned separately. They do not rewrite its inputs, original verdicts or live jobs.
-
-## How verification works
-
-```text
-Frozen tables + source context
-              ↓
-     Hermes → answer.json
-              ↓
-Separate verifier → original + changed-input SQL replay
-              ↓
-Original verdict + independent diagnostics + retained evidence
-```
-
-The reviewed grader accepts valid alternative SQL, distinguishes a wrong conclusion from a missing citation, and can inspect a uniquely identifiable requested answer even when extra output makes strict format fail. It never repairs an answer to award a pass.
-
-The replay worker is read-only, function-restricted, resource-bounded and isolated from inference credentials. All Docker, Harbor and live execution belong on GitHub-hosted Ubuntu runners. The local machine only edits, runs lightweight tests and views results.
-
-Native tests cover reference answers, valid alternatives, wrong periods, constants, joins, abstention, malformed outputs and isolation. New run controls use experiment-scoped identities, pre-setup receipts and ordered A/B pairs. [Methodology](docs/METHODOLOGY.md) explains the supported SQL subset, original-run limitations and correction policy. [The 71-control native report](reports/integration-full-37373492428.json) preserves actual outcomes. [Native compatibility notes](build-notes/NATIVE_COMPATIBILITY.md) document the integration findings.
-
-## Replay a saved submission on Actions
-
-A repository maintainer with Actions write access can dispatch these workflows. Readers cannot dispatch jobs in the owner's repository merely because it is public. Fork this repository, enable Actions and replace `YOUR_LOGIN` below with the fork owner. No inference secret is needed.
-
-Regrade every retained published submission, preserving original verdicts and input hashes:
+A maintainer with Actions write permission can replay a selected retained submission from scratch, without inference or data credentials. A public reader must fork the repository and enable Actions. Replace `YOUR_LOGIN` with the authorized owner:
 
 ```bash
 gh workflow run ci.yml --repo YOUR_LOGIN/workpaperbench --ref main \
-  -f integration=true -f scope=full -f capture=false -f setup=false -f regrade=true
-gh run list --repo YOUR_LOGIN/workpaperbench --workflow ci.yml --limit 1
-gh run watch RUN_ID --repo YOUR_LOGIN/workpaperbench
-gh run download RUN_ID --repo YOUR_LOGIN/workpaperbench --name reviewed-results-COMMIT_SHA-RUN_ID --dir replay-results
+  -f integration=false -f fresh_replay=true -f dataset=historical \
+  -f replay_slot=final-wp03-A-1
+gh run watch RUN_ID --repo YOUR_LOGIN/workpaperbench --exit-status
+gh run download RUN_ID --repo YOUR_LOGIN/workpaperbench \
+  --name reviewed-results-COMMIT_SHA-RUN_ID --dir replay-results
 ```
 
-Inspect `reports/runs/SLOT/regrade.json` inside the result archive for claim-level numerical, evidence, conclusion and replay diagnostics. The archive also contains the original answer and verdict, generated tables, and scorer/input hashes. Treat downloads as untrusted archives and inspect member paths before extraction. A repeated review of identical scorer/input bytes is a verified no-op and preserves the saved result. [Methodology](docs/METHODOLOGY.md) explains raw versus normalized input and the unavailable-answer limitation.
+Use `dataset=real-v1` to replay the new study, or `replay_slot=all` for every retained answer. Fresh receipts identify executed native verification, run identity and input/task/scorer hashes, compare earlier diagnostics and preserve them. `regrade=true` is the separate cached historical convenience.
 
-## Native controls and task authoring
+An engineer can commit a bounded `submissions/answer.json` to their fork, following the task's schema, then dispatch the same workflow with `dataset=real-v1`, `answer_path=submissions/answer.json` and `task=wp02`. The supplied [authored reference submission](submissions/reference-wp02.json) demonstrates this path. The submitted SQL executes only in the separate verifier on Actions. [Replay contract and commands](docs/REPLAY.md) · [Task-authoring guide](docs/TASK_AUTHORING.md).
 
-Run the key-free native controls in the owner's repository when authorized:
+## Methodology and limits
 
-```bash
-gh workflow run ci.yml --repo CaoimhConway/workpaperbench --ref main \
-  -f integration=true -f scope=full -f capture=false -f setup=false
-```
+A and B receive full common instructions. B differs only by the preserved 230-word contract-check skill. The model is `qwen/qwen3.6-35b-a3b` through OpenRouter default routing and the execution framework is Hermes. Development uses wp01/wp02/wp05. Evaluation uses the other five tasks. No shared source bundle crosses that split. Reused questions are exposed regression cases.
 
-The original freeze is an immutable historical record, not permission to run changed code under its old identity. A new scored experiment needs a new reviewed manifest. Do not retry individual answers for a better score.
+The native verifier has no network, inference key or Docker socket. Candidate terminal tools can read their dedicated capped inference key. Native egress restrictions retain DNS/ICMP channels. Output screening is bounded and cannot guarantee detection of arbitrary obfuscation. [Methodology and security boundaries](docs/METHODOLOGY.md) preserve these limits.
 
-The [task-authoring guide](docs/TASK_AUTHORING.md) maps one native package and walks through source review, equivalent answers, changed inputs, native verification and a future freeze. Keep extensions out of the exposed comparison.
+The earlier saved formula error remains [historical evidence](reports/case-study.md) on a synthetic task. Original tags, frozen inputs, outputs, verdicts and scorer corrections remain accessible. The source-backed upgrade does not relabel them.
 
-**Scope:** a small, partly synthetic regression study over supplied evidence. Not open-web financial research, a leaderboard, a production reliability estimate or an investment recommendation. Repeated attempts and shared source groups are not independent datasets. Provider routing and bootstrap dependencies retain documented variability.
-
-[MIT license](LICENSE) for code. Third-party source material has its own notices in [DATA_SOURCES.md](DATA_SOURCES.md).
+[MIT code license](LICENSE) · [Source-specific rights and attribution](DATA_SOURCES.md) · [Historical measured release](https://github.com/CaoimhConway/workpaperbench/releases/tag/v0.2.0).

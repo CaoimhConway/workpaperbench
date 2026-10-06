@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euo pipefail
+cat > /logs/artifacts/answer.json <<'ANSWER'
+{
+  "task_id": "real-v1-wp06",
+  "answers": [
+    {
+      "id": "sample_rate_change",
+      "status": "answered",
+      "value": 33448.12021582263,
+      "unit": "percent",
+      "sql": "WITH rates AS (SELECT height,SUM(fee_sats)*1.0/SUM(vsize) rate FROM transactions WHERE is_coinbase=0 GROUP BY height) SELECT 100.0*((SELECT rate FROM rates WHERE height=840000)/(SELECT rate FROM rates WHERE height=839999)-1) AS value",
+      "evidence": [
+        "chain:observations",
+        "chain:definitions"
+      ],
+      "reason_code": null
+    },
+    {
+      "id": "matched_rate_change",
+      "status": "answered",
+      "value": 30692.148208919192,
+      "unit": "percent",
+      "sql": "WITH rates AS (SELECT height,SUM(fee_sats)*1.0/SUM(vsize) rate FROM transactions WHERE is_coinbase=0 AND version IN (SELECT version FROM transactions WHERE is_coinbase=0 GROUP BY version HAVING COUNT(DISTINCT height)=2) GROUP BY height) SELECT 100.0*((SELECT rate FROM rates WHERE height=840000)/(SELECT rate FROM rates WHERE height=839999)-1) AS value",
+      "evidence": [
+        "chain:observations",
+        "chain:definitions"
+      ],
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "chain:observations",
+      "chain:definitions"
+    ]
+  }
+}
+ANSWER

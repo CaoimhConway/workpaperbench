@@ -26,9 +26,18 @@ def retained_directory(root, manifest_id, identifier):
     return scoped.parent.parent / identifier if manifest_id == LEGACY_MANIFEST else scoped
 
 
-def authenticate_attempt(artifact, run, manifest_id, cache):
-    slot = r"final-wp0[1-8]-[AB]-[1-3]"
-    prefixes = (f"slot-{run['head_sha']}-final-{run['id']}-",
+def run_campaign(run):
+    title = run.get("display_title", "")
+    if title.startswith("WPB::"):
+        parts = title.split("::")
+        if len(parts) == 3 and parts[2] in ("pilot", "final"):
+            return parts[2]
+    return "final"
+
+
+def authenticate_attempt(artifact, run, manifest_id, cache, mode="final"):
+    slot = rf"{mode}-wp0[1-8]-[AB]-[1-3]"
+    prefixes = (f"slot-{run['head_sha']}-{mode}-{run['id']}-",
                 f"pair-{manifest_id}-{run['id']}-", f"provider-{run['head_sha']}-{run['id']}-")
     endings = (rf"([1-9][0-9]*)-({slot})", rf"([1-9][0-9]*)-({slot}(?:--{slot})?)", r"([1-9][0-9]*)")
     match = next((m for p, e in zip(prefixes, endings)
@@ -45,6 +54,8 @@ def authenticate_attempt(artifact, run, manifest_id, cache):
         raise ValueError('artifact_attempt_identity_mismatch')
     artifact['workflow_run'] = {**artifact['workflow_run'], 'run_attempt': attempt}
     artifact['declared_slots'] = match[2].split('--') if match.lastindex == 2 else []
+    artifact['manifest_id'] = manifest_id
+    artifact['campaign'] = mode
 
 
 def screened(data):
@@ -62,6 +73,7 @@ def import_archive(data, artifact, root):
     with zipfile.ZipFile(io.BytesIO(data)) as archive:
         entries = archive.infolist()
         groups = {}
+        campaign = artifact.get("campaign", "final")
         if len(entries) > 2 * len(FILES) or sum(e.file_size for e in entries) > 1_000_000:
             raise ValueError("unexpected_archive_entry")
         for entry in entries:
@@ -72,7 +84,7 @@ def import_archive(data, artifact, root):
                     or entry.file_size > 500_000 or len(parts) not in (1, 2) or parts[-1] not in FILES):
                 raise ValueError("unexpected_archive_entry")
             group = parts[0] if len(parts) == 2 else "single"
-            if group != "single" and not re.fullmatch(r"final-wp0[1-8]-[AB]-[1-3]", group):
+            if group != "single" and not re.fullmatch(rf"{campaign}-wp0[1-8]-[AB]-[1-3]", group):
                 raise ValueError("unexpected_archive_directory")
             if parts[-1] in groups.setdefault(group, {}):
                 raise ValueError("duplicate_archive_entry")
@@ -94,14 +106,24 @@ def import_archive(data, artifact, root):
 
 def save_files(files, artifact, archive_sha256, root):
     record = json.loads(files["record.json"])
-    validate_record(record, root, artifact["workflow_run"])
+    manifest_id = artifact.get("manifest_id")
+    if not manifest_id:
+        manifest_id = json.loads((Path(root) / "config/freeze.json").read_text())["manifest_id"]
+    mode = artifact.get("campaign", "final")
+    validate_record(record, root, artifact["workflow_run"], manifest_id, mode)
     identifier = record.get("slot_id", "")
-    if not re.fullmatch(r"final-wp0[1-8]-[AB]-[1-3]", identifier):
+    if not re.fullmatch(rf"{mode}-wp0[1-8]-[AB]-[1-3]", identifier):
         raise ValueError("unexpected_slot")
-    manifest = json.loads((root / "config/freeze.json").read_text())
-    if record.get("freeze_manifest_id") != manifest["manifest_id"]:
+    from select_slots import campaign_context
+    context = campaign_context(manifest_id, root)
+    manifest = context["manifest"]
+    if mode == "final" and record.get("freeze_manifest_id") != manifest["manifest_id"]:
         raise ValueError("artifact_experiment_mismatch")
-    destination = retained_directory(root, manifest['manifest_id'], identifier)
+    if context["dataset_id"] and record.get("dataset_manifest_id") != manifest["manifest_id"]:
+        raise ValueError("artifact_dataset_mismatch")
+    if record.get("experiment_id") not in (None, manifest_id):
+        raise ValueError("artifact_experiment_mismatch")
+    destination = retained_directory(root, manifest_id, identifier)
     if any(p.is_symlink() for p in (destination, *destination.parents) if p != root and p.is_relative_to(root)):
         raise ValueError("unsafe_artifact_destination")
     destination.mkdir(parents=True, exist_ok=True)
@@ -129,14 +151,24 @@ def save_files(files, artifact, archive_sha256, root):
     return identifier
 
 
-def validate_record(record, root, run):
+def validate_record(record, root, run, manifest_id=None, mode="final"):
     if not isinstance(record, dict):
         raise ValueError('invalid_artifact_record')
-    schedule = json.loads((Path(root) / "config/schedule.json").read_text())
+    from select_slots import campaign_context, campaign_slots
+    if manifest_id is None:
+        manifest_id = json.loads((Path(root) / "config/freeze.json").read_text())["manifest_id"]
+    context = campaign_context(manifest_id, root)
+    schedule = campaign_slots(context, mode)
     slots = {s["slot_id"]: s for s in schedule}
     slot = slots.get(record.get("slot_id"))
     if slot is None or any(record.get(k) != slot[k] for k in ("campaign", "task", "arm", "repetition", "split")):
         raise ValueError("artifact_slot_identity_mismatch")
+    if record.get("experiment_id") not in (None, manifest_id):
+        raise ValueError("artifact_experiment_identity_mismatch")
+    if mode == "final" and record.get("freeze_manifest_id") != context["manifest"]["manifest_id"]:
+        raise ValueError("artifact_freeze_identity_mismatch")
+    if context["dataset_id"] and record.get("dataset_manifest_id") != context["manifest"]["manifest_id"]:
+        raise ValueError("artifact_dataset_identity_mismatch")
     if str(record.get("run_id")) != str(run["id"]) or record.get("commit_sha") != run["head_sha"]:
         raise ValueError("artifact_run_identity_mismatch")
     if str(record.get("github_run_attempt", "")) != str(run.get('run_attempt', '')) or not run.get('run_attempt'):
@@ -160,6 +192,15 @@ def missing_state(job):
     return "started_exposure_unknown"
 
 
+def reconciliation_path(root, context, mode):
+    if mode not in ("pilot", "final"):
+        raise ValueError("invalid_reconciliation_campaign")
+    reports = Path(root) / "reports"
+    if context["dataset_id"] == "real-v1":
+        return reports / "real-v1" / (mode + "-reconciliation.json")
+    return reports / "reconciliation.json"
+
+
 def provider_archive(data, artifact, run, root):
     if len(data) > 100_000 or artifact.get("digest") != "sha256:" + hashlib.sha256(data).hexdigest():
         raise ValueError("provider_archive_digest_mismatch")
@@ -173,7 +214,13 @@ def provider_archive(data, artifact, run, root):
     value = json.loads(content)
     if str(value.get("run_id")) != str(run["id"]):
         raise ValueError("provider_run_mismatch")
-    target = Path(root) / "reports/provider" / (str(run["id"]) + ".json")
+    reports = Path(root) / "reports"
+    manifest_id = artifact.get("manifest_id")
+    if manifest_id:
+        from select_slots import campaign_context
+        if campaign_context(manifest_id, root)["dataset_id"] == "real-v1":
+            reports = reports / "real-v1"
+    target = reports / "provider" / (str(run["id"]) + ".json")
     target.parent.mkdir(parents=True, exist_ok=True)
     if target.exists() and target.read_bytes() != content:
         raise ValueError("immutable_provider_conflict")
@@ -185,9 +232,12 @@ def provider_archive(data, artifact, run, root):
 def collect(run_id, root=ROOT):
     root = Path(root)
     run = api(f"repos/{REPO}/actions/runs/{run_id}")
-    manifest_id = json.loads((root / "config/freeze.json").read_text())["manifest_id"]
-    if run_manifest(run, "final", {}) != manifest_id:
+    mode = run_campaign(run)
+    manifest_id = run_manifest(run, mode, {})
+    if manifest_id == "development-v1" or not manifest_id:
         raise ValueError("run_experiment_mismatch")
+    from select_slots import campaign_context
+    context = campaign_context(manifest_id, root)
     imported, withheld, provider, attempts = [], [], None, {}
     for artifact in pages(f"repos/{REPO}/actions/runs/{run_id}/artifacts", "artifacts"):
         if not artifact["name"].startswith(("slot-", "pair-", "provider-")) or artifact.get("expired"):
@@ -199,7 +249,7 @@ def collect(run_id, root=ROOT):
             raise ValueError("oversized_artifact")
         data = subprocess.check_output(["gh", "api", f"repos/{REPO}/actions/artifacts/{artifact['id']}/zip"])
         try:
-            authenticate_attempt(artifact, run, manifest_id, attempts)
+            authenticate_attempt(artifact, run, manifest_id, attempts, mode)
             if artifact["name"].startswith("provider-"):
                 provider = provider_archive(data, artifact, run, root)
             else:
@@ -211,6 +261,8 @@ def collect(run_id, root=ROOT):
     states = {}
     for job in pages(f"repos/{REPO}/actions/runs/{run_id}/jobs?filter=all", "jobs"):
         for identifier in job_slots(job):
+            if not identifier.startswith(mode + "-"):
+                continue
             state = missing_state(job)
             retained = retained_directory(root, manifest_id, identifier) / 'record.json'
             if identifier in imported and retained.is_file():
@@ -223,7 +275,9 @@ def collect(run_id, root=ROOT):
               "as_of": datetime.now(timezone.utc).isoformat(), "workflow_status": run["status"],
               "workflow_conclusion": run.get("conclusion"), "imported_slots": sorted(set(imported)),
               "slots": states, "withheld_artifacts": withheld, "provider_artifact": provider}
-    (root / "reports/reconciliation.json").write_text(json.dumps(result, indent=2) + "\n")
+    target = reconciliation_path(root, context, mode)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(result, indent=2) + "\n")
     print("Imported", len(set(imported)), "slot artifacts. Reconciled", len(states), "scheduled job states.")
     return result
 

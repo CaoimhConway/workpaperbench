@@ -1,0 +1,41 @@
+#!/bin/bash
+set -euo pipefail
+cat > /logs/artifacts/answer.json <<'ANSWER'
+{
+  "task_id": "real-v1-wp03",
+  "answers": [
+    {
+      "id": "sample_fees",
+      "status": "answered",
+      "value": 20.80158845,
+      "unit": "btc",
+      "sql": "SELECT SUM(fee_sats)/100000000.0 AS value FROM transactions WHERE height=840000 AND is_coinbase=0",
+      "evidence": [
+        "chain:observations",
+        "chain:definitions"
+      ],
+      "reason_code": null
+    },
+    {
+      "id": "claimed_above_subsidy",
+      "status": "answered",
+      "value": 37.62561499,
+      "unit": "btc",
+      "sql": "SELECT (SUM(output_sats)-(SELECT subsidy_sats FROM blocks WHERE height=840000))/100000000.0 AS value FROM transactions WHERE height=840000 AND is_coinbase=1",
+      "evidence": [
+        "chain:observations",
+        "chain:definitions"
+      ],
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "chain:observations",
+      "chain:definitions"
+    ]
+  }
+}
+ANSWER
