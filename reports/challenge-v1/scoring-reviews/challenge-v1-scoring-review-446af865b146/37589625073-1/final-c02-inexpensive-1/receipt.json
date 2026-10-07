@@ -1,0 +1,203 @@
+{
+  "artifact_audit_sha256": "f4b6c31d3f1ee0a98633bef6892d2fc361b9309163faa1e4a0d7048a99712e4e",
+  "base_scorer_sha256": "77f41466c3a65283481907bada217f75fa92ea0ccf92355c396e7c216e57c34c",
+  "commit_sha": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "effective_gold_sha256": "509436de136e55ac5b79ee12dcc2d01afbef2699cc8ad1ac33cdea583916ae11",
+  "effective_task_sha256": "087af248d3c6c3651eab21b892884bacacb76be2c1ccc707ce5f97dd6cb489eb",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "91868cd2fe59834a58169a23a358d64c48dae7de71c7c7059d84929cb4c956cb",
+  "input_source": "retained_artifact",
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "model_key": "inexpensive",
+  "prior_verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": false,
+      "robustness": true
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "business_payment_count_2024": {
+          "availability": true,
+          "evidence": false,
+          "unit": true
+        },
+        "proxy_change_bps": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "spot_trading_volume_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": false
+      }
+    },
+    "errors": [
+      "business_payment_count_2024:evidence",
+      "conclusion:verdict"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "prior_verdict_sha256": "999ac2d746c6740752b5a074de1cb5f9c0826b3d1d1fa5b4e53f6539dfb19863",
+  "record_path": "reports/runs/challenge-v1-evaluation-d9a2fe13f6f2/final-c02-inexpensive-1/record.json",
+  "record_sha256": "a6a6377ee82becbf59cbf24fd66f4507bdf8e94080e1091e119126812fdc39db",
+  "repetition": 1,
+  "review_bundle_sha256": "a0e142a2841857842302415b6fc6ec313cec361b349589131d0199c037bbe05f",
+  "review_content_hash": "446af865b14613e821e39e9399dd183517027de5aaf8fd8e36e2451ffbbb0db4",
+  "review_id": "challenge-v1-scoring-review-446af865b146",
+  "review_scorer_sha256": "73bbec6f4f867165df6963ffa2be371dfc218ceec1698adba46f0edef79d4006",
+  "run_attempt": "1",
+  "run_id": "37589625073",
+  "scorer_version": "challenge-1.1.3",
+  "slot_id": "final-c02-inexpensive-1",
+  "source_gold_sha256": "3b88beb155d6cbf2f860065b0dd181f9ce9fadf78a4fc213271a597f2c7672c9",
+  "source_task_sha256": "a88b6ea1001c1fe91dd256362ce5f3ade184e2fb206e5381b22a451e2a7ce9be",
+  "split": "evaluation",
+  "task_id": "challenge-v1-c02",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": false,
+      "robustness": true
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "business_payment_count_2024": {
+          "availability": true,
+          "evidence": false,
+          "unit": true
+        },
+        "proxy_change_bps": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "spot_trading_volume_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": false
+      }
+    },
+    "errors": [
+      "business_payment_count_2024:evidence",
+      "conclusion:verdict"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.3",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verifier_bytes_sha256": "d1238341bfadfbf8c047a9dcbf4872f7862be3df2c1535d7bc34a4f7917a461e",
+  "verifier_path": "reports/challenge-v1/scoring-reviews/challenge-v1-scoring-review-446af865b146/37589625073-1/final-c02-inexpensive-1/verifier.json"
+}

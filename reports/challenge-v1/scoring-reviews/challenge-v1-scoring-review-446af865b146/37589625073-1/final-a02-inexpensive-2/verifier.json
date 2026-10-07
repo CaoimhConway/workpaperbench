@@ -1,0 +1,79 @@
+{
+  "scorer_version": "challenge-1.1.3",
+  "complete": false,
+  "verified_research_completion": false,
+  "strict_delivery_completion": false,
+  "checks": {
+    "delivery": true,
+    "financial_answer": true,
+    "evidence": false,
+    "robustness": true
+  },
+  "details": {
+    "claims": {
+      "revenue_gap": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "signed_component_gap": true,
+          "irrelevant_comparative_period": true
+        }
+      },
+      "adjusted_gross_profit": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "signed_component_gap": true,
+          "irrelevant_comparative_period": true
+        }
+      },
+      "adjusted_gross_margin": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "signed_component_gap": true,
+          "irrelevant_comparative_period": true
+        }
+      },
+      "margin_gap": {
+        "availability": true,
+        "unit": true,
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "signed_component_gap": true,
+          "irrelevant_comparative_period": true
+        }
+      }
+    },
+    "conclusion": {
+      "verdict": true,
+      "evidence": false
+    }
+  },
+  "errors": [
+    "shared_context:evidence",
+    "margin_gap:evidence",
+    "conclusion:evidence"
+  ],
+  "isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  }
+}
