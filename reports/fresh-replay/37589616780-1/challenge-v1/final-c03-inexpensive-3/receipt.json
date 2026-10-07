@@ -1,0 +1,120 @@
+{
+  "commit_sha": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "challenge-v1",
+  "effective_task_scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "478e0f043ba0cc84d57d4ecfe75a84e7f4e8d89cf10ef5039de61b2cb3a0910d",
+  "input_source": "retained_artifact",
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "prior_verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": false,
+      "robustness": false
+    },
+    "complete": false,
+    "sha256": "9d4b8ce50112aa22d6330962718b2e5300403de2863a950c6773e6934496d3cd"
+  },
+  "receipt_identity_sha256": "1066bb4773d4bc19e2e4f7735fce140cde1fe1f0fe99f95b7121659b007b0ced",
+  "record_sha256": "68b52fa9379c9f95760229985697cb82f80edff2d3c92dbbd390f2524ed66123",
+  "run_attempt": "1",
+  "run_id": "37589616780",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "slot_id": "final-c03-inexpensive-3",
+  "task_id": "challenge-v1-c03",
+  "task_sha256": "8426ec71d656618490ed6e561c862a7f268d2ece75916e79c787425edaacaa94",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": false,
+      "robustness": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "bitcoin_gross_profit_2023_usd_thousand": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_gross_profit_2024_usd_thousand": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_gross_profit_growth_pct": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": false,
+            "bitcoin_cost_change_2024": false,
+            "bitcoin_sales_change": false
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_share_of_total_net_revenue_increase_pct": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": false,
+            "bitcoin_cost_change_2024": false,
+            "bitcoin_sales_change": false
+          },
+          "evidence": false,
+          "numerical": false,
+          "original_replay": false,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "bitcoin_gross_profit_growth_pct:control:bitcoin_sales_change",
+      "bitcoin_gross_profit_growth_pct:control:bitcoin_cost_change_2024",
+      "bitcoin_gross_profit_growth_pct:control:bitcoin_cost_change_2023",
+      "bitcoin_share_of_total_net_revenue_increase_pct:numerical",
+      "bitcoin_share_of_total_net_revenue_increase_pct:evidence",
+      "bitcoin_share_of_total_net_revenue_increase_pct:original_replay",
+      "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_sales_change",
+      "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_cost_change_2024",
+      "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_cost_change_2023"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verdict_sha256": "e9ef2a08456485b7d8dbe00d80e77b2585528dfa85bcb741ad6036fa5750289e"
+}

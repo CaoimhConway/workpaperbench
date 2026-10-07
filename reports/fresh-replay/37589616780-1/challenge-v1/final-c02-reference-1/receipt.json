@@ -1,0 +1,118 @@
+{
+  "commit_sha": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "challenge-v1",
+  "effective_task_scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "0f3d2c4d68b7b769c890934de321a16fa9af867060c0d667c0457c3c30792480",
+  "input_source": "retained_artifact",
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "prior_verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": false,
+    "sha256": "2ae749f64eb2eec795a15f48028bdf7a7e54aa0869b00eb24013122afa6ab788"
+  },
+  "receipt_identity_sha256": "c5b7c0ee0fda0ed56936083e8e8a9451dd35f5be8af5a1685ecc8df8abda4f92",
+  "record_sha256": "f0b9f02b05516805308d08d1ae8723e48731f3e5d05f20d117819e8ac2b8a0c5",
+  "run_attempt": "1",
+  "run_id": "37589616780",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "slot_id": "final-c02-reference-1",
+  "task_id": "challenge-v1-c02",
+  "task_sha256": "a88b6ea1001c1fe91dd256362ce5f3ade184e2fb206e5381b22a451e2a7ce9be",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "business_payment_count_2024": {
+          "availability": true,
+          "evidence": false,
+          "unit": true
+        },
+        "proxy_change_bps": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "spot_trading_volume_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": false,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "business_payment_count_2024:evidence",
+      "conclusion:evidence"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verdict_sha256": "df7292ad2493fd6141c73eb717a5319d49e3acd9f6545833c7f6f32bc1176415"
+}

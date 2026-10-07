@@ -1,0 +1,121 @@
+{
+  "commit_sha": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "challenge-v1",
+  "effective_task_scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "53d52c8461cdd3ffdc8e28b2aec86972ca787c420a20bc603e575504f9008472",
+  "input_source": "retained_artifact",
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "prior_verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": false,
+    "sha256": "5719de744f810335fce75999f73823fe21c46ff0727717a87ed1922b0c3ec0f1"
+  },
+  "receipt_identity_sha256": "677f2b04d3b0139eea1ac1da3687bfdbe4b3fdd70e82f32a235183b677765a40",
+  "record_sha256": "868d9bb03fb6f5c67a343ea5485488f84c1bb9a07e827de58442711b3caa49de",
+  "run_attempt": "1",
+  "run_id": "37589616780",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "slot_id": "final-c02-reference-3",
+  "task_id": "challenge-v1-c02",
+  "task_sha256": "a88b6ea1001c1fe91dd256362ce5f3ade184e2fb206e5381b22a451e2a7ce9be",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "business_payment_count_2024": {
+          "availability": true,
+          "evidence": false,
+          "unit": true
+        },
+        "proxy_change_bps": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "spot_trading_volume_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": false,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "spot_trading_volume_growth_pct:evidence",
+      "transaction_revenue_to_spot_volume_proxy_2024_pct:evidence",
+      "proxy_change_bps:evidence",
+      "business_payment_count_2024:evidence",
+      "conclusion:evidence"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verdict_sha256": "cf0f5d93e5024bb48f9b0b02c58e48d246326d822ae08d70f5399be46214bca9"
+}
