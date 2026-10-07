@@ -1,0 +1,136 @@
+{
+  "answers": {
+    "reserve_assets_usd": {
+      "status": "answered",
+      "value": 162574933798.0,
+      "unit": "usd",
+      "tolerance": 0.5,
+      "evidence": [
+        [
+          "b03:s02"
+        ],
+        [
+          "b03:s01",
+          "b03:s02"
+        ]
+      ]
+    },
+    "net_token_liability_usd": {
+      "status": "answered",
+      "value": 157100255857.0,
+      "unit": "usd",
+      "tolerance": 0.5,
+      "evidence": [
+        [
+          "b03:s04"
+        ],
+        [
+          "b03:s01",
+          "b03:s04"
+        ]
+      ]
+    },
+    "company_asset_excess_usd": {
+      "status": "answered",
+      "value": 5466933324.0,
+      "unit": "usd",
+      "tolerance": 0.5,
+      "evidence": [
+        [
+          "b03:s02",
+          "b03:s03"
+        ],
+        [
+          "b03:s01",
+          "b03:s02",
+          "b03:s03"
+        ]
+      ]
+    },
+    "release_liability_delta_usd": {
+      "status": "answered",
+      "value": 9000.0,
+      "unit": "usd",
+      "tolerance": 0.5,
+      "evidence": [
+        [
+          "b03:s03",
+          "b03:s05"
+        ],
+        [
+          "b03:s01",
+          "b03:s03",
+          "b03:s05"
+        ]
+      ]
+    }
+  },
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_codes": [
+      "contradicted_by_calculation"
+    ],
+    "evidence": [
+      [
+        "b03:s03",
+        "b03:s05"
+      ],
+      [
+        "b03:s01",
+        "b03:s03",
+        "b03:s05"
+      ]
+    ]
+  },
+  "context_evidence_allowed": [
+    "b03:s01",
+    "b03:s06"
+  ],
+  "controls": [
+    {
+      "name": "bitcoin_fair_value_change",
+      "database": "control-1.sqlite",
+      "expected": {
+        "reserve_assets_usd": 162575183798.0,
+        "net_token_liability_usd": 157100255857.0,
+        "company_asset_excess_usd": 5467183324.0,
+        "release_liability_delta_usd": 9000.0,
+        "conclusion": "contradicted"
+      }
+    },
+    {
+      "name": "company_held_token_change",
+      "database": "control-2.sqlite",
+      "expected": {
+        "reserve_assets_usd": 162574933798.0,
+        "net_token_liability_usd": 157100254857.0,
+        "company_asset_excess_usd": 5466933324.0,
+        "release_liability_delta_usd": 9000.0,
+        "conclusion": "contradicted"
+      }
+    },
+    {
+      "name": "release_liability_alignment",
+      "database": "control-3.sqlite",
+      "expected": {
+        "reserve_assets_usd": 162574933798.0,
+        "net_token_liability_usd": 157100255857.0,
+        "company_asset_excess_usd": 5466933324.0,
+        "release_liability_delta_usd": 0.0,
+        "conclusion": "supported"
+      }
+    }
+  ],
+  "task_id": "challenge-v1-b03",
+  "scorer_version": "challenge-1.1.0",
+  "hashes": {
+    "evidence.json": "1bfdcf9ac08366a4a7560ccc925efe9aad637d271057c15f62fdad1193f3475e",
+    "control-2.sqlite": "52cf88a7bd93dc7c9f00a80b916059e7df2452534f2554901f139cc0fa32232f",
+    "sources.md": "8fe08ac98e2f7487cf90df146917854faaea21e27352dfe1fd93f4e43fc24a50",
+    "control-3.sqlite": "a271e06527b3adbcdaad39da716ed67e4f325f910366cc25ed90e68165df2817",
+    "control-1.sqlite": "d6103970da07fd0cdfd7ac20f6ebbadc3799b1bc392b79b8ab371ee590eaf308",
+    "schema.json": "32b131ff8db1a194bd8bdba7b6e610c6e6806294bcdea28833d57f9a28eef5e5",
+    "verify.py": "a69eb6c71a44ff42df488696ecd76257c5ec1096f5ae9a5dd245cc4128a2b0e2",
+    "data.sqlite": "a43b97e6a8e7b8958f8fa051424d3c707cc2c2bc8e8ed7d10eb38b4d4873a8ad"
+  }
+}

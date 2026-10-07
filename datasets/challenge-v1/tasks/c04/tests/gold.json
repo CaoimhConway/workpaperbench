@@ -7,6 +7,9 @@
       "tolerance": 0.005,
       "evidence": [
         [
+          "c04:s01"
+        ],
+        [
           "c04:s01",
           "c04:s04"
         ]
@@ -20,6 +23,10 @@
       "evidence": [
         [
           "c04:s02",
+          "c04:s04"
+        ],
+        [
+          "c04:s02",
           "c04:s04",
           "c04:s05"
         ]
@@ -31,6 +38,11 @@
       "unit": "percentage_points",
       "tolerance": 0.005,
       "evidence": [
+        [
+          "c04:s01",
+          "c04:s02",
+          "c04:s04"
+        ],
         [
           "c04:s01",
           "c04:s02",
@@ -48,6 +60,11 @@
         [
           "c04:s01",
           "c04:s02",
+          "c04:s04"
+        ],
+        [
+          "c04:s01",
+          "c04:s02",
           "c04:s04",
           "c04:s05"
         ]
@@ -61,12 +78,14 @@
         "c04:s01",
         "c04:s02",
         "c04:s04",
-        "c04:s05",
-        "c04:s06"
+        "c04:s05"
       ]
     ]
   },
-  "context_evidence_allowed": [],
+  "context_evidence_allowed": [
+    "c04:s04",
+    "c04:s05"
+  ],
   "task_id": "challenge-v1-c04",
   "scorer_version": "challenge-1.1.0",
   "controls": [

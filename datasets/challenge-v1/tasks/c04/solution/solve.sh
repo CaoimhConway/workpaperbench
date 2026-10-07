@@ -11,8 +11,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "unit": "percent",
       "reason_code": null,
       "evidence": [
-        "c04:s01",
-        "c04:s04"
+        "c04:s01"
       ],
       "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/(SELECT amount FROM revenues WHERE period_end='2023-09-30' AND months=12 AND category='Service revenue')-1.0)"
     },
@@ -24,8 +23,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "reason_code": null,
       "evidence": [
         "c04:s02",
-        "c04:s04",
-        "c04:s05"
+        "c04:s04"
       ],
       "sql": "100.0*((SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')/(SELECT amount FROM activity_metrics WHERE period_end='2023-06-30' AND months=12 AND metric='Nominal payments volume')-1.0)"
     },
@@ -38,8 +36,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "evidence": [
         "c04:s01",
         "c04:s02",
-        "c04:s04",
-        "c04:s05"
+        "c04:s04"
       ],
       "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/(SELECT amount FROM revenues WHERE period_end='2023-09-30' AND months=12 AND category='Service revenue')-1.0)-100.0*((SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')/(SELECT amount FROM activity_metrics WHERE period_end='2023-06-30' AND months=12 AND metric='Nominal payments volume')-1.0)"
     },
@@ -52,8 +49,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "evidence": [
         "c04:s01",
         "c04:s02",
-        "c04:s04",
-        "c04:s05"
+        "c04:s04"
       ],
       "sql": "100.0*(SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/1000.0/(SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')"
     }
@@ -65,8 +61,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "c04:s01",
       "c04:s02",
       "c04:s04",
-      "c04:s05",
-      "c04:s06"
+      "c04:s05"
     ]
   }
 }

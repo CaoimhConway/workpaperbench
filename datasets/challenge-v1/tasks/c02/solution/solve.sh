@@ -11,9 +11,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "unit": "percent",
       "reason_code": null,
       "evidence": [
-        "c02:s01",
-        "c02:s02",
-        "c02:s06"
+        "c02:s01"
       ],
       "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total transaction revenue')-1.0)"
     },
@@ -50,10 +48,8 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "reason_code": null,
       "evidence": [
         "c02:s01",
-        "c02:s02",
         "c02:s03",
-        "c02:s04",
-        "c02:s06"
+        "c02:s04"
       ],
       "sql": "100.0*((100.0*(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume'))-(100.0*(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2023-12-31' AND months=12 AND channel='Total Trading Volume')))"
     },

@@ -12,8 +12,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "reason_code": null,
       "evidence": [
         "c03:s01",
-        "c03:s02",
-        "c03:s03"
+        "c03:s02"
       ],
       "sql": "(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin costs')"
     },
@@ -25,8 +24,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "reason_code": null,
       "evidence": [
         "c03:s01",
-        "c03:s02",
-        "c03:s03"
+        "c03:s02"
       ],
       "sql": "(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin costs')"
     },
@@ -38,9 +36,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "reason_code": null,
       "evidence": [
         "c03:s01",
-        "c03:s02",
-        "c03:s03",
-        "c03:s05"
+        "c03:s02"
       ],
       "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin costs'))/((SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin costs'))-100.0"
     },
@@ -51,8 +47,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "unit": "percent",
       "reason_code": null,
       "evidence": [
-        "c03:s01",
-        "c03:s03"
+        "c03:s01"
       ],
       "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue'))/((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total net revenue')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total net revenue'))"
     }
@@ -62,8 +57,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
     "reason_code": null,
     "evidence": [
       "c03:s01",
-      "c03:s02",
-      "c03:s03"
+      "c03:s02"
     ]
   }
 }
