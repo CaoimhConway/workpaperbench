@@ -93,10 +93,30 @@ saved submissions. Review records and independently recalculated values appear i
 is claimed. Dependency notices are in [third-party/NOTICE.md](third-party/NOTICE.md).
 
 
-## Research Challenge development snapshot
+## Research Challenge snapshot
 
 The `challenge-v1` pilots retain authentic numerical facts from accession-specific Adobe Q3/Q4 FY2024 releases, PayPal FY2024 filing and earnings supplement, and Brale SBC May/June 2025 issuer reserve reports. Their exact URLs, source sections, capture time, original-response hashes where available and retained-extract hashes are in each `datasets/challenge-v1/authoring/*/source_capture.json`. Full issuer HTML/PDF documents are not redistributed. Retained material is factual table amounts, headings and concise definitions with attribution. Code and original annotations are MIT, while issuer source rights are not relicensed as project code. No benchmark questions are copied.
 
 Brale PDF bytes were read through the PDF reader but not captured locally, so only retained-extract hashes are claimed. Printed examiner/management dates are report dates, and historical first publication remains unknown. Both dates are month-end stocks. May and June list the same chains and reserve definition but have different examiner scope. No daily flow, token market price, observed redemption outcome or payment population is inferred. Synthetic controls are labeled and never described as authentic financial observations.
 
 Artemis acquisition is skipped because no explicitly supplied project data credential or verified redistribution grant exists. The prior RPC and DefiLlama failures/rights limitations remain historical. This snapshot uses direct primary issuer evidence instead of repeating those failed acquisition paths.
+
+### Separate evaluation source groups
+
+Nine evaluation cases use nine issuer/source-window groups, separate from all three development groups. Five evaluation cases concern actual crypto or stablecoin economic observations. With Brale development, six of the twelve challenge cases meet that scope. These are disclosure-based financial measurements, not a claim to identify on-chain business payments.
+
+| Case | Primary group | Economic scope | Research decision |
+|---|---|---|---|
+| a02 | NVIDIA FY2025 Q2/Q3 releases | Prior August 2024 guidance and October 27 actual quarter | Rebuild signed non-GAAP gross profit and compare revenue/margin with prior upper guidance |
+| a03 | Microsoft FY2025 Q1/Q2 disclosures | October 2024 guidance and December 31 quarter/half-year | Derive Q1 from Q2 and half-year, then compare margins and constant-currency Azure guidance |
+| a04 | Oracle FY2025 Q1/Q2 releases | September 2024 guidance and November 30 actual quarter | Reconcile expected currency impact and after-tax non-GAAP adjustments |
+| b02 | Circle USDC March 2025 reserve report | March 19 and March 31, 23:59 UTC stocks | Independently derive circulation and reserve assets, then reconcile coverage |
+| b03 | Tether June 2025 detailed report and July release | June 30, 23:59 UTC stocks | Rebuild reserve components and net token liabilities, distinguish company scope and cross-publication amounts |
+| b04 | Ripple RLUSD May/June 2025 reserve reports | May 30 and June 30, 17:00 Eastern stocks | Derive asset totals and an oriented residual, compare report-basis coverage |
+| c02 | Coinbase FY2024 filing and letter | Annual revenue and rounded spot trading volume, FY2023 recast comparator | Separate proxy arithmetic from comparable fee-rate inference and unavailable business-payment counts |
+| c03 | Block FY2024 filing | Original annual Bitcoin revenue and costs with FY2023 comparator | Distinguish gross revenue growth from gross profit and contribution to consolidated revenue change |
+| c04 | Visa FY2024 filing and release | September-ended revenue and its disclosed June-ended payment-volume window | Match lagged population/timing and assess limits of aggregate pricing attribution |
+
+Each authoring directory retains source URLs, section/page locators, authentic capture hashes, extract hashes and date precision. Historical HTML/PDF documents are local acquisition material and excluded from published packages. The PDF file timestamps available for Circle, Tether and Ripple are local retention metadata, not original server retrieval times. Unknown PDF publication times stay unknown. Report signatures, release publication dates, economic cutoffs and retrieval times remain separate. Tether's release additionally has actual bounded HTTP retrieval metadata. Rounded Coinbase spot volume is used at the disclosed whole-billion precision.
+
+The SEC supplies several issuers, so shared delivery infrastructure and filing templates are provider/template overlap rather than extra independent datasets. Circle's evaluation issuer also appears in Core Regression at a different January window. No challenge development issuer/source-window group crosses the evaluation split. Synthetic changed-input controls and repetitions add no base cases. No claim of contamination-free web history or issuer-independent statistical inference is made.
