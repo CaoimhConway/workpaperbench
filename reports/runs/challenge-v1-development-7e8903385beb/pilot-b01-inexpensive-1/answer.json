@@ -1,0 +1,55 @@
+{
+  "task_id": "challenge-v1-b01",
+  "context_evidence": [
+    "b01:s01",
+    "b01:s02",
+    "b01:s04",
+    "b01:s05"
+  ],
+  "answers": [
+    {
+      "id": "june_assets_usd",
+      "status": "answered",
+      "value": 9356516,
+      "unit": "USD",
+      "evidence": [
+        "b01:s04"
+      ],
+      "sql": "SELECT reported_reserve_fv_usd FROM reserve_reports WHERE report_date = '2025-06-30'",
+      "reason_code": null
+    },
+    {
+      "id": "june_reconciliation_usd",
+      "status": "answered",
+      "value": 0,
+      "unit": "USD",
+      "evidence": [
+        "b01:s04"
+      ],
+      "sql": "SELECT (reported_reserve_fv_usd - issued_sbc) FROM reserve_reports WHERE report_date = '2025-06-30'",
+      "reason_code": null
+    },
+    {
+      "id": "coverage_change_pp",
+      "status": "answered",
+      "value": 0.0,
+      "unit": "percentage_points",
+      "evidence": [
+        "b01:s01",
+        "b01:s04"
+      ],
+      "sql": "SELECT (SELECT reported_reserve_fv_usd * 100.0 / issued_sbc FROM reserve_reports WHERE report_date = '2025-06-30') - (SELECT reported_reserve_fv_usd * 100.0 / issued_sbc FROM reserve_reports WHERE report_date = '2025-05-31')",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "evidence": [
+      "b01:s01",
+      "b01:s02",
+      "b01:s04",
+      "b01:s05"
+    ],
+    "reason_code": "contradicted_by_calculation"
+  }
+}
