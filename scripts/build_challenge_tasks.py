@@ -1,6 +1,7 @@
 """Reconstruct challenge task packages from retained factual dossiers, offline."""
 import argparse
 import copy
+from decimal import Decimal
 import hashlib
 import json
 from pathlib import Path
@@ -12,6 +13,10 @@ from build_real_tasks import sqlite_contents
 
 ROOT = Path(__file__).resolve().parents[1]
 DATASET = ROOT / "datasets/challenge-v1"
+
+LEGACY_TOLERANCE_INSTRUCTION = (
+    "All numeric tolerances are 0.000001 in the requested unit, applied to the displayed source precision."
+)
 
 COMMON = """
 
@@ -25,9 +30,30 @@ Use insufficient_evidence with null value and null SQL for an unavailable reques
 All numeric tolerances are 0.000001 in the requested unit, applied to the displayed source precision. Use the public structure checker: python /workspace/check_answer.py /logs/artifacts/answer.json. It checks delivery only and contains no financial answers. No live source acquisition is needed.
 """
 
+COMMON_110 = COMMON.replace(
+    LEGACY_TOLERANCE_INSTRUCTION + " Use the public structure checker:",
+    "Per-claim absolute numerical tolerances in requested units:\n{claim_tolerances}\nUse the public structure checker:",
+)
+
+UNIT_NORMALIZATION_110 = (
+    "\n\nFor unit matching, the grader trims surrounding whitespace, ignores case, and treats runs of ordinary whitespace or underscores as a single underscore. It does not convert units or scales.\n"
+)
+
+
+def claim_tolerance_lines(definition):
+    lines = []
+    for claim in definition["reference"]["answers"]:
+        expected = definition["gold"]["answers"][claim["id"]]
+        tolerance = format(Decimal(str(expected["tolerance"])), "f")
+        lines.append(f"- {claim['id']}: {expected['unit']} - {tolerance}")
+    return "\n".join(lines)
+
 
 def package(definition, destination):
     task_id = definition["task_id"]
+    scorer_version = definition.get("scorer_version", "challenge-1.0.0")
+    if scorer_version not in ("challenge-1.0.0", "challenge-1.1.0"):
+        raise ValueError("unsupported_challenge_scorer:" + str(scorer_version))
     key = task_id.removeprefix("challenge-v1-")
     task = destination / "tasks" / key
     environment, tests, solution = [task / name for name in ("environment", "tests", "solution")]
@@ -35,8 +61,10 @@ def package(definition, destination):
         directory.mkdir(parents=True)
     database(environment / "data.sqlite", definition["tables"])
     shutil.copyfile(environment / "data.sqlite", tests / "data.sqlite")
+    schema_source = (ROOT / "config/schemas/challenge-1.1.0.json" if scorer_version == "challenge-1.1.0"
+                     else DATASET / "schema.json")
     for directory in (environment, tests):
-        shutil.copyfile(DATASET / "schema.json", directory / "schema.json")
+        shutil.copyfile(schema_source, directory / "schema.json")
         write_json(directory / "evidence.json", definition["evidence"])
         (directory / "sources.md").write_text(definition["context"].rstrip() + "\n")
     shutil.copyfile(ROOT / "scripts/check_answer.py", environment / "check_answer.py")
@@ -44,10 +72,15 @@ def package(definition, destination):
     (tests / "verify.py").write_text(verifier)
     modules = tests / "workpaperbench"
     modules.mkdir()
-    for name in ("__init__.py", "grading.py", "challenge_grading.py", "challenge_sql_worker.py"):
+    for name in ("__init__.py", "grading.py", "challenge_sql_worker.py"):
         shutil.copyfile(ROOT / "workpaperbench" / name, modules / name)
+    scorer_source = (ROOT / "config/scorers/challenge-1.1.0.py" if scorer_version == "challenge-1.1.0"
+                     else ROOT / "workpaperbench/challenge_grading.py")
+    shutil.copyfile(scorer_source, modules / "challenge_grading.py")
     gold = copy.deepcopy(definition["gold"])
     gold["task_id"] = task_id
+    if scorer_version == "challenge-1.1.0":
+        gold["scorer_version"] = scorer_version
     gold["controls"] = []
     for index, control in enumerate(definition["controls"]):
         name = f"control-{index + 1}.sqlite"
@@ -56,7 +89,14 @@ def package(definition, destination):
     gold["hashes"] = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in tests.iterdir() if p.is_file()}
     write_json(tests / "gold.json", gold)
     write_json(tests / "reference.json", definition["reference"])
-    (task / "instruction.md").write_text(definition["instruction"] + COMMON.format(task_id=task_id))
+    if scorer_version == "challenge-1.1.0":
+        instruction = definition["instruction"] + COMMON_110.format(
+            task_id=task_id,
+            claim_tolerances=claim_tolerance_lines(definition),
+        ) + UNIT_NORMALIZATION_110
+    else:
+        instruction = definition["instruction"] + COMMON.format(task_id=task_id)
+    (task / "instruction.md").write_text(instruction)
     reference = json.dumps(definition["reference"], indent=2)
     (solution / "solve.sh").write_text("#!/bin/bash\nset -euo pipefail\ncat > /logs/artifacts/answer.json <<'ANSWER'\n" + reference + "\nANSWER\n")
     (tests / "test.sh").write_text("#!/bin/bash\nset -euo pipefail\npython /tests/verify.py\n")

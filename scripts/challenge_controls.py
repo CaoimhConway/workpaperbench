@@ -6,6 +6,10 @@ import os
 from integration import ROOT, RAW, OUTPUT, control, native
 
 
+def alternate_unit_spelling(unit):
+    return unit.replace("_", " ").upper()
+
+
 def main():
     if os.environ.get("GITHUB_ACTIONS") != "true" or os.environ.get("RUNNER_OS") != "Linux":
         raise SystemExit("Challenge replay requires hosted Linux Actions")
@@ -31,8 +35,16 @@ for url in ('https://example.com', 'https://github.com'):
     raise AssertionError('Unexpected candidate network access')
 CHECK
 """
-    for task in sorted((ROOT / "datasets/challenge-v1/tasks").iterdir()):
+    tasks = sorted((ROOT / "datasets/challenge-v1/tasks").iterdir())
+    selected = os.environ.get("WPB_CHALLENGE_TASKS", "")
+    case_ids = set(selected.split(",")) if selected else {task.name for task in tasks}
+    if not case_ids or not case_ids <= {task.name for task in tasks}:
+        raise ValueError("unknown_challenge_control_task")
+    for task in tasks:
+        if task.name not in case_ids:
+            continue
         ref = json.loads((task / "tests/reference.json").read_text())
+        gold = json.loads((task / "tests/gold.json").read_text())
         name = "challenge-" + task.name
         results.append(native(control(task, name + "-reference", ref, boundaries), name + "-reference", True))
         results.append(native(task, name + "-empty", False, "nop"))
@@ -40,13 +52,15 @@ CHECK
         for claim in alternative["answers"]:
             if claim["sql"]:
                 claim["sql"] = "WITH computed(result) AS (" + claim["sql"] + ") SELECT result AS analysis FROM computed"
+        if gold.get("scorer_version") == "challenge-1.1.0":
+            for claim in alternative["answers"]:
+                claim["unit"] = alternate_unit_spelling(claim["unit"])
         results.append(native(control(task, name + "-alias", alternative), name + "-alias", True))
         constant = copy.deepcopy(ref)
         for claim in constant["answers"]:
             if claim["sql"]:
                 claim["sql"] = "SELECT " + str(claim["value"])
         results.append(native(control(task, name + "-constant", constant), name + "-constant", False))
-        gold = json.loads((task / "tests/gold.json").read_text())
         equivalent = copy.deepcopy(ref)
         for claim in equivalent["answers"]:
             claim["evidence"] = gold["answers"][claim["id"]]["evidence"][-1]
@@ -60,7 +74,25 @@ CHECK
         if shared["conclusion"]:
             shared["conclusion"]["evidence"] = [e for e in shared["conclusion"]["evidence"] if e not in shared["context_evidence"]]
         results.append(native(control(task, name + "-shared-context", shared), name + "-shared-context", True))
-    task = ROOT / "datasets/challenge-v1/tasks/a01"
+        if gold.get("scorer_version") == "challenge-1.1.0":
+            rounded = copy.deepcopy(ref)
+            for claim in rounded["answers"]:
+                if claim["status"] == "answered" and claim["unit"] in (
+                        "percent", "percentage_points", "basis_points"):
+                    claim["value"] = round(claim["value"], 2)
+            results.append(native(control(task, name + "-rounded", rounded), name + "-rounded", True))
+        if task.name == "c02":
+            guessed = copy.deepcopy(ref)
+            count = next(claim for claim in guessed["answers"]
+                         if claim["id"] == "business_payment_count_2024")
+            count.update(status="answered", value=1, sql="SELECT 1", reason_code=None)
+            item = native(control(task, name + "-guessed-count", guessed), name + "-guessed-count", False)
+            assert item["verdict"]["checks"] == {
+                "delivery": True, "evidence": True, "robustness": True, "financial_answer": False,
+            }
+            results.append(item)
+    current = ROOT / "datasets/challenge-v1/tasks/a02"
+    task = current if current.is_dir() else ROOT / "datasets/challenge-v1/tasks/a01"
     ref = json.loads((task / "tests/reference.json").read_text())
     for label, sql in (("attach", "ATTACH DATABASE '/tmp/escape' AS other"),
                        ("write", "DELETE FROM financials"),
@@ -78,7 +110,8 @@ CHECK
     item = native(control(task, "challenge-pristine", ref, "rm /workspace/data.sqlite\nprintf broken > /workspace/data.sqlite\n"), "challenge-pristine", True)
     results.append(item)
     report = {"dataset_id": "challenge-v1", "run_id": os.environ["GITHUB_RUN_ID"],
-              "commit_sha": os.environ["GITHUB_SHA"], "controls": results}
+              "commit_sha": os.environ["GITHUB_SHA"], "selected_tasks": sorted(case_ids),
+              "controls": results}
     (OUTPUT / "challenge-controls.json").write_text(json.dumps(report, indent=2) + "\n")
 
 

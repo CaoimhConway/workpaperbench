@@ -1,0 +1,78 @@
+#!/bin/bash
+set -euo pipefail
+cat > /logs/artifacts/answer.json <<'ANSWER'
+{
+  "answers": [
+    {
+      "evidence": [
+        "a04:s01"
+      ],
+      "id": "guidance_upper",
+      "reason_code": null,
+      "sql": "SELECT (SELECT high FROM guidance WHERE issue_date='2024-09-09' AND fiscal_period='Q2FY2025' AND measure='GAAP diluted EPS' AND basis='constant_currency')+(SELECT SUM(amount) FROM guidance_adjustments WHERE fiscal_period='Q2FY2025')",
+      "status": "answered",
+      "unit": "usd_per_share",
+      "value": 1.48
+    },
+    {
+      "evidence": [
+        "a04:s01",
+        "a04:s04"
+      ],
+      "id": "eps_gap",
+      "reason_code": null,
+      "sql": "SELECT (SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Non-GAAP diluted EPS')-((SELECT high FROM guidance WHERE issue_date='2024-09-09' AND fiscal_period='Q2FY2025' AND measure='GAAP diluted EPS' AND basis='constant_currency')+(SELECT SUM(amount) FROM guidance_adjustments WHERE fiscal_period='Q2FY2025'))",
+      "status": "answered",
+      "unit": "usd_per_share",
+      "value": -0.01
+    },
+    {
+      "evidence": [
+        "a04:s03",
+        "a04:s04"
+      ],
+      "id": "net_income_adjustment",
+      "reason_code": null,
+      "sql": "WITH x AS (SELECT (SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Net income') n,(SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Total revenues') r,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Operating expense') a,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Income tax expense') t) SELECT a-t FROM x",
+      "status": "answered",
+      "unit": "usd_million",
+      "value": 1056.0
+    },
+    {
+      "evidence": [
+        "a04:s02",
+        "a04:s03",
+        "a04:s04"
+      ],
+      "id": "adjusted_net_income",
+      "reason_code": null,
+      "sql": "WITH x AS (SELECT (SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Net income') n,(SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Total revenues') r,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Operating expense') a,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Income tax expense') t) SELECT n+a-t FROM x",
+      "status": "answered",
+      "unit": "usd_million",
+      "value": 4207.0
+    },
+    {
+      "evidence": [
+        "a04:s02",
+        "a04:s03",
+        "a04:s04"
+      ],
+      "id": "adjusted_net_margin",
+      "reason_code": null,
+      "sql": "WITH x AS (SELECT (SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Net income') n,(SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Total revenues') r,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Operating expense') a,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Income tax expense') t) SELECT 100.0*(n+a-t)/r FROM x",
+      "status": "answered",
+      "unit": "percent",
+      "value": 29.923892168717547
+    }
+  ],
+  "conclusion": {
+    "evidence": [
+      "a04:s01",
+      "a04:s04"
+    ],
+    "reason_code": null,
+    "verdict": "contradicted"
+  },
+  "task_id": "challenge-v1-a04"
+}
+ANSWER

@@ -1,0 +1,65 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": true,
+    "financial_answer": false,
+    "robustness": false
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "coverage_change_pp": {
+        "availability": true,
+        "controls": {
+          "component_gap": true,
+          "coverage_increase": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "june_assets_usd": {
+        "availability": true,
+        "controls": {
+          "component_gap": false,
+          "coverage_increase": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": false
+      },
+      "june_reconciliation_usd": {
+        "availability": true,
+        "controls": {
+          "component_gap": false,
+          "coverage_increase": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": false
+      }
+    },
+    "conclusion": {
+      "evidence": true,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "june_assets_usd:unit",
+    "june_assets_usd:control:component_gap",
+    "june_reconciliation_usd:unit",
+    "june_reconciliation_usd:control:component_gap"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.0.0",
+  "strict_delivery_completion": false,
+  "verified_research_completion": false
+}

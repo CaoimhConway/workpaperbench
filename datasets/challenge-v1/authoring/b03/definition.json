@@ -1,0 +1,691 @@
+{
+  "task_id": "challenge-v1-b03",
+  "split": "evaluation",
+  "source_group": "tether-international-june-2025-financial-figures",
+  "origin": "primary_source_factual_extract",
+  "previously_exposed": false,
+  "family": "B",
+  "scorer_version": "challenge-1.1.0",
+  "context": "# Tether June 2025 reserve report dictionary\n\nThe detailed Financial Figures and Reserves Report is for Tether International, S.A. de C.V. at June 30, 2025, 11:59 p.m. UTC. Its listed asset categories are reserves backing fiat-denominated Tether tokens. The report says its financial information is extracted from accounting records and is not the company's financial statements. The report was approved July 31, 2025. Its historical publication timestamp is unknown. The separate official release is dated July 31, 2025, with publication time unknown.\n\nThe detailed schedule reports USD values by reserve asset category. The detailed company total-liabilities line is company-wide and is distinct from the report's token liability measure. The token liability footnote distinguishes gross contractual redemption and company-held tokens outside the Treasury wallet. The company-held amount is excluded from the report-defined issued-token liability. All liability inputs in this dossier refer to June 30, 2025.\n\n`reserve_components` holds detailed USD reserve asset amounts. `liability_inputs` holds source amounts with distinct measures and scopes. The release's company-wide liability amount is a separate publication from the detailed report's amount. The detailed June report scope is the company named above. The December 2024 comparative is not used because it also includes Tether Limited.\n\n## Source sections\n\nb03:s01 - Detailed Financial Figures and Reserves Report, PDF page 6, printed page 1. The report covers Tether International, S.A. de C.V. on June 30, 2025 at 11:59 p.m. UTC. It was authorized and approved July 31, 2025.\n\nb03:s02 - PDF page 9, printed page 4, detailed reserve asset categories in USD: U.S. Treasury Bills 105,518,993,610, Overnight Reverse Repo 16,341,965,339, Term Reverse Repo 1,666,870,344, Money Market Funds 6,345,999,587, Cash & Bank Deposits 32,430,726, Non-U.S. Treasury Bills 48,169,774, Corp Bonds 14,605,090, Precious Metals 8,725,417,224, Bitcoin 8,928,174,931, Other Investments 4,815,162,084, Secured Loans 10,137,145,089.\n\nb03:s03 and b03:s04 - PDF page 8, printed page 3. The detailed report company total liabilities are USD 157,108,000,474. Gross contractual redemption is USD 157,571,645,333. Company-held tokens not in the Treasury wallet are USD 471,389,476 and are excluded from the net issued-token liability measure.\n\nb03:s05 - Official issuer release, dated July 31, 2025. It reports June 30 company total liabilities of USD 157,108,009,474. Publication time is unknown.\n\nb03:s06 - The detailed report describes accounting-record information and states that it is not the company financial statements. The December 2024 comparative also includes Tether Limited alongside the Company.",
+  "instruction": "Using the June 30, 2025 detailed Financial Figures and Reserves Report and the issuer release, independently reconstruct `reserve_assets_usd` (USD) from the reserve asset line items. Derive `net_token_liability_usd` (USD) from the report-defined token liability inputs. Report `company_asset_excess_usd` (USD) as reconstructed reserve assets less detailed report company liabilities and `release_liability_delta_usd` (USD), oriented as release amount minus detailed report amount. Assess whether the two publications report the same exact June 30 company total liabilities.",
+  "tables": {
+    "reserve_components": {
+      "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,amount_usd INTEGER,section_id TEXT)",
+      "rows": [
+        [
+          "2025-06-30",
+          "U.S. Treasury Bills",
+          105518993610,
+          "b03:s02"
+        ],
+        [
+          "2025-06-30",
+          "Overnight Reverse Repo",
+          16341965339,
+          "b03:s02"
+        ],
+        [
+          "2025-06-30",
+          "Term Reverse Repo",
+          1666870344,
+          "b03:s02"
+        ],
+        [
+          "2025-06-30",
+          "Money Market Funds",
+          6345999587,
+          "b03:s02"
+        ],
+        [
+          "2025-06-30",
+          "Cash & Bank Deposits",
+          32430726,
+          "b03:s02"
+        ],
+        [
+          "2025-06-30",
+          "Non-U.S. Treasury Bills",
+          48169774,
+          "b03:s02"
+        ],
+        [
+          "2025-06-30",
+          "Corp Bonds",
+          14605090,
+          "b03:s02"
+        ],
+        [
+          "2025-06-30",
+          "Precious Metals",
+          8725417224,
+          "b03:s02"
+        ],
+        [
+          "2025-06-30",
+          "Bitcoin",
+          8928174931,
+          "b03:s02"
+        ],
+        [
+          "2025-06-30",
+          "Other Investments",
+          4815162084,
+          "b03:s02"
+        ],
+        [
+          "2025-06-30",
+          "Secured Loans",
+          10137145089,
+          "b03:s02"
+        ]
+      ]
+    },
+    "liability_inputs": {
+      "schema": "CREATE TABLE liability_inputs(report_date TEXT,measure TEXT,amount_usd INTEGER,section_id TEXT)",
+      "rows": [
+        [
+          "2025-06-30",
+          "gross contractual redemption",
+          157571645333,
+          "b03:s04"
+        ],
+        [
+          "2025-06-30",
+          "company-held tokens not in Treasury wallet",
+          471389476,
+          "b03:s04"
+        ],
+        [
+          "2025-06-30",
+          "detailed FFR company total liabilities",
+          157108000474,
+          "b03:s03"
+        ],
+        [
+          "2025-06-30",
+          "July release company total liabilities",
+          157108009474,
+          "b03:s05"
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "b03:s01",
+      "text": "The June Financial Figures and Reserves Report covers Tether International, S.A. de C.V. as of June 30, 2025 at 11:59 p.m. UTC. It describes accounting-record financial information and says the company assets are reserves backing fiat-denominated Tether tokens. The report is authorized and approved July 31, 2025. Historical publication time for the PDF is unknown.",
+      "locator": "PDF page 6, printed page 1, scope, date, and authorization",
+      "origin": "https://assets.ctfassets.net/vyse88cgwfbl/2SGAAXnsb1wKByIzkhcbSx/9efa4682b3cd4c62d87a4c88ee729693/ISAE_3000R_-_Opinion_Tether_International_Financial_Figure_RC187322025BD0201.pdf",
+      "period": "2025-06-30 at 11:59 p.m. UTC",
+      "report_signed_date": "2025-07-31",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "10e6afd8a1c29ac2ac99afa6f7e75a6711b519d320b6bd35b52da45f995041ab"
+    },
+    {
+      "id": "b03:s02",
+      "text": "The detailed June 30 reserve schedule lists these USD values: U.S. Treasury Bills USD 105,518,993,610, Overnight Reverse Repo USD 16,341,965,339, Term Reverse Repo USD 1,666,870,344, Money Market Funds USD 6,345,999,587, Cash & Bank Deposits USD 32,430,726, Non-U.S. Treasury Bills USD 48,169,774, Corp Bonds USD 14,605,090, Precious Metals USD 8,725,417,224, Bitcoin USD 8,928,174,931, Other Investments USD 4,815,162,084, Secured Loans USD 10,137,145,089.",
+      "locator": "PDF page 9, printed page 4, reserve asset breakdown",
+      "origin": "https://assets.ctfassets.net/vyse88cgwfbl/2SGAAXnsb1wKByIzkhcbSx/9efa4682b3cd4c62d87a4c88ee729693/ISAE_3000R_-_Opinion_Tether_International_Financial_Figure_RC187322025BD0201.pdf",
+      "period": "2025-06-30 at 11:59 p.m. UTC",
+      "report_signed_date": "2025-07-31",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "10e6afd8a1c29ac2ac99afa6f7e75a6711b519d320b6bd35b52da45f995041ab"
+    },
+    {
+      "id": "b03:s03",
+      "text": "The detailed report states exact total liabilities for Tether International, S.A. de C.V. as of June 30, 2025.",
+      "locator": "PDF page 8, printed page 3, liabilities assertion",
+      "origin": "https://assets.ctfassets.net/vyse88cgwfbl/2SGAAXnsb1wKByIzkhcbSx/9efa4682b3cd4c62d87a4c88ee729693/ISAE_3000R_-_Opinion_Tether_International_Financial_Figure_RC187322025BD0201.pdf",
+      "period": "2025-06-30 at 11:59 p.m. UTC",
+      "report_signed_date": "2025-07-31",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "10e6afd8a1c29ac2ac99afa6f7e75a6711b519d320b6bd35b52da45f995041ab"
+    },
+    {
+      "id": "b03:s04",
+      "text": "The report distinguishes gross contractual redemption from tokens treated as liabilities. Its footnote identifies company-held tokens outside the Treasury wallet and explains that these are not included in the net issued-token liability amount.",
+      "locator": "PDF page 8, printed page 3, token liability footnote",
+      "origin": "https://assets.ctfassets.net/vyse88cgwfbl/2SGAAXnsb1wKByIzkhcbSx/9efa4682b3cd4c62d87a4c88ee729693/ISAE_3000R_-_Opinion_Tether_International_Financial_Figure_RC187322025BD0201.pdf",
+      "period": "2025-06-30 at 11:59 p.m. UTC",
+      "report_signed_date": "2025-07-31",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "10e6afd8a1c29ac2ac99afa6f7e75a6711b519d320b6bd35b52da45f995041ab"
+    },
+    {
+      "id": "b03:s05",
+      "text": "The official July 31 release reports a company-wide total-liabilities figure for June 30. The release names the June 2025 attestation report and links the detailed report.",
+      "locator": "Issuer release, published 2025-07-31, report figures paragraph",
+      "origin": "https://tether.io/news/tether-issues-20b-in-usdt-ytd-becomes-one-of-largest-u-s-debt-holders-with-127b-in-treasuries-net-profit-4-9b-in-q2-2025-attestation-report/",
+      "period": "2025-06-30",
+      "report_signed_date": null,
+      "publication": "2025-07-31",
+      "redistribution": "Retained factual extract from the official release and its locator. Full article not redistributed.",
+      "capture_sha256": "10e6afd8a1c29ac2ac99afa6f7e75a6711b519d320b6bd35b52da45f995041ab"
+    },
+    {
+      "id": "b03:s06",
+      "text": "The report says it presents financial information extracted from the company accounting records and does not represent the company financial statements. The June 2025 company scope differs from the December 2024 comparative, which also includes Tether Limited.",
+      "locator": "PDF page 6, printed page 1, scope paragraph and comparative footnote",
+      "origin": "https://assets.ctfassets.net/vyse88cgwfbl/2SGAAXnsb1wKByIzkhcbSx/9efa4682b3cd4c62d87a4c88ee729693/ISAE_3000R_-_Opinion_Tether_International_Financial_Figure_RC187322025BD0201.pdf",
+      "period": "2025-06-30 at 11:59 p.m. UTC",
+      "report_signed_date": "2025-07-31",
+      "publication": "unknown",
+      "redistribution": "Factual amounts and concise paraphrase only. Full report not redistributed.",
+      "capture_sha256": "10e6afd8a1c29ac2ac99afa6f7e75a6711b519d320b6bd35b52da45f995041ab"
+    }
+  ],
+  "reference": {
+    "task_id": "challenge-v1-b03",
+    "answers": [
+      {
+        "id": "reserve_assets_usd",
+        "status": "answered",
+        "value": 162574933798.0,
+        "unit": "usd",
+        "reason_code": null,
+        "evidence": [
+          "b03:s02"
+        ],
+        "sql": "SELECT SUM(amount_usd) AS value FROM reserve_components WHERE report_date='2025-06-30'"
+      },
+      {
+        "id": "net_token_liability_usd",
+        "status": "answered",
+        "value": 157100255857.0,
+        "unit": "usd",
+        "reason_code": null,
+        "evidence": [
+          "b03:s04"
+        ],
+        "sql": "SELECT (SELECT amount_usd FROM liability_inputs WHERE measure='gross contractual redemption') - (SELECT amount_usd FROM liability_inputs WHERE measure='company-held tokens not in Treasury wallet') AS value"
+      },
+      {
+        "id": "company_asset_excess_usd",
+        "status": "answered",
+        "value": 5466933324.0,
+        "unit": "usd",
+        "reason_code": null,
+        "evidence": [
+          "b03:s02",
+          "b03:s03"
+        ],
+        "sql": "SELECT (SELECT SUM(amount_usd) FROM reserve_components WHERE report_date='2025-06-30') - (SELECT amount_usd FROM liability_inputs WHERE measure='detailed FFR company total liabilities') AS value"
+      },
+      {
+        "id": "release_liability_delta_usd",
+        "status": "answered",
+        "value": 9000.0,
+        "unit": "usd",
+        "reason_code": null,
+        "evidence": [
+          "b03:s03",
+          "b03:s05"
+        ],
+        "sql": "SELECT (SELECT amount_usd FROM liability_inputs WHERE measure='July release company total liabilities') - (SELECT amount_usd FROM liability_inputs WHERE measure='detailed FFR company total liabilities') AS value"
+      }
+    ],
+    "conclusion": {
+      "verdict": "contradicted",
+      "reason_code": "contradicted_by_calculation",
+      "evidence": [
+        "b03:s03",
+        "b03:s05"
+      ]
+    }
+  },
+  "gold": {
+    "answers": {
+      "reserve_assets_usd": {
+        "status": "answered",
+        "value": 162574933798.0,
+        "unit": "usd",
+        "tolerance": 0.5,
+        "evidence": [
+          [
+            "b03:s02"
+          ],
+          [
+            "b03:s01",
+            "b03:s02"
+          ]
+        ]
+      },
+      "net_token_liability_usd": {
+        "status": "answered",
+        "value": 157100255857.0,
+        "unit": "usd",
+        "tolerance": 0.5,
+        "evidence": [
+          [
+            "b03:s04"
+          ],
+          [
+            "b03:s01",
+            "b03:s04"
+          ]
+        ]
+      },
+      "company_asset_excess_usd": {
+        "status": "answered",
+        "value": 5466933324.0,
+        "unit": "usd",
+        "tolerance": 0.5,
+        "evidence": [
+          [
+            "b03:s02",
+            "b03:s03"
+          ],
+          [
+            "b03:s01",
+            "b03:s02",
+            "b03:s03"
+          ]
+        ]
+      },
+      "release_liability_delta_usd": {
+        "status": "answered",
+        "value": 9000.0,
+        "unit": "usd",
+        "tolerance": 0.5,
+        "evidence": [
+          [
+            "b03:s03",
+            "b03:s05"
+          ],
+          [
+            "b03:s01",
+            "b03:s03",
+            "b03:s05"
+          ]
+        ]
+      }
+    },
+    "conclusion": {
+      "verdict": "contradicted",
+      "reason_codes": [
+        "contradicted_by_calculation"
+      ],
+      "evidence": [
+        [
+          "b03:s03",
+          "b03:s05"
+        ],
+        [
+          "b03:s01",
+          "b03:s03",
+          "b03:s05"
+        ]
+      ]
+    },
+    "context_evidence_allowed": [
+      "b03:s01",
+      "b03:s06"
+    ],
+    "controls": {
+      "bitcoin_fair_value_change": {
+        "reserve_assets_usd": 162575183798.0,
+        "net_token_liability_usd": 157100255857.0,
+        "company_asset_excess_usd": 5467183324.0,
+        "release_liability_delta_usd": 9000.0,
+        "conclusion": "contradicted"
+      },
+      "company_held_token_change": {
+        "reserve_assets_usd": 162574933798.0,
+        "net_token_liability_usd": 157100254857.0,
+        "company_asset_excess_usd": 5466933324.0,
+        "release_liability_delta_usd": 9000.0,
+        "conclusion": "contradicted"
+      },
+      "release_liability_alignment": {
+        "reserve_assets_usd": 162574933798.0,
+        "net_token_liability_usd": 157100255857.0,
+        "company_asset_excess_usd": 5466933324.0,
+        "release_liability_delta_usd": 0.0,
+        "conclusion": "supported"
+      }
+    }
+  },
+  "controls": [
+    {
+      "name": "bitcoin_fair_value_change",
+      "tables": {
+        "reserve_components": {
+          "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-06-30",
+              "U.S. Treasury Bills",
+              105518993610,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Overnight Reverse Repo",
+              16341965339,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Term Reverse Repo",
+              1666870344,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Money Market Funds",
+              6345999587,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Cash & Bank Deposits",
+              32430726,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Non-U.S. Treasury Bills",
+              48169774,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Corp Bonds",
+              14605090,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Precious Metals",
+              8725417224,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Bitcoin",
+              8928424931,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Other Investments",
+              4815162084,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Secured Loans",
+              10137145089,
+              "b03:s02"
+            ]
+          ]
+        },
+        "liability_inputs": {
+          "schema": "CREATE TABLE liability_inputs(report_date TEXT,measure TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-06-30",
+              "gross contractual redemption",
+              157571645333,
+              "b03:s04"
+            ],
+            [
+              "2025-06-30",
+              "company-held tokens not in Treasury wallet",
+              471389476,
+              "b03:s04"
+            ],
+            [
+              "2025-06-30",
+              "detailed FFR company total liabilities",
+              157108000474,
+              "b03:s03"
+            ],
+            [
+              "2025-06-30",
+              "July release company total liabilities",
+              157108009474,
+              "b03:s05"
+            ]
+          ]
+        }
+      },
+      "expected": {
+        "reserve_assets_usd": 162575183798.0,
+        "net_token_liability_usd": 157100255857.0,
+        "company_asset_excess_usd": 5467183324.0,
+        "release_liability_delta_usd": 9000.0,
+        "conclusion": "contradicted"
+      }
+    },
+    {
+      "name": "company_held_token_change",
+      "tables": {
+        "reserve_components": {
+          "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-06-30",
+              "U.S. Treasury Bills",
+              105518993610,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Overnight Reverse Repo",
+              16341965339,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Term Reverse Repo",
+              1666870344,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Money Market Funds",
+              6345999587,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Cash & Bank Deposits",
+              32430726,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Non-U.S. Treasury Bills",
+              48169774,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Corp Bonds",
+              14605090,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Precious Metals",
+              8725417224,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Bitcoin",
+              8928174931,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Other Investments",
+              4815162084,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Secured Loans",
+              10137145089,
+              "b03:s02"
+            ]
+          ]
+        },
+        "liability_inputs": {
+          "schema": "CREATE TABLE liability_inputs(report_date TEXT,measure TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-06-30",
+              "gross contractual redemption",
+              157571645333,
+              "b03:s04"
+            ],
+            [
+              "2025-06-30",
+              "company-held tokens not in Treasury wallet",
+              471390476,
+              "b03:s04"
+            ],
+            [
+              "2025-06-30",
+              "detailed FFR company total liabilities",
+              157108000474,
+              "b03:s03"
+            ],
+            [
+              "2025-06-30",
+              "July release company total liabilities",
+              157108009474,
+              "b03:s05"
+            ]
+          ]
+        }
+      },
+      "expected": {
+        "reserve_assets_usd": 162574933798.0,
+        "net_token_liability_usd": 157100254857.0,
+        "company_asset_excess_usd": 5466933324.0,
+        "release_liability_delta_usd": 9000.0,
+        "conclusion": "contradicted"
+      }
+    },
+    {
+      "name": "release_liability_alignment",
+      "tables": {
+        "reserve_components": {
+          "schema": "CREATE TABLE reserve_components(report_date TEXT,component TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-06-30",
+              "U.S. Treasury Bills",
+              105518993610,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Overnight Reverse Repo",
+              16341965339,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Term Reverse Repo",
+              1666870344,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Money Market Funds",
+              6345999587,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Cash & Bank Deposits",
+              32430726,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Non-U.S. Treasury Bills",
+              48169774,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Corp Bonds",
+              14605090,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Precious Metals",
+              8725417224,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Bitcoin",
+              8928174931,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Other Investments",
+              4815162084,
+              "b03:s02"
+            ],
+            [
+              "2025-06-30",
+              "Secured Loans",
+              10137145089,
+              "b03:s02"
+            ]
+          ]
+        },
+        "liability_inputs": {
+          "schema": "CREATE TABLE liability_inputs(report_date TEXT,measure TEXT,amount_usd INTEGER,section_id TEXT)",
+          "rows": [
+            [
+              "2025-06-30",
+              "gross contractual redemption",
+              157571645333,
+              "b03:s04"
+            ],
+            [
+              "2025-06-30",
+              "company-held tokens not in Treasury wallet",
+              471389476,
+              "b03:s04"
+            ],
+            [
+              "2025-06-30",
+              "detailed FFR company total liabilities",
+              157108000474,
+              "b03:s03"
+            ],
+            [
+              "2025-06-30",
+              "July release company total liabilities",
+              157108000474,
+              "b03:s05"
+            ]
+          ]
+        }
+      },
+      "expected": {
+        "reserve_assets_usd": 162574933798.0,
+        "net_token_liability_usd": 157100255857.0,
+        "company_asset_excess_usd": 5466933324.0,
+        "release_liability_delta_usd": 0.0,
+        "conclusion": "supported"
+      }
+    }
+  ],
+  "control_origin": "synthetic_changed_input"
+}

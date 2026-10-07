@@ -2,20 +2,21 @@
 
 ### Reproducible evaluations for financial research agents
 
-**Research Challenge development snapshot - measurement pending.** WorkpaperBench tests whether agents can find, reconcile, calculate and justify financial analysis from frozen evidence dossiers. A verified pass requires every requested financial answer, adequate source support and successful changed-input recomputation. Delivery is reported separately.
+WorkpaperBench tests whether agents can find, reconcile, calculate and justify financial analysis from compact frozen evidence dossiers. Verified Research Completion requires every requested financial answer, adequate source support and successful changed-input recomputation. Delivery is reported separately. This small offline benchmark has two layers: **Research Challenge** and the preserved **Core Regression** suites.
 
-The new `challenge-v1` layer currently contains three source-backed development cases, one per family. The required nine separate evaluation cases will be authored after the pilot. The published eight-case `real-v1` and historical suites remain **Core Regression**, with their original identities and results.
+A [saved Adobe pilot workpaper](reports/challenge-v1/workpapers/challenge-v1-development-7e8903385beb/pilot-a01-inexpensive-1.md) returns the correct original adjusted operating income, USD 2,596 million, by selecting the reported non-GAAP subtotal. Its SQL fails when a synthetic signed adjustment changes while the reported comparison total stays fixed. The original amount is correct, but the submitted calculation does not independently rebuild it. The [reference-model contrast](reports/challenge-v1/workpapers/challenge-v1-development-7e8903385beb/pilot-a01-reference-1.md) recomputes the components and passes. [Dossier](datasets/challenge-v1/tasks/a01/environment/sources.md) · [Original failed verdict](reports/runs/challenge-v1-development-7e8903385beb/pilot-a01-inexpensive-1/verdict.json).
 
-| Challenge stage | Base cases | Models | Planned attempts | Retained verdicts | Verified research |
-|---|---:|---:|---:|---:|---|
-| Development pilot, full dossiers | 3 | 2 | 18 | 0 | Pending |
-| Separate evaluation | Not yet authored | 2 | 54 | 0 | Pending |
+The initial pilot is complete. Nine separate evaluation cases passed source review and the hosted software gate. Their 54 full-dossier slots are frozen before exposure as `challenge-v1-evaluation-d9a2fe13f6f2`, with evaluation dispatch next.
 
-No difficulty or model-ranking claim is supported yet. No assisted runs have been performed.
+| Stage / model | Financial / assessed | Evidence / assessed | Robustness / assessed | Verified / scheduled | Delivery / assessed | Verdict coverage |
+|---|---:|---:|---:|---:|---:|---:|
+| Pilot / Qwen 3.6 35B A3B | 5 / 9 | 4 / 9 | 3 / 9 | 1 / 9 | 9 / 9 | 9 / 9 |
+| Pilot / Gemini 3.1 Pro Preview | 2 / 9 | 7 / 9 | 6 / 9 | 2 / 9 | 9 / 9 | 9 / 9 |
+| Separate evaluation / both models | Pending | Pending | Pending | 54 scheduled | Pending | 0 / 54 |
 
-An [explicitly authored Adobe workpaper](reports/challenge-v1/reference-workpaper.md) illustrates the new contract. Against guidance issued with Q3 FY2024 results, Q4 disclosed non-GAAP diluted EPS exceeded the upper bound by USD 0.13 per share. Independently rebuilding the operating bridge gives USD 2,596 million adjusted operating income, a 46.307528% margin and a 1,139.850161-basis-point adjusted-versus-GAAP margin gap. The task retains annual and nearby-quarter columns, later guidance and separate income/EPS reconciliations. [Read the dossier without installation](datasets/challenge-v1/tasks/a01/environment/sources.md). This is a reference, not an observed model success.
+These original pilot rates include identified unit, evidence and question-contract defects. They do not support model ranking or broad difficulty claims. The [complete pilot assessment](reports/challenge-v1/pilot-assessment.json) separates those defects from three substantive inexpensive-model recomputation failures. Original verdicts stay unchanged. New evaluation contracts remove the incidental traps before exposure. No assisted or repeat pilot runs are scheduled.
 
-The other pilots reconcile Brale SBC reserves across month-end reports with different examiner scope, and compare PayPal annual revenue composition and volume-weighted monetization. Brale's unchanged reported coverage is a retained null finding. Authentic observations and synthetic controls are labeled separately. [Challenge measurement contract](docs/CHALLENGE.md) · [Challenge records](reports/challenge-v1/results.md).
+The twelve source-backed cases span guidance and adjusted-performance reconciliation, reserve/supply reconstruction, and growth/attribution analysis. Three cases are development and nine are evaluation, with nine independent evaluation issuer/source-window groups and no group crossing the challenge split. Five evaluation cases and one development case concern crypto or stablecoins. Sources include SEC/issuer financial disclosures and reserve reports. Synthetic controls and repeated attempts are not additional observed cases. [Source inventory and rights](DATA_SOURCES.md) · [Measurement and reproduction contract](docs/CHALLENGE.md) · [Challenge records](reports/challenge-v1/results.md).
 
 ## Core Regression
 

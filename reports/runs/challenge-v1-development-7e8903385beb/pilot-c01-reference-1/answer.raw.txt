@@ -1,0 +1,65 @@
+{
+  "task_id": "challenge-v1-c01",
+  "answers": [
+    {
+      "id": "yield_2024",
+      "status": "answered",
+      "value": 1.715611337477322,
+      "unit": "percent",
+      "evidence": [
+        "c01:s01",
+        "c01:s03",
+        "c01:s06"
+      ],
+      "sql": "SELECT (r.amount / m.amount) * 100 FROM revenues r JOIN operating_metrics m ON r.period_end = m.period_end AND r.months = m.months WHERE r.category = 'Transaction revenues' AND m.metric = 'Total payment volume' AND r.period_end = '2024-12-31' AND r.months = 12",
+      "reason_code": null
+    },
+    {
+      "id": "yield_2023",
+      "status": "answered",
+      "value": 1.7569912971459114,
+      "unit": "percent",
+      "evidence": [
+        "c01:s01",
+        "c01:s03",
+        "c01:s06"
+      ],
+      "sql": "SELECT (r.amount / m.amount) * 100 FROM revenues r JOIN operating_metrics m ON r.period_end = m.period_end AND r.months = m.months WHERE r.category = 'Transaction revenues' AND m.metric = 'Total payment volume' AND r.period_end = '2023-12-31' AND r.months = 12",
+      "reason_code": null
+    },
+    {
+      "id": "yield_change",
+      "status": "answered",
+      "value": -4.137995966858946,
+      "unit": "basis points",
+      "evidence": [
+        "c01:s01",
+        "c01:s03",
+        "c01:s06"
+      ],
+      "sql": "SELECT ((r24.amount / m24.amount) - (r23.amount / m23.amount)) * 10000 FROM revenues r24 JOIN operating_metrics m24 ON r24.period_end = m24.period_end AND r24.months = m24.months JOIN revenues r23 ON r23.category = 'Transaction revenues' AND r23.period_end = '2023-12-31' AND r23.months = 12 JOIN operating_metrics m23 ON m23.metric = 'Total payment volume' AND m23.period_end = '2023-12-31' AND m23.months = 12 WHERE r24.category = 'Transaction revenues' AND m24.metric = 'Total payment volume' AND r24.period_end = '2024-12-31' AND r24.months = 12",
+      "reason_code": null
+    },
+    {
+      "id": "transaction_contribution",
+      "status": "answered",
+      "value": 97.97630799605133,
+      "unit": "percent",
+      "evidence": [
+        "c01:s01"
+      ],
+      "sql": "SELECT ((r24.amount - r23.amount) / (t24.amount - t23.amount)) * 100 FROM revenues r24 JOIN revenues r23 ON r23.category = 'Transaction revenues' AND r23.period_end = '2023-12-31' AND r23.months = 12 JOIN revenues t24 ON t24.category LIKE 'Total net revenues%' AND t24.period_end = '2024-12-31' AND t24.months = 12 JOIN revenues t23 ON t23.category LIKE 'Total net revenues%' AND t23.period_end = '2023-12-31' AND t23.months = 12 WHERE r24.category = 'Transaction revenues' AND r24.period_end = '2024-12-31' AND r24.months = 12",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "c01:s01",
+      "c01:s03",
+      "c01:s06",
+      "c01:s07"
+    ]
+  }
+}

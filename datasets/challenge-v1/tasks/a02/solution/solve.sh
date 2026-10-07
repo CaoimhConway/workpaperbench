@@ -1,0 +1,66 @@
+#!/bin/bash
+set -euo pipefail
+cat > /logs/artifacts/answer.json <<'ANSWER'
+{
+  "answers": [
+    {
+      "evidence": [
+        "a02:s01",
+        "a02:s02"
+      ],
+      "id": "revenue_gap",
+      "reason_code": null,
+      "sql": "WITH x AS (SELECT (SELECT amount FROM financials WHERE period_end='2024-10-27' AND months=3 AND measure='Revenue' AND basis='GAAP') r,(SELECT amount FROM financials WHERE period_end='2024-10-27' AND months=3 AND measure='Gross profit' AND basis='GAAP') g,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-10-27' AND months=3 AND measure='Gross profit') a) SELECT r-(SELECT midpoint*(1+range_width/100.0) FROM guidance WHERE issue_date='2024-08-28' AND fiscal_period='Q3FY2025' AND measure='Revenue' AND basis='GAAP') FROM x",
+      "status": "answered",
+      "unit": "usd_million",
+      "value": 1932.0
+    },
+    {
+      "evidence": [
+        "a02:s03"
+      ],
+      "id": "adjusted_gross_profit",
+      "reason_code": null,
+      "sql": "WITH x AS (SELECT (SELECT amount FROM financials WHERE period_end='2024-10-27' AND months=3 AND measure='Revenue' AND basis='GAAP') r,(SELECT amount FROM financials WHERE period_end='2024-10-27' AND months=3 AND measure='Gross profit' AND basis='GAAP') g,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-10-27' AND months=3 AND measure='Gross profit') a) SELECT g+a FROM x",
+      "status": "answered",
+      "unit": "usd_million",
+      "value": 26322.0
+    },
+    {
+      "evidence": [
+        "a02:s02",
+        "a02:s03"
+      ],
+      "id": "adjusted_gross_margin",
+      "reason_code": null,
+      "sql": "WITH x AS (SELECT (SELECT amount FROM financials WHERE period_end='2024-10-27' AND months=3 AND measure='Revenue' AND basis='GAAP') r,(SELECT amount FROM financials WHERE period_end='2024-10-27' AND months=3 AND measure='Gross profit' AND basis='GAAP') g,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-10-27' AND months=3 AND measure='Gross profit') a) SELECT 100.0*(g+a)/r FROM x",
+      "status": "answered",
+      "unit": "percent",
+      "value": 75.0299298785702
+    },
+    {
+      "evidence": [
+        "a02:s01",
+        "a02:s02",
+        "a02:s03"
+      ],
+      "id": "margin_gap",
+      "reason_code": null,
+      "sql": "WITH x AS (SELECT (SELECT amount FROM financials WHERE period_end='2024-10-27' AND months=3 AND measure='Revenue' AND basis='GAAP') r,(SELECT amount FROM financials WHERE period_end='2024-10-27' AND months=3 AND measure='Gross profit' AND basis='GAAP') g,(SELECT SUM(amount) FROM adjustments WHERE period_end='2024-10-27' AND months=3 AND measure='Gross profit') a) SELECT 10000.0*(g+a)/r-(SELECT 100.0*midpoint+range_width FROM guidance WHERE issue_date='2024-08-28' AND fiscal_period='Q3FY2025' AND measure='Gross margin' AND basis='non-GAAP') FROM x",
+      "status": "answered",
+      "unit": "basis_points",
+      "value": -47.007012142979306
+    }
+  ],
+  "conclusion": {
+    "evidence": [
+      "a02:s01",
+      "a02:s02",
+      "a02:s03"
+    ],
+    "reason_code": null,
+    "verdict": "contradicted"
+  },
+  "task_id": "challenge-v1-a02"
+}
+ANSWER

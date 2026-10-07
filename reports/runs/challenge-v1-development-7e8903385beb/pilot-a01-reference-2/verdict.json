@@ -1,0 +1,83 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": true,
+    "financial_answer": false,
+    "robustness": true
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "adjusted_margin": {
+        "availability": true,
+        "controls": {
+          "eps_observations": true,
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "adjusted_operating_income": {
+        "availability": true,
+        "controls": {
+          "eps_observations": true,
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": false
+      },
+      "eps_difference": {
+        "availability": true,
+        "controls": {
+          "eps_observations": true,
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": false
+      },
+      "margin_bridge": {
+        "availability": true,
+        "controls": {
+          "eps_observations": true,
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": false
+      }
+    },
+    "conclusion": {
+      "evidence": true,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "eps_difference:unit",
+    "adjusted_operating_income:unit",
+    "margin_bridge:unit"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.0.0",
+  "strict_delivery_completion": false,
+  "verified_research_completion": false
+}

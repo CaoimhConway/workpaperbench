@@ -1,0 +1,932 @@
+{
+  "scorer_version": "challenge-1.1.0",
+  "task_id": "challenge-v1-c02",
+  "family": "C",
+  "source_group": "coinbase-fy2024-fy2023-revenue-and-spot-volume",
+  "split": "evaluation",
+  "origin": "primary_source_factual_extract",
+  "previously_exposed": false,
+  "control_origin": "synthetic_changed_input",
+  "instruction": "For Coinbase FY2024 versus FY2023, report transaction_revenue_growth_pct and spot_trading_volume_growth_pct as percentages, transaction_revenue_to_spot_volume_proxy_2024_pct as a percentage, and proxy_change_bps as FY2024 minus FY2023 basis points. Also report business_payment_count_2024, the count of payments between businesses processed through Coinbase in FY2024, in count units. Use displayed source values and the FY2023 revenue categories presented in the FY2024 filing. Assess: the annual transaction-revenue-to-Trading-Volume ratio is a comparable realized spot trading fee rate across the two years.",
+  "context": "# Coinbase FY2024 and FY2023 disclosures\n\nc02:s01 - Annual transaction revenue (USD thousand)\n2024: consumer net 3,430,322, institutional net 345,598, other transaction revenue net 210,193, total transaction revenue 3,986,113.\n2023: consumer net 1,334,018, institutional net 90,164, other transaction revenue net 95,472, total transaction revenue 1,519,654. The filing reclassified 2023 revenue categories to conform to the 2024 presentation.\n\nc02:s02 - Annual subscription and services and net revenue (USD thousand)\n2024 subscription and services revenue 2,307,133 and total net revenue 6,293,246. 2023 subscription and services revenue 1,406,886 and total net revenue 2,926,540. Transaction revenue plus subscription and services revenue equals total net revenue in these rows. Other revenue is outside total net revenue.\n\nc02:s03 - Annual Trading Volume by customer type (USD billion)\nConsumer: 221 in 2024 and 75 in 2023. Institutional: 941 and 393. Total: 1,162 and 468. These values are rounded in the shareholder letter.\n\nc02:s04 - Metric definition and revenue scope\nTrading Volume is the U.S. dollar equivalent value of spot matched trades between a buyer and seller through Coinbase during the measurement period. The 10-K excludes derivatives volume and third-party venue trades from Trading Volume.\n\nc02:s05 - Derivatives revenue reporting\nCoinbase states consumer and institutional derivatives volume and market share reached highs in Q4. Revenue from these products is included in consumer and institutional transaction revenue, while reported Trading Volume excludes derivatives volume.\n\nc02:s06 - Period and units\nBoth revenue values are fiscal-year flows for years ended December 31 and are reported in USD thousands. Trading Volume values are full-year flows in USD billions and rounded to whole billions.\n\n## Data dictionary\n`period_end` labels the fiscal-year end and `months` is the reporting duration. `amount` retains the displayed value. `unit` distinguishes USD thousand revenue from USD billion volume. Section IDs map each observation and definition to the source extract.\n",
+  "tables": {
+    "revenues": {
+      "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+      "rows": [
+        [
+          "2024-12-31",
+          12,
+          "Consumer, net",
+          3430322.0,
+          "usd_thousand",
+          "c02:s01"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Institutional, net",
+          345598.0,
+          "usd_thousand",
+          "c02:s01"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Other transaction revenue, net",
+          210193.0,
+          "usd_thousand",
+          "c02:s01"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Total transaction revenue",
+          3986113.0,
+          "usd_thousand",
+          "c02:s01"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Subscription and services revenue",
+          2307133.0,
+          "usd_thousand",
+          "c02:s02"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Total net revenue",
+          6293246.0,
+          "usd_thousand",
+          "c02:s02"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Consumer, net",
+          1334018.0,
+          "usd_thousand",
+          "c02:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Institutional, net",
+          90164.0,
+          "usd_thousand",
+          "c02:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Other transaction revenue, net",
+          95472.0,
+          "usd_thousand",
+          "c02:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Total transaction revenue",
+          1519654.0,
+          "usd_thousand",
+          "c02:s01"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Subscription and services revenue",
+          1406886.0,
+          "usd_thousand",
+          "c02:s02"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Total net revenue",
+          2926540.0,
+          "usd_thousand",
+          "c02:s02"
+        ]
+      ]
+    },
+    "spot_volume": {
+      "schema": "CREATE TABLE spot_volume(period_end TEXT,months INTEGER,channel TEXT,amount REAL,unit TEXT,section_id TEXT)",
+      "rows": [
+        [
+          "2024-12-31",
+          12,
+          "Consumer",
+          221.0,
+          "usd_billion",
+          "c02:s03"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Institutional",
+          941.0,
+          "usd_billion",
+          "c02:s03"
+        ],
+        [
+          "2024-12-31",
+          12,
+          "Total Trading Volume",
+          1162.0,
+          "usd_billion",
+          "c02:s03"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Consumer",
+          75.0,
+          "usd_billion",
+          "c02:s03"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Institutional",
+          393.0,
+          "usd_billion",
+          "c02:s03"
+        ],
+        [
+          "2023-12-31",
+          12,
+          "Total Trading Volume",
+          468.0,
+          "usd_billion",
+          "c02:s03"
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "c02:s01",
+      "title": "Coinbase annual transaction revenue",
+      "locator": "Item 7, Revenue, transaction revenue table, page 93",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/coin-20241231.htm",
+      "publication": "2025-02-13, SEC filing accepted 16:16:43 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:42.312020+00:00",
+      "source_bytes_sha256": "a1269767b9bcca8c85942fdf77ae11706804dcc5ea8927330057c0ffd97555df",
+      "capture_sha256": "fb29eecb870f7dc5d97f801f521ceaa98425df3cb41a0c6836c12cb359d7b70c",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Years ended December 31, 2024 and 2023",
+      "text": "Transaction revenue, USD thousand: 2024 consumer net 3,430,322, institutional net 345,598, other transaction revenue net 210,193, total 3,986,113. 2023 consumer net 1,334,018, institutional net 90,164, other transaction revenue net 95,472, total 1,519,654. The filing states prior-period category values were reclassified to the current presentation."
+    },
+    {
+      "id": "c02:s02",
+      "title": "Coinbase subscription and services and net revenue",
+      "locator": "Item 7, Revenue, subscription and services revenue table, page 94",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/coin-20241231.htm",
+      "publication": "2025-02-13, SEC filing accepted 16:16:43 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:42.312020+00:00",
+      "source_bytes_sha256": "a1269767b9bcca8c85942fdf77ae11706804dcc5ea8927330057c0ffd97555df",
+      "capture_sha256": "fb29eecb870f7dc5d97f801f521ceaa98425df3cb41a0c6836c12cb359d7b70c",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Years ended December 31, 2024 and 2023",
+      "text": "Subscription and services revenue was USD 2,307,133 thousand in 2024 and USD 1,406,886 thousand in 2023. Total net revenue was USD 6,293,246 thousand and USD 2,926,540 thousand. These annual flows include the recast 2023 presentation."
+    },
+    {
+      "id": "c02:s03",
+      "title": "Coinbase annual Trading Volume by customer type",
+      "locator": "Annual shareholder letter, Trading Volume table, page 4",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000021/q424shareholderletter.htm",
+      "publication": "2025-02-13, 8-K accepted 16:10:21 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:42.986159+00:00",
+      "source_bytes_sha256": "106fb784946ca1766e6e7083a68cf5ffb2d6c91d93a3da5348e2c70d1a5f120f",
+      "capture_sha256": "fb29eecb870f7dc5d97f801f521ceaa98425df3cb41a0c6836c12cb359d7b70c",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Full years 2024 and 2023",
+      "text": "Trading Volume, USD billion: consumer 221 in 2024 and 75 in 2023, institutional 941 and 393, total 1,162 and 468. Figures are rounded for presentation."
+    },
+    {
+      "id": "c02:s04",
+      "title": "Coinbase Trading Volume definition and scope",
+      "locator": "Item 7, Key Business Metrics, Trading Volume",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/coin-20241231.htm",
+      "publication": "2025-02-13, SEC filing accepted 16:16:43 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:42.312020+00:00",
+      "source_bytes_sha256": "a1269767b9bcca8c85942fdf77ae11706804dcc5ea8927330057c0ffd97555df",
+      "capture_sha256": "fb29eecb870f7dc5d97f801f521ceaa98425df3cb41a0c6836c12cb359d7b70c",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Annual measurement definition",
+      "text": "Trading Volume is the U.S. dollar equivalent of spot matched trades between buyers and sellers through Coinbase during the measurement period. It excludes derivatives volume and trades executed on third-party venues. Derivatives transaction revenue is recorded in consumer and institutional transaction revenue."
+    },
+    {
+      "id": "c02:s05",
+      "title": "Coinbase transaction revenue and spot-volume reporting note",
+      "locator": "Shareholder letter, business discussion following Trading Volume table, page 4",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000021/q424shareholderletter.htm",
+      "publication": "2025-02-13, 8-K accepted 16:10:21 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:42.986159+00:00",
+      "source_bytes_sha256": "106fb784946ca1766e6e7083a68cf5ffb2d6c91d93a3da5348e2c70d1a5f120f",
+      "capture_sha256": "fb29eecb870f7dc5d97f801f521ceaa98425df3cb41a0c6836c12cb359d7b70c",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "FY2024 discussion with FY2023 comparison",
+      "text": "The letter states consumer and institutional derivatives volume and market share reached highs in Q4. It says their revenue is recorded in consumer and institutional transaction revenue, while reported Trading Volume includes only matched spot volume on Coinbase and excludes derivatives."
+    },
+    {
+      "id": "c02:s06",
+      "title": "Coinbase net revenue categories and periods",
+      "locator": "Note 3, Revenue, annual revenue disaggregation",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/coin-20241231.htm",
+      "publication": "2025-02-13, SEC filing accepted 16:16:43 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:42.312020+00:00",
+      "source_bytes_sha256": "a1269767b9bcca8c85942fdf77ae11706804dcc5ea8927330057c0ffd97555df",
+      "capture_sha256": "fb29eecb870f7dc5d97f801f521ceaa98425df3cb41a0c6836c12cb359d7b70c",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Fiscal years ended December 31, 2024 and 2023",
+      "text": "The filing reports annual transaction revenue and subscription and services revenue as components of total net revenue. Total revenue is a broader line that also includes other revenue. The transaction and subscription/service categories shown for 2023 were reclassified to conform to the 2024 presentation."
+    }
+  ],
+  "gold": {
+    "answers": {
+      "transaction_revenue_growth_pct": {
+        "status": "answered",
+        "value": 162.30398498605604,
+        "unit": "percent",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "c02:s01"
+          ],
+          [
+            "c02:s01",
+            "c02:s06"
+          ]
+        ]
+      },
+      "spot_trading_volume_growth_pct": {
+        "status": "answered",
+        "value": 148.2905982905983,
+        "unit": "percent",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "c02:s03",
+            "c02:s04"
+          ],
+          [
+            "c02:s03",
+            "c02:s04",
+            "c02:s06"
+          ]
+        ]
+      },
+      "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+        "status": "answered",
+        "value": 0.34303898450946646,
+        "unit": "percent",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "c02:s01",
+            "c02:s03",
+            "c02:s04"
+          ],
+          [
+            "c02:s01",
+            "c02:s03",
+            "c02:s04",
+            "c02:s05",
+            "c02:s06"
+          ]
+        ]
+      },
+      "proxy_change_bps": {
+        "status": "answered",
+        "value": 1.8326591347073276,
+        "unit": "basis_points",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "c02:s01",
+            "c02:s03",
+            "c02:s04"
+          ],
+          [
+            "c02:s01",
+            "c02:s03",
+            "c02:s04",
+            "c02:s05",
+            "c02:s06"
+          ]
+        ]
+      },
+      "business_payment_count_2024": {
+        "status": "insufficient_evidence",
+        "value": null,
+        "unit": "count",
+        "tolerance": 0,
+        "evidence": [
+          [
+            "c02:s03",
+            "c02:s04"
+          ]
+        ]
+      }
+    },
+    "conclusion": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04",
+          "c02:s05"
+        ],
+        [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04",
+          "c02:s05",
+          "c02:s06"
+        ]
+      ]
+    },
+    "context_evidence_allowed": [
+      "c02:s04",
+      "c02:s05",
+      "c02:s06"
+    ]
+  },
+  "reference": {
+    "task_id": "challenge-v1-c02",
+    "answers": [
+      {
+        "id": "transaction_revenue_growth_pct",
+        "status": "answered",
+        "value": 162.30398498605604,
+        "unit": "percent",
+        "reason_code": null,
+        "evidence": [
+          "c02:s01"
+        ],
+        "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total transaction revenue')-1.0)"
+      },
+      {
+        "id": "spot_trading_volume_growth_pct",
+        "status": "answered",
+        "value": 148.2905982905983,
+        "unit": "percent",
+        "reason_code": null,
+        "evidence": [
+          "c02:s03",
+          "c02:s04"
+        ],
+        "sql": "SELECT 100.0*((SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume')/(SELECT amount FROM spot_volume WHERE period_end='2023-12-31' AND months=12 AND channel='Total Trading Volume')-1.0)"
+      },
+      {
+        "id": "transaction_revenue_to_spot_volume_proxy_2024_pct",
+        "status": "answered",
+        "value": 0.34303898450946646,
+        "unit": "percent",
+        "reason_code": null,
+        "evidence": [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04"
+        ],
+        "sql": "SELECT 100.0*(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume')"
+      },
+      {
+        "id": "proxy_change_bps",
+        "status": "answered",
+        "value": 1.8326591347073276,
+        "unit": "basis_points",
+        "reason_code": null,
+        "evidence": [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04"
+        ],
+        "sql": "SELECT 100.0*((100.0*(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume'))-(100.0*(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2023-12-31' AND months=12 AND channel='Total Trading Volume')))"
+      },
+      {
+        "id": "business_payment_count_2024",
+        "status": "insufficient_evidence",
+        "value": null,
+        "unit": "count",
+        "reason_code": "no_eligible_observation",
+        "evidence": [
+          "c02:s03",
+          "c02:s04"
+        ],
+        "sql": null
+      }
+    ],
+    "conclusion": {
+      "verdict": "contradicted",
+      "reason_code": null,
+      "evidence": [
+        "c02:s01",
+        "c02:s03",
+        "c02:s04",
+        "c02:s05"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "consumer_transaction_revenue_shift",
+      "expected": {
+        "transaction_revenue_growth_pct": 172.1746529144134,
+        "spot_trading_volume_growth_pct": 148.2905982905983,
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": 0.35594776247848536,
+        "proxy_change_bps": 3.123536931609221
+      },
+      "tables": {
+        "revenues": {
+          "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Consumer, net",
+              3580322.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Institutional, net",
+              345598.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Other transaction revenue, net",
+              210193.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total transaction revenue",
+              4136113.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Subscription and services revenue",
+              2307133.0,
+              "usd_thousand",
+              "c02:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total net revenue",
+              6443246.0,
+              "usd_thousand",
+              "c02:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Consumer, net",
+              1334018.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Institutional, net",
+              90164.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Other transaction revenue, net",
+              95472.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total transaction revenue",
+              1519654.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Subscription and services revenue",
+              1406886.0,
+              "usd_thousand",
+              "c02:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total net revenue",
+              2926540.0,
+              "usd_thousand",
+              "c02:s02"
+            ]
+          ]
+        },
+        "spot_volume": {
+          "schema": "CREATE TABLE spot_volume(period_end TEXT,months INTEGER,channel TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Consumer",
+              221.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Institutional",
+              941.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total Trading Volume",
+              1162.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Consumer",
+              75.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Institutional",
+              393.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total Trading Volume",
+              468.0,
+              "usd_billion",
+              "c02:s03"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "recast_2023_transaction_revenue_shift",
+      "expected": {
+        "transaction_revenue_growth_pct": 149.1859489614629,
+        "spot_trading_volume_growth_pct": 148.2905982905983,
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": 0.34303898450946646,
+        "proxy_change_bps": 0.12325742530561808
+      },
+      "tables": {
+        "revenues": {
+          "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Consumer, net",
+              3430322.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Institutional, net",
+              345598.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Other transaction revenue, net",
+              210193.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total transaction revenue",
+              3986113.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Subscription and services revenue",
+              2307133.0,
+              "usd_thousand",
+              "c02:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total net revenue",
+              6293246.0,
+              "usd_thousand",
+              "c02:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Consumer, net",
+              1334018.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Institutional, net",
+              90164.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Other transaction revenue, net",
+              175472.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total transaction revenue",
+              1599654.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Subscription and services revenue",
+              1406886.0,
+              "usd_thousand",
+              "c02:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total net revenue",
+              3006540.0,
+              "usd_thousand",
+              "c02:s02"
+            ]
+          ]
+        },
+        "spot_volume": {
+          "schema": "CREATE TABLE spot_volume(period_end TEXT,months INTEGER,channel TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Consumer",
+              221.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Institutional",
+              941.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total Trading Volume",
+              1162.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Consumer",
+              75.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Institutional",
+              393.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total Trading Volume",
+              468.0,
+              "usd_billion",
+              "c02:s03"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "2024_spot_volume_shift",
+      "expected": {
+        "transaction_revenue_growth_pct": 162.30398498605604,
+        "spot_trading_volume_growth_pct": 150.42735042735043,
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": 0.3401120307167235,
+        "proxy_change_bps": 1.5399637554330388
+      },
+      "tables": {
+        "revenues": {
+          "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Consumer, net",
+              3430322.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Institutional, net",
+              345598.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Other transaction revenue, net",
+              210193.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total transaction revenue",
+              3986113.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Subscription and services revenue",
+              2307133.0,
+              "usd_thousand",
+              "c02:s02"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total net revenue",
+              6293246.0,
+              "usd_thousand",
+              "c02:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Consumer, net",
+              1334018.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Institutional, net",
+              90164.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Other transaction revenue, net",
+              95472.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total transaction revenue",
+              1519654.0,
+              "usd_thousand",
+              "c02:s01"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Subscription and services revenue",
+              1406886.0,
+              "usd_thousand",
+              "c02:s02"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total net revenue",
+              2926540.0,
+              "usd_thousand",
+              "c02:s02"
+            ]
+          ]
+        },
+        "spot_volume": {
+          "schema": "CREATE TABLE spot_volume(period_end TEXT,months INTEGER,channel TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-12-31",
+              12,
+              "Consumer",
+              231.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Institutional",
+              941.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2024-12-31",
+              12,
+              "Total Trading Volume",
+              1172.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Consumer",
+              75.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Institutional",
+              393.0,
+              "usd_billion",
+              "c02:s03"
+            ],
+            [
+              "2023-12-31",
+              12,
+              "Total Trading Volume",
+              468.0,
+              "usd_billion",
+              "c02:s03"
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

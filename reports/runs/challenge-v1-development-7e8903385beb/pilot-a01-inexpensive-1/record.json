@@ -1,0 +1,203 @@
+{
+  "answer_sha256": "baf0d9c39e7be7264308ad35d49dad141a202456088748d005ba9ba6cb5e4652",
+  "answer_status": "saved",
+  "arm": null,
+  "campaign": "pilot",
+  "commit_sha": "3245582bbc8da558bd69f88ee6ca9ef3600f6f65",
+  "condition": "full",
+  "config_hash": "bc24eeacadc515bbdf033afeac2c74e9a5dd8b74331b49e9ac28c40251f9c4de",
+  "dataset_hash_count": 110,
+  "dataset_id": "challenge-v1",
+  "dataset_manifest_id": "challenge-v1-development-7e8903385beb",
+  "execution_started_at": "2026-10-06T23:29:28.271129+00:00",
+  "experiment_id": "challenge-v1-development-7e8903385beb",
+  "finished_at": "2026-10-06T23:34:57.030705+00:00",
+  "github_run_attempt": "1",
+  "github_run_id": "37546782567",
+  "harbor_commit": "1e5c5c6db929a10a140d05e606882c671ae20729",
+  "harbor_metrics": {
+    "agent_execution_seconds": 159.917,
+    "agent_setup_seconds": 106.9,
+    "environment_setup_seconds": 16.98,
+    "n_input_tokens": 0,
+    "n_output_tokens": 0,
+    "verifier_seconds": 18.262
+  },
+  "harbor_native_version_fix": {
+    "change": "Two version invocations use --version. OpenRouter models use the canonical ID with explicit --provider openrouter. Session export selects the current oneshot source. Existing native adapter only, no new adapter or credential flow.",
+    "corrected_module_sha256": "02ebd73edb387091480df45fdea27b70bf37ca377ee0b68047b84d6cdbede112",
+    "original_module_sha256": "012e980302b26641dcf77f31fe71a368b2022b098619853addd015c5e18e47c6"
+  },
+  "harbor_version": "0.23.0",
+  "hermes_checkout_commit_verified": true,
+  "hermes_release_tag": "v0.21.4+canary.20261004T084456Z",
+  "hermes_resolved_release_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "hermes_runtime_version": {
+    "checked_before_solving": true,
+    "checkout_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "expected_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "matches_pin": true,
+    "native_api_retry_observer": {
+      "enabled": true,
+      "registered_hook_count": 3,
+      "registration_smoke": true,
+      "staged": true
+    }
+  },
+  "model": "qwen/qwen3.6-35b-a3b",
+  "model_harbor_model": "openrouter/qwen/qwen3.6-35b-a3b",
+  "model_key": "inexpensive",
+  "model_provider": "openrouter",
+  "model_route_policy": "OpenRouter default routing among currently compatible tool-capable endpoints. Preview/model routing may change.",
+  "native_api_retry_observer": {
+    "capture_completeness": "not_guaranteed",
+    "capture_limitations": "hooks_fail_open_upstream_internal_retries_and_routes_unobserved",
+    "capture_status": "missing",
+    "capture_truncated_possible": false,
+    "event_count": 0,
+    "events": [],
+    "observed_additional_attempts": 0,
+    "observer_registered": false,
+    "pre_request_count": 0
+  },
+  "native_command": "Harbor Trial.create / Trial.run with native Hermes",
+  "native_return_code": 0,
+  "previously_exposed": false,
+  "provider_after": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 18.463955841,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 18.463955841,
+    "reset_is_null": true,
+    "usage_usd": 1.536044159
+  },
+  "provider_before": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 18.491059091,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 18.491059091,
+    "reset_is_null": true,
+    "usage_usd": 1.508940909
+  },
+  "provider_cost_delta_usd": 0.02710325,
+  "raw_artifact_status": "screened_original_bytes",
+  "raw_sha256": "8d09a7865180f90fd54de3d89633c423d8a62fce61f489b9f2573d2974a3e46a",
+  "remaining_planned_slots": 18,
+  "remaining_reserved_slots": 18,
+  "remaining_reserved_usd": 4.5,
+  "repetition": 1,
+  "reservation_usd_per_slot": 0.1,
+  "retained_sha256": "baf0d9c39e7be7264308ad35d49dad141a202456088748d005ba9ba6cb5e4652",
+  "run_id": "37546782567",
+  "slot_id": "pilot-a01-inexpensive-1",
+  "source_group": "adobe-fy2024-q3-q4",
+  "split": "development",
+  "started_at": "2026-10-06T23:29:18.091417+00:00",
+  "status": "task_failed",
+  "task": "challenge-v1-a01",
+  "task_origin": "primary_source_factual_extract",
+  "token_counts_status": "unreported_or_native_zero_fields",
+  "tool_event_counts": {
+    "patch": 2,
+    "read_file": 5,
+    "terminal": 13,
+    "tool_describe": 1,
+    "write_file": 1
+  },
+  "tool_evidence": {
+    "calls": 22,
+    "observations": 21,
+    "omitted_items": 1,
+    "status": "screened_tools"
+  },
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "adjusted_margin": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": false
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "adjusted_operating_income": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": false
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "eps_difference": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": true
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "margin_bridge": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": false
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": false,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "eps_difference:evidence",
+      "adjusted_operating_income:evidence",
+      "adjusted_operating_income:control:signed_bridge",
+      "adjusted_margin:evidence",
+      "adjusted_margin:control:signed_bridge",
+      "margin_bridge:evidence",
+      "margin_bridge:control:signed_bridge",
+      "conclusion:evidence"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.0.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  }
+}

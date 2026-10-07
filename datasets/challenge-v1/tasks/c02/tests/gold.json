@@ -1,0 +1,155 @@
+{
+  "answers": {
+    "transaction_revenue_growth_pct": {
+      "status": "answered",
+      "value": 162.30398498605604,
+      "unit": "percent",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "c02:s01"
+        ],
+        [
+          "c02:s01",
+          "c02:s06"
+        ]
+      ]
+    },
+    "spot_trading_volume_growth_pct": {
+      "status": "answered",
+      "value": 148.2905982905983,
+      "unit": "percent",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "c02:s03",
+          "c02:s04"
+        ],
+        [
+          "c02:s03",
+          "c02:s04",
+          "c02:s06"
+        ]
+      ]
+    },
+    "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+      "status": "answered",
+      "value": 0.34303898450946646,
+      "unit": "percent",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04"
+        ],
+        [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04",
+          "c02:s05",
+          "c02:s06"
+        ]
+      ]
+    },
+    "proxy_change_bps": {
+      "status": "answered",
+      "value": 1.8326591347073276,
+      "unit": "basis_points",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04"
+        ],
+        [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04",
+          "c02:s05",
+          "c02:s06"
+        ]
+      ]
+    },
+    "business_payment_count_2024": {
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "count",
+      "tolerance": 0,
+      "evidence": [
+        [
+          "c02:s03",
+          "c02:s04"
+        ]
+      ]
+    }
+  },
+  "conclusion": {
+    "verdict": "contradicted",
+    "evidence": [
+      [
+        "c02:s01",
+        "c02:s03",
+        "c02:s04",
+        "c02:s05"
+      ],
+      [
+        "c02:s01",
+        "c02:s03",
+        "c02:s04",
+        "c02:s05",
+        "c02:s06"
+      ]
+    ]
+  },
+  "context_evidence_allowed": [
+    "c02:s04",
+    "c02:s05",
+    "c02:s06"
+  ],
+  "task_id": "challenge-v1-c02",
+  "scorer_version": "challenge-1.1.0",
+  "controls": [
+    {
+      "name": "consumer_transaction_revenue_shift",
+      "database": "control-1.sqlite",
+      "expected": {
+        "transaction_revenue_growth_pct": 172.1746529144134,
+        "spot_trading_volume_growth_pct": 148.2905982905983,
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": 0.35594776247848536,
+        "proxy_change_bps": 3.123536931609221
+      }
+    },
+    {
+      "name": "recast_2023_transaction_revenue_shift",
+      "database": "control-2.sqlite",
+      "expected": {
+        "transaction_revenue_growth_pct": 149.1859489614629,
+        "spot_trading_volume_growth_pct": 148.2905982905983,
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": 0.34303898450946646,
+        "proxy_change_bps": 0.12325742530561808
+      }
+    },
+    {
+      "name": "2024_spot_volume_shift",
+      "database": "control-3.sqlite",
+      "expected": {
+        "transaction_revenue_growth_pct": 162.30398498605604,
+        "spot_trading_volume_growth_pct": 150.42735042735043,
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": 0.3401120307167235,
+        "proxy_change_bps": 1.5399637554330388
+      }
+    }
+  ],
+  "hashes": {
+    "evidence.json": "d40a1e57d21cc0e71d0fa13874a16154d27bd95b8418817ba2963e852398a4a5",
+    "control-2.sqlite": "c4254a6b8642e8f93f9a381fe101f734281221a1ec135809c80d4882ecaa2f1b",
+    "sources.md": "fbaebdf98faca58697cc88ea9268721a02e8058a68509c23557703f7943a8920",
+    "control-3.sqlite": "5ca49ba260a6912c5bc5d5263b341cc7f45c1042566d9300f94ada5523221e7f",
+    "control-1.sqlite": "8876fba218abc17350a03b781ee150cdb6bec137981b87a1a0259fdd46196a19",
+    "schema.json": "32b131ff8db1a194bd8bdba7b6e610c6e6806294bcdea28833d57f9a28eef5e5",
+    "verify.py": "a69eb6c71a44ff42df488696ecd76257c5ec1096f5ae9a5dd245cc4128a2b0e2",
+    "data.sqlite": "bbd0d295c0918f8948454d4a63fea7a29bdc6db5bfa572a43d19840489423f99"
+  }
+}

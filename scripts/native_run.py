@@ -111,6 +111,20 @@ def frozen_inputs(manifest_id=None, root=None, *, reviewed_operations=False):
     if reviewed_operations and manifest.get("dataset_id") == "real-v1":
         from operations_review import reviewed_hashes
         hashes = reviewed_hashes(manifest, root)
+    elif reviewed_operations and manifest.get("dataset_id") == "challenge-v1":
+        from select_slots import _repo_file
+        helper_name = "scripts/operations_review.py"
+        helper_digest = manifest["hashes"].get(helper_name)
+        if helper_digest is None:
+            review = read_json(_repo_file(root, "datasets/challenge-v1/operations-review.json"))
+            if (review.get("original_manifest_id") != manifest["manifest_id"]
+                    or review.get("original_manifest_sha256") != hashlib.sha256(context["manifest_path"].read_bytes()).hexdigest()):
+                raise ValueError("challenge_operations_review_invalid")
+            helper_digest = review.get("review_helper_sha256")
+        if hashlib.sha256(_repo_file(root, helper_name).read_bytes()).hexdigest() != helper_digest:
+            raise ValueError("challenge_review_helper_changed")
+        from operations_review import challenge_reviewed_hashes
+        hashes = challenge_reviewed_hashes(manifest, root)
     covered = set()
     for name, expected in hashes.items():
         relative = Path(name)
@@ -163,6 +177,9 @@ def frozen_inputs(manifest_id=None, root=None, *, reviewed_operations=False):
                 context["schema_path"].relative_to(root).as_posix(),
                 *CHALLENGE_RUNTIME_INPUTS,
             }
+            if manifest.get("scorer_version") == "challenge-1.1.0":
+                required.add("config/scorers/challenge-1.1.0.py")
+                required.add("scripts/operations_review.py")
             for task in context["tasks"].values():
                 task_path = root / task["path"]
                 for path in task_path.rglob("*"):
@@ -633,6 +650,25 @@ def clean_process_env(key):
     return result
 
 
+def native_version_fix_metadata(module_path=None):
+    from fix_native_version import ORIGINAL_MODULE_SHA256, CORRECTED_MODULE_SHA256
+    if module_path is None:
+        from importlib.metadata import distribution
+        package = distribution("harbor")
+        if package.version != RUNTIME["harbor"]["version"]:
+            raise ValueError("native_harbor_version_mismatch")
+        module_path = Path(package.locate_file("harbor/agents/installed/hermes.py"))
+    actual = hashlib.sha256(Path(module_path).read_bytes()).hexdigest()
+    if actual != CORRECTED_MODULE_SHA256:
+        raise ValueError("native_corrected_module_mismatch")
+    return {
+        "original_module_sha256": ORIGINAL_MODULE_SHA256,
+        "corrected_module_sha256": actual,
+        "checked_before_provider_access": True,
+        "change": "Pinned native CLI version, OpenRouter routing and oneshot export corrections, plus observer enablement after native config generation when its ledger is requested.",
+    }
+
+
 def execute(mode, slot_id):
     validate_live_environment()
     if mode not in {"pilot", "final"} or not SLOT_RE.fullmatch(slot_id):
@@ -714,7 +750,6 @@ def execute(mode, slot_id):
         "commit_sha": os.environ.get("GITHUB_SHA"),
         "harbor_version": RUNTIME["harbor"]["version"],
         "harbor_commit": RUNTIME["harbor"]["git_commit"],
-        "harbor_native_version_fix": RUNTIME["harbor"].get("native_version_fix"),
         "hermes_release_tag": RUNTIME["hermes"]["release_tag"],
         "hermes_resolved_release_commit": RUNTIME["hermes"]["resolved_release_commit"],
         "hermes_checkout_commit_verified": False,
@@ -747,6 +782,7 @@ def execute(mode, slot_id):
     record["config_hash"] = hashlib.sha256(config_payload).hexdigest()
     try:
         freeze = frozen_inputs(manifest_id)
+        record["harbor_native_version_fix"] = native_version_fix_metadata()
         if context["dataset_id"]:
             record["dataset_manifest_id"] = freeze["manifest_id"]
             record["dataset_hash_count"] = len(freeze["hashes"])

@@ -1,0 +1,88 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": false,
+    "financial_answer": true,
+    "robustness": false
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "adjusted_margin": {
+        "availability": true,
+        "controls": {
+          "eps_observations": true,
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": false
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "adjusted_operating_income": {
+        "availability": true,
+        "controls": {
+          "eps_observations": true,
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": false
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "eps_difference": {
+        "availability": true,
+        "controls": {
+          "eps_observations": true,
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "margin_bridge": {
+        "availability": true,
+        "controls": {
+          "eps_observations": true,
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": false
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": false,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "eps_difference:evidence",
+    "adjusted_operating_income:evidence",
+    "adjusted_operating_income:control:signed_bridge",
+    "adjusted_margin:evidence",
+    "adjusted_margin:control:signed_bridge",
+    "margin_bridge:evidence",
+    "margin_bridge:control:signed_bridge",
+    "conclusion:evidence"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.0.0",
+  "strict_delivery_completion": false,
+  "verified_research_completion": false
+}

@@ -1,0 +1,117 @@
+{
+  "answers": {
+    "azure_gap": {
+      "evidence": [
+        [
+          "a03:s01",
+          "a03:s04"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.005,
+      "unit": "percentage_points",
+      "value": -1.0
+    },
+    "margin_change": {
+      "evidence": [
+        [
+          "a03:s02",
+          "a03:s03"
+        ],
+        [
+          "a03:s05"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.005,
+      "unit": "basis_points",
+      "value": -112.62742667169121
+    },
+    "q1_operating_income": {
+      "evidence": [
+        [
+          "a03:s02",
+          "a03:s03"
+        ],
+        [
+          "a03:s05"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.0001,
+      "unit": "usd_million",
+      "value": 30552.0
+    },
+    "q1_revenue": {
+      "evidence": [
+        [
+          "a03:s02",
+          "a03:s03"
+        ],
+        [
+          "a03:s05"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.0001,
+      "unit": "usd_million",
+      "value": 65585.0
+    }
+  },
+  "conclusion": {
+    "evidence": [
+      [
+        "a03:s01",
+        "a03:s04"
+      ]
+    ],
+    "verdict": "contradicted"
+  },
+  "context_evidence_allowed": [
+    "a03:s06"
+  ],
+  "task_id": "challenge-v1-a03",
+  "scorer_version": "challenge-1.1.0",
+  "controls": [
+    {
+      "name": "compatible_monetary_scale",
+      "database": "control-1.sqlite",
+      "expected": {
+        "azure_gap": -1.0,
+        "margin_change": -112.62742667169121,
+        "q1_operating_income": 61104.0,
+        "q1_revenue": 131170.0
+      }
+    },
+    {
+      "name": "business_growth_change",
+      "database": "control-2.sqlite",
+      "expected": {
+        "azure_gap": 1.0,
+        "margin_change": -112.62742667169121,
+        "q1_operating_income": 30552.0,
+        "q1_revenue": 65585.0
+      }
+    },
+    {
+      "name": "quarter_expense_change",
+      "database": "control-3.sqlite",
+      "expected": {
+        "azure_gap": -1.0,
+        "margin_change": -98.26621343639708,
+        "q1_operating_income": 30552.0,
+        "q1_revenue": 65585.0
+      }
+    }
+  ],
+  "hashes": {
+    "evidence.json": "c7051afac39009bb74d3aa4d8997634567bdefa9c747e22598dc38acc93d1591",
+    "control-2.sqlite": "f2c7fa93b54f498df9e10ffd315d555f1e93c485dd5fb890c5df879409c7fa20",
+    "sources.md": "1d9b3e4df7658626cf7766b89691f8d6f236918c6d6841dc6d18153e3315a193",
+    "control-3.sqlite": "ff224ab5d93ebfc1f1d66c919b4220c2d898461ba79effdf3b116cd2e820e664",
+    "control-1.sqlite": "e75ffaefe480e49f7eccdf4a0d07e494a690ef0f389566e78cedc3121de82ff4",
+    "schema.json": "32b131ff8db1a194bd8bdba7b6e610c6e6806294bcdea28833d57f9a28eef5e5",
+    "verify.py": "a69eb6c71a44ff42df488696ecd76257c5ec1096f5ae9a5dd245cc4128a2b0e2",
+    "data.sqlite": "d9128f11f3aa68045d9526a8ad8fe4367d29c2aac2518cf390d1c2f4b5f8b7b4"
+  }
+}
