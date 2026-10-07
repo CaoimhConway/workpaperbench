@@ -53,6 +53,30 @@ def native_hook_smoke_script():
     ))
 
 
+def native_failure_diagnostics(text):
+    """Return a short error-only summary without retaining prompts or credentials."""
+    text = re.sub(r"\x1b\[[0-9;]*[A-Za-z]", "", str(text or ""))
+    text = re.sub(r"(?i)Bearer\s+\S+", "Bearer [redacted]", text)
+    text = re.sub(
+        r"(?i)(sk-or-v1-[A-Za-z0-9_-]{16,}|sk-[A-Za-z0-9_-]{12,}|gh[pousr]_[A-Za-z0-9]{16,})",
+        "[redacted]", text)
+    text = re.sub(r"(?i)(OPENROUTER_API_KEY|[A-Z0-9_]*API_KEY)(\s*[=:]\s*)\S+", r"\1\2[redacted]", text)
+    relevant = re.compile(
+        r"(?i)(traceback|\b(error|exception|failed|failure)\b|not found|no such file|"
+        r"permission denied|module|plugin|config\.yaml|exit status|command failed|"
+        r"not executable|not a directory|systemexit)"
+    )
+    lines = []
+    for line in text.splitlines():
+        if relevant.search(line):
+            line = re.sub(r"\s+", " ", line).strip()[:240]
+            if line and line not in lines:
+                lines.append(line)
+        if len(lines) >= 12:
+            break
+    return lines
+
+
 def native_hook_smoke_wrapper_writer():
     return "\n".join((
         "import base64, pathlib, shlex, sys",
@@ -63,7 +87,7 @@ def native_hook_smoke_wrapper_writer():
         "    'if [ \"$1\" = \"--yolo\" ] && [ \"$2\" = \"chat\" ]; then',",
         "    '  test \"$(git -C ' + shlex.quote(checkout) + ' rev-parse HEAD)\" = ' + shlex.quote(runtime_commit),",
         "    '  cd ' + shlex.quote(checkout),",
-        "    '  WPB_INSTALLED_RUNTIME_PYTHON=' + shlex.quote(runtime_python) + ' WPB_INSTALLED_RUNTIME_COMMIT=' + shlex.quote(runtime_commit) + ' exec ' + shlex.quote(runtime_python) + ' -c ' + shlex.quote(command),",
+        "    '  WPB_INSTALLED_RUNTIME_PYTHON=' + shlex.quote(runtime_python) + ' WPB_INSTALLED_RUNTIME_COMMIT=' + shlex.quote(runtime_commit) + ' exec ' + shlex.quote(runtime_python) + ' -c ' + shlex.quote(command) + ' 2>&1',",
         "    'fi',",
         "    'exit 0',",
         "    '',",
@@ -136,6 +160,7 @@ async def verify_native_hook_smoke(agent_environment, root, expected_commit, set
     prefix = "WPB_NATIVE_HOOK_SMOKE:"
     lines = [line[len(prefix):] for line in (log_result.stdout or "").splitlines()
              if line.startswith(prefix)]
+    native_log_text = log_result.stdout or ""
     try:
         runtime_check = json.loads(lines[-1]) if len(lines) == 1 else {}
     except json.JSONDecodeError:
@@ -227,6 +252,8 @@ async def verify_native_hook_smoke(agent_environment, root, expected_commit, set
         "retry_count_reset_observed": len(starts) == 2 and [event["retry_count"] for event in starts] == [0, 0],
         "capture_completeness": evidence["capture_completeness"],
         "capture_limitations": evidence["capture_limitations"],
+        "native_log_return_code": log_result.return_code,
+        "native_log_error_summary": native_failure_diagnostics(native_log_text),
         "candidate_terminal_access_assumption": (
             "same-container terminal permissions may allow writing the shared /logs/agent mount - not probed"
         ),
@@ -320,6 +347,9 @@ async def check():
     diagnostic = {"install_complete": bool(startup), "cli_arguments_valid": passed,
                   "startup": startup, "key_free": True,
                   "exception_type": exception.exception_type if exception else None}
+    if exception:
+        diagnostic["native_trial_error_summary"] = native_failure_diagnostics(
+            getattr(exception, "exception_message", ""))
     if exception and not startup:
         detail = exception.exception_message[-4000:]
         if re.search(r"sk-or-v1-[A-Za-z0-9_-]{16,}|gh[pousr]_[A-Za-z0-9]{20,}|PRIVATE KEY", detail):
