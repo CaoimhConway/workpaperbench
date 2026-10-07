@@ -1,0 +1,65 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": false,
+    "financial_answer": true,
+    "robustness": true
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "coverage_change_bps": {
+        "availability": true,
+        "controls": {
+          "june30_component_gap": true,
+          "june30_market_revaluation": true,
+          "may30_market_revaluation": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "jun30_reconciliation_usd": {
+        "availability": true,
+        "controls": {
+          "june30_component_gap": true,
+          "june30_market_revaluation": true,
+          "may30_market_revaluation": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "jun30_reserves_usd": {
+        "availability": true,
+        "controls": {
+          "june30_component_gap": true,
+          "june30_market_revaluation": true,
+          "may30_market_revaluation": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": false,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "conclusion:evidence"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.1.0",
+  "strict_delivery_completion": false,
+  "verified_research_completion": false
+}

@@ -1,0 +1,81 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": false,
+    "financial_answer": true,
+    "robustness": true
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "company_asset_excess_usd": {
+        "availability": true,
+        "controls": {
+          "bitcoin_fair_value_change": true,
+          "company_held_token_change": true,
+          "release_liability_alignment": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "net_token_liability_usd": {
+        "availability": true,
+        "controls": {
+          "bitcoin_fair_value_change": true,
+          "company_held_token_change": true,
+          "release_liability_alignment": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "release_liability_delta_usd": {
+        "availability": true,
+        "controls": {
+          "bitcoin_fair_value_change": true,
+          "company_held_token_change": true,
+          "release_liability_alignment": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "reserve_assets_usd": {
+        "availability": true,
+        "controls": {
+          "bitcoin_fair_value_change": true,
+          "company_held_token_change": true,
+          "release_liability_alignment": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": false,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "reserve_assets_usd:evidence",
+    "net_token_liability_usd:evidence",
+    "company_asset_excess_usd:evidence",
+    "release_liability_delta_usd:evidence",
+    "conclusion:evidence"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.1.0",
+  "strict_delivery_completion": false,
+  "verified_research_completion": false
+}

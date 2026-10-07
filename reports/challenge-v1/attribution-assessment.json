@@ -209,6 +209,24 @@
             "verdict.json": "e08a134b3d194813a16c95cc641f048286040cced192c654b7f58b864212761a"
           },
           "slot_id": "final-c03-inexpensive-2"
+        },
+        {
+          "artifact_audit_sha256": "cdc8a1fca288c7f8eacc365c871ee04e8c4fa0f6d2e1805e9e36c697ed55027f",
+          "assessment": "The third reference attempt repeats the factor-of-100 mistake: its percent-valued answers 0.4075754548 and 0.3178078651 and both SQL expressions are unscaled ratios. The source-derived answers remain 40.75754548 percent and 31.78078651 percent. Evidence and the contradicted conclusion pass. Original replay and every changed-input check reject both percentage calculations. No task ambiguity is apparent.",
+          "checks": {
+            "delivery": true,
+            "evidence": true,
+            "financial_answer": false,
+            "robustness": false
+          },
+          "retained_file_sha256": {
+            "answer.json": "9200f2e298d434de19d0d9c8db8f87b586fd65f2b7e90a31101d5e2420aa01ec",
+            "answer.raw.txt": "9200f2e298d434de19d0d9c8db8f87b586fd65f2b7e90a31101d5e2420aa01ec",
+            "record.json": "cbc8642f94c1396838de0309351bd0550fca754fa70929275cbf9f78d5b1ec27",
+            "tool-evidence.json": "6f4a1480070e0a1ed31fb2ce17a1f79f206798c176013c4cca987085b30ccd25",
+            "verdict.json": "1313a128a2f296cfe1f760b8fa1e68560fa4427257037ee6a23a3221242fc38c"
+          },
+          "slot_id": "final-c03-reference-3"
         }
       ],
       "case": "c03",
@@ -421,7 +439,7 @@
   "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
   "original_scorer_version": "challenge-1.1.0",
   "review_kind": "source-first independent agent review",
-  "scope": "The six first-repetition growth/attribution answers plus the second-repetition Block pair, independent source and Decimal review. Findings are distinct from the scheduled automatic scores.",
+  "scope": "The six first-repetition growth/attribution answers, the second-repetition Block pair and the third-repetition Block reference answer, independent source and Decimal review. Findings are distinct from the scheduled automatic scores.",
   "submitted_sql_executed_locally": false,
   "versioned_correction": "Conclusion paths will be applied consistently through challenge-1.1.3 in fresh native verifiers. Original source, candidate, gold, records and verdicts remain unchanged."
 }
