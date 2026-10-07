@@ -1,0 +1,60 @@
+{
+  "task_id": "challenge-v1-c04",
+  "context_evidence": [
+    "c04:s04"
+  ],
+  "answers": [
+    {
+      "id": "service_revenue_growth_pct",
+      "status": "answered",
+      "value": 8.6874409821,
+      "unit": "percent",
+      "evidence": [
+        "c04:s01"
+      ],
+      "sql": "SELECT (MAX(CASE WHEN period_end='2024-09-30' THEN amount ELSE NULL END) - MAX(CASE WHEN period_end='2023-09-30' THEN amount ELSE NULL END)) / MAX(CASE WHEN period_end='2023-09-30' THEN amount ELSE NULL END) * 100 FROM revenues WHERE category='Service revenue';"
+    },
+    {
+      "id": "lagged_nominal_payment_volume_growth_pct",
+      "status": "answered",
+      "value": 7.4211963266,
+      "unit": "percent",
+      "evidence": [
+        "c04:s02"
+      ],
+      "sql": "SELECT (MAX(CASE WHEN period_end='2024-06-30' THEN amount ELSE NULL END) - MAX(CASE WHEN period_end='2023-06-30' THEN amount ELSE NULL END)) / MAX(CASE WHEN period_end='2023-06-30' THEN amount ELSE NULL END) * 100 FROM activity_metrics WHERE metric='Nominal payments volume';"
+    },
+    {
+      "id": "service_growth_minus_volume_growth_pp",
+      "status": "answered",
+      "value": 1.2662446554,
+      "unit": "percentage_points",
+      "evidence": [
+        "c04:s01",
+        "c04:s02"
+      ],
+      "sql": "SELECT (SELECT (MAX(CASE WHEN period_end='2024-09-30' THEN amount ELSE NULL END) - MAX(CASE WHEN period_end='2023-09-30' THEN amount ELSE NULL END)) / MAX(CASE WHEN period_end='2023-09-30' THEN amount ELSE NULL END) * 100 FROM revenues WHERE category='Service revenue') - (SELECT (MAX(CASE WHEN period_end='2024-06-30' THEN amount ELSE NULL END) - MAX(CASE WHEN period_end='2023-06-30' THEN amount ELSE NULL END)) / MAX(CASE WHEN period_end='2023-06-30' THEN amount ELSE NULL END) * 100 FROM activity_metrics WHERE metric='Nominal payments volume');"
+    },
+    {
+      "id": "service_revenue_to_lagged_volume_proxy_2024_pct",
+      "status": "answered",
+      "value": 0.1241065927,
+      "unit": "percent",
+      "evidence": [
+        "c04:s01",
+        "c04:s02",
+        "c04:s04"
+      ],
+      "sql": "SELECT (SELECT amount / 1000.0 FROM revenues WHERE category='Service revenue' AND period_end='2024-09-30') / (SELECT amount FROM activity_metrics WHERE metric='Nominal payments volume' AND period_end='2024-06-30') * 100;"
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "c04:s01",
+      "c04:s02",
+      "c04:s04"
+    ]
+  }
+}

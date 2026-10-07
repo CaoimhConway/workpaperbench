@@ -1,0 +1,523 @@
+{
+  "answer_sha256": "3a6357e4eb9a091219978e516f22dfb2a2c0f4071a6f84681ee6144f93580857",
+  "answer_status": "saved",
+  "arm": null,
+  "campaign": "final",
+  "commit_sha": "119520aa15e020802be255fe5ac83e2a0bfe6bb2",
+  "condition": "full",
+  "config_hash": "bfd84c857c248cc34cb43ded0d16fdc2b10508415c15d620e11919ed3e1dadad",
+  "dataset_hash_count": 294,
+  "dataset_id": "challenge-v1",
+  "dataset_manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "execution_started_at": "2026-10-07T04:43:15.733367+00:00",
+  "experiment_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "finished_at": "2026-10-07T04:47:07.727174+00:00",
+  "freeze_hash_count": 294,
+  "freeze_manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "github_run_attempt": "1",
+  "github_run_id": "37568399652",
+  "harbor_commit": "1e5c5c6db929a10a140d05e606882c671ae20729",
+  "harbor_metrics": {
+    "agent_execution_seconds": 87.202,
+    "agent_setup_seconds": 99.609,
+    "environment_setup_seconds": 2.981,
+    "n_input_tokens": 0,
+    "n_output_tokens": 0,
+    "verifier_seconds": 14.91
+  },
+  "harbor_native_version_fix": {
+    "change": "Pinned native CLI version, OpenRouter routing and oneshot export corrections, plus observer enablement after native config generation when its ledger is requested.",
+    "checked_before_provider_access": true,
+    "corrected_module_sha256": "9aa3157ba2fc1aff3a11a8ec833bbc3eb01506630ffd962e124cf39e362db5e7",
+    "original_module_sha256": "012e980302b26641dcf77f31fe71a368b2022b098619853addd015c5e18e47c6"
+  },
+  "harbor_version": "0.23.0",
+  "hermes_checkout_commit_verified": true,
+  "hermes_release_tag": "v0.21.4+canary.20261004T084456Z",
+  "hermes_resolved_release_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "hermes_runtime_version": {
+    "checked_before_solving": true,
+    "checkout_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "expected_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "matches_pin": true,
+    "native_api_retry_observer": {
+      "enabled": true,
+      "registered_hook_count": 3,
+      "registration_smoke": true,
+      "staged": true
+    }
+  },
+  "model": "google/gemini-3.1-pro-preview",
+  "model_harbor_model": "openrouter/google/gemini-3.1-pro-preview",
+  "model_key": "reference",
+  "model_provider": "openrouter",
+  "model_route_policy": "OpenRouter default routing among currently compatible tool-capable endpoints. Preview/model routing may change.",
+  "native_api_retry_observer": {
+    "capture_completeness": "not_guaranteed",
+    "capture_limitations": "hooks_fail_open_upstream_internal_retries_and_routes_unobserved",
+    "capture_status": "captured",
+    "capture_truncated_possible": false,
+    "event_count": 33,
+    "events": [
+      {
+        "event": "observer_registered",
+        "observed_at": 1791348307.97696
+      },
+      {
+        "api_call_count": 1,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348312.016744,
+        "request_id": "3e7f635e4fd1bfaf189d0fecfc91f89b2d2e980d87478c13667bd155bb1bc40e",
+        "retry_count": 0,
+        "started_at": 1791348311.9678977
+      },
+      {
+        "api_call_count": 1,
+        "ended_at": 1791348315.7840881,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348315.7873206,
+        "request_id": "3e7f635e4fd1bfaf189d0fecfc91f89b2d2e980d87478c13667bd155bb1bc40e",
+        "retry_count": null,
+        "started_at": 1791348311.9678977
+      },
+      {
+        "api_call_count": 2,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348315.9018826,
+        "request_id": "3c58a1fe61131a32cae1a57af38baca33d2041c2403ea0dea03b114a9995ff46",
+        "retry_count": 0,
+        "started_at": 1791348315.8999894
+      },
+      {
+        "api_call_count": 2,
+        "ended_at": 1791348318.0100977,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348318.012645,
+        "request_id": "3c58a1fe61131a32cae1a57af38baca33d2041c2403ea0dea03b114a9995ff46",
+        "retry_count": null,
+        "started_at": 1791348315.8999894
+      },
+      {
+        "api_call_count": 3,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348318.0427117,
+        "request_id": "304bcf6309c270b8ef03c870d0334b96552af2a96483524108449f0abf964e97",
+        "retry_count": 0,
+        "started_at": 1791348318.0407832
+      },
+      {
+        "api_call_count": 3,
+        "ended_at": 1791348320.745763,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348320.763458,
+        "request_id": "304bcf6309c270b8ef03c870d0334b96552af2a96483524108449f0abf964e97",
+        "retry_count": null,
+        "started_at": 1791348318.0407832
+      },
+      {
+        "api_call_count": 4,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348320.900505,
+        "request_id": "f61fe1848c0f83e9300d1da22388bd7977b1d4166f7808e0c752e1bb01e4e0d3",
+        "retry_count": 0,
+        "started_at": 1791348320.8984697
+      },
+      {
+        "api_call_count": 4,
+        "ended_at": 1791348323.1068623,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348323.1100519,
+        "request_id": "f61fe1848c0f83e9300d1da22388bd7977b1d4166f7808e0c752e1bb01e4e0d3",
+        "retry_count": null,
+        "started_at": 1791348320.8984697
+      },
+      {
+        "api_call_count": 5,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348323.1527345,
+        "request_id": "0d396dcddcd164b3556218f88b29ba62ac4eb91f05c04561ec276582cf455eff",
+        "retry_count": 0,
+        "started_at": 1791348323.1507056
+      },
+      {
+        "api_call_count": 5,
+        "ended_at": 1791348326.2292333,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348326.2319205,
+        "request_id": "0d396dcddcd164b3556218f88b29ba62ac4eb91f05c04561ec276582cf455eff",
+        "retry_count": null,
+        "started_at": 1791348323.1507056
+      },
+      {
+        "api_call_count": 6,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348326.301484,
+        "request_id": "e4c9a8781858db84cc76aa6da6759b60e2cffb461c47997f833c65d022272787",
+        "retry_count": 0,
+        "started_at": 1791348326.298838
+      },
+      {
+        "api_call_count": 6,
+        "ended_at": 1791348329.2250102,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348329.2272112,
+        "request_id": "e4c9a8781858db84cc76aa6da6759b60e2cffb461c47997f833c65d022272787",
+        "retry_count": null,
+        "started_at": 1791348326.298838
+      },
+      {
+        "api_call_count": 7,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348329.2695408,
+        "request_id": "ff7f9eef51aba585381f250774aefc644bbce7612cf4c19e90c988ab92c033f1",
+        "retry_count": 0,
+        "started_at": 1791348329.267566
+      },
+      {
+        "api_call_count": 7,
+        "ended_at": 1791348339.2417195,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348339.2444494,
+        "request_id": "ff7f9eef51aba585381f250774aefc644bbce7612cf4c19e90c988ab92c033f1",
+        "retry_count": null,
+        "started_at": 1791348329.267566
+      },
+      {
+        "api_call_count": 8,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348339.3087027,
+        "request_id": "1835a0cbbd7ae89c7f1e58af39c1df51bd8e71ca43c4311a2df260a72a6c0f5b",
+        "retry_count": 0,
+        "started_at": 1791348339.3067553
+      },
+      {
+        "api_call_count": 8,
+        "ended_at": 1791348341.8506203,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348341.8530614,
+        "request_id": "1835a0cbbd7ae89c7f1e58af39c1df51bd8e71ca43c4311a2df260a72a6c0f5b",
+        "retry_count": null,
+        "started_at": 1791348339.3067553
+      },
+      {
+        "api_call_count": 9,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348341.894284,
+        "request_id": "a5cad18804683ecb1ace9d47530a60742c600b1fc532082cf6bcd80d10e3d8c3",
+        "retry_count": 0,
+        "started_at": 1791348341.8922758
+      },
+      {
+        "api_call_count": 9,
+        "ended_at": 1791348350.0421875,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348350.0447695,
+        "request_id": "a5cad18804683ecb1ace9d47530a60742c600b1fc532082cf6bcd80d10e3d8c3",
+        "retry_count": null,
+        "started_at": 1791348341.8922758
+      },
+      {
+        "api_call_count": 10,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348350.1311631,
+        "request_id": "c6519de28d8c2c9d716f368c986959e3565f4fee61809ce118268d3f1e3f35f1",
+        "retry_count": 0,
+        "started_at": 1791348350.1278923
+      },
+      {
+        "api_call_count": 10,
+        "ended_at": 1791348359.365304,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348359.4160018,
+        "request_id": "c6519de28d8c2c9d716f368c986959e3565f4fee61809ce118268d3f1e3f35f1",
+        "retry_count": null,
+        "started_at": 1791348350.1278923
+      },
+      {
+        "api_call_count": 11,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348359.4803329,
+        "request_id": "eef7469a85e748369cfd50ceae0dfdb65c0d066660d8aab03288b8ae6e7e3913",
+        "retry_count": 0,
+        "started_at": 1791348359.4777417
+      },
+      {
+        "api_call_count": 11,
+        "ended_at": 1791348361.8053336,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348361.807889,
+        "request_id": "eef7469a85e748369cfd50ceae0dfdb65c0d066660d8aab03288b8ae6e7e3913",
+        "retry_count": null,
+        "started_at": 1791348359.4777417
+      },
+      {
+        "api_call_count": 12,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348361.849231,
+        "request_id": "b0e93897a16a1ce874a026f92dcfcf202c2f9e7a81a364d5a0c66f157387d6e1",
+        "retry_count": 0,
+        "started_at": 1791348361.8466258
+      },
+      {
+        "api_call_count": 12,
+        "ended_at": 1791348370.2285023,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348370.23093,
+        "request_id": "b0e93897a16a1ce874a026f92dcfcf202c2f9e7a81a364d5a0c66f157387d6e1",
+        "retry_count": null,
+        "started_at": 1791348361.8466258
+      },
+      {
+        "api_call_count": 13,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348370.3521533,
+        "request_id": "8497c1bb3f558f6e5e5101fa222716260aa65d873e0ee73e08e59522d2d655e1",
+        "retry_count": 0,
+        "started_at": 1791348370.3493745
+      },
+      {
+        "api_call_count": 13,
+        "ended_at": 1791348372.9834883,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348372.9858744,
+        "request_id": "8497c1bb3f558f6e5e5101fa222716260aa65d873e0ee73e08e59522d2d655e1",
+        "retry_count": null,
+        "started_at": 1791348370.3493745
+      },
+      {
+        "api_call_count": 14,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348373.1149158,
+        "request_id": "186e3fbf6b679669dfb1b5f27cb6787071376260ebe2c89850c8c2bb5bfd7f4c",
+        "retry_count": 0,
+        "started_at": 1791348373.1121254
+      },
+      {
+        "api_call_count": 14,
+        "ended_at": 1791348381.9211054,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348381.9341984,
+        "request_id": "186e3fbf6b679669dfb1b5f27cb6787071376260ebe2c89850c8c2bb5bfd7f4c",
+        "retry_count": null,
+        "started_at": 1791348373.1121254
+      },
+      {
+        "api_call_count": 15,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348382.0350654,
+        "request_id": "b82832ae6c434e66ab094bccb44cd901224d8bb68e37df98130f08c8bc49a19e",
+        "retry_count": 0,
+        "started_at": 1791348382.0322464
+      },
+      {
+        "api_call_count": 15,
+        "ended_at": 1791348384.4736912,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348384.4762416,
+        "request_id": "b82832ae6c434e66ab094bccb44cd901224d8bb68e37df98130f08c8bc49a19e",
+        "retry_count": null,
+        "started_at": 1791348382.0322464
+      },
+      {
+        "api_call_count": 16,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348384.5997982,
+        "request_id": "02947c0c1cc49a8901f6803d8c3257eece8b46c3c036a5970581afc8c45411ec",
+        "retry_count": 0,
+        "started_at": 1791348384.5968714
+      },
+      {
+        "api_call_count": 16,
+        "ended_at": 1791348389.3892462,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348389.392007,
+        "request_id": "02947c0c1cc49a8901f6803d8c3257eece8b46c3c036a5970581afc8c45411ec",
+        "retry_count": null,
+        "started_at": 1791348384.5968714
+      }
+    ],
+    "observed_additional_attempts": 0,
+    "observer_registered": true,
+    "pre_request_count": 16
+  },
+  "native_command": "Harbor Trial.create / Trial.run with native Hermes",
+  "native_return_code": 0,
+  "previously_exposed": false,
+  "provider_after": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 14.973699457,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 14.973699457,
+    "reset_is_null": true,
+    "usage_usd": 5.026300543
+  },
+  "provider_before": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 15.167825257,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 15.167825257,
+    "reset_is_null": true,
+    "usage_usd": 4.832174743
+  },
+  "provider_cost_delta_usd": 0.1941258,
+  "raw_artifact_status": "screened_original_bytes",
+  "raw_sha256": "0f3d2c4d68b7b769c890934de321a16fa9af867060c0d667c0457c3c30792480",
+  "remaining_planned_slots": 41,
+  "remaining_reserved_slots": 41,
+  "remaining_reserved_usd": 10.4,
+  "repetition": 1,
+  "reservation_usd_per_slot": 0.4,
+  "retained_sha256": "3a6357e4eb9a091219978e516f22dfb2a2c0f4071a6f84681ee6144f93580857",
+  "run_id": "37568399652",
+  "slot_id": "final-c02-reference-1",
+  "source_group": "coinbase-fy2024-fy2023-revenue-and-spot-volume",
+  "split": "evaluation",
+  "started_at": "2026-10-07T04:39:00.525988+00:00",
+  "status": "task_failed",
+  "task": "challenge-v1-c02",
+  "task_origin": "primary_source_factual_extract",
+  "token_counts_status": "unreported_or_native_zero_fields",
+  "tool_event_counts": {
+    "terminal": 9,
+    "write_file": 6
+  },
+  "tool_evidence": {
+    "calls": 15,
+    "observations": 14,
+    "omitted_items": 1,
+    "status": "screened_tools"
+  },
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "business_payment_count_2024": {
+          "availability": true,
+          "evidence": false,
+          "unit": true
+        },
+        "proxy_change_bps": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "spot_trading_volume_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": false,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "business_payment_count_2024:evidence",
+      "conclusion:evidence"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  }
+}

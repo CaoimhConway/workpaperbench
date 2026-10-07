@@ -1,0 +1,75 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": true,
+    "financial_answer": true,
+    "robustness": true
+  },
+  "complete": true,
+  "details": {
+    "claims": {
+      "coverage_change_bps": {
+        "availability": true,
+        "controls": {
+          "march31_component_gap": true,
+          "march31_supply_change": true,
+          "march31_treasury_revaluation": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "march31_circulation_usdc": {
+        "availability": true,
+        "controls": {
+          "march31_component_gap": true,
+          "march31_supply_change": true,
+          "march31_treasury_revaluation": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "march31_reserves_usd": {
+        "availability": true,
+        "controls": {
+          "march31_component_gap": true,
+          "march31_supply_change": true,
+          "march31_treasury_revaluation": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "march31_residual_usd": {
+        "availability": true,
+        "controls": {
+          "march31_component_gap": true,
+          "march31_supply_change": true,
+          "march31_treasury_revaluation": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": true,
+      "verdict": true
+    }
+  },
+  "errors": [],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.1.0",
+  "strict_delivery_completion": true,
+  "verified_research_completion": true
+}

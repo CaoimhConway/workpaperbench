@@ -1,0 +1,391 @@
+{
+  "cases": [
+    {
+      "additional_conclusion_paths": {
+        "conclusion": [
+          [
+            "c02:s05"
+          ],
+          [
+            "c02:s04",
+            "c02:s05"
+          ]
+        ]
+      },
+      "answers": [
+        {
+          "artifact_audit_sha256": "f4b6c31d3f1ee0a98633bef6892d2fc361b9309163faa1e4a0d7048a99712e4e",
+          "assessment": "All four numerical calculations and controls pass, and business-payment count is correctly unavailable. The conclusion incorrectly supports treating a transaction-revenue numerator that includes derivatives as a comparable realized spot fee rate. Both answers omit source support for the unavailable count.",
+          "checks": {
+            "delivery": true,
+            "evidence": false,
+            "financial_answer": false,
+            "robustness": true
+          },
+          "retained_file_sha256": {
+            "answer.json": "dacc7414268ce1442f741dc39e90f8cbae00d50517074136e3ea68f3e493bc4b",
+            "answer.raw.txt": "91868cd2fe59834a58169a23a358d64c48dae7de71c7c7059d84929cb4c956cb",
+            "record.json": "a6a6377ee82becbf59cbf24fd66f4507bdf8e94080e1091e119126812fdc39db",
+            "tool-evidence.json": "6c9da8f24727bee1d5958c81f8c220259f0ca54bbd92b56440b05cc939e1b80c",
+            "verdict.json": "999ac2d746c6740752b5a074de1cb5f9c0826b3d1d1fa5b4e53f6539dfb19863"
+          },
+          "slot_id": "final-c02-inexpensive-1"
+        },
+        {
+          "artifact_audit_sha256": "5de20deda44329b8a9d929f4114524f3315fa63b08653a4ea0ae04ac388aec6c",
+          "assessment": "All financial quantities, the unavailable decision, controls and contradicted conclusion pass. Empty evidence for the unavailable count is inadequate. The conclusion cites s04+s05, which directly establish the derivative-versus-spot mismatch. Requiring annual value tables for that conclusion is an evidence-path defect, corrected separately.",
+          "checks": {
+            "delivery": true,
+            "evidence": false,
+            "financial_answer": true,
+            "robustness": true
+          },
+          "retained_file_sha256": {
+            "answer.json": "3a6357e4eb9a091219978e516f22dfb2a2c0f4071a6f84681ee6144f93580857",
+            "answer.raw.txt": "0f3d2c4d68b7b769c890934de321a16fa9af867060c0d667c0457c3c30792480",
+            "record.json": "f0b9f02b05516805308d08d1ae8723e48731f3e5d05f20d117819e8ac2b8a0c5",
+            "tool-evidence.json": "8e94ec0c234d9c1e602e33edd478dccdf568dbdec5dc8870dbf333d40bc21a2d",
+            "verdict.json": "2ae749f64eb2eec795a15f48028bdf7a7e54aa0869b00eb24013122afa6ab788"
+          },
+          "slot_id": "final-c02-reference-1"
+        }
+      ],
+      "case": "c02",
+      "reference_values_independent_decimal": {
+        "business_payment_count_2024": "insufficient_evidence",
+        "proxy_change_bps": "1.83265913470732747841181576",
+        "spot_trading_volume_growth_pct": "148.2905982905982905982905983",
+        "transaction_revenue_growth_pct": "162.3039849860560364398738134",
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": "0.3430389845094664371772805508"
+      },
+      "source_capture_sha256": "7d8f910ad4fdf88d600e12847114203921cb6199c2918b1db430e7522ce08bf3",
+      "source_extract_sha256": "fb29eecb870f7dc5d97f801f521ceaa98425df3cb41a0c6836c12cb359d7b70c",
+      "sources": [
+        {
+          "bytes": 3266041,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Revenue, transaction revenue table, page 93",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/coin-20241231.htm",
+          "publication": "2025-02-13, SEC filing accepted 16:16:43 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:42.312020+00:00",
+          "source_bytes_sha256": "a1269767b9bcca8c85942fdf77ae11706804dcc5ea8927330057c0ffd97555df"
+        },
+        {
+          "bytes": 3266041,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Revenue, subscription and services revenue table, page 94",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/coin-20241231.htm",
+          "publication": "2025-02-13, SEC filing accepted 16:16:43 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:42.312020+00:00",
+          "source_bytes_sha256": "a1269767b9bcca8c85942fdf77ae11706804dcc5ea8927330057c0ffd97555df"
+        },
+        {
+          "bytes": 1650201,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Annual shareholder letter, Trading Volume table, page 4",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000021/q424shareholderletter.htm",
+          "publication": "2025-02-13, 8-K accepted 16:10:21 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:42.986159+00:00",
+          "source_bytes_sha256": "106fb784946ca1766e6e7083a68cf5ffb2d6c91d93a3da5348e2c70d1a5f120f"
+        },
+        {
+          "bytes": 3266041,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Key Business Metrics, Trading Volume",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/coin-20241231.htm",
+          "publication": "2025-02-13, SEC filing accepted 16:16:43 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:42.312020+00:00",
+          "source_bytes_sha256": "a1269767b9bcca8c85942fdf77ae11706804dcc5ea8927330057c0ffd97555df"
+        },
+        {
+          "bytes": 1650201,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Shareholder letter, business discussion following Trading Volume table, page 4",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000021/q424shareholderletter.htm",
+          "publication": "2025-02-13, 8-K accepted 16:10:21 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:42.986159+00:00",
+          "source_bytes_sha256": "106fb784946ca1766e6e7083a68cf5ffb2d6c91d93a3da5348e2c70d1a5f120f"
+        },
+        {
+          "bytes": 3266041,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Note 3, Revenue, annual revenue disaggregation",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1679788/000167978825000022/coin-20241231.htm",
+          "publication": "2025-02-13, SEC filing accepted 16:16:43 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:42.312020+00:00",
+          "source_bytes_sha256": "a1269767b9bcca8c85942fdf77ae11706804dcc5ea8927330057c0ffd97555df"
+        }
+      ]
+    },
+    {
+      "additional_conclusion_paths": {},
+      "answers": [
+        {
+          "artifact_audit_sha256": "8ddba3be235bc2812aed8530f3dbee080b97feca92a04bd7c28661242841a1bf",
+          "assessment": "Correctly derives Bitcoin gross profit and growth. For the share of total net revenue increase, the query instead subtracts the two Bitcoin shares of total revenue, returning -1.05690869 percent. The requested difference-over-difference is 31.78078651 percent. Original and all three changed-input replays fail for that claim. This is a financial metric substitution, not citation placement.",
+          "checks": {
+            "delivery": true,
+            "evidence": true,
+            "financial_answer": false,
+            "robustness": false
+          },
+          "retained_file_sha256": {
+            "answer.json": "635eb1d0b410321f63c20aa0363add2747c701de132a9456604cdef2b474ebc3",
+            "answer.raw.txt": "ad02799b50f2fb66e939446352eb65295630c9cb7c673eaafe9b19bb948ca44e",
+            "record.json": "712075a30dfd34813a662ff8396c10f5156b94443759a593b44f31b24bce7d3a",
+            "tool-evidence.json": "33b1a131f6e089bcca655fe988b35800a677892f0ccf9061d533f093a4be2b39",
+            "verdict.json": "0da5ea4b31daaf3337c074ea48d6699f551b84d81f7802f4a1093de090153d3b"
+          },
+          "slot_id": "final-c03-inexpensive-1"
+        },
+        {
+          "artifact_audit_sha256": "1f3d2bc45ecdcda1fb2390091f543c448dbbc43f5279b240403191261a2c4d79",
+          "assessment": "All four components pass, with the requested contribution denominator and source support.",
+          "checks": {
+            "delivery": true,
+            "evidence": true,
+            "financial_answer": true,
+            "robustness": true
+          },
+          "retained_file_sha256": {
+            "answer.json": "3437009d98ef7a15217a640f896379e15615a1941bdfd2387912afa548d9f54d",
+            "answer.raw.txt": "f50eef9f845aa71702ff1065b636f7bb1bf06b869eb7da76dd94d508e8b79aef",
+            "record.json": "784b8ed1611702d52991f990d916d695bab208e8187f38a21877fc7a61408047",
+            "tool-evidence.json": "f498bc03de4a9eb6635b5d17a11a4bfac3c8103f0e40b1f3db2033e55034ab95",
+            "verdict.json": "16c49c4dffe48c48484d458ba7a12aaf91f06d42105e5ce0447ef4deab4719bf"
+          },
+          "slot_id": "final-c03-reference-1"
+        }
+      ],
+      "case": "c03",
+      "reference_values_independent_decimal": {
+        "bitcoin_gross_profit_2023": "205189",
+        "bitcoin_gross_profit_2024": "288819",
+        "bitcoin_gross_profit_growth_pct": "40.75754548245763661794735590",
+        "bitcoin_share_of_total_net_revenue_increase_pct": "31.78078651328765818910597933"
+      },
+      "source_capture_sha256": "928f0b42b3d467b60ac8e04377f58e74a1423fb7c303ccf55e73523f24b8d8d6",
+      "source_extract_sha256": "f988aab324a1b3e3e30e68ca162ec94b81d84e7475c33e7cde33c7345b0bf785",
+      "sources": [
+        {
+          "bytes": 3100286,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Results of Operations, Revenue table, pages 71-72",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+          "publication": "2025-02-24, SEC filing accepted 16:17:17 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:43.543748+00:00",
+          "source_bytes_sha256": "1bf600370cee9bf5cafbdc6ed350c2fdbacac4ce0476d819d9301e51f2fd62bb"
+        },
+        {
+          "bytes": 3100286,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Results of Operations, Cost of Revenue table, pages 71-72",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+          "publication": "2025-02-24, SEC filing accepted 16:17:17 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:43.543748+00:00",
+          "source_bytes_sha256": "1bf600370cee9bf5cafbdc6ed350c2fdbacac4ce0476d819d9301e51f2fd62bb"
+        },
+        {
+          "bytes": 3100286,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Bitcoin revenue discussion, page 72",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+          "publication": "2025-02-24, SEC filing accepted 16:17:17 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:43.543748+00:00",
+          "source_bytes_sha256": "1bf600370cee9bf5cafbdc6ed350c2fdbacac4ce0476d819d9301e51f2fd62bb"
+        },
+        {
+          "bytes": 3100286,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Cash App discussion, page 75",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+          "publication": "2025-02-24, SEC filing accepted 16:17:17 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:43.543748+00:00",
+          "source_bytes_sha256": "1bf600370cee9bf5cafbdc6ed350c2fdbacac4ce0476d819d9301e51f2fd62bb"
+        },
+        {
+          "bytes": 3100286,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Consolidated statements and Item 7 tables, fiscal-year column headings",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+          "publication": "2025-02-24, SEC filing accepted 16:17:17 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:43.543748+00:00",
+          "source_bytes_sha256": "1bf600370cee9bf5cafbdc6ed350c2fdbacac4ce0476d819d9301e51f2fd62bb"
+        }
+      ]
+    },
+    {
+      "additional_conclusion_paths": {
+        "conclusion": [
+          [
+            "c04:s01",
+            "c04:s02",
+            "c04:s04"
+          ]
+        ]
+      },
+      "answers": [
+        {
+          "artifact_audit_sha256": "06877eb464fdffb63c24b1e81f815cee55c96e002c74b87f577990d8fae9d765",
+          "assessment": "All four numerical claims and controls pass. Supporting the proposition that an aggregate revenue/volume proxy establishes contractual fee-pricing changes is an unsupported inference. The requested verdict is not_established.",
+          "checks": {
+            "delivery": true,
+            "evidence": false,
+            "financial_answer": false,
+            "robustness": true
+          },
+          "retained_file_sha256": {
+            "answer.json": "581814fa1fe25cf2c42d9846c5197607bd9171dca298295a11ce1a28f5730feb",
+            "answer.raw.txt": "581814fa1fe25cf2c42d9846c5197607bd9171dca298295a11ce1a28f5730feb",
+            "record.json": "d7865b2657c351401b7c3fee45e66f2f85b60a0c5692b3f3401408b524ffe182",
+            "tool-evidence.json": "78e45fa4edff8a54bcddc75010467c4f0662ac98d4e47d4c9f4d6b5975af838d",
+            "verdict.json": "0333ede3cd002305385238f996be5471985bb251c67cbbdc212d4522f6439ffc"
+          },
+          "slot_id": "final-c04-inexpensive-1"
+        },
+        {
+          "artifact_audit_sha256": "716bc78973f7a2199a340a61fb7f9cbf480447992bac3612ed84afda55be321f",
+          "assessment": "All financial values, controls and not_established conclusion pass. The volume and growth-gap claims omit s04, which links June-ended volume to September-ended service revenue. Empty conclusion evidence is also inadequate. A separate source-first adjudication accepts s01+s02+s04 as a valid smaller conclusion path, which does not rescue the observed empty citation.",
+          "checks": {
+            "delivery": true,
+            "evidence": false,
+            "financial_answer": true,
+            "robustness": true
+          },
+          "retained_file_sha256": {
+            "answer.json": "f2539fede1804fe55924a986e4575af19f882af5c9dc53aacb2b31b70c3d83a3",
+            "answer.raw.txt": "a7b7e0f066126521e1fbc2bd760e4371cad099305027b2bfc95dbb76549180be",
+            "record.json": "e2339866f24e1d4fd4fa373767421b77b9707c53086346783d435c2923768f09",
+            "tool-evidence.json": "eb2bf0847b7dc984e66790c682973df46e918ea4bad14338e031a3f3700a6a51",
+            "verdict.json": "91c194abe31400023a7917e83e8745dce0416f3fd5a95f10f1f9fc4a9ed29208"
+          },
+          "slot_id": "final-c04-reference-1"
+        }
+      ],
+      "case": "c04",
+      "reference_values_independent_decimal": {
+        "lagged_nominal_payment_volume_growth_pct": "7.421196326631918590220898500",
+        "service_growth_minus_volume_growth_pp": "1.266244655426627207701670000",
+        "service_revenue_growth_pct": "8.687440982058545797922568500",
+        "service_revenue_to_lagged_volume_proxy_2024_pct": "0.1241065927295132470733210105"
+      },
+      "source_capture_sha256": "de383ea2ea504a5b478bcdcc83cb8a046243ca293d260be0532f7174d39cd8ab",
+      "source_extract_sha256": "652083f320187fcb14ac68ca56e915a1b0b9220f2960427dddfb47845e68417f",
+      "sources": [
+        {
+          "bytes": 2880181,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Net Revenue table, page 43",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000058/v-20240930.htm",
+          "publication": "2024-11-13, SEC filing accepted 17:14:01 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:44.711713+00:00",
+          "source_bytes_sha256": "fd79f907a3bf6ea8a84553917fe419f74a7b363238dfb8e01f4e4e321b208878"
+        },
+        {
+          "bytes": 2880181,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Key Business Drivers, nominal payments volume table, page 42",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000058/v-20240930.htm",
+          "publication": "2024-11-13, SEC filing accepted 17:14:01 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:44.711713+00:00",
+          "source_bytes_sha256": "fd79f907a3bf6ea8a84553917fe419f74a7b363238dfb8e01f4e4e321b208878"
+        },
+        {
+          "bytes": 2880181,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Key Business Drivers, processed transactions table, page 43",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000058/v-20240930.htm",
+          "publication": "2024-11-13, SEC filing accepted 17:14:01 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:44.711713+00:00",
+          "source_bytes_sha256": "fd79f907a3bf6ea8a84553917fe419f74a7b363238dfb8e01f4e4e321b208878"
+        },
+        {
+          "bytes": 2880181,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Key Business Drivers, footnote (1), page 43",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000058/v-20240930.htm",
+          "publication": "2024-11-13, SEC filing accepted 17:14:01 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:44.711713+00:00",
+          "source_bytes_sha256": "fd79f907a3bf6ea8a84553917fe419f74a7b363238dfb8e01f4e4e321b208878"
+        },
+        {
+          "bytes": 2880181,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Item 7, Key Business Drivers, definitions and volume footnotes, pages 42-43",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000058/v-20240930.htm",
+          "publication": "2024-11-13, SEC filing accepted 17:14:01 (index does not label timezone)",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:44.711713+00:00",
+          "source_bytes_sha256": "fd79f907a3bf6ea8a84553917fe419f74a7b363238dfb8e01f4e4e321b208878"
+        },
+        {
+          "bytes": 476644,
+          "content_encoding": null,
+          "content_type": "text/html",
+          "http_status": 200,
+          "locator": "Fiscal fourth-quarter results discussion, page 2",
+          "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000053/q42024earningsrelease.htm",
+          "publication": "2024-10-29, release date shown in the filing",
+          "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+          "retrieved_at": "2026-10-06T22:33:43.961578+00:00",
+          "source_bytes_sha256": "6cb253b5d331756e377bd3cd802383dbde82fc868a625ab85f15c59c22f065e7"
+        }
+      ]
+    }
+  ],
+  "difficulty_qualification": "Block metric substitution and the inexpensive Coinbase/Visa unsupported conclusions are substantive. Missing source references, missing timing context and restrictive conclusion paths are separately disclosed, and low evidence or completion alone is not research-difficulty evidence.",
+  "human_validation": false,
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "original_scorer_version": "challenge-1.1.0",
+  "review_kind": "source-first independent agent review",
+  "scope": "The six first-repetition growth/attribution answers, independent source and Decimal review. Findings are distinct from the scheduled automatic scores.",
+  "submitted_sql_executed_locally": false,
+  "versioned_correction": "Conclusion paths will be applied consistently through challenge-1.1.3 in fresh native verifiers. Original source, candidate, gold, records and verdicts remain unchanged."
+}

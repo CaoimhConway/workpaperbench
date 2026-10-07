@@ -74,7 +74,7 @@ jobs:
       - run: python scripts/audit.py
   integration:
     needs: unit
-    if: github.event_name == 'workflow_dispatch' && (inputs.integration || inputs.fresh_replay)
+    if: github.event_name == 'workflow_dispatch' && (inputs.integration || inputs.fresh_replay || inputs.regrade)
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     permissions:
@@ -134,9 +134,44 @@ jobs:
               command += ['--slot', os.environ['WPB_REPLAY_SLOT']]
           subprocess.run(command, check=True)
           PY
+      - name: Preserve exact fresh verifier bytes
+        if: inputs.fresh_replay
+        run: |
+          python - <<'PYCODE'
+          import hashlib, json, os
+          from pathlib import Path
+          run = os.environ['GITHUB_RUN_ID']
+          attempt = os.environ['GITHUB_RUN_ATTEMPT']
+          for path in Path('reports/fresh-replay', run + '-' + attempt).glob('*/*/receipt.json'):
+              receipt = json.loads(path.read_text())
+              trial = 'fresh-' + receipt['dataset'] + '-' + run + '-' + attempt + '-' + receipt['slot_id']
+              source = Path('.raw/fresh-replay', run + '-' + attempt, 'trials', trial, 'verifier/verdict.json')
+              if source.is_symlink() or not source.is_file() or source.stat().st_size > 100000:
+                  raise SystemExit('Fresh verifier bytes unavailable')
+              data = source.read_bytes()
+              if hashlib.sha256(data).hexdigest() != receipt['verdict_sha256'] or json.loads(data) != receipt['verdict']:
+                  raise SystemExit('Fresh verifier source mismatch')
+              with path.with_name('verifier.json').open('xb') as output:
+                  output.write(data)
+          PYCODE
       - name: Review retained answers in separate native verifiers without inference
         if: inputs.regrade
-        run: python scripts/regrade.py
+        env:
+          WPB_REVIEW_DATASET: ${{ inputs.dataset }}
+          WPB_ANSWER_PATH: ${{ inputs.answer_path }}
+          WPB_REPLAY_TASK: ${{ inputs.task }}
+        run: |
+          python - <<'PY'
+          import os, subprocess, sys
+          if os.environ['WPB_REVIEW_DATASET'] == 'challenge-v1':
+              subprocess.run([sys.executable, 'scripts/challenge_evidence_review.py', '--controls'], check=True)
+              command = [sys.executable, 'scripts/challenge_evidence_review.py']
+              if os.environ['WPB_ANSWER_PATH']:
+                  command += ['--answer', os.environ['WPB_ANSWER_PATH'], '--task', os.environ['WPB_REPLAY_TASK']]
+          else:
+              command = [sys.executable, 'scripts/regrade.py']
+          subprocess.run(command, check=True)
+          PY
       - name: Generate the versioned report
         if: always()
         run: |

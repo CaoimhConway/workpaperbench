@@ -1,0 +1,55 @@
+{
+  "task_id": "challenge-v1-a03",
+  "answers": [
+    {
+      "id": "q1_revenue",
+      "status": "answered",
+      "value": 69632.0,
+      "unit": "usd_million",
+      "evidence": [
+        "a03:s02"
+      ],
+      "sql": "SELECT amount FROM financials WHERE period_end='2024-12-31' AND months=3 AND measure='Total revenue'"
+    },
+    {
+      "id": "q1_operating_income",
+      "status": "answered",
+      "value": 31653.0,
+      "unit": "usd_million",
+      "evidence": [
+        "a03:s02"
+      ],
+      "sql": "SELECT amount FROM financials WHERE period_end='2024-12-31' AND months=3 AND measure='Operating income'"
+    },
+    {
+      "id": "margin_change",
+      "status": "answered",
+      "value": 112.6274,
+      "unit": "basis_points",
+      "evidence": [
+        "a03:s02",
+        "a03:s03"
+      ],
+      "sql": "SELECT (h1_oi - q1_oi) * 1.0 / (h1_rev - q1_rev) * 10000 - q1_oi * 1.0 / q1_rev * 10000 FROM (SELECT q1.amount AS q1_rev FROM financials q1 WHERE q1.period_end='2024-12-31' AND q1.months=3 AND q1.measure='Total revenue') q, (SELECT q2.amount AS q1_oi FROM financials q2 WHERE q2.period_end='2024-12-31' AND q2.months=3 AND q2.measure='Operating income') o, (SELECT h1.amount AS h1_rev FROM financials h1 WHERE h1.period_end='2024-12-31' AND h1.months=6 AND h1.measure='Total revenue') h2, (SELECT h2.amount AS h1_oi FROM financials h2 WHERE h2.period_end='2024-12-31' AND h2.months=6 AND h2.measure='Operating income') h3"
+    },
+    {
+      "id": "azure_gap",
+      "status": "answered",
+      "value": -1.0,
+      "unit": "percentage_points",
+      "evidence": [
+        "a03:s01",
+        "a03:s04"
+      ],
+      "sql": "SELECT g.constant_currency_percent - gui.high FROM growth g, guidance gui WHERE g.business='Azure and other cloud services' AND gui.business='Azure and other cloud services' AND gui.fiscal_period='Q2FY2025' AND gui.basis='constant_currency'"
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "a03:s01",
+      "a03:s04"
+    ]
+  }
+}

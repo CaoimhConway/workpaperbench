@@ -1,0 +1,113 @@
+{
+  "artifact_audit_sha256": null,
+  "base_scorer_sha256": "77f41466c3a65283481907bada217f75fa92ea0ccf92355c396e7c216e57c34c",
+  "commit_sha": "ef4cb8144395560435ccbd3872d3eda55595e94e",
+  "effective_gold_sha256": "e64ec52d82b53d98669e34c22178fc821ca5e6c48e8a3cfa4189c98941e2617e",
+  "effective_task_sha256": "c81165ca37cb435a8a92395f63bc2857df43181427993b60ae916d3fbdc3246b",
+  "input_file": "datasets/challenge-v1/tasks/c03/tests/reference.json",
+  "input_sha256": "cda39f66fa3bcfc7f93787e751ae2b454a0a3fc35132e84c329ecd597c1144c8",
+  "input_source": "authored_control",
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "model_key": null,
+  "prior_verdict": null,
+  "prior_verdict_sha256": null,
+  "record_path": null,
+  "record_sha256": null,
+  "repetition": null,
+  "review_bundle_sha256": "8ed769240561567941f1b006f8298f29ba1dafe8987678f9abfad7b7d4da8ea5",
+  "review_content_hash": "5141a5569da6658c9449f7f50205c366a17a0b82e77952929d236369a6c66a27",
+  "review_id": "challenge-v1-scoring-review-5141a5569da6",
+  "review_scorer_sha256": "6b15bdd1fae817eec1c12980281c417d056920d6c135babc53aa4e60d993cee9",
+  "run_attempt": "1",
+  "run_id": "37572673750",
+  "scorer_version": "challenge-1.1.1",
+  "slot_id": "control-c03-reference",
+  "source_gold_sha256": "5466dfa12ec0adab490554b3355f66b962fd3eafd75454dcd95509c5a058ab9c",
+  "source_task_sha256": "8426ec71d656618490ed6e561c862a7f268d2ece75916e79c787425edaacaa94",
+  "split": "evaluation",
+  "task_id": "challenge-v1-c03",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": true,
+    "details": {
+      "claims": {
+        "bitcoin_gross_profit_2023_usd_thousand": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_gross_profit_2024_usd_thousand": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_gross_profit_growth_pct": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_share_of_total_net_revenue_increase_pct": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.1",
+    "strict_delivery_completion": true,
+    "verified_research_completion": true
+  },
+  "verifier_bytes_sha256": "994bcc570a660ce3b8f7fc5cd241748f62911e89ddeb072cd5d27f95e4645f8a",
+  "verifier_path": "reports/challenge-v1/scoring-reviews/challenge-v1-scoring-review-5141a5569da6/37572673750-1-controls/control-c03-reference/verifier.json"
+}

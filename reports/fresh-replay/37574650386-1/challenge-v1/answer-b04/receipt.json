@@ -1,0 +1,91 @@
+{
+  "commit_sha": "9e23477294d3b7de4dd4dfa4e63208cd0650fce1",
+  "comparison": {
+    "checks_same": null,
+    "complete_same": null,
+    "prior_available": false
+  },
+  "dataset": "challenge-v1",
+  "effective_task_scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "input_file": "submissions/reference-b04.json",
+  "input_sha256": "eb1823ef0fe4af8dad3eca176d314ea282064ecfe7d3b5ce1f135398f2a3db50",
+  "input_source": "user_submission",
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "prior_verdict": null,
+  "receipt_identity_sha256": "10deb95cc3e37c2bf2d08a5db8425ce227d40384febd7f99bd2c9343afc73ecd",
+  "run_attempt": "1",
+  "run_id": "37574650386",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "slot_id": "answer-b04",
+  "task_id": "challenge-v1-b04",
+  "task_sha256": "fb10fba9b3f9e761821f296326a9d98d5d2d010cc2664042a68b0883b7b888c3",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": false,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "coverage_change_bps": {
+          "availability": true,
+          "controls": {
+            "june30_component_gap": true,
+            "june30_market_revaluation": true,
+            "may30_market_revaluation": true
+          },
+          "evidence": false,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "jun30_reconciliation_usd": {
+          "availability": true,
+          "controls": {
+            "june30_component_gap": true,
+            "june30_market_revaluation": true,
+            "may30_market_revaluation": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "jun30_reserves_usd": {
+          "availability": true,
+          "controls": {
+            "june30_component_gap": true,
+            "june30_market_revaluation": true,
+            "may30_market_revaluation": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": false,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "coverage_change_bps:evidence",
+      "conclusion:evidence"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verdict_sha256": "aee9c345b9294805129b5cc4aa0bc4d1faf1bc7203cad0f29b96d4a231902d62"
+}

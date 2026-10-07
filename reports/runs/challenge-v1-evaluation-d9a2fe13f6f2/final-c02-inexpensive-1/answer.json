@@ -1,0 +1,73 @@
+{
+  "task_id": "challenge-v1-c02",
+  "answers": [
+    {
+      "id": "transaction_revenue_growth_pct",
+      "status": "answered",
+      "value": 162.3039849861,
+      "unit": "percent",
+      "evidence": [
+        "c02:s01"
+      ],
+      "sql": "SELECT CAST((SUM(CASE WHEN period_end='2024-12-31' THEN amount ELSE 0 END) - SUM(CASE WHEN period_end='2023-12-31' THEN amount ELSE 0 END)) AS REAL) / SUM(CASE WHEN period_end='2023-12-31' THEN amount ELSE 0 END) * 100 FROM revenues WHERE category='Total transaction revenue'",
+      "reason_code": null
+    },
+    {
+      "id": "spot_trading_volume_growth_pct",
+      "status": "answered",
+      "value": 148.2905982906,
+      "unit": "percent",
+      "evidence": [
+        "c02:s03"
+      ],
+      "sql": "SELECT CAST((SUM(CASE WHEN period_end='2024-12-31' THEN amount ELSE 0 END) - SUM(CASE WHEN period_end='2023-12-31' THEN amount ELSE 0 END)) AS REAL) / SUM(CASE WHEN period_end='2023-12-31' THEN amount ELSE 0 END) * 100 FROM spot_volume WHERE channel='Total Trading Volume'",
+      "reason_code": null
+    },
+    {
+      "id": "transaction_revenue_to_spot_volume_proxy_2024_pct",
+      "status": "answered",
+      "value": 0.3430389845,
+      "unit": "percent",
+      "evidence": [
+        "c02:s01",
+        "c02:s03"
+      ],
+      "sql": "SELECT (SELECT amount FROM revenues WHERE period_end='2024-12-31' AND category='Total transaction revenue') * 1000.0 / ((SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND channel='Total Trading Volume') * 1000000000.0) * 100",
+      "reason_code": null
+    },
+    {
+      "id": "proxy_change_bps",
+      "status": "answered",
+      "value": 1.8326591347,
+      "unit": "basis_points",
+      "evidence": [
+        "c02:s01",
+        "c02:s03"
+      ],
+      "sql": "SELECT ((SELECT r24.amount * 1000.0 / (SELECT s24.amount * 1000000000.0 FROM spot_volume s24 WHERE s24.period_end='2024-12-31' AND s24.channel='Total Trading Volume') FROM revenues r24 WHERE r24.period_end='2024-12-31' AND r24.category='Total transaction revenue') - (SELECT r23.amount * 1000.0 / (SELECT s23.amount * 1000000000.0 FROM spot_volume s23 WHERE s23.period_end='2023-12-31' AND s23.channel='Total Trading Volume') FROM revenues r23 WHERE r23.period_end='2023-12-31' AND r23.category='Total transaction revenue')) * 10000",
+      "reason_code": null
+    },
+    {
+      "id": "business_payment_count_2024",
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "count",
+      "evidence": [],
+      "sql": null,
+      "reason_code": "missing_required_input"
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "c02:s01",
+      "c02:s03",
+      "c02:s04",
+      "c02:s05"
+    ]
+  },
+  "context_evidence": [
+    "c02:s04"
+  ]
+}

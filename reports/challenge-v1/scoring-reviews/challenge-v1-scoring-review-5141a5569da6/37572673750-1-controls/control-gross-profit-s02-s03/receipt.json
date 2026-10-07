@@ -1,0 +1,113 @@
+{
+  "artifact_audit_sha256": null,
+  "base_scorer_sha256": "77f41466c3a65283481907bada217f75fa92ea0ccf92355c396e7c216e57c34c",
+  "commit_sha": "ef4cb8144395560435ccbd3872d3eda55595e94e",
+  "effective_gold_sha256": "2915f0bcfa81b65529d5e651669026fb038476181219182343d2ba84f71e7a58",
+  "effective_task_sha256": "44b3dc81e66b0f21ff54392e96fb2c5c01a8eeaf5f16008fc98b42a54c71b3d6",
+  "input_file": "datasets/challenge-v1/tasks/a02/tests/reference.json",
+  "input_sha256": "a6aadaf05ccc071ca19ea7cacd60b07785593598b2edb8f1671f5bcc393c76b3",
+  "input_source": "authored_control",
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "model_key": null,
+  "prior_verdict": null,
+  "prior_verdict_sha256": null,
+  "record_path": null,
+  "record_sha256": null,
+  "repetition": null,
+  "review_bundle_sha256": "8ed769240561567941f1b006f8298f29ba1dafe8987678f9abfad7b7d4da8ea5",
+  "review_content_hash": "5141a5569da6658c9449f7f50205c366a17a0b82e77952929d236369a6c66a27",
+  "review_id": "challenge-v1-scoring-review-5141a5569da6",
+  "review_scorer_sha256": "6b15bdd1fae817eec1c12980281c417d056920d6c135babc53aa4e60d993cee9",
+  "run_attempt": "1",
+  "run_id": "37572673750",
+  "scorer_version": "challenge-1.1.1",
+  "slot_id": "control-gross-profit-s02-s03",
+  "source_gold_sha256": "709af8770524d48bb47268ae217076af1f6e1ce2070e3e7c263204e6ebe352f5",
+  "source_task_sha256": "34a6b4c1c510db67c6b4bdafcd10bf1df6e8794bdc9f7b1b611ab1ced7a995ec",
+  "split": "evaluation",
+  "task_id": "challenge-v1-a02",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": true,
+    "details": {
+      "claims": {
+        "adjusted_gross_margin": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "irrelevant_comparative_period": true,
+            "signed_component_gap": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "adjusted_gross_profit": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "irrelevant_comparative_period": true,
+            "signed_component_gap": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "margin_gap": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "irrelevant_comparative_period": true,
+            "signed_component_gap": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "revenue_gap": {
+          "availability": true,
+          "controls": {
+            "compatible_monetary_scale": true,
+            "irrelevant_comparative_period": true,
+            "signed_component_gap": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.1",
+    "strict_delivery_completion": true,
+    "verified_research_completion": true
+  },
+  "verifier_bytes_sha256": "57b1fe73ff14f88415b920ad0eb7d1069b7fbe32a8592c936a060dc1264ea9a1",
+  "verifier_path": "reports/challenge-v1/scoring-reviews/challenge-v1-scoring-review-5141a5569da6/37572673750-1-controls/control-gross-profit-s02-s03/verifier.json"
+}

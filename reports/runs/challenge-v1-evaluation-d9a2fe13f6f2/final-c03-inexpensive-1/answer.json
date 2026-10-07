@@ -1,0 +1,66 @@
+{
+  "task_id": "challenge-v1-c03",
+  "answers": [
+    {
+      "id": "bitcoin_gross_profit_2024_usd_thousand",
+      "status": "answered",
+      "value": 288819.0,
+      "unit": "usd_thousand",
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ],
+      "sql": "SELECT (r.amount - c.amount) AS bitcoin_gross_profit_2024_usd_thousand FROM revenues r, costs c WHERE r.period_end = '2024-12-31' AND r.category = 'Bitcoin revenue' AND c.period_end = '2024-12-31' AND c.category = 'Bitcoin costs'",
+      "reason_code": null
+    },
+    {
+      "id": "bitcoin_gross_profit_2023_usd_thousand",
+      "status": "answered",
+      "value": 205189.0,
+      "unit": "usd_thousand",
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ],
+      "sql": "SELECT (r.amount - c.amount) AS bitcoin_gross_profit_2023_usd_thousand FROM revenues r, costs c WHERE r.period_end = '2023-12-31' AND r.category = 'Bitcoin revenue' AND c.period_end = '2023-12-31' AND c.category = 'Bitcoin costs'",
+      "reason_code": null
+    },
+    {
+      "id": "bitcoin_gross_profit_growth_pct",
+      "status": "answered",
+      "value": 40.75754548245764,
+      "unit": "percent",
+      "evidence": [
+        "c03:s01",
+        "c03:s02",
+        "c03:s05"
+      ],
+      "sql": "WITH g24 AS (SELECT (r.amount - c.amount) AS gp FROM revenues r, costs c WHERE r.period_end = '2024-12-31' AND r.category = 'Bitcoin revenue' AND c.period_end = '2024-12-31' AND c.category = 'Bitcoin costs'), g23 AS (SELECT (r.amount - c.amount) AS gp FROM revenues r, costs c WHERE r.period_end = '2023-12-31' AND r.category = 'Bitcoin revenue' AND c.period_end = '2023-12-31' AND c.category = 'Bitcoin costs') SELECT (g24.gp - g23.gp) / g23.gp * 100 AS bitcoin_gross_profit_growth_pct FROM g24, g23",
+      "reason_code": null
+    },
+    {
+      "id": "bitcoin_share_of_total_net_revenue_increase_pct",
+      "status": "answered",
+      "value": -1.05690869342218,
+      "unit": "percent",
+      "evidence": [
+        "c03:s01",
+        "c03:s05"
+      ],
+      "sql": "WITH s24 AS (SELECT r.amount / t.amount * 100 AS share FROM revenues r, revenues t WHERE r.period_end = '2024-12-31' AND r.category = 'Bitcoin revenue' AND t.period_end = '2024-12-31' AND t.category = 'Total net revenue'), s23 AS (SELECT r.amount / t.amount * 100 AS share FROM revenues r, revenues t WHERE r.period_end = '2023-12-31' AND r.category = 'Bitcoin revenue' AND t.period_end = '2023-12-31' AND t.category = 'Total net revenue') SELECT (s24.share - s23.share) AS bitcoin_share_of_total_net_revenue_increase_pct FROM s24, s23",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "c03:s01",
+      "c03:s02",
+      "c03:s05"
+    ]
+  },
+  "context_evidence": [
+    "c03:s05"
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "bounds": "One saved pair demonstrates a specific period reconstruction error. It does not establish general financial capability or isolate a unique causal mechanism.",
+  "case": "a03",
+  "excerpt_caveat": "The s02 sliced table keeps a combined three-/six-month heading, and s03 omits the explicit six-month table heading. Section titles, locators, duration fields, task instructions and complete retained issuer HTML identify the periods. This weakens excerpt presentation and is disclosed. Candidate inputs remain frozen.",
+  "human_validation": false,
+  "independent_decimal_results": {
+    "azure_gap_percentage_points": "-1",
+    "q1_operating_income_usd_million": "30552",
+    "q1_revenue_usd_million": "65585",
+    "q2_minus_q1_operating_margin_basis_points": "-112.62742667169120449887662620129244043428151164410"
+  },
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "observed_mechanism": "The inexpensive answer labels December three-month consolidated results as Q1 and treats six-month minus December as Q2. This reverses quarter identification and the sign of the operating-margin change. The reference answer derives Q1 as six-month minus December-quarter values. Both calculate the Azure guidance gap correctly.",
+  "primary_sources": [
+    {
+      "id": "a03:s01",
+      "locator": "Amy Hood outlook, Azure and other cloud services",
+      "origin": "https://www.microsoft.com/en-us/Investor/events/FY-2025/earnings-fy-2025-q1",
+      "period": "Q1 FY2025 call - Q2 outlook",
+      "publication": "2024-10-30",
+      "publication_timestamp": null,
+      "redistribution": "Factual amounts, headings, footnotes and concise definitions only. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T22:37:03Z",
+      "source_bytes_sha256": "c7732fbaea9120ce47d55615d73e94d580bcb7dc3bd02cb501184371b89f7818",
+      "title": "Q1 FY2025 call - Q2 outlook"
+    },
+    {
+      "id": "a03:s02",
+      "locator": "Income Statements, three months ended December31,2024 and2023",
+      "origin": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q2/press-release-webcast",
+      "period": "Income statements - three-month columns",
+      "publication": "2025-01-29",
+      "publication_timestamp": null,
+      "redistribution": "Factual amounts, headings, footnotes and concise definitions only. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T22:37:02Z",
+      "source_bytes_sha256": "9abef32986a9a0f29ebb5adcbc5985e402eecb8dd3c6d0b51ef15dea6774ef64",
+      "title": "Income statements - three-month columns"
+    },
+    {
+      "id": "a03:s03",
+      "locator": "Income Statements, six months ended December31,2024 and2023",
+      "origin": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q2/press-release-webcast",
+      "period": "Income statements - six-month columns",
+      "publication": "2025-01-29",
+      "publication_timestamp": null,
+      "redistribution": "Factual amounts, headings, footnotes and concise definitions only. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T22:37:02Z",
+      "source_bytes_sha256": "9abef32986a9a0f29ebb5adcbc5985e402eecb8dd3c6d0b51ef15dea6774ef64",
+      "title": "Income statements - six-month columns"
+    },
+    {
+      "id": "a03:s04",
+      "locator": "Three Months Ended December31,2024, Business growth table",
+      "origin": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q2/press-release-webcast",
+      "period": "Business revenue growth and constant currency",
+      "publication": "2025-01-29",
+      "publication_timestamp": null,
+      "redistribution": "Factual amounts, headings, footnotes and concise definitions only. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T22:37:02Z",
+      "source_bytes_sha256": "9abef32986a9a0f29ebb5adcbc5985e402eecb8dd3c6d0b51ef15dea6774ef64",
+      "title": "Business revenue growth and constant currency"
+    },
+    {
+      "id": "a03:s05",
+      "locator": "Segment Revenue and Operating Income, quarterly and six-month comparisons",
+      "origin": "https://www.microsoft.com/en-us/Investor/earnings/FY-2025-Q2/press-release-webcast",
+      "period": "Segment results",
+      "publication": "2025-01-29",
+      "publication_timestamp": null,
+      "redistribution": "Factual amounts, headings, footnotes and concise definitions only. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T22:37:02Z",
+      "source_bytes_sha256": "9abef32986a9a0f29ebb5adcbc5985e402eecb8dd3c6d0b51ef15dea6774ef64",
+      "title": "Segment results"
+    },
+    {
+      "id": "a03:s06",
+      "locator": "Note19 Segment Information and MD&A constant-currency presentation",
+      "origin": "https://www.sec.gov/Archives/edgar/data/789019/000095017025010491/msft-20241231.htm",
+      "period": "Segment and currency definitions",
+      "publication": "2025-01-29",
+      "publication_timestamp": null,
+      "redistribution": "Factual amounts, headings, footnotes and concise definitions only. Full issuer document excluded.",
+      "retrieved_at": "2026-10-06T22:37:03Z",
+      "source_bytes_sha256": "9c7ddfd0a546a2a71b0f4fe8eb1c398665005c92ac2251cef11a12124509d3a5",
+      "title": "Segment and currency definitions"
+    }
+  ],
+  "review_kind": "source-first independent agent review",
+  "saved_slots": [
+    {
+      "checks": {
+        "delivery": true,
+        "evidence": false,
+        "financial_answer": false,
+        "robustness": false
+      },
+      "retained_file_sha256": {
+        "answer.json": "59ae6644bc3f773d56de427a918e52a7683d4406860610f14adec66545f67c6e",
+        "answer.raw.txt": "8a44815aeff602fc6445608510ce157def286ee77b9c4461af5365e476ff3564",
+        "artifact-audit.json": "4b730e403d5996e2133b56c303e71b33b80cfc5979eb4f066756ad60689226d0",
+        "record.json": "7b459f3451d84b697427f28aac15655e2517f7b6c0910f8f7548ce1a3f9a337a",
+        "tool-evidence.json": "9c1f078c8158d94a8629f5889ebc0045efc3ed2b98b9ef6f9cef83d8b1184989",
+        "verdict.json": "3ff2dc89258276180f31ee911359ef11db17a695f8c4a47756479a870321be35"
+      },
+      "slot_id": "final-a03-inexpensive-1"
+    },
+    {
+      "checks": {
+        "delivery": true,
+        "evidence": true,
+        "financial_answer": true,
+        "robustness": true
+      },
+      "retained_file_sha256": {
+        "answer.json": "922ec26a0f43f5388a4d26cc7c1fe25311e194bee0b368b05ef3216a76a3146a",
+        "answer.raw.txt": "3ab4bfd3b2906e700e02b630f6f4564ff2c7b446334cb55686c377b0b56c81e2",
+        "artifact-audit.json": "e5490ac5c6ee9947a5ca80ed98ec644f80acffb69fe41e904b813ec96c8d282b",
+        "record.json": "d58b56d11844a3899b24b2e5a101e0bb40c93de31418666954857ff4afdf3916",
+        "tool-evidence.json": "49e862cce5c62994d50bfe1edaa44c441f4612820dc10e053f0a92c542c6571b",
+        "verdict.json": "0510a1e59e4f766db8006427ccc531fb9a573901d0c0fb4ce4468b0175a24689"
+      },
+      "slot_id": "final-a03-reference-1"
+    }
+  ],
+  "scorer_version": "challenge-1.1.0",
+  "selection_basis": "First delivered financial-answer or robustness failure in the predeclared evaluation schedule, with the first same-case verified completion as contrast.",
+  "source_response_hashes": [
+    {
+      "bytes": 572934,
+      "ignored_local_file": "microsoft-fy25-q2-release.html",
+      "sha256": "9abef32986a9a0f29ebb5adcbc5985e402eecb8dd3c6d0b51ef15dea6774ef64"
+    },
+    {
+      "bytes": 6297521,
+      "ignored_local_file": "microsoft-fy25-q2-10q.html",
+      "sha256": "9c7ddfd0a546a2a71b0f4fe8eb1c398665005c92ac2251cef11a12124509d3a5"
+    },
+    {
+      "bytes": 344280,
+      "ignored_local_file": "microsoft-fy25-q1-earnings-call.html",
+      "sha256": "c7732fbaea9120ce47d55615d73e94d580bcb7dc3bd02cb501184371b89f7818"
+    }
+  ]
+}

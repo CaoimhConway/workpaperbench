@@ -1,0 +1,49 @@
+{
+  "task_id": "challenge-v1-a04",
+  "answers": [
+    {
+      "id": "guidance_upper",
+      "status": "answered",
+      "value": 1.48,
+      "unit": "usd_per_share",
+      "sql": "SELECT (SELECT high FROM guidance WHERE fiscal_period='Q2FY2025' AND measure='GAAP diluted EPS') + (SELECT sum(amount) FROM guidance_adjustments WHERE fiscal_period='Q2FY2025' AND item != 'Expected favorable currency impact') + (SELECT amount FROM guidance_adjustments WHERE fiscal_period='Q2FY2025' AND item = 'Expected favorable currency impact')",
+      "evidence": ["a04:s01"]
+    },
+    {
+      "id": "eps_gap",
+      "status": "answered",
+      "value": -0.01,
+      "unit": "usd_per_share",
+      "sql": "SELECT (SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Non-GAAP diluted EPS') - ((SELECT high FROM guidance WHERE fiscal_period='Q2FY2025' AND measure='GAAP diluted EPS') + (SELECT sum(amount) FROM guidance_adjustments WHERE fiscal_period='Q2FY2025' AND item != 'Expected favorable currency impact') + (SELECT amount FROM guidance_adjustments WHERE fiscal_period='Q2FY2025' AND item = 'Expected favorable currency impact'))",
+      "evidence": ["a04:s01", "a04:s04"]
+    },
+    {
+      "id": "net_income_adjustment",
+      "status": "answered",
+      "value": 1056.0,
+      "unit": "usd_million",
+      "sql": "SELECT (SELECT sum(amount) FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Operating expense') - (SELECT amount FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Income tax expense' AND item='Income tax effects')",
+      "evidence": ["a04:s03", "a04:s04", "a04:s06"]
+    },
+    {
+      "id": "adjusted_net_income",
+      "status": "answered",
+      "value": 4207.0,
+      "unit": "usd_million",
+      "sql": "SELECT (SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Net income') + (SELECT sum(amount) FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Operating expense') - (SELECT amount FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Income tax expense' AND item='Income tax effects')",
+      "evidence": ["a04:s02", "a04:s03", "a04:s04", "a04:s06"]
+    },
+    {
+      "id": "adjusted_net_margin",
+      "status": "answered",
+      "value": 29.92389,
+      "unit": "percent",
+      "sql": "SELECT ((SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Net income') + (SELECT sum(amount) FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Operating expense') - (SELECT amount FROM adjustments WHERE period_end='2024-11-30' AND months=3 AND category='Income tax expense' AND item='Income tax effects')) / (SELECT amount FROM financials WHERE period_end='2024-11-30' AND months=3 AND measure='Total revenues') * 100",
+      "evidence": ["a04:s02", "a04:s03", "a04:s04", "a04:s06"]
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "evidence": ["a04:s01", "a04:s04"]
+  }
+}
