@@ -6,6 +6,10 @@ import os
 from integration import ROOT, RAW, OUTPUT, control, native
 
 
+def alternate_unit_spelling(unit):
+    return unit.replace("_", " ").upper()
+
+
 def main():
     if os.environ.get("GITHUB_ACTIONS") != "true" or os.environ.get("RUNNER_OS") != "Linux":
         raise SystemExit("Challenge replay requires hosted Linux Actions")
@@ -33,6 +37,7 @@ CHECK
 """
     for task in sorted((ROOT / "datasets/challenge-v1/tasks").iterdir()):
         ref = json.loads((task / "tests/reference.json").read_text())
+        gold = json.loads((task / "tests/gold.json").read_text())
         name = "challenge-" + task.name
         results.append(native(control(task, name + "-reference", ref, boundaries), name + "-reference", True))
         results.append(native(task, name + "-empty", False, "nop"))
@@ -40,13 +45,15 @@ CHECK
         for claim in alternative["answers"]:
             if claim["sql"]:
                 claim["sql"] = "WITH computed(result) AS (" + claim["sql"] + ") SELECT result AS analysis FROM computed"
+        if gold.get("scorer_version") == "challenge-1.1.0":
+            for claim in alternative["answers"]:
+                claim["unit"] = alternate_unit_spelling(claim["unit"])
         results.append(native(control(task, name + "-alias", alternative), name + "-alias", True))
         constant = copy.deepcopy(ref)
         for claim in constant["answers"]:
             if claim["sql"]:
                 claim["sql"] = "SELECT " + str(claim["value"])
         results.append(native(control(task, name + "-constant", constant), name + "-constant", False))
-        gold = json.loads((task / "tests/gold.json").read_text())
         equivalent = copy.deepcopy(ref)
         for claim in equivalent["answers"]:
             claim["evidence"] = gold["answers"][claim["id"]]["evidence"][-1]
