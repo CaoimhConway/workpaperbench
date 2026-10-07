@@ -35,7 +35,14 @@ for url in ('https://example.com', 'https://github.com'):
     raise AssertionError('Unexpected candidate network access')
 CHECK
 """
-    for task in sorted((ROOT / "datasets/challenge-v1/tasks").iterdir()):
+    tasks = sorted((ROOT / "datasets/challenge-v1/tasks").iterdir())
+    selected = os.environ.get("WPB_CHALLENGE_TASKS", "")
+    case_ids = set(selected.split(",")) if selected else {task.name for task in tasks}
+    if not case_ids or not case_ids <= {task.name for task in tasks}:
+        raise ValueError("unknown_challenge_control_task")
+    for task in tasks:
+        if task.name not in case_ids:
+            continue
         ref = json.loads((task / "tests/reference.json").read_text())
         gold = json.loads((task / "tests/gold.json").read_text())
         name = "challenge-" + task.name
@@ -103,7 +110,8 @@ CHECK
     item = native(control(task, "challenge-pristine", ref, "rm /workspace/data.sqlite\nprintf broken > /workspace/data.sqlite\n"), "challenge-pristine", True)
     results.append(item)
     report = {"dataset_id": "challenge-v1", "run_id": os.environ["GITHUB_RUN_ID"],
-              "commit_sha": os.environ["GITHUB_SHA"], "controls": results}
+              "commit_sha": os.environ["GITHUB_SHA"], "selected_tasks": sorted(case_ids),
+              "controls": results}
     (OUTPUT / "challenge-controls.json").write_text(json.dumps(report, indent=2) + "\n")
 
 

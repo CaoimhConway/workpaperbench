@@ -9,3 +9,5 @@ Controls are synthetic and preserve table arithmetic. `bitcoin_sales_change` add
 Wrong approaches include reporting Bitcoin revenue as Bitcoin profit, subtracting total cost of revenue instead of Bitcoin costs, mixing cost rows across fiscal years, treating the Cash App percentages as consolidated shares, or treating the derived margin as a separately reported GAAP segment line. A candidate-only shortcut is copying the reported 7% Bitcoin revenue growth to the gross-profit growth claim, which the source costs disprove.
 
 Evidence review before exposure accepts the necessary numerical sections without redundant definition citations. Relevant shared definitions and period/scope context are optional. The dated facts and conclusion-specific scope still require their declared source paths.
+
+Hosted pre-exposure validation identified missing SELECT prefixes in the authored reference expressions. The reference statements are corrected, with source facts, candidate instructions, gold values and controls unchanged. This is an authoring defect, not a model failure. Actual hosted replay is required after the correction.

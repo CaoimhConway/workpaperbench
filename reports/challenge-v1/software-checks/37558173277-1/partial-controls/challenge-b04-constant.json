@@ -1,0 +1,75 @@
+{
+  "name": "challenge-b04-constant",
+  "expected_complete": false,
+  "verdict": {
+    "scorer_version": "challenge-1.1.0",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "delivery": true,
+      "financial_answer": true,
+      "evidence": true,
+      "robustness": false
+    },
+    "details": {
+      "claims": {
+        "jun30_reserves_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "june30_market_revaluation": false,
+            "june30_component_gap": false,
+            "may30_market_revaluation": true
+          }
+        },
+        "jun30_reconciliation_usd": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "june30_market_revaluation": true,
+            "june30_component_gap": false,
+            "may30_market_revaluation": true
+          }
+        },
+        "coverage_change_bps": {
+          "availability": true,
+          "unit": true,
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "controls": {
+            "june30_market_revaluation": false,
+            "june30_component_gap": true,
+            "may30_market_revaluation": false
+          }
+        }
+      },
+      "conclusion": {
+        "verdict": true,
+        "evidence": true
+      }
+    },
+    "errors": [
+      "jun30_reserves_usd:control:june30_market_revaluation",
+      "jun30_reserves_usd:control:june30_component_gap",
+      "jun30_reconciliation_usd:control:june30_component_gap",
+      "coverage_change_bps:control:june30_market_revaluation",
+      "coverage_change_bps:control:may30_market_revaluation"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "agent": "oracle",
+  "exception_type": null
+}

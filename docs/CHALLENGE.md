@@ -40,6 +40,8 @@ Key-free native controls, on a maintainer repository or enabled fork:
 gh workflow run ci.yml --repo YOUR_LOGIN/workpaperbench --ref main -f integration=true -f dataset=challenge-v1
 ```
 
+For an authoring recheck, append `-f challenge_tasks=c02,c03,c04` to select those cases. The six common hostile and pristine-input controls still run. Omit that input for the full suite. Unknown case IDs fail before any selected trial.
+
 Commit a bounded workpaper under `submissions/` and use the existing Actions path:
 
 ```sh

@@ -13,7 +13,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "evidence": [
         "c04:s01"
       ],
-      "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/(SELECT amount FROM revenues WHERE period_end='2023-09-30' AND months=12 AND category='Service revenue')-1.0)"
+      "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/(SELECT amount FROM revenues WHERE period_end='2023-09-30' AND months=12 AND category='Service revenue')-1.0)"
     },
     {
       "id": "lagged_nominal_payment_volume_growth_pct",
@@ -25,7 +25,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
         "c04:s02",
         "c04:s04"
       ],
-      "sql": "100.0*((SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')/(SELECT amount FROM activity_metrics WHERE period_end='2023-06-30' AND months=12 AND metric='Nominal payments volume')-1.0)"
+      "sql": "SELECT 100.0*((SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')/(SELECT amount FROM activity_metrics WHERE period_end='2023-06-30' AND months=12 AND metric='Nominal payments volume')-1.0)"
     },
     {
       "id": "service_growth_minus_volume_growth_pp",
@@ -38,7 +38,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
         "c04:s02",
         "c04:s04"
       ],
-      "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/(SELECT amount FROM revenues WHERE period_end='2023-09-30' AND months=12 AND category='Service revenue')-1.0)-100.0*((SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')/(SELECT amount FROM activity_metrics WHERE period_end='2023-06-30' AND months=12 AND metric='Nominal payments volume')-1.0)"
+      "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/(SELECT amount FROM revenues WHERE period_end='2023-09-30' AND months=12 AND category='Service revenue')-1.0)-100.0*((SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')/(SELECT amount FROM activity_metrics WHERE period_end='2023-06-30' AND months=12 AND metric='Nominal payments volume')-1.0)"
     },
     {
       "id": "service_revenue_to_lagged_volume_proxy_2024_pct",
@@ -51,7 +51,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
         "c04:s02",
         "c04:s04"
       ],
-      "sql": "100.0*(SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/1000.0/(SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')"
+      "sql": "SELECT 100.0*(SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/1000.0/(SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')"
     }
   ],
   "conclusion": {

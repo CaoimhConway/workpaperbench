@@ -13,7 +13,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "evidence": [
         "c02:s01"
       ],
-      "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total transaction revenue')-1.0)"
+      "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total transaction revenue')-1.0)"
     },
     {
       "id": "spot_trading_volume_growth_pct",
@@ -25,7 +25,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
         "c02:s03",
         "c02:s04"
       ],
-      "sql": "100.0*((SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume')/(SELECT amount FROM spot_volume WHERE period_end='2023-12-31' AND months=12 AND channel='Total Trading Volume')-1.0)"
+      "sql": "SELECT 100.0*((SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume')/(SELECT amount FROM spot_volume WHERE period_end='2023-12-31' AND months=12 AND channel='Total Trading Volume')-1.0)"
     },
     {
       "id": "transaction_revenue_to_spot_volume_proxy_2024_pct",
@@ -38,7 +38,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
         "c02:s03",
         "c02:s04"
       ],
-      "sql": "100.0*(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume')"
+      "sql": "SELECT 100.0*(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume')"
     },
     {
       "id": "proxy_change_bps",
@@ -51,7 +51,7 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
         "c02:s03",
         "c02:s04"
       ],
-      "sql": "100.0*((100.0*(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume'))-(100.0*(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2023-12-31' AND months=12 AND channel='Total Trading Volume')))"
+      "sql": "SELECT 100.0*((100.0*(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND months=12 AND channel='Total Trading Volume'))-(100.0*(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total transaction revenue')/1000000.0/(SELECT amount FROM spot_volume WHERE period_end='2023-12-31' AND months=12 AND channel='Total Trading Volume')))"
     },
     {
       "id": "business_payment_count_2024",

@@ -11,7 +11,7 @@
         "c03:s01",
         "c03:s02"
       ],
-      "sql": "(SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin costs')"
+      "sql": "SELECT (SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin costs')"
     },
     {
       "id": "bitcoin_gross_profit_2023_usd_thousand",
@@ -23,7 +23,7 @@
         "c03:s01",
         "c03:s02"
       ],
-      "sql": "(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin costs')"
+      "sql": "SELECT (SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin costs')"
     },
     {
       "id": "bitcoin_gross_profit_growth_pct",
@@ -35,7 +35,7 @@
         "c03:s01",
         "c03:s02"
       ],
-      "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin costs'))/((SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin costs'))-100.0"
+      "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin costs'))/((SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM costs WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin costs'))-100.0"
     },
     {
       "id": "bitcoin_share_of_total_net_revenue_increase_pct",
@@ -46,7 +46,7 @@
       "evidence": [
         "c03:s01"
       ],
-      "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue'))/((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total net revenue')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total net revenue'))"
+      "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Bitcoin revenue')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Bitcoin revenue'))/((SELECT amount FROM revenues WHERE period_end='2024-12-31' AND months=12 AND category='Total net revenue')-(SELECT amount FROM revenues WHERE period_end='2023-12-31' AND months=12 AND category='Total net revenue'))"
     }
   ],
   "conclusion": {
