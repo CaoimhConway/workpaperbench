@@ -73,7 +73,7 @@ if freeze.exists():
         permitted = {
             '.github/workflows/benchmark.yml', '.github/workflows/ci.yml',
             'pyproject.toml', 'DATA_SOURCES.md', 'workpaperbench/cli.py',
-            'scripts/native_trial.py', 'scripts/check_install.py',
+            'scripts/native_trial.py', 'scripts/check_install.py', 'scripts/fix_native_version.py',
             *(f'scripts/{name}.py' for name in ('audit', 'attempts', 'collect_results',
                                               'native_run', 'select_slots')),
         }
@@ -95,7 +95,8 @@ for manifest_path in (ROOT / 'datasets/challenge-v1/manifests').glob('*.json'):
     manifest = json.loads(manifest_path.read_text())
     if manifest_content_hash(manifest) != manifest['content_hash']:
         raise SystemExit('challenge_manifest_changed')
-    for name, expected in manifest['hashes'].items():
+    from operations_review import challenge_reviewed_hashes
+    for name, expected in challenge_reviewed_hashes(manifest, ROOT).items():
         path = ROOT / name
         if path.is_symlink() or not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
             raise SystemExit('challenge_input_changed:' + name)

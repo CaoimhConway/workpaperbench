@@ -314,6 +314,56 @@ def test_future_campaign_uses_frozen_final_runtime_without_rebinding_pilot(tmp_p
         new_challenge_campaign.create(profile_file, tmp_path)
 
 
+def test_challenge_operations_review_is_key_free_and_cannot_change_cases(tmp_path, monkeypatch):
+    manifest, _ = make_stage(tmp_path, "development")
+    relative = "scripts/fix_native_version.py"
+    runtime = tmp_path / relative
+    runtime.parent.mkdir(parents=True, exist_ok=True)
+    runtime.write_text("original native correction\n")
+    manifest["hashes"][relative] = hashlib.sha256(runtime.read_bytes()).hexdigest()
+    manifest["content_hash"] = select_slots.manifest_content_hash(manifest)
+    manifest["manifest_id"] = "challenge-v1-development-" + manifest["content_hash"][:12]
+    path = tmp_path / "datasets/challenge-v1/manifests/development.json"
+    write_json(path, manifest)
+    runtime.write_text("reviewed observer correction\n")
+    helper = tmp_path / "scripts/operations_review.py"
+    helper.write_bytes((ROOT / "scripts/operations_review.py").read_bytes())
+    review = {
+        "original_manifest_id": manifest["manifest_id"],
+        "original_manifest_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "correction_hashes": {relative: hashlib.sha256(runtime.read_bytes()).hexdigest()},
+        "review_helper_sha256": hashlib.sha256(helper.read_bytes()).hexdigest(),
+    }
+    review_path = tmp_path / "datasets/challenge-v1/operations-review.json"
+    write_json(review_path, review)
+    monkeypatch.setattr(native_run, "CHALLENGE_RUNTIME_INPUTS", set())
+
+    assert native_run.frozen_inputs(manifest["manifest_id"], tmp_path, reviewed_operations=True) == manifest
+    with pytest.raises(ValueError, match="freeze_hash_mismatch"):
+        native_run.frozen_inputs(manifest["manifest_id"], tmp_path)
+    original_helper = helper.read_bytes()
+    helper.write_bytes(original_helper + b"\n")
+    with pytest.raises(ValueError, match="challenge_review_helper_changed"):
+        native_run.frozen_inputs(manifest["manifest_id"], tmp_path, reviewed_operations=True)
+    helper.write_bytes(original_helper)
+    runtime.write_text("unreviewed native change\n")
+    with pytest.raises(ValueError, match="freeze_hash_mismatch"):
+        native_run.frozen_inputs(manifest["manifest_id"], tmp_path, reviewed_operations=True)
+    instruction = manifest["tasks"]["a01"]["path"] + "/instruction.md"
+    review["correction_hashes"][instruction] = manifest["hashes"][instruction]
+    write_json(review_path, review)
+    with pytest.raises(ValueError, match="challenge_operations_review_invalid"):
+        native_run.frozen_inputs(manifest["manifest_id"], tmp_path, reviewed_operations=True)
+
+
+def test_challenge_manifest_and_packaged_scorer_versions_must_match(tmp_path):
+    manifest, _ = make_stage(tmp_path, "development")
+    gold = tmp_path / manifest["tasks"]["a01"]["path"] / "tests/gold.json"
+    write_json(gold, {"task_id": "challenge-v1-a01", "scorer_version": "challenge-1.1.0"})
+    with pytest.raises(ValueError, match="challenge_task_scorer_version_mismatch"):
+        select_slots.challenge_dataset_context(manifest["manifest_id"], tmp_path)
+
+
 def test_challenge_reservation_sums_remaining_model_costs_without_multiplier(tmp_path):
     manifest, schedule = make_stage(tmp_path, "development")
     context = select_slots.challenge_dataset_context(manifest["manifest_id"], tmp_path)
