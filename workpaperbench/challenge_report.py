@@ -181,6 +181,144 @@ def report_challenge(root):
                 lines += ["Passing contrast: [" + showcase["contrast"]["slot_id"] + "](" + showcase["contrast"]["workpaper"].removeprefix("reports/challenge-v1/") + ").", ""]
     lines += ["No assisted-condition trials are recorded. These small source groups and repeated attempts do not establish population reliability or a universal model ranking. Synthetic controls test a few declared mechanisms, not universal generalization.", ""]
     result = {"dataset_id": "challenge-v1", "studies": studies}
+    reviewed = report_scoring_reviews(root)
+    if reviewed is not None:
+        result["scoring_reviews"] = reviewed
     (output / "scores.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     (output / "results.md").write_text("\n".join(lines))
+    return result
+
+
+def report_scoring_reviews(root):
+    """Keep authenticated versioned scoring reviews separate from original records."""
+    root = Path(root)
+    bundle_path = root / "datasets/challenge-v1/scoring-review.json"
+    if not bundle_path.is_file():
+        return None
+    bundle_bytes = bundle_path.read_bytes()
+    bundle = json.loads(bundle_bytes)
+    manifest_bytes = (root / "datasets/challenge-v1/manifests/evaluation.json").read_bytes()
+    manifest = json.loads(manifest_bytes)
+    if (bundle["original_manifest_sha256"] != hashlib.sha256(manifest_bytes).hexdigest()
+            or bundle["original_manifest_id"] != manifest["manifest_id"]):
+        raise ValueError("scoring_review_origin_mismatch")
+    schedule = json.loads((root / manifest["schedule"]).read_text())
+    slots = {slot["slot_id"]: slot for slot in schedule}
+    indexes = root / "reports/challenge-v1/scoring-reviews" / bundle["review_id"]
+    studies, pending = [], []
+    lines = ["# Versioned evidence scoring review", "", "Original frozen verdicts remain unchanged. This separate review permits one additional relevant NVIDIA source alongside either complete gross-profit bridge. Finance, calculation, delivery and source inputs stay fixed. Missing answers retain the scheduled denominator.", ""]
+
+    def authenticated_bytes(path, expected):
+        if (any(parent.is_symlink() for parent in (path, *path.parents) if parent.is_relative_to(root))
+                or not path.is_file() or path.stat().st_size > 500_000):
+            raise ValueError("unsafe_scoring_review_file")
+        data = path.read_bytes()
+        if hashlib.sha256(data).hexdigest() != expected:
+            raise ValueError("scoring_review_provenance_unverified")
+        return data
+
+    for index_path in sorted(indexes.glob("*/index.json")):
+        audit_path = index_path.with_name("artifact-audit.json")
+        if not audit_path.is_file():
+            pending.append(index_path.relative_to(root).as_posix())
+            continue
+        audit = json.loads(audit_path.read_text())
+        if audit.get("archive_digest_verified") is not True:
+            raise ValueError("scoring_review_archive_unverified")
+        hashes = audit["retained_file_sha256"]
+
+        def imported(relative):
+            path = root / relative
+            if Path(relative).is_absolute() or ".." in Path(relative).parts or not path.resolve().is_relative_to(index_path.parent.resolve()):
+                raise ValueError("scoring_review_path_outside_run")
+            return authenticated_bytes(path, hashes.get(relative))
+
+        index = json.loads(imported(index_path.relative_to(root).as_posix()))
+        if index.get("input_source") != "retained_artifact":
+            continue
+        origin = audit["workflow_run"]
+        if (index["review_id"] != bundle["review_id"] or index["manifest_id"] != manifest["manifest_id"]
+                or index["scorer_version"] != bundle["scorer_version"]
+                or str(index["run_id"]) != str(origin["id"])
+                or index["commit_sha"] != origin["head_sha"]
+                or str(index["run_attempt"]) != str(origin["run_attempt"])
+                or index["scheduled"] != len(schedule)):
+            raise ValueError("scoring_review_identity_mismatch")
+        verdicts, changed, detail_changed = {}, [], []
+        for relative in index["receipts"]:
+            receipt = json.loads(imported(relative))
+            identifier = receipt["slot_id"]
+            if identifier not in slots or identifier in verdicts:
+                raise ValueError("scoring_review_slot_mismatch")
+            slot = slots[identifier]
+            directory = root / "reports/runs" / manifest["manifest_id"] / identifier
+            original_audit = json.loads(authenticated_bytes(
+                directory / "artifact-audit.json", receipt["artifact_audit_sha256"]))
+            if original_audit.get("archive_digest_verified") is not True:
+                raise ValueError("scoring_review_original_unverified")
+            original_hashes = original_audit["retained_file_sha256"]
+            record_bytes = authenticated_bytes(directory / "record.json", original_hashes["record.json"])
+            original = json.loads(record_bytes)["verdict"]
+            if receipt["input_file"] not in ("answer.raw.txt", "answer.json"):
+                raise ValueError("scoring_review_answer_path_invalid")
+            answer_bytes = authenticated_bytes(directory / receipt["input_file"], original_hashes[receipt["input_file"]])
+            prior_bytes = authenticated_bytes(directory / "verdict.json", original_hashes["verdict.json"])
+            verifier_bytes = imported(receipt["verifier_path"])
+            current = json.loads(verifier_bytes)
+            if (receipt["review_id"] != bundle["review_id"]
+                    or receipt["manifest_id"] != manifest["manifest_id"]
+                    or receipt["manifest_sha256"] != hashlib.sha256(manifest_bytes).hexdigest()
+                    or receipt["scorer_version"] != bundle["scorer_version"]
+                    or receipt["run_id"] != index["run_id"]
+                    or receipt["run_attempt"] != index["run_attempt"]
+                    or receipt["commit_sha"] != index["commit_sha"]
+                    or receipt["input_source"] != "retained_artifact"
+                    or receipt["review_bundle_sha256"] != hashlib.sha256(bundle_bytes).hexdigest()
+                    or receipt["record_sha256"] != hashlib.sha256(record_bytes).hexdigest()
+                    or receipt["input_sha256"] != hashlib.sha256(answer_bytes).hexdigest()
+                    or receipt["verifier_bytes_sha256"] != hashlib.sha256(verifier_bytes).hexdigest()
+                    or receipt["prior_verdict_sha256"] != hashlib.sha256(prior_bytes).hexdigest()
+                    or receipt["prior_verdict"] != json.loads(prior_bytes)
+                    or receipt["prior_verdict"] != original or receipt["verdict"] != current
+                    or current["scorer_version"] != bundle["scorer_version"]
+                    or any(receipt[key] != slot[key] for key in ("model_key", "repetition", "split"))
+                    or receipt["task_id"] != slot["task"]
+                    or not all(current["isolation"].get(key) is True for key in
+                               ("network_namespace_none", "network_probe_blocked", "no_inference_key", "no_docker_socket"))):
+                raise ValueError("scoring_review_receipt_mismatch")
+            if any(current["checks"][key] != original["checks"][key] for key in ("financial_answer", "robustness", "delivery")):
+                raise ValueError("unexpected_non_evidence_scoring_change")
+            if current["checks"] != original["checks"]:
+                changed.append(identifier)
+            if current.get("details") != original.get("details"):
+                detail_changed.append(identifier)
+            verdicts[identifier] = current
+        missing_ids = set(slots) - set(verdicts)
+        if (index["reviewed"] != len(verdicts)
+                or len(index["missing_slots"]) != len(missing_ids)
+                or {item["slot_id"] for item in index["missing_slots"]} != missing_ids):
+            raise ValueError("scoring_review_coverage_mismatch")
+        table = []
+        for model in manifest["models"]:
+            groups = [("all", [s for s in schedule if s["model_key"] == model])]
+            groups += [(key, [s for s in schedule if s["model_key"] == model and s["task"] == task["task_id"]]) for key, task in manifest["tasks"].items()]
+            groups += [("family-" + family, [s for s in schedule if s["model_key"] == model and s["task"].removeprefix("challenge-v1-").startswith(family.lower())]) for family in "ABC"]
+            for scope, selected in groups:
+                values = [verdicts[s["slot_id"]] for s in selected if s["slot_id"] in verdicts]
+                components = {key: {"passed": sum(v["checks"][key] is True for v in values), "assessed": sum(isinstance(v["checks"][key], bool) for v in values)} for key in ("financial_answer", "evidence", "robustness", "delivery")}
+                table.append({"scope": scope, "model_key": model, "scheduled": len(selected), "verdict_coverage": len(values), "components": components,
+                              "verified_research_completion": sum(v["verified_research_completion"] is True for v in values), "strict_delivery_completion": sum(v["strict_delivery_completion"] is True for v in values)})
+        study = {"review_id": bundle["review_id"], "scorer_version": bundle["scorer_version"], "manifest_id": manifest["manifest_id"], "run_id": index["run_id"], "metrics": table, "changed_component_slots": changed, "changed_detail_slots": detail_changed, "reviewed": len(verdicts), "scheduled": len(schedule), "missing_slots": sorted(set(slots) - set(verdicts))}
+        study["task_macro_completion"] = {model: sum(row["verified_research_completion"] / row["scheduled"] for row in table if row["model_key"] == model and row["scope"] in manifest["tasks"]) / len(manifest["tasks"]) for model in manifest["models"]}
+        studies.append(study)
+        lines += ["## " + bundle["scorer_version"] + " - Actions " + str(index["run_id"]), "", "| Scope | Model | Financial / assessed | Evidence / assessed | Robustness / assessed | Verified / scheduled | Delivery / assessed | Strict / scheduled | Coverage |", "|---|---|---:|---:|---:|---:|---:|---:|---:|"]
+        for row in table:
+            cell = lambda key: str(row["components"][key]["passed"]) + " / " + str(row["components"][key]["assessed"])
+            lines.append("| " + " | ".join((row["scope"], row["model_key"], cell("financial_answer"), cell("evidence"), cell("robustness"), f"{row['verified_research_completion']} / {row['scheduled']}", cell("delivery"), f"{row['strict_delivery_completion']} / {row['scheduled']}", f"{row['verdict_coverage']} / {row['scheduled']}")) + " |")
+        lines += ["", "Changed component slots: " + (", ".join(changed) or "none") + ".", ""]
+        lines += ["Changed claim or conclusion details: " + (", ".join(detail_changed) or "none") + ". A corrected claim can leave overall evidence failure unchanged.", ""]
+    result = {"studies": studies, "pending_authenticated_import": pending}
+    output = root / "reports/challenge-v1"
+    (output / "reviewed-results.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    (output / "reviewed-results.md").write_text("\n".join(lines))
     return result
