@@ -1,0 +1,181 @@
+{
+  "answer_sha256": "d5938fb9da05ec9021de6b53642a06fe7493066d7237baf7b7c46e632cec8ac7",
+  "answer_status": "saved",
+  "arm": null,
+  "campaign": "pilot",
+  "commit_sha": "3245582bbc8da558bd69f88ee6ca9ef3600f6f65",
+  "condition": "full",
+  "config_hash": "d96c3f99af1efe8f28b615884a76cd085b28475c3313ea6a8bf7a96739a0d4db",
+  "dataset_hash_count": 110,
+  "dataset_id": "challenge-v1",
+  "dataset_manifest_id": "challenge-v1-development-7e8903385beb",
+  "execution_started_at": "2026-10-07T00:38:24.357223+00:00",
+  "experiment_id": "challenge-v1-development-7e8903385beb",
+  "finished_at": "2026-10-07T00:43:20.493825+00:00",
+  "github_run_attempt": "1",
+  "github_run_id": "37546782567",
+  "harbor_commit": "1e5c5c6db929a10a140d05e606882c671ae20729",
+  "harbor_metrics": {
+    "agent_execution_seconds": 130.091,
+    "agent_setup_seconds": 89.936,
+    "environment_setup_seconds": 17.026,
+    "n_input_tokens": 0,
+    "n_output_tokens": 0,
+    "verifier_seconds": 16.88
+  },
+  "harbor_native_version_fix": {
+    "change": "Two version invocations use --version. OpenRouter models use the canonical ID with explicit --provider openrouter. Session export selects the current oneshot source. Existing native adapter only, no new adapter or credential flow.",
+    "corrected_module_sha256": "02ebd73edb387091480df45fdea27b70bf37ca377ee0b68047b84d6cdbede112",
+    "original_module_sha256": "012e980302b26641dcf77f31fe71a368b2022b098619853addd015c5e18e47c6"
+  },
+  "harbor_version": "0.23.0",
+  "hermes_checkout_commit_verified": true,
+  "hermes_release_tag": "v0.21.4+canary.20261004T084456Z",
+  "hermes_resolved_release_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "hermes_runtime_version": {
+    "checked_before_solving": true,
+    "checkout_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "expected_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "matches_pin": true,
+    "native_api_retry_observer": {
+      "enabled": true,
+      "registered_hook_count": 3,
+      "registration_smoke": true,
+      "staged": true
+    }
+  },
+  "model": "qwen/qwen3.6-35b-a3b",
+  "model_harbor_model": "openrouter/qwen/qwen3.6-35b-a3b",
+  "model_key": "inexpensive",
+  "model_provider": "openrouter",
+  "model_route_policy": "OpenRouter default routing among currently compatible tool-capable endpoints. Preview/model routing may change.",
+  "native_api_retry_observer": {
+    "capture_completeness": "not_guaranteed",
+    "capture_limitations": "hooks_fail_open_upstream_internal_retries_and_routes_unobserved",
+    "capture_status": "missing",
+    "capture_truncated_possible": false,
+    "event_count": 0,
+    "events": [],
+    "observed_additional_attempts": 0,
+    "observer_registered": false,
+    "pre_request_count": 0
+  },
+  "native_command": "Harbor Trial.create / Trial.run with native Hermes",
+  "native_return_code": 0,
+  "previously_exposed": false,
+  "provider_after": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 16.616359297,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 16.616359297,
+    "reset_is_null": true,
+    "usage_usd": 3.383640703
+  },
+  "provider_before": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 16.639286896999998,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 16.639286896999998,
+    "reset_is_null": true,
+    "usage_usd": 3.360713103
+  },
+  "provider_cost_delta_usd": 0.0229276,
+  "raw_artifact_status": "screened_original_bytes",
+  "raw_sha256": "4771926425338c9fe74bab7ae4fed8715da8f61c462e251ead22e3c094ca0e98",
+  "remaining_planned_slots": 2,
+  "remaining_reserved_slots": 2,
+  "remaining_reserved_usd": 0.5,
+  "repetition": 3,
+  "reservation_usd_per_slot": 0.1,
+  "retained_sha256": "d5938fb9da05ec9021de6b53642a06fe7493066d7237baf7b7c46e632cec8ac7",
+  "run_id": "37546782567",
+  "slot_id": "pilot-b01-inexpensive-3",
+  "source_group": "brale-sbc-reserve-reports-2025-may-june",
+  "split": "development",
+  "started_at": "2026-10-07T00:38:13.782636+00:00",
+  "status": "task_failed",
+  "task": "challenge-v1-b01",
+  "task_origin": "primary_source_factual_extract",
+  "token_counts_status": "unreported_or_native_zero_fields",
+  "tool_event_counts": {
+    "patch": 1,
+    "read_file": 6,
+    "terminal": 10,
+    "tool_describe": 1,
+    "write_file": 2
+  },
+  "tool_evidence": {
+    "calls": 20,
+    "observations": 20,
+    "omitted_items": 0,
+    "status": "screened_tools"
+  },
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": false,
+      "robustness": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "coverage_change_pp": {
+          "availability": true,
+          "controls": {
+            "component_gap": true,
+            "coverage_increase": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "june_assets_usd": {
+          "availability": true,
+          "controls": {
+            "component_gap": false,
+            "coverage_increase": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": false
+        },
+        "june_reconciliation_usd": {
+          "availability": true,
+          "controls": {
+            "component_gap": false,
+            "coverage_increase": false
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": false
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "june_assets_usd:unit",
+      "june_assets_usd:control:component_gap",
+      "june_reconciliation_usd:unit",
+      "june_reconciliation_usd:control:component_gap",
+      "june_reconciliation_usd:control:coverage_increase"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.0.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  }
+}

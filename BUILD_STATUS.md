@@ -1,6 +1,10 @@
 # Build status
 
-## Research Challenge development gate passed
+## Research Challenge pilot complete, evaluation authoring underway
+
+All 18 pilot slots completed in Actions 37546782567 and are authenticated and retained. Original verified research completion is inexpensive 1/9 and reference 2/9, with delivery 9/9 each. These raw rates include known unit, evidence and question defects and do not establish difficulty. Independent read-only inspection confirms three substantive inexpensive recomputation failures, passing contrasting workpapers and no material assessment discrepancy. No assisted or repeat pilot runs are scheduled. The nine evaluation cases start authoring after the complete assessment and use scorer challenge-1.1.0, explicit independent derivation and residual directions, reviewed evidence alternatives and declared tolerances.
+
+Provider metadata at 2026-10-07 00:49:27 UTC confirms lifetime USD 3.531014903, pilot increment USD 2.022073994 and remaining/funded USD 16.468985097 under the unchanged USD 20 cap. Final reservation USD 13.50 fits. Slot deltas total USD 1.47773928, leaving USD 0.544334714 unallocated or lagged, not exact model attribution. All 18 retry ledgers are missing, counts remain unknown. Corrected post-write native setup is dispatched as 37554158943 at 82674f0, with no inference.
 
 Freeze `challenge-v1-development-7e8903385beb` binds Adobe, Brale SBC and PayPal dossiers, scorer `challenge-1.0.0`, native runtime, routes, neutral instructions and 18 full-dossier slots. Qwen 3.6 35B A3B and Gemini 3.1 Pro Preview receive identical tools and limits. No assisted runs are scheduled. Evaluation cases are not authored or exposed. Pre-dispatch repository history confirmed 18 unstarted slots and zero prior attempts. All 110 frozen inputs verify. Original core data, scorers, records and releases remain unchanged.
 
