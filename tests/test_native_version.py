@@ -56,11 +56,15 @@ def test_key_free_smoke_dispatches_only_after_native_config_write():
     command = check_install.native_hook_smoke_command(
         "/tmp/hermes/hermes-agent", "8b66a51036c1e20920a17cdd049fdf55c968d683")
 
+    assert script.splitlines()[0] == "import hermes_bootstrap"
+    assert script.index("import hermes_bootstrap") < script.index("import json,os,sys,time,yaml")
     assert script.index("config.yaml") < script.index("discover_plugins()")
     assert "plugins',{}).get('enabled') != ['native-api-observer']" in script
     assert "WPB_NATIVE_HOOK_SMOKE:" in script
     assert "--yolo" in command
     assert "project_python(root)" in command
+    assert "WPB_RESOLVED_PROJECT_PYTHON" in check_install.native_hook_smoke_wrapper_writer()
+    assert "'installed_runtime_python':sys.executable" in script
     assert "8b66a51036c1e20920a17cdd049fdf55c968d683" in command
     assert 'launcher="$HOME/.local/bin/hermes"' in command
     assert "launcher_disposition=symlink_unlinked" in command

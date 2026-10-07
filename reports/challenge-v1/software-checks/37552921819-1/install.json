@@ -1,0 +1,62 @@
+{
+  "install_complete": true,
+  "cli_arguments_valid": false,
+  "startup": {
+    "return_code": 0,
+    "supported_flags": {
+      "--model": true,
+      "--toolsets": true,
+      "-Q": true,
+      "--query": true
+    },
+    "retry_observer_registration_smoke": {
+      "staged": true,
+      "registration_smoke": true,
+      "registered_hook_count": 3,
+      "enabled": true
+    },
+    "native_hook_smoke_setup": {
+      "wrapper_installed": true,
+      "original_launcher_disposition": "file_renamed",
+      "return_code": 0
+    },
+    "native_hook_smoke": {
+      "passed": false,
+      "return_code": 0,
+      "native_config_write_exercised": false,
+      "synthetic_hook_dispatch_replaced_final_chat_command": true,
+      "provider_calls_made": false,
+      "hook_dispatch_followed_native_config_write": false,
+      "runtime_hooks_registered": {},
+      "runtime_marker_valid": false,
+      "installed_runtime_python_resolved": false,
+      "installed_runtime_python": null,
+      "installed_runtime_commit": null,
+      "native_process_can_write_observer_ledger": false,
+      "ledger_retained_and_readable": false,
+      "raw_request_id_absent": false,
+      "event_count": 0,
+      "repeated_request_ordinals": [],
+      "retry_count_reset_observed": false,
+      "capture_completeness": "not_guaranteed",
+      "capture_limitations": "hooks_fail_open_upstream_internal_retries_and_routes_unobserved",
+      "native_log_return_code": 0,
+      "native_log_error_summary": [
+        "Traceback (most recent call last):",
+        "File \"<string>\", line 2, in <module>",
+        "File \"<string>\", line 1, in <module>",
+        "ModuleNotFoundError: No module named 'yaml'"
+      ],
+      "candidate_terminal_access_assumption": "same-container terminal permissions may allow writing the shared /logs/agent mount - not probed"
+    }
+  },
+  "key_free": true,
+  "exception_type": "NonZeroAgentExitCodeError",
+  "native_trial_error_summary": [
+    "Command failed (exit 1): export PATH=\"$HOME/.local/bin:$PATH\" && hermes --yolo chat -q \"$HARBOR_INSTRUCTION\" -Q --model qwen/qwen3.6-35b-a3b --provider openrouter 2>&1 | stdbuf -oL tee /logs/agent/hermes.txt",
+    "stdout: Traceback (most recent call last):",
+    "File \"<string>\", line 2, in <module>",
+    "File \"<string>\", line 1, in <module>",
+    "ModuleNotFoundError: No module named 'yaml'"
+  ]
+}
