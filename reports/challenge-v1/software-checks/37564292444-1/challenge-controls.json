@@ -1,0 +1,2134 @@
+{
+  "dataset_id": "challenge-v1",
+  "run_id": "37564292444",
+  "commit_sha": "f341fa4b5efa1dc41f04b1df46d1c4e6c16270d9",
+  "selected_tasks": [
+    "c02",
+    "c03",
+    "c04"
+  ],
+  "controls": [
+    {
+      "name": "challenge-c02-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "transaction_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "spot_trading_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "proxy_change_bps": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "business_payment_count_2024": {
+              "availability": true,
+              "unit": true,
+              "evidence": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c02-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": false,
+          "financial_answer": null,
+          "evidence": null,
+          "robustness": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "delivery:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c02-alias",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "transaction_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "spot_trading_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "proxy_change_bps": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "business_payment_count_2024": {
+              "availability": true,
+              "unit": true,
+              "evidence": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c02-constant",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": false
+        },
+        "details": {
+          "claims": {
+            "transaction_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": false,
+                "recast_2023_transaction_revenue_shift": false,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "spot_trading_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": false
+              }
+            },
+            "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": false,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "proxy_change_bps": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": false,
+                "recast_2023_transaction_revenue_shift": false,
+                "2024_spot_volume_shift": false
+              }
+            },
+            "business_payment_count_2024": {
+              "availability": true,
+              "unit": true,
+              "evidence": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "transaction_revenue_growth_pct:control:consumer_transaction_revenue_shift",
+          "transaction_revenue_growth_pct:control:recast_2023_transaction_revenue_shift",
+          "spot_trading_volume_growth_pct:control:2024_spot_volume_shift",
+          "transaction_revenue_to_spot_volume_proxy_2024_pct:control:consumer_transaction_revenue_shift",
+          "proxy_change_bps:control:consumer_transaction_revenue_shift",
+          "proxy_change_bps:control:recast_2023_transaction_revenue_shift",
+          "proxy_change_bps:control:2024_spot_volume_shift"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c02-evidence",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "transaction_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "spot_trading_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "proxy_change_bps": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "business_payment_count_2024": {
+              "availability": true,
+              "unit": true,
+              "evidence": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c02-shared-context",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "transaction_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "spot_trading_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "proxy_change_bps": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "business_payment_count_2024": {
+              "availability": true,
+              "unit": true,
+              "evidence": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c02-rounded",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "transaction_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "spot_trading_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "proxy_change_bps": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "business_payment_count_2024": {
+              "availability": true,
+              "unit": true,
+              "evidence": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c02-guessed-count",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": true,
+          "financial_answer": false,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "transaction_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "spot_trading_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "proxy_change_bps": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "consumer_transaction_revenue_shift": true,
+                "recast_2023_transaction_revenue_shift": true,
+                "2024_spot_volume_shift": true
+              }
+            },
+            "business_payment_count_2024": {
+              "availability": false,
+              "unit": true,
+              "evidence": true
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "business_payment_count_2024:availability"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c03-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "bitcoin_gross_profit_2024_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_gross_profit_2023_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_gross_profit_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_share_of_total_net_revenue_increase_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c03-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": false,
+          "financial_answer": null,
+          "evidence": null,
+          "robustness": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "delivery:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c03-alias",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "bitcoin_gross_profit_2024_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_gross_profit_2023_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_gross_profit_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_share_of_total_net_revenue_increase_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c03-constant",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": false
+        },
+        "details": {
+          "claims": {
+            "bitcoin_gross_profit_2024_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": false,
+                "bitcoin_cost_change_2024": false,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_gross_profit_2023_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": false
+              }
+            },
+            "bitcoin_gross_profit_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": false,
+                "bitcoin_cost_change_2024": false,
+                "bitcoin_cost_change_2023": false
+              }
+            },
+            "bitcoin_share_of_total_net_revenue_increase_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": false,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "bitcoin_gross_profit_2024_usd_thousand:control:bitcoin_sales_change",
+          "bitcoin_gross_profit_2024_usd_thousand:control:bitcoin_cost_change_2024",
+          "bitcoin_gross_profit_2023_usd_thousand:control:bitcoin_cost_change_2023",
+          "bitcoin_gross_profit_growth_pct:control:bitcoin_sales_change",
+          "bitcoin_gross_profit_growth_pct:control:bitcoin_cost_change_2024",
+          "bitcoin_gross_profit_growth_pct:control:bitcoin_cost_change_2023",
+          "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_sales_change"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c03-evidence",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "bitcoin_gross_profit_2024_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_gross_profit_2023_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_gross_profit_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_share_of_total_net_revenue_increase_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c03-shared-context",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "bitcoin_gross_profit_2024_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_gross_profit_2023_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_gross_profit_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_share_of_total_net_revenue_increase_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c03-rounded",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "bitcoin_gross_profit_2024_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_gross_profit_2023_usd_thousand": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_gross_profit_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            },
+            "bitcoin_share_of_total_net_revenue_increase_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "bitcoin_sales_change": true,
+                "bitcoin_cost_change_2024": true,
+                "bitcoin_cost_change_2023": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c04-reference",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "service_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "lagged_nominal_payment_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "service_growth_minus_volume_growth_pp": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "service_revenue_to_lagged_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c04-empty",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": false,
+          "financial_answer": null,
+          "evidence": null,
+          "robustness": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "delivery:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "nop",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c04-alias",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "service_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "lagged_nominal_payment_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "service_growth_minus_volume_growth_pp": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "service_revenue_to_lagged_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c04-constant",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": false
+        },
+        "details": {
+          "claims": {
+            "service_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": false,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "lagged_nominal_payment_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": false
+              }
+            },
+            "service_growth_minus_volume_growth_pp": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": false,
+                "lagged_volume_2023_shift": false
+              }
+            },
+            "service_revenue_to_lagged_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "service_revenue_growth_pct:control:service_revenue_2024_shift",
+          "lagged_nominal_payment_volume_growth_pct:control:lagged_volume_2023_shift",
+          "service_growth_minus_volume_growth_pp:control:service_revenue_2024_shift",
+          "service_growth_minus_volume_growth_pp:control:lagged_volume_2023_shift"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c04-evidence",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "service_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "lagged_nominal_payment_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "service_growth_minus_volume_growth_pp": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "service_revenue_to_lagged_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c04-shared-context",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "service_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "lagged_nominal_payment_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "service_growth_minus_volume_growth_pp": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "service_revenue_to_lagged_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-c04-rounded",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "service_revenue_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "lagged_nominal_payment_volume_growth_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "service_growth_minus_volume_growth_pp": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            },
+            "service_revenue_to_lagged_volume_proxy_2024_pct": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "service_revenue_2024_shift": true,
+                "lagged_volume_2023_shift": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-attach",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": false
+        },
+        "details": {
+          "claims": {
+            "revenue_gap": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": false,
+              "controls": {
+                "compatible_monetary_scale": false,
+                "signed_component_gap": false,
+                "irrelevant_comparative_period": false
+              }
+            },
+            "adjusted_gross_profit": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            },
+            "adjusted_gross_margin": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            },
+            "margin_gap": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "revenue_gap:original_replay",
+          "revenue_gap:control:compatible_monetary_scale",
+          "revenue_gap:control:signed_component_gap",
+          "revenue_gap:control:irrelevant_comparative_period"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-write",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": false
+        },
+        "details": {
+          "claims": {
+            "revenue_gap": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": false,
+              "controls": {
+                "compatible_monetary_scale": false,
+                "signed_component_gap": false,
+                "irrelevant_comparative_period": false
+              }
+            },
+            "adjusted_gross_profit": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            },
+            "adjusted_gross_margin": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            },
+            "margin_gap": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "revenue_gap:original_replay",
+          "revenue_gap:control:compatible_monetary_scale",
+          "revenue_gap:control:signed_component_gap",
+          "revenue_gap:control:irrelevant_comparative_period"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-extension",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": false
+        },
+        "details": {
+          "claims": {
+            "revenue_gap": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": false,
+              "controls": {
+                "compatible_monetary_scale": false,
+                "signed_component_gap": false,
+                "irrelevant_comparative_period": false
+              }
+            },
+            "adjusted_gross_profit": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            },
+            "adjusted_gross_margin": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            },
+            "margin_gap": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "revenue_gap:original_replay",
+          "revenue_gap:control:compatible_monetary_scale",
+          "revenue_gap:control:signed_component_gap",
+          "revenue_gap:control:irrelevant_comparative_period"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-resource",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": false
+        },
+        "details": {
+          "claims": {
+            "revenue_gap": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": false,
+              "controls": {
+                "compatible_monetary_scale": false,
+                "signed_component_gap": false,
+                "irrelevant_comparative_period": false
+              }
+            },
+            "adjusted_gross_profit": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            },
+            "adjusted_gross_margin": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            },
+            "margin_gap": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [
+          "revenue_gap:original_replay",
+          "revenue_gap:control:compatible_monetary_scale",
+          "revenue_gap:control:signed_component_gap",
+          "revenue_gap:control:irrelevant_comparative_period"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-duplicate",
+      "expected_complete": false,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "delivery": false,
+          "financial_answer": null,
+          "evidence": null,
+          "robustness": null
+        },
+        "details": {
+          "claims": {},
+          "conclusion": null
+        },
+        "errors": [
+          "delivery:ValueError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    },
+    {
+      "name": "challenge-pristine",
+      "expected_complete": true,
+      "verdict": {
+        "scorer_version": "challenge-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "delivery": true,
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true
+        },
+        "details": {
+          "claims": {
+            "revenue_gap": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            },
+            "adjusted_gross_profit": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            },
+            "adjusted_gross_margin": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            },
+            "margin_gap": {
+              "availability": true,
+              "unit": true,
+              "evidence": true,
+              "numerical": true,
+              "original_replay": true,
+              "controls": {
+                "compatible_monetary_scale": true,
+                "signed_component_gap": true,
+                "irrelevant_comparative_period": true
+              }
+            }
+          },
+          "conclusion": {
+            "verdict": true,
+            "evidence": true
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "agent": "oracle",
+      "exception_type": null
+    }
+  ]
+}
