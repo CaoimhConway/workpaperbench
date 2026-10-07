@@ -81,7 +81,9 @@ def write_showcase(root, output, manifest, rows):
         audit = json.loads((directory / "artifact-audit.json").read_text())
         if (not answer_path.is_file()
                 or hashlib.sha256(answer_path.read_bytes()).hexdigest()
-                != audit["retained_file_sha256"].get("answer.json")):
+                != audit["retained_file_sha256"].get("answer.json")
+                or audit["retained_file_sha256"].get("answer.json")
+                != row["record"].get("retained_sha256")):
             raise ValueError("challenge_showcase_answer_provenance_unverified")
         answer = json.loads(answer_path.read_text())
         key = slot["task"].removeprefix("challenge-v1-")

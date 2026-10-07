@@ -76,7 +76,8 @@ def test_showcase_renders_exact_authenticated_answer_and_rejects_changed_bytes(t
     (directory / "answer.json").write_bytes(raw)
     (directory / "artifact-audit.json").write_text(json.dumps({"retained_file_sha256": {
         "answer.json": hashlib.sha256(raw).hexdigest()}}))
-    rows = [{"slot": slot, "record": {"verdict": {"checks": {"delivery": True, "financial_answer": True,
+    rows = [{"slot": slot, "record": {"retained_sha256": hashlib.sha256(raw).hexdigest(),
+             "verdict": {"checks": {"delivery": True, "financial_answer": True,
               "evidence": True, "robustness": True}, "verified_research_completion": True}}}]
     result = write_showcase(tmp_path, tmp_path / "reports/challenge-v1", manifest, rows)
     workpaper = (tmp_path / result["primary"]["workpaper"]).read_text()
@@ -84,5 +85,9 @@ def test_showcase_renders_exact_authenticated_answer_and_rejects_changed_bytes(t
     assert "a02-s01" in workpaper and "Saved final-a02-reference-1 workpaper" in workpaper
     assert result["contrast"] is None
     (directory / "answer.json").write_bytes(raw + b" ")
+    with pytest.raises(ValueError, match="showcase_answer_provenance_unverified"):
+        write_showcase(tmp_path, tmp_path / "reports/challenge-v1", manifest, rows)
+    (directory / "artifact-audit.json").write_text(json.dumps({"retained_file_sha256": {
+        "answer.json": hashlib.sha256(raw + b" ").hexdigest()}}))
     with pytest.raises(ValueError, match="showcase_answer_provenance_unverified"):
         write_showcase(tmp_path, tmp_path / "reports/challenge-v1", manifest, rows)
