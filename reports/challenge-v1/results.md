@@ -6,20 +6,20 @@ Full dossiers, neutral shared instructions. Model comparisons are separate from 
 
 | Scope | Model | Financial / assessed | Evidence / assessed | Robustness / assessed | Verified / scheduled | Delivery / assessed | Strict / scheduled | Verdict coverage |
 |---|---|---:|---:|---:|---:|---:|---:|---:|
-| all | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 9 | 0 / 0 | 0 / 9 | 0 / 9 |
-| a01 | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| b01 | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| c01 | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| family-A | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| family-B | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| family-C | inexpensive | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| all | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 9 | 0 / 0 | 0 / 9 | 0 / 9 |
-| a01 | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| b01 | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| c01 | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| family-A | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| family-B | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
-| family-C | reference | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 0 | 0 / 3 | 0 / 3 |
+| all | inexpensive | 3 / 6 | 3 / 6 | 1 / 6 | 1 / 9 | 6 / 6 | 1 / 9 | 6 / 9 |
+| a01 | inexpensive | 2 / 2 | 1 / 2 | 0 / 2 | 0 / 3 | 2 / 2 | 0 / 3 | 2 / 3 |
+| b01 | inexpensive | 0 / 2 | 1 / 2 | 0 / 2 | 0 / 3 | 2 / 2 | 0 / 3 | 2 / 3 |
+| c01 | inexpensive | 1 / 2 | 1 / 2 | 1 / 2 | 1 / 3 | 2 / 2 | 1 / 3 | 2 / 3 |
+| family-A | inexpensive | 2 / 2 | 1 / 2 | 0 / 2 | 0 / 3 | 2 / 2 | 0 / 3 | 2 / 3 |
+| family-B | inexpensive | 0 / 2 | 1 / 2 | 0 / 2 | 0 / 3 | 2 / 2 | 0 / 3 | 2 / 3 |
+| family-C | inexpensive | 1 / 2 | 1 / 2 | 1 / 2 | 1 / 3 | 2 / 2 | 1 / 3 | 2 / 3 |
+| all | reference | 1 / 6 | 4 / 6 | 4 / 6 | 1 / 9 | 6 / 6 | 1 / 9 | 6 / 9 |
+| a01 | reference | 1 / 2 | 2 / 2 | 2 / 2 | 1 / 3 | 2 / 2 | 1 / 3 | 2 / 3 |
+| b01 | reference | 0 / 2 | 1 / 2 | 0 / 2 | 0 / 3 | 2 / 2 | 0 / 3 | 2 / 3 |
+| c01 | reference | 0 / 2 | 1 / 2 | 2 / 2 | 0 / 3 | 2 / 2 | 0 / 3 | 2 / 3 |
+| family-A | reference | 1 / 2 | 2 / 2 | 2 / 2 | 1 / 3 | 2 / 2 | 1 / 3 | 2 / 3 |
+| family-B | reference | 0 / 2 | 1 / 2 | 0 / 2 | 0 / 3 | 2 / 2 | 0 / 3 | 2 / 3 |
+| family-C | reference | 0 / 2 | 1 / 2 | 2 / 2 | 0 / 3 | 2 / 2 | 0 / 3 | 2 / 3 |
 
 Balanced repetitions give equal weight to each task in the scheduled completion proportions. Component denominators count assessed verdicts. Missing or infrastructure-failed slots remain in scheduled denominators and are not fabricated model answers.
 
