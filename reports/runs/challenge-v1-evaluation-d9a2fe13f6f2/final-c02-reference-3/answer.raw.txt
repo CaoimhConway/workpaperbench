@@ -1,0 +1,51 @@
+{
+  "task_id": "challenge-v1-c02",
+  "answers": [
+    {
+      "id": "transaction_revenue_growth_pct",
+      "status": "answered",
+      "value": 162.30398498605604,
+      "unit": "percent",
+      "evidence": ["c02:s01"],
+      "sql": "SELECT ( (SELECT amount FROM revenues WHERE period_end='2024-12-31' AND category='Total transaction revenue') / (SELECT amount FROM revenues WHERE period_end='2023-12-31' AND category='Total transaction revenue') - 1 ) * 100;"
+    },
+    {
+      "id": "spot_trading_volume_growth_pct",
+      "status": "answered",
+      "value": 148.2905982905983,
+      "unit": "percent",
+      "evidence": ["c02:s03"],
+      "sql": "SELECT ( (SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND channel='Total Trading Volume') / (SELECT amount FROM spot_volume WHERE period_end='2023-12-31' AND channel='Total Trading Volume') - 1 ) * 100;"
+    },
+    {
+      "id": "transaction_revenue_to_spot_volume_proxy_2024_pct",
+      "status": "answered",
+      "value": 0.3430389845094664,
+      "unit": "percent",
+      "evidence": ["c02:s01", "c02:s03"],
+      "sql": "SELECT ( (SELECT amount / 1000000.0 FROM revenues WHERE period_end='2024-12-31' AND category='Total transaction revenue') / (SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND channel='Total Trading Volume') ) * 100;"
+    },
+    {
+      "id": "proxy_change_bps",
+      "status": "answered",
+      "value": 1.8326591347073238,
+      "unit": "basis_points",
+      "evidence": ["c02:s01", "c02:s03"],
+      "sql": "SELECT ( ( (SELECT amount / 1000000.0 FROM revenues WHERE period_end='2024-12-31' AND category='Total transaction revenue') / (SELECT amount FROM spot_volume WHERE period_end='2024-12-31' AND channel='Total Trading Volume') ) - ( (SELECT amount / 1000000.0 FROM revenues WHERE period_end='2023-12-31' AND category='Total transaction revenue') / (SELECT amount FROM spot_volume WHERE period_end='2023-12-31' AND channel='Total Trading Volume') ) ) * 10000;"
+    },
+    {
+      "id": "business_payment_count_2024",
+      "status": "insufficient_evidence",
+      "value": null,
+      "unit": "count",
+      "evidence": [],
+      "sql": null,
+      "reason_code": "missing_required_input"
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "incompatible_coverage",
+    "evidence": ["c02:s04", "c02:s05"]
+  }
+}

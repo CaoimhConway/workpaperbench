@@ -1,0 +1,94 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": false,
+    "financial_answer": true,
+    "robustness": false
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "adjusted_net_income": {
+        "availability": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "guidance_compensation_change": true,
+          "tax_adjustment_gap": false
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "adjusted_net_margin": {
+        "availability": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "guidance_compensation_change": true,
+          "tax_adjustment_gap": false
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "eps_gap": {
+        "availability": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "guidance_compensation_change": false,
+          "tax_adjustment_gap": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "guidance_upper": {
+        "availability": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "guidance_compensation_change": true,
+          "tax_adjustment_gap": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "net_income_adjustment": {
+        "availability": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "guidance_compensation_change": true,
+          "tax_adjustment_gap": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": true,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "eps_gap:control:guidance_compensation_change",
+    "net_income_adjustment:evidence",
+    "adjusted_net_income:evidence",
+    "adjusted_net_income:control:tax_adjustment_gap",
+    "adjusted_net_margin:evidence",
+    "adjusted_net_margin:control:tax_adjustment_gap"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.1.0",
+  "strict_delivery_completion": false,
+  "verified_research_completion": false
+}

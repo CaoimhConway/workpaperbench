@@ -1,0 +1,116 @@
+{
+  "commit_sha": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "challenge-v1",
+  "effective_task_scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "ad02799b50f2fb66e939446352eb65295630c9cb7c673eaafe9b19bb948ca44e",
+  "input_source": "retained_artifact",
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "prior_verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": false,
+      "robustness": false
+    },
+    "complete": false,
+    "sha256": "0da5ea4b31daaf3337c074ea48d6699f551b84d81f7802f4a1093de090153d3b"
+  },
+  "receipt_identity_sha256": "e243618c934c5c1bd6ee88eae1d7f2e92fa5bb73895b830ca5fd6ba8e635feb0",
+  "record_sha256": "712075a30dfd34813a662ff8396c10f5156b94443759a593b44f31b24bce7d3a",
+  "run_attempt": "1",
+  "run_id": "37589616780",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "5fe745d121f48e044f14c7321d89c3ab32782e67035dc18cf5ac116f217aab2e",
+  "slot_id": "final-c03-inexpensive-1",
+  "task_id": "challenge-v1-c03",
+  "task_sha256": "8426ec71d656618490ed6e561c862a7f268d2ece75916e79c787425edaacaa94",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": false,
+      "robustness": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "bitcoin_gross_profit_2023_usd_thousand": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_gross_profit_2024_usd_thousand": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_gross_profit_growth_pct": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_share_of_total_net_revenue_increase_pct": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": false,
+            "bitcoin_cost_change_2024": false,
+            "bitcoin_sales_change": false
+          },
+          "evidence": true,
+          "numerical": false,
+          "original_replay": false,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "bitcoin_share_of_total_net_revenue_increase_pct:numerical",
+      "bitcoin_share_of_total_net_revenue_increase_pct:original_replay",
+      "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_sales_change",
+      "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_cost_change_2024",
+      "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_cost_change_2023"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verdict_sha256": "004b249e4715b55dc94895783642dc5236ba7c973250b50ad962a9ef0f2b2d94"
+}

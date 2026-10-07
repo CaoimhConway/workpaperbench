@@ -1,0 +1,83 @@
+{
+  "scorer_version": "challenge-1.0.0",
+  "complete": false,
+  "verified_research_completion": false,
+  "strict_delivery_completion": false,
+  "checks": {
+    "delivery": true,
+    "financial_answer": false,
+    "evidence": true,
+    "robustness": true
+  },
+  "details": {
+    "claims": {
+      "eps_difference": {
+        "availability": true,
+        "unit": false,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": true,
+          "eps_observations": true
+        }
+      },
+      "adjusted_operating_income": {
+        "availability": true,
+        "unit": false,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": true,
+          "eps_observations": true
+        }
+      },
+      "adjusted_margin": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": true,
+          "eps_observations": true
+        }
+      },
+      "margin_bridge": {
+        "availability": true,
+        "unit": false,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "later_targets": true,
+          "monetary_scale": true,
+          "signed_bridge": true,
+          "eps_observations": true
+        }
+      }
+    },
+    "conclusion": {
+      "verdict": true,
+      "evidence": true
+    }
+  },
+  "errors": [
+    "eps_difference:unit",
+    "adjusted_operating_income:unit",
+    "margin_bridge:unit"
+  ],
+  "isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  }
+}

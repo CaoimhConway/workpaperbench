@@ -1,0 +1,93 @@
+{
+  "scorer_version": "challenge-1.1.0",
+  "complete": false,
+  "verified_research_completion": false,
+  "strict_delivery_completion": false,
+  "checks": {
+    "delivery": true,
+    "financial_answer": false,
+    "evidence": false,
+    "robustness": false
+  },
+  "details": {
+    "claims": {
+      "q1_revenue": {
+        "availability": true,
+        "unit": true,
+        "evidence": false,
+        "numerical": false,
+        "original_replay": false,
+        "controls": {
+          "compatible_monetary_scale": false,
+          "business_growth_change": false,
+          "quarter_expense_change": false
+        }
+      },
+      "q1_operating_income": {
+        "availability": true,
+        "unit": true,
+        "evidence": false,
+        "numerical": false,
+        "original_replay": false,
+        "controls": {
+          "compatible_monetary_scale": false,
+          "business_growth_change": false,
+          "quarter_expense_change": false
+        }
+      },
+      "margin_change": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": false,
+        "original_replay": false,
+        "controls": {
+          "compatible_monetary_scale": false,
+          "business_growth_change": false,
+          "quarter_expense_change": false
+        }
+      },
+      "azure_gap": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "business_growth_change": true,
+          "quarter_expense_change": true
+        }
+      }
+    },
+    "conclusion": {
+      "verdict": true,
+      "evidence": true
+    }
+  },
+  "errors": [
+    "q1_revenue:numerical",
+    "q1_revenue:evidence",
+    "q1_revenue:original_replay",
+    "q1_revenue:control:compatible_monetary_scale",
+    "q1_revenue:control:business_growth_change",
+    "q1_revenue:control:quarter_expense_change",
+    "q1_operating_income:numerical",
+    "q1_operating_income:evidence",
+    "q1_operating_income:original_replay",
+    "q1_operating_income:control:compatible_monetary_scale",
+    "q1_operating_income:control:business_growth_change",
+    "q1_operating_income:control:quarter_expense_change",
+    "margin_change:numerical",
+    "margin_change:original_replay",
+    "margin_change:control:compatible_monetary_scale",
+    "margin_change:control:business_growth_change",
+    "margin_change:control:quarter_expense_change"
+  ],
+  "isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  }
+}

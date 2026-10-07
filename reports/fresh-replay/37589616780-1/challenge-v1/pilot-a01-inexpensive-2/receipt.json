@@ -1,0 +1,118 @@
+{
+  "commit_sha": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "comparison": {
+    "checks_same": true,
+    "complete_same": true,
+    "prior_available": true
+  },
+  "dataset": "challenge-v1",
+  "effective_task_scorer_sha256": "d122c8c27dae7bb8bb17e8234e2b9cdaba6d0e019e711c907680b46f06d50254",
+  "input_file": "answer.raw.txt",
+  "input_sha256": "897d09198a29f1c5758ce152690884d10e6e7ecf9291cccf5a1db443a7872686",
+  "input_source": "retained_artifact",
+  "manifest_id": "challenge-v1-development-7e8903385beb",
+  "manifest_sha256": "d4deede7b91a1777e96f5552a7e5d541196aa27636c43fa94571902516112a93",
+  "prior_verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": true,
+      "robustness": false
+    },
+    "complete": false,
+    "sha256": "4d432e0438ea0aa463411248736a90d2b7208773fab9842e1c209a8b88ce491d"
+  },
+  "receipt_identity_sha256": "aa3ac084b857bc282d9196e7de8732e2d534d51ff0ae6dbc3c0d0d446dd6745a",
+  "record_sha256": "3fbcc108393c00dda30fc7cc00844cbe8e6a75f3dadaa895d87f2c3d64ed4ada",
+  "run_attempt": "1",
+  "run_id": "37589616780",
+  "scope": "Fresh native oracle replay of the exact bounded answer bytes. No model key, model call, network access, or cached replay result.",
+  "scorer_sha256": "d122c8c27dae7bb8bb17e8234e2b9cdaba6d0e019e711c907680b46f06d50254",
+  "slot_id": "pilot-a01-inexpensive-2",
+  "task_id": "challenge-v1-a01",
+  "task_sha256": "c8461b6a9557cb2e6501d19fdd4158c0e201944c58b478978db4ad3ff47349a2",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": true,
+      "robustness": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "adjusted_margin": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": false
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "adjusted_operating_income": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": false
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "eps_difference": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "margin_bridge": {
+          "availability": true,
+          "controls": {
+            "eps_observations": true,
+            "later_targets": true,
+            "monetary_scale": true,
+            "signed_bridge": false
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "adjusted_operating_income:control:signed_bridge",
+      "adjusted_margin:control:signed_bridge",
+      "margin_bridge:control:signed_bridge"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.0.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  },
+  "verdict_sha256": "f539f8e1a9b77e4eb9562aa28709858cdfd7d652c11bc08f2951f4eeec8b0f2f"
+}

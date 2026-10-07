@@ -25,3 +25,21 @@ Replace `OWNER` with the public fork owner. The dispatcher needs Actions write a
 On a public fork, enable Actions and dispatch the workflow from that fork after committing the answer under `submissions/`. The answer must be a regular file no larger than 64 KiB, contain the task's exact `task_id`, and have no symlink in its path. The job rejects secret-bearing environments.
 
 Each run writes a create-only receipt under `reports/fresh-replay/<run>-<attempt>/<dataset>/<slot>/receipt.json`. It records the input, dataset, task, current scorer, and task grader hashes, the prior verdict digest when available, the fresh verdict, and a comparison of completion and check states. A repeated write to the same run-attempt path fails instead of replacing the earlier receipt. Raw run output remains in the ignored `.raw/` directory.
+
+## Research Challenge
+
+All 72 retained challenge answers were freshly replayed in [37589616780](https://github.com/CaoimhConway/workpaperbench/actions/runs/37589616780), matching the complete original verdicts. This includes 18 development and 54 evaluation answers under their original scorers. The separate [corrected scoring run](https://github.com/CaoimhConway/workpaperbench/actions/runs/37589625073) passed 29 controls and graded all 54 unchanged evaluation answers under `challenge-1.1.3`. Original results remain preserved.
+
+Use your authorized repository or enabled fork for all original challenge answers:
+
+```sh
+gh workflow run ci.yml --repo YOUR_LOGIN/workpaperbench --ref main -f integration=false -f fresh_replay=true -f dataset=challenge-v1 -f replay_slot=all
+```
+
+Replace `all` with `final-a03-inexpensive-1` for the saved Microsoft failure. For the consistent corrected evidence review, omit `fresh_replay` and `replay_slot`, and set `regrade=true`:
+
+```sh
+gh workflow run ci.yml --repo YOUR_LOGIN/workpaperbench --ref main -f integration=false -f regrade=true -f dataset=challenge-v1
+```
+
+A committed engineer submission can use `answer_path=submissions/reference-c02.json` and `task=c02` with that corrected-review command. Its diagnostics distinguish finance, evidence, recomputation and delivery. The current 1.1.3 review is bound to the original 54-slot manifest. Future model runs use new identities under the canonical original contract, as explained in [the challenge contract](CHALLENGE.md). Actual maintainer paths passed. A foreign-fork dispatch was not performed, the repository-selection and permissions guards are tested.

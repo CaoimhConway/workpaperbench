@@ -1,0 +1,66 @@
+{
+  "task_id": "challenge-v1-c03",
+  "context_evidence": [
+    "c03:s01",
+    "c03:s02",
+    "c03:s05"
+  ],
+  "answers": [
+    {
+      "id": "bitcoin_gross_profit_2024_usd_thousand",
+      "status": "answered",
+      "value": 288819.0,
+      "unit": "usd_thousand",
+      "evidence": [
+        "c03:s01",
+        "c03:s02",
+        "c03:s05"
+      ],
+      "sql": "SELECT (SELECT amount FROM revenues WHERE category = 'Bitcoin revenue' AND period_end = '2024-12-31') - (SELECT amount FROM costs WHERE category = 'Bitcoin costs' AND period_end = '2024-12-31') AS bitcoin_gross_profit_2024_usd_thousand"
+    },
+    {
+      "id": "bitcoin_gross_profit_2023_usd_thousand",
+      "status": "answered",
+      "value": 205189.0,
+      "unit": "usd_thousand",
+      "evidence": [
+        "c03:s01",
+        "c03:s02",
+        "c03:s05"
+      ],
+      "sql": "SELECT (SELECT amount FROM revenues WHERE category = 'Bitcoin revenue' AND period_end = '2023-12-31') - (SELECT amount FROM costs WHERE category = 'Bitcoin costs' AND period_end = '2023-12-31') AS bitcoin_gross_profit_2023_usd_thousand"
+    },
+    {
+      "id": "bitcoin_gross_profit_growth_pct",
+      "status": "answered",
+      "value": 40.75754548245764,
+      "unit": "percent",
+      "evidence": [
+        "c03:s01",
+        "c03:s02",
+        "c03:s05"
+      ],
+      "sql": "SELECT ((SELECT (SELECT amount FROM revenues WHERE category = 'Bitcoin revenue' AND period_end = '2024-12-31') - (SELECT amount FROM costs WHERE category = 'Bitcoin costs' AND period_end = '2024-12-31')) - (SELECT (SELECT amount FROM revenues WHERE category = 'Bitcoin revenue' AND period_end = '2023-12-31') - (SELECT amount FROM costs WHERE category = 'Bitcoin costs' AND period_end = '2023-12-31'))) / (SELECT (SELECT amount FROM revenues WHERE category = 'Bitcoin revenue' AND period_end = '2023-12-31') - (SELECT amount FROM costs WHERE category = 'Bitcoin costs' AND period_end = '2023-12-31')) * 100.0 AS bitcoin_gross_profit_growth_pct"
+    },
+    {
+      "id": "bitcoin_share_of_total_net_revenue_increase_pct",
+      "status": "answered",
+      "value": -1.05690869342218,
+      "unit": "percent",
+      "evidence": [
+        "c03:s01",
+        "c03:s05"
+      ],
+      "sql": "SELECT ((SELECT (SELECT amount FROM revenues WHERE category = 'Bitcoin revenue' AND period_end = '2024-12-31') / (SELECT amount FROM revenues WHERE category = 'Total net revenue' AND period_end = '2024-12-31')) - (SELECT (SELECT amount FROM revenues WHERE category = 'Bitcoin revenue' AND period_end = '2023-12-31') / (SELECT amount FROM revenues WHERE category = 'Total net revenue' AND period_end = '2023-12-31'))) * 100.0 AS bitcoin_share_of_total_net_revenue_increase_pct"
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "evidence": [
+      "c03:s01",
+      "c03:s02",
+      "c03:s05"
+    ],
+    "reason_code": "contradicted_by_calculation"
+  }
+}

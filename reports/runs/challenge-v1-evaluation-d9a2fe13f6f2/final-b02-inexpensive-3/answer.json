@@ -1,0 +1,67 @@
+{
+  "task_id": "challenge-v1-b02",
+  "context_evidence": [
+    "b02:s01",
+    "b02:s02",
+    "b02:s03",
+    "b02:s04"
+  ],
+  "answers": [
+    {
+      "id": "march31_reserves_usd",
+      "status": "answered",
+      "value": 60040707041,
+      "unit": "usd",
+      "evidence": [
+        "b02:s03"
+      ],
+      "sql": "SELECT SUM(amount_usd) FROM reserve_components WHERE report_date='2025-03-31'",
+      "reason_code": null
+    },
+    {
+      "id": "march31_circulation_usdc",
+      "status": "answered",
+      "value": 59975771715,
+      "unit": "usdc",
+      "evidence": [
+        "b02:s04"
+      ],
+      "sql": "SELECT SUM(CASE WHEN measure='total supply' THEN amount_usdc WHEN measure='Tokens Allowed But Not Issued' THEN -amount_usdc WHEN measure='Access Denied Tokens' THEN -amount_usdc ELSE 0 END) FROM circulation_inputs WHERE report_date='2025-03-31'",
+      "reason_code": null
+    },
+    {
+      "id": "march31_residual_usd",
+      "status": "answered",
+      "value": -1,
+      "unit": "usd",
+      "evidence": [
+        "b02:s03"
+      ],
+      "sql": "SELECT (SELECT reported_total_usd FROM reported_reserve_totals WHERE report_date='2025-03-31') - (SELECT SUM(amount_usd) FROM reserve_components WHERE report_date='2025-03-31')",
+      "reason_code": null
+    },
+    {
+      "id": "coverage_change_bps",
+      "status": "answered",
+      "value": -0.15759761976568143,
+      "unit": "basis_points",
+      "evidence": [
+        "b02:s02",
+        "b02:s03",
+        "b02:s04"
+      ],
+      "sql": "SELECT ((SELECT SUM(rc.amount_usd) FROM reserve_components rc WHERE rc.report_date='2025-03-31') * 10000.0 / (SELECT SUM(CASE WHEN ci.measure='total supply' THEN ci.amount_usdc WHEN ci.measure='Tokens Allowed But Not Issued' THEN -ci.amount_usdc WHEN ci.measure='Access Denied Tokens' THEN -ci.amount_usdc ELSE 0 END) FROM circulation_inputs ci WHERE ci.report_date='2025-03-31') - (SELECT SUM(rc.amount_usd) FROM reserve_components rc WHERE rc.report_date='2025-03-19') * 10000.0 / (SELECT SUM(CASE WHEN ci.measure='total supply' THEN ci.amount_usdc WHEN ci.measure='Tokens Allowed But Not Issued' THEN -ci.amount_usdc WHEN ci.measure='Access Denied Tokens' THEN -ci.amount_usdc ELSE 0 END) FROM circulation_inputs ci WHERE ci.report_date='2025-03-19'))",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "b02:s01",
+      "b02:s02",
+      "b02:s03",
+      "b02:s04"
+    ]
+  }
+}
