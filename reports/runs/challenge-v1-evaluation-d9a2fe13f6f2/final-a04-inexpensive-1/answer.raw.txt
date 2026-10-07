@@ -1,0 +1,70 @@
+{
+  "task_id": "challenge-v1-a04",
+  "context_evidence": [
+    "a04:s01",
+    "a04:s02",
+    "a04:s04",
+    "a04:s06"
+  ],
+  "answers": [
+    {
+      "id": "guidance_upper",
+      "status": "answered",
+      "value": 1.48,
+      "unit": "usd_per_share",
+      "evidence": [
+        "a04:s01"
+      ],
+      "sql": "SELECT 1.04 + 0.21 + 0.01 + 0.4 + 0.01 + (-0.21) + 0.02 AS guidance_upper"
+    },
+    {
+      "id": "eps_gap",
+      "status": "answered",
+      "value": -0.01,
+      "unit": "usd_per_share",
+      "evidence": [
+        "a04:s01",
+        "a04:s04"
+      ],
+      "sql": "SELECT 1.47 - (1.04 + 0.21 + 0.01 + 0.4 + 0.01 + (-0.21) + 0.02) AS eps_gap"
+    },
+    {
+      "id": "net_income_adjustment",
+      "status": "answered",
+      "value": 1056.0,
+      "unit": "usd_million",
+      "evidence": [
+        "a04:s04"
+      ],
+      "sql": "SELECT 4207.0 - 3151.0 AS net_income_adjustment"
+    },
+    {
+      "id": "adjusted_net_income",
+      "status": "answered",
+      "value": 4207.0,
+      "unit": "usd_million",
+      "evidence": [
+        "a04:s04"
+      ],
+      "sql": "SELECT 4207.0 AS adjusted_net_income"
+    },
+    {
+      "id": "adjusted_net_margin",
+      "status": "answered",
+      "value": 29.92,
+      "unit": "percent",
+      "evidence": [
+        "a04:s04",
+        "a04:s02"
+      ],
+      "sql": "SELECT (4207.0 / 14059.0) * 100.0 AS adjusted_net_margin"
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "evidence": [
+      "a04:s01",
+      "a04:s04"
+    ]
+  }
+}
