@@ -1,21 +1,21 @@
 {
   "base_scorer_version": "challenge-1.1.0",
-  "content_hash": "5141a5569da6658c9449f7f50205c366a17a0b82e77952929d236369a6c66a27",
-  "exposure": "The correction is based only on the first NVIDIA evaluation pair and source-first review. Original frozen candidates, records and verdicts remain unchanged. Apply it consistently to every retained evaluation answer.",
+  "content_hash": "e8bab96d4e9c62873dc65dc78efa9caefbf723712e582dd8f3faf5fb1c752a63",
+  "exposure": "NVIDIA correction is based on its first evaluation pair. The Ripple source-path correction follows source-first review of the first six case pairs. Original frozen candidates, records and verdicts remain unchanged. Apply consistently to every available evaluation answer. The preliminary 1.1.1 engineering bundle is preserved separately.",
   "hashes": {
     "config/scorers/challenge-1.1.0.py": "77f41466c3a65283481907bada217f75fa92ea0ccf92355c396e7c216e57c34c",
-    "config/scorers/challenge-1.1.1.py": "3efc4e802462642456ded404c9388d91d9d6ebb92e67f56daa9cf494f3cfa6af",
-    "scripts/challenge_evidence_review.py": "bf3ffc4d8ff5723a9e58805a50419042b5cdabe05811a526e1f841b3c17441ca",
+    "config/scorers/challenge-1.1.2.py": "93c09fb83beaabbff9261a8f7dc9b7c0e07e99f4f30fff891f3ee350f18052c0",
+    "scripts/challenge_evidence_review.py": "ea2904cf08fa116e1d03684a6c2d87821cf4f6e49f4b8b70c7b898184ab2b7c7",
     "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
     "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5"
   },
   "original_manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
   "original_manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
-  "reason": "Permit the relevant income-statement GAAP gross-profit source alongside either complete NVIDIA bridge. Required bridges, missing revenue evidence, unrelated sections and invalid shared context remain rejected. Numerical, robustness and delivery logic unchanged.",
+  "reason": "Permit additional relevant NVIDIA income-statement support alongside a complete gross-profit bridge, and the explicitly described Ripple May asset-class schedule as an alternative May component citation. Required numerical support, shared-context restrictions, unrelated-section rejection, finance, robustness and delivery stay fixed.",
   "review_basis": "Source-first independent agent review of authentic disclosures and Decimal values, no human validation",
-  "review_id": "challenge-v1-scoring-review-5141a5569da6",
-  "scorer_path": "config/scorers/challenge-1.1.1.py",
-  "scorer_version": "challenge-1.1.1",
+  "review_id": "challenge-v1-scoring-review-e8bab96d4e9c",
+  "scorer_path": "config/scorers/challenge-1.1.2.py",
+  "scorer_version": "challenge-1.1.2",
   "tasks": {
     "a02": {
       "additional_evidence_paths": {
@@ -54,7 +54,22 @@
       "task_id": "challenge-v1-b03"
     },
     "b04": {
-      "additional_evidence_paths": {},
+      "additional_evidence_paths": {
+        "conclusion": [
+          [
+            "b04:s01",
+            "b04:s03",
+            "b04:s04"
+          ]
+        ],
+        "coverage_change_bps": [
+          [
+            "b04:s01",
+            "b04:s03",
+            "b04:s04"
+          ]
+        ]
+      },
       "gold_sha256": "8e309146c4aaf1e1cf0461407ffc0ec8716be39f94d9b5f6efa1719b2e0acc76",
       "task_id": "challenge-v1-b04"
     },

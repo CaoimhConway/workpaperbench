@@ -14,8 +14,8 @@ ROOT = Path(__file__).resolve().parent.parent
 REVIEW_RELATIVE = "datasets/challenge-v1/scoring-review.json"
 EVALUATION_RELATIVE = "datasets/challenge-v1/manifests/evaluation.json"
 BASE_SCORER_VERSION = "challenge-1.1.0"
-SCORER_VERSION = "challenge-1.1.1"
-SCORER_RELATIVE = "config/scorers/challenge-1.1.1.py"
+SCORER_VERSION = "challenge-1.1.2"
+SCORER_RELATIVE = "config/scorers/challenge-1.1.2.py"
 HASH_PATHS = {
     "scripts/challenge_evidence_review.py",
     "config/scorers/challenge-1.1.0.py",
@@ -26,7 +26,9 @@ HASH_PATHS = {
 TASK_KEYS = tuple(f"{family}{number:02}" for family in "abc" for number in range(2, 5))
 EXPECTED_ADDITIONS = {
     key: ({"adjusted_gross_profit": [["a02:s02", "a02:s03"],
-                                       ["a02:s02", "a02:s04"]]} if key == "a02" else {})
+                                      ["a02:s02", "a02:s04"]]} if key == "a02" else
+          {"coverage_change_bps": [["b04:s01", "b04:s03", "b04:s04"]],
+           "conclusion": [["b04:s01", "b04:s03", "b04:s04"]]} if key == "b04" else {})
     for key in TASK_KEYS
 }
 ISOLATION_KEYS = ("network_namespace_none", "network_probe_blocked", "no_inference_key", "no_docker_socket")
@@ -123,7 +125,7 @@ def validate_review(root=ROOT):
     base = _read_repo_file(root, "config/scorers/challenge-1.1.0.py")
     corrected = _read_repo_file(root, SCORER_RELATIVE)
     old_line = b'SCORER_VERSION = "challenge-1.1.0"'
-    new_line = b'SCORER_VERSION = "challenge-1.1.1"'
+    new_line = b'SCORER_VERSION = "challenge-1.1.2"'
     if base.count(old_line) != 1 or corrected != base.replace(old_line, new_line, 1):
         raise ValueError("scoring_review_scorer_not_version_only")
 
@@ -163,7 +165,8 @@ def prepare_task_copy(root, task_key, validated, destination):
         raise ValueError("scoring_review_gold_changed")
     gold = parse_json(original_gold_bytes)
     for claim_id, options in reviewed_spec["additional_evidence_paths"].items():
-        claim = gold.get("answers", {}).get(claim_id)
+        claim = (gold.get("conclusion") if claim_id == "conclusion"
+                 else gold.get("answers", {}).get(claim_id))
         if not isinstance(claim, dict) or not isinstance(claim.get("evidence"), list):
             raise ValueError("scoring_review_claim_missing")
         existing = [list(option) for option in claim["evidence"]]
@@ -495,6 +498,27 @@ def _control_answers(root, validated):
                      "expected": {"complete": False,
                                   "checks": {"delivery": False, "financial_answer": None,
                                              "evidence": None, "robustness": None}}})
+
+    key = "b04"
+    task_path = root / validated["context"]["tasks"][key]["path"]
+    reference = parse_json(read_bounded(task_path / "tests/reference.json", 300_000))
+
+    def coverage_variant(name, coverage_evidence, expected):
+        answer = json.loads(json.dumps(reference))
+        answer["context_evidence"] = ["b04:s05", "b04:s06"]
+        coverage = next(item for item in answer["answers"] if item["id"] == "coverage_change_bps")
+        coverage["evidence"] = coverage_evidence
+        answer["conclusion"]["evidence"] = list(coverage_evidence)
+        controls.append({"name": name, "task_key": key,
+                         "input_file": task_path.relative_to(root).as_posix() + "/tests/reference.json",
+                         "answer": answer, "expected": expected})
+
+    coverage_variant("may-component-source-alternative",
+                     ["b04:s01", "b04:s03", "b04:s04"], passed)
+    coverage_variant("coverage-missing-may-support",
+                     ["b04:s03", "b04:s04"], evidence_failure)
+    coverage_variant("coverage-missing-june-aggregate",
+                     ["b04:s01", "b04:s02", "b04:s04"], evidence_failure)
     return controls
 
 

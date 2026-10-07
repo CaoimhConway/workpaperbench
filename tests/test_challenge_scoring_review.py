@@ -45,7 +45,7 @@ def _fixture(tmp_path, monkeypatch):
         task_map[key] = {"task_id": "challenge-v1-" + key, "path": task_path,
                          "split": "evaluation", "source_group": "source-" + key}
         destination = root / task_path
-        if key == "a02":
+        if key in {"a02", "b04"}:
             shutil.copytree(ROOT / task_path, destination)
         else:
             write_json(destination / "tests/gold.json", {
@@ -276,7 +276,7 @@ def test_duplicate_unsafe_submission_is_rejected_before_any_sql(review_repo, tmp
 def test_control_references_keep_exact_source_bytes_and_paths(review_repo):
     validated = review.validate_review(review_repo["root"])
     controls = review._control_answers(review_repo["root"], validated)
-    assert len(controls) == 16
+    assert len(controls) == 19
     for item in controls[:9]:
         reference = review_repo["root"] / item["input_file"]
         assert item["answer_bytes"] == reference.read_bytes()
@@ -309,7 +309,7 @@ def test_controls_then_user_review_use_separate_attempt_outputs(review_repo, mon
     controls_index = review.run_controls(root, env={})
     assert controls_index.parent.name == "123456-1-controls"
     control_payload = json.loads(controls_index.read_text())
-    assert control_payload["passed"] == control_payload["total"] == 16
+    assert control_payload["passed"] == control_payload["total"] == 19
 
     missing_denominator = next(item for item in controls
                                if item["name"] == "revenue-denominator-missing")
@@ -396,3 +396,27 @@ def test_retained_review_uses_authenticated_real_audit_shape(review_repo, monkey
     assert receipt["input_file"] == "answer.json"
     assert receipt["prior_verdict"]["complete"] is False
     assert receipt["verdict"]["complete"] is True
+
+
+@pytest.mark.parametrize(("control_name", "evidence_passes"), [
+    ("may-component-source-alternative", True),
+    ("coverage-missing-may-support", False),
+    ("coverage-missing-june-aggregate", False),
+])
+def test_b04_review_accepts_only_the_bounded_may_source_alternative(
+        review_repo, tmp_path, monkeypatch, control_name, evidence_passes):
+    root = review_repo["root"]
+    validated = review.validate_review(root)
+    task_path = root / review_repo["tasks"]["b04"]["path"]
+    original_gold = (task_path / "tests/gold.json").read_bytes()
+    copied = review.prepare_task_copy(root, "b04", validated, tmp_path / "task-copy-b04")
+    assert (task_path / "tests/gold.json").read_bytes() == original_gold
+    item = next(control for control in review._control_answers(root, validated)
+                if control["name"] == control_name)
+    verdict, calls = _grade_without_sql(
+        copied["task_copy"], item["answer"], monkeypatch,
+        tmp_path / ("answer-" + control_name))
+    assert verdict["details"]["claims"]["coverage_change_bps"]["evidence"] is evidence_passes
+    assert verdict["details"]["conclusion"]["evidence"] is evidence_passes
+    assert verdict["complete"] is evidence_passes
+    assert calls

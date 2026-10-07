@@ -1,0 +1,113 @@
+{
+  "artifact_audit_sha256": null,
+  "base_scorer_sha256": "77f41466c3a65283481907bada217f75fa92ea0ccf92355c396e7c216e57c34c",
+  "commit_sha": "ef4cb8144395560435ccbd3872d3eda55595e94e",
+  "effective_gold_sha256": "bbb38cf270385d5319fd48d60839f2287443c9d71d93a9891e90c9547eccd9ae",
+  "effective_task_sha256": "080286d80b73f3dbc0a14121e28a3ef54d4e1cf84c7ba7b2fa816dcad7adf587",
+  "input_file": "datasets/challenge-v1/tasks/b03/tests/reference.json",
+  "input_sha256": "eccd66aa27e31e5e302d1eda945b0e0a4a22f588fbc85e918d725254d1a1e4c6",
+  "input_source": "authored_control",
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "model_key": null,
+  "prior_verdict": null,
+  "prior_verdict_sha256": null,
+  "record_path": null,
+  "record_sha256": null,
+  "repetition": null,
+  "review_bundle_sha256": "8ed769240561567941f1b006f8298f29ba1dafe8987678f9abfad7b7d4da8ea5",
+  "review_content_hash": "5141a5569da6658c9449f7f50205c366a17a0b82e77952929d236369a6c66a27",
+  "review_id": "challenge-v1-scoring-review-5141a5569da6",
+  "review_scorer_sha256": "6b15bdd1fae817eec1c12980281c417d056920d6c135babc53aa4e60d993cee9",
+  "run_attempt": "1",
+  "run_id": "37572673750",
+  "scorer_version": "challenge-1.1.1",
+  "slot_id": "control-b03-reference",
+  "source_gold_sha256": "c1d9fef42b78410ed74c0cb05edf43c3a536f49550b0672a37a8eae001aa742b",
+  "source_task_sha256": "94b48e6e608178ca8cc7f106d4e9ef8b767ebe76c403f55010c210df36689701",
+  "split": "evaluation",
+  "task_id": "challenge-v1-b03",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": true,
+    "details": {
+      "claims": {
+        "company_asset_excess_usd": {
+          "availability": true,
+          "controls": {
+            "bitcoin_fair_value_change": true,
+            "company_held_token_change": true,
+            "release_liability_alignment": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "net_token_liability_usd": {
+          "availability": true,
+          "controls": {
+            "bitcoin_fair_value_change": true,
+            "company_held_token_change": true,
+            "release_liability_alignment": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "release_liability_delta_usd": {
+          "availability": true,
+          "controls": {
+            "bitcoin_fair_value_change": true,
+            "company_held_token_change": true,
+            "release_liability_alignment": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "reserve_assets_usd": {
+          "availability": true,
+          "controls": {
+            "bitcoin_fair_value_change": true,
+            "company_held_token_change": true,
+            "release_liability_alignment": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.1",
+    "strict_delivery_completion": true,
+    "verified_research_completion": true
+  },
+  "verifier_bytes_sha256": "7338e74c3917327d7c74a5fe274b349bf7678faefb07ff5947a8f167af16727a",
+  "verifier_path": "reports/challenge-v1/scoring-reviews/challenge-v1-scoring-review-5141a5569da6/37572673750-1-controls/control-b03-reference/verifier.json"
+}
