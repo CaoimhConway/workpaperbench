@@ -7,6 +7,26 @@ from pathlib import Path
 from statistics import mean
 
 
+def failure_categories(record):
+    if not record or not isinstance(record.get("verdict"), dict):
+        return ["infrastructure_or_missing_outcome"]
+    categories = set()
+    for error in record["verdict"].get("errors", []):
+        if error.startswith("delivery:"):
+            categories.add("delivery")
+        elif error.endswith(":unit"):
+            categories.add("unit_representation_or_semantics")
+        elif error.endswith(":evidence"):
+            categories.add("evidence_support_or_contract")
+        elif ":control:" in error or error.endswith(":original_replay"):
+            categories.add("calculation_recomputation")
+        elif error.endswith(":verdict") or error == "conclusion:missing":
+            categories.add("bounded_conclusion")
+        elif error.endswith((":numerical", ":availability")):
+            categories.add("financial_value_or_availability")
+    return sorted(categories)
+
+
 def render_workpaper(answer, label, evidence_path):
     lines = ["# " + label, "", "Task: `" + answer["task_id"] + "`. [Frozen source dossier](" + evidence_path + ").", "",
              "| Claim | Availability | Value | Unit | Supporting sections |", "|---|---|---:|---|---|"]
@@ -69,13 +89,24 @@ def report_challenge(root):
                               "failure_components_nonexclusive": {k: sum(v.get("checks", {}).get(k) is False for v in verdicts) for k in metrics},
                               "statuses": dict(Counter(r["record"].get("status") if r["record"] else "not_recorded" for r in selected))})
         actual = sorted((r for r in rows if r["record"] and r["record"].get("execution_started_at")), key=lambda r: r["record"]["execution_started_at"])
+        observers = [r["record"].get("native_api_retry_observer", {}) for r in rows if r["record"]]
+        observed_retries = [o["observed_additional_attempts"] for o in observers
+                            if o.get("capture_status") == "captured" and o.get("observer_registered") is True]
         studies.append({"manifest_id": manifest["manifest_id"], "stage": manifest["stage"], "models": manifest["models"], "metrics": table,
+                        "scorer_version": manifest.get("scorer_version"),
+                        "retry_observation": {"retained_records": len(observers),
+                                              "capture_statuses": dict(Counter(o.get("capture_status", "not_recorded") for o in observers)),
+                                              "captured_registered_slots": len(observed_retries),
+                                              "observed_additional_attempts": sum(observed_retries) if observed_retries else None,
+                                              "capture_completeness": "not_guaranteed",
+                                              "provider_internal_retries": "unobserved"},
                         "actual_start_order": [r["slot"]["slot_id"] for r in actual],
                         "scheduled_order": [r["slot"]["slot_id"] for r in rows],
                         "task_macro_completion": {key: sum(r["verified_research_completion"] / r["scheduled"] for r in table if r["model_key"] == key and r["scope"] in manifest["tasks"]) / len(manifest["tasks"]) for key in manifest["models"]},
                         "slots": [{"slot_id": r["slot"]["slot_id"], "status": r["record"].get("status") if r["record"] else "not_recorded", "started_at": r["record"].get("execution_started_at") if r["record"] else None,
                                    "latency_seconds": (r["record"].get("harbor_metrics") or {}).get("agent_execution_seconds") if r["record"] else None,
                                    "provider_cost_delta_usd": r["record"].get("provider_cost_delta_usd") if r["record"] else None,
+                                   "failure_categories": failure_categories(r["record"]),
                                    "errors": (r["record"].get("verdict") or {}).get("errors", []) if r["record"] else []} for r in rows]})
         lines += ["## " + manifest["stage"] + " - " + manifest["manifest_id"], "", "| Scope | Model | Financial / assessed | Evidence / assessed | Robustness / assessed | Verified / scheduled | Delivery / assessed | Strict / scheduled | Verdict coverage |", "|---|---|---:|---:|---:|---:|---:|---:|---:|"]
         for row in table:
