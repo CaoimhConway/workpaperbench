@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-10-07T06:14:55.249522+00:00",
+  "checkout_commit": "46934c2fc94fd81a10e7667338e59c17886a83be",
+  "commands": [
+    {
+      "command": "python3 -m venv .venv && .venv/bin/python -m pip install --cache-dir /tmp/wpb-clean-pip-cache -e '.[test]'",
+      "exit_code": 0,
+      "log_sha256": "92a3bd66e7341865e86eecc762853dcc3b4f6f65d9205ca2cd2fce7670bec6f7"
+    },
+    {
+      "command": ".venv/bin/workpaperbench demo",
+      "exit_code": 0,
+      "log_sha256": "a363c9d8fecc3121732bd50efc10b68d1d0e442a511ecef7f1f32596e79e7969"
+    },
+    {
+      "command": ".venv/bin/python scripts/build_real_tasks.py --check",
+      "exit_code": 0,
+      "log_sha256": "677226908ecd9eca4d9a1db58c19b4139bb20268414fa1045b2f48f1faefb12c"
+    },
+    {
+      "command": ".venv/bin/python scripts/build_challenge_tasks.py --check",
+      "exit_code": 0,
+      "log_sha256": "003aad16446a929a5ed47b1f6f643d44d7f96918533994848c6c19a753d7cfca"
+    },
+    {
+      "command": ".venv/bin/workpaperbench report --dataset challenge-v1",
+      "exit_code": 0,
+      "log_sha256": "9224244e7e0fad89eb2972891fd0b55f429cf99f4dc162f99910cefd6f71d71d"
+    },
+    {
+      "command": ".venv/bin/python scripts/audit.py",
+      "exit_code": 0,
+      "log_sha256": "66dea7bf2547a34d7a71ab686aa24d391eaaba4344ef78aaae43e9dcbdb442d3"
+    }
+  ],
+  "docker_or_harbor_executed_locally": false,
+  "inference_calls": 0,
+  "lightweight_install_demo_offline_report_history_audit_passed": true,
+  "python_version": "Python 3.11.8",
+  "relevant_file_sha256": {
+    ".github/workflows/ci.yml": "343f840b2757b2a071a15c03e6782e295b23f5b959f184b28e30f5abb092a7d6",
+    "config/scorers/challenge-1.1.3.py": "dfc2a410ce078b404fb3d6723c753ba0134764cb8863fd4377e889e3df40201a",
+    "datasets/challenge-v1/manifests/development.json": "d4deede7b91a1777e96f5552a7e5d541196aa27636c43fa94571902516112a93",
+    "datasets/challenge-v1/manifests/evaluation.json": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+    "datasets/challenge-v1/scoring-review.json": "a0e142a2841857842302415b6fc6ec313cec361b349589131d0199c037bbe05f",
+    "scripts/challenge_evidence_review.py": "30937ec27297d45807eedb55f47e1d9c67034285a2f03ce5dd3b4479a42e560b",
+    "scripts/new_challenge_campaign.py": "b4270af3f6a8ea561c04390dd60ef7406325b8f3e800a97793d7e1a92a56bf33",
+    "workpaperbench/challenge_report.py": "3836eee8bc8ea2985f46cb8e2518368cf735891c4559236ffb30d1a5a9086417"
+  },
+  "repository": "https://github.com/CaoimhConway/workpaperbench.git",
+  "scope": "Clean full public HTTPS checkout. Current 371-test local/hosted checks are separate and not rerun here. Future manifest helper bytes match its existing functional proof. Foreign-fork dispatch was not performed.",
+  "submitted_sql_executed_locally": false
+}

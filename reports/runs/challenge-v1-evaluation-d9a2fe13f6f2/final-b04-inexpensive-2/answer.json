@@ -1,0 +1,56 @@
+{
+  "task_id": "challenge-v1-b04",
+  "answers": [
+    {
+      "id": "jun30_reserves_usd",
+      "status": "answered",
+      "value": 471227699,
+      "unit": "usd",
+      "evidence": [
+        "b04:s04"
+      ],
+      "sql": "SELECT SUM(amount_usd) FROM reserve_components WHERE report_date='2025-06-30'",
+      "reason_code": null
+    },
+    {
+      "id": "jun30_reconciliation_usd",
+      "status": "answered",
+      "value": 0,
+      "unit": "usd",
+      "evidence": [
+        "b04:s04",
+        "b04:s03"
+      ],
+      "sql": "SELECT r.reported_reserve_usd - COALESCE((SELECT SUM(c.amount_usd) FROM reserve_components c WHERE c.report_date='2025-06-30'),0) FROM reported_balances r WHERE r.report_date='2025-06-30'",
+      "reason_code": null
+    },
+    {
+      "id": "coverage_change_bps",
+      "status": "answered",
+      "value": -71.3547283042226,
+      "unit": "basis_points",
+      "evidence": [
+        "b04:s01",
+        "b04:s03",
+        "b04:s02",
+        "b04:s04"
+      ],
+      "sql": "SELECT (SELECT CAST(SUM(c.amount_usd) AS REAL) FROM reserve_components c WHERE c.report_date='2025-06-30') / (SELECT r.circulating_rlusd FROM reported_balances r WHERE r.report_date='2025-06-30') * 10000 - (SELECT CAST(SUM(c.amount_usd) AS REAL) FROM reserve_components c WHERE c.report_date='2025-05-30') / (SELECT r.circulating_rlusd FROM reported_balances r WHERE r.report_date='2025-05-30') * 10000",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": [
+      "b04:s01",
+      "b04:s03",
+      "b04:s02",
+      "b04:s04"
+    ]
+  },
+  "context_evidence": [
+    "b04:s05",
+    "b04:s06"
+  ]
+}

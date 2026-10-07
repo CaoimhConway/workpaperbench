@@ -1,0 +1,62 @@
+{
+  "task_id": "challenge-v1-b02",
+  "answers": [
+    {
+      "id": "march31_reserves_usd",
+      "status": "answered",
+      "value": 60040707041,
+      "unit": "usd",
+      "evidence": [
+        "b02:s03",
+        "b02:s02"
+      ],
+      "sql": "SELECT SUM(amount_usd) FROM reserve_components WHERE report_date='2025-03-31'",
+      "reason_code": null
+    },
+    {
+      "id": "march31_circulation_usdc",
+      "status": "answered",
+      "value": 59975771715,
+      "unit": "usdc",
+      "evidence": [
+        "b02:s04"
+      ],
+      "sql": "SELECT (SELECT amount_usdc FROM circulation_inputs WHERE report_date='2025-03-31' AND measure='total supply') - (SELECT amount_usdc FROM circulation_inputs WHERE report_date='2025-03-31' AND measure='Tokens Allowed But Not Issued') - (SELECT amount_usdc FROM circulation_inputs WHERE report_date='2025-03-31' AND measure='Access Denied Tokens')",
+      "reason_code": null
+    },
+    {
+      "id": "march31_residual_usd",
+      "status": "answered",
+      "value": -1,
+      "unit": "usd",
+      "evidence": [
+        "b02:s03"
+      ],
+      "sql": "SELECT (SELECT reported_total_usd FROM reported_reserve_totals WHERE report_date='2025-03-31') - (SELECT SUM(amount_usd) FROM reserve_components WHERE report_date='2025-03-31')",
+      "reason_code": null
+    },
+    {
+      "id": "coverage_change_bps",
+      "status": "answered",
+      "value": -0.15759761976541498,
+      "unit": "basis_points",
+      "evidence": [
+        "b02:s03",
+        "b02:s02",
+        "b02:s04"
+      ],
+      "sql": "SELECT (SELECT (CAST(SUM(amount_usd) AS REAL) / ((SELECT CAST(amount_usdc AS REAL) FROM circulation_inputs WHERE report_date='2025-03-31' AND measure='total supply') - (SELECT CAST(amount_usdc AS REAL) FROM circulation_inputs WHERE report_date='2025-03-31' AND measure='Tokens Allowed But Not Issued') - (SELECT CAST(amount_usdc AS REAL) FROM circulation_inputs WHERE report_date='2025-03-31' AND measure='Access Denied Tokens')) - 1.0) * 10000 FROM reserve_components WHERE report_date='2025-03-31') - (SELECT (CAST(SUM(amount_usd) AS REAL) / ((SELECT CAST(amount_usdc AS REAL) FROM circulation_inputs WHERE report_date='2025-03-19' AND measure='total supply') - (SELECT CAST(amount_usdc AS REAL) FROM circulation_inputs WHERE report_date='2025-03-19' AND measure='Tokens Allowed But Not Issued') - (SELECT CAST(amount_usdc AS REAL) FROM circulation_inputs WHERE report_date='2025-03-19' AND measure='Access Denied Tokens')) - 1.0) * 10000 FROM reserve_components WHERE report_date='2025-03-19')",
+      "reason_code": null
+    }
+  ],
+  "conclusion": {
+    "verdict": "supported",
+    "reason_code": "supported_by_calculation",
+    "evidence": [
+      "b02:s01",
+      "b02:s02",
+      "b02:s03",
+      "b02:s04"
+    ]
+  }
+}

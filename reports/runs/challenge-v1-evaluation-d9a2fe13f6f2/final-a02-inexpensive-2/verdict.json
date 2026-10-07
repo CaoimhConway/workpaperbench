@@ -1,0 +1,81 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": false,
+    "financial_answer": true,
+    "robustness": true
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "adjusted_gross_margin": {
+        "availability": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "irrelevant_comparative_period": true,
+          "signed_component_gap": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "adjusted_gross_profit": {
+        "availability": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "irrelevant_comparative_period": true,
+          "signed_component_gap": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "margin_gap": {
+        "availability": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "irrelevant_comparative_period": true,
+          "signed_component_gap": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "revenue_gap": {
+        "availability": true,
+        "controls": {
+          "compatible_monetary_scale": true,
+          "irrelevant_comparative_period": true,
+          "signed_component_gap": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": false,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "revenue_gap:evidence",
+    "adjusted_gross_profit:evidence",
+    "adjusted_gross_margin:evidence",
+    "margin_gap:evidence",
+    "conclusion:evidence"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.1.0",
+  "strict_delivery_completion": false,
+  "verified_research_completion": false
+}
