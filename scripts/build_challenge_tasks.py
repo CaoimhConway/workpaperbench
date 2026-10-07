@@ -61,8 +61,10 @@ def package(definition, destination):
         directory.mkdir(parents=True)
     database(environment / "data.sqlite", definition["tables"])
     shutil.copyfile(environment / "data.sqlite", tests / "data.sqlite")
+    schema_source = (ROOT / "config/schemas/challenge-1.1.0.json" if scorer_version == "challenge-1.1.0"
+                     else DATASET / "schema.json")
     for directory in (environment, tests):
-        shutil.copyfile(DATASET / "schema.json", directory / "schema.json")
+        shutil.copyfile(schema_source, directory / "schema.json")
         write_json(directory / "evidence.json", definition["evidence"])
         (directory / "sources.md").write_text(definition["context"].rstrip() + "\n")
     shutil.copyfile(ROOT / "scripts/check_answer.py", environment / "check_answer.py")
