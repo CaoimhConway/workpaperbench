@@ -24,6 +24,8 @@ The final showcase rule is fixed before exposure. Follow the frozen schedule and
 
 ## Practical paths
 
+The evaluation freeze is `challenge-v1-evaluation-d9a2fe13f6f2`, with nine independent issuer/source-window groups and 54 scheduled full-dossier slots. It binds source, candidate, reference, schema, scorer, model, runtime, schedule and metric inputs before exposure. The current software gate comprises 88 hosted native controls across the twelve cases, with all expected verdicts and four isolation checks passing. Failed pre-exposure reference receipts are preserved.
+
 The key-free local demo reads a reference and evidence without executing submitted SQL:
 
 ```sh
