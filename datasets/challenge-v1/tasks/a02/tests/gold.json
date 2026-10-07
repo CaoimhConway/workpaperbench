@@ -1,0 +1,158 @@
+{
+  "answers": {
+    "adjusted_gross_margin": {
+      "evidence": [
+        [
+          "a02:s02",
+          "a02:s03"
+        ],
+        [
+          "a02:s02",
+          "a02:s04"
+        ],
+        [
+          "a02:s05",
+          "a02:s03"
+        ],
+        [
+          "a02:s05",
+          "a02:s04"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.005,
+      "unit": "percent",
+      "value": 75.0299298785702
+    },
+    "adjusted_gross_profit": {
+      "evidence": [
+        [
+          "a02:s03"
+        ],
+        [
+          "a02:s04"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.0001,
+      "unit": "usd_million",
+      "value": 26322.0
+    },
+    "margin_gap": {
+      "evidence": [
+        [
+          "a02:s01",
+          "a02:s02",
+          "a02:s03"
+        ],
+        [
+          "a02:s01",
+          "a02:s02",
+          "a02:s04"
+        ],
+        [
+          "a02:s01",
+          "a02:s05",
+          "a02:s03"
+        ],
+        [
+          "a02:s01",
+          "a02:s05",
+          "a02:s04"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.005,
+      "unit": "basis_points",
+      "value": -47.007012142979306
+    },
+    "revenue_gap": {
+      "evidence": [
+        [
+          "a02:s01",
+          "a02:s02"
+        ],
+        [
+          "a02:s01",
+          "a02:s05"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.0001,
+      "unit": "usd_million",
+      "value": 1932.0
+    }
+  },
+  "conclusion": {
+    "evidence": [
+      [
+        "a02:s01",
+        "a02:s02",
+        "a02:s03"
+      ],
+      [
+        "a02:s01",
+        "a02:s02",
+        "a02:s04"
+      ],
+      [
+        "a02:s01",
+        "a02:s05",
+        "a02:s03"
+      ],
+      [
+        "a02:s01",
+        "a02:s05",
+        "a02:s04"
+      ]
+    ],
+    "verdict": "contradicted"
+  },
+  "context_evidence_allowed": [
+    "a02:s06"
+  ],
+  "task_id": "challenge-v1-a02",
+  "scorer_version": "challenge-1.1.0",
+  "controls": [
+    {
+      "name": "compatible_monetary_scale",
+      "database": "control-1.sqlite",
+      "expected": {
+        "adjusted_gross_margin": 75.0299298785702,
+        "adjusted_gross_profit": 52644.0,
+        "margin_gap": -47.007012142979306,
+        "revenue_gap": 3864.0
+      }
+    },
+    {
+      "name": "signed_component_gap",
+      "database": "control-2.sqlite",
+      "expected": {
+        "adjusted_gross_margin": 75.10119149421355,
+        "adjusted_gross_profit": 26347.0,
+        "margin_gap": -39.88085057864432,
+        "revenue_gap": 1932.0
+      }
+    },
+    {
+      "name": "irrelevant_comparative_period",
+      "database": "control-3.sqlite",
+      "expected": {
+        "adjusted_gross_margin": 75.0299298785702,
+        "adjusted_gross_profit": 26322.0,
+        "margin_gap": -47.007012142979306,
+        "revenue_gap": 1932.0
+      }
+    }
+  ],
+  "hashes": {
+    "evidence.json": "9c7f2fd20c35a7c7c43b6f4b4410fabb64c4d7a77ec145e39b67b89a8254bb3b",
+    "control-2.sqlite": "753379b899bfab8f377cdc07cfe23baf98b77084b7a8e4a8fa6e6dbea95d1d4e",
+    "sources.md": "c02eaf1e91dd9c3d45ebc64724c81efc7399036ee2c34f50c831fbf5bb7c72f0",
+    "control-3.sqlite": "75ea33fb0f506acb172c6b18a6301fe6fbbffc61de91afdc2d86a6df1bd1f702",
+    "control-1.sqlite": "532745713aa78b78093ce92a11bb9c9d99a36978cd683da187355c6bf3649988",
+    "schema.json": "32b131ff8db1a194bd8bdba7b6e610c6e6806294bcdea28833d57f9a28eef5e5",
+    "verify.py": "a69eb6c71a44ff42df488696ecd76257c5ec1096f5ae9a5dd245cc4128a2b0e2",
+    "data.sqlite": "02427d422148460ba61c991136afb22111d54015294a69a8f8eded3d2d52e658"
+  }
+}
