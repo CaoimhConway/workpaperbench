@@ -1,0 +1,402 @@
+{
+  "answer_sha256": "635eb1d0b410321f63c20aa0363add2747c701de132a9456604cdef2b474ebc3",
+  "answer_status": "saved",
+  "arm": null,
+  "campaign": "final",
+  "commit_sha": "119520aa15e020802be255fe5ac83e2a0bfe6bb2",
+  "condition": "full",
+  "config_hash": "12361cad99654edb8c2143fe785b25ba3d3cff1665cf4266e6778e5095fc3b97",
+  "dataset_hash_count": 294,
+  "dataset_id": "challenge-v1",
+  "dataset_manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "execution_started_at": "2026-10-07T04:51:42.046552+00:00",
+  "experiment_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "finished_at": "2026-10-07T04:55:29.260172+00:00",
+  "freeze_hash_count": 294,
+  "freeze_manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "github_run_attempt": "1",
+  "github_run_id": "37568399652",
+  "harbor_commit": "1e5c5c6db929a10a140d05e606882c671ae20729",
+  "harbor_metrics": {
+    "agent_execution_seconds": 75.379,
+    "agent_setup_seconds": 104.481,
+    "environment_setup_seconds": 3.015,
+    "n_input_tokens": 0,
+    "n_output_tokens": 0,
+    "verifier_seconds": 14.883
+  },
+  "harbor_native_version_fix": {
+    "change": "Pinned native CLI version, OpenRouter routing and oneshot export corrections, plus observer enablement after native config generation when its ledger is requested.",
+    "checked_before_provider_access": true,
+    "corrected_module_sha256": "9aa3157ba2fc1aff3a11a8ec833bbc3eb01506630ffd962e124cf39e362db5e7",
+    "original_module_sha256": "012e980302b26641dcf77f31fe71a368b2022b098619853addd015c5e18e47c6"
+  },
+  "harbor_version": "0.23.0",
+  "hermes_checkout_commit_verified": true,
+  "hermes_release_tag": "v0.21.4+canary.20261004T084456Z",
+  "hermes_resolved_release_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "hermes_runtime_version": {
+    "checked_before_solving": true,
+    "checkout_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "expected_commit": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+    "matches_pin": true,
+    "native_api_retry_observer": {
+      "enabled": true,
+      "registered_hook_count": 3,
+      "registration_smoke": true,
+      "staged": true
+    }
+  },
+  "model": "qwen/qwen3.6-35b-a3b",
+  "model_harbor_model": "openrouter/qwen/qwen3.6-35b-a3b",
+  "model_key": "inexpensive",
+  "model_provider": "openrouter",
+  "model_route_policy": "OpenRouter default routing among currently compatible tool-capable endpoints. Preview/model routing may change.",
+  "native_api_retry_observer": {
+    "capture_completeness": "not_guaranteed",
+    "capture_limitations": "hooks_fail_open_upstream_internal_retries_and_routes_unobserved",
+    "capture_status": "captured",
+    "capture_truncated_possible": false,
+    "event_count": 21,
+    "events": [
+      {
+        "event": "observer_registered",
+        "observed_at": 1791348819.6455142
+      },
+      {
+        "api_call_count": 1,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348823.2839031,
+        "request_id": "19267b825e1cbde3fb6e597bba8e140bb2c59e7a3fdd056a16186eb47cb28403",
+        "retry_count": 0,
+        "started_at": 1791348823.2265568
+      },
+      {
+        "api_call_count": 1,
+        "ended_at": 1791348826.9469066,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348826.9510686,
+        "request_id": "19267b825e1cbde3fb6e597bba8e140bb2c59e7a3fdd056a16186eb47cb28403",
+        "retry_count": null,
+        "started_at": 1791348823.2265568
+      },
+      {
+        "api_call_count": 2,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348827.053484,
+        "request_id": "3cabc9bfbc0f707e8b67abb0d711fc5e98d72d3d19741d4228d7ee7ad7a99a05",
+        "retry_count": 0,
+        "started_at": 1791348827.0510726
+      },
+      {
+        "api_call_count": 2,
+        "ended_at": 1791348830.8489945,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348830.8890893,
+        "request_id": "3cabc9bfbc0f707e8b67abb0d711fc5e98d72d3d19741d4228d7ee7ad7a99a05",
+        "retry_count": null,
+        "started_at": 1791348827.0510726
+      },
+      {
+        "api_call_count": 3,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348830.964753,
+        "request_id": "32ddd5eb36c99c6df53752ef870e51a7ba7c669ff0a613c5ba3b3456a1207961",
+        "retry_count": 0,
+        "started_at": 1791348830.9623458
+      },
+      {
+        "api_call_count": 3,
+        "ended_at": 1791348834.9797006,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348834.983285,
+        "request_id": "32ddd5eb36c99c6df53752ef870e51a7ba7c669ff0a613c5ba3b3456a1207961",
+        "retry_count": null,
+        "started_at": 1791348830.9623458
+      },
+      {
+        "api_call_count": 4,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348835.0475948,
+        "request_id": "826b73fe9a56c9091346dd335b640b00b32831e6bc9ad8f46204cd4406e081e0",
+        "retry_count": 0,
+        "started_at": 1791348835.045081
+      },
+      {
+        "api_call_count": 4,
+        "ended_at": 1791348839.2458606,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348839.2504747,
+        "request_id": "826b73fe9a56c9091346dd335b640b00b32831e6bc9ad8f46204cd4406e081e0",
+        "retry_count": null,
+        "started_at": 1791348835.045081
+      },
+      {
+        "api_call_count": 5,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348839.2979913,
+        "request_id": "26447fc8643c6ac2823e5920baea026c45325d0d363ca8df5a65d54eeb1bc0d2",
+        "retry_count": 0,
+        "started_at": 1791348839.2954724
+      },
+      {
+        "api_call_count": 5,
+        "ended_at": 1791348861.806355,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348861.8107517,
+        "request_id": "26447fc8643c6ac2823e5920baea026c45325d0d363ca8df5a65d54eeb1bc0d2",
+        "retry_count": null,
+        "started_at": 1791348839.2954724
+      },
+      {
+        "api_call_count": 6,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348861.8603501,
+        "request_id": "906c4fc1ea42c652ca39eab1f23ea94eba514e319c9630daba4606ba8d42a5f4",
+        "retry_count": 0,
+        "started_at": 1791348861.857176
+      },
+      {
+        "api_call_count": 6,
+        "ended_at": 1791348862.8426592,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348862.846231,
+        "request_id": "906c4fc1ea42c652ca39eab1f23ea94eba514e319c9630daba4606ba8d42a5f4",
+        "retry_count": null,
+        "started_at": 1791348861.857176
+      },
+      {
+        "api_call_count": 7,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348862.8832595,
+        "request_id": "a2abf62048e7f93937b5d996f6c6928cd6b2e5029ab75c1ec1ffa82ea169def6",
+        "retry_count": 0,
+        "started_at": 1791348862.8799841
+      },
+      {
+        "api_call_count": 7,
+        "ended_at": 1791348874.5980585,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348874.6018212,
+        "request_id": "a2abf62048e7f93937b5d996f6c6928cd6b2e5029ab75c1ec1ffa82ea169def6",
+        "retry_count": null,
+        "started_at": 1791348862.8799841
+      },
+      {
+        "api_call_count": 8,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348874.687598,
+        "request_id": "2e1a51030a26352b61be90fc1e0e5fcce5c30cf6c2acb05d9deaff53c22cfff7",
+        "retry_count": 0,
+        "started_at": 1791348874.6841557
+      },
+      {
+        "api_call_count": 8,
+        "ended_at": 1791348876.006258,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348876.0100493,
+        "request_id": "2e1a51030a26352b61be90fc1e0e5fcce5c30cf6c2acb05d9deaff53c22cfff7",
+        "retry_count": null,
+        "started_at": 1791348874.6841557
+      },
+      {
+        "api_call_count": 9,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348876.1937459,
+        "request_id": "69cc2f9d90b41e5820b6be03e1e1276dacd9b808cdc0dcacd3ed7975fcc6c854",
+        "retry_count": 0,
+        "started_at": 1791348876.1903598
+      },
+      {
+        "api_call_count": 9,
+        "ended_at": 1791348884.7208982,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348884.7249558,
+        "request_id": "69cc2f9d90b41e5820b6be03e1e1276dacd9b808cdc0dcacd3ed7975fcc6c854",
+        "retry_count": null,
+        "started_at": 1791348876.1903598
+      },
+      {
+        "api_call_count": 10,
+        "attempt_ordinal": 1,
+        "event": "pre_api_request",
+        "max_retries": null,
+        "observed_at": 1791348884.7818286,
+        "request_id": "e0259eddcdc584732b44ed23f03c83e7b0b55cb7489af0bc1e7ff73bc560a517",
+        "retry_count": 0,
+        "started_at": 1791348884.778435
+      },
+      {
+        "api_call_count": 10,
+        "ended_at": 1791348888.1565604,
+        "event": "post_api_request",
+        "max_retries": null,
+        "observed_at": 1791348888.160104,
+        "request_id": "e0259eddcdc584732b44ed23f03c83e7b0b55cb7489af0bc1e7ff73bc560a517",
+        "retry_count": null,
+        "started_at": 1791348884.778435
+      }
+    ],
+    "observed_additional_attempts": 0,
+    "observer_registered": true,
+    "pre_request_count": 10
+  },
+  "native_command": "Harbor Trial.create / Trial.run with native Hermes",
+  "native_return_code": 0,
+  "previously_exposed": false,
+  "provider_after": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 14.708726207,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 14.708726207,
+    "reset_is_null": true,
+    "usage_usd": 5.291273793
+  },
+  "provider_before": {
+    "byok_usage_usd": 0.0,
+    "funded_remaining_usd": 14.787176457000001,
+    "includes_byok": false,
+    "lifetime_limit_usd": 20.0,
+    "remaining_usd": 14.725044457,
+    "reset_is_null": true,
+    "usage_usd": 5.274955543
+  },
+  "provider_cost_delta_usd": 0.01631825,
+  "raw_artifact_status": "screened_original_bytes",
+  "raw_sha256": "ad02799b50f2fb66e939446352eb65295630c9cb7c673eaafe9b19bb948ca44e",
+  "remaining_planned_slots": 39,
+  "remaining_reserved_slots": 39,
+  "remaining_reserved_usd": 9.6,
+  "repetition": 1,
+  "reservation_usd_per_slot": 0.1,
+  "retained_sha256": "635eb1d0b410321f63c20aa0363add2747c701de132a9456604cdef2b474ebc3",
+  "run_id": "37568399652",
+  "slot_id": "final-c03-inexpensive-1",
+  "source_group": "block-fy2024-fy2023-bitcoin-revenue-costs",
+  "split": "evaluation",
+  "started_at": "2026-10-07T04:47:24.615761+00:00",
+  "status": "task_failed",
+  "task": "challenge-v1-c03",
+  "task_origin": "primary_source_factual_extract",
+  "token_counts_status": "unreported_or_native_zero_fields",
+  "tool_event_counts": {
+    "read_file": 4,
+    "terminal": 7,
+    "write_file": 1
+  },
+  "tool_evidence": {
+    "calls": 12,
+    "observations": 12,
+    "omitted_items": 0,
+    "status": "screened_tools"
+  },
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": false,
+      "robustness": false
+    },
+    "complete": false,
+    "details": {
+      "claims": {
+        "bitcoin_gross_profit_2023_usd_thousand": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_gross_profit_2024_usd_thousand": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_gross_profit_growth_pct": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": true,
+            "bitcoin_cost_change_2024": true,
+            "bitcoin_sales_change": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "bitcoin_share_of_total_net_revenue_increase_pct": {
+          "availability": true,
+          "controls": {
+            "bitcoin_cost_change_2023": false,
+            "bitcoin_cost_change_2024": false,
+            "bitcoin_sales_change": false
+          },
+          "evidence": true,
+          "numerical": false,
+          "original_replay": false,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [
+      "bitcoin_share_of_total_net_revenue_increase_pct:numerical",
+      "bitcoin_share_of_total_net_revenue_increase_pct:original_replay",
+      "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_sales_change",
+      "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_cost_change_2024",
+      "bitcoin_share_of_total_net_revenue_increase_pct:control:bitcoin_cost_change_2023"
+    ],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.0",
+    "strict_delivery_completion": false,
+    "verified_research_completion": false
+  }
+}

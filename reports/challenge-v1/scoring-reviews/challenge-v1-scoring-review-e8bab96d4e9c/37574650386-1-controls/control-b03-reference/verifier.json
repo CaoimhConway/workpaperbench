@@ -1,0 +1,75 @@
+{
+  "scorer_version": "challenge-1.1.2",
+  "complete": true,
+  "verified_research_completion": true,
+  "strict_delivery_completion": true,
+  "checks": {
+    "delivery": true,
+    "financial_answer": true,
+    "evidence": true,
+    "robustness": true
+  },
+  "details": {
+    "claims": {
+      "reserve_assets_usd": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "bitcoin_fair_value_change": true,
+          "company_held_token_change": true,
+          "release_liability_alignment": true
+        }
+      },
+      "net_token_liability_usd": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "bitcoin_fair_value_change": true,
+          "company_held_token_change": true,
+          "release_liability_alignment": true
+        }
+      },
+      "company_asset_excess_usd": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "bitcoin_fair_value_change": true,
+          "company_held_token_change": true,
+          "release_liability_alignment": true
+        }
+      },
+      "release_liability_delta_usd": {
+        "availability": true,
+        "unit": true,
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "controls": {
+          "bitcoin_fair_value_change": true,
+          "company_held_token_change": true,
+          "release_liability_alignment": true
+        }
+      }
+    },
+    "conclusion": {
+      "verdict": true,
+      "evidence": true
+    }
+  },
+  "errors": [],
+  "isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  }
+}

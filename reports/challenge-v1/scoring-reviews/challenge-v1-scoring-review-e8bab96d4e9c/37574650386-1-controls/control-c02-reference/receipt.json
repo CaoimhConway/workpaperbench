@@ -1,0 +1,118 @@
+{
+  "artifact_audit_sha256": null,
+  "base_scorer_sha256": "77f41466c3a65283481907bada217f75fa92ea0ccf92355c396e7c216e57c34c",
+  "commit_sha": "9e23477294d3b7de4dd4dfa4e63208cd0650fce1",
+  "effective_gold_sha256": "1335183a4b32d5a1493ec912a981100e7b2bafd3f3101faa29acb5c230c16807",
+  "effective_task_sha256": "503a455c7ee3532beeff090d59e852c9e41c4080aa261e43035cd0c641420379",
+  "input_file": "datasets/challenge-v1/tasks/c02/tests/reference.json",
+  "input_sha256": "656f374e58866b5c90e40abda5dddfab45b7e0af0dc5cba635820d9090a460d5",
+  "input_source": "authored_control",
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "manifest_id": "challenge-v1-evaluation-d9a2fe13f6f2",
+  "manifest_sha256": "dd7f843e345b3e8e529f07beff923081c2dc6640b476d386daa7af9f47dc9b64",
+  "model_key": null,
+  "prior_verdict": null,
+  "prior_verdict_sha256": null,
+  "record_path": null,
+  "record_sha256": null,
+  "repetition": null,
+  "review_bundle_sha256": "11d47ab5b07226f057ac7591dd0c5a9ea2372054dbe37a47e141e49f0894d0a1",
+  "review_content_hash": "e8bab96d4e9c62873dc65dc78efa9caefbf723712e582dd8f3faf5fb1c752a63",
+  "review_id": "challenge-v1-scoring-review-e8bab96d4e9c",
+  "review_scorer_sha256": "a95603bdb04a9ed253d5b14ea82ee958132551eebc4f47815bc556fd722db1a5",
+  "run_attempt": "1",
+  "run_id": "37574650386",
+  "scorer_version": "challenge-1.1.2",
+  "slot_id": "control-c02-reference",
+  "source_gold_sha256": "3b88beb155d6cbf2f860065b0dd181f9ce9fadf78a4fc213271a597f2c7672c9",
+  "source_task_sha256": "a88b6ea1001c1fe91dd256362ce5f3ade184e2fb206e5381b22a451e2a7ce9be",
+  "split": "evaluation",
+  "task_id": "challenge-v1-c02",
+  "verdict": {
+    "checks": {
+      "delivery": true,
+      "evidence": true,
+      "financial_answer": true,
+      "robustness": true
+    },
+    "complete": true,
+    "details": {
+      "claims": {
+        "business_payment_count_2024": {
+          "availability": true,
+          "evidence": true,
+          "unit": true
+        },
+        "proxy_change_bps": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "spot_trading_volume_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_growth_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        },
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+          "availability": true,
+          "controls": {
+            "2024_spot_volume_shift": true,
+            "consumer_transaction_revenue_shift": true,
+            "recast_2023_transaction_revenue_shift": true
+          },
+          "evidence": true,
+          "numerical": true,
+          "original_replay": true,
+          "unit": true
+        }
+      },
+      "conclusion": {
+        "evidence": true,
+        "verdict": true
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_namespace_none": true,
+      "network_probe_blocked": true,
+      "no_docker_socket": true,
+      "no_inference_key": true
+    },
+    "scorer_version": "challenge-1.1.2",
+    "strict_delivery_completion": true,
+    "verified_research_completion": true
+  },
+  "verifier_bytes_sha256": "e39f8f72bb6416c24dd8ad67aae2604a449be243ab0f8a317f0430175421c76a",
+  "verifier_path": "reports/challenge-v1/scoring-reviews/challenge-v1-scoring-review-e8bab96d4e9c/37574650386-1-controls/control-c02-reference/verifier.json"
+}

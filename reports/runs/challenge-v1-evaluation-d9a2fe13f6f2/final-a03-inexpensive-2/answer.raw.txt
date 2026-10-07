@@ -1,0 +1,43 @@
+{
+  "task_id": "challenge-v1-a03",
+  "answers": [
+    {
+      "id": "q1_revenue",
+      "status": "answered",
+      "value": 65585.0,
+      "unit": "usd_million",
+      "evidence": ["a03:s02", "a03:s03"],
+      "sql": "SELECT (SELECT amount FROM financials WHERE measure='Total revenue' AND months=6 AND section_id='a03:s03') - (SELECT amount FROM financials WHERE measure='Total revenue' AND months=3 AND section_id='a03:s02');"
+    },
+    {
+      "id": "q1_operating_income",
+      "status": "answered",
+      "value": 30552.0,
+      "unit": "usd_million",
+      "evidence": ["a03:s02", "a03:s03"],
+      "sql": "SELECT (SELECT amount FROM financials WHERE measure='Operating income' AND months=6 AND section_id='a03:s03') - (SELECT amount FROM financials WHERE measure='Operating income' AND months=3 AND section_id='a03:s02');"
+    },
+    {
+      "id": "margin_change",
+      "status": "answered",
+      "value": -112.63,
+      "unit": "basis_points",
+      "evidence": ["a03:s02", "a03:s03"],
+      "sql": "SELECT ((SELECT amount FROM financials WHERE measure='Operating income' AND months=3 AND section_id='a03:s02') / (SELECT amount FROM financials WHERE measure='Total revenue' AND months=3 AND section_id='a03:s02') - ((SELECT amount FROM financials WHERE measure='Operating income' AND months=6 AND section_id='a03:s03') - (SELECT amount FROM financials WHERE measure='Operating income' AND months=3 AND section_id='a03:s02')) / ((SELECT amount FROM financials WHERE measure='Total revenue' AND months=6 AND section_id='a03:s03') - (SELECT amount FROM financials WHERE measure='Total revenue' AND months=3 AND section_id='a03:s02'))) * 10000;"
+    },
+    {
+      "id": "azure_gap",
+      "status": "answered",
+      "value": -1.0,
+      "unit": "percentage_points",
+      "evidence": ["a03:s01", "a03:s04"],
+      "sql": "SELECT (SELECT constant_currency_percent FROM growth WHERE business='Azure and other cloud services') - (SELECT high FROM guidance WHERE business='Azure and other cloud services');"
+    }
+  ],
+  "conclusion": {
+    "verdict": "contradicted",
+    "reason_code": "contradicted_by_calculation",
+    "evidence": ["a03:s01", "a03:s04"]
+  },
+  "context_evidence": ["a03:s06"]
+}

@@ -1,0 +1,75 @@
+{
+  "checks": {
+    "delivery": true,
+    "evidence": false,
+    "financial_answer": true,
+    "robustness": true
+  },
+  "complete": false,
+  "details": {
+    "claims": {
+      "lagged_nominal_payment_volume_growth_pct": {
+        "availability": true,
+        "controls": {
+          "lagged_volume_2023_shift": true,
+          "service_revenue_2024_shift": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "service_growth_minus_volume_growth_pp": {
+        "availability": true,
+        "controls": {
+          "lagged_volume_2023_shift": true,
+          "service_revenue_2024_shift": true
+        },
+        "evidence": false,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "service_revenue_growth_pct": {
+        "availability": true,
+        "controls": {
+          "lagged_volume_2023_shift": true,
+          "service_revenue_2024_shift": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      },
+      "service_revenue_to_lagged_volume_proxy_2024_pct": {
+        "availability": true,
+        "controls": {
+          "lagged_volume_2023_shift": true,
+          "service_revenue_2024_shift": true
+        },
+        "evidence": true,
+        "numerical": true,
+        "original_replay": true,
+        "unit": true
+      }
+    },
+    "conclusion": {
+      "evidence": false,
+      "verdict": true
+    }
+  },
+  "errors": [
+    "lagged_nominal_payment_volume_growth_pct:evidence",
+    "service_growth_minus_volume_growth_pp:evidence",
+    "conclusion:evidence"
+  ],
+  "isolation": {
+    "network_namespace_none": true,
+    "network_probe_blocked": true,
+    "no_docker_socket": true,
+    "no_inference_key": true
+  },
+  "scorer_version": "challenge-1.1.0",
+  "strict_delivery_completion": false,
+  "verified_research_completion": false
+}
