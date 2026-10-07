@@ -1,0 +1,671 @@
+{
+  "scorer_version": "challenge-1.1.0",
+  "task_id": "challenge-v1-c04",
+  "family": "C",
+  "source_group": "visa-fy2024-fy2023-service-revenue-and-payment-volume",
+  "split": "evaluation",
+  "origin": "primary_source_factual_extract",
+  "previously_exposed": false,
+  "control_origin": "synthetic_changed_input",
+  "instruction": "For Visa FY2024 versus FY2023, report service_revenue_growth_pct, lagged_nominal_payment_volume_growth_pct and service_growth_minus_volume_growth_pp. Also report service_revenue_to_lagged_volume_proxy_2024_pct using annual service revenue and the nominal payment-volume window the filing associates with it. Assess: this aggregate proxy establishes a change in Visa contractual service-fee pricing.",
+  "context": "# Visa fiscal 2024 and fiscal 2023 disclosures\n\nc04:s01 - Annual revenue categories (USD million)\nFY2024, year ended September 30: service revenue 16,114, data processing revenue 17,714, international transaction revenue 12,665, other revenue 3,197, client incentives (13,764), net revenue 35,926.\nFY2023: service revenue 14,826, data processing revenue 16,007, international transaction revenue 11,638, other revenue 2,479, client incentives (12,297), net revenue 32,653. Client incentives are negative in the net revenue bridge.\n\nc04:s02 - Nominal payments volume (USD billion)\nVisa total: 12,984 for the twelve months ended June 30, 2024 and 12,087 for the twelve months ended June 30, 2023. The source table separates U.S. and international volumes and reports Visa totals.\n\nc04:s03 - Fiscal-year processed transactions\nVisa-processed transactions were 233,758 million for the fiscal year ended September 30, 2024 and 212,579 million for FY2023. This is a separate activity measure with a different period window from the nominal payment-volume table.\n\nc04:s04 - Service revenue timing\nService revenue for a quarter is primarily assessed using the prior quarter's nominal payments volume. Visa states that service revenue reported for the twelve months ended September 30, 2024, 2023 and 2022 was based on nominal client-reported payments volume for the twelve months ended June 30 of each year. The Q4 release separately identifies June-ended volume underlying Q4 service revenue and September-quarter volume.\n\nc04:s05 - Scope of payment volume\nPayments volume is an aggregate purchase-value measure for Visa-branded cards and other form factors and excludes Europe co-badged volume. Nominal volume converts client-reported local-currency volume using Visa-established U.S.-dollar exchange rates. It is a dollar amount, not a transaction count.\n\nc04:s06 - Fiscal Q4 timing and activity\nThe FY2024 release says fiscal Q4 service revenue was USD 4.2 billion, up 8%, and was recognized based on prior-quarter payment volume. Payment volume for the three months ended June 30, 2024, which underlay fiscal Q4 service revenue, rose 7% in constant dollars. Volume for the three months ended September 30 rose 8%.\n\n## Data dictionary\n`period_end` refers to the stated flow window end, with `months` equal to twelve. Annual revenue rows end September 30 and use USD million. Payment volume rows end June 30 and use USD billion. Processed transaction rows end September 30 and use millions of transactions.\n",
+  "tables": {
+    "revenues": {
+      "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+      "rows": [
+        [
+          "2024-09-30",
+          12,
+          "Service revenue",
+          16114.0,
+          "usd_million",
+          "c04:s01"
+        ],
+        [
+          "2024-09-30",
+          12,
+          "Data processing revenue",
+          17714.0,
+          "usd_million",
+          "c04:s01"
+        ],
+        [
+          "2024-09-30",
+          12,
+          "International transaction revenue",
+          12665.0,
+          "usd_million",
+          "c04:s01"
+        ],
+        [
+          "2024-09-30",
+          12,
+          "Other revenue",
+          3197.0,
+          "usd_million",
+          "c04:s01"
+        ],
+        [
+          "2024-09-30",
+          12,
+          "Client incentives",
+          -13764.0,
+          "usd_million",
+          "c04:s01"
+        ],
+        [
+          "2024-09-30",
+          12,
+          "Net revenue",
+          35926.0,
+          "usd_million",
+          "c04:s01"
+        ],
+        [
+          "2023-09-30",
+          12,
+          "Service revenue",
+          14826.0,
+          "usd_million",
+          "c04:s01"
+        ],
+        [
+          "2023-09-30",
+          12,
+          "Data processing revenue",
+          16007.0,
+          "usd_million",
+          "c04:s01"
+        ],
+        [
+          "2023-09-30",
+          12,
+          "International transaction revenue",
+          11638.0,
+          "usd_million",
+          "c04:s01"
+        ],
+        [
+          "2023-09-30",
+          12,
+          "Other revenue",
+          2479.0,
+          "usd_million",
+          "c04:s01"
+        ],
+        [
+          "2023-09-30",
+          12,
+          "Client incentives",
+          -12297.0,
+          "usd_million",
+          "c04:s01"
+        ],
+        [
+          "2023-09-30",
+          12,
+          "Net revenue",
+          32653.0,
+          "usd_million",
+          "c04:s01"
+        ]
+      ]
+    },
+    "activity_metrics": {
+      "schema": "CREATE TABLE activity_metrics(period_end TEXT,months INTEGER,metric TEXT,amount REAL,unit TEXT,section_id TEXT)",
+      "rows": [
+        [
+          "2024-06-30",
+          12,
+          "Nominal payments volume",
+          12984.0,
+          "usd_billion",
+          "c04:s02"
+        ],
+        [
+          "2023-06-30",
+          12,
+          "Nominal payments volume",
+          12087.0,
+          "usd_billion",
+          "c04:s02"
+        ],
+        [
+          "2024-09-30",
+          12,
+          "Visa-processed transactions",
+          233758.0,
+          "million_transactions",
+          "c04:s03"
+        ],
+        [
+          "2023-09-30",
+          12,
+          "Visa-processed transactions",
+          212579.0,
+          "million_transactions",
+          "c04:s03"
+        ]
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "id": "c04:s01",
+      "title": "Visa annual net revenue categories",
+      "locator": "Item 7, Net Revenue table, page 43",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000058/v-20240930.htm",
+      "publication": "2024-11-13, SEC filing accepted 17:14:01 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:44.711713+00:00",
+      "source_bytes_sha256": "fd79f907a3bf6ea8a84553917fe419f74a7b363238dfb8e01f4e4e321b208878",
+      "capture_sha256": "652083f320187fcb14ac68ca56e915a1b0b9220f2960427dddfb47845e68417f",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Years ended September 30, 2024 and 2023",
+      "text": "USD million. FY2024 service revenue 16,114, data processing revenue 17,714, international transaction revenue 12,665, other revenue 3,197, client incentives (13,764), net revenue 35,926. FY2023 amounts were 14,826, 16,007, 11,638, 2,479, (12,297), and 32,653."
+    },
+    {
+      "id": "c04:s02",
+      "title": "Visa nominal payments volume",
+      "locator": "Item 7, Key Business Drivers, nominal payments volume table, page 42",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000058/v-20240930.htm",
+      "publication": "2024-11-13, SEC filing accepted 17:14:01 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:44.711713+00:00",
+      "source_bytes_sha256": "fd79f907a3bf6ea8a84553917fe419f74a7b363238dfb8e01f4e4e321b208878",
+      "capture_sha256": "652083f320187fcb14ac68ca56e915a1b0b9220f2960427dddfb47845e68417f",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Twelve months ended June 30, 2024 and 2023",
+      "text": "Total nominal payments volume was USD 12,984 billion for the twelve months ended June 30, 2024 and USD 12,087 billion for the twelve months ended June 30, 2023. The table reports U.S., international and Visa totals."
+    },
+    {
+      "id": "c04:s03",
+      "title": "Visa-processed transactions",
+      "locator": "Item 7, Key Business Drivers, processed transactions table, page 43",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000058/v-20240930.htm",
+      "publication": "2024-11-13, SEC filing accepted 17:14:01 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:44.711713+00:00",
+      "source_bytes_sha256": "fd79f907a3bf6ea8a84553917fe419f74a7b363238dfb8e01f4e4e321b208878",
+      "capture_sha256": "652083f320187fcb14ac68ca56e915a1b0b9220f2960427dddfb47845e68417f",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Fiscal years ended September 30, 2024 and 2023",
+      "text": "Visa-processed transactions were 233,758 million in FY2024 and 212,579 million in FY2023. They are measured for the fiscal years ended September 30, unlike nominal payments volume, which is shown for twelve months ended June 30."
+    },
+    {
+      "id": "c04:s04",
+      "title": "Prior-quarter service revenue timing",
+      "locator": "Item 7, Key Business Drivers, footnote (1), page 43",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000058/v-20240930.htm",
+      "publication": "2024-11-13, SEC filing accepted 17:14:01 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:44.711713+00:00",
+      "source_bytes_sha256": "fd79f907a3bf6ea8a84553917fe419f74a7b363238dfb8e01f4e4e321b208878",
+      "capture_sha256": "652083f320187fcb14ac68ca56e915a1b0b9220f2960427dddfb47845e68417f",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Annual service revenue reported for FY2024, FY2023 and FY2022",
+      "text": "Service revenue in a given quarter is primarily assessed on nominal payments volume in the prior quarter. The filing states service revenue reported for the twelve months ended September 30, 2024, 2023 and 2022 was based on nominal payments volume reported by financial institution clients for the twelve months ended June 30, 2024, 2023 and 2022, respectively."
+    },
+    {
+      "id": "c04:s05",
+      "title": "Nominal payment-volume definition and scope",
+      "locator": "Item 7, Key Business Drivers, definitions and volume footnotes, pages 42-43",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000058/v-20240930.htm",
+      "publication": "2024-11-13, SEC filing accepted 17:14:01 (index does not label timezone)",
+      "retrieved_at": "2026-10-06T22:33:44.711713+00:00",
+      "source_bytes_sha256": "fd79f907a3bf6ea8a84553917fe419f74a7b363238dfb8e01f4e4e321b208878",
+      "capture_sha256": "652083f320187fcb14ac68ca56e915a1b0b9220f2960427dddfb47845e68417f",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Annual volume measurement conventions",
+      "text": "Payments volume is the aggregate dollar amount of purchases made with Visa-branded cards and other form factors, and excludes Europe co-badged volume. Nominal payments volume is denominated in U.S. dollars using Visa-established exchange rates applied to local-currency volume reported by clients. Visa notes some tables may not recalculate exactly because of rounding."
+    },
+    {
+      "id": "c04:s06",
+      "title": "Visa Q4 service revenue and current-quarter metrics",
+      "locator": "Fiscal fourth-quarter results discussion, page 2",
+      "origin": "https://www.sec.gov/Archives/edgar/data/1403161/000140316124000053/q42024earningsrelease.htm",
+      "publication": "2024-10-29, release date shown in the filing",
+      "retrieved_at": "2026-10-06T22:33:43.961578+00:00",
+      "source_bytes_sha256": "6cb253b5d331756e377bd3cd802383dbde82fc868a625ab85f15c59c22f065e7",
+      "capture_sha256": "652083f320187fcb14ac68ca56e915a1b0b9220f2960427dddfb47845e68417f",
+      "redistribution": "Factual table amounts, headings and concise source definitions only. Full issuer documents remain private and are not redistributed.",
+      "period": "Three months ended September 30, 2024",
+      "text": "The release says payments volume for the three months ended June 30, 2024, on which fiscal Q4 service revenue is recognized, increased 7% over prior year in constant dollars. September-quarter payment volume increased 8%. Fiscal Q4 service revenue was USD 4.2 billion, up 8%, and is recognized based on payments volume in the prior quarter."
+    }
+  ],
+  "gold": {
+    "answers": {
+      "service_revenue_growth_pct": {
+        "status": "answered",
+        "value": 8.687440982058545,
+        "unit": "percent",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "c04:s01",
+            "c04:s04"
+          ]
+        ]
+      },
+      "lagged_nominal_payment_volume_growth_pct": {
+        "status": "answered",
+        "value": 7.421196326631919,
+        "unit": "percent",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "c04:s02",
+            "c04:s04",
+            "c04:s05"
+          ]
+        ]
+      },
+      "service_growth_minus_volume_growth_pp": {
+        "status": "answered",
+        "value": 1.2662446554266271,
+        "unit": "percentage_points",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "c04:s01",
+            "c04:s02",
+            "c04:s04",
+            "c04:s05"
+          ]
+        ]
+      },
+      "service_revenue_to_lagged_volume_proxy_2024_pct": {
+        "status": "answered",
+        "value": 0.12410659272951324,
+        "unit": "percent",
+        "tolerance": 0.005,
+        "evidence": [
+          [
+            "c04:s01",
+            "c04:s02",
+            "c04:s04",
+            "c04:s05"
+          ]
+        ]
+      }
+    },
+    "conclusion": {
+      "verdict": "not_established",
+      "evidence": [
+        [
+          "c04:s01",
+          "c04:s02",
+          "c04:s04",
+          "c04:s05",
+          "c04:s06"
+        ]
+      ]
+    },
+    "context_evidence_allowed": []
+  },
+  "reference": {
+    "task_id": "challenge-v1-c04",
+    "answers": [
+      {
+        "id": "service_revenue_growth_pct",
+        "status": "answered",
+        "value": 8.687440982058545,
+        "unit": "percent",
+        "reason_code": null,
+        "evidence": [
+          "c04:s01",
+          "c04:s04"
+        ],
+        "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/(SELECT amount FROM revenues WHERE period_end='2023-09-30' AND months=12 AND category='Service revenue')-1.0)"
+      },
+      {
+        "id": "lagged_nominal_payment_volume_growth_pct",
+        "status": "answered",
+        "value": 7.421196326631919,
+        "unit": "percent",
+        "reason_code": null,
+        "evidence": [
+          "c04:s02",
+          "c04:s04",
+          "c04:s05"
+        ],
+        "sql": "100.0*((SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')/(SELECT amount FROM activity_metrics WHERE period_end='2023-06-30' AND months=12 AND metric='Nominal payments volume')-1.0)"
+      },
+      {
+        "id": "service_growth_minus_volume_growth_pp",
+        "status": "answered",
+        "value": 1.2662446554266271,
+        "unit": "percentage_points",
+        "reason_code": null,
+        "evidence": [
+          "c04:s01",
+          "c04:s02",
+          "c04:s04",
+          "c04:s05"
+        ],
+        "sql": "100.0*((SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/(SELECT amount FROM revenues WHERE period_end='2023-09-30' AND months=12 AND category='Service revenue')-1.0)-100.0*((SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')/(SELECT amount FROM activity_metrics WHERE period_end='2023-06-30' AND months=12 AND metric='Nominal payments volume')-1.0)"
+      },
+      {
+        "id": "service_revenue_to_lagged_volume_proxy_2024_pct",
+        "status": "answered",
+        "value": 0.12410659272951324,
+        "unit": "percent",
+        "reason_code": null,
+        "evidence": [
+          "c04:s01",
+          "c04:s02",
+          "c04:s04",
+          "c04:s05"
+        ],
+        "sql": "100.0*(SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/1000.0/(SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')"
+      }
+    ],
+    "conclusion": {
+      "verdict": "not_established",
+      "reason_code": null,
+      "evidence": [
+        "c04:s01",
+        "c04:s02",
+        "c04:s04",
+        "c04:s05",
+        "c04:s06"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "service_revenue_2024_shift",
+      "expected": {
+        "service_revenue_growth_pct": 12.059894779441521,
+        "lagged_nominal_payment_volume_growth_pct": 7.421196326631919,
+        "service_growth_minus_volume_growth_pp": 4.638698452809603,
+        "service_revenue_to_lagged_volume_proxy_2024_pct": 0.12795748613678373
+      },
+      "tables": {
+        "revenues": {
+          "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-09-30",
+              12,
+              "Service revenue",
+              16614.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "Data processing revenue",
+              17714.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "International transaction revenue",
+              12665.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "Other revenue",
+              3197.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "Client incentives",
+              -13764.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "Net revenue",
+              36426.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Service revenue",
+              14826.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Data processing revenue",
+              16007.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "International transaction revenue",
+              11638.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Other revenue",
+              2479.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Client incentives",
+              -12297.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Net revenue",
+              32653.0,
+              "usd_million",
+              "c04:s01"
+            ]
+          ]
+        },
+        "activity_metrics": {
+          "schema": "CREATE TABLE activity_metrics(period_end TEXT,months INTEGER,metric TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-06-30",
+              12,
+              "Nominal payments volume",
+              12984.0,
+              "usd_billion",
+              "c04:s02"
+            ],
+            [
+              "2023-06-30",
+              12,
+              "Nominal payments volume",
+              12087.0,
+              "usd_billion",
+              "c04:s02"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "Visa-processed transactions",
+              233758.0,
+              "million_transactions",
+              "c04:s03"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Visa-processed transactions",
+              212579.0,
+              "million_transactions",
+              "c04:s03"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "lagged_volume_2023_shift",
+      "expected": {
+        "service_revenue_growth_pct": 8.687440982058545,
+        "lagged_nominal_payment_volume_growth_pct": 6.53975547714778,
+        "service_growth_minus_volume_growth_pp": 2.1476855049107653,
+        "service_revenue_to_lagged_volume_proxy_2024_pct": 0.12410659272951324
+      },
+      "tables": {
+        "revenues": {
+          "schema": "CREATE TABLE revenues(period_end TEXT,months INTEGER,category TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-09-30",
+              12,
+              "Service revenue",
+              16114.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "Data processing revenue",
+              17714.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "International transaction revenue",
+              12665.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "Other revenue",
+              3197.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "Client incentives",
+              -13764.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "Net revenue",
+              35926.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Service revenue",
+              14826.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Data processing revenue",
+              16007.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "International transaction revenue",
+              11638.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Other revenue",
+              2479.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Client incentives",
+              -12297.0,
+              "usd_million",
+              "c04:s01"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Net revenue",
+              32653.0,
+              "usd_million",
+              "c04:s01"
+            ]
+          ]
+        },
+        "activity_metrics": {
+          "schema": "CREATE TABLE activity_metrics(period_end TEXT,months INTEGER,metric TEXT,amount REAL,unit TEXT,section_id TEXT)",
+          "rows": [
+            [
+              "2024-06-30",
+              12,
+              "Nominal payments volume",
+              12984.0,
+              "usd_billion",
+              "c04:s02"
+            ],
+            [
+              "2023-06-30",
+              12,
+              "Nominal payments volume",
+              12187.0,
+              "usd_billion",
+              "c04:s02"
+            ],
+            [
+              "2024-09-30",
+              12,
+              "Visa-processed transactions",
+              233758.0,
+              "million_transactions",
+              "c04:s03"
+            ],
+            [
+              "2023-09-30",
+              12,
+              "Visa-processed transactions",
+              212579.0,
+              "million_transactions",
+              "c04:s03"
+            ]
+          ]
+        }
+      }
+    }
+  ]
+}

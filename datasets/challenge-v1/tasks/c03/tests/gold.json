@@ -1,0 +1,115 @@
+{
+  "answers": {
+    "bitcoin_gross_profit_2024_usd_thousand": {
+      "status": "answered",
+      "value": 288819.0,
+      "unit": "usd_thousand",
+      "tolerance": 0.001,
+      "evidence": [
+        [
+          "c03:s01",
+          "c03:s02",
+          "c03:s03"
+        ]
+      ]
+    },
+    "bitcoin_gross_profit_2023_usd_thousand": {
+      "status": "answered",
+      "value": 205189.0,
+      "unit": "usd_thousand",
+      "tolerance": 0.001,
+      "evidence": [
+        [
+          "c03:s01",
+          "c03:s02",
+          "c03:s03"
+        ]
+      ]
+    },
+    "bitcoin_gross_profit_growth_pct": {
+      "status": "answered",
+      "value": 40.75754548245764,
+      "unit": "percent",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "c03:s01",
+          "c03:s02",
+          "c03:s03",
+          "c03:s05"
+        ]
+      ]
+    },
+    "bitcoin_share_of_total_net_revenue_increase_pct": {
+      "status": "answered",
+      "value": 31.78078651328766,
+      "unit": "percent",
+      "tolerance": 0.005,
+      "evidence": [
+        [
+          "c03:s01",
+          "c03:s03"
+        ]
+      ]
+    }
+  },
+  "conclusion": {
+    "verdict": "contradicted",
+    "evidence": [
+      [
+        "c03:s01",
+        "c03:s02",
+        "c03:s03"
+      ]
+    ]
+  },
+  "context_evidence_allowed": [
+    "c03:s03",
+    "c03:s04",
+    "c03:s05"
+  ],
+  "task_id": "challenge-v1-c03",
+  "scorer_version": "challenge-1.1.0",
+  "controls": [
+    {
+      "name": "bitcoin_sales_change",
+      "database": "control-1.sqlite",
+      "expected": {
+        "bitcoin_gross_profit_2024_usd_thousand": 338819.0,
+        "bitcoin_gross_profit_2023_usd_thousand": 205189.0,
+        "bitcoin_gross_profit_growth_pct": 65.12532348225295,
+        "bitcoin_share_of_total_net_revenue_increase_pct": 33.29311927215653
+      }
+    },
+    {
+      "name": "bitcoin_cost_change_2024",
+      "database": "control-2.sqlite",
+      "expected": {
+        "bitcoin_gross_profit_2024_usd_thousand": 208819.0,
+        "bitcoin_gross_profit_2023_usd_thousand": 205189.0,
+        "bitcoin_gross_profit_growth_pct": 1.7691006827851397,
+        "bitcoin_share_of_total_net_revenue_increase_pct": 31.78078651328766
+      }
+    },
+    {
+      "name": "bitcoin_cost_change_2023",
+      "database": "control-3.sqlite",
+      "expected": {
+        "bitcoin_gross_profit_2024_usd_thousand": 288819.0,
+        "bitcoin_gross_profit_2023_usd_thousand": 180189.0,
+        "bitcoin_gross_profit_growth_pct": 60.28669896608561,
+        "bitcoin_share_of_total_net_revenue_increase_pct": 31.78078651328766
+      }
+    }
+  ],
+  "hashes": {
+    "evidence.json": "a238a441d37a41192a3f9cd6e623b9008e4c89f0d61916b42de309c4d13bed19",
+    "control-2.sqlite": "4800ba06f7e71bf06c1fd9a98998dc690f842cff7b27c535c8750d73a383e980",
+    "sources.md": "70aa109d8e18e8a7d19f60313ceb52ca57414b4cf01b0da074fe9a9bd014889c",
+    "control-3.sqlite": "c37d2e2f5ed12c2e12407e209549c82e075b7f62aa2c294489ee39be2ca91a5c",
+    "control-1.sqlite": "11fc6219fbffaf60b4c18d37cf8ca2b02a614e5da3ef51bf3d6c4085fd0c2fff",
+    "schema.json": "32b131ff8db1a194bd8bdba7b6e610c6e6806294bcdea28833d57f9a28eef5e5",
+    "verify.py": "a69eb6c71a44ff42df488696ecd76257c5ec1096f5ae9a5dd245cc4128a2b0e2",
+    "data.sqlite": "02f1f9b02e3ca94b31d255afc94659d027e115e1d57fd68f3463c93ba8107db6"
+  }
+}
