@@ -33,5 +33,5 @@
   },
   "native_continuation_validation": "Native SessionDB import and restored files are checked before the candidate starts, with a continuation-ready.json receipt in the guest",
   "external_service_spend_usd": 0,
-  "startup_correction": "Initial detached launcher exited in argument parsing because the public CLI did not route queue. Fixed and checked before any new candidate attempt began. The next startup reached native restoration, where the pinned Python shim rejected stdin as a script path. The import now uses an explicit trusted script file."
+  "startup_correction": "Initial detached launch exited in public CLI argument parsing, fixed before a new candidate attempt. Startup-only c01-3 exposed the pinned Python shim stdin limitation. Startup-only c01-4 exposed missing dependencies in its generic Python environment. Neither made a model call. Restoration now uses the native hermes --run-module launcher to load the complete managed runtime."
 }

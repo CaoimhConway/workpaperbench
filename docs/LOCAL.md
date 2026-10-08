@@ -198,7 +198,7 @@ profiles into one scored condition.
 The second Block attempt reached the native 24-tool-call limit before it wrote
 JSON. The current continuation uses the distinct
 [64-turn profile](../config/local/qwen36-35b-nonthinking-terminal-64.json) and
-[new schedule](../config/local/development-schedule-qwen36-4.json):
+[new schedule](../config/local/development-schedule-qwen36-5.json):
 
 ```sh
 ./wpb serve --profile config/local/qwen36-35b-nonthinking-terminal-64.json
@@ -207,14 +207,14 @@ JSON. The current continuation uses the distinct
 In another terminal:
 
 ```sh
-./wpb queue --schedule config/local/development-schedule-qwen36-4.json
+./wpb queue --schedule config/local/development-schedule-qwen36-5.json
 ```
 
 The schedule continues Block from its retained native session and SQL, then runs
 Microsoft fresh. Completed slots are skipped on queue restart. Candidate exits
 or timeouts retain an isolated verifier result and do not prevent the next slot
 from running. Infrastructure or isolation failures still stop the queue.
-The status file is `.local/local-workflow-qwen36-development-4-status.json`.
+The status file is `.local/local-workflow-qwen36-development-5-status.json`.
 
 For an individual continuation, use a fresh attempt ID and the same task:
 
