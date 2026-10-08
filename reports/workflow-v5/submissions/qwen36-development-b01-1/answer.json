@@ -1,0 +1,64 @@
+{
+  "task_id": "workflow-v5-b01",
+  "tables": [
+    {
+      "id": "reserve_coverage",
+      "file": "reserve_coverage.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s04",
+        "b01:s02",
+        "b01:s05"
+      ]
+    },
+    {
+      "id": "signature_lag",
+      "file": "signature_lag.sql",
+      "evidence": [
+        "b01:s03",
+        "b01:s06"
+      ]
+    },
+    {
+      "id": "reserve_bridge",
+      "file": "reserve_bridge.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s04"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "base_coverage_sql_is_valid",
+      "verdict": "contradicted",
+      "evidence": [
+        "b01:s01",
+        "b01:s04",
+        "b01:s02",
+        "b01:s05"
+      ],
+      "note": "The starting starting_reserve_coverage.sql uses CROSS JOIN between reserve_reports aliased as r and a, causing SUM(a.cash_equivalents_usd+a.us_government_debt_usd) to aggregate both months' reserves (16,450,311) for each report_date. May coverage_pct is 231.9% and June is 175.8% — both wrong. The correct per-date coverage is 100.0% for both periods, with zero residual, because cash+debt equals reported_reserve_fv_usd at each date."
+    },
+    {
+      "id": "signature_lag_sql_is_valid",
+      "verdict": "supported",
+      "evidence": [
+        "b01:s03",
+        "b01:s06"
+      ],
+      "note": "The starting starting_signature_lag.sql correctly computes calendar days from economic observation date to report_signed_date: 12 days for May (2025-05-31 to 2025-06-12) and 16 days for June (2025-06-30 to 2025-07-16)."
+    },
+    {
+      "id": "observations_identify_payments_volume",
+      "verdict": "contradicted",
+      "evidence": [
+        "b01:s01",
+        "b01:s04",
+        "b01:s02",
+        "b01:s05"
+      ],
+      "note": "Neither report provides secondary-market quotes, redemption results, or instrument-level reserve holdings. The published asset categories are month-end aggregate stocks, not transaction flows. The snapshots show SBC supply and reserve balances at two points in time but do not identify or measure SBC payments volume during June."
+    }
+  ]
+}
