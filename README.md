@@ -1,143 +1,143 @@
 # WorkpaperBench
 
-### Reproducible evaluations for financial research agents
+**Can a research agent repair a financial workpaper, support its conclusions, and keep it correct when the inputs change?**
 
-WorkpaperBench tests whether agents can find, reconcile, calculate and justify financial analysis from compact frozen evidence dossiers. Verified Research Completion requires every requested financial answer, adequate source support and successful changed-input recomputation. Delivery is reported separately. This small offline benchmark has two layers: **Research Challenge** and the preserved **Core Regression** suites.
+WorkpaperBench turns public financial disclosures and flawed starting SQL into
+verifiable research tasks. Each submission is a small, inspectable work product:
+three SQL tables and a JSON file containing source references and claim verdicts.
+A separate verifier checks the numbers, evidence, behavior on changed inputs,
+and delivery. No model judges the answers.
 
-A [saved Microsoft evaluation workpaper](reports/challenge-v1/workpapers/challenge-v1-evaluation-d9a2fe13f6f2/final-a03-inexpensive-1.md) labels December-quarter revenue of USD 69,632 million and operating income of USD 31,653 million as Q1. Subtracting those amounts from the six-month totals instead gives Q1 revenue of USD 65,585 million and operating income of USD 30,552 million. The saved calculation swaps the quarters and reverses the operating-margin change, reporting +112.6274 instead of -112.6274 basis points. The [reference-model contrast](reports/challenge-v1/workpapers/challenge-v1-evaluation-d9a2fe13f6f2/final-a03-reference-1.md) derives Q1 correctly and passes. Both correctly assess the Azure guidance gap. [Frozen dossier](datasets/challenge-v1/tasks/a03/environment/sources.md) · [Source-first review and excerpt caveat](reports/challenge-v1/showcase-review.json).
+[Try the demo](#try-it-without-a-model) · [Inspect a task](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/datasets/workflow-v5/tasks/c01/instruction.md) · [Methods](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/docs/WORKFLOW.md) · [Validation](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/reports/local/workflow-quality-suite.json) · [Historical results](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/reports/challenge-v1/reviewed-results.md)
 
-Block provides a second substantive failure without that excerpt caveat: the inexpensive model substitutes a change in annual revenue shares for contribution to revenue growth. The reference model's second and third attempts report decimal ratios as percentages, making both percentage answers 100 times too small. Its first attempt passes. [Saved Block reference error](reports/runs/challenge-v1-evaluation-d9a2fe13f6f2/final-c03-reference-2/answer.json) · [Source-first diagnosis](reports/challenge-v1/attribution-assessment.json).
+**Current release: workflow-v5, scorer workflow-1.1.0.** Thirty source-backed cases,
+six development and 24 evaluation. Software and authored controls are verified.
+Candidate-model evaluation on the 24 evaluation cases, human review, and external
+replication remain pending. This is a research prerelease, with a separately
+preserved measured regression study. The default branch retains the measured
+regression implementation. The quickstart checks out the current workflow prerelease.
 
-The initial pilot and the 54-slot full-dossier evaluation are complete. Nine separate evaluation cases passed source review and the hosted software gate before exposure under `challenge-v1-evaluation-d9a2fe13f6f2`. [Actions 37568399652](https://github.com/CaoimhConway/workpaperbench/actions/runs/37568399652) retains all 54 original answers and verdicts. The table separates original and corrected scoring, each with all 27 scheduled slots per model. [Fresh native replay](reports/challenge-v1/original-fresh-validation.json) reproduced all 72 original pilot/evaluation verdicts. The [consistent evidence review](reports/challenge-v1/consistent-scoring-validation.json) graded all 54 unchanged evaluation answers with a separate scorer and passed all 29 controls, without inference.
+Engineering checks: **413 tests**, **117 isolated controls**, and native reference
+and replay verification.
 
-| Stage / model | Financial / assessed | Evidence / assessed | Robustness / assessed | Verified / scheduled | Delivery / assessed | Strict / scheduled | Verdict coverage |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| Pilot / Qwen 3.6 35B A3B | 5 / 9 | 4 / 9 | 3 / 9 | 1 / 9 | 9 / 9 | 1 / 9 | 9 / 9 |
-| Pilot / Gemini 3.1 Pro Preview | 2 / 9 | 7 / 9 | 6 / 9 | 2 / 9 | 9 / 9 | 2 / 9 | 9 / 9 |
-| Evaluation original / Qwen 3.6 35B A3B | 17 / 27 | 4 / 27 | 19 / 27 | 2 / 27 | 27 / 27 | 2 / 27 | 27 / 27 |
-| Evaluation original / Gemini 3.1 Pro Preview | 25 / 27 | 19 / 27 | 25 / 27 | 17 / 27 | 27 / 27 | 17 / 27 | 27 / 27 |
-| Evaluation corrected / Qwen 3.6 35B A3B | 17 / 27 | 14 / 27 | 19 / 27 | 8 / 27 | 27 / 27 | 8 / 27 | 27 / 27 |
-| Evaluation corrected / Gemini 3.1 Pro Preview | 25 / 27 | 20 / 27 | 25 / 27 | 18 / 27 | 27 / 27 | 18 / 27 | 27 / 27 |
+## A correct-looking answer can measure the wrong thing
 
-Original evaluation scorer is `challenge-1.1.0`. A [separate versioned evidence correction](datasets/challenge-v1/scoring-review.json) permits an additional relevant NVIDIA income-statement source alongside a complete gross-profit bridge, Ripple's explicit May component schedule as an alternative May citation, Coinbase's direct derivatives/spot scope evidence and Visa's aggregate inputs with lagged timing for its pricing identification limit. The separate review uses `challenge-1.1.3`. It preserves all original verdicts and was applied consistently to all 54 unchanged evaluation answers. Only evidence checks changed, in 11 slots. Financial, robustness and delivery outcomes are unchanged. The preserved 1.1.1 and 1.1.2 engineering gates passed. Final 1.1.3 hosted gate [37576954332](https://github.com/CaoimhConway/workpaperbench/actions/runs/37576954332) passed all 29 controls and the engineer-submission path. The complete corrected review passed hosted [37589625073](https://github.com/CaoimhConway/workpaperbench/actions/runs/37589625073), preserving original scoring beside the corrected results. [Source-first evidence diagnosis](reports/challenge-v1/evidence-assessment.json) separates missing support and shared-citation placement from financial or calculation failures. [Growth/attribution diagnosis](reports/challenge-v1/attribution-assessment.json) also separates Block's metric substitution and unsupported fee/pricing conclusions from citation failures. A public-contract ambiguity in shared-context placement is also corrected: related shared references no longer invalidate properly cited claims. The low evidence or completion rates alone do not establish research difficulty.
+Block's FY2024 filing reports Bitcoin revenue increasing from $9.498 billion to
+$10.199 billion, while consolidated revenue increases from $21.916 billion to
+$24.121 billion. The question is how much Bitcoin contributes to total revenue growth.
 
-Observed headroom is limited to these workflows and model routes. The inexpensive model passes 17/27 financial-answer checks and 19/27 recomputation checks, with substantive growth/attribution and calculation errors. Both models pass all 9/9 reserve/supply financial and recomputation checks, a ceiling for that family. The reference passes 25/27 financial-answer and recomputation checks overall. These observations support difficulty in some cases, not a broad capability ranking or a uniformly difficult suite. Three repeated attempts per case do not create independent problems.
+| Workpaper | Result | What it measures |
+| --- | ---: | --- |
+| Authored reference | **31.7808%** | Bitcoin revenue increase / total revenue increase |
+| Retained model submission | **−1.0569** | Change in Bitcoin's share of annual revenue |
+| Another retained submission | **0.3178%** | Correct ratio, wrong percent scale |
 
-These original pilot rates include identified unit, evidence and question-contract defects. They do not support model ranking or broad difficulty claims. The [complete pilot assessment](reports/challenge-v1/pilot-assessment.json) separates those defects from three substantive inexpensive-model recomputation failures. Original verdicts stay unchanged. New evaluation contracts remove the incidental traps before exposure. No assisted or repeat pilot runs are scheduled.
+The [original filing](https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm),
+[retained answers](https://github.com/CaoimhConway/workpaperbench/tree/v0.5.0-local.2/reports/runs/challenge-v1-evaluation-d9a2fe13f6f2), and
+[authored workflow example](https://github.com/CaoimhConway/workpaperbench/tree/v0.5.0-local.2/examples/block-workpaper) make the distinction inspectable.
+The workflow task also requires a gross-profit bridge, signed amortization,
+reconciliation, and an explicit limit on what the disclosure says about Bitcoin prices.
 
-The twelve source-backed cases span guidance and adjusted-performance reconciliation, reserve/supply reconstruction, and growth/attribution analysis. Three cases are development and nine are evaluation, with nine independent evaluation issuer/source-window groups and no group crossing the challenge split. Five evaluation cases and one development case concern crypto or stablecoins. Sources include SEC/issuer financial disclosures and reserve reports. Synthetic controls and repeated attempts are not additional observed cases. [Source inventory and rights](DATA_SOURCES.md) · [Measurement and reproduction contract](docs/CHALLENGE.md) · [Related work and differences](docs/METHODOLOGY.md#research-challenge-related-work) · [Challenge records](reports/challenge-v1/results.md).
+## Try it without a model
 
-## Core Regression
+Python 3.12 is the tested version. The demo needs no account, model weights, or container.
 
-**Can an agent calculate the right number - and support the conclusion?**
-
-WorkpaperBench is a small offline evaluation tool for engineers testing financial research agents. Eight native Harbor tasks require a JSON workpaper with numerical answers, source evidence, reproducible SQL and a bounded conclusion. The active `real-v1` suite uses six source-backed tasks and two controlled synthetic diagnostics. It evaluates work over supplied evidence, with separate numerical, conclusion, evidence and replay diagnostics. It is not an open-web research benchmark or a production reliability estimate.
-
-## A source-backed workpaper
-
-**Saved model workpaper [final-wp04-A-1](reports/runs/real-v1-76d0ba6152ff/final-wp04-A-1/answer.json), with [successful native verification](reports/runs/real-v1-76d0ba6152ff/final-wp04-A-1/verdict.json).** Circle's January 2025 reserve report defines circulating USDC as supply on approved blockchains minus tokens allowed but not issued and access-denied tokens. The captured source facts and the workpaper's derived quantities at **January 31, 2025, 23:59 UTC** are:
-
-| Observation | Amount | Unit |
-|---|---:|---|
-| Total supply on approved blockchains | 54,604,305,445 | USDC |
-| Allowed but not issued | 1,291,092,148 | USDC |
-| Access denied | 94,273,569 | USDC |
-| Derived circulating quantity | **53,218,939,728** | USDC |
-| Fair value of reserve assets | **53,283,800,358** | USD |
-| Reserves above circulating quantity valued at the issuer's USD 1 redemption convention | **64,860,630** | USD |
-
-The saved workpaper also calculates **16.326677% circulating-quantity growth from January 6 to January 31**. That change in a stock is not transfer volume. The reserve headroom supports a narrow reserve-coverage observation at the report date. It does not establish a market price, payment volume or the number of people using USDC. The report is signed February 27, 2025. Its historical web publication time is unknown. Retrieval now does not make the report point-in-time evidence for January 31.
-
-```sql
-SELECT ((reserves_usd - circulation) / 1000000.0) AS value FROM reserve_snapshots WHERE report_date = '2025-01-31'
-```
-
-This is the saved workpaper's SQL for reserve headroom in millions of USD. [Task and evidence](datasets/real-v1/tasks/wp04/instruction.md) · [Original issuer report](https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/USDCAttestationReports/2025/2025-USDC_Examination-Report-January-25.pdf) · [Source records and terms](DATA_SOURCES.md).
-
-## Measured results
-
-<!-- versioned-results:start -->
-
-| Dataset / scorer | Model | Arm | Strict / scheduled | Numbers / assessed | Conclusion verdict / assessed | Evidence / assessed | Replay / assessed | Verdict / scheduled | Retained / scheduled |
-|---|---|---|---:|---:|---:|---:|---:|---:|---:|
-| Historical v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | A | 3 / 15 | 13 / 13 | 11 / 11 | 7 / 13 | 7 / 13 | 15 / 15 | 15 / 15 |
-| Historical v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | B | 1 / 15 | 13 / 14 | 10 / 10 | 7 / 13 | 10 / 13 | 15 / 15 | 15 / 15 |
-| real-v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | A | 4 / 15 | 15 / 15 | 10 / 11 | 8 / 14 | 10 / 14 | 15 / 15 | 15 / 15 |
-| real-v1 / 1.2.0 | `qwen/qwen3.6-35b-a3b` | B | 4 / 15 | 14 / 14 | 11 / 12 | 10 / 14 | 8 / 14 | 14 / 15 | 14 / 15 |
-
-Evaluation only. Development is separate. Historical skill: no improvement. Real-v1: The new campaign has incomplete verdict coverage. Strict completion counts retain the scheduled denominator and cannot establish an intervention benefit.
-
-[New study](reports/real-v1/results.md) · [Historical study and original negative results](reports/results.md). Missing evidence is distinct from an incorrect conclusion. Assessments and retained outputs may have different coverage.
-
-<!-- versioned-results:end -->
-
-The new campaign retained **47 answers and verdicts across 48 scheduled slots**. Apple B1 failed a GitHub API history check before provider access or native trial execution, with no retry. Its exact setup receipt, artifact hashes and the original importer classification remain in the [failure evidence](reports/real-v1/failure-receipts/final-wp07-B-1.json) and [reconciliation assessment](reports/real-v1/final-reconciliation.json). The importer rejected that setup-only record's missing dataset-manifest field, while authenticating and retaining A1 from the same artifact. No model verdict was fabricated for B1.
-
-All 29 retained evaluation workpapers passed the numerical diagnostic, a ceiling on these fixed supplied calculations. That diagnostic does not certify unavailable quantities or broader conclusions. For example, [wp08 A2](reports/runs/real-v1-76d0ba6152ff/final-wp08-A-2/answer.json) incorrectly treats observed Bitcoin outputs as business payments. Conversely, [wp04 B2](reports/runs/real-v1-76d0ba6152ff/final-wp04-B-2/verdict.json) has a correct conclusion verdict and reason but lacks required conclusion evidence. Both arms completed 4/15 scheduled evaluation workpapers. The missing B verdict prevents a fully covered intervention comparison.
-
-Strict completion requires the full declared workpaper contract. A correct conclusion missing a citation is a contract failure, separately diagnosed from an incorrect conclusion verdict. The original 48-trial study remains accessible with its negative intervention result and corrections. Its scores do not evaluate `real-v1`.
-
-## Task inventory
-
-| Task identity | Decision | Provenance | Source group / split |
-|---|---|---|---|
-| real-v1-wp01 | Quarterly R&D from cumulative filing columns | Source-derived Tesla facts, previously exposed regression | Tesla 2024 Q2 / development |
-| real-v1-wp02 | Event identity versus equal amounts and duplicate exports | Synthetic diagnostic with a new control | Authored ledger / development |
-| real-v1-wp03 | Sample transaction fees versus coinbase compensation | Source-derived Bitcoin observations | Fixed Bitcoin block samples / evaluation |
-| real-v1-wp04 | Circulating stock, change and reserve coverage | Source-derived Circle reserve facts | Circle January 2025 / evaluation |
-| real-v1-wp05 | Compare periods under a common metric definition | Synthetic migration, previously exposed regression | Authored migration / development |
-| real-v1-wp06 | Compare fee rates on declared transaction coverage | Source-derived Bitcoin observations | Fixed Bitcoin block samples / evaluation |
-| real-v1-wp07 | Fiscal-quarter Services margin and percentage-point change | Source-derived Apple facts, previously exposed regression | Apple FY2024 Q2 / evaluation |
-| real-v1-wp08 | Output amounts and a bounded evidence limit | Source-derived Bitcoin observations | Fixed Bitcoin block samples / evaluation |
-
-There are **six source-backed base tasks, including four substantive crypto tasks, and two synthetic base tasks**. Three crypto tasks share the same Bitcoin sample bundle. Six tasks do not represent six independent datasets. Deterministic normalization preserves source numerical observations. Every task also has a separately labeled synthetic changed-input replay control. Real-task controls deliberately perturb captured amounts. Diagnostic controls remain fully synthetic. These controls are not observed economic data.
-
-The event diagnostic tests whether export copies are deduplicated without dropping distinct equal-amount events. The migration diagnostic isolates metric comparability under explicit authored definitions. Neither is marketed as observed activity.
-
-The active suite uses SEC accession-specific filing extracts, Circle's issuer report and Bitcoin observations delivered by Blockstream's documented Esplora API. [Source review and exact scope](DATA_SOURCES.md) describe the observations.
-
-## Run the key-free local demo
-
-Use Python 3.11 or 3.12. Hosted validation uses Python 3.12. No Docker, model or data key is needed. The demo reads a saved source-backed workpaper and displays its calculation without executing submitted SQL.
-
-```bash
-git clone https://github.com/CaoimhConway/workpaperbench.git
+```sh
+git clone --branch v0.5.0-local.2 https://github.com/CaoimhConway/workpaperbench.git
 cd workpaperbench
 python3 -m venv .venv
-.venv/bin/python -m pip install -e '.[test]'
-.venv/bin/workpaperbench demo
-.venv/bin/python scripts/build_real_tasks.py --check
-.venv/bin/python -m pytest -q
-.venv/bin/workpaperbench report
+.venv/bin/pip install -e '.[test]'
+./wpb demo
+./wpb validate examples/block-workpaper/answer.json
 ```
 
-Offline reconstruction checks all frozen input hashes, rebuilds the tables from original captures and compares their schemas and complete typed rows. It retains the hash-verified frozen SQLite bytes after that comparison because physical page layout can differ between SQLite builds. Other package bytes rebuild exactly. No network request is made. Refreshing source data requires a new snapshot identity.
+The demo shows the reference beside actual historical submissions. `validate`
+checks JSON structure only. Open the [task request](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/datasets/workflow-v5/tasks/c01/instruction.md),
+[source dossier](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/datasets/workflow-v5/tasks/c01/environment/sources.md),
+[output contract](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/datasets/workflow-v5/tasks/c01/environment/output_contract.json),
+and [example SQL](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/examples/block-workpaper/revenue_bridge.sql) to follow the calculation.
 
-## Fresh replay and your own workpaper
+For financial verification, set up the dedicated Linux guest in
+[local execution](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/docs/LOCAL.md#verify-a-workpaper-without-inference), then run:
 
-A maintainer with Actions write permission can replay a selected retained submission from scratch, without inference or data credentials. A public reader must fork the repository and enable Actions. Replace `YOUR_LOGIN` with the authorized owner:
-
-```bash
-gh workflow run ci.yml --repo YOUR_LOGIN/workpaperbench --ref main \
-  -f integration=false -f fresh_replay=true -f dataset=real-v1 \
-  -f replay_slot=all
-gh run watch RUN_ID --repo YOUR_LOGIN/workpaperbench --exit-status
-gh run download RUN_ID --repo YOUR_LOGIN/workpaperbench \
-  --name reviewed-results-COMMIT_SHA-RUN_ID --dir replay-results
+```sh
+./wpb grade --dataset workflow-v5 --task c01 \
+  --artifacts examples/block-workpaper --attempt block-example-1
 ```
 
-Use `replay_slot=final-wp04-A-1` for one new retained answer. Use `dataset=historical` with `replay_slot=final-wp03-A-1` for the tested historical example. Fresh receipts identify executed native verification, run identity and input/task/scorer hashes, compare earlier diagnostics and preserve them. `regrade=true` is the separate cached historical convenience.
+This example should pass all four checks. Substitute your own artifact directory
+to assess a repair. Each attempt gets a fresh receipt with task, scorer and artifact
+hashes. Reusing an attempt ID is rejected. Grading requires no inference server.
+[Replay and reporting](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/docs/LOCAL.md#submit-replay-and-report) preserve the original
+artifacts and verify them again from pristine inputs. The shipped example and
+its fresh replay are [recorded here](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/reports/local/workflow-example-replay.json).
 
-An engineer can commit a bounded `submissions/answer.json` to their fork, following the task's schema, then dispatch the same workflow with `dataset=real-v1`, `answer_path=submissions/answer.json` and `task=wp02`. The supplied [authored reference submission](submissions/reference-wp02.json) demonstrates this path. The submitted SQL executes only in the separate verifier on Actions. [Replay contract and commands](docs/REPLAY.md) · [Task-authoring guide](docs/TASK_AUTHORING.md).
+## What the tasks test
 
-Validation includes 234 lightweight tests, 111 hosted native controls and [fresh verification of all 47 retained answers](https://github.com/CaoimhConway/workpaperbench/actions/runs/37465514129). Every fresh verdict/check comparison matched its retained result. Selected historical replay and the engineer-answer path were also exercised. [Immutable receipts and provenance](reports/real-v1/native-validation.json) retain the run identities, hashes and screening limits.
+| Family | Work required | Examples | Development / evaluation |
+| --- | --- | --- | ---: |
+| Update a model | Reconstruct periods, repair definitions, preserve valid outputs | Microsoft quarters, Circle expense definitions, Nvidia H20 adjustments | 2 / 8 |
+| Audit a metric | Fix denominators, duplicates, units and stock/flow errors | Stablecoin reserves, Coinbase activity, Airbnb trailing cash flow | 2 / 8 |
+| Explain a change | Build signed bridges, reconcile bases, bound attribution | Block revenue, Cisco revised accounts, JPMorgan significant items | 2 / 8 |
 
-## Methodology and limits
+Every task has three named result tables, three structured claims, and declared
+keys, units and tolerances. The [30-case catalog](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/datasets/workflow-v5/manifest.json)
+records the split and source groups. The 24 evaluation source groups do not overlap
+the six development groups. Related issuer templates can still overlap, and the
+public tasks are not a contamination-proof test set.
 
-A and B receive full common instructions. B differs only by the preserved 230-word contract-check skill. The model is `qwen/qwen3.6-35b-a3b` through OpenRouter default routing and the execution framework is Hermes. Development uses wp01/wp02/wp05. Evaluation uses the other five tasks. No shared source bundle crosses that split. Reused questions are exposed regression cases.
+## How a workpaper earns a pass
 
-The native verifier has no network, inference key or Docker socket. Candidate terminal tools can read their dedicated capped inference key. Native egress restrictions retain DNS/ICMP channels. Output screening is bounded and cannot guarantee detection of arbitrary obfuscation. [Methodology and security boundaries](docs/METHODOLOGY.md) preserve these limits.
+| Diagnostic | Requirement |
+| --- | --- |
+| Financial answer | All original table values and claim verdicts are correct |
+| Evidence | Each output has sufficient, relevant support, including accepted alternatives |
+| Preservation | SQL remains correct on synthetic changes and preserves unaffected outputs |
+| Delivery | Exactly the requested JSON and bounded SQL files are submitted |
 
-The earlier saved formula error remains [historical evidence](reports/case-study.md) on a synthetic task. Original tags, frozen inputs, outputs, verdicts and scorer corrections remain accessible. The source-backed upgrade does not relabel them.
+[Scorer](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/config/scorers/workflow-1.1.0.py) · [Catalog builder](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/scripts/build_workflow_quality.py) · [Control sweep](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/scripts/validate_workflow_quality.py)
 
-[MIT code license](LICENSE) · [Source-specific rights and attribution](DATA_SOURCES.md) · [Historical measured release](https://github.com/CaoimhConway/workpaperbench/releases/tag/v0.2.0).
+Version 5 closes two grader shortcuts. Citing every source no longer substitutes
+for selecting relevant evidence. Fifty-one residual columns now encounter
+independently changed observations, so a hard-coded zero fails even if it matches
+the original disclosure. Three residuals that were zero by algebraic construction
+were removed. Valid alternative SQL, row and column order, and relevant additional
+citations are tested as positive controls.
+
+Verification runs read-only SQL against pristine data in a separate networkless
+container with time, memory and output limits. The candidate receives neither
+gold nor repository history. [Boundary tests](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/reports/local/local-boundary-validation.json),
+[prototype checks](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/reports/local/workflow-quality-prototypes.json), and
+[suite checks](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/reports/local/workflow-quality-suite.json) retain actual evidence.
+These are software checks using authored submissions, not model accuracy scores.
+
+## What has actually been measured
+
+The historical challenge-v1 study evaluated nine tasks, three attempts per task,
+on each of two hosted profiles. Under corrected scorer challenge-1.1.3:
+
+| Historical profile | Financial correctness | Complete workpaper |
+| --- | ---: | ---: |
+| Inexpensive | 17 / 27 | 8 / 27 |
+| Reference | 25 / 27 | 18 / 27 |
+
+[The reviewed report](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/reports/challenge-v1/reviewed-results.md) contains model
+identities, per-task outcomes, scorer corrections and limitations. These 27
+attempts per profile are clustered within nine tasks, not 27 independent problems.
+They do not establish accuracy on workflow-v5.
+
+Local workflow-v4 calibration used Qwen3.5-9B Q4_K_M on three development prototypes.
+One attempt delivered a workpaper: its original tables passed, while a claim and
+duplicate-export checks failed. Two attempts produced partial files and were
+unassessed for financial correctness. [All three outcomes](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/reports/local/workflow-development-budget-1.json)
+remain visible. No leading-model comparison has been run on the new workflow suite.
+
+## Reproduce, inspect, improve
+
+- **Evaluation engineers:** run the [isolated control sweep](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/docs/WORKFLOW.md#reproduce-the-quality-checks), inspect scorer errors, or submit a competing workpaper.
+- **Financial researchers:** start with the [blinded review pack](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/reports/local/human-review-pack.md). Human agreement has not yet been measured.
+- **Contributors:** include the task and scorer IDs, exact submitted files, and a source-backed explanation when reporting a valid answer the grader rejects.
+
+Code is [MIT licensed](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/LICENSE). [Source rights and provenance](https://github.com/CaoimhConway/workpaperbench/blob/v0.5.0-local.2/DATA_SOURCES.md)
+separate public observations, authored defects, synthetic controls and reference
+answers. Complete restricted issuer captures are not redistributed.
