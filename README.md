@@ -1,142 +1,143 @@
 # WorkpaperBench
 
-**Can a research agent repair a financial workpaper, support its conclusions, and keep it correct when the inputs change?**
+**Can a financial-research agent repair a workpaper, support its conclusions, and keep it correct when the inputs change?**
 
 WorkpaperBench turns public financial disclosures and flawed starting SQL into
-verifiable research tasks. Each submission is a small, inspectable work product:
-three SQL tables and a JSON file containing source references and claim verdicts.
-A separate verifier checks the numbers, evidence, behavior on changed inputs,
-and delivery. No model judges the answers.
+inspectable research tasks. A submission contains three SQL queries and a JSON
+file with evidence and claim verdicts. Deterministic, isolated verification tests
+financial reasoning, source selection, reconciliation, and robustness.
 
-[Try the demo](#try-it-without-a-model) · [Inspect a task](datasets/workflow-v5/tasks/c01/instruction.md) · [Methods](docs/WORKFLOW.md) · [Validation](reports/local/workflow-quality-suite.json) · [Historical results](reports/challenge-v1/reviewed-results.md)
+The contribution is a benchmark that separates a plausible answer from a
+reproducible work product - and separates financial mistakes from grader mistakes.
 
-**Current release: workflow-v5, scorer workflow-1.1.0.** Thirty source-backed cases,
-six development and 24 evaluation. Software and authored controls are verified.
-Candidate-model evaluation on the 24 evaluation cases, human review, and external
-replication remain pending. This is a research prerelease, with a separately
-preserved measured regression study.
+**Current software: workflow-v6, scorer workflow-1.2.0.** Thirty source-backed
+cases, six development and 24 evaluation. Authored references and controls are
+verified. No model has been evaluated on these revised tasks. Human review,
+external replication, and leading-model discrimination remain unmeasured.
 
-Engineering checks: **413 tests**, **117 isolated controls**, and native reference
-and replay verification.
-
-## A correct-looking answer can measure the wrong thing
-
-Block's FY2024 filing reports Bitcoin revenue increasing from $9.498 billion to
-$10.199 billion, while consolidated revenue increases from $21.916 billion to
-$24.121 billion. The question is how much Bitcoin contributes to total revenue growth.
-
-| Workpaper | Result | What it measures |
-| --- | ---: | --- |
-| Authored reference | **31.7808%** | Bitcoin revenue increase / total revenue increase |
-| Retained model submission | **−1.0569** | Change in Bitcoin's share of annual revenue |
-| Another retained submission | **0.3178%** | Correct ratio, wrong percent scale |
-
-The [original filing](https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm),
-[retained answers](reports/runs/challenge-v1-evaluation-d9a2fe13f6f2), and
-[authored workflow example](examples/block-workpaper) make the distinction inspectable.
-The workflow task also requires a gross-profit bridge, signed amortization,
-reconciliation, and an explicit limit on what the disclosure says about Bitcoin prices.
+[Task](datasets/workflow-v6/tasks/c01/instruction.md) · [Methods](docs/WORKFLOW.md) · [Corrected replays](reports/workflow-v5/corrected-replay.json) · [Validation](reports/local/workflow-validity-suite.json)
 
 ## Try it without a model
 
-Python 3.12 is the tested version. The demo needs no account, model weights, or container.
+From this checkout, using Python 3.12:
 
 ```sh
-git clone --branch v0.5.0-local.2 https://github.com/CaoimhConway/workpaperbench.git
-cd workpaperbench
 python3 -m venv .venv
 .venv/bin/pip install -e '.[test]'
 ./wpb demo
-./wpb validate examples/block-workpaper/answer.json
+./wpb validate examples/block-workpaper-v6/answer.json
 ```
 
-The demo shows the reference beside actual historical submissions. `validate`
-checks JSON structure only. Open the [task request](datasets/workflow-v5/tasks/c01/instruction.md),
-[source dossier](datasets/workflow-v5/tasks/c01/environment/sources.md),
-[output contract](datasets/workflow-v5/tasks/c01/environment/output_contract.json),
-and [example SQL](examples/block-workpaper/revenue_bridge.sql) to follow the calculation.
+The demo displays a reference calculation and recorded replay diagnostics. It
+needs no account, model weights, or container. `validate` checks JSON structure
+only. To run the regression suite:
 
-For financial verification, set up the dedicated Linux guest in
+```sh
+.venv/bin/python -m pytest -q
+```
+
+To verify financial correctness, configure the dedicated Linux guest in
 [local execution](docs/LOCAL.md#verify-a-workpaper-without-inference), then run:
 
 ```sh
-./wpb grade --dataset workflow-v5 --task c01 \
-  --artifacts examples/block-workpaper --attempt block-example-1
+./wpb grade --dataset workflow-v6 --task c01 \
+  --artifacts examples/block-workpaper-v6 --attempt my-block-example-1
 ```
 
-This example should pass all four checks. Substitute your own artifact directory
-to assess a repair. Each attempt gets a fresh receipt with task, scorer and artifact
-hashes. Reusing an attempt ID is rejected. Grading requires no inference server.
-[Replay and reporting](docs/LOCAL.md#submit-replay-and-report) preserve the original
-artifacts and verify them again from pristine inputs. The shipped example and
-its fresh replay are [recorded here](reports/local/workflow-example-replay.json).
+The example should pass every check. Use a fresh attempt ID for each run.
+Verification needs no inference server. The tested wrapper uses Lima on the
+Intel Mac Pro, with Docker inside the separate Linux guest. Other platform
+combinations have not been validated. [Reproduction commands](docs/WORKFLOW.md#reproduce-the-quality-checks)
+cover catalog reconstruction, controls, and exact retained-artifact replay.
+
+## One concrete financial distinction
+
+Block's FY2024 Bitcoin revenue increased by USD 700.903 million, while
+consolidated revenue increased by USD 2,205.430 million. Bitcoin's contribution
+to total revenue growth is:
+
+```text
+100 × (10,199,205 − 9,498,302) / (24,121,053 − 21,915,623) = 31.7808%
+```
+
+A change in Bitcoin's share of annual revenue, −1.0569 percentage points, answers
+a different question. Reporting the ratio as 0.3178% introduces a 100-fold unit
+error. The task also requires a signed gross-profit bridge, reconciliation, and
+a verdict on whether higher Bitcoin prices caused most of Bitcoin revenue growth.
+The supplied totals alone cannot establish that causal claim.
+
+Follow the [source dossier](datasets/workflow-v6/tasks/c01/environment/sources.md),
+[public contract](datasets/workflow-v6/tasks/c01/environment/output_contract.json),
+and [example SQL](examples/block-workpaper-v6/revenue_bridge.sql).
 
 ## What the tasks test
 
-| Family | Work required | Examples | Development / evaluation |
-| --- | --- | --- | ---: |
-| Update a model | Reconstruct periods, repair definitions, preserve valid outputs | Microsoft quarters, Circle expense definitions, Nvidia H20 adjustments | 2 / 8 |
-| Audit a metric | Fix denominators, duplicates, units and stock/flow errors | Stablecoin reserves, Coinbase activity, Airbnb trailing cash flow | 2 / 8 |
-| Explain a change | Build signed bridges, reconcile bases, bound attribution | Block revenue, Cisco revised accounts, JPMorgan significant items | 2 / 8 |
+| Family | Research work | Development / evaluation |
+| --- | --- | ---: |
+| Update a model | Reconstruct quarters, repair definitions, preserve valid periods | 2 / 8 |
+| Audit a metric | Fix denominators, duplicates, units, and stock/flow errors | 2 / 8 |
+| Explain a change | Build signed bridges, reconcile bases, bound causal attribution | 2 / 8 |
 
-Every task has three named result tables, three structured claims, and declared
-keys, units and tolerances. The [30-case catalog](datasets/workflow-v5/manifest.json)
-records the split and source groups. The 24 evaluation source groups do not overlap
-the six development groups. Related issuer templates can still overlap, and the
-public tasks are not a contamination-proof test set.
+Each task declares columns, keys, units, tolerances, label aliases, and three
+claim assertions. Supported means the evidence entails the assertion,
+contradicted means it entails its negation, and unresolved means neither follows.
+Twenty cases have no unresolved claim, ten have one, and its position varies.
+A fixed uncertainty answer is no longer guaranteed a correct claim in every case.
 
-## How a workpaper earns a pass
+Reports separate **numerical tables, claim verdicts, evidence, robustness, and
+delivery**. Table diagnostics distinguish numeric mismatches from missing columns,
+keys, rows, or failed SQL. Source IDs may appear inside explanations. Declared
+source-label aliases and equivalent SQL are accepted. Swapped categories, wrong
+units, unrelated citations, and duplicate keys remain failures.
 
-| Diagnostic | Requirement |
-| --- | --- |
-| Financial answer | All original table values and claim verdicts are correct |
-| Evidence | Each output has sufficient, relevant support, including accepted alternatives |
-| Preservation | SQL remains correct on synthetic changes and preserves unaffected outputs |
-| Delivery | Exactly the requested JSON and bounded SQL files are submitted |
-
-[Scorer](config/scorers/workflow-1.1.0.py) · [Catalog builder](scripts/build_workflow_quality.py) · [Control sweep](scripts/validate_workflow_quality.py)
-
-Version 5 closes two grader shortcuts. Citing every source no longer substitutes
-for selecting relevant evidence. Fifty-one residual columns now encounter
-independently changed observations, so a hard-coded zero fails even if it matches
-the original disclosure. Three residuals that were zero by algebraic construction
-were removed. Valid alternative SQL, row and column order, and relevant additional
-citations are tested as positive controls.
-
-Verification runs read-only SQL against pristine data in a separate networkless
-container with time, memory and output limits. The candidate receives neither
-gold nor repository history. [Boundary tests](reports/local/local-boundary-validation.json),
-[prototype checks](reports/local/workflow-quality-prototypes.json), and
-[suite checks](reports/local/workflow-quality-suite.json) retain actual evidence.
-These are software checks using authored submissions, not model accuracy scores.
+SQL runs against pristine inputs in a separate networkless verifier with bounded
+time, memory, and output. Candidates cannot access gold, repository history,
+credentials, or privileged sockets. Synthetic controls alter observations,
+introduce duplicate exports and irrelevant periods, and break accidental
+zero-residual shortcuts. [Isolation evidence](reports/local/local-boundary-validation.json)
+and [current controls](reports/local/workflow-validity-suite.json) are software
+validation, not model accuracy measurements.
 
 ## What has actually been measured
 
-The historical challenge-v1 study evaluated nine tasks, three attempts per task,
-on each of two hosted profiles. Under corrected scorer challenge-1.1.3:
+These are **corrected replays of three retained workflow-v5 development
+workpapers**, using scorer 1.2.0 and unchanged JSON/SQL bytes:
 
-| Historical profile | Financial correctness | Complete workpaper |
-| --- | ---: | ---: |
-| Inexpensive | 17 / 27 | 8 / 27 |
-| Reference | 25 / 27 | 18 / 27 |
+| Workpaper | Numbers | Claims | Evidence | Robustness | Delivery |
+| --- | --- | --- | --- | --- | --- |
+| Block | Pass | Pass | Pass | Pass | Pass |
+| Microsoft | Fail | Pass | Pass | Fail | Pass |
+| Brale | Pass | Pass | Pass | Fail | Pass |
 
-[The reviewed report](reports/challenge-v1/reviewed-results.md) contains model
-identities, per-task outcomes, scorer corrections and limitations. These 27
-attempts per profile are clustered within nine tasks, not 27 independent problems.
-They do not establish accuracy on workflow-v5.
+Block's original failure came from full filing labels versus shortened reference
+labels. Microsoft's source IDs embedded in explanations now receive credit,
+but its −11,262.74 basis-point calculation still fails against −112.63. Brale
+still fails to deduplicate identical exports. Ambiguous historical claims accept
+both defensible verdicts in these replays. Revised tasks have one explicit verdict.
 
-Local workflow-v4 calibration used Qwen3.5-9B Q4_K_M on three development prototypes.
-One attempt delivered a workpaper: its original tables passed, while a claim and
-duplicate-export checks failed. Two attempts produced partial files and were
-unassessed for financial correctness. [All three outcomes](reports/local/workflow-development-budget-1.json)
-remain visible. No leading-model comparison has been run on the new workflow suite.
+[Original files and receipts](reports/workflow-v5/submissions) remain inspectable
+beside the [correction report](reports/workflow-v5/corrected-replay.json).
+These Qwen3.6-35B-A3B UD-Q5_K_M attempts used different development budgets and
+settings, including a continued Block session. They are not a controlled model
+comparison. Earlier failures remain in the [original pilot](reports/local/workflow-qwen36-development-1.json)
+and [recovery record](reports/local/workflow-qwen36-development-5.json).
+The separate [historical hosted study](reports/challenge-v1/reviewed-results.md)
+is preserved. None of these results measures workflow-v6 performance.
 
-## Reproduce, inspect, improve
+## Limits and contribution
 
-- **Evaluation engineers:** run the [isolated control sweep](docs/WORKFLOW.md#reproduce-the-quality-checks), inspect scorer errors, or submit a competing workpaper.
-- **Financial researchers:** start with the [blinded review pack](reports/local/human-review-pack.md). Human agreement has not yet been measured.
-- **Contributors:** include the task and scorer IDs, exact submitted files, and a source-backed explanation when reporting a valid answer the grader rejects.
+Public disclosures, repeated issuer templates, and public reference answers create
+contamination risks. The 24 evaluation source groups do not overlap development
+groups, but this is not a private test set. They have received trusted control
+validation only. Evidence grading checks reviewed source selections, not free-text
+entailment. Finite synthetic controls do not prove correctness on every future
+input. Claim-label accuracy alone does not establish calibrated abstention.
+
+A useful contribution is a valid workpaper rejected by the grader, an independently
+checked reference, or a failing financial counterexample. Include the task and
+scorer IDs, submitted files, expected result, and supporting source. Grader fixes
+receive new identities rather than overwriting old results.
 
 Code is [MIT licensed](LICENSE). [Source rights and provenance](DATA_SOURCES.md)
-separate public observations, authored defects, synthetic controls and reference
-answers. Complete restricted issuer captures are not redistributed.
+distinguish public observations, authored defects, synthetic controls, reference
+answers, and actual submissions. 

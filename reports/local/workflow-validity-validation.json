@@ -1,0 +1,103 @@
+{
+  "check": "clean_source_checkout",
+  "python": "Python 3.12.15",
+  "private_runtime_assets_copied": false,
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "venv",
+        ".venv"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/pip",
+        "install",
+        "-e",
+        ".[test]"
+      ],
+      "returncode": 0,
+      "stdout": "Obtaining file:///private/tmp/wpb-validity-clean-e_r64pb_\n  Installing build dependencies: started\n  Installing build dependencies: finished with status 'done'\n  Checking if build backend supports build_editable: started\n  Checking if build backend supports build_editable: finished with status 'done'\n  Getting requirements to build editable: started\n  Getting requirements to build editable: finished with status 'done'\n  Preparing editable metadata (pyproject.toml): started\n  Preparing editable metadata (pyproject.toml): finished with status 'done'\nCollecting jsonschema==4.26.0 (from workpaperbench==0.4.0)\n  Using cached jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)\nCollecting attrs>=22.2.0 (from jsonschema==4.26.0->workpaperbench==0.4.0)\n  Using cached attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)\nCollecting jsonschema-specifications>=2023.03.6 (from jsonschema==4.26.0->workpaperbench==0.4.0)\n  Using cached jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)\nCollecting referencing>=0.28.4 (from jsonschema==4.26.0->workpaperbench==0.4.0)\n  Using cached referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)\nCollecting rpds-py>=0.25.0 (from jsonschema==4.26.0->workpaperbench==0.4.0)\n  Using cached rpds_py-2026.9.1-cp312-cp312-macosx_10_12_x86_64.whl.metadata (4.1 kB)\nCollecting pytest==8.4.2 (from workpaperbench==0.4.0)\n  Using cached pytest-8.4.2-py3-none-any.whl.metadata (7.7 kB)\nCollecting iniconfig>=1 (from pytest==8.4.2->workpaperbench==0.4.0)\n  Using cached iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)\nCollecting packaging>=20 (from pytest==8.4.2->workpaperbench==0.4.0)\n  Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)\nCollecting pluggy<2,>=1.5 (from pytest==8.4.2->workpaperbench==0.4.0)\n  Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)\nCollecting pygments>=2.7.2 (from pytest==8.4.2->workpaperbench==0.4.0)\n  Using cached pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)\nCollecting typing-extensions>=4.4.0 (from referencing>=0.28.4->jsonschema==4.26.0->workpaperbench==0.4.0)\n  Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)\nUsing cached jsonschema-4.26.0-py3-none-any.whl (90 kB)\nUsing cached pytest-8.4.2-py3-none-any.whl (365 kB)\nUsing cached attrs-26.1.0-py3-none-any.whl (67 kB)\nUsing cached iniconfig-2.3.1-py3-none-any.whl (7.6 kB)\nUsing cached jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)\nUsing cached packaging-26.3-py3-none-any.whl (129 kB)\nUsing cached pluggy-1.6.0-py3-none-any.whl (20 kB)\nUsing cached pygments-2.21.0-py3-none-any.whl (1.3 MB)\nUsing cached referencing-0.37.0-py3-none-any.whl (26 kB)\nUsing cached rpds_py-2026.9.1-cp312-cp312-macosx_10_12_x86_64.whl (346 kB)\nUsing cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)\nBuilding wheels for collected packages: workpaperbench\n  Building editable for workpaperbench (pyproject.toml): started\n  Building editable for workpaperbench (pyproject.toml): finished with status 'done'\n  Created wheel for workpaperbench: filename=workpaperbench-0.4.0-0.editable-py3-none-any.whl size=4025 sha256=f7106e6092557aeb30dbd231a1174086594c0a120363dc1703b83c8c0762b40b\n  Stored in directory: /private/var/folders/l4/b6j4x_7n09g1q28xq__l1x5w0000gn/T/pip-ephem-wheel-cache-_roziw5u/wheels/97/4c/5c/18ca2097951fbb70d55f1da63f479e232ee825238e8ec03a1b\nSuccessfully built workpaperbench\nInstalling collected packages: typing-extensions, rpds-py, pygments, pluggy, packaging, iniconfig, attrs, referencing, pytest, jsonschema-specifications, jsonschema, workpaperbench\nSuccessfully installed attrs-26.1.0 iniconfig-2.3.1 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 packaging-26.3 pluggy-1.6.0 pygments-2.21.0 pytest-8.4.2 referencing-0.37.0 rpds-py-2026.9.1 typing-extensions-4.16.0 workpaperbench-0.4.0\n",
+      "stderr": "\n[notice] A new release of pip is available: 25.0.1 -> 26.2.1\n[notice] To update, run: python3 -m pip install --upgrade pip\n"
+    },
+    {
+      "command": [
+        "./wpb",
+        "demo"
+      ],
+      "returncode": 0,
+      "stdout": "Authored reference: Block FY2024 revenue and gross-profit reconciliation\nCatalog: workflow-v6-canonical-d07b12eebe22 Scorer: workflow-1.2.0\nBitcoin contribution to consolidated revenue growth: 31.780787 percent\n100 * (10,199,205 - 9,498,302) / (24,121,053 - 21,915,623)\nA change in annual revenue share measures a different quantity.\nA decimal ratio labeled percent is 100 times too small.\nCorrected workflow-v5 replays of unchanged retained development submissions:\nqwen36-development-a01-5 numbers: False claims: True evidence: True robustness: False delivery: True\nqwen36-development-b01-1 numbers: True claims: True evidence: True robustness: False delivery: True\nqwen36-development-c01-5 numbers: True claims: True evidence: True robustness: True delivery: True\nNo new inference. These are not workflow-v6 model results.\nThis display reads authored targets and recorded receipts. It executes no submitted SQL.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "./wpb",
+        "validate",
+        "examples/block-workpaper-v6/answer.json"
+      ],
+      "returncode": 0,
+      "stdout": "Output structure valid. Financial correctness requires fresh separate verification.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/build_workflow_validity.py",
+        "--check"
+      ],
+      "returncode": 0,
+      "stdout": "workflow-v6-canonical-d07b12eebe22 30 cases\n",
+      "stderr": ""
+    }
+  ],
+  "manifest_id": "workflow-v6-canonical-d07b12eebe22",
+  "scorer_version": "workflow-1.2.0",
+  "regression": {
+    "full_run": {
+      "command": ".venv/bin/python -m pytest -q",
+      "passed": 460,
+      "failed": 1,
+      "seconds": 45.89,
+      "failure": "README linked to the suite report before the ongoing verifier sweep wrote it"
+    },
+    "resolved_check": {
+      "command": ".venv/bin/python -m pytest -q tests/test_release_integrity.py::test_public_reading_path_links_resolve",
+      "passed": 1,
+      "failed": 0,
+      "seconds": 0.07
+    },
+    "unresolved_failures": 0
+  },
+  "controls": {
+    "isolated_checks": 147,
+    "native_prototypes": 3,
+    "new_inference": false,
+    "prototypes_reused_in_suite": true
+  },
+  "independent_reference_review": {
+    "supported_claims_recalculated": 10,
+    "source_assertions_reviewed": 30,
+    "human_review": "pending"
+  },
+  "evidence_sha256": {
+    "reports/workflow-v5/corrected-replay.json": "9f6c90868c745c3787661bab488c93eb9c9c40d0fd6b53a25242288afd71508e",
+    "reports/local/workflow-validity-prototypes.json": "f62206158fcd94139585144424e21aaf1cc226944b6666fac9850c66a43df454",
+    "reports/local/workflow-validity-suite.json": "60f0a5a13dc1e653d071af34b41c74dd69d2ca8fc61f6fa8d842ed7c053dfd20",
+    "reports/local/local-boundary-validation.json": "42d270077eccd9060e127ce72416c766bbe589f917faa17034e6b7218b4544ca",
+    "config/scorers/workflow-1.2.0.py": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+    "config/workflow-claim-review.json": "67da1a36ab58a8f23f138921ff23e2c8e8e086257798fbebe1566a358cb022b5",
+    "datasets/workflow-v6/manifest.json": "a2b0105d7d35629df1a3d1a94450b4b8bb80c37be935f92b0f100a9c016802f9"
+  },
+  "publication_audit": {
+    "command": ".venv/bin/python scripts/audit_current.py",
+    "passed": true,
+    "scope": "Staged current source and Git history, historical freezes and all current catalogs"
+  }
+}

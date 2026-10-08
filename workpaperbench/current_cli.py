@@ -13,22 +13,26 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def demo():
-    manifest, _, task = load(ROOT, task='c03')
-    workpaper = json.loads((task / 'tests/reference.json').read_text())
-    print('Current authored reference: Block FY2024 revenue and gross-profit reconciliation')
+    manifest, _, task = load(ROOT, 'workflow-v6', 'c01')
+    gold = json.loads((task / 'tests/gold.json').read_text())
+    bridge = gold['tables']['revenue_bridge']
+    row = next(row for row in bridge['rows'] if row[0] == 'bitcoin')
+    contribution = row[list(bridge['columns']).index('contribution_pct')]
+    print('Authored reference: Block FY2024 revenue and gross-profit reconciliation')
     print('Catalog:', manifest['manifest_id'], 'Scorer:', manifest['scorer_version'])
-    for claim in workpaper['answers']:
-        print(f"{claim['id']}: {claim['value']:.6f} {claim['unit']}")
-    prior = ROOT / 'reports/runs/challenge-v1-evaluation-d9a2fe13f6f2'
-    for name in ('final-c03-inexpensive-1','final-c03-reference-1','final-c03-reference-2'):
-        saved = json.loads((prior / name / 'answer.json').read_text())
-        values = {claim['id']:claim['value'] for claim in saved['answers']}
-        print('Historical model submission', name, 'Bitcoin contribution:',
-              values['bitcoin_share_of_total_net_revenue_increase_pct'], 'percent')
-    print('Contribution to total growth differs from a change in annual revenue share.')
+    print(f'Bitcoin contribution to consolidated revenue growth: {contribution:.6f} percent')
+    print('100 * (10,199,205 - 9,498,302) / (24,121,053 - 21,915,623)')
+    print('A change in annual revenue share measures a different quantity.')
     print('A decimal ratio labeled percent is 100 times too small.')
-    print('Source: https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm')
-    print('References and recorded submissions are separate. This display executes no submitted SQL.')
+    report = json.loads((ROOT / 'reports/workflow-v5/corrected-replay.json').read_text())
+    print('Corrected workflow-v5 replays of unchanged retained development submissions:')
+    for row in report['attempts']:
+        checks = row['verdict']['checks']
+        print(row['attempt_id'], 'numbers:', checks['numerical_tables'],
+              'claims:', checks['claim_verdicts'], 'evidence:', checks['evidence'],
+              'robustness:', checks['robustness'], 'delivery:', checks['delivery'])
+    print('No new inference. These are not workflow-v6 model results.')
+    print('This display reads authored targets and recorded receipts. It executes no submitted SQL.')
 
 
 def main():

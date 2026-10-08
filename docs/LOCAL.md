@@ -27,13 +27,13 @@ The project environment and guest setup above are sufficient for grading. No
 weights, model server or Hermes installer are required for this path.
 
 ```sh
-./wpb grade --dataset workflow-v5 --task c01 \
-  --artifacts examples/block-workpaper --attempt block-example-1
+./wpb grade --dataset workflow-v6 --task c01 \
+  --artifacts examples/block-workpaper-v6 --attempt my-block-example-1
 ```
 
 The checked-in example is an authored reference. The expected checks are
 `financial_answer=true`, `evidence=true`, `robustness=true` and `delivery=true`.
-The receipt is retained under `.raw/local-trials/block-example-1/receipt.json`.
+The receipt is retained under `.raw/local-trials/my-block-example-1/receipt.json`.
 Use a fresh attempt ID for another verification. Failed financial checks produce
 a receipt too, so inspect the verdict rather than treating process exit as a score.
 
@@ -46,6 +46,9 @@ Docker and native Harbor. A general-purpose host is not an equivalent environmen
 Other guest/platform combinations have not been validated here.
 
 ## Run the measured local model
+
+The current authored catalog is workflow-v6. The version 4 and 5 commands below
+reproduce historical development conditions and do not measure the revised tasks.
 
 The measured default is Qwen3.5-9B **Q4_K_M** from
 [the pinned quantization repository](https://huggingface.co/twoody/Qwen3.5-9B-GGUF/tree/b647a5938c8cf40d1c3553ddd9bf2892895f0110).
@@ -210,8 +213,10 @@ In another terminal:
 ./wpb queue --schedule config/local/development-schedule-qwen36-5.json
 ```
 
-The schedule continues Block from its retained native session and SQL, then runs
-Microsoft fresh. Completed slots are skipped on queue restart. Candidate exits
+The completed schedule continued Block from its retained native session and SQL, then ran
+Microsoft fresh. Both delivered workpapers. The original verdicts remain in
+[the recovery report](../reports/local/workflow-qwen36-development-5.json), and
+[corrected scoring](../reports/workflow-v5/corrected-replay.json) is a separate replay. Completed slots are skipped on queue restart. Candidate exits
 or timeouts retain an isolated verifier result and do not prevent the next slot
 from running. Infrastructure or isolation failures still stop the queue.
 The status file is `.local/local-workflow-qwen36-development-5-status.json`.

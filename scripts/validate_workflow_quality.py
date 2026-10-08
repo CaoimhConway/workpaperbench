@@ -34,10 +34,23 @@ def artifacts(task, variant, covered):
             for entry in answer[role]:
                 spec = gold[role][entry['id']]
                 entry['evidence'] = sorted(set(spec['evidence'][-1] + spec['context_evidence_allowed']))
+                if gold['scorer_version'] == 'workflow-1.2.0':
+                    entry['evidence'] = [' and '.join(entry['evidence']) + ' - supplied facts and context', 'Definition: see output_contract.json']
         for name, spec in gold['tables'].items():
             sql = files[name + '.sql'].strip().rstrip(';')
-            columns = ', '.join('"' + column + '"' for column in reversed(spec['columns']))
+            expressions = []
+            for column in reversed(spec['columns']):
+                aliases = spec['columns'][column].get('aliases', {})
+                if aliases:
+                    cases = ' '.join("WHEN '" + value + "' THEN '" + alias + "'" for alias, value in aliases.items())
+                    expressions.append('CASE "' + column + '" ' + cases + ' END AS "' + column + '"')
+                else:
+                    expressions.append('"' + column + '"')
+            columns = ', '.join(expressions)
             files[name + '.sql'] = 'SELECT ' + columns + ' FROM (\n' + sql + '\n) ORDER BY 1 DESC\n'
+    elif variant == 'always_unresolved':
+        for entry in answer['claims']:
+            entry['verdict'] = 'unresolved'
     elif variant == 'citation_dump':
         known = [entry['id'] for entry in json.loads((task / 'environment/evidence.json').read_text())]
         for entry in answer['tables'] + answer['claims']:
@@ -53,13 +66,16 @@ def artifacts(task, variant, covered):
     return {name: data.encode() for name, data in files.items()}
 
 
-def expected(variant):
-    return dict(financial_answer=True, evidence=variant != 'citation_dump',
-                robustness=variant != 'constant_residual', delivery=True)
+def expected(variant, revised=False):
+    result = dict(financial_answer=variant != 'always_unresolved', evidence=variant != 'citation_dump',
+                  robustness=variant != 'constant_residual', delivery=True)
+    if revised:
+        result.update(numerical_tables=True, claim_verdicts=variant != 'always_unresolved')
+    return result
 
 
 def validate(verdict, variant, covered):
-    if verdict['checks'] != expected(variant) or not all(verdict['isolation'].values()):
+    if verdict['checks'] != expected(variant, verdict['scorer_version'] == 'workflow-1.2.0') or not all(verdict['isolation'].values()):
         raise ValueError('unexpected_quality_verdict:' + json.dumps(verdict))
     if variant == 'constant_residual':
         for name in {table for table, _ in covered}:
@@ -71,30 +87,32 @@ def validate(verdict, variant, covered):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--dataset', default=DATASET, choices=['workflow-v5', 'workflow-v6'])
     parser.add_argument('--tasks', nargs='+', default=['a01', 'b01', 'c01'])
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--native-prefix', help='Also test these cases through native Harbor before the control sweep')
     args = parser.parse_args()
     if args.output.exists():
         raise ValueError('validation_report_already_exists')
-    manifest = load(ROOT, DATASET)
+    dataset = args.dataset
+    manifest = load(ROOT, dataset)
     keys = list(manifest['tasks']) if args.tasks == ['all'] else args.tasks
     review = json.loads((ROOT / 'config/workflow-quality-review.json').read_text())
-    report = {'validation_id': 'workflow-quality-1', 'manifest_id': manifest['manifest_id'],
+    report = {'validation_id': dataset + '-quality-1', 'manifest_id': manifest['manifest_id'],
               'scorer_version': manifest['scorer_version'], 'scorer_sha256': manifest['scorer_sha256'],
               'validator_sha256': digest(__file__), 'inference': False, 'external_service_spend_usd': 0,
               'scope': 'Authored positive and negative controls, not candidate-model performance',
               'native_receipts': [], 'isolated_verifier_checks': []}
     if args.native_prefix:
         for key in keys:
-            _, _, task = load(ROOT, DATASET, key)
+            _, _, task = load(ROOT, dataset, key)
             variant = 'reference'
             directory = ROOT / '.local/quality-submissions' / (args.native_prefix + '-' + key)
             directory.mkdir(parents=True, exist_ok=False)
             for name, data in artifacts(task, variant, []).items():
                 (directory / name).write_bytes(data)
             attempt = args.native_prefix + '-' + key
-            subprocess.run([sys.executable, str(ROOT / 'scripts/local_bench.py'), 'grade', '--dataset', DATASET,
+            subprocess.run([sys.executable, str(ROOT / 'scripts/local_bench.py'), 'grade', '--dataset', dataset,
                 '--task', key, '--artifacts', str(directory), '--attempt', attempt], check=True)
             path = ROOT / '.raw/local-trials' / attempt
             receipt = json.loads((path / 'receipt.json').read_text())
@@ -107,14 +125,14 @@ def main():
             report['native_receipts'].append({'receipt_sha256': digest(path / 'receipt.json'), 'receipt': receipt})
     lock = (ROOT / '.local/local-command.lock').open('a')
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    prepare(DATASET, keys)
+    prepare(dataset, keys)
     for key in keys:
-        _, spec, task = load(ROOT, DATASET, key)
+        _, spec, task = load(ROOT, dataset, key)
         tag = 'wpb-quality-' + spec['task_sha256'][:16]
         guest('docker', 'build', '-q', '-t', tag, BUILDER + '/' + spec['path'] + '/tests', capture_output=True)
         image_id = guest('docker', 'image', 'inspect', '--format={{.Id}}', tag, capture_output=True).stdout.decode().strip()
         covered = review['residual_controls'].get(key, {}).get('covered', [])
-        for variant in ['reference', 'context', 'citation_dump'] + (['constant_residual'] if covered else []):
+        for variant in ['reference', 'context', 'citation_dump'] + (['constant_residual'] if covered else []) + (['always_unresolved'] if dataset == 'workflow-v6' else []):
             files = artifacts(task, variant, covered)
             payload = json.dumps({name: base64.b64encode(data).decode() for name, data in files.items()}).encode()
             result = guest('docker', 'run', '--rm', '--network', 'none', '--read-only', '--memory', '384m',
