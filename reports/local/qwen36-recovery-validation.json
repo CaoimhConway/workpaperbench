@@ -29,9 +29,34 @@
     "final_focused_reporting_and_retention": {
       "passed": 19,
       "seconds": 0.55
+    },
+    "final_full_suite": {
+      "passed": 424,
+      "seconds": 43.16,
+      "implementation_commit": "2752861"
     }
   },
   "native_continuation_validation": "Native SessionDB import and restored files are checked before the candidate starts, with a continuation-ready.json receipt in the guest",
   "external_service_spend_usd": 0,
-  "startup_correction": "Initial detached launch exited in public CLI argument parsing, fixed before a new candidate attempt. Startup-only c01-3 exposed the pinned Python shim stdin limitation. Startup-only c01-4 exposed missing dependencies in its generic Python environment. Neither made a model call. Restoration now uses the native hermes --run-module launcher to load the complete managed runtime."
+  "startup_correction": "Initial detached launch exited in public CLI argument parsing, fixed before a new candidate attempt. Startup-only c01-3 exposed the pinned Python shim stdin limitation. Startup-only c01-4 exposed missing dependencies in its generic Python environment. Neither made a model call. Restoration now uses the native hermes --run-module launcher to load the complete managed runtime.",
+  "native_continuation_observed": {
+    "attempt_id": "qwen36-development-c01-5",
+    "verified_at": "2026-10-13T10:38:30.421547+00:00",
+    "server_processing": true,
+    "restored": {
+      "attempt_id": "qwen36-development-c01-2",
+      "receipt_sha256": "ca8c4699f66ec3e279bdbee8f6e7fbb66147d664195c5bd8f39419e5201619c0",
+      "session_id": "20261013_090805_56db4a",
+      "session_sha256": "8050f3e6437bcd660037cdf97760e1e9d2345cf12658d917cc76f1e7aab53b3a",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "5a72055e3dd67352f8f8959d3379fb4d7a738122c9ccc2fc1abd786a106c8499",
+        "reconciliation.sql": "373d09a1346f1cad5f42faa5deb39ea16067e1e682f355630905819edb165f89",
+        "revenue_bridge.sql": "0b6f1ba7d8fb58cb57782b2af1cee757616ebee36c3ff54c70f42d342b3b7b39"
+      },
+      "condition": "Native session and saved SQL restored in a fresh isolated environment"
+    },
+    "ready_mtime": 1791887794.603807,
+    "native_resume_process_running": true,
+    "native_64_turn_process_running": true
+  }
 }
