@@ -27,11 +27,11 @@
       "seconds": 43.78
     },
     "final_focused_reporting_and_retention": {
-      "passed": 17,
-      "seconds": 0.33
+      "passed": 19,
+      "seconds": 0.55
     }
   },
   "native_continuation_validation": "Native SessionDB import and restored files are checked before the candidate starts, with a continuation-ready.json receipt in the guest",
   "external_service_spend_usd": 0,
-  "startup_correction": "Initial detached launcher exited in argument parsing because the public CLI did not route queue. Fixed and checked before any new candidate attempt began."
+  "startup_correction": "Initial detached launcher exited in argument parsing because the public CLI did not route queue. Fixed and checked before any new candidate attempt began. The next startup reached native restoration, where the pinned Python shim rejected stdin as a script path. The import now uses an explicit trusted script file."
 }

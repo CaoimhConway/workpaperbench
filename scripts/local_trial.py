@@ -28,7 +28,7 @@ cp /opt/workpaperbench-runtime/resume-input/sql/*.sql /logs/artifacts/ &&
 . /tmp/hermes/hermes-agent/scripts/_activation.sh &&
 wpb_resume_env="$(hermes_compose_env /tmp/hermes/hermes-agent sh)" &&
 hermes_apply_env "$wpb_resume_env" &&
-python - <<'WPB_RESUME'
+cat > /tmp/hermes/restore_workpaper_session.py <<'WPB_RESUME'
 import json
 from pathlib import Path
 from hermes_state import SessionDB
@@ -43,6 +43,7 @@ try:
 finally:
     db.close()
 WPB_RESUME
+python /tmp/hermes/restore_workpaper_session.py
 """
 
 def clean_environment():
