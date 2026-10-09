@@ -128,19 +128,21 @@ def state(item):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--dataset', default='workflow-v6', choices=['workflow-v6', 'workflow-v7'])
+    parser.add_argument('--json-output', type=Path)
     args = parser.parse_args()
-    if args.output.exists():
+    if args.output.exists() or (args.json_output and args.json_output.exists()):
         raise ValueError('baseline_report_already_exists')
-    manifest = load(ROOT, 'workflow-v6')
+    manifest = load(ROOT, args.dataset)
     corrected, entries = retained()
     results, historical, identities = {}, {}, []
     (ROOT / '.local').mkdir(exist_ok=True)
     with (ROOT / '.local/local-command.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         for key in sorted(manifest['tasks']):
-            _, spec, task = load(ROOT, 'workflow-v6', key)
+            _, spec, task = load(ROOT, args.dataset, key)
             results[key] = baseline(task)
-            identities.append(('workflow-v6/' + key, spec['task_sha256'], results[key]['image_id']))
+            identities.append((args.dataset + '/' + key, spec['task_sha256'], results[key]['image_id']))
             print(key, 'starting SQL checked', flush=True)
         for dataset, key in sorted({(dataset, key) for dataset, key, _, _ in entries}):
             _, spec, task = load(ROOT, dataset, key)
@@ -157,6 +159,31 @@ def main():
                 historical[dataset, key, 'corrected'] = result
                 identities.append((dataset + '/' + key + '-corrected', expected, result['image_id']))
             print(dataset, key, 'historical starting SQL checked', flush=True)
+    if args.json_output:
+        baselines = []
+        for key, result in results.items():
+            baselines.append({'manifest_id': manifest['manifest_id'],
+                'task_id': manifest['tasks'][key]['task_id'],
+                'task_sha256': manifest['tasks'][key]['task_sha256'],
+                'scorer_sha256': manifest['scorer_sha256'],
+                'tables': result['verdict']['details']['tables'],
+                'isolation': result['verdict']['isolation'], 'image_id': result['image_id']})
+        for (dataset, key, view), result in historical.items():
+            prior = load(ROOT, dataset)
+            baselines.append({'manifest_id': prior['manifest_id'],
+                'task_id': prior['tasks'][key]['task_id'],
+                'task_sha256': result['reviewed_task_sha256'],
+                'scorer_sha256': corrected['scorer_sha256'] if view == 'corrected' else prior['scorer_sha256'],
+                'scoring_view': view, 'tables': result['verdict']['details']['tables'],
+                'isolation': result['verdict']['isolation'], 'image_id': result['image_id']})
+        machine = {'report_version': 'starting-sql-1.0', 'inference': False,
+            'scope': 'SQL only. Claims, evidence and whole-workpaper completion are unassessed.',
+            'generator_sha256': digest(__file__), 'container_program_sha256': hashlib.sha256(CONTAINER.encode()).hexdigest(),
+            'baseline_helper_sha256': digest(ROOT / 'scripts/review_workflow.py'),
+            'baselines': baselines}
+        args.json_output.parent.mkdir(parents=True, exist_ok=True)
+        with args.json_output.open('x') as output:
+            output.write(json.dumps(machine, indent=2) + '\n')
     tables = [item for result in results.values() for item in result['verdict']['details']['tables'].values()]
     same = sum(sum(result['byte_identical'].values()) for result in results.values())
     original = sum(item['original'] for item in tables)
@@ -176,7 +203,7 @@ def main():
     for key, result in results.items():
         for name, item in result['verdict']['details']['tables'].items():
             values = state(item)
-            lines.append(f'| [{key}](../../datasets/workflow-v6/tasks/{key}/instruction.md) | {name} | {"yes" if result["byte_identical"][name] else "no"} | {values[0]} | {values[1]} | {values[2]} |')
+            lines.append(f'| [{key}](../../datasets/{args.dataset}/tasks/{key}/instruction.md) | {name} | {"yes" if result["byte_identical"][name] else "no"} | {values[0]} | {values[1]} | {values[2]} |')
     lines += ['', '## Retained model transitions', '',
         'Repair = incorrect to correct, Preservation = correct to correct, Regression = correct to incorrect, Unrepaired = incorrect to incorrect. Classify original-input correctness separately from correctness on original inputs plus every control. Each comparison uses one frozen task/scorer on both sides.',
         'Corrected workflow-v5 replays are separate from original workflow-v5 scores and are not workflow-v6 model results. Changes between scorer versions are scorer corrections, not model repairs. Original submissions, scores and correction receipts remain unchanged.', '',
@@ -216,7 +243,7 @@ def main():
         'Generator SHA256: `' + digest(__file__) + '`.',
         'Verifier helper SHA256: `' + digest(ROOT / 'scripts/review_workflow.py') + '`.',
         'Container program SHA256: `' + hashlib.sha256(CONTAINER.encode()).hexdigest() + '`.',
-        'Current manifest SHA256: `' + digest(ROOT / 'datasets/workflow-v6/manifest.json') + '`.',
+        'Current manifest SHA256: `' + digest(ROOT / 'datasets' / args.dataset / 'manifest.json') + '`.',
         'Current scorer SHA256: `' + manifest['scorer_sha256'] + '`.',
         'Corrected replay SHA256: `' + digest(ROOT / 'reports/workflow-v5/corrected-replay.json') + '`.', '',
         'Historical catalogs: [workflow-v4](../../datasets/workflow-v4/manifest.json), [workflow-v5](../../datasets/workflow-v5/manifest.json). Corrected tasks are reconstructed by reviewed_task, preserving original inputs and starting SQL. [Corrected replay](../workflow-v5/corrected-replay.json) binds task hashes, submitted file hashes and original receipt hashes. The budget diagnostic binds the earlier receipt and SQL hashes. Task tree hashes below authenticate all starting/reference SQL, original and synthetic inputs, verifier code and gold expectations. Image IDs identify the executed verifier builds.', '',

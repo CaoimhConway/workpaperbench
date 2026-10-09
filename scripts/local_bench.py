@@ -400,7 +400,17 @@ def report_rows(attempts):
 
 def report(attempts, destination):
     rows = report_rows(attempts)
-    result = {'report_version': 'local-1.0', 'attempts': rows, 'external_service_spend_usd': 0,
+    from workpaperbench.workflow_report import summarize
+    baselines, baseline_sources = [], {}
+    for path in sorted((ROOT / 'reports').glob('workflow-*/starting-sql.json')):
+        data = parse_json(read_bounded(path, 500000))
+        baselines.extend(data['baselines'])
+        baseline_sources[path.relative_to(ROOT).as_posix()] = digest(path)
+    result = {'report_version': 'local-1.1', 'attempts': rows,
+              'diagnostics': [summarize(row, baselines) for row in rows],
+              'baseline_sources_sha256': baseline_sources,
+              'interpretation': 'Table transitions use matching original inputs and controls. Reasoning or calculation is an observed output failure, not a claim about the internal cause. Missing delivery or infrastructure leaves table changes unassessed. Different budgets and continuations are not controlled comparisons.',
+              'external_service_spend_usd': 0,
               'held_out_evaluation': 'not run', 'frontier_discrimination': 'unmeasured'}
     with destination.open('x') as output:
         output.write(json.dumps(result, indent=2) + '\n')
