@@ -1,0 +1,84 @@
+{
+  "scorer_version": "workflow-1.2.0",
+  "complete": true,
+  "verified_research_completion": true,
+  "strict_delivery_completion": true,
+  "checks": {
+    "financial_answer": true,
+    "numerical_tables": true,
+    "claim_verdicts": true,
+    "evidence": true,
+    "robustness": true,
+    "delivery": true
+  },
+  "details": {
+    "tables": {
+      "quarter_model": {
+        "original": true,
+        "original_error": null,
+        "evidence": true,
+        "controls": {
+          "scaled_amounts_preserve_ratios": true,
+          "current_quarter_changes_prior_quarter_preserved": true,
+          "irrelevant_later_disclosure": true
+        },
+        "control_errors": {
+          "scaled_amounts_preserve_ratios": null,
+          "current_quarter_changes_prior_quarter_preserved": null,
+          "irrelevant_later_disclosure": null
+        }
+      },
+      "quarter_reconciliation": {
+        "original": true,
+        "original_error": null,
+        "evidence": true,
+        "controls": {
+          "scaled_amounts_preserve_ratios": true,
+          "current_quarter_changes_prior_quarter_preserved": true,
+          "irrelevant_later_disclosure": true
+        },
+        "control_errors": {
+          "scaled_amounts_preserve_ratios": null,
+          "current_quarter_changes_prior_quarter_preserved": null,
+          "irrelevant_later_disclosure": null
+        }
+      },
+      "guidance_bridge": {
+        "original": true,
+        "original_error": null,
+        "evidence": true,
+        "controls": {
+          "scaled_amounts_preserve_ratios": true,
+          "current_quarter_changes_prior_quarter_preserved": true,
+          "irrelevant_later_disclosure": true
+        },
+        "control_errors": {
+          "scaled_amounts_preserve_ratios": null,
+          "current_quarter_changes_prior_quarter_preserved": null,
+          "irrelevant_later_disclosure": null
+        }
+      }
+    },
+    "claims": {
+      "claim_1": {
+        "verdict": true,
+        "evidence": true
+      },
+      "claim_2": {
+        "verdict": true,
+        "evidence": true
+      },
+      "claim_3": {
+        "verdict": true,
+        "evidence": true
+      }
+    }
+  },
+  "errors": [],
+  "isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  }
+}

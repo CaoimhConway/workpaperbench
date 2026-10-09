@@ -1,0 +1,153 @@
+{
+  "validation_id": "research-readiness-1",
+  "baseline_release": "v0.5.0-local.3",
+  "baseline_commit": "11c4e2cf345e78df6ad6d8f550faf657c67e5dd6",
+  "manifest_id": "workflow-v7-canonical-fca4003d0a15",
+  "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "actions_runs_before_publication": 181,
+  "execution": {
+    "host": "MacPro7,1",
+    "host_python": "3.12.15",
+    "guest": "Ubuntu 24.04 x86_64, six CPUs, 12 GiB RAM, no host mounts or owner credentials",
+    "guest_python": "3.12.3",
+    "docker": "29.1.3",
+    "compose": "2.40.3",
+    "harbor": "0.23.0",
+    "jsonschema": "4.26.0",
+    "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683"
+  },
+  "software_sha256": {
+    "scripts/local_trial.py": "c4507592fbafc3cf333521cb12931a4f1d6aa6c8083ef2f492212c839157b91b",
+    "scripts/guest_bench.py": "fa30bf942c7ca158ddf4961524b3fd4204938a2b4c1094d92724511f02b7a05a",
+    "scripts/local_bench.py": "903fed88ed60cdc8e613a7de3f3dd8c40de757ddca6f584920c45a9abd1a2d0b",
+    "scripts/starting_sql_baseline.py": "73fac5fc3ba2e8f45cfee5aa462ec516edd7c2667dfc4dfa65b7b0b788b2af46",
+    "workpaperbench/workflow_report.py": "20bc9451ef0a8abc0937d258c266a359c6a7fa2efdcf856f1c771f2b616b470b",
+    "workpaperbench/current_cli.py": "81d01234879477ff8405fc768cf8cf74e8c3897ecaee94e485ffe7e8eb9ad62b",
+    "config/external-model.example.json": "8a583d8676c90ae99983f8ad3a3333c04dbe95ff42d032a7f169ff16f53bc24c",
+    "scripts/build_workflow_evidence_alternative.py": "a893fbaf4c74771afe53d73cff56e3d83816e0f472ef71cf1d4ace641f59c9ec"
+  },
+  "evidence_sha256": {
+    "reports/workflow-v7/validation/external-alternative-1/receipt.json": "016c9928f45636ff3250027337209f7b0f96d9bb1ed79f7d9a8c5720e2142176",
+    "reports/workflow-v7/validation/external-alternative-2/receipt.json": "25c469680e1385761fc5954d79bc683c84aaee63d0b6258f38f0739d2d32c127",
+    "reports/workflow-v7/validation/external-alternative-2/verifier.json": "ec2145c8a534dc138133a2295b7a5202f3282f9863501f6fb40e7aa8a5cde3e9",
+    "reports/workflow-v7/validation/external-reference-2/receipt.json": "f3564aa59eba6fc6ea0635ed48cb6304fda57b4be6e7897d144d6dae402ac847",
+    "reports/workflow-v7/validation/external-reference-2/verifier.json": "40765669944a96690d327052c7e1f8f93633f2a1fa0b01a5d2cbcb71443b6f8f",
+    "reports/workflow-v7/validation/external-transport-2/receipt.json": "bf43c0255b0206ecbb18729b94a91975fdd3489c6a0ef3202f4e4e45468ff788",
+    "reports/workflow-v7/validation/external-transport-2/transport-smoke.json": "287a7a9bafbeb0aa51cb78f2b308a6166a2ef1cc0a17812e9a87db6acd368a35",
+    "reports/workflow-v7/validation/external-transport-2/verifier.json": "5362a41dc92459a10900699f343d7ef1dff185cc50553cb257ab6f44c6c8dda2",
+    "reports/workflow-v7/validation/reference-report.json": "888a05b829e9108977cdd515f833b3e69333f90bf6d1b2e55f25d42106ae8d14",
+    "reports/workflow-v7/validation/rejected-transfer-report.json": "74c0451dc3d18209bc1e8df7821b07a35af1a0df20e1f97dfea75eba59f3a127"
+  },
+  "starting_baseline_sha256": "3aa4853f3dea2a08aad32122c2ff04174f4a58858dc82446bae8ce63629e8f8e",
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest -q",
+      "result": "504 passed in 46.03s"
+    },
+    {
+      "command": ".venv/bin/python scripts/build_workflow_evidence_alternative.py --check",
+      "result": "workflow-v7-canonical-fca4003d0a15 30 cases, exact reconstruction"
+    },
+    {
+      "command": ".venv/bin/python scripts/audit_current.py"
+    },
+    {
+      "command": ".venv/bin/python scripts/starting_sql_baseline.py --dataset workflow-v7 --output /tmp/wpb-starting-v7.md --json-output reports/workflow-v7/starting-sql.json",
+      "result": {
+        "byte_identical": 61,
+        "tables": 90,
+        "original_correct": 61,
+        "all_inputs_correct": 61,
+        "no_sql_repair": [
+          "b04"
+        ],
+        "transitions": {
+          "workflow-v5/original": [
+            {
+              "Repair": 2,
+              "Regression": 2,
+              "Preservation": 4,
+              "Unrepaired": 1
+            },
+            {
+              "Repair": 1,
+              "Regression": 2,
+              "Preservation": 4,
+              "Unrepaired": 2
+            }
+          ],
+          "workflow-v5/corrected": [
+            {
+              "Repair": 3,
+              "Regression": 1,
+              "Preservation": 5
+            },
+            {
+              "Repair": 2,
+              "Regression": 1,
+              "Preservation": 5,
+              "Unrepaired": 1
+            }
+          ],
+          "workflow-v4/original": [
+            {
+              "Repair": 1,
+              "Preservation": 2
+            },
+            {
+              "Unrepaired": 1,
+              "Regression": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "command": "python3 -m venv .venv && .venv/bin/pip install -e . harbor==0.23.0",
+      "result": "Fresh source directory and environment in existing dedicated Ubuntu guest, succeeded"
+    },
+    {
+      "command": "./wpb guest preflight",
+      "result": "Dedicated Linux x86_64, exact native adapter, Harbor pin and Docker bridge passed"
+    },
+    {
+      "command": "./wpb guest grade --task a01 --artifacts .local/alternative-msft-evidence --attempt external-alternative-2",
+      "result": "All diagnostics pass with segment-only evidence for the three corrected outputs"
+    },
+    {
+      "command": "./wpb guest grade --task c01 --artifacts examples/block-workpaper-v7 --attempt external-reference-2",
+      "result": "All diagnostics pass"
+    },
+    {
+      "command": "./wpb guest smoke --attempt external-transport-2",
+      "result": "Two scripted responses, real Hermes terminal, artifact retained, separate verifier rejects delivery, no inference"
+    },
+    {
+      "command": "./wpb guest report --attempts external-reference-2 --output .local/external-reference-report-2.json",
+      "result": "Identity-matched one repair and two preservations on both scopes"
+    },
+    {
+      "command": "./wpb demo && ./wpb validate examples/block-workpaper-v7/answer.json",
+      "result": "Recorded diagnostic display and structure validation pass"
+    },
+    {
+      "command": "Local Markdown target check for README, RUNNING, WORKFLOW and LOCAL",
+      "result": "All local links resolve"
+    }
+  ],
+  "review": {
+    "independent_read_only_review": "Completed, sufficient alternative evidence, historical-check interpretation, verdict binding and preparation-receipt findings fixed and tested",
+    "financial_domain_human_review": "pending"
+  },
+  "retained_setup_failure": "external-alternative-1 included macOS transfer metadata sidecars and was rejected before candidate execution. Its final infrastructure receipt is preserved. Only sidecars were removed for the fresh successful attempt.",
+  "limits": [
+    "Scripted transport is not a model evaluation",
+    "No candidate outcomes on workflow-v7",
+    "Historical model budgets and continuation differ",
+    "Other-machine OS/Docker bootstrap and external replication remain unverified",
+    "User-managed endpoint enforcement of model revision and generation settings is not independently observed",
+    "No Actions or inference launched"
+  ]
+}

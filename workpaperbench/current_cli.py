@@ -8,12 +8,13 @@ import sys
 from jsonschema import Draft202012Validator
 from .catalog import load
 from .grading import parse, validate
+from .workflow_report import summarize
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def demo():
-    manifest, _, task = load(ROOT, 'workflow-v6', 'c01')
+    manifest, _, task = load(ROOT, 'workflow-v7', 'c01')
     gold = json.loads((task / 'tests/gold.json').read_text())
     bridge = gold['tables']['revenue_bridge']
     row = next(row for row in bridge['rows'] if row[0] == 'bitcoin')
@@ -25,18 +26,29 @@ def demo():
     print('A change in annual revenue share measures a different quantity.')
     print('A decimal ratio labeled percent is 100 times too small.')
     report = json.loads((ROOT / 'reports/workflow-v5/corrected-replay.json').read_text())
+    baselines = json.loads((ROOT / 'reports/workflow-v7/starting-sql.json').read_text())['baselines']
+    current = [row for row in baselines if row['manifest_id'] == manifest['manifest_id']]
+    passed = sum(table['original'] and all(table['controls'].values())
+                 for row in current for table in row['tables'].values())
+    print(f'Starting SQL: {passed}/90 queries already pass original inputs and controls.')
     print('Corrected workflow-v5 replays of unchanged retained development submissions:')
     for row in report['attempts']:
         checks = row['verdict']['checks']
         print(row['attempt_id'], 'numbers:', checks['numerical_tables'],
               'claims:', checks['claim_verdicts'], 'evidence:', checks['evidence'],
               'robustness:', checks['robustness'], 'delivery:', checks['delivery'])
-    print('No new inference. These are not workflow-v6 model results.')
+        comparison = summarize({**row, 'manifest_id': report['base_manifest_id'],
+            'scorer_sha256': report['scorer_sha256'], 'task_id': 'workflow-v5-' + row['task'],
+            'task_sha256': row['reviewed_task_sha256'], 'status': 'verified'}, baselines)
+        print('  Original inputs plus controls:', comparison['transition_counts']['original_and_controls'])
+    print('No new inference. Unequal historical budgets. These are not workflow-v7 model results.')
     print('This display reads authored targets and recorded receipts. It executes no submitted SQL.')
 
 
 def main():
     arguments = sys.argv[1:] or ['demo']
+    if arguments[0] == 'guest':
+        raise SystemExit(subprocess.call([sys.executable, str(ROOT / 'scripts/guest_bench.py'), *arguments[1:]]))
     if arguments[0] in ('local','preflight','serve','run','grade','replay','report','controls','queue'):
         arguments = arguments[1:] if arguments[0] == 'local' else arguments
         raise SystemExit(subprocess.call([sys.executable, str(ROOT / 'scripts/local_bench.py'), *arguments]))
@@ -49,6 +61,7 @@ def main():
     sub = parser.add_subparsers(dest='command',required=True)
     sub.add_parser('demo',help='Show a reference and preserved historical submissions')
     for name,description in (
+        ('guest','Run or grade directly inside an isolated Linux guest'),
         ('preflight','Check the local execution host and guest'),
         ('serve','Start one pinned local model'),
         ('run','Run selected development tasks with fresh candidate state'),

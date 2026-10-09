@@ -1,0 +1,117 @@
+{
+  "attempt_id": "external-alternative-2",
+  "execution_profile": "isolated-linux",
+  "manifest_id": "workflow-v7-canonical-fca4003d0a15",
+  "task_id": "workflow-v7-a01",
+  "task_sha256": "a85333ce37881027c49615ab242aec2d69761f321d29ff1f83cc687f62c76911",
+  "scorer_version": "workflow-1.2.0",
+  "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+  "started_at": "2026-10-14T00:35:07.536036+00:00",
+  "external_service_spend_usd": 0,
+  "status": "verified",
+  "inference": false,
+  "source_kind": "submitted_artifact_replay",
+  "configuration_evidence": "Declared model revision, serving runtime and generation settings. Native version and endpoint model ID are checked. Server enforcement is not independently observed.",
+  "execution_files_sha256": {
+    "scripts/local_trial.py": "c4507592fbafc3cf333521cb12931a4f1d6aa6c8083ef2f492212c839157b91b",
+    "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+    "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+    "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+    "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+  },
+  "effective_task_sha256": "39bed487a90189541fdf720c99c5f264d69c034005f9c4dc1d4e42c5aed3f644",
+  "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+  "verdict": {
+    "scorer_version": "workflow-1.2.0",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": true,
+      "robustness": true,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "quarter_model": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "current_quarter_changes_prior_quarter_preserved": true,
+            "irrelevant_later_disclosure": true
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "current_quarter_changes_prior_quarter_preserved": null,
+            "irrelevant_later_disclosure": null
+          }
+        },
+        "quarter_reconciliation": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "current_quarter_changes_prior_quarter_preserved": true,
+            "irrelevant_later_disclosure": true
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "current_quarter_changes_prior_quarter_preserved": null,
+            "irrelevant_later_disclosure": null
+          }
+        },
+        "guidance_bridge": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "current_quarter_changes_prior_quarter_preserved": true,
+            "irrelevant_later_disclosure": true
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "current_quarter_changes_prior_quarter_preserved": null,
+            "irrelevant_later_disclosure": null
+          }
+        }
+      },
+      "claims": {
+        "claim_1": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_2": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_3": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "verdict_sha256": "ec2145c8a534dc138133a2295b7a5202f3282f9863501f6fb40e7aa8a5cde3e9",
+  "sql_file_sha256": {
+    "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+    "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+    "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6"
+  },
+  "raw_answer_sha256": "40a29f144b72ba4cef3ff61ce22b098790cee6ed16c42a6a1057111dfd4842cc",
+  "normalized_answer_sha256": "40a29f144b72ba4cef3ff61ce22b098790cee6ed16c42a6a1057111dfd4842cc",
+  "finished_at": "2026-10-14T00:35:45.120171+00:00"
+}

@@ -1,0 +1,29 @@
+{
+  "configuration_id": "my-model-development-1",
+  "execution_profile": "isolated-linux",
+  "model": {
+    "id": "my-model",
+    "revision": "REPLACE_WITH_IMMUTABLE_WEIGHTS_REVISION"
+  },
+  "runtime": {
+    "name": "REPLACE_WITH_SERVING_RUNTIME",
+    "version": "REPLACE_WITH_PINNED_RUNTIME_VERSION"
+  },
+  "serving": {
+    "base_url": "http://172.17.0.1:18080/v1",
+    "context": 65536
+  },
+  "candidate": {
+    "wall_seconds": 3600,
+    "turns": 24,
+    "generation": {
+      "max_tokens": 4096,
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "seed": 17
+    },
+    "toolsets": "terminal"
+  },
+  "harbor_version": "0.23.0",
+  "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683"
+}

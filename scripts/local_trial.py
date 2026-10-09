@@ -19,7 +19,52 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / 'scripts'))
 from workpaperbench.catalog import load, tree_hash
 from fresh_replay import ensure_no_symlink_ancestors, parse_json, read_bounded, reject_credential_patterns
-from fix_native_version import corrected_hermes_source
+from fix_native_version import corrected_hermes_source, ORIGINAL_MODULE_SHA256
+
+HERMES_REVISION = '8b66a51036c1e20920a17cdd049fdf55c968d683'
+INSTALLER_SHA256 = '25d3c95550e5ed7c0eec180a7d78dde765721c4e33639ab257c154c0a6e7554f'
+
+
+def external_configuration(path):
+    """Accept one bounded native custom route without credentials or fallbacks."""
+    raw = read_bounded(path, 20000)
+    reject_credential_patterns(raw)
+    spec = parse_json(raw)
+    fields = {'configuration_id', 'execution_profile', 'model', 'runtime', 'serving',
+              'candidate', 'harbor_version', 'hermes_revision'}
+    if set(spec) != fields or spec['execution_profile'] != 'isolated-linux':
+        raise ValueError('unsupported_external_profile')
+    for key, required in (('model', {'id', 'revision'}), ('runtime', {'name', 'version'}),
+                          ('serving', {'base_url', 'context'}),
+                          ('candidate', {'wall_seconds', 'turns', 'generation', 'toolsets'})):
+        if not isinstance(spec[key], dict) or set(spec[key]) != required:
+            raise ValueError('external_configuration_fields:' + key)
+    strings = [spec['configuration_id'], *spec['model'].values(), *spec['runtime'].values()]
+    if any(not isinstance(value, str) or not value.strip() or len(value) > 200
+           or value.startswith('REPLACE_') for value in strings):
+        raise ValueError('external_configuration_identity')
+    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._/-]{0,199}', spec['model']['id']):
+        raise ValueError('external_model_id')
+    if (spec['harbor_version'] != '0.23.0' or spec['hermes_revision'] != HERMES_REVISION
+            or spec['serving']['base_url'] != 'http://172.17.0.1:18080/v1'
+            or spec['candidate']['toolsets'] != 'terminal'):
+        raise ValueError('external_native_route_or_version')
+    candidate = spec['candidate']
+    for value, low, high in ((candidate['turns'], 1, 90), (candidate['wall_seconds'], 30, 21600),
+                             (spec['serving']['context'], 1024, 262144)):
+        if type(value) is not int or not low <= value <= high:
+            raise ValueError('external_execution_budget')
+    generation = candidate['generation']
+    if not isinstance(generation, dict) or set(generation) != {'max_tokens', 'temperature', 'top_p', 'seed'}:
+        raise ValueError('external_generation_fields')
+    for name, low, high in (('max_tokens', 1, spec['serving']['context']),
+                            ('temperature', 0, 2), ('top_p', 0.000001, 1), ('seed', 0, 2147483647)):
+        value = generation[name]
+        if type(value) not in (int, float) or not low <= value <= high:
+            raise ValueError('external_generation_budget:' + name)
+        if name in ('max_tokens', 'seed') and type(value) is not int:
+            raise ValueError('external_generation_integer:' + name)
+    return spec, raw
 
 
 RESUME_COMMAND = """export PATH="$HOME/.local/bin:$PATH" &&
@@ -237,84 +282,99 @@ async def run(arguments):
     if arguments.configuration:
         config_bytes = read_bounded(arguments.configuration, 20000)
         configuration = parse_json(config_bytes)
+        if configuration.get('execution_profile') == 'isolated-linux':
+            configuration, config_bytes = external_configuration(arguments.configuration)
+            if platform.machine() != 'x86_64':
+                raise ValueError('external_profile_requires_linux_x86_64_guest')
         if (configuration['model']['id'] != arguments.model
-                or configuration['execution_profile'] != 'local-lima'
+                or configuration['execution_profile'] not in ('local-lima', 'isolated-linux')
                 or configuration['candidate']['turns'] != arguments.turns
                 or configuration['candidate']['wall_seconds'] != arguments.wall):
             raise ValueError('effective_model_configuration_mismatch')
+    if arguments.model and arguments.dataset.startswith('workflow-') and spec.get('split') != 'development':
+        raise ValueError('local_models_must_not_see_held_out_evaluation')
+    smoke = getattr(arguments, 'transport_smoke', False)
+    if smoke and (not configuration or configuration['model']['id'] != 'deterministic-harness-fixture'):
+        raise ValueError('transport_smoke_requires_scripted_fixture')
     output = ROOT / ".raw/local-trials" / arguments.attempt
     output.mkdir(parents=True, exist_ok=False)
     started = datetime.now(timezone.utc).isoformat()
-    receipt = {"attempt_id": arguments.attempt, "execution_profile": "local-lima",
+    receipt = {"attempt_id": arguments.attempt, "execution_profile": configuration['execution_profile'] if configuration else getattr(arguments, 'execution_profile', 'local-lima'),
                "manifest_id": manifest["manifest_id"], "task_id": spec["task_id"],
                "task_sha256": spec["task_sha256"], "scorer_version": manifest["scorer_version"],
                "scorer_sha256": manifest["scorer_sha256"], "started_at": started,
-               "external_service_spend_usd": 0, "status": "started", "inference": arguments.model is not None}
+               "external_service_spend_usd": 0, "status": "started", "inference": arguments.model is not None and not smoke}
+    if receipt['execution_profile'] == 'isolated-linux':
+        receipt['source_kind'] = 'scripted_harness_fixture' if smoke else ('model_evaluation' if arguments.model else 'submitted_artifact_replay')
+        receipt['configuration_evidence'] = 'Declared model revision, serving runtime and generation settings. Native version and endpoint model ID are checked. Server enforcement is not independently observed.'
     receipt['execution_files_sha256'] = {name:hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
         for name in ('scripts/local_trial.py','scripts/fresh_replay.py','scripts/fix_native_version.py','scripts/native_run.py','config/runtime.json')}
     if configuration:
         receipt['model_configuration'] = configuration
         receipt['model_configuration_sha256'] = hashlib.sha256(config_bytes).hexdigest()
     (output / "start.json").write_text(json.dumps(receipt, indent=2) + "\n")
-    task = output / "task"
-    # Fresh file metadata avoids reusing a context checksum for equal-sized
-    # SQLite files retained with the same original archive timestamps.
-    shutil.copytree(source, task, copy_function=shutil.copy)
-    if arguments.legacy:
-        if arguments.model or arguments.dataset != 'challenge-v2':
-            raise ValueError('legacy_replay_is_inference_free')
-        canonical_gold = parse_json((task / 'tests/gold.json').read_bytes())
-        shutil.rmtree(task)
-        legacy_source = ROOT / 'datasets/challenge-v1/tasks' / arguments.task
-        shutil.copytree(legacy_source, task, copy_function=shutil.copy,
-                        ignore=shutil.ignore_patterns('__pycache__','*.pyc','._*'))
-        if tree_hash(task) != spec['origin_task_sha256']:
-            raise ValueError('legacy_source_dossier_changed')
-        gold = parse_json((task / 'tests/gold.json').read_bytes())
-        for identifier, declaration in gold['answers'].items():
-            declaration['evidence'] = canonical_gold['answers'][identifier]['evidence']
-        if gold.get('conclusion') is not None:
-            gold['conclusion']['evidence'] = canonical_gold['conclusion']['evidence']
-        gold['scorer_version'] = manifest['scorer_version']
-        shutil.copyfile(source / 'tests/workpaperbench/challenge_grading.py', task / 'tests/workpaperbench/challenge_grading.py')
-        shutil.copyfile(source / 'tests/verify.py', task / 'tests/verify.py')
-        gold['hashes']['verify.py'] = hashlib.sha256((task / 'tests/verify.py').read_bytes()).hexdigest()
-        (task / 'tests/gold.json').write_text(json.dumps(gold,indent=2) + '\n')
-        toml = task / 'task.toml'
-        toml.write_text(toml.read_text().replace('allowed_hosts = ["openrouter.ai"]', 'allowed_hosts = ["172.17.0.1"]'))
-        receipt.update(task_id=gold['task_id'], source_task_sha256=spec['origin_task_sha256'],
-                       source_snapshot='challenge-v1 original published candidate dossier',
-                       historical_inputs_repaired=False)
-    if arguments.model:
-        installer_path = ROOT / '.local/hermes-install.sh'
-        installer_bytes = read_bounded(installer_path, 100000)
-        receipt['hermes_installer_sha256'] = hashlib.sha256(installer_bytes).hexdigest()
-        (task / 'environment/hermes-install.sh').write_bytes(installer_bytes)
-        dockerfile = task / 'environment/Dockerfile'
-        dockerfile.write_text(dockerfile.read_text() + 'COPY hermes-install.sh /opt/workpaperbench-runtime/hermes-install.sh\n')
-    if arguments.answer:
-        answer = read_bounded(arguments.answer, 65536)
-        reject_credential_patterns(answer)
-        encoded = base64.b64encode(answer).decode()
-        (task / "solution/solve.sh").write_text(
-            "#!/bin/bash\nset -euo pipefail\npython - <<'WRITE'\n"
-            "import base64\nfrom pathlib import Path\n"
-            "Path('/logs/artifacts/answer.json').write_bytes(base64.b64decode(" + repr(encoded) + "))\nWRITE\n")
-    if arguments.artifacts:
-        directory = arguments.artifacts
-        if directory.is_symlink() or not directory.is_dir() or len(list(directory.iterdir())) > 5:
-            raise ValueError('unsafe_submission_directory')
-        script = "#!/bin/bash\nset -euo pipefail\npython - <<'WRITE'\nimport base64\nfrom pathlib import Path\n"
-        for path in sorted(directory.iterdir()):
-            if path.name != 'answer.json' and not __import__('re').fullmatch(r'[a-z][a-z0-9_]{0,40}\.sql', path.name):
-                raise ValueError('unsafe_submission_name')
-            raw = read_bounded(path, 65536 if path.name == 'answer.json' else 16384)
-            reject_credential_patterns(raw)
-            script += "Path('/logs/artifacts/" + path.name + "').write_bytes(base64.b64decode(" + repr(base64.b64encode(raw).decode()) + "))\n"
-        (task / 'solution/solve.sh').write_text(script + 'WRITE\n')
-    if arguments.boundaries:
-        original_solution = (task / "solution/solve.sh").read_text()
-        probe = '''python - <<'BOUNDARIES'
+    try:
+        task = output / "task"
+        # Fresh file metadata avoids reusing a context checksum for equal-sized
+        # SQLite files retained with the same original archive timestamps.
+        shutil.copytree(source, task, copy_function=shutil.copy)
+        if arguments.legacy:
+            if arguments.model or arguments.dataset != 'challenge-v2':
+                raise ValueError('legacy_replay_is_inference_free')
+            canonical_gold = parse_json((task / 'tests/gold.json').read_bytes())
+            shutil.rmtree(task)
+            legacy_source = ROOT / 'datasets/challenge-v1/tasks' / arguments.task
+            shutil.copytree(legacy_source, task, copy_function=shutil.copy,
+                            ignore=shutil.ignore_patterns('__pycache__','*.pyc','._*'))
+            if tree_hash(task) != spec['origin_task_sha256']:
+                raise ValueError('legacy_source_dossier_changed')
+            gold = parse_json((task / 'tests/gold.json').read_bytes())
+            for identifier, declaration in gold['answers'].items():
+                declaration['evidence'] = canonical_gold['answers'][identifier]['evidence']
+            if gold.get('conclusion') is not None:
+                gold['conclusion']['evidence'] = canonical_gold['conclusion']['evidence']
+            gold['scorer_version'] = manifest['scorer_version']
+            shutil.copyfile(source / 'tests/workpaperbench/challenge_grading.py', task / 'tests/workpaperbench/challenge_grading.py')
+            shutil.copyfile(source / 'tests/verify.py', task / 'tests/verify.py')
+            gold['hashes']['verify.py'] = hashlib.sha256((task / 'tests/verify.py').read_bytes()).hexdigest()
+            (task / 'tests/gold.json').write_text(json.dumps(gold,indent=2) + '\n')
+            toml = task / 'task.toml'
+            toml.write_text(toml.read_text().replace('allowed_hosts = ["openrouter.ai"]', 'allowed_hosts = ["172.17.0.1"]'))
+            receipt.update(task_id=gold['task_id'], source_task_sha256=spec['origin_task_sha256'],
+                           source_snapshot='challenge-v1 original published candidate dossier',
+                           historical_inputs_repaired=False)
+        if arguments.model:
+            installer_path = ROOT / '.local/hermes-install.sh'
+            installer_bytes = read_bounded(installer_path, 100000)
+            receipt['hermes_installer_sha256'] = hashlib.sha256(installer_bytes).hexdigest()
+            if receipt['execution_profile'] == 'isolated-linux' and receipt['hermes_installer_sha256'] != INSTALLER_SHA256:
+                raise ValueError('external_pinned_installer_changed')
+            (task / 'environment/hermes-install.sh').write_bytes(installer_bytes)
+            dockerfile = task / 'environment/Dockerfile'
+            dockerfile.write_text(dockerfile.read_text() + 'COPY hermes-install.sh /opt/workpaperbench-runtime/hermes-install.sh\n')
+        if arguments.answer:
+            answer = read_bounded(arguments.answer, 65536)
+            reject_credential_patterns(answer)
+            encoded = base64.b64encode(answer).decode()
+            (task / "solution/solve.sh").write_text(
+                "#!/bin/bash\nset -euo pipefail\npython - <<'WRITE'\n"
+                "import base64\nfrom pathlib import Path\n"
+                "Path('/logs/artifacts/answer.json').write_bytes(base64.b64decode(" + repr(encoded) + "))\nWRITE\n")
+        if arguments.artifacts:
+            directory = arguments.artifacts
+            if directory.is_symlink() or not directory.is_dir() or len(list(directory.iterdir())) > 5:
+                raise ValueError('unsafe_submission_directory')
+            script = "#!/bin/bash\nset -euo pipefail\npython - <<'WRITE'\nimport base64\nfrom pathlib import Path\n"
+            for path in sorted(directory.iterdir()):
+                if path.name != 'answer.json' and not __import__('re').fullmatch(r'[a-z][a-z0-9_]{0,40}\.sql', path.name):
+                    raise ValueError('unsafe_submission_name')
+                raw = read_bounded(path, 65536 if path.name == 'answer.json' else 16384)
+                reject_credential_patterns(raw)
+                script += "Path('/logs/artifacts/" + path.name + "').write_bytes(base64.b64decode(" + repr(base64.b64encode(raw).decode()) + "))\n"
+            (task / 'solution/solve.sh').write_text(script + 'WRITE\n')
+        if arguments.boundaries:
+            original_solution = (task / "solution/solve.sh").read_text()
+            probe = '''python - <<'BOUNDARIES'
 import json, socket
 from pathlib import Path
 checks = {}
@@ -356,14 +416,13 @@ Path('/workspace/local-boundaries.json').write_text(json.dumps(checks))
 assert all(checks.values()), checks
 BOUNDARIES
 '''
-        (task / "solution/solve.sh").write_text(original_solution.replace('set -euo pipefail\n', 'set -euo pipefail\n' + probe, 1))
-    continuation_id = None
-    if getattr(arguments, 'continue_from', None):
-        if not configuration or spec.get('split') != 'development':
-            raise ValueError('continuation_requires_development_inference')
-        continuation_id = prepare_continuation(task, receipt, arguments.continue_from, configuration)
-    receipt['effective_task_sha256'] = tree_hash(task)
-    try:
+            (task / "solution/solve.sh").write_text(original_solution.replace('set -euo pipefail\n', 'set -euo pipefail\n' + probe, 1))
+        continuation_id = None
+        if getattr(arguments, 'continue_from', None):
+            if not configuration or spec.get('split') != 'development':
+                raise ValueError('continuation_requires_development_inference')
+            continuation_id = prepare_continuation(task, receipt, arguments.continue_from, configuration)
+        receipt['effective_task_sha256'] = tree_hash(task)
         from harbor.models.trial.config import TrialConfig
         from harbor.trial.trial import Trial
         from harbor.trial.hooks import TrialEvent
@@ -373,7 +432,10 @@ BOUNDARIES
             distribution_path = distribution("harbor").locate_file("harbor/agents/installed/hermes.py")
             adapter = Path(distribution_path)
             original = adapter.read_bytes()
-            if original != (ROOT / ".local/harbor-hermes-original.py").read_bytes():
+            if receipt['execution_profile'] == 'isolated-linux':
+                if distribution('harbor').version != '0.23.0' or hashlib.sha256(original).hexdigest() != ORIGINAL_MODULE_SHA256:
+                    raise ValueError('external_native_adapter_changed')
+            elif original != (ROOT / ".local/harbor-hermes-original.py").read_bytes():
                 raise ValueError("local_native_adapter_changed")
             generation = copy_generation = dict(configuration['candidate']['generation']) if configuration else None
             if copy_generation is not None:
@@ -478,6 +540,7 @@ if __name__ == "__main__":
     parser.add_argument("--continue-from")
     parser.add_argument("--model")
     parser.add_argument('--configuration', type=Path)
+    parser.add_argument('--transport-smoke', action='store_true')
     parser.add_argument("--boundaries", action="store_true")
     parser.add_argument("--wall", type=int, default=600)
     parser.add_argument("--turns", type=int, default=12)
