@@ -93,6 +93,8 @@ def test_retained_submissions_reproduce_control_inclusive_transitions():
     counts = Counter()
     for item in replay['attempts']:
         directory = root / 'reports/workflow-v5/submissions' / item['attempt_id']
+        original = json.loads((directory / 'receipt.json').read_text())
+        assert summarize(original, baseline['baselines'])['failure_dimensions']['reasoning_or_calculation'] == 'fail'
         for name, expected in item['files_sha256'].items():
             assert hashlib.sha256((directory / name).read_bytes()).hexdigest() == expected
         row = {**item, 'manifest_id': replay['base_manifest_id'],

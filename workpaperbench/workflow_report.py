@@ -61,6 +61,9 @@ def summarize(row, baselines):
         'initially_incorrect': sum(table_state(item, controls) is False for item in initial.values()),
         'initially_correct': sum(table_state(item, controls) is True for item in initial.values()),
     } for scope, controls in (('original_inputs', False), ('original_and_controls', True))} if baseline else None
+    reasoning = dimension(checks.get('numerical_tables'), checks.get('claim_verdicts'))
+    if 'numerical_tables' not in checks and 'claim_verdicts' not in checks:
+        reasoning = dimension(checks.get('financial_answer'))
     return {
         'attempt_id': row['attempt_id'], 'task_id': row.get('task_id'),
         'condition': 'continued' if row.get('continuation') else 'fresh',
@@ -69,8 +72,7 @@ def summarize(row, baselines):
         'baseline_note': ('Same task, scorer and control inputs on both sides' if baseline else
                           'No matching starting-SQL receipt. Changes remain unassessed'),
         'failure_dimensions': {
-            'reasoning_or_calculation': 'unassessed' if infrastructure else dimension(
-                checks.get('numerical_tables'), checks.get('claim_verdicts')),
+            'reasoning_or_calculation': 'unassessed' if infrastructure else reasoning,
             'evidence': 'unassessed' if infrastructure else dimension(checks.get('evidence')),
             'robustness': 'unassessed' if infrastructure else dimension(checks.get('robustness')),
             'delivery': 'unassessed' if infrastructure else dimension(checks.get('delivery')),

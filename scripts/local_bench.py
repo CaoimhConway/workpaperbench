@@ -384,6 +384,9 @@ def report_rows(attempts):
             expected = row.get(field)
             if expected and digest(directory / filename) != expected:
                 raise ValueError('report_retained_bytes_changed')
+        if 'verdict' in row:
+            if not row.get('verdict_sha256') or parse_json(read_bounded(directory / 'verifier.json', 100000)) != row['verdict']:
+                raise ValueError('report_verdict_receipt_mismatch')
         for filename, expected in row.get('sql_file_sha256', {}).items():
             if digest(file_path(directory / 'raw-sql', filename)) != expected:
                 raise ValueError('report_retained_sql_changed')
