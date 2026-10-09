@@ -1,0 +1,4 @@
+SELECT window,100.0*(current_billed_usd_billion/prior_billed_usd_billion-1) billed_reported_growth_pct,
+100.0*(current_billed_usd_billion/fx_prior_billed_usd_billion-1) billed_fx_growth_pct,100.0*(current_revenue_usd_million/prior_revenue_usd_million-1) revenue_reported_growth_pct,
+100.0*(current_revenue_usd_million/fx_prior_revenue_usd_million-1) revenue_fx_growth_pct,current_network_usd_billion-current_billed_usd_billion current_processed_usd_billion,
+prior_network_usd_billion-prior_billed_usd_billion prior_processed_usd_billion FROM comparison WHERE window IN ('FY','Q4')

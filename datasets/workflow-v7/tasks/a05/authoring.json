@@ -1,0 +1,55 @@
+{
+  "rationale": "A retail model can double-count membership economics in merchandise margin and misread a 16-week quarter as 13 weeks. Updating matched durations and explaining an accrual bridge leaves useful work even when actual cash collections and price/renewal effects remain unidentified.",
+  "source_group": "costco-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "authored synthetic work-product defects",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "af1cc45cb7336ae8df8c107d056f4495169d197f26a7b6b86307b04b58b057c0",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "4117af872759ee2fc410fd3b95a28e4047c50c88fd8d0a54367e0e33c2c116f7",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "20c3c966163ab660f6ef170273615aff4c3ee820ebbc65a1899f034b459ea7f8",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "f02c563af79419f80d00c8697fad4820debb2d9c98296357d561ce593c1cf7cc",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": "The independent calculator used reconstructed operating income in contribution denominators while reference SQL used reported operating income. The new discrepancy control exposed this. Use the reported duration-matched change and state that basis explicitly. Original data and prior expected rows are unchanged.",
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "f45110b251e7d95e12af31623cf38c5460c1f68ed4c574785da20dbb89cf928c",
+    "claim_mapping": {
+      "membership_growth_contributes_to_operating_growth": "claim_1",
+      "quarter_is_one_fourth_of_year": "claim_2",
+      "exact_fee_cash_receipts_identified": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_fee_cash_receipts_identified",
+      "assertion": "Earned membership fees for the first 36 weeks of FY2025 were USD 3,599 million.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a05:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a05:s02"
+      ],
+      "source_grounded_reason": "Both the annual 52-week and Q4 16-week membership-fee observations are supplied. Annual less Q4 gives the matching first-36-week flow and does not estimate cash collections.",
+      "independent_calculation": "5323 - 1724 = 3599 USD million"
+    },
+    "human_review": "pending"
+  }
+}
