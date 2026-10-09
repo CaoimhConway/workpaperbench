@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v4-b05",
+  "tables": [
+    {
+      "id": "quarter_activity",
+      "file": "quarter_activity.sql",
+      "evidence": [
+        "b05:s01",
+        "b05:s02"
+      ]
+    },
+    {
+      "id": "margin_reconciliation",
+      "file": "margin_reconciliation.sql",
+      "evidence": [
+        "b05:s03"
+      ]
+    },
+    {
+      "id": "annual_activity_bridge",
+      "file": "annual_activity_bridge.sql",
+      "evidence": [
+        "b05:s01",
+        "b05:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "quarter_ratio_equals_ttm",
+      "verdict": "contradicted",
+      "evidence": [
+        "b05:s01",
+        "b05:s02"
+      ]
+    },
+    {
+      "id": "unique_people_identifiable",
+      "verdict": "unresolved",
+      "evidence": [
+        "b05:s02"
+      ]
+    },
+    {
+      "id": "annual_ex_interest_margin_dollars_increased",
+      "verdict": "supported",
+      "evidence": [
+        "b05:s03"
+      ]
+    }
+  ]
+}

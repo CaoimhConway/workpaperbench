@@ -1,0 +1,1882 @@
+{
+  "validation_id": "workflow-v6-quality-1",
+  "manifest_id": "workflow-v6-canonical-d07b12eebe22",
+  "scorer_version": "workflow-1.2.0",
+  "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+  "validator_sha256": "37239a8007531e97bcf30c624623383e45470f3190df00cac70d33753d921d4f",
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "scope": "Authored positive and negative controls, not candidate-model performance",
+  "native_receipts": [
+    {
+      "receipt_sha256": "522aa5ae432bef42a60b2b5d3b23f7db9258b5c31b4e6049d085639b869e888f",
+      "receipt": {
+        "attempt_id": "validity-native-1-a01",
+        "execution_profile": "local-lima",
+        "manifest_id": "workflow-v6-canonical-d07b12eebe22",
+        "task_id": "workflow-v6-a01",
+        "task_sha256": "d0b28fee894032ea9724834c98c488138bd65793ff04b798be39e2d604a1cc5d",
+        "scorer_version": "workflow-1.2.0",
+        "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+        "started_at": "2026-10-13T20:51:44.973843+00:00",
+        "external_service_spend_usd": 0,
+        "status": "verified",
+        "inference": false,
+        "execution_files_sha256": {
+          "scripts/local_trial.py": "df3d38767775a1f1e566f9880467ef4a85a32b2a6877c6a0497d81a7723780ec",
+          "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+          "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+          "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+          "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+        },
+        "effective_task_sha256": "73b00cc7bd516fa3a1442be0f5e0c8b5097dcdb770955faa0a8df4812adbbb88",
+        "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+        "verdict": {
+          "scorer_version": "workflow-1.2.0",
+          "complete": true,
+          "verified_research_completion": true,
+          "strict_delivery_completion": true,
+          "checks": {
+            "financial_answer": true,
+            "numerical_tables": true,
+            "claim_verdicts": true,
+            "evidence": true,
+            "robustness": true,
+            "delivery": true
+          },
+          "details": {
+            "tables": {
+              "quarter_model": {
+                "original": true,
+                "original_error": null,
+                "evidence": true,
+                "controls": {
+                  "scaled_amounts_preserve_ratios": true,
+                  "current_quarter_changes_prior_quarter_preserved": true,
+                  "irrelevant_later_disclosure": true
+                },
+                "control_errors": {
+                  "scaled_amounts_preserve_ratios": null,
+                  "current_quarter_changes_prior_quarter_preserved": null,
+                  "irrelevant_later_disclosure": null
+                }
+              },
+              "quarter_reconciliation": {
+                "original": true,
+                "original_error": null,
+                "evidence": true,
+                "controls": {
+                  "scaled_amounts_preserve_ratios": true,
+                  "current_quarter_changes_prior_quarter_preserved": true,
+                  "irrelevant_later_disclosure": true
+                },
+                "control_errors": {
+                  "scaled_amounts_preserve_ratios": null,
+                  "current_quarter_changes_prior_quarter_preserved": null,
+                  "irrelevant_later_disclosure": null
+                }
+              },
+              "guidance_bridge": {
+                "original": true,
+                "original_error": null,
+                "evidence": true,
+                "controls": {
+                  "scaled_amounts_preserve_ratios": true,
+                  "current_quarter_changes_prior_quarter_preserved": true,
+                  "irrelevant_later_disclosure": true
+                },
+                "control_errors": {
+                  "scaled_amounts_preserve_ratios": null,
+                  "current_quarter_changes_prior_quarter_preserved": null,
+                  "irrelevant_later_disclosure": null
+                }
+              }
+            },
+            "claims": {
+              "claim_1": {
+                "verdict": true,
+                "evidence": true
+              },
+              "claim_2": {
+                "verdict": true,
+                "evidence": true
+              },
+              "claim_3": {
+                "verdict": true,
+                "evidence": true
+              }
+            }
+          },
+          "errors": [],
+          "isolation": {
+            "network_probe_blocked": true,
+            "network_namespace_none": true,
+            "no_inference_key": true,
+            "no_docker_socket": true
+          }
+        },
+        "verdict_sha256": "ec2145c8a534dc138133a2295b7a5202f3282f9863501f6fb40e7aa8a5cde3e9",
+        "sql_file_sha256": {
+          "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+          "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+          "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6"
+        },
+        "raw_answer_sha256": "4e26b84c9fb3e4ac9350996723ffe7100a414462b4f6fa0095bbdafceee4afda",
+        "normalized_answer_sha256": "4e26b84c9fb3e4ac9350996723ffe7100a414462b4f6fa0095bbdafceee4afda",
+        "finished_at": "2026-10-13T20:52:21.624461+00:00"
+      }
+    },
+    {
+      "receipt_sha256": "fb53e5b0659975485a3d529d95b9a197732e516ee01be1bf7134b3e3ef1dadfb",
+      "receipt": {
+        "attempt_id": "validity-native-1-b01",
+        "execution_profile": "local-lima",
+        "manifest_id": "workflow-v6-canonical-d07b12eebe22",
+        "task_id": "workflow-v6-b01",
+        "task_sha256": "2eaaa268e6eceb90de67365f5ad07830d1c81551767f6a8d2329165dcc93b688",
+        "scorer_version": "workflow-1.2.0",
+        "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+        "started_at": "2026-10-13T20:52:22.571375+00:00",
+        "external_service_spend_usd": 0,
+        "status": "verified",
+        "inference": false,
+        "execution_files_sha256": {
+          "scripts/local_trial.py": "df3d38767775a1f1e566f9880467ef4a85a32b2a6877c6a0497d81a7723780ec",
+          "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+          "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+          "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+          "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+        },
+        "effective_task_sha256": "6f02fc37cd5e2386147c9a525328fe1225f26257bdae923e5e1cea1681a489a6",
+        "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+        "verdict": {
+          "scorer_version": "workflow-1.2.0",
+          "complete": true,
+          "verified_research_completion": true,
+          "strict_delivery_completion": true,
+          "checks": {
+            "financial_answer": true,
+            "numerical_tables": true,
+            "claim_verdicts": true,
+            "evidence": true,
+            "robustness": true,
+            "delivery": true
+          },
+          "details": {
+            "tables": {
+              "reserve_coverage": {
+                "original": true,
+                "original_error": null,
+                "evidence": true,
+                "controls": {
+                  "scaled_amounts_preserve_ratios": true,
+                  "june_cash_and_total_reserves_change": true,
+                  "identical_export_duplicate": true,
+                  "distinct_dates_with_equal_amounts": true,
+                  "independent_disclosure_discrepancy": true
+                },
+                "control_errors": {
+                  "scaled_amounts_preserve_ratios": null,
+                  "june_cash_and_total_reserves_change": null,
+                  "identical_export_duplicate": null,
+                  "distinct_dates_with_equal_amounts": null,
+                  "independent_disclosure_discrepancy": null
+                }
+              },
+              "signature_lag": {
+                "original": true,
+                "original_error": null,
+                "evidence": true,
+                "controls": {
+                  "scaled_amounts_preserve_ratios": true,
+                  "june_cash_and_total_reserves_change": true,
+                  "identical_export_duplicate": true,
+                  "distinct_dates_with_equal_amounts": true,
+                  "independent_disclosure_discrepancy": true
+                },
+                "control_errors": {
+                  "scaled_amounts_preserve_ratios": null,
+                  "june_cash_and_total_reserves_change": null,
+                  "identical_export_duplicate": null,
+                  "distinct_dates_with_equal_amounts": null,
+                  "independent_disclosure_discrepancy": null
+                }
+              },
+              "reserve_bridge": {
+                "original": true,
+                "original_error": null,
+                "evidence": true,
+                "controls": {
+                  "scaled_amounts_preserve_ratios": true,
+                  "june_cash_and_total_reserves_change": true,
+                  "identical_export_duplicate": true,
+                  "distinct_dates_with_equal_amounts": true,
+                  "independent_disclosure_discrepancy": true
+                },
+                "control_errors": {
+                  "scaled_amounts_preserve_ratios": null,
+                  "june_cash_and_total_reserves_change": null,
+                  "identical_export_duplicate": null,
+                  "distinct_dates_with_equal_amounts": null,
+                  "independent_disclosure_discrepancy": null
+                }
+              }
+            },
+            "claims": {
+              "claim_1": {
+                "verdict": true,
+                "evidence": true
+              },
+              "claim_2": {
+                "verdict": true,
+                "evidence": true
+              },
+              "claim_3": {
+                "verdict": true,
+                "evidence": true
+              }
+            }
+          },
+          "errors": [],
+          "isolation": {
+            "network_probe_blocked": true,
+            "network_namespace_none": true,
+            "no_inference_key": true,
+            "no_docker_socket": true
+          }
+        },
+        "verdict_sha256": "2c773cad7d5be7109de79d60942a21b0a542c530cb01051aac1f14edc09926c1",
+        "sql_file_sha256": {
+          "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+          "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+          "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc"
+        },
+        "raw_answer_sha256": "d62575942323cdda6819596d5e0f52a6b2ca8fa0b483790eaa731bce592c6617",
+        "normalized_answer_sha256": "d62575942323cdda6819596d5e0f52a6b2ca8fa0b483790eaa731bce592c6617",
+        "finished_at": "2026-10-13T20:52:59.221653+00:00"
+      }
+    },
+    {
+      "receipt_sha256": "29b554f4954ea4fe45c69de449bf8c6c8fe95a6be2756a23bbbe6e7d1de5de4e",
+      "receipt": {
+        "attempt_id": "validity-native-1-c01",
+        "execution_profile": "local-lima",
+        "manifest_id": "workflow-v6-canonical-d07b12eebe22",
+        "task_id": "workflow-v6-c01",
+        "task_sha256": "e322f168198fb8146a10873fa1eb2897fa779ad442e185589d4ada39b132a989",
+        "scorer_version": "workflow-1.2.0",
+        "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+        "started_at": "2026-10-13T20:53:00.149096+00:00",
+        "external_service_spend_usd": 0,
+        "status": "verified",
+        "inference": false,
+        "execution_files_sha256": {
+          "scripts/local_trial.py": "df3d38767775a1f1e566f9880467ef4a85a32b2a6877c6a0497d81a7723780ec",
+          "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+          "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+          "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+          "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+        },
+        "effective_task_sha256": "373953a84dc29d95f477260ca3f985183a729ba68aaae634f52bb5f5f2270ccc",
+        "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+        "verdict": {
+          "scorer_version": "workflow-1.2.0",
+          "complete": true,
+          "verified_research_completion": true,
+          "strict_delivery_completion": true,
+          "checks": {
+            "financial_answer": true,
+            "numerical_tables": true,
+            "claim_verdicts": true,
+            "evidence": true,
+            "robustness": true,
+            "delivery": true
+          },
+          "details": {
+            "tables": {
+              "revenue_bridge": {
+                "original": true,
+                "original_error": null,
+                "evidence": true,
+                "controls": {
+                  "scaled_amounts_preserve_ratios": true,
+                  "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                  "irrelevant_later_disclosure": true,
+                  "independent_disclosure_discrepancy": true
+                },
+                "control_errors": {
+                  "scaled_amounts_preserve_ratios": null,
+                  "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                  "irrelevant_later_disclosure": null,
+                  "independent_disclosure_discrepancy": null
+                }
+              },
+              "profit_bridge": {
+                "original": true,
+                "original_error": null,
+                "evidence": true,
+                "controls": {
+                  "scaled_amounts_preserve_ratios": true,
+                  "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                  "irrelevant_later_disclosure": true,
+                  "independent_disclosure_discrepancy": true
+                },
+                "control_errors": {
+                  "scaled_amounts_preserve_ratios": null,
+                  "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                  "irrelevant_later_disclosure": null,
+                  "independent_disclosure_discrepancy": null
+                }
+              },
+              "reconciliation": {
+                "original": true,
+                "original_error": null,
+                "evidence": true,
+                "controls": {
+                  "scaled_amounts_preserve_ratios": true,
+                  "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                  "irrelevant_later_disclosure": true,
+                  "independent_disclosure_discrepancy": true
+                },
+                "control_errors": {
+                  "scaled_amounts_preserve_ratios": null,
+                  "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                  "irrelevant_later_disclosure": null,
+                  "independent_disclosure_discrepancy": null
+                }
+              }
+            },
+            "claims": {
+              "claim_1": {
+                "verdict": true,
+                "evidence": true
+              },
+              "claim_2": {
+                "verdict": true,
+                "evidence": true
+              },
+              "claim_3": {
+                "verdict": true,
+                "evidence": true
+              }
+            }
+          },
+          "errors": [],
+          "isolation": {
+            "network_probe_blocked": true,
+            "network_namespace_none": true,
+            "no_inference_key": true,
+            "no_docker_socket": true
+          }
+        },
+        "verdict_sha256": "40765669944a96690d327052c7e1f8f93633f2a1fa0b01a5d2cbcb71443b6f8f",
+        "sql_file_sha256": {
+          "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+          "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+          "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+        },
+        "raw_answer_sha256": "b5155c1d90b4b21e5120eefafa776c4b090a23e97c5f845a7516b9b6085c12a0",
+        "normalized_answer_sha256": "b5155c1d90b4b21e5120eefafa776c4b090a23e97c5f845a7516b9b6085c12a0",
+        "finished_at": "2026-10-13T20:53:36.543102+00:00"
+      }
+    }
+  ],
+  "isolated_verifier_checks": [
+    {
+      "task": "a01",
+      "task_sha256": "d0b28fee894032ea9724834c98c488138bd65793ff04b798be39e2d604a1cc5d",
+      "variant": "reference",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:7cae0fb5d4aa55e90ad4d50f52bbf8cfde20fc87e667ecee69876f1ac0006527",
+      "files_sha256": {
+        "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+        "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6",
+        "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+        "answer.json": "4e26b84c9fb3e4ac9350996723ffe7100a414462b4f6fa0095bbdafceee4afda"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "quarter_model": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            },
+            "quarter_reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            },
+            "guidance_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "task_sha256": "d0b28fee894032ea9724834c98c488138bd65793ff04b798be39e2d604a1cc5d",
+      "variant": "context",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:7cae0fb5d4aa55e90ad4d50f52bbf8cfde20fc87e667ecee69876f1ac0006527",
+      "files_sha256": {
+        "quarter_model.sql": "725ee2785e1bc601990fe13a2754ca4db6efb6701170f8b4267294984126909f",
+        "quarter_reconciliation.sql": "e7541526cae12353707d8857e45216599fb467ec5b6889901c4b3fc2d3266e32",
+        "guidance_bridge.sql": "9c4bbef467e09769103362635dc886bcb0a8dacd5d015ad44317615ce9960c5e",
+        "answer.json": "ba7d6fd3e901683f541df187d777e6049aaeefdc7bd4bd77d7c78fd061db4d40"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "quarter_model": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            },
+            "quarter_reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            },
+            "guidance_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "task_sha256": "d0b28fee894032ea9724834c98c488138bd65793ff04b798be39e2d604a1cc5d",
+      "variant": "citation_dump",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:7cae0fb5d4aa55e90ad4d50f52bbf8cfde20fc87e667ecee69876f1ac0006527",
+      "files_sha256": {
+        "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+        "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6",
+        "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+        "answer.json": "a805d312024017eb30d5ea7ddb90fda5bd27c4171007823a4e5651a2c73139ad"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": false,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "quarter_model": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            },
+            "quarter_reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            },
+            "guidance_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": false
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": false
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": false
+            }
+          }
+        },
+        "errors": [
+          "quarter_model:evidence",
+          "quarter_reconciliation:evidence",
+          "guidance_bridge:evidence",
+          "claim_1:evidence",
+          "claim_2:evidence",
+          "claim_3:evidence"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "task_sha256": "d0b28fee894032ea9724834c98c488138bd65793ff04b798be39e2d604a1cc5d",
+      "variant": "always_unresolved",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:7cae0fb5d4aa55e90ad4d50f52bbf8cfde20fc87e667ecee69876f1ac0006527",
+      "files_sha256": {
+        "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+        "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6",
+        "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+        "answer.json": "af1b7565807f71e239ad221b34f861603d8b81deaff008b6c88198499623663d"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": true,
+          "claim_verdicts": false,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "quarter_model": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            },
+            "quarter_reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            },
+            "guidance_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "current_quarter_changes_prior_quarter_preserved": null,
+                "irrelevant_later_disclosure": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": false,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": false,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": false,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "claim_1:verdict",
+          "claim_2:verdict",
+          "claim_3:verdict"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "task_sha256": "2eaaa268e6eceb90de67365f5ad07830d1c81551767f6a8d2329165dcc93b688",
+      "variant": "reference",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:30b69a3407bf0ec7897c0fc4a181ee41164d3ed5c53f1ef748c388b52c156e24",
+      "files_sha256": {
+        "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc",
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+        "answer.json": "d62575942323cdda6819596d5e0f52a6b2ca8fa0b483790eaa731bce592c6617"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "reserve_coverage": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "signature_lag": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "reserve_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "task_sha256": "2eaaa268e6eceb90de67365f5ad07830d1c81551767f6a8d2329165dcc93b688",
+      "variant": "context",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:30b69a3407bf0ec7897c0fc4a181ee41164d3ed5c53f1ef748c388b52c156e24",
+      "files_sha256": {
+        "reserve_coverage.sql": "3b7acb4d9204f5a65cb2333414bf90524f4354391731069830cf82f735239228",
+        "signature_lag.sql": "082ffc333ab44b52c387c5aafb74198160400ec77860673d89a70cf79a8606df",
+        "reserve_bridge.sql": "22b9b21efb5927ccc32ed4d395da600f5e997697a860f483327ee8d8eb732fc1",
+        "answer.json": "904b93f907288bbaaf50b771de05bfc07eb7b40d916ce52f805fd76fb5cbf66d"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "reserve_coverage": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "signature_lag": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "reserve_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "task_sha256": "2eaaa268e6eceb90de67365f5ad07830d1c81551767f6a8d2329165dcc93b688",
+      "variant": "citation_dump",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:30b69a3407bf0ec7897c0fc4a181ee41164d3ed5c53f1ef748c388b52c156e24",
+      "files_sha256": {
+        "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc",
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+        "answer.json": "b8be55c5672e691f63b8aad0c228d4ff17e8c3a4e8a3e94eac20e925b553a9c6"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": false,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "reserve_coverage": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "signature_lag": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "reserve_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": false
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": false
+            }
+          }
+        },
+        "errors": [
+          "reserve_coverage:evidence",
+          "signature_lag:evidence",
+          "reserve_bridge:evidence",
+          "claim_2:evidence",
+          "claim_3:evidence"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "task_sha256": "2eaaa268e6eceb90de67365f5ad07830d1c81551767f6a8d2329165dcc93b688",
+      "variant": "constant_residual",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:30b69a3407bf0ec7897c0fc4a181ee41164d3ed5c53f1ef748c388b52c156e24",
+      "files_sha256": {
+        "reserve_coverage.sql": "5212a162c5e39101a587d9d60794063bd78b18a4af8f21f3a14272bdbb1381f7",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc",
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+        "answer.json": "d62575942323cdda6819596d5e0f52a6b2ca8fa0b483790eaa731bce592c6617"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "reserve_coverage": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": false
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": "numeric"
+              }
+            },
+            "signature_lag": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "reserve_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "reserve_coverage:control:independent_disclosure_discrepancy"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "task_sha256": "2eaaa268e6eceb90de67365f5ad07830d1c81551767f6a8d2329165dcc93b688",
+      "variant": "always_unresolved",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:30b69a3407bf0ec7897c0fc4a181ee41164d3ed5c53f1ef748c388b52c156e24",
+      "files_sha256": {
+        "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc",
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+        "answer.json": "a4ba8e9267551270d21933077ad3003f5d91ea4675c7513d0b00db6d46003737"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": true,
+          "claim_verdicts": false,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "reserve_coverage": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "signature_lag": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "reserve_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "june_cash_and_total_reserves_change": true,
+                "identical_export_duplicate": true,
+                "distinct_dates_with_equal_amounts": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "june_cash_and_total_reserves_change": null,
+                "identical_export_duplicate": null,
+                "distinct_dates_with_equal_amounts": null,
+                "independent_disclosure_discrepancy": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": false,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": false,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "claim_2:verdict",
+          "claim_3:verdict"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "c01",
+      "task_sha256": "e322f168198fb8146a10873fa1eb2897fa779ad442e185589d4ada39b132a989",
+      "variant": "reference",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:ab6e6bd0ecd82660e031d67caa00c406e26d9e3954a296e43567590356737434",
+      "files_sha256": {
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "answer.json": "b5155c1d90b4b21e5120eefafa776c4b090a23e97c5f845a7516b9b6085c12a0"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "c01",
+      "task_sha256": "e322f168198fb8146a10873fa1eb2897fa779ad442e185589d4ada39b132a989",
+      "variant": "context",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:ab6e6bd0ecd82660e031d67caa00c406e26d9e3954a296e43567590356737434",
+      "files_sha256": {
+        "revenue_bridge.sql": "bed84445aa3fc9546cc6b85ebaaba2ae7bf3d1e9df3459b7b0beea9776d4d8b3",
+        "profit_bridge.sql": "4f3ee342dccef65e48a11202a8dbedbf8fcc6f3d7e849d54d15b296267f54c6f",
+        "reconciliation.sql": "b0bf8e11b830fa68577d6d4f7a2fdbba01f757763994771c1aa17b83be51fb60",
+        "answer.json": "bd4f2548f915424f4889aabfbd42a0f97b8a79231d70331a35b978a2c6c3a690"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "c01",
+      "task_sha256": "e322f168198fb8146a10873fa1eb2897fa779ad442e185589d4ada39b132a989",
+      "variant": "citation_dump",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:ab6e6bd0ecd82660e031d67caa00c406e26d9e3954a296e43567590356737434",
+      "files_sha256": {
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "answer.json": "9efd837047c2a38a04ab4519fef6970db0515de799691cd9f20fdd93e207e1bb"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": false,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": false
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": false
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": false
+            }
+          }
+        },
+        "errors": [
+          "revenue_bridge:evidence",
+          "profit_bridge:evidence",
+          "reconciliation:evidence",
+          "claim_1:evidence",
+          "claim_2:evidence",
+          "claim_3:evidence"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "c01",
+      "task_sha256": "e322f168198fb8146a10873fa1eb2897fa779ad442e185589d4ada39b132a989",
+      "variant": "constant_residual",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:ab6e6bd0ecd82660e031d67caa00c406e26d9e3954a296e43567590356737434",
+      "files_sha256": {
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "f844e07b67e9aa38d41510427d4f7255d5fd341892a924cda19536d55f812d0b",
+        "answer.json": "b5155c1d90b4b21e5120eefafa776c4b090a23e97c5f845a7516b9b6085c12a0"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": false
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": "numeric"
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "reconciliation:control:independent_disclosure_discrepancy"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "c01",
+      "task_sha256": "e322f168198fb8146a10873fa1eb2897fa779ad442e185589d4ada39b132a989",
+      "variant": "always_unresolved",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:ab6e6bd0ecd82660e031d67caa00c406e26d9e3954a296e43567590356737434",
+      "files_sha256": {
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "answer.json": "f7e2f7559a49001a00fa5219af84f5621e022c89df619cc13c20b74452c0eb15"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": true,
+          "claim_verdicts": false,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": false,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": false,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "claim_2:verdict",
+          "claim_3:verdict"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    }
+  ]
+}

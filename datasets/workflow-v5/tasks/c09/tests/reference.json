@@ -1,0 +1,50 @@
+{
+  "task_id": "workflow-v5-c09",
+  "tables": [
+    {
+      "id": "bank_basis_bridge",
+      "file": "bank_basis_bridge.sql",
+      "evidence": [
+        "c09:s01",
+        "c09:s03"
+      ]
+    },
+    {
+      "id": "significant_item_bridge",
+      "file": "significant_item_bridge.sql",
+      "evidence": [
+        "c09:s02"
+      ]
+    },
+    {
+      "id": "annual_exclusion_components",
+      "file": "annual_exclusion_components.sql",
+      "evidence": [
+        "c09:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "managed_presentation_changes_net_income",
+      "verdict": "contradicted",
+      "evidence": [
+        "c09:s01"
+      ]
+    },
+    {
+      "id": "annual_exclusion_less_than_q4",
+      "verdict": "supported",
+      "evidence": [
+        "c09:s02"
+      ]
+    },
+    {
+      "id": "exact_payment_fee_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "c09:s03"
+      ]
+    }
+  ]
+}

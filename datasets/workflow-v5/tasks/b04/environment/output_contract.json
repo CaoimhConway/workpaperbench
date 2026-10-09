@@ -1,0 +1,135 @@
+{
+  "tables": {
+    "expense_audit": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gaap_expense_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_expense_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_including_sbc_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "removal_of_settlement_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "comparable_credit_excluded_expense_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "annual_revenue_bridge": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_total_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "crypto_scope": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "scope": {
+          "type": "text",
+          "unit": "label"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "volume_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "share_of_combined_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "monthly_average_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period",
+        "scope"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "bitstamp_majority_q4": "Bitstamp represents more than half of Q4FY2025 combined crypto notional volume.",
+    "removing_settlement_benefit_reduces_expense": "Removing the Q4FY2024 settlement benefit lowers adjusted operating expense.",
+    "organic_asset_gain_identified": "The supplied observations identify the exact FY2025 organic investment return within Total Platform Assets."
+  },
+  "definitions": {
+    "expense_audit": "Adjusted expense subtracts signed SBC, settlements and credit losses. Including SBC adds it back to adjusted expense. Settlement removal is minus the signed settlement expense.",
+    "annual_revenue_bridge": "Use reported annual component changes divided by reported total revenue change.",
+    "crypto_scope": "Two output scopes, app and bitstamp, for Q4FY2025 and January2026. Share uses the combined total for that same period. Monthly average divides by disclosed duration and is not a seasonally adjusted forecast."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient facts and relevant period, unit, definition or scope context for each output. Additional unrelated sections fail evidence. Equivalent reviewed source paths are accepted, without a shortest-citation requirement.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested."
+}

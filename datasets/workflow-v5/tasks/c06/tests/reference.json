@@ -1,0 +1,50 @@
+{
+  "task_id": "workflow-v5-c06",
+  "tables": [
+    {
+      "id": "geographic_currency",
+      "file": "geographic_currency.sql",
+      "evidence": [
+        "c06:s01"
+      ]
+    },
+    {
+      "id": "consolidated_currency_bridge",
+      "file": "consolidated_currency_bridge.sql",
+      "evidence": [
+        "c06:s01"
+      ]
+    },
+    {
+      "id": "revenue_growth_components",
+      "file": "revenue_growth_components.sql",
+      "evidence": [
+        "c06:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "prior_hedging_excluded_from_cc_growth",
+      "verdict": "supported",
+      "evidence": [
+        "c06:s01"
+      ]
+    },
+    {
+      "id": "cloud_exceeds_half_reported_growth",
+      "verdict": "contradicted",
+      "evidence": [
+        "c06:s02"
+      ]
+    },
+    {
+      "id": "exact_ai_product_effect_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "c06:s02",
+        "c06:s03"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v4-c04",
+  "tables": [
+    {
+      "id": "regional_attribution",
+      "file": "regional_attribution.sql",
+      "evidence": [
+        "c04:s01",
+        "c04:s02"
+      ]
+    },
+    {
+      "id": "worldwide_reconciliation",
+      "file": "worldwide_reconciliation.sql",
+      "evidence": [
+        "c04:s01"
+      ]
+    },
+    {
+      "id": "company_margin_bridge",
+      "file": "company_margin_bridge.sql",
+      "evidence": [
+        "c04:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "branded_volume_matches_all_revenue",
+      "verdict": "contradicted",
+      "evidence": [
+        "c04:s02",
+        "c04:s03"
+      ]
+    },
+    {
+      "id": "annual_average_purchase_increased",
+      "verdict": "supported",
+      "evidence": [
+        "c04:s01",
+        "c04:s02"
+      ]
+    },
+    {
+      "id": "merchant_price_mix_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "c04:s02"
+      ]
+    }
+  ]
+}

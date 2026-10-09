@@ -1,0 +1,139 @@
+{
+  "tables": {
+    "category_margin": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "category": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gross_profit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year",
+        "months",
+        "category"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "net_income_growth_bridge": {
+      "columns": {
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "prior_signed_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_signed_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_net_income_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "months",
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "prior_tax_baseline": {
+      "columns": {
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "prior_gaap_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "tax_charge_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "prior_adjusted_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_gaap_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "gaap_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "current_gaap_growth_vs_adjusted_prior_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "months"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "prior_tax_charge_exceeds_half_growth": "The excluded prior tax charge exceeds half the FY2025 increase in GAAP net income.",
+    "entire_net_growth_is_operating": "The full annual GAAP net-income increase equals the operating-income increase.",
+    "exact_product_price_effect_identified": "The supplied category revenue and cost tables separately identify the exact product price effect."
+  },
+  "definitions": {
+    "category_margin": "Both fiscal years, months=3 Q4 and 12 annual. Category gross margin uses category revenue.",
+    "net_income_growth_bridge": "Six signed net-income components per duration. Expenses and tax enter negatively. Contributions divide by the same-duration GAAP net-income increase.",
+    "prior_tax_baseline": "Remove the prior tax charge by adding it to prior net income. Current remains GAAP. Percentage growth uses each clearly declared baseline."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  }
+}

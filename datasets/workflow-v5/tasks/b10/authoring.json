@@ -1,0 +1,31 @@
+{
+  "rationale": "A report contains parent-only and consolidated statements with superficially similar starting labels. An audit must preserve tax and ownership scopes across three linked reconciliations and resist equating unrealized earnings, sale gains and float stocks with cash flows.",
+  "source_group": "berkshire-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "authored synthetic work-product defects",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "6a3775c7c5f81af6d96b5d1840facde1cd172dbe5fbe6ba3514b7853c25b1112",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "f50f23048d168bfa260e34689bac2d83ec3df23834ab1585c578d0579783bf21",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "4dfef41a315ff4e4f5763b67cae557ad463fc30b52c916549cfa221b1575a057",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "d1f6fa2fa7a03b6f290e4d462bc1f4eb803f442f658d3ff6bbf7f0237ce6968e",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  }
+}

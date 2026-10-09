@@ -1,0 +1,371 @@
+{
+  "report_version": "local-1.0",
+  "attempts": [
+    {
+      "attempt_id": "qwen36-development-c01-5",
+      "execution_profile": "local-lima",
+      "manifest_id": "workflow-v5-canonical-7429612183c6",
+      "task_id": "workflow-v5-c01",
+      "task_sha256": "ca99d37c4bae432e9cfa2b65314f48dbb4017646874fc6a7dff262c566f4cff3",
+      "scorer_version": "workflow-1.1.0",
+      "scorer_sha256": "f8e733696dbf51923b6f751da57ca9e60ed5c5ebe565c96c998a6989bd1e924d",
+      "started_at": "2026-10-13T10:34:09.454176+00:00",
+      "external_service_spend_usd": 0,
+      "status": "verified",
+      "inference": true,
+      "execution_files_sha256": {
+        "scripts/local_trial.py": "df3d38767775a1f1e566f9880467ef4a85a32b2a6877c6a0497d81a7723780ec",
+        "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+        "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+        "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+        "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+      },
+      "model_configuration": {
+        "configuration_id": "qwen36-35b-a3b-udq5km-cpu-64k-nonthinking-terminal-64",
+        "execution_profile": "local-lima",
+        "model": {
+          "id": "qwen36-35b-a3b-ud_q5_k_m",
+          "weights": ".local/models/Qwen3.6-35B-A3B-UD-Q5_K_M.gguf",
+          "repository": "unsloth/Qwen3.6-35B-A3B-GGUF",
+          "revision": "a483e9e6cbd595906af30beda3187c2663a1118c",
+          "sha256": "c13ce26253ea334df472bd8fbd2d6da66d8a41195c17f6fcbf44c4d20ece0932",
+          "quantization": "UD-Q5_K_M",
+          "total_parameters_billions": 35,
+          "active_parameters_billions": 3,
+          "chat_template_sha256": "55d4931433fe502b794226ee7f4d206a6bdd436ac9f80eb7d8ebb4c639f9ea0c",
+          "native_context": 262144,
+          "base_model_declared_by_quantizer": "Qwen/Qwen3.6-35B-A3B",
+          "official_model_revision_checked": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+          "conversion": "Publisher quantization, conversion not independently reproduced. Checked official revision is not a verified conversion input.",
+          "architecture": "qwen35moe, gated DeltaNet and attention with mixture of experts, text only",
+          "license": "Apache-2.0"
+        },
+        "runtime": {
+          "binary": ".local/runtime/llama-b11516/llama-server",
+          "sha256": "cdf2d31e4b75714ebad37ffeb8f3d51e9a7be45daa6fd884a6a360abaee04091",
+          "version": "llama.cpp b11516 d4d82d67f",
+          "backend": "cpu",
+          "hardware": "MacPro7,1 Intel Xeon W-3245, Accelerate BLAS, no GPU offload"
+        },
+        "serving": {
+          "port": 18087,
+          "context": 65536,
+          "threads": 8,
+          "parallel": 1,
+          "reasoning": "off",
+          "flash_attention": "off",
+          "cache_type_k": "f16",
+          "cache_type_v": "f16",
+          "observe_slots": true,
+          "context_shift": false,
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          }
+        },
+        "candidate": {
+          "wall_seconds": 5400,
+          "turns": 64,
+          "generation": {
+            "max_tokens": 4096,
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "seed": 17,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "repeat_penalty": 1.0
+          },
+          "toolsets": "terminal",
+          "system_prompt": "Complete the filesystem task using the declared tools. Create and check every requested deliverable at its declared absolute path before ending. JSON in a chat reply does not create a file. Work independently within the task environment and do not ask the user to create the deliverable. Save each deliverable as soon as it is ready, then check the saved files. Keep explanations concise and use tool calls to make progress."
+        },
+        "harbor_version": "0.23.0",
+        "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+        "status": "Development recovery after the 24-turn native limit, with original failures retained and Block restored from its candidate session and SQL",
+        "external_service_spend_usd": 0
+      },
+      "model_configuration_sha256": "eb6267700a34e5b5eba4385bd7362a9572f285abea857d529d9fb071293337e9",
+      "hermes_installer_sha256": "25d3c95550e5ed7c0eec180a7d78dde765721c4e33639ab257c154c0a6e7554f",
+      "continuation": {
+        "attempt_id": "qwen36-development-c01-2",
+        "receipt_sha256": "ca8c4699f66ec3e279bdbee8f6e7fbb66147d664195c5bd8f39419e5201619c0",
+        "session_id": "20261013_090805_56db4a",
+        "session_sha256": "8050f3e6437bcd660037cdf97760e1e9d2345cf12658d917cc76f1e7aab53b3a",
+        "sql_file_sha256": {
+          "profit_bridge.sql": "5a72055e3dd67352f8f8959d3379fb4d7a738122c9ccc2fc1abd786a106c8499",
+          "reconciliation.sql": "373d09a1346f1cad5f42faa5deb39ea16067e1e682f355630905819edb165f89",
+          "revenue_bridge.sql": "0b6f1ba7d8fb58cb57782b2af1cee757616ebee36c3ff54c70f42d342b3b7b39"
+        },
+        "condition": "Native session and saved SQL restored in a fresh isolated environment"
+      },
+      "effective_task_sha256": "7e9953a730c40faa0a976082d626fe178869085fa770a1a3227d73859ccb5e64",
+      "native_adapter_sha256": "085b7e43a664d9896b33dfc1247138cca0032fa5d0ab71b734e23538f4a01be3",
+      "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+      "candidate_local_model_health": true,
+      "native_session_restored": true,
+      "verdict": {
+        "scorer_version": "workflow-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": false,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": false,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": false,
+                "irrelevant_later_disclosure": false,
+                "independent_disclosure_discrepancy": false
+              }
+            },
+            "profit_bridge": {
+              "original": false,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": false,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": false,
+                "irrelevant_later_disclosure": false,
+                "independent_disclosure_discrepancy": false
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              }
+            }
+          },
+          "claims": {
+            "bitcoin_majority_of_total_revenue_increase": {
+              "verdict": true,
+              "evidence": true
+            },
+            "all_components_reconcile": {
+              "verdict": true,
+              "evidence": true
+            },
+            "bitcoin_price_effect_identifiable": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "revenue_bridge:original",
+          "revenue_bridge:control:scaled_amounts_preserve_ratios",
+          "revenue_bridge:control:bitcoin_revenue_and_cost_change_with_matching_totals",
+          "revenue_bridge:control:irrelevant_later_disclosure",
+          "revenue_bridge:control:independent_disclosure_discrepancy",
+          "profit_bridge:original",
+          "profit_bridge:control:scaled_amounts_preserve_ratios",
+          "profit_bridge:control:bitcoin_revenue_and_cost_change_with_matching_totals",
+          "profit_bridge:control:irrelevant_later_disclosure",
+          "profit_bridge:control:independent_disclosure_discrepancy"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "verdict_sha256": "c23bc4d742390bb46ca743a9099432fc2f167f12ae75598e37eecf4adea1f703",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "5a72055e3dd67352f8f8959d3379fb4d7a738122c9ccc2fc1abd786a106c8499",
+        "reconciliation.sql": "373d09a1346f1cad5f42faa5deb39ea16067e1e682f355630905819edb165f89",
+        "revenue_bridge.sql": "0b6f1ba7d8fb58cb57782b2af1cee757616ebee36c3ff54c70f42d342b3b7b39"
+      },
+      "raw_answer_sha256": "7e2f9721438ea484e5f0ad95bcf5d2a0d074ebc3962512c11f65fe113308ff20",
+      "normalized_answer_sha256": "bec0be126650625e58ccb20e5eed6f5486684dc756916d2ba8825a77f906ae0e",
+      "finished_at": "2026-10-13T10:59:35.535609+00:00"
+    },
+    {
+      "attempt_id": "qwen36-development-a01-5",
+      "execution_profile": "local-lima",
+      "manifest_id": "workflow-v5-canonical-7429612183c6",
+      "task_id": "workflow-v5-a01",
+      "task_sha256": "dcaefcc8fd9c21b22937260c8e77d68cf364606d6c2e2ba9934f89f4e3983e59",
+      "scorer_version": "workflow-1.1.0",
+      "scorer_sha256": "f8e733696dbf51923b6f751da57ca9e60ed5c5ebe565c96c998a6989bd1e924d",
+      "started_at": "2026-10-13T10:59:38.923574+00:00",
+      "external_service_spend_usd": 0,
+      "status": "verified",
+      "inference": true,
+      "execution_files_sha256": {
+        "scripts/local_trial.py": "df3d38767775a1f1e566f9880467ef4a85a32b2a6877c6a0497d81a7723780ec",
+        "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+        "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+        "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+        "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+      },
+      "model_configuration": {
+        "configuration_id": "qwen36-35b-a3b-udq5km-cpu-64k-nonthinking-terminal-64",
+        "execution_profile": "local-lima",
+        "model": {
+          "id": "qwen36-35b-a3b-ud_q5_k_m",
+          "weights": ".local/models/Qwen3.6-35B-A3B-UD-Q5_K_M.gguf",
+          "repository": "unsloth/Qwen3.6-35B-A3B-GGUF",
+          "revision": "a483e9e6cbd595906af30beda3187c2663a1118c",
+          "sha256": "c13ce26253ea334df472bd8fbd2d6da66d8a41195c17f6fcbf44c4d20ece0932",
+          "quantization": "UD-Q5_K_M",
+          "total_parameters_billions": 35,
+          "active_parameters_billions": 3,
+          "chat_template_sha256": "55d4931433fe502b794226ee7f4d206a6bdd436ac9f80eb7d8ebb4c639f9ea0c",
+          "native_context": 262144,
+          "base_model_declared_by_quantizer": "Qwen/Qwen3.6-35B-A3B",
+          "official_model_revision_checked": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+          "conversion": "Publisher quantization, conversion not independently reproduced. Checked official revision is not a verified conversion input.",
+          "architecture": "qwen35moe, gated DeltaNet and attention with mixture of experts, text only",
+          "license": "Apache-2.0"
+        },
+        "runtime": {
+          "binary": ".local/runtime/llama-b11516/llama-server",
+          "sha256": "cdf2d31e4b75714ebad37ffeb8f3d51e9a7be45daa6fd884a6a360abaee04091",
+          "version": "llama.cpp b11516 d4d82d67f",
+          "backend": "cpu",
+          "hardware": "MacPro7,1 Intel Xeon W-3245, Accelerate BLAS, no GPU offload"
+        },
+        "serving": {
+          "port": 18087,
+          "context": 65536,
+          "threads": 8,
+          "parallel": 1,
+          "reasoning": "off",
+          "flash_attention": "off",
+          "cache_type_k": "f16",
+          "cache_type_v": "f16",
+          "observe_slots": true,
+          "context_shift": false,
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          }
+        },
+        "candidate": {
+          "wall_seconds": 5400,
+          "turns": 64,
+          "generation": {
+            "max_tokens": 4096,
+            "temperature": 0.7,
+            "top_p": 0.8,
+            "top_k": 20,
+            "seed": 17,
+            "min_p": 0,
+            "presence_penalty": 1.5,
+            "repeat_penalty": 1.0
+          },
+          "toolsets": "terminal",
+          "system_prompt": "Complete the filesystem task using the declared tools. Create and check every requested deliverable at its declared absolute path before ending. JSON in a chat reply does not create a file. Work independently within the task environment and do not ask the user to create the deliverable. Save each deliverable as soon as it is ready, then check the saved files. Keep explanations concise and use tool calls to make progress."
+        },
+        "harbor_version": "0.23.0",
+        "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+        "status": "Development recovery after the 24-turn native limit, with original failures retained and Block restored from its candidate session and SQL",
+        "external_service_spend_usd": 0
+      },
+      "model_configuration_sha256": "eb6267700a34e5b5eba4385bd7362a9572f285abea857d529d9fb071293337e9",
+      "hermes_installer_sha256": "25d3c95550e5ed7c0eec180a7d78dde765721c4e33639ab257c154c0a6e7554f",
+      "effective_task_sha256": "bb2e85e058ef0f9304aba147b05b75008607d181655cd85c86c6cd55df58b1de",
+      "native_adapter_sha256": "085b7e43a664d9896b33dfc1247138cca0032fa5d0ab71b734e23538f4a01be3",
+      "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+      "candidate_local_model_health": true,
+      "verdict": {
+        "scorer_version": "workflow-1.1.0",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "evidence": false,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "quarter_model": {
+              "original": true,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              }
+            },
+            "quarter_reconciliation": {
+              "original": false,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": false,
+                "current_quarter_changes_prior_quarter_preserved": false,
+                "irrelevant_later_disclosure": false
+              }
+            },
+            "guidance_bridge": {
+              "original": true,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "current_quarter_changes_prior_quarter_preserved": true,
+                "irrelevant_later_disclosure": true
+              }
+            }
+          },
+          "claims": {
+            "azure_within_earlier_range": {
+              "verdict": true,
+              "evidence": false
+            },
+            "q2_operating_margin_improved_from_q1": {
+              "verdict": true,
+              "evidence": false
+            },
+            "azure_operating_income_identifiable": {
+              "verdict": false,
+              "evidence": false
+            }
+          }
+        },
+        "errors": [
+          "quarter_model:evidence",
+          "quarter_reconciliation:original",
+          "quarter_reconciliation:evidence",
+          "quarter_reconciliation:control:scaled_amounts_preserve_ratios",
+          "quarter_reconciliation:control:current_quarter_changes_prior_quarter_preserved",
+          "quarter_reconciliation:control:irrelevant_later_disclosure",
+          "guidance_bridge:evidence",
+          "azure_within_earlier_range:evidence",
+          "q2_operating_margin_improved_from_q1:evidence",
+          "azure_operating_income_identifiable:verdict",
+          "azure_operating_income_identifiable:evidence"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "verdict_sha256": "2f590da63ed872a793b2b226d108adaf2b2f8c5cb9d4d404312e11b9a135483c",
+      "sql_file_sha256": {
+        "guidance_bridge.sql": "544f91d3835898cd4b0b120b9aa0d02d2a1a8c327735f1387e324912534b211c",
+        "quarter_model.sql": "e7452e7c2b7eaf7e5c3db23ef07e78120e8c356c5c4dbb903c5c1eba7fed597a",
+        "quarter_reconciliation.sql": "5ee6fdcb4fdcf2db4b4f2a55213605891278d6c632c1a6e108b70fe88d75089b"
+      },
+      "raw_answer_sha256": "c55ba75ef4e502aafd772ead14232f6953b66418613c06f6829a33d0ba1a4c93",
+      "normalized_answer_sha256": "c55ba75ef4e502aafd772ead14232f6953b66418613c06f6829a33d0ba1a4c93",
+      "finished_at": "2026-10-13T11:28:29.030195+00:00"
+    }
+  ],
+  "external_service_spend_usd": 0,
+  "held_out_evaluation": "not run",
+  "frontier_discrimination": "unmeasured"
+}

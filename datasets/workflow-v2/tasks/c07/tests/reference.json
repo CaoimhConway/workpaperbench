@@ -1,0 +1,54 @@
+{
+  "task_id": "workflow-v2-c07",
+  "tables": [
+    {
+      "id": "financial_versions",
+      "file": "financial_versions.sql",
+      "evidence": [
+        "c07:s01",
+        "c07:s02"
+      ]
+    },
+    {
+      "id": "settlement_revision_bridge",
+      "file": "settlement_revision_bridge.sql",
+      "evidence": [
+        "c07:s01",
+        "c07:s02"
+      ]
+    },
+    {
+      "id": "cash_revision_bridge",
+      "file": "cash_revision_bridge.sql",
+      "evidence": [
+        "c07:s01",
+        "c07:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "annual_net_growth_direction_changes",
+      "verdict": "supported",
+      "evidence": [
+        "c07:s01",
+        "c07:s02"
+      ]
+    },
+    {
+      "id": "settlement_requires_incremental_cash",
+      "verdict": "contradicted",
+      "evidence": [
+        "c07:s02"
+      ]
+    },
+    {
+      "id": "exact_organic_revenue_growth_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "c07:s01",
+        "c07:s03"
+      ]
+    }
+  ]
+}

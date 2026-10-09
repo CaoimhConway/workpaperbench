@@ -1,0 +1,149 @@
+{
+  "tables": {
+    "category_economics": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "subscription_gp_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "merchant_gp_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "subscription_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "merchant_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "merchant_revenue_to_gmv_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year",
+        "months"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "cash_generation": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fcf_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fcf_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "year",
+        "months"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "subscription_stock_bridge": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "mrr_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "exit_annual_run_rate_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "observed_annual_subscription_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "run_rate_minus_observed_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "run_rate_gap_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "exit_stock_is_annual_revenue": "The December exit MRR annual run rate equals observed annual subscription revenue in FY2025.",
+    "merchant_margin_below_subscription": "Merchant solutions has a lower FY2025 gross margin percentage than subscription solutions.",
+    "exact_payments_fee_identified": "Merchant revenue divided by GMV identifies the exact Shopify Payments processing fee."
+  },
+  "definitions": {
+    "category_economics": "Both years, months=3 Q4, 9 first nine months, 12 annual. Category gross margins use their own revenue denominators.",
+    "cash_generation": "FCF margin uses total company revenue and matched periods.",
+    "subscription_stock_bridge": "Two December stocks. Twelve times exit MRR is a hypothetical annual run rate. Gap is run rate less actual annual subscription revenue, with percentage denominator actual revenue."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  }
+}

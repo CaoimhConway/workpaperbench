@@ -1,0 +1,51 @@
+{
+  "task_id": "workflow-v5-a08",
+  "tables": [
+    {
+      "id": "income_model",
+      "file": "income_model.sql",
+      "evidence": [
+        "a08:s01"
+      ]
+    },
+    {
+      "id": "operating_adjustment_bridge",
+      "file": "operating_adjustment_bridge.sql",
+      "evidence": [
+        "a08:s01",
+        "a08:s02"
+      ]
+    },
+    {
+      "id": "acquisition_scope",
+      "file": "acquisition_scope.sql",
+      "evidence": [
+        "a08:s01",
+        "a08:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "annual_acquisition_same_as_q4",
+      "verdict": "supported",
+      "evidence": [
+        "a08:s03"
+      ]
+    },
+    {
+      "id": "offering_rename_changes_allocation",
+      "verdict": "contradicted",
+      "evidence": [
+        "a08:s03"
+      ]
+    },
+    {
+      "id": "exact_organic_cc_growth",
+      "verdict": "unresolved",
+      "evidence": [
+        "a08:s03"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "tables": {
+    "regional_attribution": {
+      "columns": {
+        "window": {
+          "type": "text",
+          "unit": "label"
+        },
+        "region": {
+          "type": "text",
+          "unit": "label"
+        },
+        "prior_purchase_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "current_purchase_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "change_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "contribution_to_worldwide_purchase_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "prior_average_purchase_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "current_average_purchase_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "average_purchase_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "current_gdv_residual_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "window",
+        "region"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "worldwide_reconciliation": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "regional_gdv_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "regional_purchase_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "regional_purchase_transactions_million": {
+          "type": "real",
+          "unit": "million_transactions",
+          "tolerance": 1e-06
+        },
+        "gdv_residual_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "purchase_residual_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "transaction_residual_million": {
+          "type": "real",
+          "unit": "million_transactions",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "company_margin_bridge": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gaap_operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "gaap_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "adjusted_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "expense_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "branded_volume_matches_all_revenue": "Branded purchase volume and total company net revenue have identical scope.",
+    "annual_average_purchase_increased": "Worldwide annual average purchase value per branded purchase transaction increased from FY2024 to FY2025.",
+    "merchant_price_mix_identified": "The supplied operational tables separately identify merchant price changes and customer basket-mix effects."
+  },
+  "definitions": {
+    "regional_attribution": "FY and Q4FY windows compare 2025 to 2024. Regions are APMEA, Canada, Europe, Latin America and United States. Contribution divides regional purchase-volume change by reported worldwide purchase-volume change. Average purchase is purchase dollars per purchase transaction.",
+    "worldwide_reconciliation": "Four original periods. Residuals are sums of the five exclusive regional rows less reported worldwide amounts.",
+    "company_margin_bridge": "Use reported adjusted operating expense to calculate adjusted income/margin. Expense residual is GAAP less listed litigation/restructuring exclusions less reported adjusted expense, retaining the source rounding remainder."
+  }
+}

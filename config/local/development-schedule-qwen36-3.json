@@ -1,0 +1,53 @@
+{
+  "schedule_id": "local-workflow-qwen36-development-3",
+  "declared_at": "2026-10-13T10:05:01.340816+00:00",
+  "authorization": "Owner requested the actual 24-turn failure fixed and the queue resumed unattended",
+  "status": "Development continuation after observed failures, not a fresh or preregistered comparison",
+  "model_configuration": "config/local/qwen36-35b-nonthinking-terminal-64.json",
+  "model_configuration_sha256": "eb6267700a34e5b5eba4385bd7362a9572f285abea857d529d9fb071293337e9",
+  "manifest_id": "workflow-v5-canonical-7429612183c6",
+  "scorer_version": "workflow-1.1.0",
+  "scorer_sha256": "f8e733696dbf51923b6f751da57ca9e60ed5c5ebe565c96c998a6989bd1e924d",
+  "repetitions": 1,
+  "execution_concurrency": 1,
+  "repeat_policy": "Continue Block once from its saved native session and SQL with a 64-turn budget, then run Microsoft once from fresh state. Native candidate failure retains a verifier result and does not stop the queue. Infrastructure or boundary failures remain fatal.",
+  "held_out_candidate_model_calls": 0,
+  "external_service_spend_usd": 0,
+  "execution_files_sha256": {
+    "scripts/local_bench.py": "85a627bb08fdd6c638abda0efe7682676ef022487625c4a905bace472082bde0",
+    "scripts/local_trial.py": "c85ff6de1037d9a9134bf3c085cded4e0e9f4fa1d2f2645f76f90f7019dfe60f",
+    "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+    "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+    "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+    "workpaperbench/catalog.py": "feda93e6adde7a12181c403f9217f61f4767f510916d9bc17c2776f0d38be3a7",
+    "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5",
+    "workpaperbench/current_cli.py": "7615cac77db6b12ce68af16732a91b5af2e37f8b737aac3e2d0a39f36d1bf26b",
+    "wpb": "971f44dae3eb1c411c7b34b76e4157c2b0ffc0454684636407ea8a348264f53d"
+  },
+  "attempts": [
+    {
+      "attempt_id": "qwen36-development-c01-3",
+      "task_id": "workflow-v5-c01",
+      "task_sha256": "ca99d37c4bae432e9cfa2b65314f48dbb4017646874fc6a7dff262c566f4cff3",
+      "condition": "Native candidate session and saved SQL continued in a fresh isolated environment",
+      "continue_from": "qwen36-development-c01-2"
+    },
+    {
+      "attempt_id": "qwen36-development-a01-3",
+      "task_id": "workflow-v5-a01",
+      "task_sha256": "dcaefcc8fd9c21b22937260c8e77d68cf364606d6c2e2ba9934f89f4e3983e59",
+      "condition": "Full dossier, fresh candidate state"
+    }
+  ],
+  "preceding_schedule": "config/local/development-schedule-qwen36-2.json",
+  "preserved_attempts": [
+    "qwen36-development-b01-1",
+    "qwen36-development-c01-1",
+    "qwen36-development-c01-2"
+  ],
+  "not_started_in_preceding_schedule": [
+    "qwen36-development-a01-2"
+  ],
+  "report": "reports/local/workflow-qwen36-development-3.json",
+  "public_entrypoint_verified_at": "2026-10-13T10:10:16.287394+00:00"
+}

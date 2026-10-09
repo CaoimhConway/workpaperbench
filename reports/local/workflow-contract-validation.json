@@ -1,0 +1,1249 @@
+{
+  "validation_id": "workflow-public-contract-1",
+  "manifest_id": "workflow-v3-canonical-78b9269c61e1",
+  "previous_manifest_id": "workflow-v2-canonical-37cd5f906bb2",
+  "task_design_revisions_used": 1,
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "new_native_submissions": 36,
+  "receipts": [
+    {
+      "attempt_id": "workflow-contract-a01-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "abc553d560f28fd0cf2e57f4245c9cb869050de4fd3a91d8238546b0795f8143",
+      "task_sha256": "d753539e7e014d7cb62a00e96c0bb985f0762dd6840e122e117b94a353afcd3b",
+      "raw_answer_sha256": "c40cbe480a1a30a446ddf6e93e56ec0e1186ba10e1ac478f3666ae32719d50cd",
+      "normalized_answer_sha256": "c40cbe480a1a30a446ddf6e93e56ec0e1186ba10e1ac478f3666ae32719d50cd",
+      "sql_file_sha256": {
+        "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+        "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+        "quarter_reconciliation.sql": "5d9f0e48cfc97fcf6dd05306e5d79faf9fba3e7ab82dce6375913e3b7ba97d21"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-a01-alternative-1",
+      "variant": "alternative",
+      "receipt_sha256": "6061103fd38eb7441b3d6bdb5e1fb147711ea41d0d3af30588f506ccdfee3063",
+      "task_sha256": "d753539e7e014d7cb62a00e96c0bb985f0762dd6840e122e117b94a353afcd3b",
+      "raw_answer_sha256": "c40cbe480a1a30a446ddf6e93e56ec0e1186ba10e1ac478f3666ae32719d50cd",
+      "normalized_answer_sha256": "c40cbe480a1a30a446ddf6e93e56ec0e1186ba10e1ac478f3666ae32719d50cd",
+      "sql_file_sha256": {
+        "guidance_bridge.sql": "36fa0ee1ca2c9008c68bb8f98ff464b85ee6c6809872692a1fa2c309cbab7c5f",
+        "quarter_model.sql": "8dca430205cc426fae3d0032e58f19faf4c2910339177611bebfbcd2009f00b3",
+        "quarter_reconciliation.sql": "223277f1f0bb3d431d1e68e2ffe5779719a768e18bc1027d84334117155996b8"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-a01-absolute-path-1",
+      "variant": "absolute-path",
+      "receipt_sha256": "2313b6a0a98a24fe6c7fa446d1a2302bc96bbd05dce2ee25936f4b027e5c0015",
+      "task_sha256": "d753539e7e014d7cb62a00e96c0bb985f0762dd6840e122e117b94a353afcd3b",
+      "raw_answer_sha256": "7cea72ec18b0e13ee82f80ae0f64eb001d9b9b1b2365b195bd5ea0243b895d04",
+      "normalized_answer_sha256": "7cea72ec18b0e13ee82f80ae0f64eb001d9b9b1b2365b195bd5ea0243b895d04",
+      "sql_file_sha256": {
+        "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+        "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+        "quarter_reconciliation.sql": "5d9f0e48cfc97fcf6dd05306e5d79faf9fba3e7ab82dce6375913e3b7ba97d21"
+      },
+      "checks": {
+        "financial_answer": null,
+        "evidence": null,
+        "robustness": null,
+        "delivery": false
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b01-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "8b578179b66bae133b52c67b4d19fdd5fbc255a289ad2cdfce3f49c24d8467fd",
+      "task_sha256": "6cc2eccaf4bef35ae24dfee91197575319e6d89343d7c4a583955dcc38c2f806",
+      "raw_answer_sha256": "c550e39ab6d993a80efed9c55e8e8f339135baa724d4aef17c4469c7df86632d",
+      "normalized_answer_sha256": "c550e39ab6d993a80efed9c55e8e8f339135baa724d4aef17c4469c7df86632d",
+      "sql_file_sha256": {
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+        "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b01-alternative-1",
+      "variant": "alternative",
+      "receipt_sha256": "7f40c360c8b924f09c1e301939df9664fe27e1dda6e56ae43d78ab3ef8066e7b",
+      "task_sha256": "6cc2eccaf4bef35ae24dfee91197575319e6d89343d7c4a583955dcc38c2f806",
+      "raw_answer_sha256": "c550e39ab6d993a80efed9c55e8e8f339135baa724d4aef17c4469c7df86632d",
+      "normalized_answer_sha256": "c550e39ab6d993a80efed9c55e8e8f339135baa724d4aef17c4469c7df86632d",
+      "sql_file_sha256": {
+        "reserve_bridge.sql": "8141de1665ef2d6764cdb237e7fa52588125fba8834a0ea23a9c789f9bab6ebd",
+        "reserve_coverage.sql": "403efdaebb156984e6a5b67c46395a885c2a6754e0e0b8ede2d220d1e07ddc5f",
+        "signature_lag.sql": "810aff58eaf3f3181417dd5ebf6a496d974c14f21f3c7fec93d880840f727fe5"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b01-absolute-path-1",
+      "variant": "absolute-path",
+      "receipt_sha256": "272d5cbbc97c2d2d80ea5539878b18782f8428d2bd5296176ec3ffc4d7e518c4",
+      "task_sha256": "6cc2eccaf4bef35ae24dfee91197575319e6d89343d7c4a583955dcc38c2f806",
+      "raw_answer_sha256": "8a4876b1a56dad1e0947396a5fd3e8e95c2d863c9d3341dda5ad730811b6b2a5",
+      "normalized_answer_sha256": "8a4876b1a56dad1e0947396a5fd3e8e95c2d863c9d3341dda5ad730811b6b2a5",
+      "sql_file_sha256": {
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+        "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc"
+      },
+      "checks": {
+        "financial_answer": null,
+        "evidence": null,
+        "robustness": null,
+        "delivery": false
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c01-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "08efded436fb994e8d5b439ec25979d9e22152a280eddadf4f18938717c10038",
+      "task_sha256": "becd34e0d049da8c9929287023ebe6ad4cb9d8edf5512f3814af294b5e05eea0",
+      "raw_answer_sha256": "179a1898f76a0ac7848909061bab61b226c6c12b2c99a614618fcc5571e52103",
+      "normalized_answer_sha256": "179a1898f76a0ac7848909061bab61b226c6c12b2c99a614618fcc5571e52103",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c01-alternative-1",
+      "variant": "alternative",
+      "receipt_sha256": "302628377a048d6e7fd1d1e153cc5705699e3d1b45221004f88ed932b63c45e2",
+      "task_sha256": "becd34e0d049da8c9929287023ebe6ad4cb9d8edf5512f3814af294b5e05eea0",
+      "raw_answer_sha256": "179a1898f76a0ac7848909061bab61b226c6c12b2c99a614618fcc5571e52103",
+      "normalized_answer_sha256": "179a1898f76a0ac7848909061bab61b226c6c12b2c99a614618fcc5571e52103",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "e32a2282bd150ae7d85db18acaa822b9d119b9e21df751a84b8bdc33e0116a94",
+        "reconciliation.sql": "dab0619bcce06fc9aa07a61969cb21f81c487d6c709ce5ef142d734f7c3e8909",
+        "revenue_bridge.sql": "836129ab0c772aa6746f5c6be2269b5e6556165e49bc1f80dcd52fb8912eb3c3"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c01-absolute-path-1",
+      "variant": "absolute-path",
+      "receipt_sha256": "5d5e999d3fe865f5a5795cdaf1cd6c537be40d5d035d36168466612d9cdd4ecf",
+      "task_sha256": "becd34e0d049da8c9929287023ebe6ad4cb9d8edf5512f3814af294b5e05eea0",
+      "raw_answer_sha256": "dc74779861a78e931f1757a6ae1ce351fe8aad0d2e2e7e11b5db9472605da15c",
+      "normalized_answer_sha256": "dc74779861a78e931f1757a6ae1ce351fe8aad0d2e2e7e11b5db9472605da15c",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      },
+      "checks": {
+        "financial_answer": null,
+        "evidence": null,
+        "robustness": null,
+        "delivery": false
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-a02-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "c004ceb1230dc79b3690660c97fb02c8fa3d8449bf8e3b734b09442c9b6b2e39",
+      "task_sha256": "8350bf388552e86605cbe0c36faf1a6e7eee0a29f6aa8ea5375267631d79f497",
+      "raw_answer_sha256": "b401c8e04f1c797430c5e6ed5c538756f22bdf0bb3518ba148eab099e8feabf2",
+      "normalized_answer_sha256": "b401c8e04f1c797430c5e6ed5c538756f22bdf0bb3518ba148eab099e8feabf2",
+      "sql_file_sha256": {
+        "cash_model.sql": "3a00e064b27902b151d944617fbe8e3c2d65bcf146f7f0ba168d2c7e19c90e1c",
+        "operating_cash_bridge.sql": "f31dc620e1cccb2c8c078f380dda76013135a1160b2185ec865b1cf33945e9d1",
+        "segment_model.sql": "cca511c5066a2347e390cb0c702611a2416641033cf74474f77b85981fd85fa3"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b02-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "65764292a508e567c12608451faccedaecffd92c8032115099203e8e1593b631",
+      "task_sha256": "8ae5e76878c1f3a076dfc111ad3a18cc3d025bcd040965753037ff2ac9282d54",
+      "raw_answer_sha256": "5da18f119885f593f3c5f7906ab976bf285dfa5a12f43567c34aa3138636782e",
+      "normalized_answer_sha256": "5da18f119885f593f3c5f7906ab976bf285dfa5a12f43567c34aa3138636782e",
+      "sql_file_sha256": {
+        "qualified_coverage.sql": "9bc0574b6f9740125fb7749861d12fd60b4d47e526a5533fdcbed65a32ce9137",
+        "stock_bridge.sql": "f18aee6f76edaefb6e0caae73bac785153f21d266cbd3446946b0baf42eb9328",
+        "treasury_valuation.sql": "b2d86238f079ef59328cb4c4b2218e2b078527fa9e4d7de38c4e29e997af70c3"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c02-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "39b56964a350790bfc156213fa1586c99e4270e14b72602cc9f9e666d44ae911",
+      "task_sha256": "f4226938daa4f82654db9df0c08d43e90ec26ad5731fe85ad69d8ed513b9c3c0",
+      "raw_answer_sha256": "507c14a18312556bef631f4eb1f9dcb0026c8f79d75003b74dfaf7e52f745bd5",
+      "normalized_answer_sha256": "507c14a18312556bef631f4eb1f9dcb0026c8f79d75003b74dfaf7e52f745bd5",
+      "sql_file_sha256": {
+        "adjustment_attribution.sql": "3d5c5911096643f5dbe4b2dc6c01c8b44f54498030c2dec251f08cadebbc56a8",
+        "arr_guidance_bridge.sql": "bbd43630df6c191d4ad35a34b71074309038c165d5f852849711e85c16ba30b8",
+        "operating_reconciliation.sql": "20aec68b50c907967652a91824271658971be059cd280d26e2c83fca5fad79f5"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-a03-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "5be2f66f9c77f506b79a94f76f2d7fdef37bf2c45a2f2b5706717ae0fcf5d226",
+      "task_sha256": "7edb01623410f1cf6efba20e66dd56274da064784716b8472cd75d951cd1e37b",
+      "raw_answer_sha256": "7e4734155f6ba0ec737480dd41cd416f45f6059c36e7f0d183f67c745cbb97fc",
+      "normalized_answer_sha256": "7e4734155f6ba0ec737480dd41cd416f45f6059c36e7f0d183f67c745cbb97fc",
+      "sql_file_sha256": {
+        "definition_attribution.sql": "188ee2c377ff369af809ace8a72ab9e31f8f619a025403a6bdc0bd85e058d01a",
+        "expense_model.sql": "fc2d839e90775e03e494ca40f00e5edacc204a80169a53f61eeb1f7e7bf7da96",
+        "operating_margins.sql": "5b03d1df8df19ec2ecfe44ffead8c5792b44b5672e13d98ec2971a7bf04c0edb"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b03-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "1a044b63edfbf65847387ce693aa5079b1e618e8842198167e8585b250dc216b",
+      "task_sha256": "98a7fe600c5e815d0f8a08ab52f29ac632e536c0278931b0a2f83ee6c9c722ae",
+      "raw_answer_sha256": "3ee45df6d26082661f66e5f096a0a671e2080024d3947a3c34f040546fae7016",
+      "normalized_answer_sha256": "3ee45df6d26082661f66e5f096a0a671e2080024d3947a3c34f040546fae7016",
+      "sql_file_sha256": {
+        "annual_revenue_bridge.sql": "e226c1fdae5f752ddeff4ca65586f521a05d6e822e86e5efcd839f863488ca04",
+        "spot_revenue_proxy.sql": "c27cd745672fd4f610fbd36ce77b36972f07806f32a636a9a20920171ae72740",
+        "usdc_booked_ratio.sql": "9bb4b606517afd300944166bbd665a5bcdc771f3ff172f185004d46d67ce96bd"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b05-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "fa63ddb1cc9b50e54391e859af0af71881d7f350f8793d207f995c38e00712af",
+      "task_sha256": "a7f15969e9d95d4ac05238698fc515eca96ddb7e65f3785b1c3fb52b4bed5315",
+      "raw_answer_sha256": "6193e656caa6e35dda14db0cdb2f95e3ec4eb280ecb58a9528a9432ef2c29430",
+      "normalized_answer_sha256": "6193e656caa6e35dda14db0cdb2f95e3ec4eb280ecb58a9528a9432ef2c29430",
+      "sql_file_sha256": {
+        "annual_activity_bridge.sql": "236b395eb83c81420997816f667c654305c20249a7bf993d7dfd2fde92558ee9",
+        "margin_reconciliation.sql": "939e823bab287a8ee006505406bd5c84990f999313b7804fe080664da44341e6",
+        "quarter_activity.sql": "2590308086afc8402db1a2b5ddb1dbc01becabfb4c64f15b10de9d5df4a0cb79"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b04-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "9be893013a3e43dd3aa038bd5d549eed8407a640ed9e2d392c5eedf4690e92d9",
+      "task_sha256": "064e20f9b8238993afce1d53383ad525516d1cf584f4835072e8772388eaf825",
+      "raw_answer_sha256": "595287b9df2e9e18bca3ceaa6431e3d64b8f2ab02accd9b6f0c1c09948a7b95b",
+      "normalized_answer_sha256": "595287b9df2e9e18bca3ceaa6431e3d64b8f2ab02accd9b6f0c1c09948a7b95b",
+      "sql_file_sha256": {
+        "annual_revenue_bridge.sql": "e568f85490ed055a0224ef0ca84ed85633fdecca04c48e34c1288a4560a5faaa",
+        "crypto_scope.sql": "a88262605769af745b61acf149e2fb0fce402d827bd542a6ef03dfe5598f22a1",
+        "expense_audit.sql": "5398a05852533c0b91bfaabbd48abba734647eaa1993ebb239c6b7d35e4c2f6f"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c03-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "5a00313901264208f620846905f8c62b2e4942b07278fec274d1b7db83d80cae",
+      "task_sha256": "3ac5aa11193c38dee65a852005538e2340663dfd8447357c1534d3b37b1f8c0e",
+      "raw_answer_sha256": "fa410badd3a921e5b6d758dbdbf9d2e06973b59dd4a3d8e51db5f753b162bdf9",
+      "normalized_answer_sha256": "fa410badd3a921e5b6d758dbdbf9d2e06973b59dd4a3d8e51db5f753b162bdf9",
+      "sql_file_sha256": {
+        "gross_to_net.sql": "3f9f75a7fe1f545582512985c2c9c1dcd0bec600d458f4e0935d9ec7a1b20634",
+        "income_growth_bridge.sql": "7095b71d64eed9817bdb34ea96342895c64cfb19738ab20165f299388e31c63c",
+        "net_income_reconciliation.sql": "24a841d36a566a8d8245b925106eef18f0a72f62fed84637e17a15d4a90b9a98"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c04-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "c39ffd727f50545b11ae24d600b44c2bef079d581583215735ef7b4ab0e5a8bf",
+      "task_sha256": "d4b132ffe2dbc74995c5162c2cf59eae4049357ce9c7b2575538c9a2eb7dd09f",
+      "raw_answer_sha256": "90a7d1a2c83877b0c4d075554860436cd5bfcc110f70d8490e4d831b975dc59b",
+      "normalized_answer_sha256": "90a7d1a2c83877b0c4d075554860436cd5bfcc110f70d8490e4d831b975dc59b",
+      "sql_file_sha256": {
+        "company_margin_bridge.sql": "48a7bd62f2896486f82fb8bc4dfb30fc9ceb4a0198399366101217e681efa46c",
+        "regional_attribution.sql": "26f4e77dd20e4e60bc0092bc6f74fbea00546a7086343049a8e994b9b7fe644e",
+        "worldwide_reconciliation.sql": "434ca146ad5e8bce89ac68357d9b26c89eed8299359f40f0fc6dd3fb0bacf4c5"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-a04-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "5010029df5fc119f158d9e489b1c8f63345d204573f0ecbf0aad2a320c879cf6",
+      "task_sha256": "45e0a6a38c285a09e3f9e192952a59828194350d2c4af3a0e4226fb917d571dc",
+      "raw_answer_sha256": "9a0156721cb1e5b005204cbaf3c1ee08391406682a897966380475a607fa98e9",
+      "normalized_answer_sha256": "9a0156721cb1e5b005204cbaf3c1ee08391406682a897966380475a607fa98e9",
+      "sql_file_sha256": {
+        "cash_generation.sql": "52d067ed2a792a96e23ed33f23d5487974fa89aef0655b850f677fc239bbee70",
+        "cash_movement.sql": "0834c33364da618c3402169a942d5b98e4dd29933fbdbb1b865825fc80c3c983",
+        "noncash_capital.sql": "26caf2284c7ff16fab507a81993d6d90a1277e0bb23e1b401005f70385410404"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-a05-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "d9b90cb2fe98e0431bf6cca011fb1d91f3ae8cf6080878cd34a5a19960407618",
+      "task_sha256": "20c3c966163ab660f6ef170273615aff4c3ee820ebbc65a1899f034b459ea7f8",
+      "raw_answer_sha256": "92c7321b49b0b3a3bdeb605e6aae6829d17a0305596708b08444757a1338f5e9",
+      "normalized_answer_sha256": "92c7321b49b0b3a3bdeb605e6aae6829d17a0305596708b08444757a1338f5e9",
+      "sql_file_sha256": {
+        "income_model.sql": "6e9e057c3d941287b94c962ced7b8ee6dd217073c7e7c0514e0fcc921c64da5a",
+        "membership_accrual_bridge.sql": "44a6e09c6232845568f87c7b4d02b8d82704fbcfc09459aee64bb0757534535e",
+        "operating_growth_bridge.sql": "eca1c0aa716db78d28e2344e61c5958482375b1f74baeb9f1d3d41b711408dd7"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-a06-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "d9adbc0bbd2fb4558182230d9b3a6f9b7d3da9cea4723512c5151cc2ab7d4c67",
+      "task_sha256": "a1918d27bc164204cd0bcb976daceb509a1e45bf6bb9dc3eb8278348352a3bcf",
+      "raw_answer_sha256": "83eee64f10d0a9ba37311ae8cee51b2e1903462047baa789aa77fc9e74f17e90",
+      "normalized_answer_sha256": "83eee64f10d0a9ba37311ae8cee51b2e1903462047baa789aa77fc9e74f17e90",
+      "sql_file_sha256": {
+        "adjustment_bridge.sql": "4a8c79b23c9b1e5071f4d24a641d66082aaa01085ef68c10e384f22bc94a66fb",
+        "income_model.sql": "b460753def03b4f41b1d62c3c3e22a08eafe3e4c2c8343f865cc99dc397ac830",
+        "year_to_date_cash.sql": "e1989d23e5933db86e8aac364c56faf904df443312fa015ef1b805d377f65547"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b06-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "7a5bc6921874b5346bd5b6c441c8b7b40bbdfc7ef9da5b8995fec52a3b92b60e",
+      "task_sha256": "094e8436886d184acb5417ca20b4e4d41d7382b97572e1824cdae9b56e33080e",
+      "raw_answer_sha256": "2d1b223ef5788fc7d26247641a94d506da3401d734b37888ce007ebb2562e06b",
+      "normalized_answer_sha256": "2d1b223ef5788fc7d26247641a94d506da3401d734b37888ce007ebb2562e06b",
+      "sql_file_sha256": {
+        "consumer_activity.sql": "831046215f7233bd564d3569c48166a7f5eb4e03dfed941d1c630f5fe4527909",
+        "corporate_bridge.sql": "20f97695108a52bd9c5ed57316e499b183ce2110e0486a6e9f00b964639da452",
+        "segment_metrics.sql": "1f4a2f61f5ba6f510894114d8be03903aa955151f29e45d12ce9d4c135eda10e"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b07-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "c82515b7a13f553ba901cdfb1277e5b3cfc7af6f4c2ec93c8f438bd98a34aefc",
+      "task_sha256": "8f6e02f418d3c765feef97d55a88ff622bef9b80e714adc192025c586f706b8f",
+      "raw_answer_sha256": "b07e562147d038af0a75a438c948ef931f3078036eb1d23251b8f42071c2f198",
+      "normalized_answer_sha256": "b07e562147d038af0a75a438c948ef931f3078036eb1d23251b8f42071c2f198",
+      "sql_file_sha256": {
+        "booking_ratios.sql": "37031def23406ec3ac3d502041481bd876011f68ed98ca7f8dc14d792622db6f",
+        "quarter_cash.sql": "b191657ea3b4928e00b0761e7730a38fb9a2b07f302ec8457100bba0e00d2020",
+        "rolling_cash.sql": "3b4096dbdb92088ea1d6ab5a97b6af07d288c6d21c5486ef0aa79d638238d318"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b08-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "b5592393630417ab8c86eabb244bbe9a9d143da919e6d121d7a0384108b7860d",
+      "task_sha256": "4b582390249ed55083c5f9ef160f8840175faff2d1ffb24494da18243d6bafb1",
+      "raw_answer_sha256": "460490efee8b350fd4d27a1b8c39f919b88c5dbd30854520b8d92f05bbd03255",
+      "normalized_answer_sha256": "460490efee8b350fd4d27a1b8c39f919b88c5dbd30854520b8d92f05bbd03255",
+      "sql_file_sha256": {
+        "cash_generation.sql": "553e1d3ce13a5bb7a8df563aa14eefe2e97c70e28e81fb9500a51ca1af4918f1",
+        "category_economics.sql": "ce57f889878d39e49d8e2a8a67d7b0facda1146237db442748a7c06dd7bf746e",
+        "subscription_stock_bridge.sql": "4d722624874f3681494165db71434efe062bae13795d096b07cf627fa2fa3eee"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c05-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "d56388d634db4af7bed592e8c48d0dea8713ea702d8586077d98aa6a036adf7b",
+      "task_sha256": "fe0991fda965182496d733ccb33ba44fc95ea48c00d99325d2a93ce589adef4a",
+      "raw_answer_sha256": "dda1e13c82ba4f4b509f7f18d6450729724807844e7ed42e164eaea7d55751ea",
+      "normalized_answer_sha256": "dda1e13c82ba4f4b509f7f18d6450729724807844e7ed42e164eaea7d55751ea",
+      "sql_file_sha256": {
+        "category_margin.sql": "ecdb3ed1cf3ff5d2b9e69caf24dcd74a264cb862551c788354b45e6e8348095a",
+        "net_income_growth_bridge.sql": "00b43410a144189ca9df4f070dffdb5682bc9d641cc60e91b727bd4ded11d92d",
+        "prior_tax_baseline.sql": "32bb6e670f681576c3f660038008eb4fc0ce418fe62a3b22e51c4e1726963e03"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c06-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "4e434e4192c432f74bab10daf271755b7ce27a8978a8d308b9850840d54c057c",
+      "task_sha256": "f3b6550e744bd8a511301c06dc51e199ab3f8f722af2358bd3c39ec182b10a92",
+      "raw_answer_sha256": "3b3ecd4b61382100fbf16b94afbbac462a9a110352349705db45cb1e14c7c3bf",
+      "normalized_answer_sha256": "3b3ecd4b61382100fbf16b94afbbac462a9a110352349705db45cb1e14c7c3bf",
+      "sql_file_sha256": {
+        "consolidated_currency_bridge.sql": "882b05f34f5b36b3ce53b81d88a21efdf4be92b247d14759c5e897621507e8d5",
+        "geographic_currency.sql": "2c70feb454f5f2a0e235a3f11cfb858bd4a0034f22931ef47406a945e5030f33",
+        "revenue_growth_components.sql": "e369f3e3516f7cb70b5eefc7fcead5c6ab7723dcedf096a5080b41f18e7335d9"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c07-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "7b8e12e6b691867cca730d95d80a89d295a38ba7564fd7d575ae4cd996446e31",
+      "task_sha256": "fb604b52ca0621ee0043df8a0e5027753807fec6ba308b5d9d0c5b48e885ec4d",
+      "raw_answer_sha256": "ba9f8f148cb9c61f90251d61ebde45bea91903f1938d97a225eedeea1dbef4c9",
+      "normalized_answer_sha256": "ba9f8f148cb9c61f90251d61ebde45bea91903f1938d97a225eedeea1dbef4c9",
+      "sql_file_sha256": {
+        "cash_revision_bridge.sql": "89f670439e976ed65baf167cc65a41fe176fc87882e4150829b1af966731e9a0",
+        "financial_versions.sql": "f641192fa1f5238856b420897de8417ad1364b90f2a565c9bca4a3f2ff2c0aa9",
+        "settlement_revision_bridge.sql": "220c2bce7d01225b2eba0e78a88d1e0d461148eb38d8a48c3b10842606d3337f"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-a07-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "31eee2e1300ce878ad419fc3755bc5b6991da0f29e68c25bf6d95adda31a9ba3",
+      "task_sha256": "369c21b9a064f55bbcbdb0fd27cdfa3a253f775f02598d2c0f40412cf98a7370",
+      "raw_answer_sha256": "551ce10c5c610d1f8b05191376399112fc0070888fdb35725e6b0a6a1b235c32",
+      "normalized_answer_sha256": "551ce10c5c610d1f8b05191376399112fc0070888fdb35725e6b0a6a1b235c32",
+      "sql_file_sha256": {
+        "cash_generation.sql": "948c70780a1b063de1ea9f80db9ca21d35765f6e0f6ade513386c778e2fd9d60",
+        "current_h20_bridge.sql": "f8951712149a8aa01b83e360498883e63655205979a879457ffd75d89bbe57b5",
+        "gross_profit_bases.sql": "6a9ef6e35224eada23fe43de1d3bbe6e6056753b864f2c5bbf203b7fa46252e9"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-a08-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "28f4ab8b60053a020c1ebd7477e316b559a915505155ac6480841d2bd654b6a8",
+      "task_sha256": "f8b8de1f7c4e8a3b46e7a83fa4c78d8b1dd544d3a5b113c9aded1921b231f635",
+      "raw_answer_sha256": "d0f8b060b899733643f830079837c6bdcd849d074248194a60c1a6bf27ec4096",
+      "normalized_answer_sha256": "d0f8b060b899733643f830079837c6bdcd849d074248194a60c1a6bf27ec4096",
+      "sql_file_sha256": {
+        "acquisition_scope.sql": "9f164c6c488bd8893934720025b7e465fb73ff06e491da8713495b3153ed8eae",
+        "income_model.sql": "955081acb80905e48facfa306ca0ad9317097eb9f746179770b84374e196bc4d",
+        "operating_adjustment_bridge.sql": "ee4bbd00ea3d1e3725c1519a6881e8bfbcf81db15aec94568505eb59cca25675"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-a09-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "104858018169a3adcbd531f814c35d7def30b03e5bbf64cc0467744a7fd5e44d",
+      "task_sha256": "58303897ed2068e2686cd151693efa68100b3378dfe3489a2e89e7125deb0de1",
+      "raw_answer_sha256": "024d0adeb1fc4221886e2116f1fef762e46bed62f0e193c3fe1a6823075bd19e",
+      "normalized_answer_sha256": "024d0adeb1fc4221886e2116f1fef762e46bed62f0e193c3fe1a6823075bd19e",
+      "sql_file_sha256": {
+        "consolidated_bridge.sql": "20fc2f707be2fbf555a90d6bfb23980f9b7e6c2442c86e6f33bdf978b9e16dea",
+        "segment_model.sql": "e06af82fa18fc761fd7334184b15c1ef6b6653610fab14c9074cf2d9f41e365c",
+        "service_subscriptions.sql": "9683df112e25921fc246f1a877ecc2e8514a533986c4cda2db38b4243de16f4a"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-a10-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "2b726d58c9b2d7296ecfa3a0ac669c65ceb751ad0caae05004bcba297140ec1b",
+      "task_sha256": "360c8fcb3fee8efdf379edb77c916ffde8c95d6418950777c5c321a77e6cc93f",
+      "raw_answer_sha256": "b1e871bfc76a0b80b8a24f9c20cce69037a2bb3df851ce0645ed888c2f40d24b",
+      "normalized_answer_sha256": "b1e871bfc76a0b80b8a24f9c20cce69037a2bb3df851ce0645ed888c2f40d24b",
+      "sql_file_sha256": {
+        "currency_and_network.sql": "fc732a3166d59f9b2bdc22cf345172113804db70544d704c631109b19c3f68ce",
+        "income_model.sql": "4c1c1f55bf4e7bfdedd5d15fad3945b8a599dc807acd364610274852f7c31219",
+        "revenue_growth_bridge.sql": "fc330dad66b65fa5dd57056e3e9fe28ccf5cb1bd498c3f01940828db950c9483"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b09-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "16e0a65d01747566f08f18036b160b5722e26eaa4b0950577dd9d0490d4c7289",
+      "task_sha256": "b24b7fd862078322053b7da9bfb9934f9512bf0da5e427a5e7f0576db01d5cf7",
+      "raw_answer_sha256": "6e3ac3844206f3f450e62b9f415b58f05e63cab9bb90e2fd15b96e294c474634",
+      "normalized_answer_sha256": "6e3ac3844206f3f450e62b9f415b58f05e63cab9bb90e2fd15b96e294c474634",
+      "sql_file_sha256": {
+        "income_reconciliation.sql": "53f67d4906744bb1e2724ffea0827e9501c76c000cf603dd9a2c463d5fb21c13",
+        "operating_reconciliation.sql": "9afb1be25989bb8343c6308584fb5897c4e0b675c6e570387ea458a8957246cc",
+        "share_basis.sql": "5a82064d6ee5b150ddea651a7eda3f2e2b4d1c01ebce5578548413d1d6576f56"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-b10-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "5c229306a3fbe5395dc53af2e548530a60b49b044f19bc1f77df2fda13e89b54",
+      "task_sha256": "4dfef41a315ff4e4f5763b67cae557ad463fc30b52c916549cfa221b1575a057",
+      "raw_answer_sha256": "5a7c3b297c492916b0b38f1dc686a8b5f6f04335b432587578b06ca24e3eecc9",
+      "normalized_answer_sha256": "5a7c3b297c492916b0b38f1dc686a8b5f6f04335b432587578b06ca24e3eecc9",
+      "sql_file_sha256": {
+        "consolidated_cash_bridge.sql": "25051e19aa04962f0215c8785180ace7c0ccef21c21903162e18282caa61b0e3",
+        "investment_gain_bridge.sql": "60a8ed195050c46d85ab972b8cee29786989e234251ab1b2e66b791178afe6dd",
+        "parent_earnings_bridge.sql": "a4296a0dfee17e03861e1de52783e02b2dd2cd63ffd35023d9e88a2e74e32ae8"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c08-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "e1cd828df891469d7c9f0eda812e41a3bdd58c5041709d257bc83813f4195b41",
+      "task_sha256": "3e9d53f07bb154caf6d21c1692bbaf32d426e29ffdb01cd26b05aab2cc616c27",
+      "raw_answer_sha256": "e1ba5a5bb330ecb684122c9e90ce9b3c4e8f115c600c4d6719ff77bb74fba564",
+      "normalized_answer_sha256": "e1ba5a5bb330ecb684122c9e90ce9b3c4e8f115c600c4d6719ff77bb74fba564",
+      "sql_file_sha256": {
+        "income_reconciliation.sql": "58482d48839f059846f4f33dfd16b687e347799ec207b810d6c9aff424d44fa2",
+        "segment_growth_bridge.sql": "41118daf13bbfbb2145b90726520c509768b2e788ad7edca6d86d01227562bc1",
+        "share_basis.sql": "b295be33d95e9d1de0339484e9754586595fb497094e3f6650968f0d08fb5cfe"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c09-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "1a4b0509c19a46dee155fce3680e00bbc66e7f947db8326bf13b6d20fc7ff47c",
+      "task_sha256": "1c1376cb294aa45326f97cef9a1e9563fb3c87a426233deeed1380e6ec0e9b1a",
+      "raw_answer_sha256": "0d45e57183d82c5522ede3b8445fb09ba5e0be5da0653d9025d15a7c7e723050",
+      "normalized_answer_sha256": "0d45e57183d82c5522ede3b8445fb09ba5e0be5da0653d9025d15a7c7e723050",
+      "sql_file_sha256": {
+        "annual_exclusion_components.sql": "4d7cb4109e48192547d3d8917d61e05a11952dabb5ba06dacce14d4aba10045a",
+        "bank_basis_bridge.sql": "77d74009057d9fad82d0f9e2bda41540d48007ee55692174ad55798f24d2b271",
+        "significant_item_bridge.sql": "be6e82dded603b7cb74e71f9f8f99536053c5763b85998dea3caa07a5053f18c"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    },
+    {
+      "attempt_id": "workflow-contract-c10-reference-1",
+      "variant": "reference",
+      "receipt_sha256": "a661401b2dca411a7c458524d3cff8f1cded8b5cfc0a91491cbbd2a2d3b30385",
+      "task_sha256": "1622706a1004c879cbe4d78c64266f15ceaccad8327872a359e49f27f2e2a931",
+      "raw_answer_sha256": "8441e4a99a489ae9a622ed12781db07f3d83d19c823825f201efa87d956af539",
+      "normalized_answer_sha256": "8441e4a99a489ae9a622ed12781db07f3d83d19c823825f201efa87d956af539",
+      "sql_file_sha256": {
+        "annual_currency_margin.sql": "56040be2b7de5f3d0a56b8eb94ceb4f4b0ae3aaaae7241997c0cc715f29e2d0e",
+        "forecast_bounds.sql": "d68699fea40c5ea0c0c2e0019a4f3d41736ab8c7c49349c770df1fa5de6b7e34",
+        "regional_currency.sql": "656a9e8721b1c1347c0ecbaed48a9221d34c2b49031158f0edb367ea4d8381d1"
+      },
+      "checks": {
+        "financial_answer": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      }
+    }
+  ],
+  "continuity": [
+    {
+      "task": "a01",
+      "previous_task_sha256": "1879b444c70205673a0b175dac69890de9eb04a7f7bd1f4504255d4c5af2d7ea",
+      "current_task_sha256": "d753539e7e014d7cb62a00e96c0bb985f0762dd6840e122e117b94a353afcd3b",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "d9128f11f3aa68045d9526a8ad8fe4367d29c2aac2518cf390d1c2f4b5f8b7b4",
+        "environment/evidence.json": "5c5c3c5f1048b4cca19ba14e2c032aa76887da880c91669d400200128566a09c",
+        "environment/sources.md": "352a270ef60734e0bfb82916abeece1817e1cdc5a8f0546cbde4963818cee51b"
+      },
+      "unchanged_financial_contract_sha256": "b169e5209524c91726c1074c795f59c9f194e796acc90735dc24854148b2a2e1"
+    },
+    {
+      "task": "b01",
+      "previous_task_sha256": "67a188575d97f06c1f159bf4ef8c3ad863869fecbb098ad0d7c4814e8d92d7f2",
+      "current_task_sha256": "6cc2eccaf4bef35ae24dfee91197575319e6d89343d7c4a583955dcc38c2f806",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "3945352157d91e372f9372acd70423465e0e9957ee37f96962490f99c0ec783f",
+        "environment/evidence.json": "cfeb10ece9dbd85b95142cef69879b3e911469c9da8d7655954ce75111b42b67",
+        "environment/sources.md": "c2e9c814acb52a05115c8990eee1efc867c0e6c350ea8054564ace39a5cc4638"
+      },
+      "unchanged_financial_contract_sha256": "770962cfdb905757dd0891b7d5a589e8426e71425095a4e25c7248599f0d5c51"
+    },
+    {
+      "task": "c01",
+      "previous_task_sha256": "ae8213b9c79bc0df5f29c069f5dcff656be94bb612360a455070fd05776dbef7",
+      "current_task_sha256": "becd34e0d049da8c9929287023ebe6ad4cb9d8edf5512f3814af294b5e05eea0",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "02f1f9b02e3ca94b31d255afc94659d027e115e1d57fd68f3463c93ba8107db6",
+        "environment/evidence.json": "a238a441d37a41192a3f9cd6e623b9008e4c89f0d61916b42de309c4d13bed19",
+        "environment/sources.md": "420523d2bab652e4bd271ae1291f88c6ca82071745c3160153cb8d749e49619b"
+      },
+      "unchanged_financial_contract_sha256": "6d1a7b8b67c56c7fa4c803fc476a9c48978732ec3fc9fc96b49f807941a475a4"
+    },
+    {
+      "task": "a02",
+      "previous_task_sha256": "011b734316e1b8063f3f35b11427946e1e97222b24676c49d9fe6f8df2eba26f",
+      "current_task_sha256": "8350bf388552e86605cbe0c36faf1a6e7eee0a29f6aa8ea5375267631d79f497",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "babf50b460d8a1aee4fc79a95e9f2b152f5e8ee89f9ca426d118a01c1cd20fa0",
+        "environment/evidence.json": "6e46d2488326a51cd69462c7c1ff028ae88fd044d477ed975ab30aa95c0c330b",
+        "environment/sources.md": "7012ab578e78f79f48e5e5006030c00af3aa918fc8a386ee2a9fb0c0d240b309"
+      },
+      "unchanged_financial_contract_sha256": "6cffc709264fe0e1e5055724fd2cc1b28fede3d93397c60f97487bb1a6368626"
+    },
+    {
+      "task": "b02",
+      "previous_task_sha256": "3af86e120fc92989e5618e4db11a623953ab0bf8af192e6b1aa6228dacdcc7d3",
+      "current_task_sha256": "8ae5e76878c1f3a076dfc111ad3a18cc3d025bcd040965753037ff2ac9282d54",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "606a8befbd2009e44ef4e8eba62f2ffb9b21f2e8bafb6c0b85e3eab3aca85638",
+        "environment/evidence.json": "e2c933252b0a41278c7281e66e52b19f4b84b9f1e492bf7f0d9144c30210f17c",
+        "environment/sources.md": "548dec14af4847453ba6af010155a06c09e05ee9b39cb27900cd00b7aac6223b"
+      },
+      "unchanged_financial_contract_sha256": "c1132848e7ef409da443a2072009875892b11acd0806759c46843163933489f7"
+    },
+    {
+      "task": "c02",
+      "previous_task_sha256": "d5f808e513894056c3e9bd79af5a5522ce6c815d1650889ac05f6c5e6db61176",
+      "current_task_sha256": "f4226938daa4f82654db9df0c08d43e90ec26ad5731fe85ad69d8ed513b9c3c0",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "3455aeec4a701b86604efc4a4c5f6b8ef743b3532dcb36af8cba9a7cf210739a",
+        "environment/evidence.json": "fb939a87c5be57a1aa0fc261c2601d96e6bab0d28a8a15662fb77dfdbc315497",
+        "environment/sources.md": "38bc3923dedfdda0532fcd7b39372efc681af99a0cd126f33514ba7d1df297ed"
+      },
+      "unchanged_financial_contract_sha256": "8e346564113d3e3a419b72bbea2079ef0f414ae2f142418eada184c1001c3b09"
+    },
+    {
+      "task": "a03",
+      "previous_task_sha256": "f2189c9b09adb2699ff79d30c4c6f1f91ed93e115ea202731d0f31be0916b876",
+      "current_task_sha256": "7edb01623410f1cf6efba20e66dd56274da064784716b8472cd75d951cd1e37b",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "fca8831de55c6f061a3b94855322591d91a804f9aa972565985c60f9cdad79f0",
+        "environment/evidence.json": "f3b265f024b349d24e82933af9884e0f3767b22684124be0ae96ba728310c4d5",
+        "environment/sources.md": "016afb0ced39422494c92b1d74e06165f1a64dabbfe1b101023852275406a2bb"
+      },
+      "unchanged_financial_contract_sha256": "297887381ac5d02b5f94230aa79f124acae38138e376a2eec07680b186682ad5"
+    },
+    {
+      "task": "b03",
+      "previous_task_sha256": "d5c0ebcdc432f08c4b2654f685dc8f0377ea141082a29aefc39608dd8365150d",
+      "current_task_sha256": "98a7fe600c5e815d0f8a08ab52f29ac632e536c0278931b0a2f83ee6c9c722ae",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "e3392d3346f62ea969e353de5596439d44352e311b4f1a1a0d2d1c2058b2d390",
+        "environment/evidence.json": "94f8fa0a5d96d4f05f95d0cd940cc602a97cca653c3a81b2e1560096bd8d932b",
+        "environment/sources.md": "e1dbbb161e0ebfc2446b70acb27bd047c9a29d02722667e85be5529e9ec61c3a"
+      },
+      "unchanged_financial_contract_sha256": "3339b48be274f1dd9e1b6cb9351678e864e65f5647812fd8edf68c2931a33887"
+    },
+    {
+      "task": "b05",
+      "previous_task_sha256": "18739b5dd2353afac8f63d55848711511086ee5304e91ebf3812e756dc91bd2f",
+      "current_task_sha256": "a7f15969e9d95d4ac05238698fc515eca96ddb7e65f3785b1c3fb52b4bed5315",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "6826f7f8a4cd6b28d8cc8bf0f30d34c824004089856fff5d55647a626c54c503",
+        "environment/evidence.json": "dd2a1e145f23adf9fb6df073dfe9977829c2e97c1c5f8774ba7514ee66c20d53",
+        "environment/sources.md": "0bf62bfb030a49d28b546a095d2c196a2c483a081fba392e7cf31b98732c4b9f"
+      },
+      "unchanged_financial_contract_sha256": "60dfc9f05478d800d2345c4d7708b753ad4b17eb31501fff18ae41e9c00390ef"
+    },
+    {
+      "task": "b04",
+      "previous_task_sha256": "820b65eb59cade77f4009c4ec64c5aad001ce56adaf5f340327d8e6d4cfea838",
+      "current_task_sha256": "064e20f9b8238993afce1d53383ad525516d1cf584f4835072e8772388eaf825",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "fdb472a6933158e623f745791499c36286341d7acadc48ffc33fc092e9a83bee",
+        "environment/evidence.json": "665a254bbbc24640183cff4382c0327dbc629f15b50640a2d778bca95f1fec9c",
+        "environment/sources.md": "d79f3a0aa48ee96de1e7bb92ca1d1d9fe0b46057995dd79538cd42871750cda5"
+      },
+      "unchanged_financial_contract_sha256": "82c662cf498345060be19babb82f676ab97466cd06d0a9e0ed60f09b49bf73f3"
+    },
+    {
+      "task": "c03",
+      "previous_task_sha256": "268ef3c07f708bd279e42598e082c1e7bacf72faf7d6ed3f0b9135265c6399ec",
+      "current_task_sha256": "3ac5aa11193c38dee65a852005538e2340663dfd8447357c1534d3b37b1f8c0e",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "a721641b601a692021eefcbdf45d6b401340fcffb2e5e2f04bde6c282dcb9621",
+        "environment/evidence.json": "1fdbaad9a032c35d4b81b87baf5dc2670a0d091e11fb561cfbcaa2e483888dfc",
+        "environment/sources.md": "184fa07bdc8c0ceb0ef8fe005c6019488f9f3813d946c773d1549ecd04800225"
+      },
+      "unchanged_financial_contract_sha256": "767515aa203281e03e191efe5860a49df4268af8070f39374c7c6f375642988d"
+    },
+    {
+      "task": "c04",
+      "previous_task_sha256": "82543de82070e81097ff92e9490ea28e4e3bbfe7a2c8faa3edff054457f063ad",
+      "current_task_sha256": "d4b132ffe2dbc74995c5162c2cf59eae4049357ce9c7b2575538c9a2eb7dd09f",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "5bbeec26af7cf6f2bcd4a44d7831f873e35aa3b49814a28baff3c7bec2457642",
+        "environment/evidence.json": "7d1bba05352abad1fc83fc51c78f5a5fd47e1e6c7b0a1494503f1a7f4a128936",
+        "environment/sources.md": "053274b38157b774d7f7a82577cd479ab4fc334f7d31eae076bfe9d638da096f"
+      },
+      "unchanged_financial_contract_sha256": "62691dcf348d483361aadde5e52582d2dae418194da1d46f00f8a0e355f127b2"
+    },
+    {
+      "task": "a04",
+      "previous_task_sha256": "9968fde5377dbeb80a449e93e55248f69d155a0f80c963a84e1dd2746c0c7152",
+      "current_task_sha256": "45e0a6a38c285a09e3f9e192952a59828194350d2c4af3a0e4226fb917d571dc",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "fdebe06fab6f635f895c86ba9d59565ce00644ed4692f6b6dc6d3fdd9504ebe6",
+        "environment/evidence.json": "77db57cf8be37cbe180819753fa45a0b7b2e5e00fc285fe6b6bc6b877b4598e2",
+        "environment/sources.md": "e8245cacee7c7a298ca68243ef0ced333de2e1dfcff019ce67091772065611d2"
+      },
+      "unchanged_financial_contract_sha256": "1d6d57bb9956d22f2f52ee6626dbc02d067e9138a3bb723d1526644dc5bfc499"
+    },
+    {
+      "task": "a05",
+      "previous_task_sha256": "4117af872759ee2fc410fd3b95a28e4047c50c88fd8d0a54367e0e33c2c116f7",
+      "current_task_sha256": "20c3c966163ab660f6ef170273615aff4c3ee820ebbc65a1899f034b459ea7f8",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "da06ec14ed1498630df62eabf0d6ee434399b028320ffb3e65499439116f2136",
+        "environment/evidence.json": "4c30ad7b08ba397d9e7060c4f18a2fbe7f323201c35b76c171be7f0535e30dea",
+        "environment/sources.md": "a40210b9ad8f7203b188b0240a5239c2b4f5dd49c74b0d9de45a75699378c67f"
+      },
+      "unchanged_financial_contract_sha256": "087ec718bac0d5afbc757f9893de31f465a0ce4eaf8e2b0b59fe6a3c07934b20"
+    },
+    {
+      "task": "a06",
+      "previous_task_sha256": "8fa22b73495038d9ad1b1672802c722e67c37df72f4b9178d426696e56e20f32",
+      "current_task_sha256": "a1918d27bc164204cd0bcb976daceb509a1e45bf6bb9dc3eb8278348352a3bcf",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "53c406097a8a7804b81d8d5d9d047bed89d4f7a86bb6b17b4ce847ddbf6db81d",
+        "environment/evidence.json": "086648aa1f8e4f8ab6a8b503fe6c5c21592ae067fe4bdc1b4a746e88da7c3340",
+        "environment/sources.md": "872894d48600b9d962c2b6be30acbf70b71ac1d20aa634708b45ff940f930df8"
+      },
+      "unchanged_financial_contract_sha256": "c6ae3d972b0a41c1d54f194697747d99bf4e9ee3e22e5919713752cf57b7bf2f"
+    },
+    {
+      "task": "b06",
+      "previous_task_sha256": "2e688163aa3ab20811d38111335a73c554aeb812cb582c829cb6a77fe6d6bcef",
+      "current_task_sha256": "094e8436886d184acb5417ca20b4e4d41d7382b97572e1824cdae9b56e33080e",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "affde08bd0e23e469feac5ba7696c8d02bc956720ad38ae9d032205f6c9ae58b",
+        "environment/evidence.json": "2877056d2f30b3cbd5bd2a37074fa8b0fc71542434722964c7e75623b06c137b",
+        "environment/sources.md": "6b8798017553661ed91e32a0e0d81c47448f3a59fc910613c783227951fac769"
+      },
+      "unchanged_financial_contract_sha256": "70ce5aa962551b4b1183c36e4b15d534e6d5fb462360bc232f76afcb2e778607"
+    },
+    {
+      "task": "b07",
+      "previous_task_sha256": "1e69e7a145ffbb53a134ec6c7eca0adb414e8a7a7d03c370ad404797b6855089",
+      "current_task_sha256": "8f6e02f418d3c765feef97d55a88ff622bef9b80e714adc192025c586f706b8f",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "f73d730049589e735f5ee212f6474aed797214b7441a65f5d2f4cd7fc77cd570",
+        "environment/evidence.json": "4f12ab3b93f161aa3e8761f0237cc75f4bc05df2b984613314798d473801dde4",
+        "environment/sources.md": "b82d90f496969015fa11bb8a3a1903af5f1039462860c5b202ab10f2404e1107"
+      },
+      "unchanged_financial_contract_sha256": "eb5326d8e829a82d2ca941dd948279d8f02400ff9a973b9be08da4822ba0f72c"
+    },
+    {
+      "task": "b08",
+      "previous_task_sha256": "f7733a2ae45a4ec0378f4aa7b1af5f11fce1d10f5d6a6d7040278f71d5ae5382",
+      "current_task_sha256": "4b582390249ed55083c5f9ef160f8840175faff2d1ffb24494da18243d6bafb1",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "498152c21a162d186b7034391aa4bbb39d18a89a7b463351cee3f7b1f58278c9",
+        "environment/evidence.json": "47f871bbd519b06b4afba058588cdc8e5f6dc8e07217ec8391cbf66d31dd20d4",
+        "environment/sources.md": "3b98dd6070149f4f1069b09b97f66f78dd6db99a1adb352908640cf3900bd680"
+      },
+      "unchanged_financial_contract_sha256": "59485e114c4d9486d355c2588e0a8de54fa91ab90c928c042b703754c13fdcb9"
+    },
+    {
+      "task": "c05",
+      "previous_task_sha256": "93b1fec2bf3b3dba6e23eb5916afded7f180fc979196b4db7d6c39ab8bcea22a",
+      "current_task_sha256": "fe0991fda965182496d733ccb33ba44fc95ea48c00d99325d2a93ce589adef4a",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "ddc12c71a24036850a874fb745a10cd682593d37756524fa09f1e9af6548d0f9",
+        "environment/evidence.json": "68507ff701ea690d272b84269e4704a8c8535a431ddc164776e70efb7295c995",
+        "environment/sources.md": "2235e64ecce336fa84e59ad2b5d32f0a6c31854001c135e3bde48a8741e247e4"
+      },
+      "unchanged_financial_contract_sha256": "f2ccdadd3befccd3cf5ced21e02da90907de200dd685d2b5d66db08a7ce2d5d4"
+    },
+    {
+      "task": "c06",
+      "previous_task_sha256": "436d91c10db69839e1c65926d329f7533e79736f91a57f5d8651653ba935af33",
+      "current_task_sha256": "f3b6550e744bd8a511301c06dc51e199ab3f8f722af2358bd3c39ec182b10a92",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "2290ade5a37a50fd8fc142a9f7d1ed965106873ef27d903437351a2342432a8b",
+        "environment/evidence.json": "81e26d9da535d3a03f0d95a212f5c746c2186fd7e44266dda5883264ac4cf370",
+        "environment/sources.md": "557aaf177841f354b2bacd8ae9af015c62a04cb1d0480cca86cf3d79c77763e1"
+      },
+      "unchanged_financial_contract_sha256": "e24986f30ba1bc73626acd6f1c45a4733ff0dee7abc9521aea4bb6f73b6bc090"
+    },
+    {
+      "task": "c07",
+      "previous_task_sha256": "bf50d3ebe77f29388eeda2e74cde1f10d84963b2fa89f970a558c20f707e9e5f",
+      "current_task_sha256": "fb604b52ca0621ee0043df8a0e5027753807fec6ba308b5d9d0c5b48e885ec4d",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "e623dc537e39a69879b6edbbdd369cd1d41ec4f0fe6161d671a082b53fa3b946",
+        "environment/evidence.json": "7547dfb3335a6be5e037286fc8dce8b4144f94a648dbf8a20921a74291f9faea",
+        "environment/sources.md": "136074ecc2e98c73bcf713eaba1cf45752df09ffa591f232f56f3f30dbe7e65d"
+      },
+      "unchanged_financial_contract_sha256": "65e59d7d709e7491af0769cbe16ff2f8c011483f446fe9b0efb073f9d6299e36"
+    },
+    {
+      "task": "a07",
+      "previous_task_sha256": "c29437ed69ef727fb99f714fe066cb4f863459623e0de7ffc88e9277fa259a57",
+      "current_task_sha256": "369c21b9a064f55bbcbdb0fd27cdfa3a253f775f02598d2c0f40412cf98a7370",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "7f4795d33085d3e02130fc1771d1e3bd0564fa9c47b1db1eba4fcb55ba25a8d8",
+        "environment/evidence.json": "364c50a373defff566124aac5fd2d302ed90011f3f220adb178bfb178d45eeb4",
+        "environment/sources.md": "439e71595d2169be63b8cbf119a2b8cca79b67469f66c8a84ba33e8c9cafef5a"
+      },
+      "unchanged_financial_contract_sha256": "25e542bf00a710495045e6d77f6cc089140709dafd18e2111307a6160cc2caf4"
+    },
+    {
+      "task": "a08",
+      "previous_task_sha256": "82dcc481753e17bdfe7637a507adfb33ef2755410e7dfcf38e58565a75f887c0",
+      "current_task_sha256": "f8b8de1f7c4e8a3b46e7a83fa4c78d8b1dd544d3a5b113c9aded1921b231f635",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "27ff56d9fdb6ac8f8b5f590dee2988bcecb904e15e876b0786552eb115ceaa93",
+        "environment/evidence.json": "91ad8613c223e238c54cc4fe4fb6988616ad0ad3a1a31b37c1aaa8fa08e71642",
+        "environment/sources.md": "00710fd32dc1d9d44ceb8f3bcf592365481cefd99dff7608aa0e6b7b794e1e49"
+      },
+      "unchanged_financial_contract_sha256": "da815a51312ac580d3e28c8e758b2bd0cee95964ba97a9bdbb6c5235813bce18"
+    },
+    {
+      "task": "a09",
+      "previous_task_sha256": "fc3522d4cb27f5b17e86f43f1cc3c4262caa6a241b6ffb6e61c87e368ec5d6be",
+      "current_task_sha256": "58303897ed2068e2686cd151693efa68100b3378dfe3489a2e89e7125deb0de1",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "c1ae8e23a9ee084597be555bae5e50a79d377cd686105d2b3eb2866080b0c6f3",
+        "environment/evidence.json": "8ded8997ddbec7705c5d992731a294e7ad0e84c10a91b9110933204653020641",
+        "environment/sources.md": "b4430008f26f7e74a99e83cb4dd244019fff8e88d279b812f2ef343b224e33e2"
+      },
+      "unchanged_financial_contract_sha256": "5a5c9875aa0c74c93a92266ffdf0062c7fe783f8d154532ef8b154fe33f9bea9"
+    },
+    {
+      "task": "a10",
+      "previous_task_sha256": "25b531e0814e066a433cb3f5440b6164dc1350188806fa19a9695bbe32f2c2e0",
+      "current_task_sha256": "360c8fcb3fee8efdf379edb77c916ffde8c95d6418950777c5c321a77e6cc93f",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "5fb2204062c1b315b7c3d3ffe4cfa32617008d70c1ac7d1677516e084813c26b",
+        "environment/evidence.json": "799dbe69bb50e98b95b96a2e050e998d46765a55e986b667d6aef378b9683ed9",
+        "environment/sources.md": "84bba12bd9586c0af1363ef727a5765023d9ca59608f78bccb21e2052df440e8"
+      },
+      "unchanged_financial_contract_sha256": "658c97d19143f8ceabdbf14a2bff57be8315dd11ccd98f67062ff358b2129a67"
+    },
+    {
+      "task": "b09",
+      "previous_task_sha256": "a04b5fdb7dc0f2dd65b65e4a17567ef84c59c0d2961221b320b41e63bb0e29c7",
+      "current_task_sha256": "b24b7fd862078322053b7da9bfb9934f9512bf0da5e427a5e7f0576db01d5cf7",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "73a37c375e474b075c3ccfa28cd5d52568a8fe969cfb1159d5915ce3b2c04cbc",
+        "environment/evidence.json": "c4fbbd64acf98b9fcf586308ebb865258ec19530ee26cef745bf796e0dd1cb19",
+        "environment/sources.md": "94d5ab9c2933e77576e0e23a8738f198c6db0c4c23927ac1dafd19ab97eee9e7"
+      },
+      "unchanged_financial_contract_sha256": "80dc09f7d1a23dc779419d2a5f1e943bd0b7790a69370c788ba9c0fc69027cb0"
+    },
+    {
+      "task": "b10",
+      "previous_task_sha256": "f50f23048d168bfa260e34689bac2d83ec3df23834ab1585c578d0579783bf21",
+      "current_task_sha256": "4dfef41a315ff4e4f5763b67cae557ad463fc30b52c916549cfa221b1575a057",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "4b6c92163b4239eb72775ca038a299bd608b5bdfd9f5784c2e1e84a4d9d88861",
+        "environment/evidence.json": "e4e03a97a756e1f20bef486c6f6f9897f9efaabff797ad87e96b3571443adff9",
+        "environment/sources.md": "c3a5c022e1f840a799dc530d4921f8c824b4f170768d8fb74bb3dd806a7933d4"
+      },
+      "unchanged_financial_contract_sha256": "0c41cf68df25b1fcdc4966c016fe3321f1ed268ec8054d797412df390ba65426"
+    },
+    {
+      "task": "c08",
+      "previous_task_sha256": "d1ce4c3f0eb0ec4ea442240625a0e61c159096b217d994bfc4fce9f21b850b77",
+      "current_task_sha256": "3e9d53f07bb154caf6d21c1692bbaf32d426e29ffdb01cd26b05aab2cc616c27",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "7bfdf349e79215983b35bfea479064519ec9390b61074f75ad0775b1c76ea6d8",
+        "environment/evidence.json": "a645ffc2e36c64b040ea9e3188970d6a53069e026573d3508dc7046040459c43",
+        "environment/sources.md": "396af1088625c096bd1ccc6cda6902730765b6f8c81316d86a98585c659b8d32"
+      },
+      "unchanged_financial_contract_sha256": "1733a36e10d76b31548036bf9fb137ef20ba50ca6a527b796730e2059af38736"
+    },
+    {
+      "task": "c09",
+      "previous_task_sha256": "478650c92b1cf0c6ec7d5c6c692fadc4e116aca8b00edea0cce8541a2b2234ad",
+      "current_task_sha256": "1c1376cb294aa45326f97cef9a1e9563fb3c87a426233deeed1380e6ec0e9b1a",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "d17b47e547920b5b49bc56fbb1fd36d0b1745123836ea706d1a1b34c15baeded",
+        "environment/evidence.json": "809355b3db329c0748785cb0e4630d58ef18895c2e03448fe0674d79279c5642",
+        "environment/sources.md": "9f648798621a10d368348f0a3ad113e2c7b4b4ce26e90610a36df2e74b00863a"
+      },
+      "unchanged_financial_contract_sha256": "fb070590a3df73011723dc640bcdacbff7c9b2d3c298feaf12a5651fe96b1904"
+    },
+    {
+      "task": "c10",
+      "previous_task_sha256": "919529fd29cb7324edce64e9c5e07d5b75276216cf11d449c8ee7939acb38213",
+      "current_task_sha256": "1622706a1004c879cbe4d78c64266f15ceaccad8327872a359e49f27f2e2a931",
+      "unchanged_inputs_sha256": {
+        "environment/data.sqlite": "c36d7dd8922d4e745093dd5fa74140cca28ebafb4bfe8cda72e0048c16d3ebb0",
+        "environment/evidence.json": "fd6fc97efd86db847bf2211e801752ce3a6724db0b16ccef2a58d4c1df2fafa0",
+        "environment/sources.md": "54f734aa6404d35fb64ad60589936f369008251b964f8419480673ef218d2019"
+      },
+      "unchanged_financial_contract_sha256": "f28a5d9cbe95f4999b62b60c8155127e12a39d7ee129a9f72a1547dc5c185290"
+    }
+  ],
+  "reused_quality_evidence": {
+    "path": "reports/local/workflow-suite-validation.json",
+    "sha256": "e5ab0f61caedf93b87d0891e575d5807f0de347ba4acdf0d6485808b0ac62e1d",
+    "submissions": 180,
+    "scope": "Unchanged source observations, financial rules, SQL references, counterfactuals and scorer. Original receipts retain prior task and catalog identities. New public contract receives fresh native references and prototype alternatives/rejections."
+  }
+}

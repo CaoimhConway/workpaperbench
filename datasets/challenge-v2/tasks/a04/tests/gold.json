@@ -1,0 +1,132 @@
+{
+  "answers": {
+    "adjusted_net_income": {
+      "evidence": [
+        [
+          "a04:s02",
+          "a04:s03",
+          "a04:s04"
+        ],
+        [
+          "a04:s03",
+          "a04:s04"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.0001,
+      "unit": "usd_million",
+      "value": 4207.0
+    },
+    "adjusted_net_margin": {
+      "evidence": [
+        [
+          "a04:s02",
+          "a04:s03",
+          "a04:s04"
+        ],
+        [
+          "a04:s03",
+          "a04:s04"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.005,
+      "unit": "percent",
+      "value": 29.923892168717547
+    },
+    "eps_gap": {
+      "evidence": [
+        [
+          "a04:s01",
+          "a04:s04"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.0001,
+      "unit": "usd_per_share",
+      "value": -0.01
+    },
+    "guidance_upper": {
+      "evidence": [
+        [
+          "a04:s01"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.0001,
+      "unit": "usd_per_share",
+      "value": 1.48
+    },
+    "net_income_adjustment": {
+      "evidence": [
+        [
+          "a04:s03",
+          "a04:s04"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.0001,
+      "unit": "usd_million",
+      "value": 1056.0
+    }
+  },
+  "conclusion": {
+    "evidence": [
+      [
+        "a04:s01",
+        "a04:s04"
+      ]
+    ],
+    "verdict": "contradicted"
+  },
+  "context_evidence_allowed": [
+    "a04:s06"
+  ],
+  "controls": [
+    {
+      "database": "control-1.sqlite",
+      "expected": {
+        "adjusted_net_income": 8414.0,
+        "adjusted_net_margin": 29.923892168717547,
+        "eps_gap": -0.01,
+        "guidance_upper": 1.48,
+        "net_income_adjustment": 2112.0
+      },
+      "name": "compatible_monetary_scale"
+    },
+    {
+      "database": "control-2.sqlite",
+      "expected": {
+        "adjusted_net_income": 4107.0,
+        "adjusted_net_margin": 29.21260402589089,
+        "eps_gap": -0.01,
+        "guidance_upper": 1.48,
+        "net_income_adjustment": 956.0
+      },
+      "name": "tax_adjustment_gap"
+    },
+    {
+      "database": "control-3.sqlite",
+      "expected": {
+        "adjusted_net_income": 4207.0,
+        "adjusted_net_margin": 29.923892168717547,
+        "eps_gap": -0.06,
+        "guidance_upper": 1.53,
+        "net_income_adjustment": 1056.0
+      },
+      "name": "guidance_compensation_change"
+    }
+  ],
+  "hashes": {
+    "control-1.sqlite": "5065a44775e944539109da7a32947b85c5ecd7362046a1c25ba530af5b9188be",
+    "control-2.sqlite": "d03ba97b73d51638842f10f24a385dd765f6e60ff65b9e62736fa4bfc8c34777",
+    "control-3.sqlite": "5514b2d3db963a53e465beccefc7f048255f991dc1536c7a9225c0b69ac74106",
+    "data.sqlite": "3233f2c7c5611f09fd7622043b4065a5808313f075b0f64ce2d65ab15d2f23db",
+    "evidence.json": "7247ed865896c28540e538fe3b48d48c1e58808bc04b93ac4c43855f595b1900",
+    "schema.json": "604a67a9b071041d467a8b70bc3eadc96e8f6fddc75d9356537c537a7d6f1627",
+    "sources.md": "176400cbc0133ab4f0e9c678dd4d9212d386bd5c7a6add84f3f2df0b023dd13b",
+    "verify.py": "1eadd0271b6b421bee438078d895b00b7de1f11d6b6b4197388cf51d25c81dae"
+  },
+  "scorer_version": "challenge-1.1.3",
+  "task_id": "challenge-v2-a04"
+}

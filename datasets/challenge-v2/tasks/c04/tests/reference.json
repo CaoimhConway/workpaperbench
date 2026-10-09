@@ -1,0 +1,64 @@
+{
+  "answers": [
+    {
+      "evidence": [
+        "c04:s01"
+      ],
+      "id": "service_revenue_growth_pct",
+      "reason_code": null,
+      "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/(SELECT amount FROM revenues WHERE period_end='2023-09-30' AND months=12 AND category='Service revenue')-1.0)",
+      "status": "answered",
+      "unit": "percent",
+      "value": 8.687440982058545
+    },
+    {
+      "evidence": [
+        "c04:s02",
+        "c04:s04"
+      ],
+      "id": "lagged_nominal_payment_volume_growth_pct",
+      "reason_code": null,
+      "sql": "SELECT 100.0*((SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')/(SELECT amount FROM activity_metrics WHERE period_end='2023-06-30' AND months=12 AND metric='Nominal payments volume')-1.0)",
+      "status": "answered",
+      "unit": "percent",
+      "value": 7.421196326631919
+    },
+    {
+      "evidence": [
+        "c04:s01",
+        "c04:s02",
+        "c04:s04"
+      ],
+      "id": "service_growth_minus_volume_growth_pp",
+      "reason_code": null,
+      "sql": "SELECT 100.0*((SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/(SELECT amount FROM revenues WHERE period_end='2023-09-30' AND months=12 AND category='Service revenue')-1.0)-100.0*((SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')/(SELECT amount FROM activity_metrics WHERE period_end='2023-06-30' AND months=12 AND metric='Nominal payments volume')-1.0)",
+      "status": "answered",
+      "unit": "percentage_points",
+      "value": 1.2662446554266271
+    },
+    {
+      "evidence": [
+        "c04:s01",
+        "c04:s02",
+        "c04:s04"
+      ],
+      "id": "service_revenue_to_lagged_volume_proxy_2024_pct",
+      "reason_code": null,
+      "sql": "SELECT 100.0*(SELECT amount FROM revenues WHERE period_end='2024-09-30' AND months=12 AND category='Service revenue')/1000.0/(SELECT amount FROM activity_metrics WHERE period_end='2024-06-30' AND months=12 AND metric='Nominal payments volume')",
+      "status": "answered",
+      "unit": "percent",
+      "value": 0.12410659272951324
+    }
+  ],
+  "conclusion": {
+    "evidence": [
+      "c04:s01",
+      "c04:s02",
+      "c04:s04",
+      "c04:s05"
+    ],
+    "reason_code": null,
+    "verdict": "not_established"
+  },
+  "task_id": "challenge-v2-c04"
+}

@@ -1,0 +1,18 @@
+{
+  "rationale": "Quarterly transactions are often paired with a trailing-year account metric. Fixing that period mismatch must preserve the valid quarter calculations and margin reconciliation. The revenue bridge and interest exclusion prevent payment value, pricing and financial margin from being treated as interchangeable.",
+  "source_group": "paypal-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "authored synthetic work-product defects",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "e6d5b4c449f511a4b2ac8cb5bd7242f402c73128fa1ddbab81314bb77ae36c42",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "18739b5dd2353afac8f63d55848711511086ee5304e91ebf3812e756dc91bd2f",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  }
+}

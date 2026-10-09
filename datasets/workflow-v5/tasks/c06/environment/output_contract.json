@@ -1,0 +1,161 @@
+{
+  "tables": {
+    "geographic_currency": {
+      "columns": {
+        "comparison": {
+          "type": "text",
+          "unit": "label"
+        },
+        "region": {
+          "type": "text",
+          "unit": "label"
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fx_effect_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "reported_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "cc_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "comparison",
+        "region"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "consolidated_currency_bridge": {
+      "columns": {
+        "comparison": {
+          "type": "text",
+          "unit": "label"
+        },
+        "prior_reported_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_reported_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fx_effect_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "hedging_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "reported_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "cc_disclosure_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "comparison"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "revenue_growth_components": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_reported_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "prior_hedging_excluded_from_cc_growth": "The constant-currency growth denominator excludes prior-period hedging.",
+    "cloud_exceeds_half_reported_growth": "Google Cloud contributes more than half the reported Q2 year-over-year revenue increase.",
+    "exact_ai_product_effect_identified": "These revenue and currency tables separately identify the exact revenue-growth effect of AI products."
+  },
+  "definitions": {
+    "geographic_currency": "Two declared comparison contexts and four regions. CC current is current less that comparison FX effect.",
+    "consolidated_currency_bridge": "CC growth uses prior unhedged regional revenue. Reported growth decomposes into CC change, translation FX and the change in consolidated hedging.",
+    "revenue_growth_components": "Seven leaf components, including hedging. Contributions divide by total reported Q2FY2025 less Q2FY2024 revenue."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient facts and relevant period, unit, definition or scope context for each output. Additional unrelated sections fail evidence. Equivalent reviewed source paths are accepted, without a shortest-citation requirement.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested."
+}

@@ -1,0 +1,43 @@
+{
+  "validation_version": "workflow-suite-local-1",
+  "manifest_id": "workflow-v2-canonical-37cd5f906bb2",
+  "manifest_file_sha256": "d326fc88b18aa1f78abed57dd326b1efdede660faff07f54dcd616f4b8cc4fec",
+  "scorer_version": "workflow-1.0.0",
+  "scorer_sha256": "caf9b58c3e0f1c6ae34cc59546de95b0e0055f872c575db61796ad7ddd1c61aa",
+  "cases": 30,
+  "development": 6,
+  "evaluation": 24,
+  "quality_submissions": 180,
+  "reference_and_valid_alternative_passes": 60,
+  "unchanged_valid_work_product_passes": 1,
+  "unchanged_damaged_work_product_expected_failures": 29,
+  "constant_output_matches_original_but_fails_controls": 30,
+  "blank_delivery_failures_with_semantic_checks_unassessed": 30,
+  "unconditional_edit_expected_financial_failures": 30,
+  "all_isolation_flags_true": true,
+  "inference": false,
+  "evaluation_candidate_model_exposure": 0,
+  "human_review": "pending",
+  "source_reports": [
+    {
+      "report": "reports/local/workflow-expanded-validation.json",
+      "report_sha256": "de66ecd5b2e1c706713b2bd71bf31cbc28a3283fcabbfa7c89fb02189a812083",
+      "original_manifest_id": "workflow-v2-canonical-7ee6c27df887",
+      "task_and_scorer_bytes_match_final_catalog": true
+    },
+    {
+      "report": "reports/local/workflow-added-validation.json",
+      "report_sha256": "afe5a005d3f4717a056c8f612bc886fe71977f234fe0f36888d8cea633ad6daf",
+      "original_manifest_id": "workflow-v2-canonical-051118d0e930",
+      "task_and_scorer_bytes_match_final_catalog": true
+    },
+    {
+      "report": "reports/local/workflow-final-validation.json",
+      "report_sha256": "939ab142c1947ac72f6da9bb72e93471647eac452f9e909a057b2c8fc5346bcf",
+      "original_manifest_id": "workflow-v2-canonical-37cd5f906bb2",
+      "task_and_scorer_bytes_match_final_catalog": true
+    }
+  ],
+  "binding_method": "Earlier native receipts retain their original catalog identities. Every reported task and embedded scorer hash is identical to this final catalog. Authoring-code catalog changes do not relabel executed native trials.",
+  "control_scope": "Three reviewed task-local counterfactuals per case, not universal robustness. Authored wrong submissions are verification controls, not actual model performance."
+}

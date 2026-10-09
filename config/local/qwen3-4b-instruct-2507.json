@@ -1,0 +1,55 @@
+{
+  "configuration_id": "qwen3-4b-instruct-2507-q4km-cpu-64k-preview",
+  "execution_profile": "local-lima",
+  "model": {
+    "id": "qwen3-4b-instruct-2507-q4_k_m",
+    "weights": ".local/models/Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+    "repository": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+    "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+    "sha256": "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+    "quantization": "Q4_K_M",
+    "total_parameters_billions": 4.0,
+    "active_parameters_billions": 4.0,
+    "chat_template_sha256": "c979e0e71a3e21b8f208e6ab120d5cb29327885f29d2a8b18fda67a723798e18",
+    "base_model_declared_by_quantizer": "Qwen/Qwen3-4B-Instruct-2507",
+    "base_conversion_revision": "not independently established",
+    "native_context": 262144,
+    "official_tokenizer_template_sha256": "64f85b198065d0fba2a81f37e10ed68161ce2c19a754c7100e67e0ca2ee9c326",
+    "template_origin": "Actual embedded GGUF metadata, differs from official tokenizer template"
+  },
+  "runtime": {
+    "binary": ".local/runtime/llama-b11516/llama-server",
+    "sha256": "cdf2d31e4b75714ebad37ffeb8f3d51e9a7be45daa6fd884a6a360abaee04091",
+    "version": "llama.cpp b11516 d4d82d67f",
+    "backend": "cpu",
+    "hardware": "MacPro7,1 Intel Xeon W-3245, Accelerate BLAS, no GPU offload"
+  },
+  "serving": {
+    "port": 18084,
+    "context": 65536,
+    "threads": 8,
+    "parallel": 1,
+    "reasoning": "off",
+    "flash_attention": "off",
+    "cache_type_k": "f16",
+    "cache_type_v": "f16",
+    "observe_slots": true,
+    "context_shift": false
+  },
+  "candidate": {
+    "wall_seconds": 1800,
+    "turns": 12,
+    "generation": {
+      "max_tokens": 4096,
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "seed": 17,
+      "min_p": 0
+    }
+  },
+  "harbor_version": "0.23.0",
+  "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "status": "Unscored setup preview, final choice requires native tool and artifact proof",
+  "external_service_spend_usd": 0
+}

@@ -1,0 +1,45 @@
+{
+  "schedule_id": "local-workflow-qwen36-development-1",
+  "declared_at": "2026-10-13T05:54:27.236196+00:00",
+  "authorization": "Owner requested a stronger local model trial before external inference on 13 October 2026 UTC",
+  "status": "Declared before any pilot task exposure, execution requires successful setup compatibility",
+  "model_configuration": "config/local/qwen36-35b-terminal-24.json",
+  "model_configuration_sha256": "061f67c0ce6778b507f6ffc06e6899b60924084760b95cbbfae4c381275e20e1",
+  "manifest_id": "workflow-v5-canonical-7429612183c6",
+  "scorer_version": "workflow-1.1.0",
+  "scorer_sha256": "f8e733696dbf51923b6f751da57ca9e60ed5c5ebe565c96c998a6989bd1e924d",
+  "repetitions": 1,
+  "execution_concurrency": 1,
+  "repeat_policy": "One fresh attempt per selected development case. No score-based retry. Retain failures and partial outputs.",
+  "held_out_candidate_model_calls": 0,
+  "external_service_spend_usd": 0,
+  "execution_files_sha256": {
+    "scripts/local_bench.py": "13c5fc1e559d1f6659a8a79ff8e730358f7a63248d5fbaac8cc27f35c2ec146e",
+    "scripts/local_trial.py": "400bcc2798de2459a10e2b75b14ed2e4cb02a838414ac6b17e42a23a20c40572",
+    "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+    "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+    "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+    "workpaperbench/catalog.py": "feda93e6adde7a12181c403f9217f61f4767f510916d9bc17c2776f0d38be3a7",
+    "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+  },
+  "attempts": [
+    {
+      "attempt_id": "qwen36-development-b01-1",
+      "task_id": "workflow-v5-b01",
+      "task_sha256": "c3adad399c0fc576ede83cd073656546752f7e5aba81452226acd9324e9604ee",
+      "condition": "Full dossier, fresh candidate state"
+    },
+    {
+      "attempt_id": "qwen36-development-c01-1",
+      "task_id": "workflow-v5-c01",
+      "task_sha256": "ca99d37c4bae432e9cfa2b65314f48dbb4017646874fc6a7dff262c566f4cff3",
+      "condition": "Full dossier, fresh candidate state"
+    },
+    {
+      "attempt_id": "qwen36-development-a01-1",
+      "task_id": "workflow-v5-a01",
+      "task_sha256": "dcaefcc8fd9c21b22937260c8e77d68cf364606d6c2e2ba9934f89f4e3983e59",
+      "condition": "Full dossier, fresh candidate state"
+    }
+  ]
+}

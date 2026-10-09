@@ -1,0 +1,124 @@
+{
+  "validation_version": "local-boundaries-1",
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "candidate_attempt_id": "canonical-local-boundaries-5",
+  "candidate_task_sha256": "2b4587f3d899ee0f524b0bb3ce7b3c525fd426d90ccefd44e9b857c17a2108da",
+  "candidate_checks": {
+    "unavailable:/tests/gold.json": true,
+    "unavailable:/workspace/.git": true,
+    "unavailable:/Users": true,
+    "unavailable:/root/.ssh": true,
+    "unavailable:/var/run/docker.sock": true,
+    "fresh_candidate_state": true,
+    "external_tls_blocked": true,
+    "guest_ssh_blocked": true,
+    "daemon_tcp_blocked": true,
+    "external_dns_udp_blocked": true,
+    "docker_dns_stub_blocked": true,
+    "icmp_probe_available": true,
+    "external_icmp_blocked": true
+  },
+  "verifier_isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  },
+  "pristine_reference_checks": {
+    "delivery": true,
+    "financial_answer": true,
+    "evidence": true,
+    "robustness": true
+  },
+  "sql_worker_sha256": "ab5d803ac8c9f2ea34297bd6bb2d066a8ba70d0111b6ae0d4dba67d7a9b5c5b1",
+  "sql_limits": {
+    "address_space_bytes": 268435456,
+    "cpu_seconds": 2,
+    "file_size_bytes": 0,
+    "progress_seconds": 1.5,
+    "parent_wall_seconds": 2.5,
+    "rows": 100,
+    "columns": 16,
+    "cell_bytes": 1024,
+    "output_bytes": 65536
+  },
+  "sql_probes": {
+    "time": {
+      "rejected": true,
+      "seconds": 1.535,
+      "stdout_bytes": 30,
+      "diagnostic": "{\"error\": \"OperationalError\"}\n"
+    },
+    "memory": {
+      "rejected": true,
+      "seconds": 0.098,
+      "stdout_bytes": 25,
+      "diagnostic": "{\"error\": \"MemoryError\"}\n"
+    },
+    "rows": {
+      "rejected": true,
+      "seconds": 0.033,
+      "stdout_bytes": 24,
+      "diagnostic": "{\"error\": \"ValueError\"}\n"
+    },
+    "cell": {
+      "rejected": true,
+      "seconds": 0.033,
+      "stdout_bytes": 24,
+      "diagnostic": "{\"error\": \"ValueError\"}\n"
+    },
+    "bytes": {
+      "rejected": true,
+      "seconds": 0.033,
+      "stdout_bytes": 24,
+      "diagnostic": "{\"error\": \"ValueError\"}\n"
+    },
+    "write": {
+      "rejected": true,
+      "seconds": 0.032,
+      "stdout_bytes": 27,
+      "diagnostic": "{\"error\": \"DatabaseError\"}\n"
+    },
+    "attach": {
+      "rejected": true,
+      "seconds": 0.032,
+      "stdout_bytes": 27,
+      "diagnostic": "{\"error\": \"DatabaseError\"}\n"
+    },
+    "extension": {
+      "rejected": true,
+      "seconds": 0.032,
+      "stdout_bytes": 30,
+      "diagnostic": "{\"error\": \"OperationalError\"}\n"
+    },
+    "file": {
+      "rejected": true,
+      "seconds": 0.033,
+      "stdout_bytes": 30,
+      "diagnostic": "{\"error\": \"OperationalError\"}\n"
+    }
+  },
+  "files": {
+    ".raw/local-trials/canonical-local-boundaries-5/receipt.json": "7e39a18d45fc37147a960b0715b3bdbc8f52198442ba72fcb66223686b043483",
+    ".raw/local-trials/canonical-local-boundaries-5/verifier.json": "2afde73a539ab1973de98e33438a25b4fa54d55e52caec5dbb9c1629f6457a59",
+    ".raw/local-trials/canonical-local-boundaries-5/resource-controls.json": "55b876b97dbcaee29f0180015055d541446eed8677e7c10b1e3d426849f07c42"
+  },
+  "service_failure_control": {
+    "attempt_id": "stopped-model-guard-1",
+    "rejected_before_guest_or_inference": true,
+    "diagnostic": "ProcessLookupError",
+    "fallback_calls": 0
+  },
+  "limitations": [
+    "The stopped-service control verifies pre-trial rejection. Candidate network controls prevent any external route during a trial, but no mid-response outage was injected.",
+    "Early setup attempts predate launcher and execution-file digest fields. They remain setup diagnostics."
+  ],
+  "execution_files_sha256": {
+    "scripts/local_trial.py": "e3359e9c85679d4ed3b8bd8b9c063d65ada2dc243df1efc0089a5240a1b210e1",
+    "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+    "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+    "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+    "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "tables": {
+    "expense_model": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "gaap_expense_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "prior_adjusted_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "new_adjusted_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "additional_exclusions_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "prior_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "new_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "operating_margins": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "revenue_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "rldc_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "rldc_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "adjusted_ebitda_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "revenue_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "cost_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "definition_attribution": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "prior_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "current_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "contribution_to_definition_gap_change_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "new_definition_lower": "Annual FY2025 adjusted expenses are lower under the new definition than under the prior definition.",
+    "ebitda_margin_uses_revenue": "The issuer defines adjusted EBITDA margin using total revenue as denominator.",
+    "constant_balance_rate_effect_identified": "The supplied statements separately quantify the exact constant-balance rate effect on annual reserve income."
+  },
+  "definitions": {
+    "expense_model": "9MFY denotes the first nine months, annual less Q4. Adjustments retain source signs. Both reported-definition residuals compare recomputed amounts to reported amounts.",
+    "definition_attribution": "Positive exclusions reduce expense. Changes are FY2025 less FY2024 and contributions divide by the change in the prior-minus-new definition gap.",
+    "operating_margins": "Use exact USD thousand statement amounts. RLDC equals reserve plus other revenue less distribution and other costs. EBITDA margin uses the issuer denominator. No rounding to whole millions."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient facts and relevant period, unit, definition or scope context for each output. Additional unrelated sections fail evidence. Equivalent reviewed source paths are accepted, without a shortest-citation requirement.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested."
+}

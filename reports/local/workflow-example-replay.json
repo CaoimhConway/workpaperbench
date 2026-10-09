@@ -1,0 +1,204 @@
+{
+  "report_version": "local-1.0",
+  "attempts": [
+    {
+      "attempt_id": "block-example-1",
+      "execution_profile": "local-lima",
+      "manifest_id": "workflow-v5-canonical-7429612183c6",
+      "task_id": "workflow-v5-c01",
+      "task_sha256": "ca99d37c4bae432e9cfa2b65314f48dbb4017646874fc6a7dff262c566f4cff3",
+      "scorer_version": "workflow-1.1.0",
+      "scorer_sha256": "f8e733696dbf51923b6f751da57ca9e60ed5c5ebe565c96c998a6989bd1e924d",
+      "started_at": "2026-10-13T05:10:58.977193+00:00",
+      "external_service_spend_usd": 0,
+      "status": "verified",
+      "inference": false,
+      "execution_files_sha256": {
+        "scripts/local_trial.py": "400bcc2798de2459a10e2b75b14ed2e4cb02a838414ac6b17e42a23a20c40572",
+        "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+        "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+        "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+        "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+      },
+      "effective_task_sha256": "40b1dea36e84bb3db3fa2de803360c80d1160ed02d9de2f6ceadd8856b1e10fe",
+      "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+      "verdict": {
+        "scorer_version": "workflow-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              }
+            }
+          },
+          "claims": {
+            "bitcoin_majority_of_total_revenue_increase": {
+              "verdict": true,
+              "evidence": true
+            },
+            "all_components_reconcile": {
+              "verdict": true,
+              "evidence": true
+            },
+            "bitcoin_price_effect_identifiable": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "verdict_sha256": "08e2129210bcc11d677fa8049f18d24b64a05b0d51edd7ef4d99eb2912cdd126",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      },
+      "raw_answer_sha256": "7e1b9bfa7dafb3e3134a8cb1cbc4776b25d36143b64b3106635a7b50721c7847",
+      "normalized_answer_sha256": "7e1b9bfa7dafb3e3134a8cb1cbc4776b25d36143b64b3106635a7b50721c7847",
+      "finished_at": "2026-10-13T05:11:35.425955+00:00"
+    },
+    {
+      "attempt_id": "block-example-replay-1",
+      "execution_profile": "local-lima",
+      "manifest_id": "workflow-v5-canonical-7429612183c6",
+      "task_id": "workflow-v5-c01",
+      "task_sha256": "ca99d37c4bae432e9cfa2b65314f48dbb4017646874fc6a7dff262c566f4cff3",
+      "scorer_version": "workflow-1.1.0",
+      "scorer_sha256": "f8e733696dbf51923b6f751da57ca9e60ed5c5ebe565c96c998a6989bd1e924d",
+      "started_at": "2026-10-13T05:11:36.505801+00:00",
+      "external_service_spend_usd": 0,
+      "status": "verified",
+      "inference": false,
+      "execution_files_sha256": {
+        "scripts/local_trial.py": "400bcc2798de2459a10e2b75b14ed2e4cb02a838414ac6b17e42a23a20c40572",
+        "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+        "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+        "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+        "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+      },
+      "effective_task_sha256": "40b1dea36e84bb3db3fa2de803360c80d1160ed02d9de2f6ceadd8856b1e10fe",
+      "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+      "verdict": {
+        "scorer_version": "workflow-1.1.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              }
+            }
+          },
+          "claims": {
+            "bitcoin_majority_of_total_revenue_increase": {
+              "verdict": true,
+              "evidence": true
+            },
+            "all_components_reconcile": {
+              "verdict": true,
+              "evidence": true
+            },
+            "bitcoin_price_effect_identifiable": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "verdict_sha256": "08e2129210bcc11d677fa8049f18d24b64a05b0d51edd7ef4d99eb2912cdd126",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      },
+      "raw_answer_sha256": "7e1b9bfa7dafb3e3134a8cb1cbc4776b25d36143b64b3106635a7b50721c7847",
+      "normalized_answer_sha256": "7e1b9bfa7dafb3e3134a8cb1cbc4776b25d36143b64b3106635a7b50721c7847",
+      "finished_at": "2026-10-13T05:12:13.322362+00:00"
+    }
+  ],
+  "external_service_spend_usd": 0,
+  "held_out_evaluation": "not run",
+  "frontier_discrimination": "unmeasured"
+}

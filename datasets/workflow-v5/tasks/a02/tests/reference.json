@@ -1,0 +1,51 @@
+{
+  "task_id": "workflow-v5-a02",
+  "tables": [
+    {
+      "id": "cash_model",
+      "file": "cash_model.sql",
+      "evidence": [
+        "a02:s01",
+        "a02:s03"
+      ]
+    },
+    {
+      "id": "operating_cash_bridge",
+      "file": "operating_cash_bridge.sql",
+      "evidence": [
+        "a02:s01"
+      ]
+    },
+    {
+      "id": "segment_model",
+      "file": "segment_model.sql",
+      "evidence": [
+        "a02:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "annual_fcf_increased",
+      "verdict": "contradicted",
+      "evidence": [
+        "a02:s01",
+        "a02:s03"
+      ]
+    },
+    {
+      "id": "foa_income_covers_rl_loss",
+      "verdict": "supported",
+      "evidence": [
+        "a02:s02"
+      ]
+    },
+    {
+      "id": "tax_adjustment_future_cash_identifiable",
+      "verdict": "unresolved",
+      "evidence": [
+        "a02:s01"
+      ]
+    }
+  ]
+}

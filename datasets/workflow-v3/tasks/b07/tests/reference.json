@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v3-b07",
+  "tables": [
+    {
+      "id": "booking_ratios",
+      "file": "booking_ratios.sql",
+      "evidence": [
+        "b07:s01",
+        "b07:s02"
+      ]
+    },
+    {
+      "id": "quarter_cash",
+      "file": "quarter_cash.sql",
+      "evidence": [
+        "b07:s02",
+        "b07:s03"
+      ]
+    },
+    {
+      "id": "rolling_cash",
+      "file": "rolling_cash.sql",
+      "evidence": [
+        "b07:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "ttm_fcf_increased",
+      "verdict": "supported",
+      "evidence": [
+        "b07:s03"
+      ]
+    },
+    {
+      "id": "booking_ratio_identifies_fee",
+      "verdict": "unresolved",
+      "evidence": [
+        "b07:s01",
+        "b07:s02"
+      ]
+    },
+    {
+      "id": "q4_annualization_equals_ttm",
+      "verdict": "contradicted",
+      "evidence": [
+        "b07:s03"
+      ]
+    }
+  ]
+}

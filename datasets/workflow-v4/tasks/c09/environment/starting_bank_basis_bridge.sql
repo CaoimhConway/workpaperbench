@@ -1,0 +1,4 @@
+SELECT period,managed_revenue_usd_million,managed_revenue_usd_million-fte_adjustment_usd_million printed_input_reported_basis_estimate_usd_million,
+fte_adjustment_usd_million,100.0*expense_usd_million/managed_revenue_usd_million overhead_pct,
+100.0*(expense_usd_million-legal_expense_usd_million)/(managed_revenue_usd_million-fte_adjustment_usd_million) adjusted_overhead_pct,
+nii_usd_million+nir_usd_million-managed_revenue_usd_million managed_revenue_residual_usd_million FROM bank_bases WHERE period IN ('Q4FY2025','FY2025')

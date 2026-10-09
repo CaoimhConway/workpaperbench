@@ -1,0 +1,162 @@
+{
+  "answers": {
+    "business_payment_count_2024": {
+      "evidence": [
+        [
+          "c02:s03",
+          "c02:s04"
+        ]
+      ],
+      "status": "insufficient_evidence",
+      "tolerance": 0,
+      "unit": "count",
+      "value": null
+    },
+    "proxy_change_bps": {
+      "evidence": [
+        [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04"
+        ],
+        [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04",
+          "c02:s05",
+          "c02:s06"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.005,
+      "unit": "basis_points",
+      "value": 1.8326591347073276
+    },
+    "spot_trading_volume_growth_pct": {
+      "evidence": [
+        [
+          "c02:s03",
+          "c02:s04"
+        ],
+        [
+          "c02:s03",
+          "c02:s04",
+          "c02:s06"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.005,
+      "unit": "percent",
+      "value": 148.2905982905983
+    },
+    "transaction_revenue_growth_pct": {
+      "evidence": [
+        [
+          "c02:s01"
+        ],
+        [
+          "c02:s01",
+          "c02:s06"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.005,
+      "unit": "percent",
+      "value": 162.30398498605604
+    },
+    "transaction_revenue_to_spot_volume_proxy_2024_pct": {
+      "evidence": [
+        [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04"
+        ],
+        [
+          "c02:s01",
+          "c02:s03",
+          "c02:s04",
+          "c02:s05",
+          "c02:s06"
+        ]
+      ],
+      "status": "answered",
+      "tolerance": 0.005,
+      "unit": "percent",
+      "value": 0.34303898450946646
+    }
+  },
+  "conclusion": {
+    "evidence": [
+      [
+        "c02:s01",
+        "c02:s03",
+        "c02:s04",
+        "c02:s05"
+      ],
+      [
+        "c02:s01",
+        "c02:s03",
+        "c02:s04",
+        "c02:s05",
+        "c02:s06"
+      ],
+      [
+        "c02:s05"
+      ],
+      [
+        "c02:s04",
+        "c02:s05"
+      ]
+    ],
+    "verdict": "contradicted"
+  },
+  "context_evidence_allowed": [
+    "c02:s04",
+    "c02:s05",
+    "c02:s06"
+  ],
+  "controls": [
+    {
+      "database": "control-1.sqlite",
+      "expected": {
+        "proxy_change_bps": 3.123536931609221,
+        "spot_trading_volume_growth_pct": 148.2905982905983,
+        "transaction_revenue_growth_pct": 172.1746529144134,
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": 0.35594776247848536
+      },
+      "name": "consumer_transaction_revenue_shift"
+    },
+    {
+      "database": "control-2.sqlite",
+      "expected": {
+        "proxy_change_bps": 0.12325742530561808,
+        "spot_trading_volume_growth_pct": 148.2905982905983,
+        "transaction_revenue_growth_pct": 149.1859489614629,
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": 0.34303898450946646
+      },
+      "name": "recast_2023_transaction_revenue_shift"
+    },
+    {
+      "database": "control-3.sqlite",
+      "expected": {
+        "proxy_change_bps": 1.5399637554330388,
+        "spot_trading_volume_growth_pct": 150.42735042735043,
+        "transaction_revenue_growth_pct": 162.30398498605604,
+        "transaction_revenue_to_spot_volume_proxy_2024_pct": 0.3401120307167235
+      },
+      "name": "2024_spot_volume_shift"
+    }
+  ],
+  "hashes": {
+    "control-1.sqlite": "8876fba218abc17350a03b781ee150cdb6bec137981b87a1a0259fdd46196a19",
+    "control-2.sqlite": "c4254a6b8642e8f93f9a381fe101f734281221a1ec135809c80d4882ecaa2f1b",
+    "control-3.sqlite": "5ca49ba260a6912c5bc5d5263b341cc7f45c1042566d9300f94ada5523221e7f",
+    "data.sqlite": "bbd0d295c0918f8948454d4a63fea7a29bdc6db5bfa572a43d19840489423f99",
+    "evidence.json": "d40a1e57d21cc0e71d0fa13874a16154d27bd95b8418817ba2963e852398a4a5",
+    "schema.json": "604a67a9b071041d467a8b70bc3eadc96e8f6fddc75d9356537c537a7d6f1627",
+    "sources.md": "fbaebdf98faca58697cc88ea9268721a02e8058a68509c23557703f7943a8920",
+    "verify.py": "1eadd0271b6b421bee438078d895b00b7de1f11d6b6b4197388cf51d25c81dae"
+  },
+  "scorer_version": "challenge-1.1.3",
+  "task_id": "challenge-v2-c02"
+}

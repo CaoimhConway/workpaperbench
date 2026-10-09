@@ -1,0 +1,151 @@
+{
+  "tables": {
+    "parent_earnings_bridge": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "parent_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "investment_gain_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "signed_impairment_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "operating_earnings_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "consolidated_cash_bridge": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "parent_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "consolidated_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "noncontrolling_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "signed_adjustment_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "operating_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "investment_gain_bridge": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "unrealized_equity_gain_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "equity_sold_gain_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fixed_net_gain_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "other_gain_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "pretax_gain_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cash_removal_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "unrealized_to_net_gain_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "unrealized_exceeds_net_gain": "The current-year unrealized equity gain exceeds the total pretax investment gain.",
+    "parent_income_is_cf_start": "Parent-attributable earnings are the starting net earnings of the consolidated operating-cash bridge.",
+    "exact_float_cost_identified": "The year-end float stocks identify an exact annual cost of float."
+  },
+  "definitions": {
+    "parent_earnings_bridge": "After-tax parent scope for three years. Operating earnings remove signed investment gains and signed equity-method impairments from parent income.",
+    "consolidated_cash_bridge": "Consolidated scope for three years. Add all signed statement adjustments to consolidated net earnings. Noncontrolling income is consolidated less parent income.",
+    "investment_gain_bridge": "Pretax scope for three years. Net fixed gains combine realized gains and losses. Compare component total with the signed cash-flow removal and report unrealized equity gain divided by net pretax investment gain."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient facts and relevant period, unit, definition or scope context for each output. Additional unrelated sections fail evidence. Equivalent reviewed source paths are accepted, without a shortest-citation requirement.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested."
+}

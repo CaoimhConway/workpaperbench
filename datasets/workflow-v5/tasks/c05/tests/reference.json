@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v5-c05",
+  "tables": [
+    {
+      "id": "category_margin",
+      "file": "category_margin.sql",
+      "evidence": [
+        "c05:s01"
+      ]
+    },
+    {
+      "id": "net_income_growth_bridge",
+      "file": "net_income_growth_bridge.sql",
+      "evidence": [
+        "c05:s01"
+      ]
+    },
+    {
+      "id": "prior_tax_baseline",
+      "file": "prior_tax_baseline.sql",
+      "evidence": [
+        "c05:s01",
+        "c05:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "prior_tax_charge_exceeds_half_growth",
+      "verdict": "supported",
+      "evidence": [
+        "c05:s01",
+        "c05:s02"
+      ]
+    },
+    {
+      "id": "entire_net_growth_is_operating",
+      "verdict": "contradicted",
+      "evidence": [
+        "c05:s01"
+      ]
+    },
+    {
+      "id": "exact_product_price_effect_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "c05:s01",
+        "c05:s03"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+# Financial workflow
+
+Complete an annual consolidated revenue and gross-profit attribution for Block using the FY2024 filing and its own FY2023 comparator. Audit the starting attribution. Show each revenue category's change, contribution to total revenue growth, annual shares and share change. Build a gross-profit bridge including acquired-technology amortization, reconcile both bridges to reported totals, and quantify Bitcoin gross-profit growth. Determine whether Bitcoin explains a majority of consolidated revenue growth and whether a separate price effect is identifiable.
+
+Read the source headings, definitions and evidence locators in /workspace/sources.md and evidence.json. The SQLite tables contain source-derived observations. The starting SQL is an authored research work product. Its defects are synthetic, not discovered issuer defects.
+
+Deliver /logs/artifacts/answer.json and one read-only SELECT/CTE .sql file per requested named table. The JSON schema is /workspace/schema.json and the public columns, units, keys and claim assertions are /workspace/output_contract.json. Use the literal claim IDs for the assertions stated there, with supported, contradicted or unresolved verdicts. A short optional note is not semantically graded. Cite each output's supporting evidence IDs.
+
+Table column names are required, column order and row order are ignored. Keys are unique, duplicate output keys fail, and no row may be silently dropped. Ratios labeled percent must be multiplied by 100, and basis points by 10000. Monetary columns retain the specified units. Each query returns at most 100 rows and 16 columns, with no file access, DDL, writes, wall-clock dates or extensions. Answer JSON is at most 65536 bytes and each SQL file at most 16384 UTF-8 bytes. No additional artifact files.
+
+Recompute from pristine inputs. Hidden synthetic controls exercise the declared period filters, equivalent monetary scaling, meaningful component changes and unaffected outputs. SBC also tests duplicate exports and distinct economic dates with equal amounts. Required categories for Block are transaction, subscription, hardware, bitcoin and acquired_technology_amortization in the profit bridge. FY2024 and FY2025 each have fiscal quarters 1 and 2 in the Microsoft model.
+
+Task ID: workflow-v1-c01

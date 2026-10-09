@@ -1,0 +1,142 @@
+{
+  "tables": {
+    "segment_metrics": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "segment": {
+          "type": "text",
+          "unit": "label"
+        },
+        "bookings_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_ebitda_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "revenue_to_bookings_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "ebitda_to_bookings_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year",
+        "segment"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "corporate_bridge": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "segment_sum_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "corporate_cost_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "total_adjusted_ebitda_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "ebitda_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "bookings_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "revenue_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "total_ebitda_to_bookings_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "consumer_activity": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "trips_million": {
+          "type": "real",
+          "unit": "million",
+          "tolerance": 1e-06
+        },
+        "mapcs_million": {
+          "type": "real",
+          "unit": "million",
+          "tolerance": 1e-06
+        },
+        "quarterly_trips_per_monthly_consumer": {
+          "type": "real",
+          "unit": "trips",
+          "tolerance": 1e-06
+        },
+        "monthly_trips_per_monthly_consumer": {
+          "type": "real",
+          "unit": "trips",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "monthly_activity_increased": "Monthly trips per monthly active consumer increased between the supplied Q4 periods.",
+    "freight_revenue_is_a_commission": "Freight revenue divided by bookings uniquely identifies the contractual commission on Freight bookings.",
+    "all_segments_profitable_in_prior_q4": "Every supplied segment had positive adjusted EBITDA in Q4FY2024."
+  },
+  "definitions": {
+    "segment_metrics": "Both years 2024 and 2025. Financial ratios use the matching segment Gross Bookings denominator.",
+    "corporate_bridge": "Signed corporate costs plus segment EBITDA equals total EBITDA. Retain booking and revenue reconciliation residuals.",
+    "consumer_activity": "Quarterly ratio and monthly ratio are both required. The latter divides quarter trips by the average monthly consumer count and three months."
+  }
+}

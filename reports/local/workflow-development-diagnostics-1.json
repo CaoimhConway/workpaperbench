@@ -1,0 +1,93 @@
+{
+  "diagnostic_version": "local-development-diagnostics-1",
+  "schedule_id": "local-workflow-development-2",
+  "attempts": [
+    {
+      "attempt_id": "local-development-a01-1",
+      "task_id": "workflow-v1-a01",
+      "status": "infrastructure_failed",
+      "started_at": "2026-10-09T13:41:02.801303+00:00",
+      "finished_at": "2026-10-09T14:14:09.498505+00:00",
+      "error": "Agent execution timed out after 1800.0 seconds",
+      "raw_answer_sha256": "caae06e666541165f6bc7994a12101a2ae66217af96b6ae9ef7f84aa73eb7f35",
+      "normalized_answer_sha256": "6d80483574481cb81501ac970f1b7314d838eb4182d50cbf752f3bdf19aa1d85",
+      "sql_file_sha256": {},
+      "model_configuration_sha256": "9444f79be682a7424de7504f095cebbf94559295427b1d02539a0f5a97892421",
+      "observed_request_ids": [
+        797,
+        1017,
+        1478,
+        1513,
+        1541,
+        1570,
+        1598,
+        1628,
+        2316,
+        3393
+      ],
+      "checks": {
+        "financial_answer": null,
+        "evidence": null,
+        "robustness": null,
+        "delivery": null
+      },
+      "receipt_sha256": "8d3d60413c74751fa0d19e199ff9299fbf9573a47b35d1089feed3bd3fb84d00"
+    },
+    {
+      "attempt_id": "local-development-b01-1",
+      "task_id": "workflow-v1-b01",
+      "status": "verified",
+      "started_at": "2026-10-09T14:20:48.441834+00:00",
+      "finished_at": "2026-10-09T14:31:41.391025+00:00",
+      "error": null,
+      "raw_answer_sha256": "e7097c390475b82caa88fd078483c9af83cb7c1e538159c4989e4cad2bb8e853",
+      "normalized_answer_sha256": "17311d66b0266caa5223b9925d0eb11c67ba668f8fb623ac05b40e05d063740d",
+      "sql_file_sha256": {},
+      "model_configuration_sha256": "9444f79be682a7424de7504f095cebbf94559295427b1d02539a0f5a97892421",
+      "observed_request_ids": [
+        4670,
+        4894,
+        5041,
+        5761,
+        5812,
+        6266
+      ],
+      "checks": {
+        "financial_answer": null,
+        "evidence": null,
+        "robustness": null,
+        "delivery": false
+      },
+      "receipt_sha256": "71312ed419f8ac2795b60ae04190c76755b6d6ef545c2521f0abb99392fbb63c"
+    }
+  ],
+  "unstarted_attempts": [
+    "local-development-c01-1"
+  ],
+  "schedule_status": "Paused after timeout and incomplete SQL delivery",
+  "b01_observed_tool_use": {
+    "read_file": 7,
+    "search_files": 4,
+    "patch": 2,
+    "write_file": 1,
+    "terminal": 0
+  },
+  "b01_diagnosis": [
+    "Read disclosed observations, schema, output contract and starting SQL",
+    "One attempted patch did not match the source file",
+    "The successful coverage patch retained the original cross join and sum",
+    "Wrote JSON declaring three SQL files but created none in the artifact directory",
+    "Unambiguous partial claim verdicts were assessed without executing structurally rejected SQL"
+  ],
+  "a01_diagnosis": [
+    "Execution time limit expired before a completed verifier verdict",
+    "JSON was retained, but no permitted SQL files were written",
+    "Financial, evidence, preservation and delivery outcomes remain unassessed",
+    "No completed tool trajectory was retained after cancellation, so search and transformation behavior is not established"
+  ],
+  "adaptation": "Test the already downloaded 30B local weights with generic filesystem guidance in a separately labeled unscored regression smoke",
+  "task_design_revisions_used": 0,
+  "expert_selected_evidence_diagnostic_runs_used": 0,
+  "held_out_candidate_model_calls": 0,
+  "external_service_spend_usd": 0
+}

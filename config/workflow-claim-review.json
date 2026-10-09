@@ -1,0 +1,455 @@
+{
+  "base_catalog": "workflow-v5-canonical-7429612183c6",
+  "scope": "Supplied workflow-v5 authoring contracts, gold claim identities, evidence locators, source dossiers and pristine source-derived tables only. No model outputs or inference.",
+  "observed_defect": "Every prior case contains exactly one unresolved claim, commonly phrased as whether a quantity is identifiable. Absence of disclosure and uncertainty about economic value are conflated.",
+  "decision": "Replace those assertions with source-grounded known facts, explicit disclosure claims and undecidable economic assertions. Keep single verdicts on new tasks and preserve prior claims in historical scoring.",
+  "replacement_distribution": {
+    "contradicted": 10,
+    "supported": 10,
+    "unresolved": 10
+  },
+  "human_review": "pending",
+  "claims": {
+    "a01": {
+      "replaces": "azure_operating_income_identifiable",
+      "assertion": "The supplied segment-results table reports Azure-only operating income for Q2 FY2025 separately from Intelligent Cloud operating income.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "a03:s05"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a03:s04",
+        "a03:s06"
+      ],
+      "source_grounded_reason": "The complete segment table reports Intelligent Cloud operating income of USD 10,851 million and no Azure-only operating-income line. Azure is separately disclosed as business revenue growth, which cannot substitute for segment profit."
+    },
+    "a02": {
+      "replaces": "tax_adjustment_future_cash_identifiable",
+      "assertion": "Using the issuer free-cash-flow definition, free cash flow for the first nine months of FY2025 was USD 29,508 million.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a02:s01",
+          "a02:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "Subtract Q4 from annual operating cash, property purchases and finance-lease principal, preserving the cash-outflow signs. This tests duration and issuer-definition reconciliation without repeating the annual direction claim.",
+      "independent_calculation": "(115800 - 36214) - (69691 - 21383) - (2524 - 754) = 29508 USD million"
+    },
+    "a03": {
+      "replaces": "constant_balance_rate_effect_identified",
+      "assertion": "Reserve-yield changes contributed more than half of the FY2024-to-FY2025 change in reserve income.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "a03:s02",
+          "a03:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "The supplied operations provide annual reserve income. The definitions state that yield and average circulation both affect reserve income, but do not provide the separate constant-balance rate contribution needed to decide this causal majority claim."
+    },
+    "a04": {
+      "replaces": "exact_ai_cash_spending_identified",
+      "assertion": "The supplied cash-flow statement contains a separate FY2025 cash property-purchase amount for artificial-intelligence projects.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "a04:s01",
+          "a04:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a04:s03"
+      ],
+      "source_grounded_reason": "The cash-flow statement has total property purchases. The narrative says the increase is primarily for artificial intelligence without a precise project allocation. The claim describes a line in the supplied document, so its absence from the complete supplied table is a contradiction, not an unresolved economic amount."
+    },
+    "a05": {
+      "replaces": "exact_fee_cash_receipts_identified",
+      "assertion": "Earned membership fees for the first 36 weeks of FY2025 were USD 3,599 million.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a05:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a05:s02"
+      ],
+      "source_grounded_reason": "Both the annual 52-week and Q4 16-week membership-fee observations are supplied. Annual less Q4 gives the matching first-36-week flow and does not estimate cash collections.",
+      "independent_calculation": "5323 - 1724 = 3599 USD million"
+    },
+    "a06": {
+      "replaces": "exact_q3_operating_cash_identified",
+      "assertion": "The supplied cash-flow dossier contains both six-month and nine-month operating cash flow, allowing Q3 operating cash flow to be obtained by subtraction.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "a06:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a06:s01"
+      ],
+      "source_grounded_reason": "The dossier explicitly supplies nine-month cash flows and no six-month cash-flow statement. The income statement has different durations and cannot supply the missing cash-flow input."
+    },
+    "a07": {
+      "replaces": "exact_future_china_shipments",
+      "assertion": "NVIDIA made no H20 shipments to China during Q3 FY2026.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "a07:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "The supplied Q2 release contains a Q3 guidance assumption of no China H20 shipments. It supplies no realized Q3 shipments, so neither zero nor nonzero actual shipments are established."
+    },
+    "a08": {
+      "replaces": "exact_organic_cc_growth",
+      "assertion": "Subtracting the disclosed Informatica contribution from FY2026 total revenue gives an arithmetic current-period revenue amount of USD 41,126 million.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a08:s01",
+          "a08:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "Total FY2026 revenue is subscription/support plus professional services. Removing the USD 399 million disclosed acquisition contribution gives a defined arithmetic scope adjustment, without claiming exact organic constant-currency growth.",
+      "independent_calculation": "39388 + 2137 - 399 = 41126 USD million"
+    },
+    "a09": {
+      "replaces": "exact_constant_scope_dtc_growth",
+      "assertion": "Disney Q4 FY2025 DTC revenue growth would have been positive with Star India excluded from both comparison periods.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "a09:s02",
+          "a09:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a09:s01"
+      ],
+      "source_grounded_reason": "The source establishes deconsolidation and explains multiple DTC growth factors. It does not provide the common-scope two-period DTC amounts needed to determine the sign of this counterfactual growth claim."
+    },
+    "a10": {
+      "replaces": "exact_discount_price_effect",
+      "assertion": "Using the supplied annual values, FY2025 discount revenue divided by billed business is approximately 2.24 percent.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a10:s01",
+          "a10:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a10:s03"
+      ],
+      "source_grounded_reason": "Annual discount revenue is in USD million and billed business is in USD billion. Their descriptive ratio can be computed even though it does not identify causal pricing.",
+      "independent_calculation": "37401 / (1669.8 * 1000) * 100 = 2.2398490837226013 percent"
+    },
+    "b01": {
+      "replaces": "observations_identify_payments_volume",
+      "assertion": "More SBC units were transferred in payments during June 2025 than were in circulation at the June 30 observation.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "b01:s04"
+        ],
+        [
+          "b01:s02"
+        ],
+        [
+          "b01:s05"
+        ],
+        [
+          "b01:s01",
+          "b01:s04"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s03",
+        "b01:s06"
+      ],
+      "source_grounded_reason": "The reports supply month-end issued-supply and reserve stocks. Repeated transfers can generate payment volume above supply, while few transfers can generate less. Neither payment-transfer counts nor amounts are supplied, so both outcomes remain possible with the reported stocks."
+    },
+    "b02": {
+      "replaces": "payments_volume_identifiable",
+      "assertion": "The supplied January and February reports include a total of PYUSD payment transfers between January 30 and February 27.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b02:s04"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b02:s01",
+        "b02:s02"
+      ],
+      "source_grounded_reason": "The supplied reports contain dated token and reserve stocks and timing definitions, not an interval payment-transfer total. This is an assertion about what the dossier reports, rather than about the unobserved size of payment flows."
+    },
+    "b03": {
+      "replaces": "institutional_spot_commission_identified",
+      "assertion": "The supplied institutional transaction-revenue and institutional spot-volume disclosures have identical product scope.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b03:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b03:s01"
+      ],
+      "source_grounded_reason": "Institutional transaction revenue includes derivatives, including Deribit, while the operational denominator is spot volume. A spot-only rate cannot be inferred by treating their scopes as identical."
+    },
+    "b04": {
+      "replaces": "organic_asset_gain_identified",
+      "assertion": "Investment returns contributed more than acquisitions to the FY2025 increase in Total Platform Assets.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "b04:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b04:s02"
+      ],
+      "source_grounded_reason": "The scope notes identify acquisition effects from Bitstamp and TradePMR and missing comparable customer-flow coverage. No decomposition separates the investment-return and acquisition contributions, so their relative magnitudes cannot be decided."
+    },
+    "b05": {
+      "replaces": "unique_people_identifiable",
+      "assertion": "Using the supplied rounded values, Q4 FY2025 payment transactions divided by December 2025 active accounts is approximately 15.38 transactions per account.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "b05:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b05:s02"
+      ],
+      "source_grounded_reason": "Both quarterly transactions and period-end active accounts are supplied. The descriptive quarter ratio is computable even though the issuer activity metric uses trailing-twelve-month transactions and accounts are not unique people.",
+      "independent_calculation": "6754 / 439 = 15.38496583143508 transactions per account"
+    },
+    "b06": {
+      "replaces": "freight_revenue_is_a_commission",
+      "assertion": "The supplied Freight revenue-to-bookings ratio is disclosed as the contractual commission rate on Freight bookings.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b06:s01",
+          "b06:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b06:s02"
+      ],
+      "source_grounded_reason": "The source describes revenue divided by bookings as a heterogeneous accounting ratio, not a uniquely identified contractual commission. The claim attributes a specific disclosed meaning to the ratio that the scope notes reject."
+    },
+    "b07": {
+      "replaces": "booking_ratio_identifies_fee",
+      "assertion": "Airbnb increased its contractual booking fee percentage from FY2024 to FY2025.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "b07:s01",
+          "b07:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b07:s03"
+      ],
+      "source_grounded_reason": "Revenue and GBV have different recognition timing and GBV includes taxes, cleaning fees and host earnings. The revenue-to-GBV ratio cannot establish the direction of a contractual fee change."
+    },
+    "b08": {
+      "replaces": "exact_payments_fee_identified",
+      "assertion": "From FY2024 to FY2025, merchant-solutions gross profit increased by USD 767 million, exceeding the USD 316 million increase in subscription-solutions gross profit.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "b08:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b08:s03"
+      ],
+      "source_grounded_reason": "Subtract each category cost from its own revenue in each year, then compare changes. This compares dollar growth contributions rather than repeating the existing gross-margin percentage comparison.",
+      "independent_calculation": "(8804 - 5481) - (6530 - 3974) = 767, (2752 - 520) - (2350 - 434) = 316 USD million"
+    },
+    "b09": {
+      "replaces": "exact_prior_restatement_identified",
+      "assertion": "The supplied FY2024 non-GAAP comparison has been restated using the new FY2025 deferred-compensation exclusions.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b09:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b09:s01"
+      ],
+      "source_grounded_reason": "The issuer explicitly says the new exclusions were not applied to prior periods because the impact was immaterial. Absence of prior adjustments is not proof of zero prior economic activity."
+    },
+    "b10": {
+      "replaces": "exact_float_cost_identified",
+      "assertion": "Berkshire FY2025 average insurance float exceeded its FY2024 average insurance float.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "b10:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b10:s01"
+      ],
+      "source_grounded_reason": "The supplied approximate year-end stocks rose from USD 171 billion to USD 176 billion. Endpoints do not determine either annual average, so the ordering of the averages remains unknown."
+    },
+    "c01": {
+      "replaces": "bitcoin_price_effect_identifiable",
+      "assertion": "Higher Bitcoin selling prices caused more than half of the increase in Block Bitcoin revenue from FY2023 to FY2024.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "c03:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s01",
+        "c03:s02",
+        "c03:s05"
+      ],
+      "source_grounded_reason": "Bitcoin revenue is the full customer sale value and depends on both customer demand and market price. The annual revenue and cost totals provide no price-volume decomposition. The claim is about an economic causal majority, not whether a disclosure exists."
+    },
+    "c02": {
+      "replaces": "exact_organic_arr_increase_identifiable",
+      "assertion": "Applying the 10.2 percent FY2026 ARR growth target to the revalued opening ARR basis implies ending ARR of USD 28.27732 billion.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c02:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c02:s03"
+      ],
+      "source_grounded_reason": "The revalued opening basis is USD 25.66 billion. The implied target is arithmetic from the supplied rounded inputs, not a realized result or recognized revenue.",
+      "independent_calculation": "25.66 * (1 + 10.2 / 100) = 28.27732 USD billion"
+    },
+    "c03": {
+      "replaces": "same_quarter_price_effect_identified",
+      "assertion": "FY2025 client incentives were approximately 28.25 percent of revenue before client incentives.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c03:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s03"
+      ],
+      "source_grounded_reason": "The denominator is the sum of service, data-processing, international-transaction and other revenue before the signed incentives deduction, not net revenue.",
+      "independent_calculation": "15751 / (17539 + 19993 + 14166 + 4053) * 100 = 28.252408028555543 percent"
+    },
+    "c04": {
+      "replaces": "merchant_price_mix_identified",
+      "assertion": "Higher merchant prices caused more than half of the FY2025 increase in average value per Mastercard-branded purchase transaction.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "c04:s01",
+          "c04:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c04:s03"
+      ],
+      "source_grounded_reason": "Branded purchase value and transaction counts identify average transaction size. They do not decompose merchant prices, goods per basket, geography or customer mix, so they cannot establish this causal majority."
+    },
+    "c05": {
+      "replaces": "exact_product_price_effect_identified",
+      "assertion": "The supplied product-category tables include separate dollar contributions from price changes and unit-volume changes to FY2025 product revenue growth.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c05:s01",
+          "c05:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "The category tables report sales and costs, without separate price and unit-volume contributions. Their absence from the complete supplied table contradicts the stated disclosure claim."
+    },
+    "c06": {
+      "replaces": "exact_ai_product_effect_identified",
+      "assertion": "The year-over-year change in consolidated hedging revenue reduced the reported Q2 FY2025 revenue increase by USD 214 million.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c06:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c06:s01",
+        "c06:s03"
+      ],
+      "source_grounded_reason": "Consolidated hedging moves from positive USD 102 million to negative USD 112 million. This additive contribution is distinct from geography translation effects and from the existing Cloud majority claim.",
+      "independent_calculation": "-112 - 102 = -214 USD million"
+    },
+    "c07": {
+      "replaces": "exact_organic_revenue_growth_identified",
+      "assertion": "The supplied FY2024 and FY2025 consolidated annual revenue totals include equal durations of Splunk ownership.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c07:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c07:s01"
+      ],
+      "source_grounded_reason": "The source states approximately four months of Splunk in FY2024 and a full year in FY2025. Equal durations are therefore contradicted, while a precise organic growth amount would require further data."
+    },
+    "c08": {
+      "replaces": "exact_ai_pricing_effect_identified",
+      "assertion": "Higher AI-semiconductor prices caused more than half of the FY2025 increase in Broadcom semiconductor revenue.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "c08:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "The segment table gives total semiconductor revenue. AI commentary does not separately quantify prices, units or mix, so it does not determine the asserted price contribution."
+    },
+    "c09": {
+      "replaces": "exact_payment_fee_identified",
+      "assertion": "Using the supplied significant-item amounts, the annual exclusion bridge implies an after-tax First Republic gain of USD 446 million.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c09:s02"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "The annual net-income exclusion increase of USD 445 million equals removal of the USD 1,665 million after-tax Apple reserve less removal of the First Republic after-tax gain and the USD 774 million tax benefit. The residual is a derived amount, not a separately printed exact-dollar result.",
+      "independent_calculation": "1665 - 774 - 445 = 446 USD million"
+    },
+    "c10": {
+      "replaces": "exact_average_member_revenue_identified",
+      "assertion": "The supplied 325 million paid-membership milestone is reported as the FY2025 annual average number of paid memberships.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c10:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "The supplied figure is a milestone crossed during Q4, not the average membership count across FY2025. No annual average is supplied."
+    }
+  }
+}

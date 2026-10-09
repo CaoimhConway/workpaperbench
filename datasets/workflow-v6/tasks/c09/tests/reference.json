@@ -1,0 +1,50 @@
+{
+  "task_id": "workflow-v6-c09",
+  "tables": [
+    {
+      "id": "bank_basis_bridge",
+      "file": "bank_basis_bridge.sql",
+      "evidence": [
+        "c09:s01",
+        "c09:s03"
+      ]
+    },
+    {
+      "id": "significant_item_bridge",
+      "file": "significant_item_bridge.sql",
+      "evidence": [
+        "c09:s02"
+      ]
+    },
+    {
+      "id": "annual_exclusion_components",
+      "file": "annual_exclusion_components.sql",
+      "evidence": [
+        "c09:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "c09:s01"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "c09:s02"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "supported",
+      "evidence": [
+        "c09:s02"
+      ]
+    }
+  ]
+}

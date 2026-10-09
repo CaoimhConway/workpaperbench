@@ -1,0 +1,51 @@
+{
+  "task_id": "workflow-v3-c10",
+  "tables": [
+    {
+      "id": "regional_currency",
+      "file": "regional_currency.sql",
+      "evidence": [
+        "c10:s01"
+      ]
+    },
+    {
+      "id": "annual_currency_margin",
+      "file": "annual_currency_margin.sql",
+      "evidence": [
+        "c10:s02"
+      ]
+    },
+    {
+      "id": "forecast_bounds",
+      "file": "forecast_bounds.sql",
+      "evidence": [
+        "c10:s02",
+        "c10:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "beginning_year_margin_basis_matches_regional_basis",
+      "verdict": "contradicted",
+      "evidence": [
+        "c10:s01",
+        "c10:s02"
+      ]
+    },
+    {
+      "id": "target_includes_acquisition_expense",
+      "verdict": "supported",
+      "evidence": [
+        "c10:s03"
+      ]
+    },
+    {
+      "id": "exact_average_member_revenue_identified",
+      "verdict": "unresolved",
+      "evidence": [
+        "c10:s03"
+      ]
+    }
+  ]
+}

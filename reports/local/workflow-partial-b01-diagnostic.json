@@ -1,0 +1,98 @@
+{
+  "proof_id": "partial-b01-diagnostic-1",
+  "original_attempt_id": "local-hybrid-development-b01-1",
+  "original_status": "infrastructure_failed",
+  "original_receipt_sha256": "0edf710b30c2af0f809cd905dc02a5036152c0f71c0df8eb93a05676bb16260d",
+  "diagnostic_attempt_id": "partial-diagnostic-b01-1",
+  "diagnostic_receipt_sha256": "c105e7a3f0cc60f96b6a2a8015392e7f8b38c0427ad06fb43f8e803fbfcca2e8",
+  "manifest_id": "workflow-v4-canonical-ab41935da3c6",
+  "scorer_sha256": "caf9b58c3e0f1c6ae34cc59546de95b0e0055f872c575db61796ad7ddd1c61aa",
+  "raw_answer_sha256": "bf34bbed42f3fa3cd8b5b9f9c5fcac137c6af779bb5bd2f733fa27a0072ce835",
+  "normalized_answer_sha256": "4b7dd4d70ea3bff81be5c9853c49e8e71046b3aad2323a22a23e02b0b2d936b7",
+  "sql_file_sha256": {
+    "reserve_bridge.sql": "dc166aef4c9169b1fb2fbd5fd961ad8e7e2feef393f78e5e6bfb940a67e48eda",
+    "reserve_coverage.sql": "c1e0693008295a2fb68df381f79c735350e878888a2ffb092087e5a882c1b7c2",
+    "signature_lag.sql": "bb16264f03c3c022fb421ca9a4d3cc1f0f2b4dd0a9ce62dd179ce2195343d8c2"
+  },
+  "verdict": {
+    "scorer_version": "workflow-1.0.0",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "financial_answer": true,
+      "evidence": false,
+      "robustness": false,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "reserve_coverage": {
+          "original": true,
+          "evidence": false,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "june_cash_and_total_reserves_change": true,
+            "identical_export_duplicate": false,
+            "distinct_dates_with_equal_amounts": true
+          }
+        },
+        "signature_lag": {
+          "original": true,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "june_cash_and_total_reserves_change": true,
+            "identical_export_duplicate": false,
+            "distinct_dates_with_equal_amounts": true
+          }
+        },
+        "reserve_bridge": {
+          "original": true,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "june_cash_and_total_reserves_change": false,
+            "identical_export_duplicate": false,
+            "distinct_dates_with_equal_amounts": true
+          }
+        }
+      },
+      "claims": {
+        "base_coverage_sql_is_valid": {
+          "verdict": true,
+          "evidence": false
+        },
+        "signature_lag_sql_is_valid": {
+          "verdict": true,
+          "evidence": true
+        },
+        "observations_identify_payments_volume": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [
+      "reserve_coverage:evidence",
+      "reserve_coverage:control:identical_export_duplicate",
+      "signature_lag:control:identical_export_duplicate",
+      "reserve_bridge:control:june_cash_and_total_reserves_change",
+      "reserve_bridge:control:identical_export_duplicate",
+      "base_coverage_sql_is_valid:evidence"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "interpretation": "Fresh native grading of exactly retained artifacts from an incomplete native session. This does not change its scored infrastructure outcome or constitute successful scored completion.",
+  "limitations": [
+    "No candidate artifact was repaired or reconstructed from chat.",
+    "This is inference-free verification, not an expert-selected-evidence model run."
+  ]
+}

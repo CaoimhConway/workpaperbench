@@ -1,0 +1,32 @@
+{
+  "proof_id": "partial-artifact-retention-1",
+  "attempt_id": "partial-retention-control-1",
+  "receipt_sha256": "0a240c61bb4d9b8d78e051b3a06b03e12cb3edf019db175bdcc47190f1d66c9b",
+  "manifest_id": "workflow-v4-canonical-ab41935da3c6",
+  "scorer_sha256": "caf9b58c3e0f1c6ae34cc59546de95b0e0055f872c575db61796ad7ddd1c61aa",
+  "execution_files_sha256": {
+    "scripts/local_trial.py": "400bcc2798de2459a10e2b75b14ed2e4cb02a838414ac6b17e42a23a20c40572",
+    "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+    "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+    "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+    "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+  },
+  "inference": false,
+  "sql_file_sha256": {
+    "partial.sql": "c004bd963637fe4097724104f9d4cf1343a01c7ccabf75d984562ad17f2d2fd3"
+  },
+  "sql_bytes": 18,
+  "checks": {
+    "financial_answer": null,
+    "evidence": null,
+    "robustness": null,
+    "delivery": false
+  },
+  "isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  },
+  "external_service_spend_usd": 0
+}

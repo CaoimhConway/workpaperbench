@@ -1,0 +1,184 @@
+{
+  "$id": "https://github.com/CaoimhConway/workpaperbench/challenge-v1/workpaper-1.1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "answers": {
+      "items": {
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "else": {
+              "properties": {
+                "reason_code": {
+                  "enum": [
+                    "no_eligible_observation",
+                    "missing_comparable_definition",
+                    "missing_required_labels",
+                    "missing_required_input"
+                  ]
+                },
+                "sql": {
+                  "type": "null"
+                },
+                "value": {
+                  "type": "null"
+                }
+              }
+            },
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "answered"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "reason_code": {
+                  "type": "null"
+                },
+                "sql": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        ],
+        "properties": {
+          "evidence": {
+            "items": {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 10,
+            "minItems": 0,
+            "type": "array",
+            "uniqueItems": true
+          },
+          "id": {
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string"
+          },
+          "reason_code": {
+            "enum": [
+              "no_eligible_observation",
+              "missing_comparable_definition",
+              "missing_required_labels",
+              "missing_required_input",
+              null
+            ]
+          },
+          "sql": {
+            "maxLength": 16384,
+            "minLength": 1,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "enum": [
+              "answered",
+              "insufficient_evidence"
+            ]
+          },
+          "unit": {
+            "maxLength": 64,
+            "minLength": 1,
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "status",
+          "value",
+          "unit",
+          "evidence",
+          "sql"
+        ],
+        "type": "object"
+      },
+      "maxItems": 5,
+      "minItems": 1,
+      "type": "array"
+    },
+    "conclusion": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "evidence": {
+              "items": {
+                "maxLength": 100,
+                "minLength": 1,
+                "type": "string"
+              },
+              "maxItems": 10,
+              "minItems": 0,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "reason_code": {
+              "enum": [
+                "supported_by_calculation",
+                "contradicted_by_calculation",
+                "incompatible_definition",
+                "incompatible_coverage",
+                "ineligible_source",
+                "missing_required_evidence",
+                null
+              ]
+            },
+            "verdict": {
+              "enum": [
+                "supported",
+                "contradicted",
+                "not_established"
+              ]
+            }
+          },
+          "required": [
+            "verdict",
+            "evidence"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "context_evidence": {
+      "items": {
+        "maxLength": 100,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 10,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "task_id": {
+      "pattern": "^challenge-v2-[abc]0[1-4]$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "answers",
+    "conclusion"
+  ],
+  "type": "object"
+}

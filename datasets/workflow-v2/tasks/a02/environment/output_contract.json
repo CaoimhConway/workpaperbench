@@ -1,0 +1,133 @@
+{
+  "tables": {
+    "cash_model": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "net_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "operating_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "property_spending_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "lease_principal_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "free_cash_flow_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "fcf_less_net_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "months"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "operating_cash_bridge": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "noncash_adjustments_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "working_capital_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "months"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "segment_model": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "segment": {
+          "type": "text",
+          "unit": "label"
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "operating_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "months",
+        "segment"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "annual_fcf_increased": "FY2025 free cash flow exceeded FY2024 free cash flow on the issuer definition.",
+    "foa_income_covers_rl_loss": "FY2025 Family of Apps operating income exceeds the absolute Reality Labs operating loss.",
+    "tax_adjustment_future_cash_identifiable": "The supplied cash-flow statement identifies the exact future cash-tax saving caused by its deferred-tax adjustment."
+  },
+  "definitions": {
+    "cash_model": "months=3 denotes Q4, months=9 the first nine months and months=12 the fiscal year. Spending and lease principal are positive outflow amounts. FCF less net income is a difference of period flows.",
+    "operating_cash_bridge": "Residual is net income plus the disclosed noncash adjustments and operating-asset/liability changes less reported operating cash flow. Other means the row in operating cash adjustments, not other investing or financing activities.",
+    "segment_model": "Family of Apps and Reality Labs are separate segment keys, with operating margin in percent."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "configuration_id": "qwen3-4b-q4km-cpu-64k-yarn-preview",
+  "execution_profile": "local-lima",
+  "model": {
+    "id": "qwen3-4b-q4_k_m",
+    "weights": ".local/models/Qwen3-4B-Q4_K_M.gguf",
+    "repository": "Qwen/Qwen3-4B-GGUF",
+    "revision": "bc640142c66e1fdd12af0bd68f40445458f3869b",
+    "sha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5",
+    "quantization": "Q4_K_M",
+    "total_parameters_billions": 4.0,
+    "active_parameters_billions": 4.0,
+    "chat_template_sha256": "57f1fd00f0013a2be96aa79b857391f27e23df5b5f847072b524c897e24d0361"
+  },
+  "runtime": {
+    "binary": ".local/runtime/llama-b11516/llama-server",
+    "sha256": "cdf2d31e4b75714ebad37ffeb8f3d51e9a7be45daa6fd884a6a360abaee04091",
+    "version": "llama.cpp b11516 d4d82d67f",
+    "backend": "cpu",
+    "hardware": "MacPro7,1 Intel Xeon W-3245, Accelerate BLAS, no GPU offload"
+  },
+  "serving": {
+    "port": 18083,
+    "context": 65536,
+    "threads": 8,
+    "parallel": 1,
+    "reasoning": "off",
+    "rope_scaling": "yarn",
+    "rope_scale": 2,
+    "yarn_original_context": 32768,
+    "flash_attention": "off",
+    "cache_type_k": "f16",
+    "cache_type_v": "f16",
+    "observe_slots": true,
+    "context_shift": false
+  },
+  "candidate": {
+    "wall_seconds": 1800,
+    "turns": 12,
+    "generation": {
+      "max_tokens": 4096,
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "seed": 17,
+      "min_p": 0
+    }
+  },
+  "harbor_version": "0.23.0",
+  "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683",
+  "status": "Unscored setup preview, final choice requires native tool and artifact proof",
+  "external_service_spend_usd": 0
+}

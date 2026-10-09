@@ -1,0 +1,1098 @@
+# Meta FY2025 cash-generation and segment disclosures
+
+Primary issuer: https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Fourth-Quarter-and-Full-Year-2025-Results/default.aspx
+
+Published January 28, 2026. Retrieved 2026-10-09T09:45:30.193355+00:00. This is not a historical point-in-time availability claim.
+
+All tables below retain USD million, unaudited, and the four source columns: three months ended December 31, 2025, three months ended December 31, 2024, twelve months ended December 31, 2025 and twelve months ended December 31, 2024. Negative cash-flow amounts are outflows.
+
+a02:s01 - Condensed consolidated statements of cash flows, three and twelve months ended December 31, 2025 and 2024
+Operating cash flow reconciles net income through noncash adjustments and changes in operating assets and liabilities. Property purchases are investing outflows, while principal finance-lease payments are financing outflows.
+
+a02:s02 - Segment information, revenue and income (loss) from operations, same four period columns
+Family of Apps and Reality Labs are reportable segments. Advertising plus other revenue belongs within Family of Apps. The segments are not additional revenue categories to add to advertising.
+
+a02:s03 - Non-GAAP financial measures and reconciliation of free cash flow
+Meta defines free cash flow by deducting both property and equipment purchases and principal finance-lease payments from operating cash flow. The reported full-year free cash flows are USD 43,585 million in 2025 and USD 52,103 million in 2024.
+
+Source-derived cash-flow observations
+
+[
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "",
+    "amount": 2025.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "",
+    "amount": 2024.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "",
+    "amount": 2025.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "",
+    "amount": 2024.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Net income",
+    "amount": 22768.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Net income",
+    "amount": 20838.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Net income",
+    "amount": 60458.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Net income",
+    "amount": 62360.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Depreciation and amortization",
+    "amount": 5411.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Depreciation and amortization",
+    "amount": 4460.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Depreciation and amortization",
+    "amount": 18616.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Depreciation and amortization",
+    "amount": 15498.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Share-based compensation",
+    "amount": 5890.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Share-based compensation",
+    "amount": 4262.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Share-based compensation",
+    "amount": 20427.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Share-based compensation",
+    "amount": 16690.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Deferred income taxes",
+    "amount": 1033.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Deferred income taxes",
+    "amount": -1332.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Deferred income taxes",
+    "amount": 18738.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Deferred income taxes",
+    "amount": -4738.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Unrealized (gain) loss on equity investments",
+    "amount": -496.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Unrealized (gain) loss on equity investments",
+    "amount": 2.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Unrealized (gain) loss on equity investments",
+    "amount": -1138.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Unrealized (gain) loss on equity investments",
+    "amount": -53.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Impairment charges for facilities consolidation",
+    "amount": 0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Impairment charges for facilities consolidation",
+    "amount": 94.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Impairment charges for facilities consolidation",
+    "amount": 0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Impairment charges for facilities consolidation",
+    "amount": 383.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Other",
+    "amount": -56.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Other",
+    "amount": 167.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Other",
+    "amount": -416.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Other",
+    "amount": 140.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Accounts receivable",
+    "amount": -2475.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Accounts receivable",
+    "amount": -2978.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Accounts receivable",
+    "amount": -1815.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Accounts receivable",
+    "amount": -1485.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Prepaid expenses and other current assets",
+    "amount": 259.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Prepaid expenses and other current assets",
+    "amount": -530.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Prepaid expenses and other current assets",
+    "amount": -89.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Prepaid expenses and other current assets",
+    "amount": -698.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Other assets",
+    "amount": -272.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Other assets",
+    "amount": -200.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Other assets",
+    "amount": -481.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Other assets",
+    "amount": -270.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Accounts payable",
+    "amount": 623.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Accounts payable",
+    "amount": 568.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Accounts payable",
+    "amount": -14.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Accounts payable",
+    "amount": 373.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Accrued expenses and other current liabilities",
+    "amount": 3960.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Accrued expenses and other current liabilities",
+    "amount": 1523.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Accrued expenses and other current liabilities",
+    "amount": 1077.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Accrued expenses and other current liabilities",
+    "amount": 323.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Other liabilities",
+    "amount": -431.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Other liabilities",
+    "amount": 1114.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Other liabilities",
+    "amount": 437.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Other liabilities",
+    "amount": 2805.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Net cash provided by operating activities",
+    "amount": 36214.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Net cash provided by operating activities",
+    "amount": 27988.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Net cash provided by operating activities",
+    "amount": 115800.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Net cash provided by operating activities",
+    "amount": 91328.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Purchases of property and equipment",
+    "amount": -21383.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Purchases of property and equipment",
+    "amount": -14425.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Purchases of property and equipment",
+    "amount": -69691.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Purchases of property and equipment",
+    "amount": -37256.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Purchases of marketable securities",
+    "amount": -14580.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Purchases of marketable securities",
+    "amount": -10898.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Purchases of marketable securities",
+    "amount": -36929.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Purchases of marketable securities",
+    "amount": -25542.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Sales and maturities of marketable securities",
+    "amount": 3113.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Sales and maturities of marketable securities",
+    "amount": 3817.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Sales and maturities of marketable securities",
+    "amount": 26874.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Sales and maturities of marketable securities",
+    "amount": 15789.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Payments for held-for-sale assets",
+    "amount": -635.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Payments for held-for-sale assets",
+    "amount": 0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Payments for held-for-sale assets",
+    "amount": -2432.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Payments for held-for-sale assets",
+    "amount": 0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Proceeds from Venture distribution",
+    "amount": 2554.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Proceeds from Venture distribution",
+    "amount": 0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Proceeds from Venture distribution",
+    "amount": 2554.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Proceeds from Venture distribution",
+    "amount": 0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Purchases of non-marketable equity investments",
+    "amount": -70.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Purchases of non-marketable equity investments",
+    "amount": 0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Purchases of non-marketable equity investments",
+    "amount": -18330.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Purchases of non-marketable equity investments",
+    "amount": -11.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Acquisitions of businesses and intangible assets",
+    "amount": -3415.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Acquisitions of businesses and intangible assets",
+    "amount": -9.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Acquisitions of businesses and intangible assets",
+    "amount": -4231.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Acquisitions of businesses and intangible assets",
+    "amount": -270.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Other investing activities",
+    "amount": 229.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Other investing activities",
+    "amount": 17.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Other investing activities",
+    "amount": 182.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Other investing activities",
+    "amount": 140.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Net cash used in investing activities",
+    "amount": -34187.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Net cash used in investing activities",
+    "amount": -21498.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Net cash used in investing activities",
+    "amount": -102003.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Net cash used in investing activities",
+    "amount": -47150.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Taxes paid related to net share settlement of equity awards",
+    "amount": -4272.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Taxes paid related to net share settlement of equity awards",
+    "amount": -3857.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Taxes paid related to net share settlement of equity awards",
+    "amount": -18400.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Taxes paid related to net share settlement of equity awards",
+    "amount": -13770.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Repurchases of Class A common stock",
+    "amount": 0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Repurchases of Class A common stock",
+    "amount": 0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Repurchases of Class A common stock",
+    "amount": -26248.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Repurchases of Class A common stock",
+    "amount": -30125.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Payments for dividends and dividend equivalents",
+    "amount": -1338.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Payments for dividends and dividend equivalents",
+    "amount": -1269.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Payments for dividends and dividend equivalents",
+    "amount": -5324.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Payments for dividends and dividend equivalents",
+    "amount": -5072.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Proceeds from issuance of long-term debt, net",
+    "amount": 29906.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Proceeds from issuance of long-term debt, net",
+    "amount": 0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Proceeds from issuance of long-term debt, net",
+    "amount": 29906.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Proceeds from issuance of long-term debt, net",
+    "amount": 10432.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Principal payments on finance leases",
+    "amount": -754.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Principal payments on finance leases",
+    "amount": -411.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Principal payments on finance leases",
+    "amount": -2524.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Principal payments on finance leases",
+    "amount": -1969.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Other financing activities",
+    "amount": 1607.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Other financing activities",
+    "amount": 72.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Other financing activities",
+    "amount": 2220.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Other financing activities",
+    "amount": -277.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Net cash used in financing activities",
+    "amount": 25149.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Net cash used in financing activities",
+    "amount": -5465.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Net cash used in financing activities",
+    "amount": -20370.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Net cash used in financing activities",
+    "amount": -40781.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Effect of exchange rate changes on cash, cash equivalents, and restricted cash equivalents",
+    "amount": -17.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Effect of exchange rate changes on cash, cash equivalents, and restricted cash equivalents",
+    "amount": -714.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Effect of exchange rate changes on cash, cash equivalents, and restricted cash equivalents",
+    "amount": 235.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Effect of exchange rate changes on cash, cash equivalents, and restricted cash equivalents",
+    "amount": -786.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Net increase (decrease) in cash, cash equivalents, and restricted cash equivalents",
+    "amount": 27159.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Net increase (decrease) in cash, cash equivalents, and restricted cash equivalents",
+    "amount": 311.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Net increase (decrease) in cash, cash equivalents, and restricted cash equivalents",
+    "amount": -6338.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Net increase (decrease) in cash, cash equivalents, and restricted cash equivalents",
+    "amount": 2611.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Cash, cash equivalents, and restricted cash equivalents at beginning of the period",
+    "amount": 11941.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Cash, cash equivalents, and restricted cash equivalents at beginning of the period",
+    "amount": 45127.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Cash, cash equivalents, and restricted cash equivalents at beginning of the period",
+    "amount": 45438.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Cash, cash equivalents, and restricted cash equivalents at beginning of the period",
+    "amount": 42827.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Cash, cash equivalents, and restricted cash equivalents at end of the period",
+    "amount": 39100.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Cash, cash equivalents, and restricted cash equivalents at end of the period",
+    "amount": 45438.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Cash, cash equivalents, and restricted cash equivalents at end of the period",
+    "amount": 39100.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Cash, cash equivalents, and restricted cash equivalents at end of the period",
+    "amount": 45438.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Cash and cash equivalents",
+    "amount": 35873.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Cash and cash equivalents",
+    "amount": 43889.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Cash and cash equivalents",
+    "amount": 35873.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Cash and cash equivalents",
+    "amount": 43889.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Restricted cash equivalents, included in prepaid expenses and other current assets",
+    "amount": 837.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Restricted cash equivalents, included in prepaid expenses and other current assets",
+    "amount": 353.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Restricted cash equivalents, included in prepaid expenses and other current assets",
+    "amount": 837.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Restricted cash equivalents, included in prepaid expenses and other current assets",
+    "amount": 353.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Restricted cash equivalents, included in other assets",
+    "amount": 2390.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Restricted cash equivalents, included in other assets",
+    "amount": 1196.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Restricted cash equivalents, included in other assets",
+    "amount": 2390.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Restricted cash equivalents, included in other assets",
+    "amount": 1196.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Total cash, cash equivalents, and restricted cash equivalents",
+    "amount": 39100.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Total cash, cash equivalents, and restricted cash equivalents",
+    "amount": 45438.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Total cash, cash equivalents, and restricted cash equivalents",
+    "amount": 39100.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Total cash, cash equivalents, and restricted cash equivalents",
+    "amount": 45438.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "measure": "Cash paid for income taxes, net",
+    "amount": 1285.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "measure": "Cash paid for income taxes, net",
+    "amount": 2227.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "measure": "Cash paid for income taxes, net",
+    "amount": 7578.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "measure": "Cash paid for income taxes, net",
+    "amount": 10554.0
+  }
+]
+
+Source-derived segment observations
+
+[
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "segment": "Family of Apps",
+    "measure": "revenue",
+    "amount": 58938.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "segment": "Family of Apps",
+    "measure": "revenue",
+    "amount": 47302.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "segment": "Family of Apps",
+    "measure": "revenue",
+    "amount": 198759.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "segment": "Family of Apps",
+    "measure": "revenue",
+    "amount": 162355.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "segment": "Reality Labs",
+    "measure": "revenue",
+    "amount": 955.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "segment": "Reality Labs",
+    "measure": "revenue",
+    "amount": 1083.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "segment": "Reality Labs",
+    "measure": "revenue",
+    "amount": 2207.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "segment": "Reality Labs",
+    "measure": "revenue",
+    "amount": 2146.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "segment": "Family of Apps",
+    "measure": "operating_income",
+    "amount": 30766.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "segment": "Family of Apps",
+    "measure": "operating_income",
+    "amount": 28332.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "segment": "Family of Apps",
+    "measure": "operating_income",
+    "amount": 102469.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "segment": "Family of Apps",
+    "measure": "operating_income",
+    "amount": 87109.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 3,
+    "segment": "Reality Labs",
+    "measure": "operating_income",
+    "amount": -6021.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 3,
+    "segment": "Reality Labs",
+    "measure": "operating_income",
+    "amount": -4967.0
+  },
+  {
+    "fiscal_year": 2025,
+    "months": 12,
+    "segment": "Reality Labs",
+    "measure": "operating_income",
+    "amount": -19193.0
+  },
+  {
+    "fiscal_year": 2024,
+    "months": 12,
+    "segment": "Reality Labs",
+    "measure": "operating_income",
+    "amount": -17729.0
+  }
+]

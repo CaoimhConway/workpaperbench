@@ -1,0 +1,545 @@
+{
+  "diagnostic_id": "workflow-development-budget-diagnostics-1",
+  "schedule_id": "local-workflow-development-4",
+  "manifest_id": "workflow-v4-canonical-ab41935da3c6",
+  "scorer_sha256": "caf9b58c3e0f1c6ae34cc59546de95b0e0055f872c575db61796ad7ddd1c61aa",
+  "model_configuration_sha256": "30f79f52a8c9033b45cf5c0518ac96718e3880323b79bcb4fa8004661e4e4236",
+  "scored_attempts": [
+    {
+      "attempt_id": "local-budget-development-c01-1",
+      "task_id": "workflow-v4-c01",
+      "receipt_sha256": "2f2531733676f9159d93c31d64679426b0f68195a30c253c555e0ebe7e61d23c",
+      "status": "infrastructure_failed",
+      "started_at": "2026-10-12T06:55:45.356146+00:00",
+      "finished_at": "2026-10-12T07:56:52.856299+00:00",
+      "elapsed_seconds": 3667.500153,
+      "checks": {
+        "delivery": null,
+        "financial_answer": null,
+        "evidence": null,
+        "robustness": null
+      },
+      "isolation": null,
+      "details": null,
+      "errors": [
+        "RuntimeError"
+      ],
+      "raw_answer_sha256": null,
+      "normalized_answer_sha256": null,
+      "sql_file_sha256": {
+        "revenue_bridge.sql": "cf299b85292372d144d994c115e32cb98b096ad4d07d51e99edd02306dae6368"
+      },
+      "native_metadata": {
+        "available": true,
+        "sha256": "dc492202b239972b7151fa6010dd1f903186f3da110b4ae23f2d33db29c4e65b",
+        "steps": 27,
+        "tool_calls": 28,
+        "tool_names": {
+          "terminal": 28
+        },
+        "source_file_mentions": {
+          "sources.md": 1,
+          "evidence.json": 1,
+          "schema.json": 1,
+          "output_contract.json": 1,
+          "starting_": 0
+        },
+        "sqlite_commands": 8
+      },
+      "native_artifact_supplement": null,
+      "timings": [
+        {
+          "request_id": 106,
+          "generation_ms": 14631.53,
+          "tokens": 145,
+          "tokens_per_second": 9.84
+        },
+        {
+          "request_id": 312,
+          "generation_ms": 5574.13,
+          "tokens": 51,
+          "tokens_per_second": 8.97
+        },
+        {
+          "request_id": 448,
+          "generation_ms": 11296.86,
+          "tokens": 102,
+          "tokens_per_second": 8.94
+        },
+        {
+          "request_id": 560,
+          "generation_ms": 91348.18,
+          "tokens": 805,
+          "tokens_per_second": 8.8
+        },
+        {
+          "request_id": 1426,
+          "generation_ms": 283846.82,
+          "tokens": 2463,
+          "tokens_per_second": 8.67
+        },
+        {
+          "request_id": 4033,
+          "generation_ms": 109365.76,
+          "tokens": 947,
+          "tokens_per_second": 8.65
+        },
+        {
+          "request_id": 5050,
+          "generation_ms": 103861.05,
+          "tokens": 889,
+          "tokens_per_second": 8.55
+        },
+        {
+          "request_id": 6007,
+          "generation_ms": 103765.33,
+          "tokens": 864,
+          "tokens_per_second": 8.32
+        },
+        {
+          "request_id": 6939,
+          "generation_ms": 94451.23,
+          "tokens": 769,
+          "tokens_per_second": 8.13
+        },
+        {
+          "request_id": 7770,
+          "generation_ms": 7658.86,
+          "tokens": 64,
+          "tokens_per_second": 8.23
+        },
+        {
+          "request_id": 7852,
+          "generation_ms": 117234.24,
+          "tokens": 969,
+          "tokens_per_second": 8.26
+        },
+        {
+          "request_id": 8891,
+          "generation_ms": 93921.78,
+          "tokens": 755,
+          "tokens_per_second": 8.03
+        },
+        {
+          "request_id": 9710,
+          "generation_ms": 90155.05,
+          "tokens": 736,
+          "tokens_per_second": 8.15
+        },
+        {
+          "request_id": 10504,
+          "generation_ms": 90490.32,
+          "tokens": 731,
+          "tokens_per_second": 8.07
+        },
+        {
+          "request_id": 11294,
+          "generation_ms": 83799.77,
+          "tokens": 654,
+          "tokens_per_second": 7.79
+        },
+        {
+          "request_id": 12004,
+          "generation_ms": 92376.54,
+          "tokens": 735,
+          "tokens_per_second": 7.95
+        },
+        {
+          "request_id": 12798,
+          "generation_ms": 6332.5,
+          "tokens": 51,
+          "tokens_per_second": 7.9
+        },
+        {
+          "request_id": 12866,
+          "generation_ms": 7947.93,
+          "tokens": 64,
+          "tokens_per_second": 7.93
+        },
+        {
+          "request_id": 12938,
+          "generation_ms": 96036.36,
+          "tokens": 752,
+          "tokens_per_second": 7.82
+        },
+        {
+          "request_id": 13750,
+          "generation_ms": 95359.3,
+          "tokens": 742,
+          "tokens_per_second": 7.77
+        },
+        {
+          "request_id": 14553,
+          "generation_ms": 117384.39,
+          "tokens": 904,
+          "tokens_per_second": 7.69
+        },
+        {
+          "request_id": 15530,
+          "generation_ms": 96960.07,
+          "tokens": 739,
+          "tokens_per_second": 7.61
+        },
+        {
+          "request_id": 16334,
+          "generation_ms": 99351.92,
+          "tokens": 753,
+          "tokens_per_second": 7.57
+        },
+        {
+          "request_id": 17151,
+          "generation_ms": 99128.76,
+          "tokens": 748,
+          "tokens_per_second": 7.54
+        },
+        {
+          "request_id": 17962,
+          "generation_ms": 173964.59,
+          "tokens": 1298,
+          "tokens_per_second": 7.46
+        }
+      ],
+      "per_call_token_limit_observations": {
+        "limit": 4096,
+        "generation_timings_at_limit": 0
+      },
+      "diagnosis": {
+        "infrastructure": "Native partial-session exit 1",
+        "delivery": "Only revenue_bridge.sql retained, no JSON",
+        "semantics": "Unassessed"
+      }
+    },
+    {
+      "attempt_id": "local-budget-development-b01-1",
+      "task_id": "workflow-v4-b01",
+      "receipt_sha256": "b8a081a0d3b114adb9cceed3a1dfcaa87a4327bbdec86935a89f4217bb2baa1c",
+      "status": "verified",
+      "started_at": "2026-10-12T07:58:33.228738+00:00",
+      "finished_at": "2026-10-12T08:12:46.305847+00:00",
+      "elapsed_seconds": 853.077109,
+      "checks": {
+        "financial_answer": false,
+        "evidence": true,
+        "robustness": false,
+        "delivery": true
+      },
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "details": {
+        "tables": {
+          "reserve_coverage": {
+            "original": true,
+            "evidence": true,
+            "controls": {
+              "scaled_amounts_preserve_ratios": true,
+              "june_cash_and_total_reserves_change": true,
+              "identical_export_duplicate": false,
+              "distinct_dates_with_equal_amounts": true
+            }
+          },
+          "signature_lag": {
+            "original": true,
+            "evidence": true,
+            "controls": {
+              "scaled_amounts_preserve_ratios": true,
+              "june_cash_and_total_reserves_change": true,
+              "identical_export_duplicate": false,
+              "distinct_dates_with_equal_amounts": true
+            }
+          },
+          "reserve_bridge": {
+            "original": true,
+            "evidence": true,
+            "controls": {
+              "scaled_amounts_preserve_ratios": true,
+              "june_cash_and_total_reserves_change": true,
+              "identical_export_duplicate": false,
+              "distinct_dates_with_equal_amounts": true
+            }
+          }
+        },
+        "claims": {
+          "base_coverage_sql_is_valid": {
+            "verdict": false,
+            "evidence": true
+          },
+          "signature_lag_sql_is_valid": {
+            "verdict": true,
+            "evidence": true
+          },
+          "observations_identify_payments_volume": {
+            "verdict": true,
+            "evidence": true
+          }
+        }
+      },
+      "errors": [
+        "reserve_coverage:control:identical_export_duplicate",
+        "signature_lag:control:identical_export_duplicate",
+        "reserve_bridge:control:identical_export_duplicate",
+        "base_coverage_sql_is_valid:verdict"
+      ],
+      "raw_answer_sha256": "e287085b7824484034adb80360edd0d914845404b39df54b7d308a707d3a6622",
+      "normalized_answer_sha256": "6bccc04b01b567e308ad636beab80f15ed7160923c050e3cefeb92fd4ce3815d",
+      "sql_file_sha256": {
+        "reserve_bridge.sql": "51b2f6846a9be9c8cffd006fd3260867ed29be8906437c28072df376f74ff18d",
+        "reserve_coverage.sql": "c1e0693008295a2fb68df381f79c735350e878888a2ffb092087e5a882c1b7c2",
+        "signature_lag.sql": "066286ee0e7a8da43374a1bf888a77b3340fe43ed28717161ba825cee895c4a7"
+      },
+      "native_metadata": {
+        "available": true,
+        "sha256": "af48ed863f6de081fed63767b52cf498384b0f7dd2131a3af2ec198585e8c30c",
+        "steps": 16,
+        "tool_calls": 23,
+        "tool_names": {
+          "terminal": 23
+        },
+        "source_file_mentions": {
+          "sources.md": 1,
+          "evidence.json": 1,
+          "schema.json": 1,
+          "output_contract.json": 1,
+          "starting_": 3
+        },
+        "sqlite_commands": 8
+      },
+      "native_artifact_supplement": null,
+      "timings": [
+        {
+          "request_id": 19809,
+          "generation_ms": 37124.85,
+          "tokens": 367,
+          "tokens_per_second": 9.86
+        },
+        {
+          "request_id": 20204,
+          "generation_ms": 10060.46,
+          "tokens": 94,
+          "tokens_per_second": 9.24
+        },
+        {
+          "request_id": 20356,
+          "generation_ms": 12397.64,
+          "tokens": 115,
+          "tokens_per_second": 9.2
+        },
+        {
+          "request_id": 20482,
+          "generation_ms": 6201.13,
+          "tokens": 58,
+          "tokens_per_second": 9.19
+        },
+        {
+          "request_id": 20553,
+          "generation_ms": 19948.95,
+          "tokens": 182,
+          "tokens_per_second": 9.07
+        },
+        {
+          "request_id": 20750,
+          "generation_ms": 44971.62,
+          "tokens": 408,
+          "tokens_per_second": 9.05
+        },
+        {
+          "request_id": 21183,
+          "generation_ms": 13169.73,
+          "tokens": 120,
+          "tokens_per_second": 9.04
+        },
+        {
+          "request_id": 21315,
+          "generation_ms": 30460.98,
+          "tokens": 275,
+          "tokens_per_second": 9.0
+        },
+        {
+          "request_id": 21609,
+          "generation_ms": 39315.4,
+          "tokens": 353,
+          "tokens_per_second": 8.95
+        },
+        {
+          "request_id": 21988,
+          "generation_ms": 19373.72,
+          "tokens": 175,
+          "tokens_per_second": 8.98
+        },
+        {
+          "request_id": 22177,
+          "generation_ms": 36801.3,
+          "tokens": 329,
+          "tokens_per_second": 8.91
+        },
+        {
+          "request_id": 22529,
+          "generation_ms": 17181.32,
+          "tokens": 155,
+          "tokens_per_second": 8.96
+        },
+        {
+          "request_id": 22698,
+          "generation_ms": 76654.31,
+          "tokens": 677,
+          "tokens_per_second": 8.82
+        },
+        {
+          "request_id": 23422,
+          "generation_ms": 6955.27,
+          "tokens": 62,
+          "tokens_per_second": 8.77
+        },
+        {
+          "request_id": 23499,
+          "generation_ms": 7404.21,
+          "tokens": 64,
+          "tokens_per_second": 8.51
+        },
+        {
+          "request_id": 23578,
+          "generation_ms": 53101.28,
+          "tokens": 460,
+          "tokens_per_second": 8.64
+        }
+      ],
+      "per_call_token_limit_observations": {
+        "limit": 4096,
+        "generation_timings_at_limit": 0
+      },
+      "diagnosis": {
+        "original_financial_tables": "All three match",
+        "financial_interpretation": "The damaged starting coverage query is judged valid after its repair",
+        "evidence": "Adequate reviewed support",
+        "preservation": "All three queries fail the identical-export-duplicate control",
+        "unsupported_inference": "Payments volume is correctly unresolved",
+        "delivery": "JSON and all three SQL files delivered"
+      }
+    },
+    {
+      "attempt_id": "local-budget-development-a01-1",
+      "task_id": "workflow-v4-a01",
+      "receipt_sha256": "65b5dc20da2bb3d2b437e661de2cc982a465ae996a9b1352bcef0c0cc9110b20",
+      "status": "infrastructure_failed",
+      "started_at": "2026-10-12T08:13:10.222059+00:00",
+      "finished_at": "2026-10-12T09:15:42.884465+00:00",
+      "elapsed_seconds": 3752.662406,
+      "checks": {
+        "delivery": null,
+        "financial_answer": null,
+        "evidence": null,
+        "robustness": null
+      },
+      "isolation": null,
+      "details": null,
+      "errors": [
+        "RuntimeError"
+      ],
+      "raw_answer_sha256": null,
+      "normalized_answer_sha256": null,
+      "sql_file_sha256": {
+        "quarter_model.sql": "4313e83d7bb4375e65f97ae9e27ae7d5f254fbb2befbe326a3230893dc533403"
+      },
+      "native_metadata": {
+        "available": false
+      },
+      "native_artifact_supplement": null,
+      "timings": [
+        {
+          "request_id": 24176,
+          "generation_ms": 27797.03,
+          "tokens": 277,
+          "tokens_per_second": 9.93
+        },
+        {
+          "request_id": 24476,
+          "generation_ms": 5849.11,
+          "tokens": 49,
+          "tokens_per_second": 8.21
+        },
+        {
+          "request_id": 24724,
+          "generation_ms": 7631.4,
+          "tokens": 64,
+          "tokens_per_second": 8.26
+        },
+        {
+          "request_id": 24796,
+          "generation_ms": 526079.09,
+          "tokens": 4096,
+          "tokens_per_second": 7.78
+        },
+        {
+          "request_id": 29198,
+          "generation_ms": 14183.93,
+          "tokens": 114,
+          "tokens_per_second": 7.97
+        },
+        {
+          "request_id": 29560,
+          "generation_ms": 529694.26,
+          "tokens": 4096,
+          "tokens_per_second": 7.73
+        },
+        {
+          "request_id": 33930,
+          "generation_ms": 371112.86,
+          "tokens": 2880,
+          "tokens_per_second": 7.76
+        },
+        {
+          "request_id": 37008,
+          "generation_ms": 529968.33,
+          "tokens": 4096,
+          "tokens_per_second": 7.73
+        },
+        {
+          "request_id": 41371,
+          "generation_ms": 253954.45,
+          "tokens": 1985,
+          "tokens_per_second": 7.81
+        },
+        {
+          "request_id": 43488,
+          "generation_ms": 323981.03,
+          "tokens": 2520,
+          "tokens_per_second": 7.78
+        }
+      ],
+      "per_call_token_limit_observations": {
+        "limit": 4096,
+        "generation_timings_at_limit": 3
+      },
+      "diagnosis": {
+        "infrastructure": "Agent execution timed out at 3600 seconds",
+        "delivery": "Only quarter_model.sql retained, no JSON",
+        "semantics": "Unassessed",
+        "native_trajectory": "Unavailable after timeout, server timing observations retained"
+      }
+    }
+  ],
+  "external_service_spend_usd": 0,
+  "task_design_revisions_used": 1,
+  "grading_corrections": 1,
+  "expert_selected_evidence_diagnostics_used": 0,
+  "held_out_candidate_model_calls": 0,
+  "limitations": [
+    "Three scheduled development attempts under one fixed local quantization do not establish frontier discrimination or fine-grained rankings.",
+    "Infrastructure failures and rejected delivery leave semantic checks unassessed.",
+    "Additional known source context is accepted only with sufficient reviewed support. Evidence IDs do not validate arbitrary prose.",
+    "The setup smoke and earlier profiles/catalogs are excluded from this scored report.",
+    "Source-file mentions count tool arguments, not comprehension or complete reading.",
+    "Per-call token limits and tool-loop limits can leave semantics unassessed. A capped native session is not successful scored completion."
+  ],
+  "calibration_status": "Limited, further calls paused after two infrastructure failures across three scheduled slots",
+  "assessment_coverage": {
+    "scheduled": 3,
+    "assessed": 1,
+    "unassessed": 2,
+    "verified_research_completion": 0,
+    "held_out_candidate_model_calls": 0
+  }
+}

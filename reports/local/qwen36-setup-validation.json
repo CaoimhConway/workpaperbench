@@ -1,0 +1,170 @@
+{
+  "validation_version": "qwen36-local-setup-1",
+  "weights": {
+    "repository": "unsloth/Qwen3.6-35B-A3B-GGUF",
+    "revision": "a483e9e6cbd595906af30beda3187c2663a1118c",
+    "filename": "Qwen3.6-35B-A3B-UD-Q5_K_M.gguf",
+    "sha256": "c13ce26253ea334df472bd8fbd2d6da66d8a41195c17f6fcbf44c4d20ece0932",
+    "bytes": 26456194016,
+    "downloaded_at": "2026-10-13T05:57:12.267672+00:00",
+    "official_model": "Qwen/Qwen3.6-35B-A3B",
+    "official_model_revision_checked": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "license": "Apache-2.0",
+    "conversion": "Publisher quantization, conversion not independently reproduced",
+    "external_service_spend_usd": 0
+  },
+  "configuration": "config/local/qwen36-35b-terminal-24.json",
+  "configuration_sha256": "061f67c0ce6778b507f6ffc06e6899b60924084760b95cbbfae4c381275e20e1",
+  "hardware": "MacPro7,1, Intel Xeon W-3245, 96 GiB RAM",
+  "backend": "CPU, eight threads, no GPU offload",
+  "metal_probe": {
+    "runtime_source_commit": "8a1a9b5126126e5228b95fa909d4b08fac65e8b3",
+    "detected_gpu": "AMD Radeon Pro W5700X, one device exposed",
+    "exit_code": -6,
+    "failure": "GGML_ASSERT(buf_src) in ggml_metal_buffer_set_tensor",
+    "log_sha256": "fde21b90c2a7f69083189b0a7e6725044f6af54eb8410a7c35408dc823d6eda0"
+  },
+  "boundary_attempt_id": "qwen36-boundaries-1",
+  "boundary_receipt_sha256": "aa59484c735fe1bc13bbb36cdef76a4cd4d220c3acee653e52c14498bbe96fe8",
+  "candidate_boundary_checks": {
+    "unavailable:/tests/gold.json": true,
+    "unavailable:/workspace/.git": true,
+    "unavailable:/Users": true,
+    "unavailable:/root/.ssh": true,
+    "unavailable:/var/run/docker.sock": true,
+    "fresh_candidate_state": true,
+    "external_tls_blocked": true,
+    "guest_ssh_blocked": true,
+    "daemon_tcp_blocked": true,
+    "external_dns_udp_blocked": true,
+    "docker_dns_stub_blocked": true,
+    "icmp_probe_available": true,
+    "external_icmp_blocked": true
+  },
+  "verifier_isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  },
+  "sql_resource_checks": {
+    "time": {
+      "rejected": true,
+      "seconds": 1.536,
+      "stdout_bytes": 30,
+      "diagnostic": "{\"error\": \"OperationalError\"}\n"
+    },
+    "memory": {
+      "rejected": true,
+      "seconds": 0.097,
+      "stdout_bytes": 25,
+      "diagnostic": "{\"error\": \"MemoryError\"}\n"
+    },
+    "rows": {
+      "rejected": true,
+      "seconds": 0.035,
+      "stdout_bytes": 24,
+      "diagnostic": "{\"error\": \"ValueError\"}\n"
+    },
+    "cell": {
+      "rejected": true,
+      "seconds": 0.034,
+      "stdout_bytes": 24,
+      "diagnostic": "{\"error\": \"ValueError\"}\n"
+    },
+    "bytes": {
+      "rejected": true,
+      "seconds": 0.034,
+      "stdout_bytes": 24,
+      "diagnostic": "{\"error\": \"ValueError\"}\n"
+    },
+    "write": {
+      "rejected": true,
+      "seconds": 0.033,
+      "stdout_bytes": 27,
+      "diagnostic": "{\"error\": \"DatabaseError\"}\n"
+    },
+    "attach": {
+      "rejected": true,
+      "seconds": 0.033,
+      "stdout_bytes": 27,
+      "diagnostic": "{\"error\": \"DatabaseError\"}\n"
+    },
+    "extension": {
+      "rejected": true,
+      "seconds": 0.033,
+      "stdout_bytes": 30,
+      "diagnostic": "{\"error\": \"OperationalError\"}\n"
+    },
+    "file": {
+      "rejected": true,
+      "seconds": 0.035,
+      "stdout_bytes": 30,
+      "diagnostic": "{\"error\": \"OperationalError\"}\n"
+    }
+  },
+  "tool_smoke": {
+    "receipt_sha256": "b1d98cf63db3577e455ce630451c5329b52ab26fc5c98d97cb8a824a4a161548",
+    "scored_task": false,
+    "observations": "Authored USD-million values, H1 revenue 2225 and Q2 revenue 1074",
+    "tool_request_correct": true,
+    "tool_response_used": true,
+    "arithmetic_correct": true,
+    "strict_json_response": false,
+    "actual_response": "```json\n{\n  \"q1\": 1151\n}\n```",
+    "phases": [
+      {
+        "phase": 0,
+        "wall_seconds": 15.971471142955124,
+        "usage": {
+          "completion_tokens": 113,
+          "prompt_tokens": 312,
+          "total_tokens": 425,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 312,
+          "prompt_ms": 6987.316,
+          "prompt_per_token_ms": 22.39524358974359,
+          "prompt_per_second": 44.65233860898806,
+          "predicted_n": 113,
+          "predicted_ms": 8960.137,
+          "predicted_per_token_ms": 80.00122321428572,
+          "predicted_per_second": 12.499808875690182
+        }
+      },
+      {
+        "phase": 1,
+        "wall_seconds": 10.981975189992227,
+        "usage": {
+          "completion_tokens": 122,
+          "prompt_tokens": 483,
+          "total_tokens": 605,
+          "prompt_tokens_details": {
+            "cached_tokens": 424
+          }
+        },
+        "timings": {
+          "cache_n": 424,
+          "prompt_n": 59,
+          "prompt_ms": 1451.554,
+          "prompt_per_token_ms": 24.602610169491527,
+          "prompt_per_second": 40.64609377260508,
+          "predicted_n": 122,
+          "predicted_ms": 9523.203,
+          "predicted_per_token_ms": 78.70415702479339,
+          "predicted_per_second": 12.705809169456957
+        }
+      }
+    ]
+  },
+  "focused_regression_tests": {
+    "passed": 11,
+    "seconds": 3.11
+  },
+  "decision": "Tool transport and response interpretation work. Preserve the Markdown formatting failure. Actual file delivery is unproven and will be assessed in the first declared native development attempt.",
+  "external_service_spend_usd": 0
+}

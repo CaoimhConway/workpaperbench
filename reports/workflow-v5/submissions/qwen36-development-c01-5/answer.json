@@ -1,0 +1,40 @@
+{
+  "task_id": "workflow-v5-c01",
+  "tables": [
+    {
+      "id": "revenue_bridge",
+      "file": "revenue_bridge.sql",
+      "evidence": ["c03:s01", "c03:s05"]
+    },
+    {
+      "id": "profit_bridge",
+      "file": "profit_bridge.sql",
+      "evidence": ["c03:s01", "c03:s02", "c03:s05"]
+    },
+    {
+      "id": "reconciliation",
+      "file": "reconciliation.sql",
+      "evidence": ["c03:s01", "c03:s02", "c03:s05"]
+    }
+  ],
+  "claims": [
+    {
+      "id": "bitcoin_majority_of_total_revenue_increase",
+      "verdict": "contradicted",
+      "evidence": ["c03:s01", "c03:s03"],
+      "note": "Bitcoin contributed 700,903 of the 2,205,430 total revenue increase (31.78%), not a majority (>50%). Subscription and services-based revenue was the largest contributor at 55.32%."
+    },
+    {
+      "id": "all_components_reconcile",
+      "verdict": "supported",
+      "evidence": ["c03:s01", "c03:s02"],
+      "note": "Revenue component changes sum to the reported total revenue change (residual=0). Gross profit component changes including amortization of acquired technology assets sum to the reported gross profit change (residual=0)."
+    },
+    {
+      "id": "bitcoin_price_effect_identifiable",
+      "verdict": "unresolved",
+      "evidence": ["c03:s03"],
+      "note": "The filing states Bitcoin revenue fluctuates with both customer demand and bitcoin market price (c03:s03), but provides no separate numerical breakdown isolating the price effect from volume/demand effects."
+    }
+  ]
+}

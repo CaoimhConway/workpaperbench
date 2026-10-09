@@ -1,0 +1,108 @@
+{
+  "tables": {
+    "reserve_coverage": {
+      "columns": {
+        "report_date": {
+          "type": "text",
+          "unit": "label"
+        },
+        "reserves_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "issued_sbc": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "coverage_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "residual_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "report_date"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "signature_lag": {
+      "columns": {
+        "report_date": {
+          "type": "text",
+          "unit": "label"
+        },
+        "report_signed_date": {
+          "type": "text",
+          "unit": "label"
+        },
+        "days_to_signature": {
+          "type": "integer",
+          "unit": "count"
+        }
+      },
+      "keys": [
+        "report_date"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "reserve_bridge": {
+      "columns": {
+        "prior_date": {
+          "type": "text",
+          "unit": "label"
+        },
+        "current_date": {
+          "type": "text",
+          "unit": "label"
+        },
+        "cash_change_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "debt_change_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "reserve_change_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "circulation_change_sbc": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "coverage_change_bps": {
+          "type": "real",
+          "unit": "basis_points",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "prior_date",
+        "current_date"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "base_coverage_sql_is_valid": "The supplied starting_reserve_coverage.sql correctly measures coverage separately at each requested economic observation date.",
+    "signature_lag_sql_is_valid": "The supplied starting_signature_lag.sql correctly measures calendar days from economic observation date to signature date.",
+    "observations_identify_payments_volume": "The supplied month-end reserve and circulation snapshots identify SBC payments volume during June."
+  },
+  "definitions": {
+    "reserve_coverage": "Coverage compares same-date cash plus government debt with issued SBC. Residual is component reserves less reported reserve fair value.",
+    "reserve_bridge": "Changes are June less May stocks, not transaction flows. Signature lags are calendar days, not known publication delays."
+  }
+}

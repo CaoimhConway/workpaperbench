@@ -1,0 +1,64 @@
+{
+  "task_id": "workflow-v5-a01",
+  "tables": [
+    {
+      "id": "quarter_model",
+      "file": "quarter_model.sql",
+      "evidence": [
+        "a03:s02 - Three months ended Dec 31, 2024 total revenue 69632 USD million and operating income 31653 USD million (FY2025 Q2 reported)",
+        "a03:s03 - Six months ended Dec 31, 2024 total revenue 135217 USD million and operating income 62205 USD million; Q1 derived as six-month minus Q2: revenue 65585, operating income 30552 (FY2025 Q1)",
+        "a03:s02 - Three months ended Dec 31, 2023 total revenue 62020 USD million and operating income 27032 USD million (FY2024 Q2 reported)",
+        "a03:s03 - Six months ended Dec 31, 2023 total revenue 118537 USD million and operating income 53927 USD million; Q1 derived as six-month minus Q2: revenue 56517, operating income 26895 (FY2024 Q1)"
+      ]
+    },
+    {
+      "id": "quarter_reconciliation",
+      "file": "quarter_reconciliation.sql",
+      "evidence": [
+        "a03:s02 - FY2025 Q2 operating income 31653 USD million, revenue 69632 USD million; FY2024 Q2 operating income 27032 USD million, revenue 62020 USD million",
+        "a03:s03 - Six-month totals for FY2025 and FY2024 used to derive Q1 operating income and revenue by subtraction",
+        "Definition: margin_qoq_bps is Q2 operating margin less Q1, in basis points (margin_diff_pct * 10000)"
+      ]
+    },
+    {
+      "id": "guidance_bridge",
+      "file": "guidance_bridge.sql",
+      "evidence": [
+        "a03:s04 - Azure and other cloud services reported constant-currency growth 31% for three months ended Dec 31, 2024 (Q2 FY2025)",
+        "a03:s01 - Q1 FY2025 call guidance for Azure and other cloud services Q2 FY2025: 31% to 32% in constant currency, issued 2024-10-30",
+        "Definition: midpoint_gap_pp is actual constant-currency percent less the midpoint of the earlier guidance range (31 - 31.5 = -0.5 pp)"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "azure_within_earlier_range",
+      "verdict": "supported",
+      "evidence": [
+        "a03:s04 - Azure and other cloud services constant-currency growth for Q2 FY2025: 31%",
+        "a03:s01 - Earlier guidance from Q1 FY2025 call (issue date 2024-10-30) for Azure Q2 FY2025: 31% to 32% constant currency",
+        "Actual 31% lies within the closed guidance range [31%, 32%]"
+      ],
+      "note": "Azure actual CC growth equals the low end of the earlier guidance range."
+    },
+    {
+      "id": "q2_operating_margin_improved_from_q1",
+      "verdict": "contradicted",
+      "evidence": [
+        "a03:s03 and a03:s02 - FY2025 Q1 derived operating margin: 30552/65585*100 = 46.58%; Q2 reported: 31653/69632*100 = 45.46%",
+        "quarter_reconciliation.sql - FY2025 margin_qoq_bps = -11262.74 bps (Q2 margin below Q1)",
+        "Definition: margin_qoq_bps is Q2 operating margin less Q1 in basis points; negative value indicates decline"
+      ],
+      "note": "Operating margin declined by approximately 113 basis points from Q1 to Q2 FY2025."
+    },
+    {
+      "id": "azure_operating_income_identifiable",
+      "verdict": "contradicted",
+      "evidence": [
+        "a03:s06 - Azure is a business growth disclosure, not consolidated revenue; no separate Azure operating income amount is identified in the supplied disclosures",
+        "a03:s05 - Intelligent Cloud segment operating income (10851 USD million for Q2 FY2025) includes Azure but also Server products and cloud services; Intelligent Cloud must not be treated as Azure operating income per task instructions"
+      ],
+      "note": "The disclosures provide Azure revenue growth rates but no standalone Azure operating income figure."
+    }
+  ]
+}

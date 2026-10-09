@@ -1,0 +1,61 @@
+{
+  "rationale": "An analyst needs an updated comparable quarterly model, a reconciliation and an actual-versus-guidance check. Dependencies are duration reconstruction, fiscal calendar, ratios, currency basis and segment scope. Using six-month amounts as a quarter, summing percentage changes or equating a segment with one business are plausible wrong methods.",
+  "source_group": "microsoft-fy2025-q1-q2",
+  "source_catalog": "challenge-v2-canonical-cb40dc200fda",
+  "source_task_sha256": "99e8788e1a566758114ec39468cbe134ff1c6202e219f367d79bf245bba03e9a",
+  "split": "development",
+  "exposure": "Previously published source group, never held out",
+  "observations": "authentic permitted capture",
+  "starting_defects": "authored synthetic work-product defects",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source rows, separate from submitted SQL",
+  "human_review": "pending",
+  "prototype_task_sha256": "0ae9c5339016bbb8cdf8c4e1ea8e6817620fe70b3b30d97a47958c56148925da",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "1879b444c70205673a0b175dac69890de9eb04a7f7bd1f4504255d4c5af2d7ea",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "d753539e7e014d7cb62a00e96c0bb985f0762dd6840e122e117b94a353afcd3b",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "6af45705207ca926ce9809ca1f0258ecc0a8fc597a3e2bbccc74108857b134ba",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {
+      "quarter_reconciliation": [
+        "revenue_residual_usd_million",
+        "operating_income_residual_usd_million"
+      ]
+    },
+    "new_synthetic_control": false,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "dcaefcc8fd9c21b22937260c8e77d68cf364606d6c2e2ba9934f89f4e3983e59",
+    "claim_mapping": {
+      "q2_operating_margin_improved_from_q1": "claim_1",
+      "azure_operating_income_identifiable": "claim_2",
+      "azure_within_earlier_range": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "azure_operating_income_identifiable",
+      "assertion": "The supplied segment-results table reports Azure-only operating income for Q2 FY2025 separately from Intelligent Cloud operating income.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "a03:s05"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a03:s04",
+        "a03:s06"
+      ],
+      "source_grounded_reason": "The complete segment table reports Intelligent Cloud operating income of USD 10,851 million and no Azure-only operating-income line. Azure is separately disclosed as business revenue growth, which cannot substitute for segment profit."
+    },
+    "human_review": "pending"
+  }
+}
