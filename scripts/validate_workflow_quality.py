@@ -87,7 +87,7 @@ def validate(verdict, variant, covered):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--dataset', default=DATASET, choices=['workflow-v5', 'workflow-v6'])
+    parser.add_argument('--dataset', default=DATASET, choices=['workflow-v5', 'workflow-v6', 'workflow-v7'])
     parser.add_argument('--tasks', nargs='+', default=['a01', 'b01', 'c01'])
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--native-prefix', help='Also test these cases through native Harbor before the control sweep')

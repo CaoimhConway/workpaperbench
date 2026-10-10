@@ -1,0 +1,89 @@
+{
+  "attempt_id": "external-transport-2",
+  "execution_profile": "isolated-linux",
+  "manifest_id": "workflow-v7-canonical-fca4003d0a15",
+  "task_id": "workflow-v7-c01",
+  "task_sha256": "0950c3ec508d27eb571be6a392cb3d03e30e2dda659d419dda9281bfd6349450",
+  "scorer_version": "workflow-1.2.0",
+  "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+  "started_at": "2026-10-14T00:36:23.444456+00:00",
+  "external_service_spend_usd": 0,
+  "status": "verified",
+  "inference": false,
+  "source_kind": "scripted_harness_fixture",
+  "configuration_evidence": "Declared model revision, serving runtime and generation settings. Native version and endpoint model ID are checked. Server enforcement is not independently observed.",
+  "execution_files_sha256": {
+    "scripts/local_trial.py": "c4507592fbafc3cf333521cb12931a4f1d6aa6c8083ef2f492212c839157b91b",
+    "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+    "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+    "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+    "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+  },
+  "model_configuration": {
+    "configuration_id": "deterministic-native-transport-1",
+    "execution_profile": "isolated-linux",
+    "model": {
+      "id": "deterministic-harness-fixture",
+      "revision": "scripted-no-inference"
+    },
+    "runtime": {
+      "name": "Python standard-library protocol fixture",
+      "version": "1"
+    },
+    "serving": {
+      "base_url": "http://172.17.0.1:18080/v1",
+      "context": 65536
+    },
+    "candidate": {
+      "wall_seconds": 180,
+      "turns": 3,
+      "generation": {
+        "max_tokens": 4096,
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "seed": 17
+      },
+      "toolsets": "terminal"
+    },
+    "harbor_version": "0.23.0",
+    "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683"
+  },
+  "model_configuration_sha256": "d1ffc74dff71617c72fbbba0dc157444deab90d0229f577e1a67295d6e5ca49c",
+  "hermes_installer_sha256": "25d3c95550e5ed7c0eec180a7d78dde765721c4e33639ab257c154c0a6e7554f",
+  "effective_task_sha256": "7c0edced50985da3f0d877ee641ec06868140a2a79ba224ed6df042aa13e9773",
+  "native_adapter_sha256": "4854553a013c452c4fff5531973933f13b44cc8724a54b3cb58c6a90f2fb34cc",
+  "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+  "candidate_local_model_health": true,
+  "verdict": {
+    "scorer_version": "workflow-1.2.0",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "financial_answer": null,
+      "numerical_tables": null,
+      "claim_verdicts": null,
+      "evidence": null,
+      "robustness": null,
+      "delivery": false
+    },
+    "details": {
+      "tables": {},
+      "claims": {}
+    },
+    "errors": [
+      "delivery:ValidationError"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "verdict_sha256": "5362a41dc92459a10900699f343d7ef1dff185cc50553cb257ab6f44c6c8dda2",
+  "sql_file_sha256": {},
+  "raw_answer_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "normalized_answer_sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+  "finished_at": "2026-10-14T00:39:21.092326+00:00"
+}

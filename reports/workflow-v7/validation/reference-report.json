@@ -1,0 +1,193 @@
+{
+  "report_version": "local-1.1",
+  "attempts": [
+    {
+      "attempt_id": "external-reference-2",
+      "execution_profile": "isolated-linux",
+      "manifest_id": "workflow-v7-canonical-fca4003d0a15",
+      "task_id": "workflow-v7-c01",
+      "task_sha256": "0950c3ec508d27eb571be6a392cb3d03e30e2dda659d419dda9281bfd6349450",
+      "scorer_version": "workflow-1.2.0",
+      "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+      "started_at": "2026-10-14T00:35:45.493078+00:00",
+      "external_service_spend_usd": 0,
+      "status": "verified",
+      "inference": false,
+      "source_kind": "submitted_artifact_replay",
+      "configuration_evidence": "Declared model revision, serving runtime and generation settings. Native version and endpoint model ID are checked. Server enforcement is not independently observed.",
+      "execution_files_sha256": {
+        "scripts/local_trial.py": "c4507592fbafc3cf333521cb12931a4f1d6aa6c8083ef2f492212c839157b91b",
+        "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+        "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+        "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+        "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+      },
+      "effective_task_sha256": "04d8578788b6d01d22d9690d1afbb278f1b6342e148beb68efa01da21777cb28",
+      "candidate_network_policy": "Loopback and guest bridge TCP 18080 only, all other IPv4/IPv6 protocols dropped",
+      "verdict": {
+        "scorer_version": "workflow-1.2.0",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "verdict_sha256": "40765669944a96690d327052c7e1f8f93633f2a1fa0b01a5d2cbcb71443b6f8f",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      },
+      "raw_answer_sha256": "782d1a1de4578c3c0ace4849dbc5d19383fb08b82ca4ce3335da0c86def4dfe6",
+      "normalized_answer_sha256": "782d1a1de4578c3c0ace4849dbc5d19383fb08b82ca4ce3335da0c86def4dfe6",
+      "finished_at": "2026-10-14T00:36:22.864615+00:00"
+    }
+  ],
+  "diagnostics": [
+    {
+      "attempt_id": "external-reference-2",
+      "task_id": "workflow-v7-c01",
+      "condition": "fresh",
+      "source_kind": "submitted_artifact_replay",
+      "baseline_matched": true,
+      "baseline_note": "Same task, scorer and control inputs on both sides",
+      "failure_dimensions": {
+        "reasoning_or_calculation": "pass",
+        "evidence": "pass",
+        "robustness": "pass",
+        "delivery": "pass",
+        "infrastructure": "pass"
+      },
+      "candidate_error_type": null,
+      "tables": {
+        "profit_bridge": {
+          "original_inputs": "Preservation",
+          "original_and_controls": "Preservation",
+          "original_error": null,
+          "failed_controls": {}
+        },
+        "reconciliation": {
+          "original_inputs": "Preservation",
+          "original_and_controls": "Preservation",
+          "original_error": null,
+          "failed_controls": {}
+        },
+        "revenue_bridge": {
+          "original_inputs": "Repair",
+          "original_and_controls": "Repair",
+          "original_error": null,
+          "failed_controls": {}
+        }
+      },
+      "transition_counts": {
+        "original_inputs": {
+          "Preservation": 2,
+          "Repair": 1
+        },
+        "original_and_controls": {
+          "Preservation": 2,
+          "Repair": 1
+        }
+      },
+      "opportunities": {
+        "original_inputs": {
+          "initially_incorrect": 1,
+          "initially_correct": 2
+        },
+        "original_and_controls": {
+          "initially_incorrect": 1,
+          "initially_correct": 2
+        }
+      }
+    }
+  ],
+  "baseline_sources_sha256": {
+    "reports/workflow-v7/starting-sql.json": "3aa4853f3dea2a08aad32122c2ff04174f4a58858dc82446bae8ce63629e8f8e"
+  },
+  "interpretation": "Table transitions use matching original inputs and controls. Reasoning or calculation is an observed output failure, not a claim about the internal cause. Missing delivery or infrastructure leaves table changes unassessed. Different budgets and continuations are not controlled comparisons.",
+  "external_service_spend_usd": 0,
+  "held_out_evaluation": "not run",
+  "frontier_discrimination": "unmeasured"
+}

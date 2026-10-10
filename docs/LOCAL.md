@@ -1,4 +1,8 @@
-# Local execution
+# Owner-hosted local execution
+
+For current evaluations without Mac-specific paths, use the [portable Linux
+execution guide](RUNNING.md). This document preserves the measured local profiles
+and their historical development conditions.
 
 This profile uses the Intel Mac Pro as the inference host. Docker runs only in a
 dedicated Ubuntu guest. The tested guest has six CPUs, 12 GiB RAM and a 40 GiB
@@ -27,8 +31,8 @@ The project environment and guest setup above are sufficient for grading. No
 weights, model server or Hermes installer are required for this path.
 
 ```sh
-./wpb grade --dataset workflow-v6 --task c01 \
-  --artifacts examples/block-workpaper-v6 --attempt my-block-example-1
+./wpb grade --dataset workflow-v7 --task c01 \
+  --artifacts examples/block-workpaper-v7 --attempt my-block-example-1
 ```
 
 The checked-in example is an authored reference. The expected checks are
@@ -47,7 +51,7 @@ Other guest/platform combinations have not been validated here.
 
 ## Run the measured local model
 
-The current authored catalog is workflow-v6. The version 4 and 5 commands below
+The current authored catalog is workflow-v7. The version 4 and 5 commands below
 reproduce historical development conditions and do not measure the revised tasks.
 
 The measured default is Qwen3.5-9B **Q4_K_M** from

@@ -1,0 +1,54 @@
+{
+  "rationale": "The same deferred plan produces adjustments above and below operating income, while a prior GAAP loss changes dilution. Preserving genuine unchanged periods requires financial scope decisions and a supported non-answer to an unavailable restatement.",
+  "source_group": "intuit-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "authored synthetic work-product defects",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "3bab670a8a51d52224b990f41b88b75e7ff8be77947d5ade6d26ac3cde54805b",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "a04b5fdb7dc0f2dd65b65e4a17567ef84c59c0d2961221b320b41e63bb0e29c7",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "b24b7fd862078322053b7da9bfb9934f9512bf0da5e427a5e7f0576db01d5cf7",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "08d44a36adf91b7a31ddc3f3d30f7607a3a9bd24bd3a13ba491de4b3089ef42c",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "53a6abecf4d9262d4b714caae0690d59b256274954fd8ee27b4536173ca106cf",
+    "claim_mapping": {
+      "loss_period_share_bases_differ": "claim_1",
+      "deferred_rows_cancel_exactly": "claim_2",
+      "exact_prior_restatement_identified": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_prior_restatement_identified",
+      "assertion": "The supplied FY2024 non-GAAP comparison has been restated using the new FY2025 deferred-compensation exclusions.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b09:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b09:s01"
+      ],
+      "source_grounded_reason": "The issuer explicitly says the new exclusions were not applied to prior periods because the impact was immaterial. Absence of prior adjustments is not proof of zero prior economic activity."
+    },
+    "human_review": "pending"
+  }
+}

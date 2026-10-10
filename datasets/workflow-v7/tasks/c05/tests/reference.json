@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v7-c05",
+  "tables": [
+    {
+      "id": "category_margin",
+      "file": "category_margin.sql",
+      "evidence": [
+        "c05:s01"
+      ]
+    },
+    {
+      "id": "net_income_growth_bridge",
+      "file": "net_income_growth_bridge.sql",
+      "evidence": [
+        "c05:s01"
+      ]
+    },
+    {
+      "id": "prior_tax_baseline",
+      "file": "prior_tax_baseline.sql",
+      "evidence": [
+        "c05:s01",
+        "c05:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "c05:s01"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "c05:s01",
+        "c05:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "supported",
+      "evidence": [
+        "c05:s01",
+        "c05:s02"
+      ]
+    }
+  ]
+}

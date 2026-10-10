@@ -62,6 +62,18 @@ def test_report_rejects_rebound_attempt_identity(tmp_path, monkeypatch):
         LOCAL.report(['attempt-1'], tmp_path / 'report.json')
 
 
+def test_report_rejects_changed_embedded_verdict(tmp_path, monkeypatch):
+    directory = receipt(tmp_path, 'attempt-1')
+    path = directory / 'receipt.json'
+    record = json.loads(path.read_text())
+    record['verdict'] = {'complete': True}
+    path.write_text(json.dumps(record))
+    monkeypatch.setattr(LOCAL, 'ROOT', tmp_path)
+    with pytest.raises(ValueError, match='verdict_receipt_mismatch'):
+        LOCAL.report(['attempt-1'], tmp_path / 'report.json')
+    assert not (tmp_path / 'report.json').exists()
+
+
 def test_separate_attempts_exclude_prior_idle_server_observations(tmp_path):
     path = tmp_path / 'settings.jsonl'
     first = {'id_task': 98, 'params': {'seed': 17}}
