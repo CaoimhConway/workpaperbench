@@ -1,0 +1,66 @@
+{
+  "rationale": "Reconcile JPMorgan FY2025 and Q4 managed presentation, adjusted overhead and significant-item exclusions. Preserve rounding residuals from printed slide inputs. Derive the implied after-tax First Republic exclusion from the disclosed combined annual change, distinguishing that derivation from a printed observation.",
+  "source_group": "jpm-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "4f6cab9662bc10bc42e3ee53e590dd7a4bb5d6d7a30aeae2a616838f339d2d46",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "478650c92b1cf0c6ec7d5c6c692fadc4e116aca8b00edea0cce8541a2b2234ad",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "1c1376cb294aa45326f97cef9a1e9563fb3c87a426233deeed1380e6ec0e9b1a",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "3b4451281e662e43622a1cf8578ad234f1615c8852e76eb4b4990287b4228dd2",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "202f1df7078b11b3613e772157ebdbc1d61901b489edf826f231fabba4f675e1",
+    "claim_mapping": {
+      "managed_presentation_changes_net_income": "claim_1",
+      "annual_exclusion_less_than_q4": "claim_2",
+      "exact_payment_fee_identified": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_payment_fee_identified",
+      "assertion": "Using the supplied significant-item amounts, the annual exclusion bridge implies an after-tax First Republic gain of USD 446 million.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c09:s02"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "The annual net-income exclusion increase of USD 445 million equals removal of the USD 1,665 million after-tax Apple reserve less removal of the First Republic after-tax gain and the USD 774 million tax benefit. The residual is a derived amount, not a separately printed exact-dollar result.",
+      "independent_calculation": "1665 - 774 - 445 = 446 USD million"
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "23a0fc97766280cb70a03115c63f86d33b5c9cfda00d424b625e17eb4418896b",
+    "maintenance_rationale": "A bank managed basis moves revenue and tax together, while significant-item exclusion mixes pretax reserves, after-tax costs and gains. Proper denominators and a bounded derived residual must survive without inventing precise unpublished totals.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_annual_exclusion_components.sql",
+      "starting_bank_basis_bridge.sql",
+      "starting_significant_item_bridge.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction"
+}

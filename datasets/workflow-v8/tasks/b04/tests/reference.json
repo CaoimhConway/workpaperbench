@@ -1,0 +1,49 @@
+{
+  "task_id": "workflow-v8-b04",
+  "tables": [
+    {
+      "id": "expense_audit",
+      "file": "expense_audit.sql",
+      "evidence": [
+        "b04:s01"
+      ]
+    },
+    {
+      "id": "annual_revenue_bridge",
+      "file": "annual_revenue_bridge.sql",
+      "evidence": [
+        "b04:s01"
+      ]
+    },
+    {
+      "id": "crypto_scope",
+      "file": "crypto_scope.sql",
+      "evidence": [
+        "b04:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "unresolved",
+      "evidence": [
+        "b04:s03"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "b04:s01"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "supported",
+      "evidence": [
+        "b04:s02"
+      ]
+    }
+  ]
+}

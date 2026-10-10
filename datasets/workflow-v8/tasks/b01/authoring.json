@@ -1,0 +1,127 @@
+{
+  "rationale": "Build an SBC reserve workpaper from the May and June 2025 reserve reports. Calculate coverage and residuals by economic observation date and calendar days from observation to report signature. Bridge cash, government-debt, reserve and circulation changes from May to June. Treat repeated identical exports as one report, while keeping different economic dates distinct even when their amounts are equal. Determine whether these snapshots identify payments volume.",
+  "source_group": "brale-sbc-reserve-reports-2025-may-june",
+  "source_catalog": "challenge-v2-canonical-cb40dc200fda",
+  "source_task_sha256": "89a7f0b8768b1dc112c2f9250a808e9dc05327477dd8184db9e7812ae21ebdee",
+  "split": "development",
+  "exposure": "Previously published source group, never held out",
+  "observations": "authentic permitted capture",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source rows, separate from submitted SQL",
+  "human_review": "pending",
+  "prototype_task_sha256": "4b357d41a1d50222d7e0321599e607d049c332de66d31d07c0c52433a23cf432",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "67a188575d97f06c1f159bf4ef8c3ad863869fecbb098ad0d7c4814e8d92d7f2",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "6cc2eccaf4bef35ae24dfee91197575319e6d89343d7c4a583955dcc38c2f806",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "54ce0f2a2b0075355136165b785601716b89e389165f23c2c5e1a8e22c172ce0",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "c3adad399c0fc576ede83cd073656546752f7e5aba81452226acd9324e9604ee",
+    "claim_mapping": {
+      "observations_identify_payments_volume": "claim_1",
+      "signature_lag_sql_is_valid": "claim_2",
+      "base_coverage_sql_is_valid": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "observations_identify_payments_volume",
+      "assertion": "More SBC units were transferred in payments during June 2025 than were in circulation at the June 30 observation.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "b01:s04"
+        ],
+        [
+          "b01:s02"
+        ],
+        [
+          "b01:s05"
+        ],
+        [
+          "b01:s01",
+          "b01:s04"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s03",
+        "b01:s06"
+      ],
+      "source_grounded_reason": "The reports supply month-end issued-supply and reserve stocks. Repeated transfers can generate payment volume above supply, while few transfers can generate less. Neither payment-transfer counts nor amounts are supplied, so both outcomes remain possible with the reported stocks."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "5d46ea1f3c848a5b21889135e5f60cee382a57f8c65006b1707edd1d6be6b71b",
+    "maintenance_rationale": "A researcher needs to distinguish an economic date join defect from a valid signature-date calculation. The coverage module deliberately contains an authored synthetic join defect over authentic observations. Stock changes are useful, but are not transaction flows or evidence of historical publication timing.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_reserve_bridge.sql",
+      "starting_reserve_coverage.sql",
+      "starting_signature_lag.sql"
+    ],
+    "claim_assertion_changes": {
+      "claim_2": "The June report was signed more calendar days after its economic observation than the May report.",
+      "claim_3": "At least one observation date shows reserve assets greater than issued SBC units at USD 1 per token."
+    },
+    "evidence_support_changes": {
+      "outputs": [
+        "tables.signature_lag",
+        "claims.claim_2"
+      ],
+      "sufficient_evidence": [
+        [
+          "b01:s01",
+          "b01:s04"
+        ],
+        [
+          "b01:s01",
+          "b01:s05"
+        ],
+        [
+          "b01:s01",
+          "b01:s06"
+        ],
+        [
+          "b01:s02",
+          "b01:s04"
+        ],
+        [
+          "b01:s02",
+          "b01:s05"
+        ],
+        [
+          "b01:s02",
+          "b01:s06"
+        ],
+        [
+          "b01:s03",
+          "b01:s04"
+        ],
+        [
+          "b01:s03",
+          "b01:s05"
+        ],
+        [
+          "b01:s03",
+          "b01:s06"
+        ]
+      ],
+      "reason": "Every supplied evidence entry includes its report observation period and report_signed_date. Any May entry paired with any June entry supports the two signature lags and their comparison."
+    }
+  },
+  "evaluation_track": "construction"
+}
