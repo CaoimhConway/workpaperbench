@@ -153,7 +153,7 @@ def test_queue_finishes_after_candidate_failure_and_restart_skips_slots(tmp_path
 def test_public_cli_exposes_local_recovery_commands(command, expected_flag):
     import subprocess
     import sys
-    result = subprocess.run([sys.executable, '-m', 'workpaperbench.current_cli', command, '--help'],
+    result = subprocess.run([sys.executable, '-m', 'workpaperbench.current_cli', 'local', command, '--help'],
                             cwd=Path(__file__).parents[1], capture_output=True, text=True, timeout=15)
     assert result.returncode == 0, result.stderr
     assert expected_flag in result.stdout
