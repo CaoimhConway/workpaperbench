@@ -151,9 +151,12 @@ and explanatory citations, citation dumping, applicable constant-zero residuals,
 and an always-unresolved claim baseline. Incorrect claim labels cannot be rescued
 by correct SQL or evidence. These are engineering controls, not model trials.
 
-Every verifier container uses network-none, a read-only root, bounded temporary
-storage, no capabilities, no inference credential, and no Docker socket. SQL runs
-only inside the isolated Linux verifier. Workers enforce read-only authorization,
+Standalone sweep, baseline and historical-replay containers use network-none,
+a read-only root, bounded temporary storage and dropped capabilities. Native
+verifier receipts directly check network-none, blocked network access, no inference
+credential and no Docker socket. These receipts do not attest to every standalone
+container restriction. Scoring executes SQL only inside isolated Linux verification.
+Both paths use workers that enforce read-only authorization,
 256 MiB address space, two-second CPU and 1.5-second progress limits with bounded
 output. Actual network and namespace checks accompany verdicts. The unchanged
 worker and runner retain the earlier [resource and candidate-boundary proof](../reports/local/local-boundary-validation.json).
