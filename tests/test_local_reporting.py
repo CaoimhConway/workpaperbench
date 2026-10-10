@@ -40,6 +40,25 @@ def test_report_rejects_mixed_model_configurations(tmp_path, monkeypatch):
         LOCAL.report(['attempt-1', 'attempt-2'], tmp_path / 'report.json')
 
 
+def test_report_rejects_repeated_attempt_ids(tmp_path, monkeypatch):
+    receipt(tmp_path, 'attempt-1')
+    monkeypatch.setattr(LOCAL, 'ROOT', tmp_path)
+    with pytest.raises(ValueError, match='distinct_attempts'):
+        LOCAL.report(['attempt-1', 'attempt-1'], tmp_path / 'report.json')
+
+
+def test_report_rejects_mixed_input_tracks(tmp_path, monkeypatch):
+    receipt(tmp_path, 'attempt-1')
+    directory = receipt(tmp_path, 'attempt-2')
+    path = directory / 'receipt.json'
+    data = json.loads(path.read_text())
+    data['evaluation_track'] = 'construction'
+    path.write_text(json.dumps(data))
+    monkeypatch.setattr(LOCAL, 'ROOT', tmp_path)
+    with pytest.raises(ValueError, match='evaluation_tracks_differ'):
+        LOCAL.report(['attempt-1', 'attempt-2'], tmp_path / 'report.json')
+
+
 def test_report_does_not_replace_prior_output(tmp_path, monkeypatch):
     receipt(tmp_path, 'attempt-1')
     monkeypatch.setattr(LOCAL, 'ROOT', tmp_path)
