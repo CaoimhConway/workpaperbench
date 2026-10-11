@@ -1,0 +1,137 @@
+{
+  "attempt_id": "open-brale-evidence-1",
+  "execution_profile": "isolated-linux",
+  "manifest_id": "workflow-v8-canonical-67966f15cd8e",
+  "task_id": "workflow-v8-b01",
+  "task_sha256": "c9bb260c61140b035370e91c2761956bdf4e3a877157636d1fac04c44313e8fe",
+  "scorer_version": "workflow-1.2.0",
+  "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+  "started_at": "2026-10-14T03:14:47.413847+00:00",
+  "external_service_spend_usd": 0,
+  "status": "verified",
+  "inference": false,
+  "source_kind": "submitted_artifact_replay",
+  "configuration_evidence": "Declared model revision, serving runtime, model ID and generation settings. Native version is checked. Server identity and enforcement are not independently observed.",
+  "evaluation_track": "construction",
+  "task_split": "development",
+  "requested_tables": [
+    "reserve_coverage",
+    "signature_lag",
+    "reserve_bridge"
+  ],
+  "execution_files_sha256": {
+    "scripts/local_trial.py": "ed066ab9d98be6530adb61d80a5dd86d3c5d54df060b5a244e0ef222f726f40f",
+    "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+    "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+    "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+    "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+  },
+  "model_endpoint": null,
+  "effective_task_sha256": "3350b411d1e85dd2137a290a73a3bc37dd21c1d540c61f7a69cdca263169054b",
+  "candidate_network_policy": "Loopback and declared endpoint IP addresses/TCP port only. IPv6 endpoints additionally allow neighbor solicitation/advertisement with hop limit 255. Other ICMP, DNS and nonendpoint traffic are dropped.",
+  "verdict": {
+    "scorer_version": "workflow-1.2.0",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": true,
+      "robustness": true,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "reserve_coverage": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "june_cash_and_total_reserves_change": true,
+            "identical_export_duplicate": true,
+            "distinct_dates_with_equal_amounts": true,
+            "independent_disclosure_discrepancy": true
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "june_cash_and_total_reserves_change": null,
+            "identical_export_duplicate": null,
+            "distinct_dates_with_equal_amounts": null,
+            "independent_disclosure_discrepancy": null
+          }
+        },
+        "signature_lag": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "june_cash_and_total_reserves_change": true,
+            "identical_export_duplicate": true,
+            "distinct_dates_with_equal_amounts": true,
+            "independent_disclosure_discrepancy": true
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "june_cash_and_total_reserves_change": null,
+            "identical_export_duplicate": null,
+            "distinct_dates_with_equal_amounts": null,
+            "independent_disclosure_discrepancy": null
+          }
+        },
+        "reserve_bridge": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "june_cash_and_total_reserves_change": true,
+            "identical_export_duplicate": true,
+            "distinct_dates_with_equal_amounts": true,
+            "independent_disclosure_discrepancy": true
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "june_cash_and_total_reserves_change": null,
+            "identical_export_duplicate": null,
+            "distinct_dates_with_equal_amounts": null,
+            "independent_disclosure_discrepancy": null
+          }
+        }
+      },
+      "claims": {
+        "claim_1": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_2": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_3": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "verdict_sha256": "2c773cad7d5be7109de79d60942a21b0a542c530cb01051aac1f14edc09926c1",
+  "sql_file_sha256": {
+    "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+    "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+    "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc"
+  },
+  "raw_answer_sha256": "74e8c4c5162ae0e8e722a48882c910c6725af8d248ecb875481e707e28ef63fe",
+  "normalized_answer_sha256": "74e8c4c5162ae0e8e722a48882c910c6725af8d248ecb875481e707e28ef63fe",
+  "finished_at": "2026-10-14T03:15:24.976093+00:00"
+}

@@ -1,0 +1,96 @@
+{
+  "scorer_version": "workflow-1.2.0",
+  "complete": true,
+  "verified_research_completion": true,
+  "strict_delivery_completion": true,
+  "checks": {
+    "financial_answer": true,
+    "numerical_tables": true,
+    "claim_verdicts": true,
+    "evidence": true,
+    "robustness": true,
+    "delivery": true
+  },
+  "details": {
+    "tables": {
+      "reserve_coverage": {
+        "original": true,
+        "original_error": null,
+        "evidence": true,
+        "controls": {
+          "scaled_amounts_preserve_ratios": true,
+          "june_cash_and_total_reserves_change": true,
+          "identical_export_duplicate": true,
+          "distinct_dates_with_equal_amounts": true,
+          "independent_disclosure_discrepancy": true
+        },
+        "control_errors": {
+          "scaled_amounts_preserve_ratios": null,
+          "june_cash_and_total_reserves_change": null,
+          "identical_export_duplicate": null,
+          "distinct_dates_with_equal_amounts": null,
+          "independent_disclosure_discrepancy": null
+        }
+      },
+      "signature_lag": {
+        "original": true,
+        "original_error": null,
+        "evidence": true,
+        "controls": {
+          "scaled_amounts_preserve_ratios": true,
+          "june_cash_and_total_reserves_change": true,
+          "identical_export_duplicate": true,
+          "distinct_dates_with_equal_amounts": true,
+          "independent_disclosure_discrepancy": true
+        },
+        "control_errors": {
+          "scaled_amounts_preserve_ratios": null,
+          "june_cash_and_total_reserves_change": null,
+          "identical_export_duplicate": null,
+          "distinct_dates_with_equal_amounts": null,
+          "independent_disclosure_discrepancy": null
+        }
+      },
+      "reserve_bridge": {
+        "original": true,
+        "original_error": null,
+        "evidence": true,
+        "controls": {
+          "scaled_amounts_preserve_ratios": true,
+          "june_cash_and_total_reserves_change": true,
+          "identical_export_duplicate": true,
+          "distinct_dates_with_equal_amounts": true,
+          "independent_disclosure_discrepancy": true
+        },
+        "control_errors": {
+          "scaled_amounts_preserve_ratios": null,
+          "june_cash_and_total_reserves_change": null,
+          "identical_export_duplicate": null,
+          "distinct_dates_with_equal_amounts": null,
+          "independent_disclosure_discrepancy": null
+        }
+      }
+    },
+    "claims": {
+      "claim_1": {
+        "verdict": true,
+        "evidence": true
+      },
+      "claim_2": {
+        "verdict": true,
+        "evidence": true
+      },
+      "claim_3": {
+        "verdict": true,
+        "evidence": true
+      }
+    }
+  },
+  "errors": [],
+  "isolation": {
+    "network_probe_blocked": true,
+    "network_namespace_none": true,
+    "no_inference_key": true,
+    "no_docker_socket": true
+  }
+}

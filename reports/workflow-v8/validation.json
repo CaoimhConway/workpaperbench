@@ -1,0 +1,144 @@
+{
+  "validation_id": "public-construction-readiness-1",
+  "baseline_release": "v0.5.0-local.4",
+  "baseline_commit": "b8acc1d7558a42feefb3dfa0fa54d657f7b44b88",
+  "manifest_id": "workflow-v8-canonical-67966f15cd8e",
+  "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "actions_runs_before_publication": 181,
+  "execution": {
+    "host": "MacPro7,1",
+    "host_python": "3.12.15",
+    "guest": "Ubuntu 24.04 x86_64, six CPUs, 12 GiB RAM, no host mounts or owner credentials",
+    "guest_python": "3.12.3",
+    "docker": "29.1.3",
+    "compose": "2.40.3",
+    "harbor": "0.23.0",
+    "jsonschema": "4.26.0",
+    "hermes_revision": "8b66a51036c1e20920a17cdd049fdf55c968d683"
+  },
+  "software_sha256": {
+    "scripts/local_trial.py": "c0cf4f93d1a7b18cb541681ecdba8efd24c09b15d922bad92e9fffcfe47ad372",
+    "scripts/guest_bench.py": "168ad6e0e22bfaae48c16529d49e48b225f07da4dafc31c7b4b33191bf4f2137",
+    "scripts/local_bench.py": "cde59b1464cbaa993a43c950db59750a26c2294a4806922d8e8afe8452627394",
+    "scripts/validate_workflow_quality.py": "939a0a72d311b6b830dcf1823450e54fc630abf1adf7bf9132b853b795473827",
+    "scripts/build_workflow_construction.py": "23a0106a5e56fcfcf0a9dac51dee27c56f0bb36e8bd517d16af70e53dfc3d436",
+    "workpaperbench/workflow_report.py": "5a6182664462d8cc7d971fb84112cac261d707a8cef6334f8f98aed2af06e976",
+    "workpaperbench/current_cli.py": "83b5b414c5364a0ed9b90b8903472733f1bd8cc1511a30f93604e0eaf12ddee1",
+    "config/external-model.example.json": "59a8661b6f4c145f234d34e66c4b2a3c33a8d712493b504ca30ebb86c04c84fb",
+    "tests/native_https_fixture.py": "8a94d95cfb0f138a262b3610dd13632de7ade0722199932a0aaf91ff592f122e",
+    "tests/native_ipv6_fixture.py": "cc27922ec87d3a1e778497fbccc40da0c0a22679da03d220958fefba9b4a914b",
+    "tests/test_guest_execution.py": "77f2a522913233ddb376c10f17f07c6094b13e300f736217d3e1aa45f466f4be"
+  },
+  "evidence_sha256": {
+    "reports/workflow-v8/validation/ipv6-fixture.json": "cf306b6c4bab4d32f067af0be9f4c984feaf703619470773ffb2f0eb886e9f63",
+    "reports/workflow-v8/validation/native-controller-env.json": "87ec3e567bab5927e1a52bcb7f49db4e743901ab0693eb4bedc4a64208259e00",
+    "reports/workflow-v8/validation/open-auth-evaluation-1/answer.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "reports/workflow-v8/validation/open-auth-evaluation-1/raw-answer.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "reports/workflow-v8/validation/open-auth-evaluation-1/receipt.json": "0a4a83069a460493ce70e95e7a90ef5d1e7e176172160e9a0580bc9ca84af9f0",
+    "reports/workflow-v8/validation/open-auth-evaluation-1/transport-smoke.json": "c6f309bfafd87c3cd7f42252a957be6f3b493bfb80fd2b4ef5f0935ac3d9d48a",
+    "reports/workflow-v8/validation/open-auth-evaluation-1/verifier.json": "5362a41dc92459a10900699f343d7ef1dff185cc50553cb257ab6f44c6c8dda2",
+    "reports/workflow-v8/validation/open-brale-evidence-1/answer.json": "74e8c4c5162ae0e8e722a48882c910c6725af8d248ecb875481e707e28ef63fe",
+    "reports/workflow-v8/validation/open-brale-evidence-1/raw-answer.json": "74e8c4c5162ae0e8e722a48882c910c6725af8d248ecb875481e707e28ef63fe",
+    "reports/workflow-v8/validation/open-brale-evidence-1/raw-sql/reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+    "reports/workflow-v8/validation/open-brale-evidence-1/raw-sql/reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+    "reports/workflow-v8/validation/open-brale-evidence-1/raw-sql/signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc",
+    "reports/workflow-v8/validation/open-brale-evidence-1/receipt.json": "aed4e612278a980896d431faec98991b43bb92f9c551754d809706da1fc83273",
+    "reports/workflow-v8/validation/open-brale-evidence-1/verifier.json": "2c773cad7d5be7109de79d60942a21b0a542c530cb01051aac1f14edc09926c1",
+    "reports/workflow-v8/validation/open-https-evaluation-1/receipt.json": "283286a59edace9f0f357f659739b6f19118ecfdc3e5f42d7232da21eb23f2ea",
+    "reports/workflow-v8/validation/open-https-evaluation-1/verifier.json": "a7c34eec893c5a869a66904ff1afdf518624f3e3db88470a5c8f558d69ecf363",
+    "reports/workflow-v8/validation/open-https-evaluation-2/receipt.json": "5ac4ec5ac22b40edb4df607060576e16374ed251bcf9badfa2bebcfb31df566d",
+    "reports/workflow-v8/validation/open-https-evaluation-3/answer.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "reports/workflow-v8/validation/open-https-evaluation-3/https-smoke.json": "f3f8a9aedb46a84c9c59a597fa62e6560261bf4eb925b90f21c2d2fc5d50971d",
+    "reports/workflow-v8/validation/open-https-evaluation-3/raw-answer.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "reports/workflow-v8/validation/open-https-evaluation-3/receipt.json": "b32ee82ec731790ba6aed851d67d4b606219aa089c867df973057bdd9b0d3905",
+    "reports/workflow-v8/validation/open-https-evaluation-3/verifier.json": "5362a41dc92459a10900699f343d7ef1dff185cc50553cb257ab6f44c6c8dda2",
+    "reports/workflow-v8/validation/open-reference-1/answer.json": "b21d6702a576427052beb47464608ce7ad94f115a02da8b808d799319b0c963d",
+    "reports/workflow-v8/validation/open-reference-1/raw-answer.json": "b21d6702a576427052beb47464608ce7ad94f115a02da8b808d799319b0c963d",
+    "reports/workflow-v8/validation/open-reference-1/raw-sql/profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+    "reports/workflow-v8/validation/open-reference-1/raw-sql/reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+    "reports/workflow-v8/validation/open-reference-1/raw-sql/revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+    "reports/workflow-v8/validation/open-reference-1/receipt.json": "7892ca5ed7d1a4953bd0bc1a2773021d1f3f2d8d37b82dc93bd93b81c64b3bef",
+    "reports/workflow-v8/validation/open-reference-1/verifier.json": "40765669944a96690d327052c7e1f8f93633f2a1fa0b01a5d2cbcb71443b6f8f",
+    "reports/workflow-v8/validation/quality.json": "fc873bf4860bf501172312fc9af51726bbb2b248746d8cc7b553154719d01700",
+    "reports/workflow-v8/validation/reference-report.json": "0302ffba4495fb1f23fda6557a9e279dc2d8b56334a57625efac9a4932e83430",
+    "reports/workflow-v8/validation/rejected-stale-context-quality.json": "e24528a283c6c7757e99772e1a2a76c80befc3232ae17ba5ada0822456221b58"
+  },
+  "checks": [
+    {
+      "command": ".venv/bin/python -m pytest -q",
+      "result": "542 passed, 1 native-only test skipped on macOS, 50.51 seconds. The native environment assembly check separately passed against Harbor 0.23.0 in Linux."
+    },
+    {
+      "command": ".venv/bin/python scripts/build_workflow_construction.py --check",
+      "result": "Exact reconstruction of 30 cases, no starting SQL, financial inputs/targets/reference SQL/controls preserved"
+    },
+    {
+      "command": ".venv/bin/python scripts/validate_workflow_quality.py --dataset workflow-v8 --tasks all --output .local/open-quality-fixed.json",
+      "result": {
+        "total_expectations": 147,
+        "passed": 147,
+        "reference": 30,
+        "equivalent_context": 30,
+        "citation_dump": 30,
+        "always_unresolved": 30,
+        "constant_residual": 27,
+        "execution_note": "Ran from the fresh source tree with a separate previously installed Harbor 0.23.0 Python environment while the other environment ran the HTTPS fixture. No simultaneous native trials."
+      }
+    },
+    {
+      "command": "./wpb grade --task c01 --artifacts examples/block-workpaper-v8 --attempt open-reference-1",
+      "result": "All six diagnostics pass, three correct construction queries, no maintenance transitions"
+    },
+    {
+      "command": "./wpb grade --task b01 --artifacts .local/brale-source-alternative --attempt open-brale-evidence-1",
+      "result": "All diagnostics pass with b01:s02 and b01:s05 date-bearing citations on signature lag and claim_2"
+    },
+    {
+      "command": "./wpb smoke --task c09 --attempt open-auth-evaluation-1 --port 19090 --authenticated",
+      "result": "Two scripted requests, real terminal artifact, separate delivery rejection, no inference"
+    },
+    {
+      "command": ".venv/bin/python tests/native_https_fixture.py --attempt open-https-evaluation-3",
+      "result": "Authenticated HTTPS hostname, normal certificate verification with fixture CA and test DNS mapping, real terminal artifact and separate rejection, no inference"
+    },
+    {
+      "command": "python tests/native_ipv6_fixture.py --python-image wpb-workflow-verifier-controls:latest --sidecar-image harbor-prebuilt:harbor-docker-egress-control-sidecar--c08979aaa1949ff7 --output /tmp/wpb-ipv6-proof.json",
+      "result": "Fresh IPv6 neighbors resolve, selected port succeeds, other port and echo blocked, created resources removed"
+    },
+    {
+      "command": "./wpb report --attempts open-reference-1 open-brale-evidence-1 --output .local/open-reference-report.json",
+      "result": "Two authored workpapers, six correct queries, construction condition, no model attempts"
+    },
+    {
+      "command": "./wpb demo && ./wpb validate examples/block-workpaper-v8/answer.json && ./wpb list --split evaluation",
+      "result": "Demo and schema check pass, all 24 evaluation tasks listed"
+    },
+    {
+      "command": ".venv/bin/python scripts/audit_current.py",
+      "result": "Publication checks passed, historical references and executable/source hashes preserved"
+    }
+  ],
+  "failed_checks_retained": [
+    {
+      "evidence": "validation/rejected-stale-context-quality.json",
+      "interpretation": "45 of 147 variants rejected trusted_input_changed from stale Docker context checksums. Original on-disk task hashes matched. Fresh temporary contexts corrected the validation build and passed all 147 expectations."
+    },
+    {
+      "attempt": "open-https-evaluation-1",
+      "interpretation": "Fixture-only trust installation changed an integrity-checked certificate package. Native bootstrap retried after egress restriction and timed out. Not a model evaluation."
+    },
+    {
+      "attempt": "open-https-evaluation-2",
+      "interpretation": "Fixture-only SSL_CERT_FILE applied before its file existed, causing curl 77 during native setup. Not a model evaluation."
+    }
+  ],
+  "interpretation": [
+    "Scripted protocol fixtures validate native transport and delivery, not financial model performance.",
+    "Earlier HTTP and reference receipts retain their exact runner hashes. Final HTTPS and IPv6 checks bind the published runner hash.",
+    "No construction model inference, matched-budget comparison, independent financial-domain review, or external replication was performed.",
+    "Linux x86_64 is validated. Other architectures and independent OS/Docker bootstrap remain untested.",
+    "Public references and repeated financial templates create contamination and dependence risks."
+  ]
+}
