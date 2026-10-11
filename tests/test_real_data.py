@@ -92,6 +92,54 @@ def test_original_dataset_remains_frozen():
             assert hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest
 
 
+def publication_fixture(tmp_path):
+    import shutil
+    registry = json.loads((ROOT / 'config/publication-inputs.json').read_text())
+    manifest = json.loads((ROOT / 'config/freeze.json').read_text())
+    entry = registry['manifests'][manifest['manifest_id']]
+    for name in ('config/freeze.json', 'config/publication-inputs.json',
+                 *entry['inputs'], *entry['documents'], *entry.get('implementations', {})):
+        path = tmp_path / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / name, path)
+    return manifest, registry
+
+
+@pytest.mark.parametrize('name', ['sources/wp05.json', 'tasks/wp05/tests/gold.json'])
+def test_publication_binding_cannot_relabel_changed_financial_contract(tmp_path, name):
+    from operations_review import publication_input_hashes
+    manifest, registry = publication_fixture(tmp_path)
+    path = tmp_path / name
+    obj = json.loads(path.read_text())
+    if name.startswith('sources/'):
+        obj['tables']['events']['rows'][0][-1] += 1
+    else:
+        obj['answers']['naive_growth']['value'] += 1
+    path.write_text(json.dumps(obj))
+    registry['manifests'][manifest['manifest_id']]['inputs'][name]['publication_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
+    (tmp_path / 'config/publication-inputs.json').write_text(json.dumps(registry))
+    with pytest.raises(ValueError, match='publication_input_mismatch'):
+        publication_input_hashes(manifest, tmp_path)
+
+
+def test_publication_binding_rejects_extra_paths_and_changed_manifest(tmp_path):
+    from operations_review import publication_input_hashes
+    manifest, registry = publication_fixture(tmp_path)
+    publication_input_hashes(manifest, tmp_path)
+    entry = registry['manifests'][manifest['manifest_id']]
+    entry['inputs']['tasks/wp05/tests/reference.json'] = {}
+    path = tmp_path / 'config/publication-inputs.json'
+    path.write_text(json.dumps(registry))
+    with pytest.raises(ValueError, match='publication_input_allowlist'):
+        publication_input_hashes(manifest, tmp_path)
+    entry['inputs'].pop('tasks/wp05/tests/reference.json')
+    path.write_text(json.dumps(registry))
+    freeze = tmp_path / 'config/freeze.json'
+    freeze.write_bytes(freeze.read_bytes() + b'\n')
+    with pytest.raises(ValueError, match='publication_manifest_mismatch'):
+        publication_input_hashes(manifest, tmp_path)
+
+
 def test_offline_reconstruction_preserves_frozen_package_bytes():
     subprocess.run([sys.executable, str(ROOT / 'scripts/build_real_tasks.py'), '--check'], check=True, cwd=ROOT)
 
