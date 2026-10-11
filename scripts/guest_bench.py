@@ -14,15 +14,14 @@ import threading
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / 'scripts'))
-from local_trial import clean_environment, external_configuration, run
+from local_trial import external_configuration, model_credential, run
 from local_bench import report
 from workpaperbench.catalog import load
 
 
 def preflight():
-    clean_environment()
-    if platform.machine() != 'x86_64':
-        raise ValueError('external_profile_requires_linux_x86_64_guest')
+    if platform.system() != 'Linux':
+        raise ValueError('external_profile_requires_linux_docker')
     from importlib.metadata import distribution
     import hashlib
     from local_trial import ORIGINAL_MODULE_SHA256
@@ -33,11 +32,50 @@ def preflight():
     if hashlib.sha256(adapter.read_bytes()).hexdigest() != ORIGINAL_MODULE_SHA256:
         raise ValueError('external_native_adapter_changed')
     subprocess.run(['docker', 'info'], check=True, stdout=subprocess.DEVNULL, timeout=30)
-    bridge = subprocess.check_output(['docker', 'network', 'inspect', 'bridge'], text=True, timeout=30)
-    if json.loads(bridge)[0]['IPAM']['Config'][0]['Gateway'] != '172.17.0.1':
-        raise ValueError('external_docker_bridge_gateway')
-    load(ROOT, 'workflow-v7')
-    print('Dedicated Linux x86_64 guest, Docker bridge and Harbor 0.23.0 verified.')
+    print('Linux Docker runtime and pinned Harbor 0.23.0 adapter verified.')
+
+
+def selected_tasks(dataset, tasks=None, split='all'):
+    manifest = load(ROOT, dataset)
+    selected = tasks if tasks is not None else [key for key, spec in manifest['tasks'].items()
+                                               if split == 'all' or spec.get('split') == split]
+    if not selected or len(set(selected)) != len(selected) or any(key not in manifest['tasks'] for key in selected):
+        raise ValueError('invalid_task_selection')
+    return selected
+
+
+def batch(args):
+    selected = selected_tasks(args.dataset, args.tasks, args.split or 'all')
+    configurations, _ = external_configuration(args.profile)
+    credential = model_credential(configurations)
+    trials = [trial_arguments(argparse.Namespace(**{**vars(args), 'task': task,
+                               'attempt': args.attempt + '-' + task}), args.profile) for task in selected]
+    output = ROOT / '.raw/local-trials'
+    summary = output / (args.attempt + '-batch.json')
+    if summary.exists() or any((output / trial.attempt).exists() for trial in trials):
+        raise ValueError('attempt_already_exists')
+    preflight()
+    output.mkdir(parents=True, exist_ok=True)
+    with summary.open('x') as stream:
+        stream.write(json.dumps({'status': 'started', 'attempts': []}) + '\n')
+    outcomes = []
+    for trial in trials:
+        try:
+            asyncio.run(run(trial, credential=credential))
+        except Exception:
+            receipt = output / trial.attempt / 'receipt.json'
+            if not receipt.is_file():
+                summary.write_text(json.dumps({'status': 'infrastructure_failed',
+                    'failed_to_start': trial.attempt, 'attempts': outcomes}, indent=2) + '\n')
+                raise
+        row = json.loads((output / trial.attempt / 'receipt.json').read_text())
+        outcomes.append({'attempt_id': trial.attempt, 'task_id': row['task_id'], 'status': row['status']})
+        summary.write_text(json.dumps({'status': 'running', 'attempts': outcomes}, indent=2) + '\n')
+    failed = any(row['status'] not in ('verified', 'candidate_failed') for row in outcomes)
+    summary.write_text(json.dumps({'status': 'infrastructure_failed' if failed else 'completed',
+                                  'attempts': outcomes}, indent=2) + '\n')
+    if failed:
+        raise SystemExit('Batch retained infrastructure failures. Inspect individual receipts.')
 
 
 def trial_arguments(args, profile=None, smoke=False):
@@ -57,8 +95,9 @@ def trial_arguments(args, profile=None, smoke=False):
 
 class FixtureHandler(BaseHTTPRequestHandler):
     """A scripted protocol fixture. It makes no inference and reads no answers."""
-    def __init__(self, *args, observations, **kwargs):
+    def __init__(self, *args, observations, credential='local-only', **kwargs):
         self.observations = observations
+        self.credential = credential
         super().__init__(*args, **kwargs)
 
     def log_message(self, *args):
@@ -79,6 +118,9 @@ class FixtureHandler(BaseHTTPRequestHandler):
         self.send({'object': 'list', 'data': [{'id': 'deterministic-harness-fixture', 'object': 'model'}]})
 
     def do_POST(self):
+        if self.headers.get('Authorization') != 'Bearer ' + self.credential:
+            self.send_error(401)
+            return
         length = int(self.headers.get('Content-Length', '0'))
         if self.path != '/v1/chat/completions' or not 0 < length <= 2000000 or len(self.observations) >= 6:
             self.send_error(400)
@@ -122,17 +164,26 @@ def smoke(args):
                 model={'id': 'deterministic-harness-fixture', 'revision': 'scripted-no-inference'},
                 runtime={'name': 'Python standard-library protocol fixture', 'version': '1'})
     spec['candidate'].update(turns=3, wall_seconds=180)
+    host = args.host
+    if host is None:
+        bridge = json.loads(subprocess.check_output(['docker', 'network', 'inspect', 'bridge'], text=True, timeout=30))
+        host = bridge[0]['IPAM']['Config'][0]['Gateway']
+    spec['serving']['base_url'] = 'http://' + host + ':' + str(args.port) + '/v1'
+    credential = 'fixture-only-no-provider-credential' if args.authenticated else 'local-only'
+    spec['serving'].pop('api_key_env', None)
+    if args.authenticated:
+        spec['serving']['api_key_env'] = 'WPB_FIXTURE_API_KEY'
     directory = ROOT / '.local'
     directory.mkdir(exist_ok=True)
     profile = directory / (args.attempt + '-transport-profile.json')
     with profile.open('x') as output:
         output.write(json.dumps(spec, indent=2) + '\n')
     observations = []
-    server = ThreadingHTTPServer(('172.17.0.1', 18080), partial(FixtureHandler, observations=observations))
+    server = ThreadingHTTPServer((host, args.port), partial(FixtureHandler, observations=observations, credential=credential))
     worker = threading.Thread(target=server.serve_forever, daemon=True)
     worker.start()
     try:
-        asyncio.run(run(trial_arguments(args, profile, smoke=True)))
+        asyncio.run(run(trial_arguments(args, profile, smoke=True), credential=credential))
     finally:
         server.shutdown()
         server.server_close()
@@ -147,6 +198,7 @@ def smoke(args):
               and all(row['generation'] == expected for row in observations))
     proof = {'kind': 'scripted_native_harness_fixture', 'inference': False,
              'financial_evaluation': False, 'passed': passed, 'requests': observations,
+             'authenticated': args.authenticated, 'endpoint': spec['serving']['base_url'],
              'expected_result': 'Native terminal writes invalid JSON workpaper. Separate verification rejects delivery.'}
     (output / 'transport-smoke.json').write_text(json.dumps(proof, indent=2) + '\n')
     if not passed:
@@ -158,21 +210,41 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
     commands.add_parser('preflight')
+    listing = commands.add_parser('list')
+    listing.add_argument('--dataset', default='workflow-v8')
+    listing.add_argument('--split', choices=('development', 'evaluation', 'all'), default='all')
+    batching = commands.add_parser('batch')
+    batching.add_argument('--dataset', default='workflow-v8')
+    selection = batching.add_mutually_exclusive_group(required=True)
+    selection.add_argument('--tasks', nargs='+')
+    selection.add_argument('--split', choices=('development', 'evaluation', 'all'))
+    batching.add_argument('--profile', type=Path, required=True)
+    batching.add_argument('--attempt', required=True)
     for name in ('run', 'grade', 'smoke'):
         command = commands.add_parser(name)
-        command.add_argument('--dataset', default='workflow-v7')
+        command.add_argument('--dataset', default='workflow-v8')
         command.add_argument('--task', default='c01')
         command.add_argument('--attempt', required=True)
         if name == 'run':
             command.add_argument('--profile', type=Path, required=True)
         elif name == 'grade':
             command.add_argument('--artifacts', type=Path, required=True)
+        else:
+            command.add_argument('--host')
+            command.add_argument('--port', type=int, default=18080)
+            command.add_argument('--authenticated', action='store_true')
     reporting = commands.add_parser('report')
     reporting.add_argument('--attempts', nargs='+', required=True)
     reporting.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     if args.command == 'preflight':
         preflight()
+    elif args.command == 'list':
+        manifest = load(ROOT, args.dataset)
+        for key in selected_tasks(args.dataset, split=args.split):
+            print(key, manifest['tasks'][key].get('split', 'unspecified'))
+    elif args.command == 'batch':
+        batch(args)
     elif args.command == 'report':
         report(args.attempts, args.output)
     elif args.command == 'smoke':

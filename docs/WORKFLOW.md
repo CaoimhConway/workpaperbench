@@ -1,10 +1,45 @@
 # Workflow methods
 
-The current catalog is `workflow-v7-canonical-fca4003d0a15`, using scorer
-`workflow-1.2.0`. Six development and 24 evaluation cases each request three SQL
-result tables and three claim verdicts. Deliver `answer.json` and three named
-`.sql` files. The [Block example](../examples/block-workpaper-v7) is an authored
-reference, not a model submission.
+The default catalog is `workflow-v8-canonical-67966f15cd8e` (construction), using
+scorer `workflow-1.2.0`. Six development and 24 evaluation cases each request three
+SQL result tables and three claim verdicts. All 30 cases are available for external
+model execution. Deliver `answer.json` and three named `.sql` files. The
+[Block example](../examples/block-workpaper-v8) is an authored reference.
+
+## Construction and maintenance
+
+| Condition | Construction, workflow-v8 | Maintenance, workflow-v7 |
+| --- | --- | --- |
+| Candidate receives | Dossier, normalized observations and output contract | Same financial inputs plus three starting queries |
+| Starting SQL | None | 61/90 queries already correct across the catalog |
+| Required work | Construct all three queries and assess the claims | Check existing work, repair defects and preserve correct results |
+| Report | Original and control-inclusive correctness | Correctness plus repair, preservation, regression and unrepaired transitions |
+| Interpretation | Bounded workpaper construction | Supplied-work maintenance with a predictable defect-count prior |
+
+Construction removes all 90 starting SQL files and their candidate Docker COPY
+entries. There is no faulty-query count to infer and no supplied correct SQL to
+copy into the answer. It does not add defects or cases, alter numeric targets, or
+claim increased empirical difficulty. Definitions and observations are retained
+because they define the financial question and make scoring reproducible.
+Source extraction and open-ended investment research remain outside the scope.
+
+The [versioned builder](../scripts/build_workflow_construction.py) preserves the
+financial source values, reference SQL, numerical targets, controls, scorer and
+source-group splits. It rewrites construction instructions and two Brale claims
+that previously referred to the removed starting SQL. The replacements compare
+June versus May signature lag (16 versus 12 days, supported) and assert that at
+least one observation has reserves greater than circulation (contradicted by
+both dated equalities). These are new assertions, not historical rescores.
+
+Every supplied Brale evidence entry includes observation and signature dates.
+Version 8 accepts all nine cross-report citation pairs for the lag table and its
+claim. Refuting the existential reserve assertion still requires both dated
+amount tables. [Tests](../tests/test_workflow_construction.py) independently
+calculate these relationships and check sufficient and insufficient alternatives.
+
+Catalog and task identities separate the conditions. Reports reject mixed
+catalogs/tracks and never transfer maintenance baselines to construction.
+Historical maintenance results remain unchanged and are not construction scores.
 
 ## Measurement contract
 
@@ -29,7 +64,7 @@ source selection, not the entailment or truthfulness of arbitrary explanations.
 A valid rejected evidence path remains a grader defect requiring review.
 
 Robustness requires correct recomputation across every synthetic control.
-Preservation means a query that was initially correct remains correct on the
+In maintenance, preservation means a query that was initially correct remains correct on the
 same original inputs and controls. Repair, regression, and unrepaired outcomes
 use the other three before/after combinations.
 Different SQL is accepted when its observable results agree on original and
@@ -86,17 +121,18 @@ and scorer 1.2.0 are unchanged. Historical catalogs and receipts are untouched.
 
 ## Validity assessment
 
-The starting-SQL check was rerun on all 30 current tasks in isolated verification.
+The starting-SQL check was rerun on all 30 maintenance tasks in isolated verification.
 **61/90 queries pass original inputs and every control.** They are also
 byte-identical to the reference SQL. Twenty-nine tasks have exactly one faulty
 query, while `b04` has none. Existing correct code is realistic assistance for
 maintenance work and provides preservation opportunities. The repeated defect
-count supplies a shortcut prior. This collection therefore measures bounded
+count supplies a shortcut prior. That track therefore measures bounded
 maintenance, not unconstrained defect discovery or writing a workpaper from scratch.
+The default construction condition removes those starting queries entirely.
 No coverage gap justified adding defects or expanding the dataset.
 
-Candidate inputs include normalized observations, source excerpts, definitions,
-units, formulas, and starting SQL. These intentionally remove much of source
+Both tracks supply normalized observations, source excerpts, definitions,
+units and formulas. Only maintenance supplies starting SQL. These intentionally remove much of source
 extraction and search. They are disclosed assistance, not hidden reference access.
 Candidate images omit gold, solutions, tests, checkout history and credentials.
 Published references remain a contamination risk outside that execution boundary.
@@ -118,7 +154,7 @@ Brale's duplicate-export failure. Microsoft's correct starting basis-point query
 regressed. Block's apparent category failures were grader errors. Neither scorer
 corrections nor improved original-input results are automatically robust repairs.
 
-Current reports use the [identity-bound starting receipts](../reports/workflow-v7/starting-sql.json)
+Maintenance reports use the [identity-bound starting receipts](../reports/workflow-v7/starting-sql.json)
 and expose per-query transitions on both scopes, plus initially correct and
 incorrect opportunity counts. Missing or rejected deliveries leave SQL transitions
 unassessed. Infrastructure failures leave semantic diagnostics unassessed. A
@@ -128,21 +164,24 @@ Budgets, continuation history and unscored attempts must accompany interpretatio
 
 ## Reproduce the quality checks
 
-Install the project environment and configure the separate Ubuntu guest using
-[the portable execution guide](RUNNING.md). The full catalog sweep below uses the
-existing [Mac/Lima maintenance wrapper](LOCAL.md), while individual native grading
-and reporting use the portable `./wpb guest` path. No model or inference server is needed.
+Install the [portable Linux/Docker harness](RUNNING.md). No model or inference
+server is needed for these checks. The full suite runs on the same controller
+without any Mac/Lima dependency:
 
 ```sh
+.venv/bin/pip install -e '.[test]'
 .venv/bin/python -m pytest -q
-.venv/bin/python scripts/build_workflow_evidence_alternative.py --check
+.venv/bin/python scripts/build_workflow_construction.py --check
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v7 --native-prefix my-validity \
-  --output /tmp/my-validity-prototypes.json
+  --dataset workflow-v8 --native-prefix my-validity \
+  --output .local/my-validity-prototypes.json
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v7 --tasks all --output /tmp/my-validity-suite.json
-.venv/bin/python scripts/review_workflow.py --output /tmp/my-corrected-replay.json
+  --dataset workflow-v8 --tasks all --output .local/my-validity-suite.json
 ```
+
+The explicit `--executor local-lima` option retains the owner-specific maintenance
+wrapper for historical work. It is not the public execution default. Historical
+corrected-replay receipts and scripts retain their original identities.
 
 Use fresh output paths and attempt prefixes. The prototype command runs Microsoft,
 Brale and Block through native Harbor, then exercises the same separate verifier.
@@ -162,6 +201,14 @@ output. Actual network and namespace checks accompany verdicts. The unchanged
 worker and runner retain the earlier [resource and candidate-boundary proof](../reports/local/local-boundary-validation.json).
 These probes do not constitute a security proof for arbitrary workloads.
 
+The [current validation record](../reports/workflow-v8/validation.json) includes
+147 reference/control expectations and native authenticated HTTP/HTTPS fixtures.
+The HTTPS fixture uses a test-only hostname mapping and temporary certificate
+trust after setup, with ordinary certificate verification enabled. It does not
+contact a model or provider. The separate IPv6 fixture verifies fresh neighbor
+resolution, the selected TCP destination and rejection of an unrelated port and
+ICMP echo using the native sidecar. Fixture failures remain separately recorded.
+
 ## Evaluation limits
 
 The evaluation split has 24 distinct source-window groups without development
@@ -177,7 +224,8 @@ retain derivations. Independent financial-domain review remains pending.
 
 A measured comparison requires frozen profiles and budgets, all failures retained,
 task-level paired reporting, and uncertainty that accounts for repeated attempts.
-The [future comparison](../config/future-comparison.json) remains disabled. The
+The owner's [historical comparison plan](../config/future-comparison.json) remains disabled.
+It does not restrict external task selection. The
 three corrected development replays use different settings and include a continued
-session. They do not establish workflow-v7 accuracy or a model ranking. Human
+session. They do not establish construction accuracy or a model ranking. Human
 review and external replication also remain unevidenced.

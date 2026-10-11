@@ -1,0 +1,34 @@
+{
+  "kind": "scripted_authenticated_https_native_fixture",
+  "inference": false,
+  "financial_evaluation": false,
+  "passed": true,
+  "requests": [
+    {
+      "model": "deterministic-harness-fixture",
+      "tool_result_observed": false,
+      "generation": {
+        "max_tokens": 4096,
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "seed": 17
+      }
+    },
+    {
+      "model": "deterministic-harness-fixture",
+      "tool_result_observed": true,
+      "generation": {
+        "max_tokens": 4096,
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "seed": 17
+      }
+    }
+  ],
+  "certificate_verification": "Native client verification enabled, fixture CA supplied through candidate SSL_CERT_FILE after native setup",
+  "dns_fixture": "Test-only mapping of workpaperbench-fixture.test to Docker bridge. Normal runner pins that hostname in candidate hosts.",
+  "certificate_sha256": "cb244cabacd0ec3d1ce1293627183f3735e46f9e7ff58fe1812ed37f49d92e1f",
+  "fixture_sha256": "8a94d95cfb0f138a262b3610dd13632de7ade0722199932a0aaf91ff592f122e",
+  "runner_sha256": "c0cf4f93d1a7b18cb541681ecdba8efd24c09b15d922bad92e9fffcfe47ad372",
+  "endpoint": "https://workpaperbench-fixture.test:19443/v1"
+}

@@ -1,0 +1,6 @@
+SELECT b.year,b.reported_parent_income_usd_million parent_income_usd_million,b.consolidated_income_usd_million,
+b.consolidated_income_usd_million-b.reported_parent_income_usd_million noncontrolling_income_usd_million,
+SUM(a.signed_cash_adjustment_usd_million) signed_adjustment_usd_million,
+b.consolidated_income_usd_million+SUM(a.signed_cash_adjustment_usd_million) operating_cash_usd_million,
+b.consolidated_income_usd_million+SUM(a.signed_cash_adjustment_usd_million)-b.reported_operating_cash_usd_million residual_usd_million
+FROM annual_bases b JOIN cash_adjustments a USING(year) WHERE b.year IN (2023,2024,2025) GROUP BY b.year

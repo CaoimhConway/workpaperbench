@@ -1,0 +1,68 @@
+{
+  "rationale": "Produce a Mastercard FY2025 attribution workpaper using the branded operational tables and company financial reconciliations. Attribute annual and Q4 worldwide purchase-volume growth to five mutually exclusive regions, compare average purchase sizes, and reconcile regional totals with worldwide rows. Preserve source-rounding residuals and avoid adding subtotal or credit/debit partitions twice. Reconcile company operating margins separately from the operational measures.",
+  "source_group": "mastercard-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "2fd22f84d6863174609792502b0fda821c5873447e78489608f91512ef2746e4",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "82543de82070e81097ff92e9490ea28e4e3bbfe7a2c8faa3edff054457f063ad",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "d4b132ffe2dbc74995c5162c2cf59eae4049357ce9c7b2575538c9a2eb7dd09f",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "d127737071665fb3f8585a182906ec18fbca113191aa6511008f573676b606ee",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": false,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "2f609d0956d6c24f904d7a6373b147e8f4bf7d3e77e0a3c77c5329560afd2f7c",
+    "claim_mapping": {
+      "annual_average_purchase_increased": "claim_1",
+      "branded_volume_matches_all_revenue": "claim_2",
+      "merchant_price_mix_identified": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "merchant_price_mix_identified",
+      "assertion": "Higher merchant prices caused more than half of the FY2025 increase in average value per Mastercard-branded purchase transaction.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "c04:s01",
+          "c04:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c04:s03"
+      ],
+      "source_grounded_reason": "Branded purchase value and transaction counts identify average transaction size. They do not decompose merchant prices, goods per basket, geography or customer mix, so they cannot establish this causal majority."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "0c8c8db1106f77c0d881003fc0be9be67a5f2520c5fed7d86aec44590b4d3688",
+    "maintenance_rationale": "Branded operational tables contain overlapping subtotals and program partitions. A usable attribution must preserve their hierarchy, billion/million unit conversion and rounding. Company revenue has wider scope, so purchase-size changes cannot be read as network pricing or independently separated merchant price and mix effects.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_company_margin_bridge.sql",
+      "starting_regional_attribution.sql",
+      "starting_worldwide_reconciliation.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction"
+}

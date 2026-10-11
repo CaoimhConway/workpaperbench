@@ -1,0 +1,3 @@
+SELECT fiscal_year,months,operating_cash_usd_million,capital_spending_usd_million,
+operating_cash_usd_million-capital_spending_usd_million free_cash_flow_usd_million,
+operating_cash_usd_million-capital_spending_usd_million-reported_fcf_usd_million residual_usd_million FROM cashflows WHERE fiscal_year IN (2025,2026) AND months=9

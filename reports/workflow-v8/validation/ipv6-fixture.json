@@ -1,0 +1,26 @@
+{
+  "kind": "trusted_ipv6_network_fixture",
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "passed": true,
+  "source_sha256": "cc27922ec87d3a1e778497fbccc40da0c0a22679da03d220958fefba9b4a914b",
+  "runner_sha256": "c0cf4f93d1a7b18cb541681ecdba8efd24c09b15d922bad92e9fffcfe47ad372",
+  "rules_sha256": "aecdf7d18a1d63e1370febe31656006f4dfb31632a05e1ca414655efb07a7eed",
+  "images": {
+    "python": "sha256:751eaa3ef587b456da3a5639debe0370fac825024d9b96de67aa27716f933c1c",
+    "native_sidecar": "sha256:113d0c6cd42e0801094d99a2505c5c96d3241e2f2e897714bca9f276374f186a"
+  },
+  "before_policy": {
+    "28443": true,
+    "28444": true,
+    "echo": true
+  },
+  "fresh_neighbors": true,
+  "after_policy": {
+    "28443": true,
+    "28444": false,
+    "echo": false
+  },
+  "rules_verified": true,
+  "cleanup_complete": true
+}

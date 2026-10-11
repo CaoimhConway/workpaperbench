@@ -1,16 +1,17 @@
 {
-  "configuration_id": "my-model-development-1",
+  "configuration_id": "my-model-evaluation-1",
   "execution_profile": "isolated-linux",
   "model": {
     "id": "my-model",
-    "revision": "REPLACE_WITH_IMMUTABLE_WEIGHTS_REVISION"
+    "revision": "REPLACE_WITH_REVISION_OR_NOT_REPORTED_BY_SERVER"
   },
   "runtime": {
     "name": "REPLACE_WITH_SERVING_RUNTIME",
     "version": "REPLACE_WITH_PINNED_RUNTIME_VERSION"
   },
   "serving": {
-    "base_url": "http://172.17.0.1:18080/v1",
+    "base_url": "https://models.example.com/v1",
+    "api_key_env": "WPB_MODEL_API_KEY",
     "context": 65536
   },
   "candidate": {

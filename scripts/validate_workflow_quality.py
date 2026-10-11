@@ -23,6 +23,12 @@ for name,data in payload.items():
 runpy.run_path('/tests/verify.py',run_name='__main__')
 print(pathlib.Path('/logs/verifier/verdict.json').read_text())
 '''
+VERIFIER_BUILD = '''import pathlib,shutil,subprocess,sys,tempfile
+with tempfile.TemporaryDirectory(prefix='wpb-quality-') as directory:
+ context=pathlib.Path(directory)/'tests'
+ shutil.copytree(sys.argv[1],context,copy_function=shutil.copy)
+ subprocess.run(['docker','build','-q','-t',sys.argv[2],str(context)],check=True)
+'''
 
 
 def artifacts(task, variant, covered):
@@ -87,7 +93,9 @@ def validate(verdict, variant, covered):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--dataset', default=DATASET, choices=['workflow-v5', 'workflow-v6', 'workflow-v7'])
+    parser.add_argument('--dataset', default='workflow-v8', choices=['workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8'])
+    parser.add_argument('--executor', choices=['docker', 'local-lima'], default='docker',
+                        help='Docker on this Linux controller, or the historical owner maintenance wrapper')
     parser.add_argument('--tasks', nargs='+', default=['a01', 'b01', 'c01'])
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--native-prefix', help='Also test these cases through native Harbor before the control sweep')
@@ -95,6 +103,11 @@ def main():
     if args.output.exists():
         raise ValueError('validation_report_already_exists')
     dataset = args.dataset
+    if args.executor == 'docker':
+        from guest_bench import preflight
+        preflight()
+    execute = (lambda *command, **kwargs: subprocess.run(list(command), check=True, **kwargs)) if args.executor == 'docker' else guest
+    builder = str(ROOT) if args.executor == 'docker' else BUILDER
     manifest = load(ROOT, dataset)
     keys = list(manifest['tasks']) if args.tasks == ['all'] else args.tasks
     review = json.loads((ROOT / 'config/workflow-quality-review.json').read_text())
@@ -112,7 +125,8 @@ def main():
             for name, data in artifacts(task, variant, []).items():
                 (directory / name).write_bytes(data)
             attempt = args.native_prefix + '-' + key
-            subprocess.run([sys.executable, str(ROOT / 'scripts/local_bench.py'), 'grade', '--dataset', dataset,
+            runner = 'guest_bench.py' if args.executor == 'docker' else 'local_bench.py'
+            subprocess.run([sys.executable, str(ROOT / 'scripts' / runner), 'grade', '--dataset', dataset,
                 '--task', key, '--artifacts', str(directory), '--attempt', attempt], check=True)
             path = ROOT / '.raw/local-trials' / attempt
             receipt = json.loads((path / 'receipt.json').read_text())
@@ -123,19 +137,23 @@ def main():
                 assert digest(path / 'raw-sql' / name) == checksum
             validate(receipt['verdict'], variant, [])
             report['native_receipts'].append({'receipt_sha256': digest(path / 'receipt.json'), 'receipt': receipt})
+    (ROOT / '.local').mkdir(exist_ok=True)
     lock = (ROOT / '.local/local-command.lock').open('a')
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    prepare(dataset, keys)
+    if args.executor == 'local-lima':
+        prepare(dataset, keys)
     for key in keys:
         _, spec, task = load(ROOT, dataset, key)
         tag = 'wpb-quality-' + spec['task_sha256'][:16]
-        guest('docker', 'build', '-q', '-t', tag, BUILDER + '/' + spec['path'] + '/tests', capture_output=True)
-        image_id = guest('docker', 'image', 'inspect', '--format={{.Id}}', tag, capture_output=True).stdout.decode().strip()
+        # Fresh metadata prevents equal-sized archived databases from reusing
+        # a stale build-context checksum. Frozen task files stay untouched.
+        execute('python3', '-c', VERIFIER_BUILD, builder + '/' + spec['path'] + '/tests', tag, capture_output=True)
+        image_id = execute('docker', 'image', 'inspect', '--format={{.Id}}', tag, capture_output=True).stdout.decode().strip()
         covered = review['residual_controls'].get(key, {}).get('covered', [])
-        for variant in ['reference', 'context', 'citation_dump'] + (['constant_residual'] if covered else []) + (['always_unresolved'] if dataset == 'workflow-v6' else []):
+        for variant in ['reference', 'context', 'citation_dump'] + (['constant_residual'] if covered else []) + (['always_unresolved'] if manifest['scorer_version'] == 'workflow-1.2.0' else []):
             files = artifacts(task, variant, covered)
             payload = json.dumps({name: base64.b64encode(data).decode() for name, data in files.items()}).encode()
-            result = guest('docker', 'run', '--rm', '--network', 'none', '--read-only', '--memory', '384m',
+            result = execute('docker', 'run', '--rm', '--network', 'none', '--read-only', '--memory', '384m',
                 '--cpus', '1', '--pids-limit', '32', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges',
                 '--tmpfs', '/logs:rw,noexec,nosuid,size=4m', '--tmpfs', '/tmp:rw,noexec,nosuid,size=4m',
                 '-i', image_id, 'python', '-c', CONTAINER, input=payload, capture_output=True)

@@ -3,7 +3,7 @@ import copy
 
 import pytest
 
-from workpaperbench.workflow_report import change, summarize
+from workpaperbench.workflow_report import aggregate, change, summarize
 
 
 def table(original=True, duplicate=True):
@@ -104,3 +104,51 @@ def test_retained_submissions_reproduce_control_inclusive_transitions():
         assert result['baseline_matched']
         counts.update(result['transition_counts']['original_and_controls'])
     assert counts == dict(Repair=2, Preservation=5, Regression=1, Unrepaired=1)
+
+
+def test_construction_has_correctness_without_borrowing_maintenance_repairs():
+    row, baseline = inputs()
+    row['evaluation_track'] = 'construction'
+    row['requested_tables'] = ['coverage', 'bridge']
+    result = summarize(row, [baseline])
+    assert not result['baseline_matched']
+    assert result['transition_counts'] is None
+    assert result['opportunities'] is None
+    assert result['outcome_counts'] == {
+        'original_inputs': {'Correct': 1, 'Incorrect': 1},
+        'original_and_controls': {'Incorrect': 2},
+    }
+    assert 'original_inputs' not in result['tables']['coverage']
+    assert result['tables']['coverage']['failed_controls'] == {'duplicate': 'mismatch'}
+
+
+def test_construction_delivery_failure_keeps_requested_outputs_unassessed():
+    row, _ = inputs()
+    row.update(evaluation_track='construction', requested_tables=['first', 'second', 'third'])
+    row['verdict'] = {'checks': {'delivery': False}, 'complete': False}
+    result = summarize(row, [])
+    assert result['outcome_counts']['original_and_controls'] == {'Unassessed': 3}
+    assert result['transition_counts'] is None
+
+
+def test_external_summary_reports_actual_split_unknown_cost_and_repeated_tasks():
+    row, baseline = inputs()
+    row.update(task_split='evaluation', external_service_spend_usd=None)
+    first = summarize(row, [baseline])
+    result = aggregate([row, row], [first, first])
+    assert result['attempts'] == 2
+    assert result['distinct_tasks'] == 1
+    assert result['repeated_tasks'] == {row['task_id']: 2}
+    assert result['model_attempts_by_split'] == {'evaluation': 2}
+    assert result['external_service_spend_usd'] is None
+    assert result['table_outcomes']['original_and_controls'] == {'Incorrect': 4}
+
+
+def test_infrastructure_cannot_be_counted_as_completed_workpaper():
+    row, baseline = inputs()
+    row.update(status='infrastructure_failed', external_service_spend_usd=0)
+    row['verdict']['complete'] = True
+    result = aggregate([row], [summarize(row, [baseline])])
+    assert result['fully_correct_workpapers'] == 0
+    assert result['infrastructure_failures'] == 1
+    assert result['external_service_spend_usd'] == 0

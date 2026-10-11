@@ -1,0 +1,51 @@
+{
+  "task_id": "workflow-v8-a03",
+  "tables": [
+    {
+      "id": "expense_model",
+      "file": "expense_model.sql",
+      "evidence": [
+        "a03:s01"
+      ]
+    },
+    {
+      "id": "operating_margins",
+      "file": "operating_margins.sql",
+      "evidence": [
+        "a03:s02",
+        "a03:s03"
+      ]
+    },
+    {
+      "id": "definition_attribution",
+      "file": "definition_attribution.sql",
+      "evidence": [
+        "a03:s01"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": [
+        "a03:s01"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "unresolved",
+      "evidence": [
+        "a03:s02",
+        "a03:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "contradicted",
+      "evidence": [
+        "a03:s03"
+      ]
+    }
+  ]
+}

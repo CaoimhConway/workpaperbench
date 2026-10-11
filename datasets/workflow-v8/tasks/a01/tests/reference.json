@@ -1,0 +1,54 @@
+{
+  "task_id": "workflow-v8-a01",
+  "tables": [
+    {
+      "id": "quarter_model",
+      "file": "quarter_model.sql",
+      "evidence": [
+        "a03:s02",
+        "a03:s03"
+      ]
+    },
+    {
+      "id": "quarter_reconciliation",
+      "file": "quarter_reconciliation.sql",
+      "evidence": [
+        "a03:s02",
+        "a03:s03"
+      ]
+    },
+    {
+      "id": "guidance_bridge",
+      "file": "guidance_bridge.sql",
+      "evidence": [
+        "a03:s01",
+        "a03:s04"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "a03:s02",
+        "a03:s03"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "a03:s05"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "supported",
+      "evidence": [
+        "a03:s01",
+        "a03:s04"
+      ]
+    }
+  ]
+}

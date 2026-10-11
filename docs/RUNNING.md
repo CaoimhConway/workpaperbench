@@ -1,150 +1,189 @@
 # Run your own workpaper evaluation
 
-Use the existing Harbor 0.23.0 / Hermes harness directly inside a dedicated
-Ubuntu 24.04 x86_64 guest. This path needs no Mac, Lima, owner account, model
-weights path or hosted provider integration. Docker runs inside the guest.
+Run any of the 30 published tasks through native Harbor 0.23.0 / Hermes using
+one tool-capable Chat Completions endpoint. The controller can be your Linux
+workstation, dedicated server or VM. No Mac, Lima, owner account, environment
+marker, fixed bridge address or development-only permission is required.
 
-The guest must have no shared host folders, private credentials, forwarded SSH
-agent or unrelated workloads. The repository stays on the guest controller.
-Candidate containers receive only their published task inputs. Native separate
-verification receives pristine data with network disabled and no model access.
+The default `workflow-v8` construction track supplies source observations and an
+output contract, with no starting SQL. Models write all three queries.
+`--dataset workflow-v7` selects the separate maintenance track with supplied SQL
+and repair/preservation reporting. Keep results from these conditions separate.
 
-## 1. Install inside the guest
+## 1. Install the native harness
 
-Allow about 12 GiB RAM and 40 GiB disk for the native runtime and images.
-Install Docker Engine and its Compose plugin inside the guest using
-[Docker's Ubuntu instructions](https://docs.docker.com/engine/install/ubuntu/).
-The tested guest has Docker Engine 29.1.3 and Compose 2.40.3. Do not mix upstream
-Docker packages with Ubuntu's `docker.io` packages. OS and Docker provisioning
-are prerequisites, not a newly validated bootstrap procedure.
+Use Python 3.12, Docker Engine and the Docker Compose plugin. Ubuntu 24.04
+x86_64 is the validated platform. Other Linux architectures are not rejected by
+the runner, but have not been empirically validated. Allow about 12 GiB RAM and
+40 GiB disk for runtime dependencies and images, plus resources for your model
+server if it runs on the same machine.
 
-These remaining setup commands are for the guest, not the developer's host:
+Install Docker with [Docker's Linux instructions](https://docs.docker.com/engine/install/).
+Run the controller and Docker daemon on the same Linux machine. Native Harbor
+bind-mounts artifact and log paths, so a remote daemon with a different filesystem
+is not supported by this setup. Docker client context, socket and TLS configuration
+are preserved on the controller and are not injected into candidate environments.
+Use a dedicated controller without unrelated credentials or sensitive host mounts.
+Candidate tools execute inside Docker. The separate verifier has no network,
+model access, inference credential or Docker socket. The controller retains the
+checkout, references and Docker access outside the candidate.
 
 ```sh
 sudo apt-get update
-sudo apt-get install -y ca-certificates curl git python3 python3-venv socat nftables
-sudo systemctl enable --now docker
-sudo usermod -aG docker "$USER"
-sudo touch /etc/workpaperbench-local-profile
-```
+sudo apt-get install -y ca-certificates curl git python3 python3-venv
+# Docker Engine and its Compose plugin must already be installed and usable.
+docker info >/dev/null
+docker compose version
 
-Start a new login shell so Docker group membership takes effect. The marker
-declares this dedicated environment. It does not create isolation by itself.
-
-```sh
 git clone https://github.com/CaoimhConway/workpaperbench.git
 cd workpaperbench
-git checkout v0.5.0-local.4
+git checkout v0.6.0-rc.1
 python3 -m venv .venv
 .venv/bin/pip install -e . harbor==0.23.0
 mkdir -p .local
 curl --fail --location \
   --header 'Accept: application/vnd.github.raw+json' \
-  https://api.github.com/repositories/1024554267/contents/scripts/install.sh?ref=8b66a51036c1e20920a17cdd049fdf55c968d683 \
+  'https://api.github.com/repositories/1024554267/contents/scripts/install.sh?ref=8b66a51036c1e20920a17cdd049fdf55c968d683' \
   --output .local/hermes-install.sh
 printf '%s\n' '25d3c95550e5ed7c0eec180a7d78dde765721c4e33639ab257c154c0a6e7554f  .local/hermes-install.sh' | sha256sum --check
-./wpb guest preflight
+./wpb preflight
 ```
 
-Preflight requires Docker's default bridge gateway `172.17.0.1`. The runner
-checks the pinned native adapter and installed Hermes revision. Runtime setup
+Preflight checks Docker and the exact pinned native adapter. Runtime installation
 downloads public dependencies before candidate egress is restricted. Bootstrap
-dependencies are not fully locked, so retain setup failures as infrastructure
-outcomes. The validated native route uses the dedicated Ubuntu guest. Other
-distributions and container engines remain unverified.
+dependencies are not fully locked. Setup failures remain infrastructure outcomes.
+The historical Mac/Lima wrapper is available only through `./wpb local ...` and
+is not part of this setup. `./wpb guest ...` remains an alias for the public commands.
 
-## 2. Verify the path without a model
-
-```sh
-./wpb guest grade --task c01 --artifacts examples/block-workpaper-v7 \
-  --attempt external-reference-1
-./wpb guest smoke --attempt external-transport-1
-```
-
-The authored reference should pass financial, evidence, robustness and delivery
-checks. The smoke uses two scripted Chat Completions responses, a real Hermes
-terminal call and an intentionally invalid `{}` workpaper. It should pass its
-transport proof while separate verification rejects delivery. This is a harness
-test with `inference: false`, not a model evaluation or financial score. Port
-18080 must be free during the smoke.
-
-Both runs retain `.raw/local-trials/<attempt>/receipt.json` and `verifier.json`.
-The smoke also writes `transport-smoke.json`. Always use a new attempt ID.
-
-## 3. Configure and run your compatible model
-
-Serve a model with tool-capable Chat Completions at
-`http://172.17.0.1:18080/v1` as seen from candidate containers. Its `/models`
-response must contain the configured model ID. It must accept the harmless
-`Authorization: Bearer local-only` placeholder without requiring a private key.
-Bind the user-managed server to the guest bridge address, or forward an existing
-server to that address. No inference proxy or provider adapter is supplied.
-
-For an endpoint already forwarded to guest loopback port 18080, the bridge
-listener is:
+## 2. Verify delivery and scoring without a model
 
 ```sh
-socat TCP-LISTEN:18080,bind=172.17.0.1,reuseaddr,fork TCP:127.0.0.1:18080
+./wpb grade --task c01 --artifacts examples/block-workpaper-v8 \
+  --attempt reference-1
+./wpb report --attempts reference-1 --output .local/reference-report.json
+./wpb smoke --task c09 --attempt transport-1 --port 19090 --authenticated
 ```
 
-Keep that listener running. Do not expose unrelated host services through it.
-Candidate egress allows this one bridge port and loopback. Other external
-addresses, guest services and DNS are blocked after setup.
+The authored Block workpaper should pass every diagnostic and report three correct
+queries on original inputs and controls. Construction has no repair or preservation
+baseline. The smoke uses a local scripted endpoint, a test-only credential, two
+scripted responses and a real Hermes terminal call. It deliberately delivers `{}`,
+which the separate verifier rejects. Its transport proof is marked
+`inference: false`, `financial_evaluation: false`. No model or provider is contacted.
+The fixture discovers the Docker bridge for its listener. The chosen port must be
+free, and `--host` can select a different controller address for the fixture.
 
-Copy [the minimal profile](../config/external-model.example.json), then set the
-model ID, immutable weights revision and serving runtime name/version:
+## 3. Configure your model
+
+Copy [the profile](../config/external-model.example.json) and edit the endpoint,
+model ID, revision, serving runtime and budgets:
 
 ```sh
 cp config/external-model.example.json .local/my-model.json
 ```
 
-The example declares 65,536 context tokens, 24 native tool-loop turns,
-4,096 generated tokens per request and 3,600 candidate seconds. Set compatible
-budgets before running. Temperature, top-p and seed are explicit. Hermes can
-make a forced final request at its turn limit, so turns are not an exact API
-request count. Setup has a separate 1,200-second limit and the verifier has
-180 seconds. No compression or fallback model is enabled.
+`serving.base_url` is the URL reachable from candidate containers, such as an
+HTTPS team endpoint or an HTTP local model server. Arbitrary hostnames, addresses
+and ports are accepted. A controller's `127.0.0.1` is not the candidate's loopback.
+Bind or forward a local server to an address reachable from Docker, then put that
+address in the profile. The runner does not install a provider proxy or require
+`/models`. The endpoint must accept standard Chat Completions messages and tool
+calls, including the native Hermes terminal tool.
 
-The endpoint's model ID and native runtime revision are checked. Model revision,
-serving runtime, context and generation settings are declarations, not proof
-that a user-managed server honored them. Preserve your server configuration and
-request logs when making model comparisons. Use equal settings and fresh
-attempts for a controlled comparison.
+For an authenticated endpoint, `serving.api_key_env` names the environment variable
+containing its key. In a Bash shell, supply it without putting the value in a
+profile, command argument or shell-history entry:
 
 ```sh
-./wpb guest run --dataset workflow-v7 --task c01 \
-  --profile .local/my-model.json --attempt my-model-c01-1
-./wpb guest report --attempts my-model-c01-1 \
-  --output .local/my-model-report.json
+read -r -s -p 'Model API key: ' WPB_MODEL_API_KEY
+export WPB_MODEL_API_KEY
 ```
 
-Development task IDs are `a01 a02 b01 b02 c01 c02`. Run one at a time, changing
-`--task` and `--attempt`. The low-level runner rejects model execution on the
-24 evaluation tasks during the current development phase. Their references and
-controls can be verified without inference.
+For a credential-free local endpoint, remove `api_key_env`. The native client sends
+the harmless `local-only` placeholder. HTTPS uses normal certificate verification
+and the configured hostname. The runner resolves and pins endpoint addresses for
+each trial and permits only that TCP destination and port, loopback, and necessary
+local IPv6 neighbor discovery. Candidate DNS and unrelated outbound connections
+are blocked. Use an endpoint that does not redirect to a different service.
 
-## Read and replay the result
+The native installed client needs the inference key in its environment.
+**Candidate terminal tools can read that key.** Use a dedicated key with appropriate
+scope and spending controls. The verifier receives no key. Public profiles and
+receipts record only its environment-variable name. Raw native traces remain
+private and require review before sharing.
 
-A successful process exit means a receipt was produced. Read its verdict to
-determine whether the workpaper passed. Reports separate query repairs,
-preservations, regressions and remaining defects, alongside numerical, claim,
-evidence, robustness and delivery checks. Candidate timeout/partial exit remains
-visible. Infrastructure or isolation failure is not a reasoning score.
+Model identity, weights revision and server enforcement of settings are declared
+metadata. Record an immutable revision when available. If the server does not
+report one, say `not reported by server` instead of inventing a pin. The harness
+checks its native runtime revision, not your server's underlying weights.
+
+The example sets 65,536 context tokens, 24 tool-loop turns, 4,096 generated tokens
+per request and 3,600 candidate seconds. Set budgets suitable for your model and
+use the same profile across a comparison. `max_tokens` is required. `temperature`,
+`top_p` and `seed` are optional, so omit settings your server does not support.
+Omitted sampling settings follow native client/server defaults. Hermes can make a final
+request at its turn limit, so turns are not an exact request count. Setup has a
+separate 1,200-second limit and verification has 180 seconds. No compression or
+fallback model is enabled. The harness does not impose a monetary cap or claim
+provider cost measurement. External inference cost is recorded as unknown.
+
+## 4. Select and run tasks
+
+```sh
+./wpb list --split all
+./wpb run --task c09 --profile .local/my-model.json --attempt my-model-c09-1
+./wpb report --attempts my-model-c09-1 --output .local/my-model-c09-report.json
+
+# Run all 24 evaluation cases with the same profile and fresh candidate state.
+./wpb batch --split evaluation --profile .local/my-model.json --attempt my-model-eval-1
+```
+
+Both splits are runnable. Use `--split development` for six development cases,
+`--split all` for all 30, or `--tasks a01 b01 c09` for an explicit batch.
+The split describes experimental use, not an access restriction. Select your
+profile on development cases before making an evaluation comparison.
+
+A batch runs serially, creates attempt IDs such as `my-model-eval-1-c09`, and
+retains each result plus `.raw/local-trials/my-model-eval-1-batch.json`. Failed
+infrastructure attempts stay visible and cause a nonzero batch exit. Never reuse
+an attempt ID. To report the batch, derive its explicit attempt list:
+
+```sh
+.venv/bin/python - <<'PY'
+import json, subprocess
+from pathlib import Path
+batch = json.loads(Path('.raw/local-trials/my-model-eval-1-batch.json').read_text())
+attempts = [row['attempt_id'] for row in batch['attempts']]
+subprocess.run(['./wpb', 'report', '--attempts', *attempts,
+                '--output', '.local/my-model-eval-1-report.json'], check=True)
+PY
+```
+
+Use one native trial per installed harness environment. Independent workers need
+separate Python environments and output directories. A new batch prefix always
+starts fresh work. Previously completed attempts are not silently resumed.
+
+## Read, replay and audit results
+
+A zero process exit means the native run produced a receipt. Read the verdict to
+see whether the workpaper passed. Reports include complete workpaper counts,
+original/control-inclusive query correctness, evidence, claims, robustness,
+delivery and infrastructure diagnostics. They state actual split coverage,
+repeated tasks, and unknown costs. Missing delivery leaves financial outcomes
+unassessed. Construction reports never borrow maintenance repair counts.
 
 Exact submitted JSON is retained as `raw-answer.json`, normalized JSON as
-`answer.json` when parseable, and SQL under `raw-sql/`. Raw native traces remain
-under the attempt directory. Screen them before sharing. Receipts bind artifact,
-task, scorer and configuration hashes. Reports reject mixed scorer or model
-configurations and never replace existing output files.
+`answer.json` when parseable, and SQL under `raw-sql/`, beneath
+`.raw/local-trials/<attempt>/`. Receipts bind artifact, task, scorer and configuration
+hashes. Reports reject mixed catalogs, tracks or model configurations, altered
+verifier bytes and duplicate attempt IDs. Existing output files are never replaced.
 
-To score a retained submission again, copy `raw-answer.json` to `answer.json`
-in a fresh artifact directory and add its exact `raw-sql/*.sql` files. Use
-`guest grade --dataset <original-catalog> --task <original-task> --artifacts
-<directory> --attempt <new-id>`. This creates an inference-free replay, not a
-new evaluation. Preserve the original receipt and catalog identity when
-comparing corrections. Historical results do not measure discrimination on
-the current catalog.
+For an inference-free replay, copy `raw-answer.json` to `answer.json` in a fresh
+artifact directory and add the exact `raw-sql/*.sql` files. Run `./wpb grade
+--dataset <original-catalog> --task <original-task> --artifacts <directory>
+--attempt <new-id>`. Preserve the original receipt and catalog identity. Replays
+and grader corrections do not become new model evaluations.
 
-Use `./wpb` for the current interface. The installed `workpaperbench` console
-command preserves the historical release interface. The owner-specific measured
-model profiles remain in [LOCAL.md](LOCAL.md).
+The [methods](WORKFLOW.md) include a portable all-task reference/control sweep.
+The historical installed `workpaperbench` console entry point remains unchanged.
+Use `./wpb` for this public interface.

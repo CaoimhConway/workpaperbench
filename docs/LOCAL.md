@@ -31,7 +31,7 @@ The project environment and guest setup above are sufficient for grading. No
 weights, model server or Hermes installer are required for this path.
 
 ```sh
-./wpb grade --dataset workflow-v7 --task c01 \
+./wpb local grade --dataset workflow-v7 --task c01 \
   --artifacts examples/block-workpaper-v7 --attempt my-block-example-1
 ```
 
@@ -51,7 +51,8 @@ Other guest/platform combinations have not been validated here.
 
 ## Run the measured local model
 
-The current authored catalog is workflow-v7. The version 4 and 5 commands below
+This historical maintenance workflow uses workflow-v7. The public interface defaults
+to workflow-v8 construction and is documented in [RUNNING.md](RUNNING.md). The version 4 and 5 commands below
 reproduce historical development conditions and do not measure the revised tasks.
 
 The measured default is Qwen3.5-9B **Q4_K_M** from
@@ -104,7 +105,7 @@ The equivalent Python entry point is `python -m workpaperbench.current_cli`:
 
 
 ```sh
-./wpb preflight
+./wpb local preflight
 ./wpb controls --attempt boundaries-1
 ./wpb serve
 ```
@@ -113,8 +114,8 @@ Leave the server command running. In another terminal, run a single selected
 published regression task, or the selected development prototypes:
 
 ```sh
-./wpb run --task c03 --attempt my-block-1
-./wpb run --dataset workflow-v5 --tasks a01 b01 c01 --attempt my-dev
+./wpb local run --task c03 --attempt my-block-1
+./wpb local run --dataset workflow-v5 --tasks a01 b01 c01 --attempt my-dev
 ```
 
 Each identifier is unique. Existing attempt directories are rejected. The runner
@@ -153,7 +154,7 @@ Conversion is not independently reproduced.
 In another terminal, use a fresh attempt ID for one development task:
 
 ```sh
-./wpb run --dataset workflow-v5 --task b01 --attempt my-qwen36-brale-1 \
+./wpb local run --dataset workflow-v5 --task b01 --attempt my-qwen36-brale-1 \
   --profile config/local/qwen36-35b-terminal-24.json
 ```
 
@@ -187,7 +188,7 @@ For the authorized continuation, use the distinct
 With that server running, use a fresh attempt ID:
 
 ```sh
-./wpb run --dataset workflow-v5 --task c01 --attempt my-qwen36-block-recovery-1 \
+./wpb local run --dataset workflow-v5 --task c01 --attempt my-qwen36-block-recovery-1 \
   --profile config/local/qwen36-35b-nonthinking-terminal-24.json
 ```
 
@@ -228,7 +229,7 @@ The status file is `.local/local-workflow-qwen36-development-5-status.json`.
 For an individual continuation, use a fresh attempt ID and the same task:
 
 ```sh
-./wpb run --dataset workflow-v5 --task c01 --attempt my-block-continuation-1 \
+./wpb local run --dataset workflow-v5 --task c01 --attempt my-block-continuation-1 \
   --continue-from qwen36-development-c01-2 \
   --profile config/local/qwen36-35b-nonthinking-terminal-64.json
 ```
@@ -245,10 +246,10 @@ attempts in any comparison.
 Submit an engineer's JSON workpaper or workflow artifact directory:
 
 ```sh
-./wpb grade --task c03 --answer /path/to/answer.json --attempt engineer-1
-./wpb grade --dataset workflow-v5 --task b01 --artifacts /path/to/workpaper --attempt engineer-workflow-1
+./wpb local grade --task c03 --answer /path/to/answer.json --attempt engineer-1
+./wpb local grade --dataset workflow-v5 --task b01 --artifacts /path/to/workpaper --attempt engineer-workflow-1
 ./wpb replay --task c03 --retained my-block-1 --attempt replay-block-1
-./wpb report --attempts my-block-1 --output reports/local/my-block-report.json
+./wpb local report --attempts my-block-1 --output reports/local/my-block-report.json
 ```
 
 Replay uses exact retained JSON and SQL bytes in a new inference-free native
@@ -263,7 +264,7 @@ For a workflow replay and report, keep the catalog and task explicit:
 ```sh
 ./wpb replay --dataset workflow-v5 --task c01 \
   --retained block-example-1 --attempt block-example-replay-1
-./wpb report --attempts block-example-1 block-example-replay-1 \
+./wpb local report --attempts block-example-1 block-example-replay-1 \
   --output reports/local/my-workpaper-review.json
 ```
 

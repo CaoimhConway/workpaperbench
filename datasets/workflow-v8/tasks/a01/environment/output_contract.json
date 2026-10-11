@@ -1,0 +1,110 @@
+{
+  "tables": {
+    "quarter_model": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "quarter": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "operating_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "quarter"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "quarter_reconciliation": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "margin_qoq_bps": {
+          "type": "real",
+          "unit": "basis_points",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "guidance_bridge": {
+      "columns": {
+        "business": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "Azure and other cloud services"
+          ]
+        },
+        "actual_cc_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "guidance_low_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "guidance_high_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "midpoint_gap_pp": {
+          "type": "real",
+          "unit": "percentage_points",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "business"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "Microsoft consolidated Q2 FY2025 operating margin exceeded its Q1 FY2025 operating margin.",
+    "claim_2": "The supplied segment-results table reports Azure-only operating income for Q2 FY2025 separately from Intelligent Cloud operating income.",
+    "claim_3": "Azure Q2 FY2025 constant-currency growth lies within the closed range disclosed in the earlier Q1 call."
+  },
+  "definitions": {
+    "quarter_reconciliation": "margin_qoq_bps = 10000 * (Q2 operating income / Q2 revenue - Q1 operating income / Q1 revenue). Both ratios use matching consolidated quarters and units.",
+    "guidance_bridge": "midpoint_gap_pp is actual constant-currency percent less the midpoint of the earlier guidance range."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

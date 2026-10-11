@@ -1,0 +1,131 @@
+{
+  "attempt_id": "open-reference-1",
+  "execution_profile": "isolated-linux",
+  "manifest_id": "workflow-v8-canonical-67966f15cd8e",
+  "task_id": "workflow-v8-c01",
+  "task_sha256": "ef59802ec87024e34fb688cfd67a088be5eef96a20be223c0e55121008f02398",
+  "scorer_version": "workflow-1.2.0",
+  "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e",
+  "started_at": "2026-10-14T03:08:39.777584+00:00",
+  "external_service_spend_usd": 0,
+  "status": "verified",
+  "inference": false,
+  "source_kind": "submitted_artifact_replay",
+  "configuration_evidence": "Declared model revision, serving runtime, model ID and generation settings. Native version is checked. Server identity and enforcement are not independently observed.",
+  "evaluation_track": "construction",
+  "task_split": "development",
+  "requested_tables": [
+    "revenue_bridge",
+    "profit_bridge",
+    "reconciliation"
+  ],
+  "execution_files_sha256": {
+    "scripts/local_trial.py": "ed066ab9d98be6530adb61d80a5dd86d3c5d54df060b5a244e0ef222f726f40f",
+    "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+    "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+    "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+    "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+  },
+  "model_endpoint": null,
+  "effective_task_sha256": "9a0c385bc066f25d44f03589aac87e239b9a961e007f94b409cb7daac2c21759",
+  "candidate_network_policy": "Loopback and declared endpoint IP addresses/TCP port only. IPv6 endpoints additionally allow neighbor solicitation/advertisement with hop limit 255. Other ICMP, DNS and nonendpoint traffic are dropped.",
+  "verdict": {
+    "scorer_version": "workflow-1.2.0",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": true,
+      "robustness": true,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "revenue_bridge": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+            "irrelevant_later_disclosure": true,
+            "independent_disclosure_discrepancy": true
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+            "irrelevant_later_disclosure": null,
+            "independent_disclosure_discrepancy": null
+          }
+        },
+        "profit_bridge": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+            "irrelevant_later_disclosure": true,
+            "independent_disclosure_discrepancy": true
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+            "irrelevant_later_disclosure": null,
+            "independent_disclosure_discrepancy": null
+          }
+        },
+        "reconciliation": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+            "irrelevant_later_disclosure": true,
+            "independent_disclosure_discrepancy": true
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+            "irrelevant_later_disclosure": null,
+            "independent_disclosure_discrepancy": null
+          }
+        }
+      },
+      "claims": {
+        "claim_1": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_2": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_3": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "verdict_sha256": "40765669944a96690d327052c7e1f8f93633f2a1fa0b01a5d2cbcb71443b6f8f",
+  "sql_file_sha256": {
+    "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+    "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+    "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+  },
+  "raw_answer_sha256": "b21d6702a576427052beb47464608ce7ad94f115a02da8b808d799319b0c963d",
+  "normalized_answer_sha256": "b21d6702a576427052beb47464608ce7ad94f115a02da8b808d799319b0c963d",
+  "finished_at": "2026-10-14T03:09:18.036250+00:00"
+}

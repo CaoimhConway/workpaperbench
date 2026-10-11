@@ -1,0 +1,31 @@
+{
+  "kind": "scripted_native_harness_fixture",
+  "inference": false,
+  "financial_evaluation": false,
+  "passed": true,
+  "requests": [
+    {
+      "model": "deterministic-harness-fixture",
+      "tool_result_observed": false,
+      "generation": {
+        "max_tokens": 4096,
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "seed": 17
+      }
+    },
+    {
+      "model": "deterministic-harness-fixture",
+      "tool_result_observed": true,
+      "generation": {
+        "max_tokens": 4096,
+        "temperature": 0.6,
+        "top_p": 0.95,
+        "seed": 17
+      }
+    }
+  ],
+  "authenticated": true,
+  "endpoint": "http://172.17.0.1:19090/v1",
+  "expected_result": "Native terminal writes invalid JSON workpaper. Separate verification rejects delivery."
+}
