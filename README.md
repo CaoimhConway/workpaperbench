@@ -2,13 +2,13 @@
 
 Reproducible evaluations for financial research agents
 
-WorkpaperBench tests whether agents can find, reconcile, calculate and justify financial analysis from compact frozen evidence dossiers.
+WorkpaperBench tests whether agents can reconcile financial sources, calculate metrics consistently and support their conclusions with frozen financial evidence.
 
 [Quickstart](#quickstart) · [Execution guide](docs/RUNNING.md) · [Methods](docs/WORKFLOW.md) · [Task contract](datasets/workflow-v8/tasks/c01/instruction.md) · [Research prerelease](https://github.com/CaoimhConway/workpaperbench/releases/tag/v0.6.0-rc.1)
 
 ## Scope
 
-The benchmark contains **30 source-backed tasks** across three financial workflows,
+The benchmark contains 30 source-backed tasks across three financial workflows,
 with six development cases and 24 evaluation cases. All tasks are available to
 external teams using a compatible model.
 
@@ -18,9 +18,9 @@ external teams using a compatible model.
 | Audit a metric | Choose denominators, separate stocks from flows, deduplicate exports | 2 / 8 |
 | Explain a change | Build signed bridges, reconcile totals, bound causal attribution | 2 / 8 |
 
-The default **construction track** (`workflow-v8`, scorer `workflow-1.2.0`)
+The default construction track (`workflow-v8`, scorer `workflow-1.2.0`)
 requires agents to write three SQL queries per task, with no starting SQL.
-The separate **maintenance track** (`workflow-v7`) supplies existing queries to
+The separate maintenance track (`workflow-v7`) supplies existing queries to
 check and repair while preserving correct work. The tracks have distinct
 identities and reports. See the [track comparison](docs/WORKFLOW.md#construction-and-maintenance).
 
@@ -28,6 +28,9 @@ Tasks supply source excerpts, normalized observations, definitions and output
 contracts. They measure analysis within a fixed dossier, not source extraction,
 open-ended search or investment research. Evidence grading checks source
 selection, and claim verdicts assess bounded assertions.
+
+Tests include independently calculated reference answers, alternative correct
+solutions and targeted counterexamples.
 
 ## Evaluation
 
@@ -42,45 +45,59 @@ preserved results and regressions. Missing or invalid deliveries leave financial
 outcomes unassessed. Versioned receipts bind submissions to task, scorer and
 configuration hashes.
 
-Model runs use native Harbor/Hermes with explicit endpoint configuration and
-execution budgets. SQL verification runs separately in an isolated Linux
-environment with no network or inference credentials, using read-only access and
-bounded memory, time and output.
+Retained submissions can be replayed without inference to investigate failures and
+check scorer changes.
+
+Model runs use native Harbor. Python graders execute submitted SQL against SQLite
+in a separate Docker verifier on Linux, with no network or inference credentials,
+read-only access and bounded memory, time and output.
+
+The pytest suite covers graders, reporting and task regressions, with CI in
+[GitHub Actions](.github/workflows/ci.yml).
 
 ## Quickstart
 
-Use Python 3.12 to install the package and browse the task catalog:
+Use a Linux controller with uv, Docker Engine and Docker Compose installed:
 
 ```sh
-git clone https://github.com/CaoimhConway/workpaperbench.git
-cd workpaperbench
-git checkout v0.6.0-rc.1
-python3 -m venv .venv
-.venv/bin/pip install -e .
-./wpb list --split evaluation
+uv tool install --python 3.12 'harbor==0.23.0'
 ```
 
-To run evaluations, follow the [execution guide](docs/RUNNING.md) to set up a
-Linux controller with Docker Engine, Docker Compose and the pinned Harbor/Hermes
-runtime. Configure the [model profile](config/external-model.example.json) as
-`.local/my-model.json`, setting your endpoint, model identity and budgets.
-The endpoint must support Chat Completions and tool calls.
-
-From that controller, run a task, generate its report or evaluate the full split:
+First run each of the 30 oracle solutions five times to check your environment.
+Oracle runs use the provided reference solutions and make no model calls:
 
 ```sh
-./wpb run --task c09 --profile .local/my-model.json --attempt my-model-c09-1
-./wpb report --attempts my-model-c09-1 --output .local/my-model-c09-report.json
-./wpb batch --split evaluation --profile .local/my-model.json --attempt my-model-eval-1
+harbor run \
+  --repo CaoimhConway/workpaperbench@v0.6.0-rc.1 \
+  -p datasets/workflow-v8/tasks \
+  --agent oracle -k 5 \
+  --n-concurrent 2 --env docker
 ```
 
-Use fresh attempt IDs and report paths. Select `--split development` for six
-cases or `--split all` for all 30. The execution guide also covers batch reports
-and scoring retained workpapers without model inference.
+Every oracle attempt should receive reward `1`. If one fails, include its task,
+Harbor version and verifier diagnostics in an [issue](https://github.com/CaoimhConway/workpaperbench/issues/new).
 
-Supply credentials through environment variables. Candidate terminal tools can
-read the inference key, so use a dedicated key with appropriate scope and
-spending controls. The verifier receives no key.
+To evaluate a model, set the credentials required by its provider and replace
+`<provider/model>` with its Harbor model name:
+
+```sh
+harbor run \
+  --repo CaoimhConway/workpaperbench@v0.6.0-rc.1 \
+  -p datasets/workflow-v8/tasks \
+  --agent terminus-2 --model '<provider/model>' \
+  --ak max_turns=24 \
+  --n-concurrent 2 --env docker
+```
+
+This runs all 30 tasks. Use `-i c01` for one development task and adjust concurrency
+to your resources. Read the rewards and exceptions in the job result, plus each
+trial's `verifier/verdict.json` for financial diagnostics.
+
+The [execution guide](docs/RUNNING.md) covers split filters, custom endpoints,
+agent-specific setup and credential boundaries. It also describes the Harbor/Hermes
+`wpb` commands for detailed reports and replay without model calls.
+The [validation record](reports/workflow-v8/direct-harbor-validation.json) covers
+the oracle runs and scripted agent checks. These checks do not measure model performance.
 
 ## Contributing
 

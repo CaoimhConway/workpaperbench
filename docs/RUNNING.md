@@ -1,9 +1,131 @@
 # Run your own workpaper evaluation
 
-Run any of the 30 published tasks through native Harbor 0.23.0 / Hermes using
-one tool-capable Chat Completions endpoint. The controller can be your Linux
-workstation, dedicated server or VM. No Mac, Lima, owner account, environment
-marker, fixed bridge address or development-only permission is required.
+Run any of the 30 published tasks through native Harbor 0.23.0. The controller
+can be your Linux workstation, dedicated server or VM. Docker Engine and Docker
+Compose must run on that controller. Ubuntu 24.04 x86_64 is the validated platform.
+The tested guest has six CPUs and 12 GiB RAM. Start with two concurrent trials.
+
+## Direct Harbor execution
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and
+[Docker Engine](https://docs.docker.com/engine/install/) on the Linux controller,
+then install the pinned harness:
+
+```sh
+uv tool install --python 3.12 'harbor==0.23.0'
+```
+
+Harbor downloads the task directories from the pinned release. Run all 30 oracle
+solutions five times before evaluating a model in a new environment:
+
+```sh
+harbor run \
+  --repo CaoimhConway/workpaperbench@v0.6.0-rc.1 \
+  -p datasets/workflow-v8/tasks \
+  --agent oracle -k 5 \
+  --n-concurrent 2 --env docker
+```
+
+Each oracle attempt should have reward `1` and no exception. These are reference
+checks, not model evaluations. Inspect the job's `result.json` and each trial's
+`verifier/verdict.json`. A successful process exit alone does not establish that
+the workpaper passed. Oracle solutions are available to the oracle agent, while
+normal candidate images omit solutions, gold and verifier code.
+
+For a model evaluation, provide the credentials required by the selected provider
+through its environment variables and choose its Harbor model name:
+
+```sh
+harbor run \
+  --repo CaoimhConway/workpaperbench@v0.6.0-rc.1 \
+  -p datasets/workflow-v8/tasks \
+  --agent terminus-2 --model '<provider/model>' \
+  --ak max_turns=24 \
+  --n-concurrent 2 --env docker
+```
+
+Terminus-2 calls the model from the controller and sends terminal commands into
+the candidate container. A custom Chat Completions endpoint must be reachable
+from the controller. For example, with a server already running locally:
+
+```sh
+OPENAI_API_KEY=local-only harbor run \
+  --repo CaoimhConway/workpaperbench@v0.6.0-rc.1 \
+  -p datasets/workflow-v8/tasks -i c01 \
+  --agent terminus-2 --model openai/my-model \
+  --ak api_base=http://127.0.0.1:8000/v1 \
+  --ak max_turns=24 \
+  --n-concurrent 1 --env docker
+```
+
+The placeholder above is for a credential-free local endpoint. Supply any real
+key expected by an authenticated endpoint through the corresponding provider
+environment variable. Declare context, output limits and sampling settings with
+the agent's supported options. `harbor agent schema terminus-2` lists them.
+Keep those settings and budgets fixed across a comparison and retain the job
+configuration. The direct interface records the selected model name and options,
+without attesting to the server's weights revision or enforcement of settings.
+
+Use `-i c01` to select one development task. The complete development set is
+`a01`, `a02`, `b01`, `b02`, `c01`, `c02`. To run only the 24 evaluation tasks, add:
+
+```sh
+-x a01 -x a02 -x b01 -x b02 -x c01 -x c02
+```
+
+Use development tasks to select configurations before an evaluation comparison.
+Set `--job-name` and `--jobs-dir` for identifiable new jobs. `-k` controls repeated
+attempts, and `--n-concurrent` controls simultaneous trials. Keep failed attempts
+and exceptions when interpreting coverage. Repeated attempts are not independent
+tasks. Harbor's aggregate reward measures complete workpapers. The retained
+verdict JSON separates numerical tables, claims, evidence, robustness and delivery.
+
+### Agent and environment boundaries
+
+Docker is the validated environment for these commands. Other Harbor agents
+have their own setup, credentials and model options. Installed agents make API
+calls inside the candidate environment and may expose their inference key to
+terminal tools. Use a dedicated key with appropriate scope and spending controls.
+Add `--allow-agent-host <provider-host>` when an installed agent needs an endpoint
+beyond the task's default `172.17.0.1` allowlist.
+
+Native Harbor applies that candidate host allowlist during execution. It permits
+configured resolver DNS and ICMP, and uses a transparent proxy for TCP traffic.
+A TCP connection to the proxy can succeed before an external destination is
+rejected. The direct path does not enforce the configured `wpb` path's stricter
+endpoint-and-port policy. Terminus-2's controller-side model calls are outside
+the candidate network policy.
+
+Verification runs in a fresh separate Docker environment with `network_mode:
+none`, pristine observations, no inference key and no Docker socket. Its verifier records
+check loopback-only interfaces and a failed external TLS probe. Read-only SQL
+authorization and bounded workers constrain replay. These checks do not prove
+security for arbitrary workloads. Modal and other sandbox backends have not been
+validated against this verifier's network-namespace requirements.
+
+The [direct validation record](../reports/workflow-v8/direct-harbor-validation.json)
+binds the oracle sweep and local scripted Terminus-2 fixtures. The fixtures check
+native API transport, terminal feedback, retained delivery, positive and negative
+grader outcomes, and isolation on development task `c01`. They make no inference
+or provider calls and establish no model-performance result. To reproduce the
+transport checks from a checkout of current `main`, run:
+
+```sh
+python3 scripts/validate_direct_harbor.py \
+  --output .local/my-direct-harbor-validation.json
+```
+
+Use a fresh output path. Raw native logs stay below `.local` and need review before
+sharing. The fixture explicitly injects a harmless test key into the candidate,
+checks that terminal tools can read it, and verifies that the separate verifier
+receives no key. This does not imply Terminus-2 forwards its real controller key.
+
+## Configured Harbor/Hermes execution
+
+The `wpb` interface below adds explicit endpoint-and-port restrictions, pinned
+Hermes compatibility, identity-bound receipts and detailed financial reports.
+It uses one tool-capable Chat Completions endpoint. No Mac, Lima, owner account,
+environment marker or development-only permission is required.
 
 The default `workflow-v8` construction track supplies source observations and an
 output contract, with no starting SQL. Models write all three queries.
