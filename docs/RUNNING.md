@@ -54,13 +54,22 @@ OPENAI_API_KEY=local-only harbor run \
   -p datasets/workflow-v8/tasks -i c01 \
   --agent terminus-2 --model openai/my-model \
   --ak api_base=http://127.0.0.1:8000/v1 \
+  --ak 'model_info={"max_input_tokens":65536,"max_output_tokens":4096,"input_cost_per_token":0,"output_cost_per_token":0,"litellm_provider":"openai","mode":"chat"}' \
+  --ak 'llm_call_kwargs={"max_tokens":4096}' \
+  --ak temperature=0.6 \
   --ak max_turns=24 \
   --n-concurrent 1 --env docker
 ```
 
-The placeholder above is for a credential-free local endpoint. Supply any real
-key expected by an authenticated endpoint through the corresponding provider
-environment variable. Declare context, output limits and sampling settings with
+The placeholder above is for a credential-free local endpoint serving a
+65,536-token context with a 4,096-token response limit. Replace both limits with
+your server's actual configuration. `model_info` supplies the limits used for
+Harbor's context accounting, while `llm_call_kwargs.max_tokens` sets the requested
+response budget. Metadata does not configure the server. The zero cost fields
+apply to this local example, not paid endpoints.
+
+Supply any real key expected by an authenticated endpoint through the
+corresponding provider environment variable. Declare sampling settings with
 the agent's supported options. `harbor agent schema terminus-2` lists them.
 Keep those settings and budgets fixed across a comparison and retain the job
 configuration. The direct interface records the selected model name and options,
@@ -119,6 +128,46 @@ Use a fresh output path. Raw native logs stay below `.local` and need review bef
 sharing. The fixture explicitly injects a harmless test key into the candidate,
 checks that terminal tools can read it, and verifies that the separate verifier
 receives no key. This does not imply Terminus-2 forwards its real controller key.
+
+A [local-model smoke record](../reports/workflow-v8/direct-model-smoke-v1/record.json)
+and its retained workpaper exercise actual inference on development task `b01`
+with Qwen3.6-35B-A3B, CPU inference and native Terminus-2. The single attempt
+completed nine turns and delivered all required files without an exception or
+retry. Original-input calculations and claim verdicts passed. The complete reward
+was `0` because claim 1 had no citations and the SQL failed changed-input controls:
+
+- The queries did not deduplicate identical exports.
+- The bridge multiplied a percentage-point difference by 10,000, producing a
+  basis-point change 100 times too large when coverage changed.
+- The reserve bridge used reported fair values instead of the specified reserve
+  components, which diverged under the independent-disclosure control.
+
+Inference used only a local endpoint, with zero external-service spend. This is
+execution evidence from one development attempt, not a benchmark performance
+estimate. The record includes weights, runtime, settings, file hashes and the
+complete verifier diagnostics.
+
+### Regression checks
+
+From a checkout of current `main` on the Linux Docker controller, run:
+
+```sh
+python3 scripts/workflow_regression.py \
+  --output .local/my-workflow-regression.json
+```
+
+This checks the checkout's oracle solutions for `a01`, `b01` and `c01`, followed
+by correct and invalid scripted deliveries through native Terminus-2. It makes
+no model calls. Missing diagnostics, infrastructure errors, changed artifacts
+or unexpected rewards fail the command and remain in the result ledger. Use a
+fresh output path. Raw native logs remain local beside the summary.
+The [recorded regression](../reports/workflow-v8/native-regression-v1.json) passed
+all three oracles and both scripted deliveries without retries or inference.
+
+The same command is available through the
+[WorkpaperBench workflow regression](../.github/workflows/workflow-regression.yml)
+manual GitHub Actions dispatch. It runs the current construction checks and
+uploads their summary separately from historical reports.
 
 ## Configured Harbor/Hermes execution
 

@@ -1,0 +1,161 @@
+{
+  "kind": "workflow_v8_native_regression",
+  "status": "passed",
+  "harbor_version": "0.23.0",
+  "inference": false,
+  "model_performance_evaluation": false,
+  "external_service_spend_usd": 0,
+  "source": {
+    "kind": "checkout",
+    "manifest_id": "workflow-v8-canonical-67966f15cd8e",
+    "manifest_sha256": "4a302e73ab408efd84bbe48e30f9746c39583aac768d12e0975580c018bf040d",
+    "tasks_sha256": {
+      "a01": "fe7d40dd90ec185d5e685e02e4ba36d6cb2cba0eb63c4e67d1a227b1bc8630c2",
+      "b01": "c9bb260c61140b035370e91c2761956bdf4e3a877157636d1fac04c44313e8fe",
+      "c01": "ef59802ec87024e34fb688cfd67a088be5eef96a20be223c0e55121008f02398"
+    }
+  },
+  "implementation_sha256": {
+    "workflow_regression.py": "33ac2d684e2b5699d17959b03eb74cb9a12b08618bc93121ddd57ac479b29665",
+    "validate_direct_harbor.py": "8edc261897a785874c9c4db72955a8b057dfdf157e421b66b50ef810d2ce3142"
+  },
+  "oracles": [
+    {
+      "task": "workflow-v8-a01",
+      "reward": 1.0,
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "native_result_sha256": "a822477d1652efd3174b707bde298e03ba107bc997d8c481fe92e695327617bd",
+      "verdict_sha256": "ec2145c8a534dc138133a2295b7a5202f3282f9863501f6fb40e7aa8a5cde3e9",
+      "retained_answer_sha256": "c4e0bdbb8f09ce14acb89cbc2d7f5b3be42e368f78c24743c685dfc5bbfaf3d5",
+      "retained_sql_sha256": {
+        "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+        "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199",
+        "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6"
+      }
+    },
+    {
+      "task": "workflow-v8-c01",
+      "reward": 1.0,
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "native_result_sha256": "33f74ef83c2ab41db185eb29fe61c655e4b7e27b2ccc4562d9f06f3d80f1e4ca",
+      "verdict_sha256": "40765669944a96690d327052c7e1f8f93633f2a1fa0b01a5d2cbcb71443b6f8f",
+      "retained_answer_sha256": "b21d6702a576427052beb47464608ce7ad94f115a02da8b808d799319b0c963d",
+      "retained_sql_sha256": {
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      }
+    },
+    {
+      "task": "workflow-v8-b01",
+      "reward": 1.0,
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "native_result_sha256": "c31822c5d0d3be44910fc9de61079340e50ddf56401e49b997614f91b6517945",
+      "verdict_sha256": "2c773cad7d5be7109de79d60942a21b0a542c530cb01051aac1f14edc09926c1",
+      "retained_answer_sha256": "015fe0c27c21b1d530b2d60d8f5c423a036a8d747e0823dfe0418a689c23d3e7",
+      "retained_sql_sha256": {
+        "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc",
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130"
+      }
+    }
+  ],
+  "agent_transport": {
+    "kind": "scripted_native_harbor_agent_fixture",
+    "harbor_version": "0.23.0",
+    "repo": null,
+    "inference": false,
+    "model_performance_evaluation": false,
+    "external_service_spend_usd": 0,
+    "cases": [
+      {
+        "variant": "reference",
+        "agent": "terminus-2",
+        "task": "workflow-v8-c01",
+        "reward": 1.0,
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        },
+        "native_result_sha256": "cddd4f853b1088f8b3b13497663b21fa8168258b0e46fa6605393ff2ede5fe5a",
+        "verdict_sha256": "40765669944a96690d327052c7e1f8f93633f2a1fa0b01a5d2cbcb71443b6f8f",
+        "retained_answer_sha256": "cc64b189feac98180a02b6dc3606a414e090156eaf4e085a77dbc6b318d6cc0a",
+        "retained_sql_sha256": {
+          "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+          "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+          "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+        },
+        "native_job_result_sha256": "13af7fb6f2a9d85453e02d07163022b343490d12fe1ac454dec893e3c9be9c6f",
+        "requests": [
+          {
+            "terminal_completion_observed": false
+          },
+          {
+            "terminal_completion_observed": true
+          },
+          {
+            "terminal_completion_observed": true
+          }
+        ],
+        "candidate_received_test_key": true,
+        "candidate_external_tls_probe_blocked": true,
+        "candidate_reference_paths_absent": true
+      },
+      {
+        "variant": "invalid",
+        "agent": "terminus-2",
+        "task": "workflow-v8-c01",
+        "reward": 0.0,
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        },
+        "native_result_sha256": "164114c8bb97287f62dfff9fcde71e98c32e15456c448437021db66e6ef0f33d",
+        "verdict_sha256": "5362a41dc92459a10900699f343d7ef1dff185cc50553cb257ab6f44c6c8dda2",
+        "retained_answer_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "retained_sql_sha256": {},
+        "native_job_result_sha256": "73277bf07ed78968fe0f9c2cb4106936f34d894a3201f107225b75a220376532",
+        "requests": [
+          {
+            "terminal_completion_observed": false
+          },
+          {
+            "terminal_completion_observed": true
+          },
+          {
+            "terminal_completion_observed": true
+          }
+        ],
+        "candidate_received_test_key": true,
+        "candidate_external_tls_probe_blocked": true,
+        "candidate_reference_paths_absent": true
+      }
+    ],
+    "source": {
+      "kind": "checkout",
+      "manifest_id": "workflow-v8-canonical-67966f15cd8e",
+      "task_sha256": "ef59802ec87024e34fb688cfd67a088be5eef96a20be223c0e55121008f02398"
+    }
+  },
+  "error": null,
+  "native_job_result_sha256": "ecfa12afc4c779a0092e3347d99087be692b5a28112473cae591205f7de905bf"
+}

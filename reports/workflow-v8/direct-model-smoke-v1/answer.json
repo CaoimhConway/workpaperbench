@@ -1,0 +1,40 @@
+{
+  "task_id": "workflow-v8-b01",
+  "tables": [
+    {
+      "id": "reserve_coverage",
+      "file": "reserve_coverage.sql",
+      "evidence": ["b01:s01", "b01:s04"]
+    },
+    {
+      "id": "signature_lag",
+      "file": "signature_lag.sql",
+      "evidence": ["b01:s03", "b01:s06"]
+    },
+    {
+      "id": "reserve_bridge",
+      "file": "reserve_bridge.sql",
+      "evidence": ["b01:s01", "b01:s04"]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "unresolved",
+      "evidence": [],
+      "note": "Neither report provides payment volume data; payments are outside the examiner scope."
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": ["b01:s03", "b01:s06"],
+      "note": "June lag is 16 days, May lag is 12 days; June exceeds May."
+    },
+    {
+      "id": "claim_3",
+      "verdict": "contradicted",
+      "evidence": ["b01:s01", "b01:s04"],
+      "note": "At both dates reserve fair value equals issued SBC (100% coverage), never greater."
+    }
+  ]
+}

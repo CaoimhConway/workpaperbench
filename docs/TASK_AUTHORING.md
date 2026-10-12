@@ -1,44 +1,119 @@
 # Task authoring
 
-The active suite is `datasets/real-v1`, with dataset-scoped task IDs and separate manifests. Keep published historical task identities and source bytes unchanged. A new snapshot is a separate directory and reviewed manifest, not a refresh in place.
+The default suite is `workflow-v8`, the construction track with 30 tasks and
+scorer `workflow-1.2.0`. Each task requests three SQL result tables and three
+claim verdicts. Candidates receive observations and an output contract, with no
+starting SQL. The six development and 24 evaluation cases have separate source
+groups. The [methods](WORKFLOW.md) describe the measurement contract and splits.
 
-Rebuild and verify the retained real-v1 packages offline:
+Author new cases in a distinct future dataset directory. Keep published catalogs,
+task IDs and frozen packages unchanged. New source observations, task requests or
+grading rules require distinct task and catalog identities before evaluation.
+The `workflow-v7` maintenance track is a separate condition with starting queries,
+not an interchangeable source of construction results.
 
-```sh
-.venv/bin/python scripts/build_real_tasks.py --check
-```
+## Package and output contract
 
-Source-derived definitions are in `scripts/real_definitions.py`. Native packages use the same bounded JSON/SQL contract and unchanged scorer. Review independently calculated reference values, relevant evidence alternatives, positive and negative conclusions, source permissions and synthetic changed-input controls before freezing. Add no provider framework or arbitrary-code runner.
-
-For a bounded engineer answer to an existing task, use the [fresh replay path](REPLAY.md). The local structure checker is safe, but submitted SQL must run only on Actions. A frozen dataset rejects reconstruction differences, and new acquisition output must use a distinct empty capture directory.
-
-The original authoring guide follows for historical package layout.
-
-# Author one native task
-
-Extend a future version of the suite in a new branch. The published eight-task experiment remains immutable. A changed task requires new source review, controls and freeze before scored exposure. Adding more examples does not retroactively change the released comparison.
-
-Use [wp03](../tasks/wp03/) as a compact example:
+Use [construction task c01](../datasets/workflow-v8/tasks/c01/) and its
+[candidate request](../datasets/workflow-v8/tasks/c01/instruction.md) as a concrete
+package example:
 
 | File | Responsibility |
-|---|---|
-| `sources/wp03.json` | Authored tables, evidence, requested claims, references and changed-input values |
-| `tasks/wp03/instruction.md` | Candidate request, units, cutoff and output location |
-| `tasks/wp03/environment/` | Candidate-only database, excerpts, evidence and schema |
-| `tasks/wp03/task.toml` | Native Harbor environment and time/resource limits |
-| `tasks/wp03/solution/solve.sh` | Authored reference used by Harbor's oracle control |
-| `tasks/wp03/tests/` | Separate pristine inputs, gold, verifier and changed-input fixture |
+| --- | --- |
+| `instruction.md` | Financial question, task ID, output location and candidate requirements |
+| `environment/data.sqlite` | Normalized source observations available to the candidate |
+| `environment/sources.md` and `evidence.json` | Source excerpts, dates, definitions, provenance and evidence locators |
+| `environment/schema.json` | Structure of `answer.json` |
+| `environment/output_contract.json` | Requested tables, columns, keys, units, labels and claim assertions |
+| `task.toml` and `environment/Dockerfile` | Native Harbor resources, candidate image and separate verification policy |
+| `authoring.json` | Source group, split, reference method and control rationale |
+| `solution/solve.sh` and three reference `.sql` files | Authored oracle submission |
+| `tests/` | Pristine observations, synthetic controls, reference JSON, gold targets and isolated verifier |
+| Dataset `manifest.json` | Catalog and task identities, source-group splits and frozen hashes |
 
-1. Edit the source JSON. Identify the origin, source group, periods, units and evidence locators. Mark synthetic numbers and labels explicitly. Limit the work to a few requested values and at most one bounded conclusion.
-2. Independently calculate the reference values from the source. Include a legitimate alternative query and a plausible wrong query. Choose a changed-input fixture that exposes that error while preserving the metric's definition and coverage.
-3. Run `python scripts/build_tasks.py` in the future-suite branch to generate packages. This rebuilds databases and candidate files, so it must never be used to synchronize grader fixes into the frozen experiment.
-4. Run the lightweight suite and the full native Actions controls. The native oracle reads the authored solution, the candidate sees only environment files, and the separate verifier replays SQL against its own pristine inputs.
-5. Review candidate requests without consulting the reference answer. Freeze the new version only after source, licensing, isolation, safe alternatives and wrong-answer controls pass.
+Deliver `answer.json` and the three named `.sql` files to `/logs/artifacts`.
+The JSON contains `task_id`, three `tables` entries and three `claims` entries.
+Each table entry names its SQL basename and supporting evidence. Each claim
+entry supplies its verdict and supporting evidence. Include every requested ID
+exactly once and no extra files. SQL is read-only SELECT/CTE, separate from JSON.
+The public schema and output contract specify names and limits.
 
-For a key-free native reference check in a GitHub-hosted Ubuntu 24.04 workflow, use the same pinned installation steps as [ci.yml](../.github/workflows/ci.yml), then:
+Claim verdicts are `supported`, `contradicted` or `unresolved`, scoped to the
+supplied dossier. Distinguish an absent disclosure from an unknown economic
+quantity. Missing information is not zero. Evidence IDs must be known, relevant
+and sufficient for each output. Explanations do not substitute for citations or
+correct calculations.
+
+## Source, reference and control checks
+
+For each new case:
+
+1. Record authentic source locators, observation periods, units, publication
+   precision and redistribution rights. Label authored observations and synthetic
+   controls explicitly. Separate forecasts, stocks, flows and source-defined
+   metrics. Keep overlapping issuer/source windows in the same split.
+2. Independently calculate reference tables and claim verdicts from the supplied
+   evidence. Declare unique row keys, required columns, numeric tolerances,
+   canonical labels and any legitimate source-label aliases. Do not normalize
+   different economic categories, periods or measures into the same label.
+3. Verify alternative correct SQL, reordered rows and columns, relevant extra
+   context and sufficient citation alternatives. Test duplicate keys, omitted
+   rows, swapped categories, wrong periods, wrong units, percent scaling, unrelated
+   citations and unsupported claim verdicts.
+4. Design synthetic controls that change relevant operands while preserving the
+   stated definitions and scope. Reject constant answers and forced-zero
+   residuals. Preserve independently disclosed discrepancies rather than changing
+   observations to make totals reconcile.
+5. Check the candidate request, schema and public contract for answer-revealing
+   examples or labels. Keep gold, oracle solutions, verifier code, credentials,
+   Git history and host sockets outside the candidate image. Require fresh,
+   networkless separate verification with bounded SQL workers.
+
+Source rights and synthetic origins follow [the provenance policy](../DATA_SOURCES.md).
+Oracle and control checks establish reference behavior, not model performance or
+independent human validation.
+
+## Verify the published format
+
+From a checkout with the [documented installation](RUNNING.md), reconstruct the
+frozen construction catalog without changing it and check the example JSON:
 
 ```sh
-harbor trial start -p tasks/wp03 -a oracle --trial-name wp03-reference --trials-dir .raw/reference
+.venv/bin/python scripts/build_workflow_construction.py --check
+./wpb validate examples/block-workpaper-v8/answer.json
 ```
 
-The canonical full-suite command is the README's tested Actions dispatch. Keep candidate instructions/schema, databases, evidence and treatment unchanged when correcting only a verifier. Copy the two trusted grading modules into all eight `tests/workpaperbench` directories and register their reviewed hashes separately.
+The versioned builder reconstructs `workflow-v8` from `workflow-v7` in a temporary
+directory and compares the output with the frozen package. It is not a generic
+new-task generator. Do not edit published packages and regenerate them in place.
+A future catalog needs its own reviewed construction and freeze process.
+
+On the installed Linux Docker controller, verify all four submitted files in a
+fresh separate verifier and inspect the report:
+
+```sh
+./wpb grade --dataset workflow-v8 --task c01 \
+  --artifacts examples/block-workpaper-v8 --attempt authoring-reference-1
+./wpb report --attempts authoring-reference-1 \
+  --output .local/authoring-reference-report.json
+```
+
+Use a new attempt ID and output path each time. `validate` checks JSON structure
+without executing SQL. `grade` executes SQL only in the separate Docker verifier,
+using pristine inputs and controls. A zero process exit alone is not a passing
+financial result. Check delivery, numerical tables, claims, evidence, robustness
+and isolation in the retained verifier result.
+
+The existing positive and negative construction controls can also be reproduced
+on that controller without model calls:
+
+```sh
+.venv/bin/python scripts/validate_workflow_quality.py \
+  --dataset workflow-v8 --tasks c01 \
+  --output .local/authoring-c01-controls.json
+```
+
+The [execution guide](RUNNING.md) covers complete oracle sweeps, artifact replay
+and credential boundaries. Historical single-JSON/inline-SQL packages remain in
+[real-v1](../datasets/real-v1/), with their separate [replay guide](REPLAY.md).
+They are not the default construction format.

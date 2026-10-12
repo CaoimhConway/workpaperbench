@@ -1,0 +1,379 @@
+{
+  "record_version": "direct-model-smoke-1",
+  "kind": "single_development_native_model_smoke",
+  "attempt_id": "qwen36-workflow-v8-b01-smoke-1",
+  "inference": true,
+  "benchmark_performance_study": false,
+  "task_id": "workflow-v8-b01",
+  "split": "development",
+  "source": {
+    "repo": "CaoimhConway/workpaperbench",
+    "tag": "v0.6.0-rc.1",
+    "tag_commit": "8b5aefea841b161f8a1456d3ec501370c55b27db",
+    "native_git_reference": "4367548274286fae9382eef1a3974f4d9495fa01",
+    "manifest_id": "workflow-v8-canonical-67966f15cd8e",
+    "manifest_sha256": "4a302e73ab408efd84bbe48e30f9746c39583aac768d12e0975580c018bf040d",
+    "task_sha256": "c9bb260c61140b035370e91c2761956bdf4e3a877157636d1fac04c44313e8fe",
+    "scorer_version": "workflow-1.2.0",
+    "scorer_sha256": "fe823e2c8adbc5ca556e0900d1eb61275ba5101a910421f6a7b304579a33f35e"
+  },
+  "controller": {
+    "system": "Ubuntu 24.04",
+    "architecture": "x86_64",
+    "cpus": 6,
+    "memory_gib": 12,
+    "harbor_version": "0.23.0",
+    "environment": "docker"
+  },
+  "model": {
+    "id": "qwen36-35b-a3b-ud_q5_k_m",
+    "weights": ".local/models/Qwen3.6-35B-A3B-UD-Q5_K_M.gguf",
+    "repository": "unsloth/Qwen3.6-35B-A3B-GGUF",
+    "revision": "a483e9e6cbd595906af30beda3187c2663a1118c",
+    "sha256": "c13ce26253ea334df472bd8fbd2d6da66d8a41195c17f6fcbf44c4d20ece0932",
+    "quantization": "UD-Q5_K_M",
+    "total_parameters_billions": 35,
+    "active_parameters_billions": 3,
+    "chat_template_sha256": "55d4931433fe502b794226ee7f4d206a6bdd436ac9f80eb7d8ebb4c639f9ea0c",
+    "native_context": 262144,
+    "base_model_declared_by_quantizer": "Qwen/Qwen3.6-35B-A3B",
+    "official_model_revision_checked": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "conversion": "Publisher quantization, conversion not independently reproduced. Checked official revision is not a verified conversion input.",
+    "architecture": "qwen35moe, gated DeltaNet and attention with mixture of experts, text only",
+    "license": "Apache-2.0"
+  },
+  "runtime": {
+    "binary": ".local/runtime/llama-b11516/llama-server",
+    "sha256": "cdf2d31e4b75714ebad37ffeb8f3d51e9a7be45daa6fd884a6a360abaee04091",
+    "version": "llama.cpp b11516 d4d82d67f",
+    "backend": "cpu",
+    "hardware": "MacPro7,1 Intel Xeon W-3245, Accelerate BLAS, no GPU offload"
+  },
+  "serving": {
+    "port": 18087,
+    "context": 65536,
+    "threads": 8,
+    "parallel": 1,
+    "reasoning": "off",
+    "flash_attention": "off",
+    "cache_type_k": "f16",
+    "cache_type_v": "f16",
+    "observe_slots": true,
+    "context_shift": false,
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "agent": {
+    "name": "terminus-2",
+    "native_version": "2.0.0",
+    "model_name": "openai/qwen36-35b-a3b-ud_q5_k_m",
+    "options": {
+      "api_base": "http://127.0.0.1:18088/v1",
+      "model_info": {
+        "max_input_tokens": 65536,
+        "max_output_tokens": 4096,
+        "input_cost_per_token": 0,
+        "output_cost_per_token": 0,
+        "litellm_provider": "openai",
+        "mode": "chat"
+      },
+      "llm_call_kwargs": {
+        "max_tokens": 4096,
+        "seed": 17,
+        "top_p": 0.8,
+        "presence_penalty": 1.5,
+        "extra_body": {
+          "top_k": 20,
+          "min_p": 0
+        }
+      },
+      "temperature": 0.7,
+      "max_turns": 24
+    },
+    "agent_wall_seconds": 3600,
+    "attempts": 1,
+    "concurrency": 1,
+    "max_retries": 0
+  },
+  "observed_generation": [
+    {
+      "request_id": 78951,
+      "settings": {
+        "max_tokens": 4096,
+        "temperature": 0.699999988079071,
+        "top_p": 0.800000011920929,
+        "top_k": 20,
+        "min_p": 0.0,
+        "seed": 17,
+        "presence_penalty": 1.5
+      }
+    },
+    {
+      "request_id": 79213,
+      "settings": {
+        "max_tokens": 4096,
+        "temperature": 0.699999988079071,
+        "top_p": 0.800000011920929,
+        "top_k": 20,
+        "min_p": 0.0,
+        "seed": 17,
+        "presence_penalty": 1.5
+      }
+    },
+    {
+      "request_id": 79471,
+      "settings": {
+        "max_tokens": 4096,
+        "temperature": 0.699999988079071,
+        "top_p": 0.800000011920929,
+        "top_k": 20,
+        "min_p": 0.0,
+        "seed": 17,
+        "presence_penalty": 1.5
+      }
+    },
+    {
+      "request_id": 79873,
+      "settings": {
+        "max_tokens": 4096,
+        "temperature": 0.699999988079071,
+        "top_p": 0.800000011920929,
+        "top_k": 20,
+        "min_p": 0.0,
+        "seed": 17,
+        "presence_penalty": 1.5
+      }
+    },
+    {
+      "request_id": 81895,
+      "settings": {
+        "max_tokens": 4096,
+        "temperature": 0.699999988079071,
+        "top_p": 0.800000011920929,
+        "top_k": 20,
+        "min_p": 0.0,
+        "seed": 17,
+        "presence_penalty": 1.5
+      }
+    },
+    {
+      "request_id": 82307,
+      "settings": {
+        "max_tokens": 4096,
+        "temperature": 0.699999988079071,
+        "top_p": 0.800000011920929,
+        "top_k": 20,
+        "min_p": 0.0,
+        "seed": 17,
+        "presence_penalty": 1.5
+      }
+    },
+    {
+      "request_id": 82716,
+      "settings": {
+        "max_tokens": 4096,
+        "temperature": 0.699999988079071,
+        "top_p": 0.800000011920929,
+        "top_k": 20,
+        "min_p": 0.0,
+        "seed": 17,
+        "presence_penalty": 1.5
+      }
+    },
+    {
+      "request_id": 82976,
+      "settings": {
+        "max_tokens": 4096,
+        "temperature": 0.699999988079071,
+        "top_p": 0.800000011920929,
+        "top_k": 20,
+        "min_p": 0.0,
+        "seed": 17,
+        "presence_penalty": 1.5
+      }
+    },
+    {
+      "request_id": 83305,
+      "settings": {
+        "max_tokens": 4096,
+        "temperature": 0.699999988079071,
+        "top_p": 0.800000011920929,
+        "top_k": 20,
+        "min_p": 0.0,
+        "seed": 17,
+        "presence_penalty": 1.5
+      }
+    }
+  ],
+  "started_at": "2026-10-14T22:10:37.386552+00:00",
+  "finished_at": "2026-10-14T22:21:21.878972+00:00",
+  "wall_seconds": 644.492,
+  "native_process_exit_code": 0,
+  "native_exception": null,
+  "reward": 0.0,
+  "episodes": 9,
+  "native_usage": {
+    "n_input_tokens": 85916,
+    "n_cache_tokens": 75737,
+    "n_output_tokens": 4197,
+    "cost_usd": null
+  },
+  "external_service_spend_usd": 0,
+  "execution": {
+    "model_endpoint": "Local loopback SSH forward to the Mac Pro server",
+    "server_outbound_policy": "Outbound connections denied except loopback",
+    "controller_model_credentials": "Harmless local-only placeholder",
+    "candidate": {
+      "candidate_image": "sha256:45bd05d8105190582835ab3c99aaabe2760a1c75b6f41e26f086fb0dc2a0dbcd",
+      "mounts": [
+        {
+          "destination": "/logs/verifier",
+          "read_write": true
+        },
+        {
+          "destination": "/logs/agent",
+          "read_write": true
+        },
+        {
+          "destination": "/logs/artifacts",
+          "read_write": true
+        }
+      ],
+      "candidate_checks": {
+        "private_paths_absent": {
+          "/tests": true,
+          "/solution": true,
+          "/workspace/.git": true,
+          "/Users": true,
+          "/var/run/docker.sock": true
+        },
+        "credential_environment_absent": {
+          "OPENAI_API_KEY": true,
+          "GH_TOKEN": true,
+          "GITHUB_TOKEN": true
+        }
+      }
+    },
+    "verifier_environment_mode": "separate",
+    "model_input": "Public construction dossier and terminal observations, no starting SQL or reference answers"
+  },
+  "artifacts_sha256": {
+    "answer.json": "29b8bf51870cf38cdc6555a7ba7c4e6f2aa28f718f522f6650724836fd08bb95",
+    "reserve_bridge.sql": "cf4f1441a599f6526e1c273142bd050ab124e8f4ecf35de10aca8e4772a2858c",
+    "reserve_coverage.sql": "7223400c90891ff51a35d3aeff4df6047920ec5a145ca94d9db274f184c0b183",
+    "signature_lag.sql": "9ce261436aac4c281152e7ad9ee3ab496c91bab97a0b381c92dd56e582d4e264"
+  },
+  "verdict": {
+    "scorer_version": "workflow-1.2.0",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": false,
+      "robustness": false,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "reserve_coverage": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "june_cash_and_total_reserves_change": true,
+            "identical_export_duplicate": false,
+            "distinct_dates_with_equal_amounts": true,
+            "independent_disclosure_discrepancy": true
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "june_cash_and_total_reserves_change": null,
+            "identical_export_duplicate": "rows",
+            "distinct_dates_with_equal_amounts": null,
+            "independent_disclosure_discrepancy": null
+          }
+        },
+        "signature_lag": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "june_cash_and_total_reserves_change": true,
+            "identical_export_duplicate": false,
+            "distinct_dates_with_equal_amounts": true,
+            "independent_disclosure_discrepancy": true
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "june_cash_and_total_reserves_change": null,
+            "identical_export_duplicate": "rows",
+            "distinct_dates_with_equal_amounts": null,
+            "independent_disclosure_discrepancy": null
+          }
+        },
+        "reserve_bridge": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scaled_amounts_preserve_ratios": true,
+            "june_cash_and_total_reserves_change": false,
+            "identical_export_duplicate": false,
+            "distinct_dates_with_equal_amounts": true,
+            "independent_disclosure_discrepancy": false
+          },
+          "control_errors": {
+            "scaled_amounts_preserve_ratios": null,
+            "june_cash_and_total_reserves_change": "numeric",
+            "identical_export_duplicate": "rows",
+            "distinct_dates_with_equal_amounts": null,
+            "independent_disclosure_discrepancy": "numeric"
+          }
+        }
+      },
+      "claims": {
+        "claim_1": {
+          "verdict": true,
+          "evidence": false
+        },
+        "claim_2": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_3": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [
+      "reserve_coverage:control:identical_export_duplicate",
+      "signature_lag:control:identical_export_duplicate",
+      "reserve_bridge:control:june_cash_and_total_reserves_change",
+      "reserve_bridge:control:identical_export_duplicate",
+      "reserve_bridge:control:independent_disclosure_discrepancy",
+      "claim_1:evidence"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "original_sha256": {
+    "native_job_result": "3598a653f9407cde6182c3e032e65eeab237053a162a2aa56258c70cfd8fd528",
+    "native_trial_result": "be3dd1bbdec2ba5de68e4df574dd3a9effd7940ea00433038148352e9f8b50fd",
+    "native_verdict": "ec0efee2b4c02adc98a39bf3f44478c9d394ef9ac6789519bf47727e4b475407",
+    "native_invocation": "70a7a010a68b5e31612bd2a43f41b7b300f9a2004cd72e67bced309e2cef2f97",
+    "native_trajectory": "f85d4302bfa755ff2d89b25612cb270ab4a8e143ba423cc744af98ed42c2d526",
+    "server_observations": "d1330e2889625d82553c894bf4956bdf0dfd4614604acf6d0e04c99d677ce0e7"
+  },
+  "limits": "One development-task smoke checks execution and reports its observed outcome. It does not estimate benchmark performance, variance or held-out capability."
+}
