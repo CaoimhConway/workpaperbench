@@ -1,0 +1,53 @@
+{
+  "task_id": "workflow-v9-c04",
+  "tables": [
+    {
+      "id": "regional_attribution",
+      "file": "regional_attribution.sql",
+      "evidence": [
+        "c04:s01",
+        "c04:s02"
+      ]
+    },
+    {
+      "id": "worldwide_reconciliation",
+      "file": "worldwide_reconciliation.sql",
+      "evidence": [
+        "c04:s01"
+      ]
+    },
+    {
+      "id": "company_margin_bridge",
+      "file": "company_margin_bridge.sql",
+      "evidence": [
+        "c04:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": [
+        "c04:s01",
+        "c04:s02"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "c04:s02",
+        "c04:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": [
+        "c04:s01",
+        "c04:s02"
+      ]
+    }
+  ]
+}

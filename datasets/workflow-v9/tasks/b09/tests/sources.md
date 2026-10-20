@@ -1,0 +1,720 @@
+# intuit-fy2025 primary factual extract
+
+https://investors.intuit.com/news-events/press-releases/detail/1266/intuit-reports-strong-fourth-quarter-and-full-year-fiscal-2025-results-sets-fiscal-2026-guidance-with-double-digit-revenue-growth-and-continued-operating-margin-expansion
+
+Published 2025-08-21. Retrieved 2026-10-09T10:15:51.175405+00:00. This retrieval does not establish historical public availability.
+
+Original units and periods: USD million and million diluted shares, unaudited, signed exclusions. Q1, Q2, Q3, Q4 and full fiscal years 2025 and 2024 ended July 31.
+
+b09:s01 - Tables B1 and B2, non-GAAP operating and net-income reconciliations with full quarter/year headings
+Operating adjustments include deferred-compensation liability gains/losses in FY2025. The deferred-plan asset adjustment is below operating income and belongs only to the net-income reconciliation. Signed gains remove income, signed losses add it. Investment, disposal and tax rows have separate income-only scope. Rounded fiscal sums can differ from the sum of four published quarters.
+
+b09:s02 - Table B1 note A and Table B2 note A
+The new deferred-compensation exclusions were not applied to prior periods because the impact was immaterial. Omitted prior adjustments do not mean there was no prior economic activity and do not identify a fully restated prior measure. The FY2024 restructuring exclusion includes USD 25 million stock compensation that is not also included in the ordinary SBC exclusion.
+
+b09:s03 - Tables B1 and B2, final diluted-share rows
+FY2024 Q4 has a GAAP loss and 280 million GAAP diluted shares, while its positive adjusted income uses 283 million diluted shares. The other reported denominators are separately retained. Use the matching income and share basis, not GAAP loss-period shares for non-GAAP EPS.
+
+Source-derived observations
+
+{
+  "income_bases": [
+    {
+      "fiscal_year": 2025,
+      "window": "Q1",
+      "gaap_operating_usd_million": 271,
+      "gaap_income_usd_million": 197,
+      "reported_adjusted_operating_usd_million": 953,
+      "reported_adjusted_income_usd_million": 709,
+      "gaap_shares_million": 283,
+      "adjusted_shares_million": 283
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q2",
+      "gaap_operating_usd_million": 593,
+      "gaap_income_usd_million": 471,
+      "reported_adjusted_operating_usd_million": 1260,
+      "reported_adjusted_income_usd_million": 938,
+      "gaap_shares_million": 283,
+      "adjusted_shares_million": 283
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q3",
+      "gaap_operating_usd_million": 3720,
+      "gaap_income_usd_million": 2820,
+      "reported_adjusted_operating_usd_million": 4343,
+      "reported_adjusted_income_usd_million": 3280,
+      "gaap_shares_million": 282,
+      "adjusted_shares_million": 282
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q4",
+      "gaap_operating_usd_million": 339,
+      "gaap_income_usd_million": 381,
+      "reported_adjusted_operating_usd_million": 1016,
+      "reported_adjusted_income_usd_million": 776,
+      "gaap_shares_million": 282,
+      "adjusted_shares_million": 282
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "FY",
+      "gaap_operating_usd_million": 4923,
+      "gaap_income_usd_million": 3869,
+      "reported_adjusted_operating_usd_million": 7572,
+      "reported_adjusted_income_usd_million": 5703,
+      "gaap_shares_million": 283,
+      "adjusted_shares_million": 283
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q1",
+      "gaap_operating_usd_million": 307,
+      "gaap_income_usd_million": 241,
+      "reported_adjusted_operating_usd_million": 960,
+      "reported_adjusted_income_usd_million": 698,
+      "gaap_shares_million": 283,
+      "adjusted_shares_million": 283
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q2",
+      "gaap_operating_usd_million": 369,
+      "gaap_income_usd_million": 353,
+      "reported_adjusted_operating_usd_million": 1000,
+      "reported_adjusted_income_usd_million": 746,
+      "gaap_shares_million": 284,
+      "adjusted_shares_million": 284
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q3",
+      "gaap_operating_usd_million": 3105,
+      "gaap_income_usd_million": 2389,
+      "reported_adjusted_operating_usd_million": 3712,
+      "reported_adjusted_income_usd_million": 2804,
+      "gaap_shares_million": 284,
+      "adjusted_shares_million": 284
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q4",
+      "gaap_operating_usd_million": -151,
+      "gaap_income_usd_million": -20,
+      "reported_adjusted_operating_usd_million": 730,
+      "reported_adjusted_income_usd_million": 563,
+      "gaap_shares_million": 280,
+      "adjusted_shares_million": 283
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "FY",
+      "gaap_operating_usd_million": 3630,
+      "gaap_income_usd_million": 2963,
+      "reported_adjusted_operating_usd_million": 6402,
+      "reported_adjusted_income_usd_million": 4811,
+      "gaap_shares_million": 284,
+      "adjusted_shares_million": 284
+    }
+  ],
+  "adjustments": [
+    {
+      "fiscal_year": 2025,
+      "window": "Q1",
+      "measure": "technology",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 37
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q2",
+      "measure": "technology",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 37
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q3",
+      "measure": "technology",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 38
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q4",
+      "measure": "technology",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 44
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "FY",
+      "measure": "technology",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 156
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q1",
+      "measure": "intangibles",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 120
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q2",
+      "measure": "intangibles",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 120
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q3",
+      "measure": "intangibles",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 120
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q4",
+      "measure": "intangibles",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 121
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "FY",
+      "measure": "intangibles",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 481
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q1",
+      "measure": "restructuring",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 9
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q2",
+      "measure": "restructuring",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 4
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q3",
+      "measure": "restructuring",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 1
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q4",
+      "measure": "restructuring",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 1
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "FY",
+      "measure": "restructuring",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 15
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q1",
+      "measure": "professional",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 0
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q2",
+      "measure": "professional",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 0
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q3",
+      "measure": "professional",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 2
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q4",
+      "measure": "professional",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 0
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "FY",
+      "measure": "professional",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 2
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q1",
+      "measure": "sbc",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 511
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q2",
+      "measure": "sbc",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 498
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q3",
+      "measure": "sbc",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 469
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q4",
+      "measure": "sbc",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 490
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "FY",
+      "measure": "sbc",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 1968
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q1",
+      "measure": "deferred_liability",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 5
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q2",
+      "measure": "deferred_liability",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 8
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q3",
+      "measure": "deferred_liability",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": -7
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q4",
+      "measure": "deferred_liability",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 21
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "FY",
+      "measure": "deferred_liability",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 27
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q1",
+      "measure": "investment",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 42
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q2",
+      "measure": "investment",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 3
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q3",
+      "measure": "investment",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 2
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q4",
+      "measure": "investment",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -2
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "FY",
+      "measure": "investment",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 45
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q1",
+      "measure": "deferred_asset",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -4
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q2",
+      "measure": "deferred_asset",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -7
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q3",
+      "measure": "deferred_asset",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 7
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q4",
+      "measure": "deferred_asset",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -20
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "FY",
+      "measure": "deferred_asset",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -24
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q1",
+      "measure": "tax",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -208
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q2",
+      "measure": "tax",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -196
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q3",
+      "measure": "tax",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -172
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "Q4",
+      "measure": "tax",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -260
+    },
+    {
+      "fiscal_year": 2025,
+      "window": "FY",
+      "measure": "tax",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -836
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q1",
+      "measure": "technology",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 38
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q2",
+      "measure": "technology",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 36
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q3",
+      "measure": "technology",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 36
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q4",
+      "measure": "technology",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 36
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "FY",
+      "measure": "technology",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 146
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q1",
+      "measure": "intangibles",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 120
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q2",
+      "measure": "intangibles",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 120
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q3",
+      "measure": "intangibles",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 120
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q4",
+      "measure": "intangibles",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 123
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "FY",
+      "measure": "intangibles",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 483
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q1",
+      "measure": "restructuring",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 0
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q2",
+      "measure": "restructuring",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 0
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q3",
+      "measure": "restructuring",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 0
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q4",
+      "measure": "restructuring",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 223
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "FY",
+      "measure": "restructuring",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 223
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q1",
+      "measure": "professional",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 0
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q2",
+      "measure": "professional",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 0
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q3",
+      "measure": "professional",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 0
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q4",
+      "measure": "professional",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 5
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "FY",
+      "measure": "professional",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 5
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q1",
+      "measure": "sbc",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 495
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q2",
+      "measure": "sbc",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 475
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q3",
+      "measure": "sbc",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 451
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q4",
+      "measure": "sbc",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 494
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "FY",
+      "measure": "sbc",
+      "scope": "operating_and_income",
+      "signed_adjustment_usd_million": 1915
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q1",
+      "measure": "investment",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 1
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q2",
+      "measure": "investment",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -3
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q3",
+      "measure": "investment",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 1
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q4",
+      "measure": "investment",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 1
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "FY",
+      "measure": "investment",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 0
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q1",
+      "measure": "disposal",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 1
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q2",
+      "measure": "disposal",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 0
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q3",
+      "measure": "disposal",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 9
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q4",
+      "measure": "disposal",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -1
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "FY",
+      "measure": "disposal",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": 9
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q1",
+      "measure": "tax",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -198
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q2",
+      "measure": "tax",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -235
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q3",
+      "measure": "tax",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -202
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "Q4",
+      "measure": "tax",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -298
+    },
+    {
+      "fiscal_year": 2024,
+      "window": "FY",
+      "measure": "tax",
+      "scope": "income_only",
+      "signed_adjustment_usd_million": -933
+    }
+  ]
+}

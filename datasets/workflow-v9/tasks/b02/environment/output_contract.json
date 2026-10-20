@@ -1,0 +1,177 @@
+{
+  "tables": {
+    "qualified_coverage": {
+      "columns": {
+        "economic_date": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "2026-01-30",
+            "2026-02-10",
+            "2026-02-27"
+          ]
+        },
+        "assets_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "redeemable_tokens": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "coverage_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "surplus_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "residual_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "days_to_signature": {
+          "type": "integer",
+          "unit": "count"
+        }
+      },
+      "keys": [
+        "economic_date"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "treasury_valuation": {
+      "columns": {
+        "economic_date": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "2026-01-30",
+            "2026-02-10",
+            "2026-02-27"
+          ]
+        },
+        "distinct_holdings": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "par_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "cost_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "fair_value_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "valuation_gain_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "discount_to_par_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "residual_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "economic_date"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "stock_bridge": {
+      "columns": {
+        "prior_date": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "2026-01-30",
+            "2026-02-10"
+          ]
+        },
+        "current_date": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "2026-02-10",
+            "2026-02-27"
+          ]
+        },
+        "cash_change_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "repo_change_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "treasury_change_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "asset_change_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        },
+        "token_change": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "surplus_change_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "prior_date",
+        "current_date"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "The supplied January report uses one consistent year for its January 16 observation.",
+    "claim_2": "The supplied January and February reports include a total of PYUSD payment transfers between January 30 and February 27.",
+    "claim_3": "At each requested unambiguous observation date, redemption assets exceed redeemable tokens at USD 1 per token."
+  },
+  "definitions": {
+    "qualified_coverage": "Assets are cash plus repo fair value plus deduplicated Treasury-holding fair value. Residual is recomputed assets less reported assets. Signature lag is calendar days from economic observation to signature, not a public posting delay.",
+    "treasury_valuation": "Holdings are keyed by economic_date and cusip. Identical export repetitions are one holding, distinct CUSIPs with equal values remain separate. Valuation gain is fair value less cost, discount_to_par is fair value less par. Residual is deduplicated Treasury-holding fair value less the reported Treasury asset-category fair value at the same economic date.",
+    "stock_bridge": "Use January 30 to February 10 and February 10 to February 27. Changes are current less prior stocks, with surplus change equal to asset change less redeemable-token change."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

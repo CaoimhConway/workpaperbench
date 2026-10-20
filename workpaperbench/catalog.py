@@ -47,7 +47,7 @@ def tree_hash(path):
 
 
 def load(root, dataset="challenge-v2", task=None):
-    if dataset not in ('challenge-v2', 'workflow-v1', 'workflow-v2', 'workflow-v3', 'workflow-v4', 'workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8'):
+    if dataset not in ('challenge-v2', 'workflow-v1', 'workflow-v2', 'workflow-v3', 'workflow-v4', 'workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9'):
         raise ValueError("unsupported_current_dataset")
     root = Path(root)
     path = file_path(root, "datasets/" + dataset + "/manifest.json")
@@ -60,7 +60,7 @@ def load(root, dataset="challenge-v2", task=None):
             or manifest.get('scorer_path') != 'config/scorers/challenge-1.1.3.py'
             or manifest.get('scorer_sha256') != CHALLENGE_SCORER_SHA256):
         raise ValueError('catalog_scorer_identity_mismatch')
-    if dataset in ('workflow-v6', 'workflow-v7', 'workflow-v8') and (manifest.get('scorer_version') != 'workflow-1.2.0'
+    if dataset in ('workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9') and (manifest.get('scorer_version') != 'workflow-1.2.0'
             or manifest.get('scorer_path') != 'config/scorers/workflow-1.2.0.py'
             or manifest.get('scorer_sha256') != WORKFLOW_VALIDITY_SCORER_SHA256):
         raise ValueError('catalog_scorer_identity_mismatch')
@@ -68,7 +68,7 @@ def load(root, dataset="challenge-v2", task=None):
             or manifest.get('scorer_path') != 'config/scorers/workflow-1.1.0.py'
             or manifest.get('scorer_sha256') != WORKFLOW_REVIEW_SCORER_SHA256):
         raise ValueError('catalog_scorer_identity_mismatch')
-    if dataset.startswith('workflow-') and dataset not in ('workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8') and (manifest.get('scorer_version') != 'workflow-1.0.0'
+    if dataset.startswith('workflow-') and dataset not in ('workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9') and (manifest.get('scorer_version') != 'workflow-1.0.0'
             or manifest.get('scorer_path') != 'workpaperbench/workflow_grading.py'
             or manifest.get('scorer_sha256') != WORKFLOW_SCORER_SHA256):
         raise ValueError('catalog_scorer_identity_mismatch')

@@ -13,7 +13,7 @@ def main():
                    cwd=ROOT, check=True)
     for dataset in ('challenge-v2', 'workflow-v1', 'workflow-v2', 'workflow-v3',
                     'workflow-v4', 'workflow-v5', 'workflow-v6', 'workflow-v7',
-                    'workflow-v8'):
+                    'workflow-v8', 'workflow-v9'):
         manifest = load(ROOT, dataset)
         for key in manifest['tasks']:
             load(ROOT, dataset, key)

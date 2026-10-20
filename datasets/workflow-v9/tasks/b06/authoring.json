@@ -1,0 +1,68 @@
+{
+  "rationale": "Build a Q4FY2025 platform-metric workpaper against the prior Q4. Calculate segment revenue and booking ratios, reconcile the segment EBITDA sum through corporate costs, and calculate monthly consumer activity. Report descriptive segment ratios without turning them into contractual commissions.",
+  "source_group": "uber-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "d4b2622020130c23364c1569a36e17eaddeda2ed6bbdd9f74db33f1b2aa5eaf8",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "2e688163aa3ab20811d38111335a73c554aeb812cb582c829cb6a77fe6d6bcef",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "094e8436886d184acb5417ca20b4e4d41d7382b97572e1824cdae9b56e33080e",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "c30bcc099676aaaf32d57d5d92f18aa5cb08951670ea3bce550d95a2b2f5869c",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "226ff92dee4aca69ecc9d3012a53aace6b232d0850276c57280a5c79ce03439f",
+    "claim_mapping": {
+      "freight_revenue_is_a_commission": "claim_1",
+      "all_segments_profitable_in_prior_q4": "claim_2",
+      "monthly_activity_increased": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "freight_revenue_is_a_commission",
+      "assertion": "The supplied Freight revenue-to-bookings ratio is disclosed as the contractual commission rate on Freight bookings.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b06:s01",
+          "b06:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b06:s02"
+      ],
+      "source_grounded_reason": "The source describes revenue divided by bookings as a heterogeneous accounting ratio, not a uniquely identified contractual commission. The claim attributes a specific disclosed meaning to the ratio that the scope notes reject."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "d715053e3263066201d0591712dacb18114d2f1bc74e3edc45db4948e7b04277",
+    "maintenance_rationale": "Monthly averaged audience stocks, quarterly activity flows and heterogeneous booking/revenue presentation interact. Correcting activity duration must preserve negative segment outcomes and the corporate deduction, while an exact fee conclusion stays unidentified.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_consumer_activity.sql",
+      "starting_corporate_bridge.sql",
+      "starting_segment_metrics.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction"
+}
