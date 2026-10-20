@@ -4,7 +4,7 @@ Reproducible evaluations for financial research agents
 
 WorkpaperBench tests whether agents can reconcile financial sources, calculate metrics consistently and support their conclusions with frozen financial evidence.
 
-[Quickstart](#quickstart) · [Execution guide](docs/RUNNING.md) · [Methods](docs/WORKFLOW.md) · [Task contract](datasets/workflow-v8/tasks/c01/instruction.md) · [Research prerelease](https://github.com/CaoimhConway/workpaperbench/releases/tag/v0.6.0-rc.1)
+[Quickstart](#quickstart) · [Execution guide](docs/RUNNING.md) · [Methods](docs/WORKFLOW.md) · [Task contract](datasets/workflow-v9/tasks/c01/instruction.md) · [Research prerelease](https://github.com/CaoimhConway/workpaperbench/releases/tag/v0.6.1-rc.1)
 
 ## Scope
 
@@ -18,7 +18,7 @@ external teams using a compatible model.
 | Audit a metric | Choose denominators, separate stocks from flows, deduplicate exports | 2 / 8 |
 | Explain a change | Build signed bridges, reconcile totals, bound causal attribution | 2 / 8 |
 
-The default construction track (`workflow-v8`, scorer `workflow-1.2.0`)
+The default construction track (`workflow-v9`, scorer `workflow-1.2.0`)
 requires agents to write three SQL queries per task, with no starting SQL.
 The separate maintenance track (`workflow-v7`) supplies existing queries to
 check and repair while preserving correct work. The tracks have distinct
@@ -68,8 +68,8 @@ Oracle runs use the provided reference solutions and make no model calls:
 
 ```sh
 harbor run \
-  --repo CaoimhConway/workpaperbench@v0.6.0-rc.1 \
-  -p datasets/workflow-v8/tasks \
+  --repo CaoimhConway/workpaperbench@v0.6.1-rc.1 \
+  -p datasets/workflow-v9/tasks \
   --agent oracle -k 5 \
   --n-concurrent 2 --env docker
 ```
@@ -82,8 +82,8 @@ To evaluate a model, set the credentials required by its provider and replace
 
 ```sh
 harbor run \
-  --repo CaoimhConway/workpaperbench@v0.6.0-rc.1 \
-  -p datasets/workflow-v8/tasks \
+  --repo CaoimhConway/workpaperbench@v0.6.1-rc.1 \
+  -p datasets/workflow-v9/tasks \
   --agent terminus-2 --model '<provider/model>' \
   --ak max_turns=24 \
   --n-concurrent 2 --env docker
@@ -96,7 +96,7 @@ trial's `verifier/verdict.json` for financial diagnostics.
 The [execution guide](docs/RUNNING.md) covers split filters, custom endpoints,
 agent-specific setup and credential boundaries. It also describes the Harbor/Hermes
 `wpb` commands for detailed reports and replay without model calls.
-The [validation record](reports/workflow-v8/direct-harbor-validation.json) covers
+The [validation record](reports/workflow-v9/direct-harbor-validation.json) covers
 the oracle runs and scripted agent checks. These checks do not measure model performance.
 
 ## Contributing
