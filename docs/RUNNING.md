@@ -20,8 +20,8 @@ solutions five times before evaluating a model in a new environment:
 
 ```sh
 harbor run \
-  --repo CaoimhConway/workpaperbench@v0.6.0-rc.1 \
-  -p datasets/workflow-v8/tasks \
+  --repo CaoimhConway/workpaperbench@v0.6.1-rc.1 \
+  -p datasets/workflow-v9/tasks \
   --agent oracle -k 5 \
   --n-concurrent 2 --env docker
 ```
@@ -37,8 +37,8 @@ through its environment variables and choose its Harbor model name:
 
 ```sh
 harbor run \
-  --repo CaoimhConway/workpaperbench@v0.6.0-rc.1 \
-  -p datasets/workflow-v8/tasks \
+  --repo CaoimhConway/workpaperbench@v0.6.1-rc.1 \
+  -p datasets/workflow-v9/tasks \
   --agent terminus-2 --model '<provider/model>' \
   --ak max_turns=24 \
   --n-concurrent 2 --env docker
@@ -50,8 +50,8 @@ from the controller. For example, with a server already running locally:
 
 ```sh
 OPENAI_API_KEY=local-only harbor run \
-  --repo CaoimhConway/workpaperbench@v0.6.0-rc.1 \
-  -p datasets/workflow-v8/tasks -i c01 \
+  --repo CaoimhConway/workpaperbench@v0.6.1-rc.1 \
+  -p datasets/workflow-v9/tasks -i c01 \
   --agent terminus-2 --model openai/my-model \
   --ak api_base=http://127.0.0.1:8000/v1 \
   --ak 'model_info={"max_input_tokens":65536,"max_output_tokens":4096,"input_cost_per_token":0,"output_cost_per_token":0,"litellm_provider":"openai","mode":"chat"}' \
@@ -117,7 +117,7 @@ authorization and bounded workers constrain replay. These checks do not prove
 security for arbitrary workloads. Modal and other sandbox backends have not been
 validated against this verifier's network-namespace requirements.
 
-The [direct validation record](../reports/workflow-v8/direct-harbor-validation.json)
+The [direct validation record](../reports/workflow-v9/direct-harbor-validation.json)
 binds the oracle sweep and local scripted Terminus-2 fixtures. The fixtures check
 native API transport, terminal feedback, retained delivery, positive and negative
 grader outcomes, and isolation on development task `c01`. They make no inference
@@ -125,7 +125,7 @@ or provider calls and establish no model-performance result. To reproduce the
 transport checks from a checkout of current `main`, run:
 
 ```sh
-python3 scripts/validate_direct_harbor.py \
+python3 scripts/validate_direct_harbor.py --checkout \
   --output .local/my-direct-harbor-validation.json
 ```
 
@@ -135,8 +135,9 @@ checks that terminal tools can read it, and verifies that the separate verifier
 receives no key. This does not imply Terminus-2 forwards its real controller key.
 
 A [local-model smoke record](../reports/workflow-v8/direct-model-smoke-v1/record.json)
-and its retained workpaper exercise actual inference on development task `b01`
-with Qwen3.6-35B-A3B, CPU inference and native Terminus-2. The single attempt
+and its retained workpaper exercise actual inference on the preserved
+`workflow-v8` development task `b01` with Qwen3.6-35B-A3B, CPU inference and
+native Terminus-2. The single attempt
 completed nine turns and delivered all required files without an exception or
 retry. Original-input calculations and claim verdicts passed. The complete reward
 was `0` because claim 1 had no citations and the SQL failed changed-input controls:
@@ -161,13 +162,13 @@ python3 scripts/workflow_regression.py \
   --output .local/my-workflow-regression.json
 ```
 
-This checks the checkout's oracle solutions for `a01`, `b01` and `c01`, followed
+This checks the checkout's oracle solutions for `a01`, `b01`, `b02` and `c01`, followed
 by correct and invalid scripted deliveries through native Terminus-2. It makes
 no model calls. Missing diagnostics, infrastructure errors, changed artifacts
 or unexpected rewards fail the command and remain in the result ledger. Use a
 fresh output path. Raw native logs remain local beside the summary.
-The [recorded regression](../reports/workflow-v8/native-regression-v1.json) passed
-all three oracles and both scripted deliveries without retries or inference.
+The [current recorded regression](../reports/workflow-v9/native-regression-v1.json) passed
+all four oracles and both scripted deliveries without retries or inference.
 
 The same command is available through the
 [WorkpaperBench workflow regression](../.github/workflows/workflow-regression.yml)
@@ -181,7 +182,7 @@ Hermes compatibility, identity-bound receipts and detailed financial reports.
 It uses one tool-capable Chat Completions endpoint. No Mac, Lima, owner account,
 environment marker or development-only permission is required.
 
-The default `workflow-v8` construction track supplies source observations and an
+The default `workflow-v9` construction track supplies source observations and an
 output contract, with no starting SQL. Models write all three queries.
 `--dataset workflow-v7` selects the separate maintenance track with supplied SQL
 and repair/preservation reporting. Keep results from these conditions separate.
@@ -213,7 +214,7 @@ docker compose version
 
 git clone https://github.com/CaoimhConway/workpaperbench.git
 cd workpaperbench
-git checkout v0.6.0-rc.1
+git checkout v0.6.1-rc.1
 python3 -m venv .venv
 .venv/bin/pip install -e . harbor==0.23.0
 mkdir -p .local
@@ -234,7 +235,7 @@ is not part of this setup. `./wpb guest ...` remains an alias for the public com
 ## 2. Verify delivery and scoring without a model
 
 ```sh
-./wpb grade --task c01 --artifacts examples/block-workpaper-v8 \
+./wpb grade --task c01 --artifacts examples/block-workpaper-v9 \
   --attempt reference-1
 ./wpb report --attempts reference-1 --output .local/reference-report.json
 ./wpb smoke --task c09 --attempt transport-1 --port 19090 --authenticated

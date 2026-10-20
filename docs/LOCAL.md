@@ -52,7 +52,7 @@ Other guest/platform combinations have not been validated here.
 ## Run the measured local model
 
 This historical maintenance workflow uses workflow-v7. The public interface defaults
-to workflow-v8 construction and is documented in [RUNNING.md](RUNNING.md). The version 4 and 5 commands below
+to workflow-v9 construction and is documented in [RUNNING.md](RUNNING.md). The version 4 and 5 commands below
 reproduce historical development conditions and do not measure the revised tasks.
 
 The measured default is Qwen3.5-9B **Q4_K_M** from

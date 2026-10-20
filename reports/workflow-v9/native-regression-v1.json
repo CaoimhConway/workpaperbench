@@ -1,0 +1,180 @@
+{
+  "kind": "workflow_v9_native_regression",
+  "status": "passed",
+  "harbor_version": "0.23.0",
+  "inference": false,
+  "model_performance_evaluation": false,
+  "external_service_spend_usd": 0,
+  "source": {
+    "kind": "checkout",
+    "manifest_id": "workflow-v9-canonical-7441313f1a0b",
+    "manifest_sha256": "6ca81be03b0236a20e6c9d834ba8b99fbe070a722e947675d4e8764b1db58714",
+    "tasks_sha256": {
+      "a01": "b2863b64a9f94f8e085c026272b1f079984ccb6a75e6c9f54f6dee798078977d",
+      "b01": "667116159ff4c99205cfafa6ceef22daa7f1328d42e4c923fb728cccfa33f5bf",
+      "b02": "c8e58bf9cd9737fd20652548fbe393e2c5dce29162ab0913fa932c1246ae04fc",
+      "c01": "74a530698e01e43838ae0c7c68d4f13154ab254bbad34d49d67c944a0aeb1dfe"
+    }
+  },
+  "implementation_sha256": {
+    "workflow_regression.py": "2f1eb273a9c608f86d4200e6ac05910689f03a6fc1432a43a61f09adcdf0182f",
+    "validate_direct_harbor.py": "ab7525231bedd7b339afb328cb3cfce6a910967d1aa11083c554240b0564478b"
+  },
+  "oracles": [
+    {
+      "task": "workflow-v9-b01",
+      "reward": 1.0,
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "native_result_sha256": "d18c65591bc7b70025eb0fb459b8e864224e118730d519a6f39f24f2803cf98b",
+      "verdict_sha256": "2c773cad7d5be7109de79d60942a21b0a542c530cb01051aac1f14edc09926c1",
+      "retained_answer_sha256": "5ae7979ace3d91de7a3745dc8b81bf8b08dd8426d1485ad2a770df147cb1910f",
+      "retained_sql_sha256": {
+        "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+        "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429",
+        "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc"
+      }
+    },
+    {
+      "task": "workflow-v9-c01",
+      "reward": 1.0,
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "native_result_sha256": "06d9716bb3cf2887ea26992df221bbfc88b5f9cea4461035349691050ef3e81c",
+      "verdict_sha256": "40765669944a96690d327052c7e1f8f93633f2a1fa0b01a5d2cbcb71443b6f8f",
+      "retained_answer_sha256": "9ec40da11c18c6ccd55429c5be39d82b0933778b605296f8a533327499a0cd34",
+      "retained_sql_sha256": {
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      }
+    },
+    {
+      "task": "workflow-v9-b02",
+      "reward": 1.0,
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "native_result_sha256": "d327cd37e61de73dac30adb76475e0710442417af779e92cdd748fa962877fb8",
+      "verdict_sha256": "62d7161b5dcb7598ac8508dbcd85100da3064e908703a4937ae7082aac365ef8",
+      "retained_answer_sha256": "8f2ff663812bb31a3f6c8decfbe2014c259726b6f20bc651fb2697e6b2a88342",
+      "retained_sql_sha256": {
+        "stock_bridge.sql": "f18aee6f76edaefb6e0caae73bac785153f21d266cbd3446946b0baf42eb9328",
+        "treasury_valuation.sql": "b2d86238f079ef59328cb4c4b2218e2b078527fa9e4d7de38c4e29e997af70c3",
+        "qualified_coverage.sql": "9bc0574b6f9740125fb7749861d12fd60b4d47e526a5533fdcbed65a32ce9137"
+      }
+    },
+    {
+      "task": "workflow-v9-a01",
+      "reward": 1.0,
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "native_result_sha256": "3252304e15ad7c1481f9623c6c0ea71cbcf66ea7391ffd0bea51fe34bf6e866e",
+      "verdict_sha256": "ec2145c8a534dc138133a2295b7a5202f3282f9863501f6fb40e7aa8a5cde3e9",
+      "retained_answer_sha256": "2180ca02dfc50d485067101fe2afd25c7f9978fd2e0c6984e9e5e9563ed77bc1",
+      "retained_sql_sha256": {
+        "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+        "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6",
+        "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199"
+      }
+    }
+  ],
+  "agent_transport": {
+    "kind": "scripted_native_harbor_agent_fixture",
+    "harbor_version": "0.23.0",
+    "repo": null,
+    "inference": false,
+    "model_performance_evaluation": false,
+    "external_service_spend_usd": 0,
+    "cases": [
+      {
+        "variant": "reference",
+        "agent": "terminus-2",
+        "task": "workflow-v9-c01",
+        "reward": 1.0,
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        },
+        "native_result_sha256": "9c524da4dc60c57f7cc8d97fac9a8f0a2b3aa8e57f41c81cbd90b6012f060040",
+        "verdict_sha256": "40765669944a96690d327052c7e1f8f93633f2a1fa0b01a5d2cbcb71443b6f8f",
+        "retained_answer_sha256": "44a36c3c769044b007ee0d491b9dafab1c4f69bf6a16269e45821bd74f226d54",
+        "retained_sql_sha256": {
+          "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+          "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+          "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+        },
+        "native_job_result_sha256": "203afb7ba268eed53e634215c0c9666a00b8a077f2e722007abf9d88a8819c8d",
+        "requests": [
+          {
+            "terminal_completion_observed": false
+          },
+          {
+            "terminal_completion_observed": true
+          },
+          {
+            "terminal_completion_observed": true
+          }
+        ],
+        "candidate_received_test_key": true,
+        "candidate_external_tls_probe_blocked": true,
+        "candidate_reference_paths_absent": true
+      },
+      {
+        "variant": "invalid",
+        "agent": "terminus-2",
+        "task": "workflow-v9-c01",
+        "reward": 0.0,
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        },
+        "native_result_sha256": "ce13499878c983ecd74fc78ece0fd4efdfb5ee6c69eaa5cffcf9d427b724b55a",
+        "verdict_sha256": "5362a41dc92459a10900699f343d7ef1dff185cc50553cb257ab6f44c6c8dda2",
+        "retained_answer_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "retained_sql_sha256": {},
+        "native_job_result_sha256": "06686a538e30b10b3449b5945cf179bc2dc0094542846370c7507badc134404c",
+        "requests": [
+          {
+            "terminal_completion_observed": false
+          },
+          {
+            "terminal_completion_observed": true
+          },
+          {
+            "terminal_completion_observed": true
+          }
+        ],
+        "candidate_received_test_key": true,
+        "candidate_external_tls_probe_blocked": true,
+        "candidate_reference_paths_absent": true
+      }
+    ],
+    "source": {
+      "kind": "checkout",
+      "manifest_id": "workflow-v9-canonical-7441313f1a0b",
+      "task_sha256": "74a530698e01e43838ae0c7c68d4f13154ab254bbad34d49d67c944a0aeb1dfe"
+    }
+  },
+  "error": null,
+  "native_job_result_sha256": "f0638840f6e1fa9bfe3232c3fa13d207741c7088a99d294eb9c29dbcabf83ee8"
+}

@@ -1,6 +1,6 @@
 # Task authoring
 
-The default suite is `workflow-v8`, the construction track with 30 tasks and
+The default suite is `workflow-v9`, the construction track with 30 tasks and
 scorer `workflow-1.2.0`. Each task requests three SQL result tables and three
 claim verdicts. Candidates receive observations and an output contract, with no
 starting SQL. The six development and 24 evaluation cases have separate source
@@ -14,8 +14,8 @@ not an interchangeable source of construction results.
 
 ## Package and output contract
 
-Use [construction task c01](../datasets/workflow-v8/tasks/c01/) and its
-[candidate request](../datasets/workflow-v8/tasks/c01/instruction.md) as a concrete
+Use [construction task c01](../datasets/workflow-v9/tasks/c01/) and its
+[candidate request](../datasets/workflow-v9/tasks/c01/instruction.md) as a concrete
 package example:
 
 | File | Responsibility |
@@ -79,11 +79,11 @@ From a checkout with the [documented installation](RUNNING.md), reconstruct the
 frozen construction catalog without changing it and check the example JSON:
 
 ```sh
-.venv/bin/python scripts/build_workflow_construction.py --check
-./wpb validate examples/block-workpaper-v8/answer.json
+.venv/bin/python scripts/build_workflow_pyusd_revision.py --check
+./wpb validate examples/block-workpaper-v9/answer.json
 ```
 
-The versioned builder reconstructs `workflow-v8` from `workflow-v7` in a temporary
+The versioned builder reconstructs `workflow-v9` from `workflow-v8` in a temporary
 directory and compares the output with the frozen package. It is not a generic
 new-task generator. Do not edit published packages and regenerate them in place.
 A future catalog needs its own reviewed construction and freeze process.
@@ -92,8 +92,8 @@ On the installed Linux Docker controller, verify all four submitted files in a
 fresh separate verifier and inspect the report:
 
 ```sh
-./wpb grade --dataset workflow-v8 --task c01 \
-  --artifacts examples/block-workpaper-v8 --attempt authoring-reference-1
+./wpb grade --dataset workflow-v9 --task c01 \
+  --artifacts examples/block-workpaper-v9 --attempt authoring-reference-1
 ./wpb report --attempts authoring-reference-1 \
   --output .local/authoring-reference-report.json
 ```
@@ -109,7 +109,7 @@ on that controller without model calls:
 
 ```sh
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v8 --tasks c01 \
+  --dataset workflow-v9 --tasks c01 \
   --output .local/authoring-c01-controls.json
 ```
 

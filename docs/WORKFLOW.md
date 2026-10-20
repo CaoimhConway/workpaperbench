@@ -1,14 +1,14 @@
 # Workflow methods
 
-The default catalog is `workflow-v8-canonical-67966f15cd8e` (construction), using
+The default catalog is `workflow-v9-canonical-7441313f1a0b` (construction), using
 scorer `workflow-1.2.0`. Six development and 24 evaluation cases each request three
 SQL result tables and three claim verdicts. All 30 cases are available for external
 model execution. Deliver `answer.json` and three named `.sql` files. The
-[Block example](../examples/block-workpaper-v8) is an authored reference.
+[Block example](../examples/block-workpaper-v9) is an authored reference.
 
 ## Construction and maintenance
 
-| Condition | Construction, workflow-v8 | Maintenance, workflow-v7 |
+| Condition | Construction, workflow-v9 | Maintenance, workflow-v7 |
 | --- | --- | --- |
 | Candidate receives | Dossier, normalized observations and output contract | Same financial inputs plus three starting queries |
 | Starting SQL | None | 61/90 queries already correct across the catalog |
@@ -171,12 +171,12 @@ without any Mac/Lima dependency:
 ```sh
 .venv/bin/pip install -e '.[test]'
 .venv/bin/python -m pytest -q
-.venv/bin/python scripts/build_workflow_construction.py --check
+.venv/bin/python scripts/build_workflow_pyusd_revision.py --check
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v8 --native-prefix my-validity \
+  --dataset workflow-v9 --native-prefix my-validity \
   --output .local/my-validity-prototypes.json
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v8 --tasks all --output .local/my-validity-suite.json
+  --dataset workflow-v9 --tasks all --output .local/my-validity-suite.json
 ```
 
 The explicit `--executor local-lima` option retains the owner-specific maintenance
@@ -201,13 +201,21 @@ output. Actual network and namespace checks accompany verdicts. The unchanged
 worker and runner retain the earlier [resource and candidate-boundary proof](../reports/local/local-boundary-validation.json).
 These probes do not constitute a security proof for arbitrary workloads.
 
-The [current validation record](../reports/workflow-v8/validation.json) includes
+The preserved [workflow-v8 validation record](../reports/workflow-v8/validation.json) includes
 147 reference/control expectations and native authenticated HTTP/HTTPS fixtures.
 The HTTPS fixture uses a test-only hostname mapping and temporary certificate
 trust after setup, with ordinary certificate verification enabled. It does not
 contact a model or provider. The separate IPv6 fixture verifies fresh neighbor
 resolution, the selected TCP destination and rejection of an unrelated port and
 ICMP echo using the native sidecar. Fixture failures remain separately recorded.
+
+The `workflow-v9` revision accepts the January and February report summaries as
+sufficient support for the PYUSD asset-coverage claim. It also defines Treasury
+valuation residuals as deduplicated holding fair value less the reported Treasury
+category. Financial observations, targets, controls and scorer code are unchanged.
+The [current native validation](../reports/workflow-v9/direct-harbor-validation.json)
+records the revised catalog separately. Earlier task versions and results remain
+available under their original identities.
 
 ## Evaluation limits
 

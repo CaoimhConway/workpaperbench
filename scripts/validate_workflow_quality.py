@@ -93,7 +93,7 @@ def validate(verdict, variant, covered):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--dataset', default='workflow-v8', choices=['workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8'])
+    parser.add_argument('--dataset', default='workflow-v9', choices=['workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9'])
     parser.add_argument('--executor', choices=['docker', 'local-lima'], default='docker',
                         help='Docker on this Linux controller, or the historical owner maintenance wrapper')
     parser.add_argument('--tasks', nargs='+', default=['a01', 'b01', 'c01'])
