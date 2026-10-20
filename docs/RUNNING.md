@@ -58,6 +58,7 @@ OPENAI_API_KEY=local-only harbor run \
   --ak 'llm_call_kwargs={"max_tokens":4096}' \
   --ak temperature=0.6 \
   --ak max_turns=24 \
+  --agent-timeout-multiplier 6 \
   --n-concurrent 1 --env docker
 ```
 
@@ -67,6 +68,10 @@ your server's actual configuration. `model_info` supplies the limits used for
 Harbor's context accounting, while `llm_call_kwargs.max_tokens` sets the requested
 response budget. Metadata does not configure the server. The zero cost fields
 apply to this local example, not paid endpoints.
+
+The task default allows 600 seconds of agent execution. This local example
+multiplies that limit by six, allowing 3,600 seconds for a slower model server.
+Choose and record a suitable wall-time budget before starting a comparison.
 
 Supply any real key expected by an authenticated endpoint through the
 corresponding provider environment variable. Declare sampling settings with
