@@ -1,6 +1,6 @@
 # Independent-operand control audit
 
-Catalog: `workflow-v11-canonical-2a1d26d1ec5f`. Scorer: `workflow-1.2.1`.
+Catalog: `workflow-v11-canonical-99f9af5fc8cb`. Scorer: `workflow-1.2.1`.
 Prior catalog: `workflow-v10-canonical-b514bac2274f`. No model inference.
 
 The bounded audit tried the following eight incorrect implementations. Each

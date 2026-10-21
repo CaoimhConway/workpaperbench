@@ -15,6 +15,7 @@ from workpaperbench.catalog import content_hash, load, tree_hash
 from review_workflow import seal, write_json
 
 DATASET = 'workflow-v11'
+SQLITE_VERSION = '3.45.1'
 CONTROLS = {
     'c01': {
         'name': 'subscription_cost_increases_with_matching_total',
@@ -66,11 +67,14 @@ def add_control(task, gold, definition):
 
 
 def construct(destination):
+    if sqlite3.sqlite_version != SQLITE_VERSION:
+        raise ValueError('dependency_builder_requires_sqlite_' + SQLITE_VERSION)
     prior = load(ROOT, 'workflow-v10')
     manifest = copy.deepcopy(prior)
     manifest.update(dataset_id=DATASET, prior_catalog=prior['manifest_id'],
         status='Software and authored controls only, no candidate runs on revised tasks',
-        dependency_revision={'controls': CONTROLS, 'original_observations_changed': False,
+        dependency_revision={'controls': CONTROLS, 'builder_sqlite_version': SQLITE_VERSION,
+            'original_observations_changed': False,
             'original_targets_changed': False, 'reference_sql_changed': False,
             'scorer_changed': False, 'new_inference': False})
     for key, old in prior['tasks'].items():
