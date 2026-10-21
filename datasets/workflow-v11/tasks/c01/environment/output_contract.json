@@ -1,0 +1,158 @@
+{
+  "tables": {
+    "revenue_bridge": {
+      "columns": {
+        "category": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "bitcoin",
+            "hardware",
+            "subscription",
+            "transaction"
+          ],
+          "aliases": {
+            "Transaction-based revenue": "transaction",
+            "Subscription and services-based revenue": "subscription",
+            "Hardware revenue": "hardware",
+            "Bitcoin revenue": "bitcoin"
+          }
+        },
+        "revenue_2023_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "revenue_2024_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "contribution_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "share_2023_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "share_2024_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "share_change_pp": {
+          "type": "real",
+          "unit": "percentage_points",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "category"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "profit_bridge": {
+      "columns": {
+        "category": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "acquired_technology_amortization",
+            "bitcoin",
+            "hardware",
+            "subscription",
+            "transaction"
+          ],
+          "aliases": {
+            "Transaction-based revenue": "transaction",
+            "Subscription and services-based revenue": "subscription",
+            "Hardware revenue": "hardware",
+            "Bitcoin revenue": "bitcoin",
+            "Amortization of acquired technology assets": "acquired_technology_amortization"
+          }
+        },
+        "gross_profit_2023_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "gross_profit_2024_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "category"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "reconciliation": {
+      "columns": {
+        "revenue_change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "gross_profit_change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "revenue_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "gross_profit_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "bitcoin_gross_profit_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "Higher Bitcoin selling prices caused more than half of the increase in Block Bitcoin revenue from FY2023 to FY2024.",
+    "claim_2": "Bitcoin contributed more than half of the increase in annual consolidated Block revenue from FY2023 to FY2024.",
+    "claim_3": "The supplied revenue categories and cost categories, including acquired-technology amortization, reconcile to the reported annual consolidated totals."
+  },
+  "definitions": {
+    "revenue_bridge": "Contribution is the category change divided by consolidated revenue change, in percent. share_change_pp is annual share in FY2024 less FY2023.",
+    "profit_bridge": "Amortization is a negative gross-profit component without a corresponding revenue category.",
+    "reconciliation": "Each residual is reported consolidated total change less summed component changes. Bitcoin gross-profit growth uses FY2023 as the base."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

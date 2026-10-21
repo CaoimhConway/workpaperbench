@@ -1,0 +1,79 @@
+{
+  "rationale": "Build a Robinhood FY2025 financial workpaper. Reconcile adjusted expenses, including negative prior settlement amounts and both the reported and a consistently credit-excluded expense basis. Attribute annual revenue growth across transaction, interest and other revenue. Separate app and Bitstamp crypto volume in Q4 and preliminary January, normalizing duration only as a monthly arithmetic average. Resolve the scope of any organic asset-growth inference.",
+  "source_group": "robinhood-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "67a331d9ba95ad2b5d67ceb37f5030bc6d81b2a189d65fdc99813f5f0a3163c9",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "820b65eb59cade77f4009c4ec64c5aad001ce56adaf5f340327d8e6d4cfea838",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "064e20f9b8238993afce1d53383ad525516d1cf584f4835072e8772388eaf825",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "e9870b0d9f27b8ba3cc79651023782c54bf053ff4cfa7c6962a6f5ce57d59361",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "22d5ea53fc51a22fd70fce5c1b9df98b699d4eb9726a0f868eb4408739fe6ef7",
+    "claim_mapping": {
+      "organic_asset_gain_identified": "claim_1",
+      "removing_settlement_benefit_reduces_expense": "claim_2",
+      "bitstamp_majority_q4": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "organic_asset_gain_identified",
+      "assertion": "Investment returns contributed more than acquisitions to the FY2025 increase in Total Platform Assets.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "b04:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b04:s02"
+      ],
+      "source_grounded_reason": "The scope notes identify acquisition effects from Bitstamp and TradePMR and missing comparable customer-flow coverage. No decomposition separates the investment-return and acquisition contributions, so their relative magnitudes cannot be decided."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "d8c5fa2194d032ee0edea82585ada981229476458b48140eb720766a000c2eca",
+    "maintenance_rationale": "A valid work product should survive an audit. Negative settlements and a changed expense exclusion create plausible but unnecessary edits. Acquired crypto volume and a preliminary month require scope and duration discipline, while acquired assets prevent an unsupported organic-return story.",
+    "maintenance_starting_defects": "Authored reviewed work product, no injected SQL defect, no-change is a valid outcome",
+    "removed_starting_files": [
+      "starting_annual_revenue_bridge.sql",
+      "starting_crypto_scope.sql",
+      "starting_expense_audit.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "e22bb4d432e8162f43251024405724e84dd501f27fdb595f7edb12f331699cb6",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  }
+}

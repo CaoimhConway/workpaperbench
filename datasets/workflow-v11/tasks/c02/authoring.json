@@ -1,0 +1,80 @@
+{
+  "rationale": "Reconcile Adobe FY2025 GAAP and adjusted operating performance before using next-year ARR guidance. Include each disclosed quarterly comparison, quantify the annual change in the adjustment gap by component, and show why growth rates differ. Build an ARR basis bridge from observed FY2025 exit to revalued FY2026 opening and the mechanically implied target on the disclosed growth basis. Keep forecasts and ARR stock measures distinct from recognized revenue.",
+  "source_group": "adobe-fy2025-adjusted-arr-bases",
+  "split": "development",
+  "exposure": "Newly authored development case, never held out",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "be6ca47d3597d5aef748517f3f760a37b01adffa3765e0e5c402279594ea64c3",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "d5f808e513894056c3e9bd79af5a5522ce6c815d1650889ac05f6c5e6db61176",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "f4226938daa4f82654db9df0c08d43e90ec26ad5731fe85ad69d8ed513b9c3c0",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "0c144ee5249aa49eb59ec21fa191db35fb5230989dd1e00bea7ee66cff5fae86",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "fd72099ee1ff830a4ac6ed61a659452ebcaf6a1832a1638c6d6c178b896e3e05",
+    "claim_mapping": {
+      "adjusted_growth_slower_than_gaap": "claim_1",
+      "arr_revaluation_is_recognized_revenue": "claim_2",
+      "exact_organic_arr_increase_identifiable": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_organic_arr_increase_identifiable",
+      "assertion": "Applying the 10.2 percent FY2026 ARR growth target to the revalued opening ARR basis implies ending ARR of USD 28.27732 billion.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c02:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c02:s03"
+      ],
+      "source_grounded_reason": "The revalued opening basis is USD 25.66 billion. The implied target is arithmetic from the supplied rounded inputs, not a realized result or recognized revenue.",
+      "independent_calculation": "25.66 * (1 + 10.2 / 100) = 28.27732 USD billion"
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "eb683ea79d21a45fae7b95413571047d292ac8463140712541683c77363cbc9b",
+    "maintenance_rationale": "An analyst can misattribute better GAAP growth to recurring performance when a prior acquisition expense leaves the adjusted measure. ARR guidance requires another basis reconciliation, and a currency-driven revaluation does not identify organic sales or recognized revenue.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_adjustment_attribution.sql",
+      "starting_arr_guidance_bridge.sql",
+      "starting_operating_reconciliation.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "7e3002b730ad4e0d4746275f0915d5a1a85d3e3caaac79a2c8243c8ab2b966ee",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  }
+}

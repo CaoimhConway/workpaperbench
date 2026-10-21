@@ -1,0 +1,850 @@
+{
+  "task_id": "workflow-v11-c07",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "financial_versions": {
+      "columns": {
+        "version": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "annual",
+            "release"
+          ]
+        },
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "gross_profit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "pretax_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "net_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "version",
+        "year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c07:s01",
+          "c07:s02"
+        ]
+      ],
+      "rows": [
+        [
+          "release",
+          2025,
+          37145.0,
+          12115.0,
+          11455.0,
+          10453.0,
+          0.0
+        ],
+        [
+          "annual",
+          2025,
+          36790.0,
+          11760.0,
+          11100.0,
+          10180.0,
+          0.0
+        ],
+        [
+          "release",
+          2024,
+          34828.0,
+          12181.0,
+          12234.0,
+          10320.0,
+          0.0
+        ],
+        [
+          "annual",
+          2024,
+          34828.0,
+          12181.0,
+          12234.0,
+          10320.0,
+          0.0
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "settlement_revision_bridge": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "gross_profit_usd_million",
+            "net_income_usd_million",
+            "operating_income_usd_million",
+            "pretax_usd_million",
+            "product_cost_usd_million",
+            "tax_usd_million"
+          ]
+        },
+        "prior_release_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "annual_report_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "observed_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "settlement_effect_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c07:s01",
+          "c07:s02"
+        ]
+      ],
+      "rows": [
+        [
+          "product_cost_usd_million",
+          14766.0,
+          15121.0,
+          355.0,
+          355.0,
+          0.0
+        ],
+        [
+          "gross_profit_usd_million",
+          37145.0,
+          36790.0,
+          -355.0,
+          -355.0,
+          0.0
+        ],
+        [
+          "operating_income_usd_million",
+          12115.0,
+          11760.0,
+          -355.0,
+          -355.0,
+          0.0
+        ],
+        [
+          "pretax_usd_million",
+          11455.0,
+          11100.0,
+          -355.0,
+          -355.0,
+          0.0
+        ],
+        [
+          "tax_usd_million",
+          1002.0,
+          920.0,
+          -82.0,
+          -82.0,
+          0.0
+        ],
+        [
+          "net_income_usd_million",
+          10453.0,
+          10180.0,
+          -273.0,
+          -273.0,
+          0.0
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c07:s03"
+      ]
+    },
+    "cash_revision_bridge": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "deferred_tax",
+            "inventory_change",
+            "net_income",
+            "operating_cash",
+            "other_asset_change"
+          ]
+        },
+        "prior_release_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "annual_report_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c07:s01",
+          "c07:s03"
+        ]
+      ],
+      "rows": [
+        [
+          "net_income",
+          10453.0,
+          10180.0,
+          -273.0
+        ],
+        [
+          "deferred_tax",
+          -1051.0,
+          -1133.0,
+          -82.0
+        ],
+        [
+          "inventory_change",
+          278.0,
+          209.0,
+          -69.0
+        ],
+        [
+          "other_asset_change",
+          -923.0,
+          -499.0,
+          424.0
+        ],
+        [
+          "operating_cash",
+          14193.0,
+          14193.0,
+          0.0
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c07:s02"
+      ]
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c07:s01",
+          "c07:s02"
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "claim_2": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c07:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c07:s01"
+      ]
+    },
+    "claim_3": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c07:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c07:s03"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "scaled_financial_observations",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "financial_versions": [
+          [
+            "release",
+            2025,
+            74290.0,
+            24230.0,
+            22910.0,
+            20906.0,
+            0.0
+          ],
+          [
+            "annual",
+            2025,
+            73580.0,
+            23520.0,
+            22200.0,
+            20360.0,
+            0.0
+          ],
+          [
+            "release",
+            2024,
+            69656.0,
+            24362.0,
+            24468.0,
+            20640.0,
+            0.0
+          ],
+          [
+            "annual",
+            2024,
+            69656.0,
+            24362.0,
+            24468.0,
+            20640.0,
+            0.0
+          ]
+        ],
+        "settlement_revision_bridge": [
+          [
+            "product_cost_usd_million",
+            29532.0,
+            30242.0,
+            710.0,
+            710.0,
+            0.0
+          ],
+          [
+            "gross_profit_usd_million",
+            74290.0,
+            73580.0,
+            -710.0,
+            -710.0,
+            0.0
+          ],
+          [
+            "operating_income_usd_million",
+            24230.0,
+            23520.0,
+            -710.0,
+            -710.0,
+            0.0
+          ],
+          [
+            "pretax_usd_million",
+            22910.0,
+            22200.0,
+            -710.0,
+            -710.0,
+            0.0
+          ],
+          [
+            "tax_usd_million",
+            2004.0,
+            1840.0,
+            -164.0,
+            -164.0,
+            0.0
+          ],
+          [
+            "net_income_usd_million",
+            20906.0,
+            20360.0,
+            -546.0,
+            -546.0,
+            0.0
+          ]
+        ],
+        "cash_revision_bridge": [
+          [
+            "net_income",
+            20906.0,
+            20360.0,
+            -546.0
+          ],
+          [
+            "deferred_tax",
+            -2102.0,
+            -2266.0,
+            -164.0
+          ],
+          [
+            "inventory_change",
+            556.0,
+            418.0,
+            -138.0
+          ],
+          [
+            "other_asset_change",
+            -1846.0,
+            -998.0,
+            848.0
+          ],
+          [
+            "operating_cash",
+            28386.0,
+            28386.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "expense_and_tax_revision_preserves_total_cash",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "financial_versions": [
+          [
+            "release",
+            2025,
+            37145.0,
+            12115.0,
+            11455.0,
+            10453.0,
+            0.0
+          ],
+          [
+            "annual",
+            2025,
+            36780.0,
+            11750.0,
+            11090.0,
+            10172.0,
+            0.0
+          ],
+          [
+            "release",
+            2024,
+            34828.0,
+            12181.0,
+            12234.0,
+            10320.0,
+            0.0
+          ],
+          [
+            "annual",
+            2024,
+            34828.0,
+            12181.0,
+            12234.0,
+            10320.0,
+            0.0
+          ]
+        ],
+        "settlement_revision_bridge": [
+          [
+            "product_cost_usd_million",
+            14766.0,
+            15131.0,
+            365.0,
+            365.0,
+            0.0
+          ],
+          [
+            "gross_profit_usd_million",
+            37145.0,
+            36780.0,
+            -365.0,
+            -365.0,
+            0.0
+          ],
+          [
+            "operating_income_usd_million",
+            12115.0,
+            11750.0,
+            -365.0,
+            -365.0,
+            0.0
+          ],
+          [
+            "pretax_usd_million",
+            11455.0,
+            11090.0,
+            -365.0,
+            -365.0,
+            0.0
+          ],
+          [
+            "tax_usd_million",
+            1002.0,
+            918.0,
+            -84.0,
+            -84.0,
+            0.0
+          ],
+          [
+            "net_income_usd_million",
+            10453.0,
+            10172.0,
+            -281.0,
+            -281.0,
+            0.0
+          ]
+        ],
+        "cash_revision_bridge": [
+          [
+            "net_income",
+            10453.0,
+            10172.0,
+            -281.0
+          ],
+          [
+            "deferred_tax",
+            -1051.0,
+            -1135.0,
+            -84.0
+          ],
+          [
+            "inventory_change",
+            278.0,
+            209.0,
+            -69.0
+          ],
+          [
+            "other_asset_change",
+            -923.0,
+            -489.0,
+            434.0
+          ],
+          [
+            "operating_cash",
+            14193.0,
+            14193.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "irrelevant_later_disclosures",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "financial_versions": [
+          [
+            "release",
+            2025,
+            37145.0,
+            12115.0,
+            11455.0,
+            10453.0,
+            0.0
+          ],
+          [
+            "annual",
+            2025,
+            36790.0,
+            11760.0,
+            11100.0,
+            10180.0,
+            0.0
+          ],
+          [
+            "release",
+            2024,
+            34828.0,
+            12181.0,
+            12234.0,
+            10320.0,
+            0.0
+          ],
+          [
+            "annual",
+            2024,
+            34828.0,
+            12181.0,
+            12234.0,
+            10320.0,
+            0.0
+          ]
+        ],
+        "settlement_revision_bridge": [
+          [
+            "product_cost_usd_million",
+            14766.0,
+            15121.0,
+            355.0,
+            355.0,
+            0.0
+          ],
+          [
+            "gross_profit_usd_million",
+            37145.0,
+            36790.0,
+            -355.0,
+            -355.0,
+            0.0
+          ],
+          [
+            "operating_income_usd_million",
+            12115.0,
+            11760.0,
+            -355.0,
+            -355.0,
+            0.0
+          ],
+          [
+            "pretax_usd_million",
+            11455.0,
+            11100.0,
+            -355.0,
+            -355.0,
+            0.0
+          ],
+          [
+            "tax_usd_million",
+            1002.0,
+            920.0,
+            -82.0,
+            -82.0,
+            0.0
+          ],
+          [
+            "net_income_usd_million",
+            10453.0,
+            10180.0,
+            -273.0,
+            -273.0,
+            0.0
+          ]
+        ],
+        "cash_revision_bridge": [
+          [
+            "net_income",
+            10453.0,
+            10180.0,
+            -273.0
+          ],
+          [
+            "deferred_tax",
+            -1051.0,
+            -1133.0,
+            -82.0
+          ],
+          [
+            "inventory_change",
+            278.0,
+            209.0,
+            -69.0
+          ],
+          [
+            "other_asset_change",
+            -923.0,
+            -499.0,
+            424.0
+          ],
+          [
+            "operating_cash",
+            14193.0,
+            14193.0,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "independent_disclosure_discrepancy",
+      "database": "control-discrepancy.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "changes": [
+        [
+          "income_versions",
+          0,
+          "product_revenue_usd_million",
+          17
+        ]
+      ],
+      "tables": {
+        "financial_versions": [
+          [
+            "release",
+            2025,
+            37162.0,
+            12132.0,
+            11472.0,
+            10470.0,
+            17.0
+          ],
+          [
+            "annual",
+            2025,
+            36790.0,
+            11760.0,
+            11100.0,
+            10180.0,
+            0.0
+          ],
+          [
+            "release",
+            2024,
+            34828.0,
+            12181.0,
+            12234.0,
+            10320.0,
+            0.0
+          ],
+          [
+            "annual",
+            2024,
+            34828.0,
+            12181.0,
+            12234.0,
+            10320.0,
+            0.0
+          ]
+        ],
+        "settlement_revision_bridge": [
+          [
+            "product_cost_usd_million",
+            14766.0,
+            15121.0,
+            355.0,
+            355.0,
+            0.0
+          ],
+          [
+            "gross_profit_usd_million",
+            37162.0,
+            36790.0,
+            -372.0,
+            -355.0,
+            -17.0
+          ],
+          [
+            "operating_income_usd_million",
+            12132.0,
+            11760.0,
+            -372.0,
+            -355.0,
+            -17.0
+          ],
+          [
+            "pretax_usd_million",
+            11472.0,
+            11100.0,
+            -372.0,
+            -355.0,
+            -17.0
+          ],
+          [
+            "tax_usd_million",
+            1002.0,
+            920.0,
+            -82.0,
+            -82.0,
+            0.0
+          ],
+          [
+            "net_income_usd_million",
+            10453.0,
+            10180.0,
+            -273.0,
+            -273.0,
+            0.0
+          ]
+        ],
+        "cash_revision_bridge": [
+          [
+            "net_income",
+            10453.0,
+            10180.0,
+            -273.0
+          ],
+          [
+            "deferred_tax",
+            -1051.0,
+            -1133.0,
+            -82.0
+          ],
+          [
+            "inventory_change",
+            278.0,
+            209.0,
+            -69.0
+          ],
+          [
+            "other_asset_change",
+            -923.0,
+            -499.0,
+            424.0
+          ],
+          [
+            "operating_cash",
+            14193.0,
+            14193.0,
+            0.0
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "3c08cecc128b2a3c0054ff1bab851c59c27eb7ee209ac8302e787746d4bedce8",
+    "control-2.sqlite": "19577a1ea5adec62aa30d0c5f0433e28ca0bd8f84a78ab9ab11336d63ecd8fd8",
+    "control-3.sqlite": "b8a6b9f63493ff7744a9f85cbf2f0c26755e73d3ab3a49854dfac315fbe40c1c",
+    "control-discrepancy.sqlite": "8d170670baec1597ec53f606791bd566b55bdbc22062a9028c0da50f79f7c835",
+    "data.sqlite": "e623dc537e39a69879b6edbbdd369cd1d41ec4f0fe6161d671a082b53fa3b946",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "7547dfb3335a6be5e037286fc8dce8b4144f94a648dbf8a20921a74291f9faea",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "136074ecc2e98c73bcf713eaba1cf45752df09ffa591f232f56f3f30dbe7e65d",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

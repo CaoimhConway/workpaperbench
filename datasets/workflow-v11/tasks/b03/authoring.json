@@ -1,0 +1,98 @@
+{
+  "rationale": "Build a Coinbase revenue-yield workpaper through FY2025. Produce the annual revenue contribution bridge using recast categories and corporate interest. Calculate quarterly and annualized USDC booked-revenue ratios separately on and off platform. Show the consumer and institutional Q4 revenue-to-spot-volume proxies, but resolve whether those proxies identify commission rates. Do not mix total derivative notional with spot volume or treat a condensed disclosure as zero.",
+  "source_group": "coinbase-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "b27fe19abfea4d0d476e1c06971fda08e9c5f89a9f5d2f5904e6c41d92e3a3b9",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "d5c0ebcdc432f08c4b2654f685dc8f0377ea141082a29aefc39608dd8365150d",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "98a7fe600c5e815d0f8a08ab52f29ac632e536c0278931b0a2f83ee6c9c722ae",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "33c82f24f4ca6277ddc5d2a966f86f6dbad35bf1643f68b3964932ac77b37cbd",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": false,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "346d7327602e2f4ab51f095712333e9e1230520fafd54cad8dbbff4c98524848",
+    "claim_mapping": {
+      "custodial_missing_means_zero": "claim_1",
+      "stablecoin_majority_growth": "claim_2",
+      "institutional_spot_commission_identified": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "institutional_spot_commission_identified",
+      "assertion": "The supplied institutional transaction-revenue and institutional spot-volume disclosures have identical product scope.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b03:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b03:s01"
+      ],
+      "source_grounded_reason": "Institutional transaction revenue includes derivatives, including Deribit, while the operational denominator is spot volume. A spot-only rate cannot be inferred by treating their scopes as identical."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "93956eb6a6c015ba96924b27c6799303db91922694062f9c3fc40b72a8b9122c",
+    "maintenance_rationale": "A research project can perform valid revenue arithmetic while mislabeling a derivatives-inclusive numerator as a spot fee. A second scope problem arises when USDC revenue is compared with balances using inconsistent units or periods. Preserve useful arithmetic and mark the non-identifiable fee inference unresolved.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_annual_revenue_bridge.sql",
+      "starting_spot_revenue_proxy.sql",
+      "starting_usdc_booked_ratio.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "024af4bafbda1e991e5a71c27e332354b91ff42a58c205d0b2736bdd3ac757bd",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "dependency_revision": {
+    "prior_task_sha256": "998ae269d8bc14e766c52069f4fe2b7d74e6cd982879b36cbfe8c6d1dfaefa03",
+    "name": "consumer_spot_volume_increases_with_revenue_fixed",
+    "changes": [
+      [
+        "spot_volume",
+        {
+          "period": "Q4FY2025",
+          "segment": "consumer"
+        },
+        "volume_usd_billion",
+        10
+      ]
+    ],
+    "reason": "Consumer spot volume varies independently of booked revenue. The apparent revenue-to-spot ratio changes without identifying a commission or changing annual revenue attribution or USDC economics.",
+    "original_observations_changed": false,
+    "original_targets_changed": false,
+    "human_review": "pending"
+  }
+}

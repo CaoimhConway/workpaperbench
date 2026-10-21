@@ -1,0 +1,80 @@
+{
+  "rationale": "Reconcile Visa FY2025 revenue and earnings before attributing operating improvement. Build the current annual, Q4 and reconstructed nine-month gross-to-net bridge, preserving signed client incentives. Reconcile after-tax net-income adjustments for both years and both Q4 comparisons, then show how GAAP and adjusted growth diverge. Distinguish litigation exclusions from recurring revenue economics and respect service-revenue timing.",
+  "source_group": "visa-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "3c75520cc8125d61c0c674481017eae3f5a40f881c1b31c95ca17ae961132477",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "268ef3c07f708bd279e42598e082c1e7bacf72faf7d6ed3f0b9135265c6399ec",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "3ac5aa11193c38dee65a852005538e2340663dfd8447357c1534d3b37b1f8c0e",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "a9cb9439dba6222d4043fcc0d6072f70f9b61e334ddcdd3ce380da16bf16a935",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "c4d72dd08fce1af02aaa61c3f4baed2922f1c18fa1eb6fc41e66fd1619f00ddb",
+    "claim_mapping": {
+      "q4_gaap_and_adjusted_same_direction": "claim_1",
+      "litigation_majority_annual_gap": "claim_2",
+      "same_quarter_price_effect_identified": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "same_quarter_price_effect_identified",
+      "assertion": "FY2025 client incentives were approximately 28.25 percent of revenue before client incentives.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c03:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s03"
+      ],
+      "source_grounded_reason": "The denominator is the sum of service, data-processing, international-transaction and other revenue before the signed incentives deduction, not net revenue.",
+      "independent_calculation": "15751 / (17539 + 19993 + 14166 + 4053) * 100 = 28.252408028555543 percent"
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "3e99dae5e750549ef730de2be6ba0c20c4ddae6dad253f0ed9a97492b64fa886",
+    "maintenance_rationale": "A net revenue bridge and an after-tax earnings bridge answer different questions. Signed incentives, cumulative periods and legal exclusions interact, while the lagged service-volume basis prevents a causal pricing attribution from the headline growth rates.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_gross_to_net.sql",
+      "starting_income_growth_bridge.sql",
+      "starting_net_income_reconciliation.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "00eac44882ef8675378ec57ee3d0ee7cc00ee3ab373c72989b579453a2e521e1",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  }
+}

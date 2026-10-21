@@ -1,0 +1,890 @@
+{
+  "task_id": "workflow-v11-a10",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "income_model": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2024",
+            "FY2025",
+            "Q1FY2025",
+            "Q2FY2025",
+            "Q3FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "pretax_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "net_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "revenue_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "net_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "a10:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "Q4FY2025",
+          18980.0,
+          3090.0,
+          2462.0,
+          0.0,
+          0.0
+        ],
+        [
+          "Q3FY2025",
+          18426.0,
+          3825.0,
+          2902.0,
+          0.0,
+          0.0
+        ],
+        [
+          "Q2FY2025",
+          17856.0,
+          3550.0,
+          2885.0,
+          0.0,
+          0.0
+        ],
+        [
+          "Q1FY2025",
+          16967.0,
+          3330.0,
+          2584.0,
+          0.0,
+          0.0
+        ],
+        [
+          "Q4FY2024",
+          17179.0,
+          2756.0,
+          2170.0,
+          0.0,
+          0.0
+        ],
+        [
+          "FY2025",
+          72229.0,
+          13795.0,
+          10833.0,
+          0.0,
+          0.0
+        ],
+        [
+          "FY2024",
+          65949.0,
+          12895.0,
+          10129.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "currency_and_network": {
+      "columns": {
+        "window": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY",
+            "Q4"
+          ]
+        },
+        "billed_reported_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "billed_fx_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "revenue_reported_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "revenue_fx_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "current_processed_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "prior_processed_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "window"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "a10:s02",
+          "a10:s03"
+        ]
+      ],
+      "rows": [
+        [
+          "Q4",
+          8.986287952987267,
+          7.850739035619093,
+          10.483730135630712,
+          9.401118220070321,
+          61.1,
+          55.6
+        ],
+        [
+          "FY",
+          7.666516216390483,
+          7.348119575699132,
+          9.522509818192846,
+          9.30042522282584,
+          227.2,
+          213.9
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a10:s01"
+      ]
+    },
+    "revenue_growth_bridge": {
+      "columns": {
+        "window": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY",
+            "Q4"
+          ]
+        },
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "card_fees",
+            "discount",
+            "net_interest",
+            "service_other"
+          ]
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_revenue_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "window",
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "a10:s01",
+          "a10:s03"
+        ]
+      ],
+      "rows": [
+        [
+          "Q4",
+          "discount",
+          707.0,
+          39.25596890616324
+        ],
+        [
+          "Q4",
+          "card_fees",
+          384.0,
+          21.321488062187672
+        ],
+        [
+          "Q4",
+          "service_other",
+          226.0,
+          12.54858411993337
+        ],
+        [
+          "Q4",
+          "net_interest",
+          484.0,
+          26.873958911715714
+        ],
+        [
+          "FY",
+          "discount",
+          2209.0,
+          35.17515923566879
+        ],
+        [
+          "FY",
+          "card_fees",
+          1544.0,
+          24.585987261146496
+        ],
+        [
+          "FY",
+          "service_other",
+          706.0,
+          11.242038216560509
+        ],
+        [
+          "FY",
+          "net_interest",
+          1821.0,
+          28.996815286624205
+        ]
+      ],
+      "context_evidence_allowed": []
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a10:s01",
+          "a10:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a10:s03"
+      ]
+    },
+    "claim_2": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a10:s02",
+          "a10:s03"
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "claim_3": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "a10:s02"
+        ]
+      ],
+      "context_evidence_allowed": []
+    }
+  },
+  "controls": [
+    {
+      "name": "scaled_amounts_preserve_ratios",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "income_model": [
+          [
+            "Q4FY2025",
+            37960.0,
+            6180.0,
+            4924.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q3FY2025",
+            36852.0,
+            7650.0,
+            5804.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q2FY2025",
+            35712.0,
+            7100.0,
+            5770.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q1FY2025",
+            33934.0,
+            6660.0,
+            5168.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            34358.0,
+            5512.0,
+            4340.0,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            144458.0,
+            27590.0,
+            21666.0,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2024",
+            131898.0,
+            25790.0,
+            20258.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "currency_and_network": [
+          [
+            "Q4",
+            8.986287952987267,
+            7.850739035619093,
+            10.483730135630712,
+            9.401118220070321,
+            122.2,
+            111.2
+          ],
+          [
+            "FY",
+            7.666516216390483,
+            7.348119575699132,
+            9.522509818192846,
+            9.30042522282584,
+            454.4,
+            427.8
+          ]
+        ],
+        "revenue_growth_bridge": [
+          [
+            "Q4",
+            "discount",
+            1414.0,
+            39.25596890616324
+          ],
+          [
+            "Q4",
+            "card_fees",
+            768.0,
+            21.321488062187672
+          ],
+          [
+            "Q4",
+            "service_other",
+            452.0,
+            12.54858411993337
+          ],
+          [
+            "Q4",
+            "net_interest",
+            968.0,
+            26.873958911715714
+          ],
+          [
+            "FY",
+            "discount",
+            4418.0,
+            35.17515923566879
+          ],
+          [
+            "FY",
+            "card_fees",
+            3088.0,
+            24.585987261146496
+          ],
+          [
+            "FY",
+            "service_other",
+            1412.0,
+            11.242038216560509
+          ],
+          [
+            "FY",
+            "net_interest",
+            3642.0,
+            28.996815286624205
+          ]
+        ]
+      }
+    },
+    {
+      "name": "fee_and_expense_change_preserves_net_income",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "income_model": [
+          [
+            "Q4FY2025",
+            18990.0,
+            3090.0,
+            2462.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q3FY2025",
+            18426.0,
+            3825.0,
+            2902.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q2FY2025",
+            17856.0,
+            3550.0,
+            2885.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q1FY2025",
+            16967.0,
+            3330.0,
+            2584.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            17179.0,
+            2756.0,
+            2170.0,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            72239.0,
+            13795.0,
+            10833.0,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2024",
+            65949.0,
+            12895.0,
+            10129.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "currency_and_network": [
+          [
+            "Q4",
+            8.986287952987267,
+            7.850739035619093,
+            10.54194074160312,
+            9.458758429880685,
+            61.1,
+            55.6
+          ],
+          [
+            "FY",
+            7.666516216390483,
+            7.348119575699132,
+            9.53767305038742,
+            9.315557707731186,
+            227.2,
+            213.9
+          ]
+        ],
+        "revenue_growth_bridge": [
+          [
+            "Q4",
+            "discount",
+            707.0,
+            39.039204859193816
+          ],
+          [
+            "Q4",
+            "card_fees",
+            394.0,
+            21.75593594699061
+          ],
+          [
+            "Q4",
+            "service_other",
+            226.0,
+            12.479293208172281
+          ],
+          [
+            "Q4",
+            "net_interest",
+            484.0,
+            26.72556598564329
+          ],
+          [
+            "FY",
+            "discount",
+            2209.0,
+            35.11923688394277
+          ],
+          [
+            "FY",
+            "card_fees",
+            1554.0,
+            24.705882352941178
+          ],
+          [
+            "FY",
+            "service_other",
+            706.0,
+            11.2241653418124
+          ],
+          [
+            "FY",
+            "net_interest",
+            1821.0,
+            28.950715421303656
+          ]
+        ]
+      }
+    },
+    {
+      "name": "irrelevant_later_disclosures",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "income_model": [
+          [
+            "Q4FY2025",
+            18980.0,
+            3090.0,
+            2462.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q3FY2025",
+            18426.0,
+            3825.0,
+            2902.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q2FY2025",
+            17856.0,
+            3550.0,
+            2885.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q1FY2025",
+            16967.0,
+            3330.0,
+            2584.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            17179.0,
+            2756.0,
+            2170.0,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            72229.0,
+            13795.0,
+            10833.0,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2024",
+            65949.0,
+            12895.0,
+            10129.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "currency_and_network": [
+          [
+            "Q4",
+            8.986287952987267,
+            7.850739035619093,
+            10.483730135630712,
+            9.401118220070321,
+            61.1,
+            55.6
+          ],
+          [
+            "FY",
+            7.666516216390483,
+            7.348119575699132,
+            9.522509818192846,
+            9.30042522282584,
+            227.2,
+            213.9
+          ]
+        ],
+        "revenue_growth_bridge": [
+          [
+            "Q4",
+            "discount",
+            707.0,
+            39.25596890616324
+          ],
+          [
+            "Q4",
+            "card_fees",
+            384.0,
+            21.321488062187672
+          ],
+          [
+            "Q4",
+            "service_other",
+            226.0,
+            12.54858411993337
+          ],
+          [
+            "Q4",
+            "net_interest",
+            484.0,
+            26.873958911715714
+          ],
+          [
+            "FY",
+            "discount",
+            2209.0,
+            35.17515923566879
+          ],
+          [
+            "FY",
+            "card_fees",
+            1544.0,
+            24.585987261146496
+          ],
+          [
+            "FY",
+            "service_other",
+            706.0,
+            11.242038216560509
+          ],
+          [
+            "FY",
+            "net_interest",
+            1821.0,
+            28.996815286624205
+          ]
+        ]
+      }
+    },
+    {
+      "name": "independent_disclosure_discrepancy",
+      "database": "control-discrepancy.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "changes": [
+        [
+          "income",
+          0,
+          "discount_usd_million",
+          17
+        ]
+      ],
+      "tables": {
+        "income_model": [
+          [
+            "Q4FY2025",
+            18997.0,
+            3107.0,
+            2479.0,
+            17.0,
+            17.0
+          ],
+          [
+            "Q3FY2025",
+            18426.0,
+            3825.0,
+            2902.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q2FY2025",
+            17856.0,
+            3550.0,
+            2885.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q1FY2025",
+            16967.0,
+            3330.0,
+            2584.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            17179.0,
+            2756.0,
+            2170.0,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            72229.0,
+            13795.0,
+            10833.0,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2024",
+            65949.0,
+            12895.0,
+            10129.0,
+            0.0,
+            0.0
+          ]
+        ],
+        "currency_and_network": [
+          [
+            "Q4",
+            8.986287952987267,
+            7.850739035619093,
+            10.483730135630712,
+            9.401118220070321,
+            61.1,
+            55.6
+          ],
+          [
+            "FY",
+            7.666516216390483,
+            7.348119575699132,
+            9.522509818192846,
+            9.30042522282584,
+            227.2,
+            213.9
+          ]
+        ],
+        "revenue_growth_bridge": [
+          [
+            "Q4",
+            "discount",
+            724.0,
+            40.19988895058301
+          ],
+          [
+            "Q4",
+            "card_fees",
+            384.0,
+            21.321488062187672
+          ],
+          [
+            "Q4",
+            "service_other",
+            226.0,
+            12.54858411993337
+          ],
+          [
+            "Q4",
+            "net_interest",
+            484.0,
+            26.873958911715714
+          ],
+          [
+            "FY",
+            "discount",
+            2209.0,
+            35.17515923566879
+          ],
+          [
+            "FY",
+            "card_fees",
+            1544.0,
+            24.585987261146496
+          ],
+          [
+            "FY",
+            "service_other",
+            706.0,
+            11.242038216560509
+          ],
+          [
+            "FY",
+            "net_interest",
+            1821.0,
+            28.996815286624205
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "79eace0c82fc152fb0e1eaab37f0ddae72e27cc360fd9864ab8e1e7c97783f69",
+    "control-2.sqlite": "656e854711a81de66c057d0de9a3fa3c845790039ff62276fa3153f70a91a6f9",
+    "control-3.sqlite": "6a872c3127b721e501df04d849c22c08c938ba69c95e914f960c5a86b35c2fb6",
+    "control-discrepancy.sqlite": "e286b9090f3982cfc623b80c00065515c2517788a27e818a05beedceffaee649",
+    "data.sqlite": "5fb2204062c1b315b7c3d3ffe4cfa32617008d70c1ac7d1677516e084813c26b",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "799dbe69bb50e98b95b96a2e050e998d46765a55e986b667d6aef378b9683ed9",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "84bba12bd9586c0af1363ef727a5765023d9ca59608f78bccb21e2052df440e8",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

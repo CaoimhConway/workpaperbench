@@ -1,0 +1,49 @@
+{
+  "task_id": "workflow-v11-c06",
+  "tables": [
+    {
+      "id": "geographic_currency",
+      "file": "geographic_currency.sql",
+      "evidence": [
+        "c06:s01"
+      ]
+    },
+    {
+      "id": "consolidated_currency_bridge",
+      "file": "consolidated_currency_bridge.sql",
+      "evidence": [
+        "c06:s01"
+      ]
+    },
+    {
+      "id": "revenue_growth_components",
+      "file": "revenue_growth_components.sql",
+      "evidence": [
+        "c06:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": [
+        "c06:s01"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "c06:s02"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "contradicted",
+      "evidence": [
+        "c06:s02"
+      ]
+    }
+  ]
+}

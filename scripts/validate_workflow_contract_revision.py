@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT))
 from workpaperbench.catalog import load
 from validate_workflow_quality import CONTAINER, VERIFIER_BUILD
 
-DATASET = 'workflow-v10'
+DATASET = 'workflow-v11'
 CASES = {
     'c01': ('equivalent_arithmetic', 'unicode_comment', 'maximum_escaped_comment',
             'outside_numeric_tolerance', 'oversized_sql'),

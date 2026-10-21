@@ -1,0 +1,54 @@
+{
+  "task_id": "workflow-v11-b01",
+  "tables": [
+    {
+      "id": "reserve_coverage",
+      "file": "reserve_coverage.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s04"
+      ]
+    },
+    {
+      "id": "signature_lag",
+      "file": "signature_lag.sql",
+      "evidence": [
+        "b01:s03",
+        "b01:s06"
+      ]
+    },
+    {
+      "id": "reserve_bridge",
+      "file": "reserve_bridge.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s04"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "unresolved",
+      "evidence": [
+        "b01:s04"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "b01:s03",
+        "b01:s06"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "contradicted",
+      "evidence": [
+        "b01:s01",
+        "b01:s04"
+      ]
+    }
+  ]
+}

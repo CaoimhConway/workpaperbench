@@ -16,8 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from workpaperbench.catalog import load
 
-REPO = 'CaoimhConway/workpaperbench@v0.6.2-rc.1'
-TASKS = 'datasets/workflow-v10/tasks'
+REPO = 'CaoimhConway/workpaperbench@v0.6.3-rc.1'
+TASKS = 'datasets/workflow-v11/tasks'
 MODEL = 'workpaperbench-direct-fixture'
 KEY = 'fixture-only-no-provider-credential'
 MARKER = 'WPB_DIRECT_AGENT_OK'
@@ -197,7 +197,7 @@ def validate(binary, output, checkout=False, comparison_recipe=False):
     if subprocess.check_output([binary, '--version'], text=True, timeout=30,
                                env=child_environment()).strip() != '0.23.0':
         raise ValueError('unexpected_harbor_version')
-    manifest, spec, task = load(ROOT, 'workflow-v10', 'c01')
+    manifest, spec, task = load(ROOT, 'workflow-v11', 'c01')
     recipe = None
     if comparison_recipe:
         recipe = json.loads((ROOT / 'config/construction-comparison.json').read_text())
@@ -254,7 +254,7 @@ def validate(binary, output, checkout=False, comparison_recipe=False):
             **result, 'native_job_result_sha256': job_sha256, 'requests': requests,
             'candidate_received_test_key': True, 'candidate_external_tls_probe_blocked': True,
             'candidate_reference_paths_absent': True})
-    current, current_spec, _ = load(ROOT, 'workflow-v10', 'c01')
+    current, current_spec, _ = load(ROOT, 'workflow-v11', 'c01')
     if current['manifest_id'] != manifest['manifest_id'] or current_spec['task_sha256'] != spec['task_sha256']:
         raise ValueError('fixture_inputs_changed_during_execution')
     report = {'kind': 'scripted_native_harbor_agent_fixture', 'harbor_version': '0.23.0',

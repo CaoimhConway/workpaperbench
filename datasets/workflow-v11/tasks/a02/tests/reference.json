@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v11-a02",
+  "tables": [
+    {
+      "id": "cash_model",
+      "file": "cash_model.sql",
+      "evidence": [
+        "a02:s01",
+        "a02:s03"
+      ]
+    },
+    {
+      "id": "operating_cash_bridge",
+      "file": "operating_cash_bridge.sql",
+      "evidence": [
+        "a02:s01"
+      ]
+    },
+    {
+      "id": "segment_model",
+      "file": "segment_model.sql",
+      "evidence": [
+        "a02:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "a02:s01",
+        "a02:s03"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "a02:s02"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "supported",
+      "evidence": [
+        "a02:s01",
+        "a02:s03"
+      ]
+    }
+  ]
+}

@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def demo():
-    manifest, _, task = load(ROOT, 'workflow-v10', 'c01')
+    manifest, _, task = load(ROOT, 'workflow-v11', 'c01')
     gold = json.loads((task / 'tests/gold.json').read_text())
     bridge = gold['tables']['revenue_bridge']
     row = next(row for row in bridge['rows'] if row[0] == 'bitcoin')
