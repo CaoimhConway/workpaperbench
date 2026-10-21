@@ -1,0 +1,207 @@
+{
+  "review_id": "workflow-v11-source-arithmetic-1",
+  "manifest_id": "workflow-v11-canonical-99f9af5fc8cb",
+  "scorer_version": "workflow-1.2.1",
+  "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+  "method": "Selected primary-capture text/table inspection, capture SHA256 verification against frozen evidence, and independent Python Decimal arithmetic. No independent human review. Original observations and references preserved.",
+  "human_review": "pending",
+  "new_inference": false,
+  "scope": "Four changed tasks and b02, c07, c09 reporting-basis, date and missing-evidence interpretations. Not a complete re-transcription of the 30-task catalog.",
+  "cases": [
+    {
+      "task_id": "workflow-v11-c01",
+      "task_sha256": "630ddb6bfb86517177439a571fed1bcb0c25b5ae0483df6eb89152477ee093f4",
+      "evidence_sha256": "a238a441d37a41192a3f9cd6e623b9008e4c89f0d61916b42de309c4d13bed19",
+      "source_checks": [
+        {
+          "origin": "https://www.sec.gov/Archives/edgar/data/1512673/000162828025007376/sq-20241231.htm",
+          "locator": "Item7 cost table and consolidated statements of operations, FY2024/FY2023",
+          "method": "SEC primary filing opened and inspected during this review. Subscription revenue, costs, consolidated revenue and costs agree with the frozen observations. No original capture bytes replaced."
+        }
+      ],
+      "arithmetic": [
+        {
+          "current_subscription_profit": 6027986,
+          "subscription_profit_change": 1158273,
+          "aggregate_profit_change": 1383150,
+          "revenue_change": 2205430,
+          "residuals": [
+            0,
+            0
+          ]
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "task_id": "workflow-v11-b06",
+      "task_sha256": "272948dff4806b8df3d2913cb2ddf25f4cb77ee1c933649c1083bc9f2c160a1f",
+      "evidence_sha256": "2877056d2f30b3cbd5bd2a37074fa8b0fc71542434722964c7e75623b06c137b",
+      "source_checks": [
+        {
+          "origin": "https://investor.uber.com/news-events/news/press-release-details/2026/Uber-Announces-Results-for-Fourth-Quarter-and-Full-Year-2025/default.aspx",
+          "locator": "Gross Bookings, Revenue and Segment Adjusted EBITDA, Q4 comparison tables",
+          "capture_sha256": "63739e29d92968e3eef4b83f4fa26f57b99cb9d726f45a6b8faffe0c754ad90b",
+          "capture_matches_frozen_evidence": true,
+          "reviewed_text_sha256": "bb71225134484b4b2935743a01eb2cee19fb25f28ad2b0d52cdf30588c4e98f1",
+          "method": "Selected source-table rows and definition text inspected using retained extraction, with numerical and scope checks. Full original not redistributed."
+        }
+      ],
+      "arithmetic": [
+        {
+          "original_quarterly_ratio": "18.56930693069306930693069307",
+          "changed_quarterly_ratio": "19.56930693069306930693069307",
+          "changed_monthly_ratio": "6.523102310231023102310231023",
+          "months": 3,
+          "interpretation": "Quarterly trips are flows, MAPCs are a monthly average, not quarterly unique consumers."
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "task_id": "workflow-v11-b03",
+      "task_sha256": "4d95c00b71f0ef437aabc3931dfa8df4f16b1b7f8cfb7ce909ac8adaf620b1fe",
+      "evidence_sha256": "94f8fa0a5d96d4f05f95d0cd940cc602a97cca653c3a81b2e1560096bd8d932b",
+      "source_checks": [
+        {
+          "origin": "https://s27.q4cdn.com/397450999/files/doc_financials/2025/q4/v2/Q4-25-Shareholder-Letter.pdf",
+          "locator": "PDF page 5, total revenue table, all seven period columns and custodial fee footnote",
+          "capture_sha256": "e0937495a0bf6dc6e94caa49a8819d5ea954c98578f21298570e95daa56d3685",
+          "capture_matches_frozen_evidence": true,
+          "reviewed_text_sha256": "6dbf2ad439bf5fa59aafa3c11b08e9ee7bd7aaa7fd4afe9ab23ada36e81b4d23",
+          "method": "Selected source-table rows and definition text inspected using retained extraction, with numerical and scope checks. Full original not redistributed."
+        }
+      ],
+      "arithmetic": [
+        {
+          "original_proxy_pct": "1.310535714285714285714285714",
+          "changed_proxy_pct": "1.111969696969696969696969697",
+          "interpretation": "Spot-volume proxy, not an identified commission, numerator USDmillion and denominator USDbillion."
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "task_id": "workflow-v11-c04",
+      "task_sha256": "a361f19647a019cc1b4f4a938c28fef6d4baef2410fba43514162a14830094a6",
+      "evidence_sha256": "7d1bba05352abad1fc83fc51c78f5a5fd47e1e6c7b0a1494503f1a7f4a128936",
+      "source_checks": [
+        {
+          "origin": "https://s25.q4cdn.com/479285134/files/doc_financials/2025/q4/4Q25-Mastercard-Earnings-Release.pdf",
+          "locator": "PDF pages 13 and 14, operating-performance tables, all Mastercard credit/charge/debit programs",
+          "capture_sha256": "20fbb8b32b6fadfac6cd1f00a6ba11d5d2ff4dafec8ebfe40e9240cf6cb858ad",
+          "capture_matches_frozen_evidence": true,
+          "reviewed_text_sha256": "9268bcecd8899d87741c007d69dc866c2d5a019ca9974c292736d7245f4cccae",
+          "method": "Selected source-table rows and definition text inspected using retained extraction, with numerical and scope checks. Full original not redistributed."
+        }
+      ],
+      "arithmetic": [
+        {
+          "period": "Q4FY2025",
+          "gaap_profit_change": -100,
+          "adjusted_profit_change": -100,
+          "gaap_margin_pct": "54.62184873949579831932773109",
+          "adjusted_margin_pct": "56.60913013854190324778560073",
+          "expense_residual_preserved": 1
+        },
+        {
+          "period": "FY2025",
+          "gaap_profit_change": -100,
+          "adjusted_profit_change": -100,
+          "gaap_margin_pct": "57.32365588118691104266414565",
+          "adjusted_margin_pct": "58.86371260406818944222500076",
+          "expense_residual_preserved": 1
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "task_id": "workflow-v11-b02",
+      "task_sha256": "5e9f7af73812fda2af787affb21414d9e2464772f2445947812232bfb2830d22",
+      "evidence_sha256": "e2c933252b0a41278c7281e66e52b19f4b84b9f1e492bf7f0d9144c30210f17c",
+      "source_checks": [
+        {
+          "origin": "https://framerusercontent.com/assets/4nhrwes0E2nzCc9LijHM1X3Ci74.pdf",
+          "locator": "PDF pages 4-5, 7 and 10, January 30 token total, asset composition and comparison",
+          "capture_sha256": "26ba8f439740eec3ca17c1d050dae23e8d231783671d89d8f699a2345bcce722",
+          "capture_matches_frozen_evidence": true,
+          "reviewed_text_sha256": "22baadb21095a1133d7eead07a84957c54ffeb89cc09ff4be7d37b0200993936",
+          "method": "Selected source-table rows and definition text inspected using retained extraction, with numerical and scope checks. Full original not redistributed."
+        }
+      ],
+      "arithmetic": [
+        {
+          "january30_reconstructed_assets": 3622145209,
+          "surplus_over_tokens": 13447596,
+          "january30_to_february10_reported_asset_change": 277488228,
+          "january30_to_february10_reported_treasury_change": -1933750,
+          "interpretation": "Reported stocks drive stock_bridge. Holdings reconstruction is a separate basis. Signature date is not publication date. No payment flow follows from stock changes."
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "task_id": "workflow-v11-c07",
+      "task_sha256": "ae55e93ffce7a7198f3fe6cde33d782ce8e418f35572f264b2588dfa5a2f6bdb",
+      "evidence_sha256": "7547dfb3335a6be5e037286fc8dce8b4144f94a648dbf8a20921a74291f9faea",
+      "source_checks": [
+        {
+          "origin": "https://www.cisco.com/c/dam/en_us/about/annual-report/2025-cisco-full-annual-report.pdf",
+          "locator": "Annual report pages 36, 57, 59 and 101, statements and Note 21",
+          "capture_sha256": "85571360fab2c1a9126db451530fe397f17a60b7cfb0b47538caf89190fb08eb",
+          "capture_matches_frozen_evidence": true,
+          "reviewed_text_sha256": "f13138bea1a216d40c855c9e35696de85594d9791f6ef4d44a427a3600781e52",
+          "method": "Selected source-table rows and definition text inspected using retained extraction, with numerical and scope checks. Full original not redistributed."
+        }
+      ],
+      "arithmetic": [
+        {
+          "after_tax_settlement_effect": -273,
+          "cash_reconciliation_changes": {
+            "net_income": -273,
+            "deferred_tax": -82,
+            "inventory_change": -69,
+            "other_asset_change": 424,
+            "operating_cash": 0
+          },
+          "interpretation": "Annual report supersedes release. No incremental settlement cash consideration. Acquired revenue periods prevent exact organic growth inference."
+        }
+      ],
+      "human_review": "pending"
+    },
+    {
+      "task_id": "workflow-v11-c09",
+      "task_sha256": "cd408fda7cbc8d1db727179fa26bb458977ca900c8ae123b7b9244b61e6131ee",
+      "evidence_sha256": "809355b3db329c0748785cb0e4630d58ef18895c2e03448fe0674d79279c5642",
+      "source_checks": [
+        {
+          "origin": "https://www.jpmorganchase.com/content/dam/jpmc/jpmorgan-chase-and-co/investor-relations/documents/quarterly-earnings/2025/4th-quarter/3f2030e7-c144-4ad8-92b8-57b36851ffb6.pdf",
+          "locator": "Presentation slides 2 and 3 and note 1 on slide 13, managed basis",
+          "capture_sha256": "ecd004d848b57b4650a15218336910f2385aea410ed309ddff2ed02d35e8008a",
+          "capture_matches_frozen_evidence": true,
+          "reviewed_text_sha256": "9fa38bfbfc641e8c41da908365770fdde533153653c7e550f0fa6dd08bc67035",
+          "method": "Selected source-table rows and definition text inspected using retained extraction, with numerical and scope checks. Full original not redistributed."
+        }
+      ],
+      "arithmetic": [
+        {
+          "reserve_tax_shield": 535,
+          "derived_gain_after_tax_exclusion": -446,
+          "annual_net_exclusion": 445,
+          "quarter_reported_basis_revenue_estimate": 45831,
+          "annual_reported_basis_revenue_estimate": 182500,
+          "quarter_adjusted_net_income_rounding_residual": -35,
+          "annual_adjusted_net_income_rounding_residual": -55,
+          "interpretation": "Overhead denominator remains managed revenue. Rounded observations are not exact unpublished financials. Derived after-tax gain is not printed input."
+        }
+      ],
+      "human_review": "pending"
+    }
+  ],
+  "unresolved_defects": [],
+  "limits": [
+    "No independent human financial-domain review",
+    "The historical January16 year conflict remains deliberately unresolved, no date inferred",
+    "Capture identity and selected arithmetic checks do not establish exhaustive source transcription or control coverage"
+  ]
+}

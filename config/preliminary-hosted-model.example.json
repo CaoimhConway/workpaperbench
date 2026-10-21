@@ -1,0 +1,158 @@
+{
+  "protocol_version": "preliminary-difficulty-pilot-1",
+  "status": "prepared_not_executed",
+  "results": null,
+  "task_source": {
+    "repository": "CaoimhConway/workpaperbench",
+    "release": "v0.6.3-rc.1",
+    "dataset": "workflow-v11",
+    "manifest_id": "workflow-v11-canonical-99f9af5fc8cb",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "task_path": "datasets/workflow-v11/tasks",
+    "release_status": "prepared_unpublished",
+    "execution_source": "exact_local_checkout"
+  },
+  "runtime": {
+    "harbor_version": "0.23.0",
+    "agent": "terminus-2",
+    "inference_transport": "LiteLLM Chat Completions",
+    "environment": "docker",
+    "concurrent_trials": 1,
+    "trial_retries": 0,
+    "fresh_session_per_attempt": true,
+    "fresh_candidate_environment_per_attempt": true,
+    "model_fallback": false,
+    "agent_timeout_multiplier": 6,
+    "agent_seconds": 3600,
+    "agent_kwargs": {
+      "max_turns": 24,
+      "parser_name": "json",
+      "enable_summarize": false,
+      "proactive_summarization_threshold": 0,
+      "use_responses_api": false,
+      "reasoning_effort": "high",
+      "interleaved_thinking": true,
+      "model_info": {
+        "max_input_tokens": 65536,
+        "max_output_tokens": 16384
+      },
+      "llm_call_kwargs": {
+        "max_tokens": 16384
+      }
+    },
+    "sampling": {
+      "request_parameters": {},
+      "policy": "Provider defaults, with effective settings or unavailable observations recorded before execution"
+    }
+  },
+  "model_freeze_template": {
+    "configuration_id": "<frozen-configuration-id>",
+    "configuration_sha256": null,
+    "harbor_model": "<provider/strong-hosted-model>",
+    "provider": "<provider>",
+    "requested_model_revision": "<revision-or-explicit-unversioned-alias>",
+    "returned_model_revision_policy": "Retain response model identifiers, record unavailable fields as unknown",
+    "serving_backend_and_version": "<reported-backend-version-or-unknown>",
+    "quantization": null,
+    "effective_context_limit": "<observed-or-provider-documented-limit>",
+    "effective_output_limit_including_reasoning": "<observed-or-provider-documented-limit>",
+    "effective_sampling_defaults": null,
+    "dependency_versions": null,
+    "image_digests": null,
+    "credential_delivery": "Provider-supported environment variables, never stored in this configuration",
+    "unsupported_option_policy": "Require a distinct configuration identity and disclose the different condition"
+  },
+  "stages": {
+    "smoke": {
+      "purpose": "Six development tasks for real-provider compatibility and initial usage, latency and cost observation",
+      "tasks_in_order": [
+        "c01",
+        "a01",
+        "a02",
+        "b01",
+        "b02",
+        "c02"
+      ],
+      "attempts_per_task": 1,
+      "inspect_first_task_before_continuing": true
+    },
+    "evaluation": {
+      "split": "evaluation",
+      "tasks_in_order": [
+        "a03",
+        "a04",
+        "a05",
+        "a06",
+        "a07",
+        "a08",
+        "a09",
+        "a10",
+        "b03",
+        "b04",
+        "b05",
+        "b06",
+        "b07",
+        "b08",
+        "b09",
+        "b10",
+        "c03",
+        "c04",
+        "c05",
+        "c06",
+        "c07",
+        "c08",
+        "c09",
+        "c10"
+      ],
+      "attempts_per_task": 1,
+      "attempts_per_model": 24,
+      "schedule_policy": "Freeze the exact task and attempt sequence before execution and use it for every model",
+      "tuning_on_evaluation_outputs": false,
+      "replace_failed_attempts": false
+    }
+  },
+  "required_result_fields": [
+    "frozen_configuration_and_hash",
+    "source_and_artifact_hashes",
+    "job_and_trial_ids",
+    "task_id",
+    "split",
+    "attempt_index",
+    "actual_request_settings",
+    "returned_model_identifiers",
+    "start_and_finish_times",
+    "exception",
+    "retry_counts",
+    "input_output_and_reasoning_tokens",
+    "cache_usage",
+    "costs",
+    "retained_workpaper",
+    "separate_verifier_verdict",
+    "complete_workpaper_reward",
+    "financial_answer",
+    "numerical_tables",
+    "claim_verdicts",
+    "evidence",
+    "robustness",
+    "delivery",
+    "original_input_diagnostics",
+    "changed_input_diagnostics"
+  ],
+  "reporting": {
+    "retain_failures_timeouts_and_infrastructure_errors": true,
+    "unassessed_dimensions_remain_unassessed": true,
+    "uncertainty_unit": "Task or source group, repeated attempts are not independent tasks",
+    "historical_different_configurations": "Retain their original conditions and report separately",
+    "interpretation": "Bounded comparison over this task sample, no general model-ranking claim"
+  },
+  "freeze_policy": "Resolve development configuration decisions and freeze before any evaluation. Any incompatible option requires an explicit separate configuration identity, never silent substitution.",
+  "launch_policy": {
+    "inference_commands": "prepared_but_not_executed",
+    "monetary_limit_usd": null,
+    "price_source": null,
+    "external_service_spend_usd": 0,
+    "budget_decision": "Set an explicit funded budget before launch. No new inference or spending is authorized by this preparation. The harness does not enforce a monetary cap."
+  }
+}

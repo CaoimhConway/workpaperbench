@@ -4,7 +4,7 @@ Use this recipe to evaluate models under one declared construction condition.
 The [configuration template](../config/construction-comparison.json) fixes the
 task, scorer, agent and resource settings. It contains no model results.
 
-The [scripted validation](../reports/workflow-v10/comparison-recipe-validation.json)
+The [scripted validation](../reports/workflow-v11/comparison-recipe-validation.json)
 checks native delivery and forwarding of the output budget and reasoning setting.
 It makes no model calls and does not establish provider compatibility or performance.
 
@@ -15,8 +15,8 @@ python3 scripts/validate_direct_harbor.py --checkout --comparison-recipe \
 
 ## Freeze the configuration
 
-Use Harbor 0.23.0 with the `v0.6.2-rc.1` task release, catalog
-`workflow-v10-canonical-b514bac2274f` and scorer `workflow-1.2.1`. Complete the
+Use Harbor 0.23.0 with the prepared, unpublished `v0.6.3-rc.1` local checkout, catalog
+`workflow-v11-canonical-99f9af5fc8cb` and scorer `workflow-1.2.1`. Complete the
 [environment and oracle checks](RUNNING.md#direct-harbor-execution) first.
 
 Before any model calls, save a separate configuration for each model with its
@@ -44,7 +44,8 @@ The harness does not enforce a monetary cap. Mark unobserved costs as unknown.
 
 ## Run the smoke and comparison stages
 
-The following Bash recipe uses Terminus-2 through LiteLLM Chat Completions.
+All inference commands below are prepared but not executed. The following Bash
+recipe uses Terminus-2 through LiteLLM Chat Completions.
 Replace the model placeholder after freezing its configuration. Choose a fresh
 job name and output directory for every execution.
 
@@ -52,8 +53,7 @@ job name and output directory for every execution.
 model='<provider/model>'
 jobs_dir='.local/comparison/<frozen-model-configuration-id>'
 recipe=(
-  --repo CaoimhConway/workpaperbench@v0.6.2-rc.1
-  -p datasets/workflow-v10/tasks
+  -p datasets/workflow-v11/tasks
   --agent terminus-2 --model "$model"
   --ak max_turns=24 --ak parser_name=json
   --ak enable_summarize=false --ak proactive_summarization_threshold=0
@@ -113,3 +113,9 @@ Repeated attempts on one task do not increase the number of independent tasks.
 This sample supports bounded comparisons and does not establish a general model
 ranking. Keep historical runs with different agents, quantization, reasoning,
 sampling or budgets in their original conditions.
+
+## Preliminary difficulty pilot
+
+The [pilot](PILOT.md) is a separate condition: six development compatibility checks,
+then one attempt on each of the 24 evaluation tasks per frozen configuration.
+It does not change this full comparison's three-attempt, 72-outcome recipe.

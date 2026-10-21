@@ -1,6 +1,6 @@
 # Task authoring
 
-The default suite is `workflow-v10`, the construction track with 30 tasks and
+The default suite is `workflow-v11`, the construction track with 30 tasks and
 scorer `workflow-1.2.1`. Each task requests three SQL result tables and three
 claim verdicts. Candidates receive observations and an output contract, with no
 starting SQL. The six development and 24 evaluation cases have separate source
@@ -14,8 +14,8 @@ not an interchangeable source of construction results.
 
 ## Package and output contract
 
-Use [construction task c01](../datasets/workflow-v10/tasks/c01/) and its
-[candidate request](../datasets/workflow-v10/tasks/c01/instruction.md) as a concrete
+Use [construction task c01](../datasets/workflow-v11/tasks/c01/) and its
+[candidate request](../datasets/workflow-v11/tasks/c01/instruction.md) as a concrete
 package example:
 
 | File | Responsibility |
@@ -81,11 +81,16 @@ From a checkout with the [documented installation](RUNNING.md), reconstruct the
 frozen construction catalog without changing it and check the example JSON:
 
 ```sh
-.venv/bin/python scripts/build_workflow_contract_revision.py --check
-./wpb validate examples/block-workpaper-v10/answer.json
+.venv/bin/python scripts/build_workflow_dependency_revision.py --check
+./wpb validate examples/block-workpaper-v11/answer.json
 ```
 
-The versioned builder reconstructs `workflow-v10` from `workflow-v9` in a temporary
+Run this builder on the supported Ubuntu 24.04 controller with SQLite 3.45.1
+(the system Python 3.12 binding). It rejects other SQLite writer versions because
+their database header metadata differs. Grading uses the unchanged pinned verifier
+and does not require the builder engine.
+
+The versioned builder reconstructs `workflow-v11` from `workflow-v10` in a temporary
 directory and compares the output with the frozen package. It is not a generic
 new-task generator. Do not edit published packages and regenerate them in place.
 A future catalog needs its own reviewed construction and freeze process.
@@ -94,8 +99,8 @@ On the installed Linux Docker controller, verify all four submitted files in a
 fresh separate verifier and inspect the report:
 
 ```sh
-./wpb grade --dataset workflow-v10 --task c01 \
-  --artifacts examples/block-workpaper-v10 --attempt authoring-reference-1
+./wpb grade --dataset workflow-v11 --task c01 \
+  --artifacts examples/block-workpaper-v11 --attempt authoring-reference-1
 ./wpb report --attempts authoring-reference-1 \
   --output .local/authoring-reference-report.json
 ```
@@ -111,7 +116,7 @@ on that controller without model calls:
 
 ```sh
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v10 --tasks c01 \
+  --dataset workflow-v11 --tasks c01 \
   --output .local/authoring-c01-controls.json
 ```
 

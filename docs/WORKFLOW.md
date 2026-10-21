@@ -1,14 +1,14 @@
 # Workflow methods
 
-The default catalog is `workflow-v10-canonical-b514bac2274f` (construction), using
+The default catalog is `workflow-v11-canonical-99f9af5fc8cb` (construction), using
 scorer `workflow-1.2.1`. Six development and 24 evaluation cases each request three
 SQL result tables and three claim verdicts. All 30 cases are available for external
 model execution. Deliver `answer.json` and three named `.sql` files. The
-[Block example](../examples/block-workpaper-v10) is an authored reference.
+[Block example](../examples/block-workpaper-v11) is an authored reference.
 
 ## Construction and maintenance
 
-| Condition | Construction, workflow-v10 | Maintenance, workflow-v7 |
+| Condition | Construction, workflow-v11 | Maintenance, workflow-v7 |
 | --- | --- | --- |
 | Candidate receives | Dossier, normalized observations and output contract | Same financial inputs plus three starting queries |
 | Starting SQL | None | 61/90 queries already correct across the catalog |
@@ -68,7 +68,7 @@ In maintenance, preservation means a query that was initially correct remains co
 same original inputs and controls. Repair, regression, and unrepaired outcomes
 use the other three before/after combinations.
 Different SQL is accepted when its observable results agree on original and
-control inputs. Three to five controls test specific dependencies, not all future
+control inputs. Three to six controls test specific dependencies, not all future
 inputs. Delivery requires the exact requested files, bounded sizes, unique IDs,
 and safe relative basenames. Structural rejection prevents SQL replay and leaves
 semantic aggregates unassessed, rather than recording failed calculations.
@@ -171,12 +171,12 @@ without any Mac/Lima dependency:
 ```sh
 .venv/bin/pip install -e '.[test]'
 .venv/bin/python -m pytest -q
-.venv/bin/python scripts/build_workflow_contract_revision.py --check
+.venv/bin/python scripts/build_workflow_dependency_revision.py --check
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v10 --native-prefix my-validity \
+  --dataset workflow-v11 --native-prefix my-validity \
   --output .local/my-validity-prototypes.json
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v10 --tasks all --output .local/my-validity-suite.json
+  --dataset workflow-v11 --tasks all --output .local/my-validity-suite.json
 ```
 
 The explicit `--executor local-lima` option retains the owner-specific maintenance
@@ -229,6 +229,16 @@ controls. Earlier catalogs and results keep their original identities.
 Use the [comparison recipe](COMPARISON.md) to freeze agent and execution settings
 before a model comparison. These corrections and authored checks do not establish
 model performance on the revised catalog.
+
+Version 11 adds independent subscription costs in c01, consumer activity in b06,
+consumer spot volume in b03 and operating expenses on both bases in c04.
+The [dependency audit](../reports/workflow-v11/dependency-audit.md) records the
+specific shortcuts tested and the bounded coverage. These coherent changes
+preserve revenue or other denominators as stated, including existing rounded
+reconciliation discrepancies. Original observations, original targets, reference
+SQL, splits and scorer 1.2.1 are unchanged. The
+[release record](../reports/workflow-v11/README.md) distinguishes software checks,
+authored references, pending human review and the unexecuted difficulty pilot.
 
 ## Evaluation limits
 

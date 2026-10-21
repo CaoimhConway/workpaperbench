@@ -4,7 +4,7 @@ Reproducible evaluations for financial research agents
 
 WorkpaperBench tests whether agents can reconcile financial sources, calculate metrics consistently and support their conclusions with frozen financial evidence.
 
-[Quickstart](#quickstart) · [Execution guide](docs/RUNNING.md) · [Methods](docs/WORKFLOW.md) · [Task contract](datasets/workflow-v10/tasks/c01/instruction.md) · [Research prerelease](https://github.com/CaoimhConway/workpaperbench/releases/tag/v0.6.2-rc.1)
+[Quickstart](#quickstart) · [Execution guide](docs/RUNNING.md) · [Methods](docs/WORKFLOW.md) · [Task contract](datasets/workflow-v11/tasks/c01/instruction.md) · [Prepared release](reports/workflow-v11/README.md)
 
 ## Scope
 
@@ -18,7 +18,7 @@ external teams using a compatible model.
 | Audit a metric | Choose denominators, separate stocks from flows, deduplicate exports | 2 / 8 |
 | Explain a change | Build signed bridges, reconcile totals, bound causal attribution | 2 / 8 |
 
-The default construction track (`workflow-v10`, scorer `workflow-1.2.1`)
+The default construction track (`workflow-v11`, scorer `workflow-1.2.1`)
 requires agents to write three SQL queries per task, with no starting SQL.
 The separate maintenance track (`workflow-v7`) supplies existing queries to
 check and repair while preserving correct work. The tracks have distinct
@@ -63,41 +63,44 @@ Use a Linux controller with uv, Docker Engine and Docker Compose installed:
 uv tool install --python 3.12 'harbor==0.23.0'
 ```
 
-First run each of the 30 oracle solutions five times to check your environment.
-Oracle runs use the provided reference solutions and make no model calls:
+The prepared `v0.6.3-rc.1` release is local and unpublished. From this checkout,
+run one `c01` oracle attempt. This uses the authored solution with no model calls:
 
 ```sh
-harbor run \
-  --repo CaoimhConway/workpaperbench@v0.6.2-rc.1 \
-  -p datasets/workflow-v10/tasks \
-  --agent oracle -k 5 \
-  --n-concurrent 2 --env docker
+harbor run -p datasets/workflow-v11/tasks -i c01 --agent oracle -k 1 \
+  --n-concurrent 1 --max-retries 0 --env docker \
+  --job-name quickstart-c01-v11-3 --jobs-dir .local/quickstart-v11-3
 ```
 
-Every oracle attempt should receive reward `1`. If one fails, include its task,
-Harbor version and verifier diagnostics in an [issue](https://github.com/CaoimhConway/workpaperbench/issues/new).
-
-To evaluate a model, set the credentials required by its provider and replace
-`<provider/model>` with its Harbor model name:
+Inspect the job result and its separate-verifier verdict:
 
 ```sh
-harbor run \
-  --repo CaoimhConway/workpaperbench@v0.6.2-rc.1 \
-  -p datasets/workflow-v10/tasks \
-  --agent terminus-2 --model '<provider/model>' \
-  --ak max_turns=24 \
-  --n-concurrent 2 --env docker
+cat .local/quickstart-v11-3/quickstart-c01-v11-3/result.json
+cat .local/quickstart-v11-3/quickstart-c01-v11-3/*/verifier/verdict.json
 ```
 
-This runs all 30 tasks. Use `-i c01` for one development task and adjust concurrency
-to your resources. Read the rewards and exceptions in the job result, plus each
-trial's `verifier/verdict.json` for financial diagnostics.
+Reward should be `1`, `complete` should be `true`, every check should pass and the
+job should have no exception. A process exit alone is not a passing financial result.
 
-The [execution guide](docs/RUNNING.md) covers split filters, custom endpoints,
-agent-specific setup and credential boundaries. It also describes the Harbor/Hermes
-`wpb` commands for detailed reports and replay without model calls.
-The [validation record](reports/workflow-v10/direct-harbor-validation.json) covers
-the oracle runs and scripted agent checks. These checks do not measure model performance.
+The following real candidate attempt **requires inference**. It is prepared
+but was not executed. Set the provider's credential environment variables and
+replace the model placeholder before running:
+
+```sh
+harbor run -p datasets/workflow-v11/tasks -i c01 \
+  --agent terminus-2 --model '<provider/model>' --ak max_turns=24 \
+  --n-concurrent 1 --max-retries 0 --env docker \
+  --job-name candidate-c01-v11-1 --jobs-dir .local/candidate-v11-1
+```
+
+This is a first-use example, not the frozen comparison condition. Continue with
+[full oracle qualification](docs/RUNNING.md#direct-harbor-execution),
+[evaluate your own agent](docs/RUNNING.md#evaluate-your-own-agent), and the
+[comparison protocol](docs/COMPARISON.md). The separate
+[preliminary difficulty pilot](docs/PILOT.md) prepares six development checks
+and one attempt per evaluation task. The
+[validation record](reports/workflow-v11/README.md) describes inference-free
+software checks and pending human review. These are not model-performance results.
 
 ## Contributing
 

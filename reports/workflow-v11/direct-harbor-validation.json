@@ -1,0 +1,3079 @@
+{
+  "validation_id": "workflow-v11-direct-harbor-1",
+  "status": "passed",
+  "inference": false,
+  "model_performance_evaluation": false,
+  "external_service_spend_usd": 0,
+  "harbor_version": "0.23.0",
+  "scope": "Native authored oracle and scripted delivery qualification, no provider compatibility or model performance",
+  "source": {
+    "kind": "checkout",
+    "manifest_id": "workflow-v11-canonical-99f9af5fc8cb",
+    "manifest_sha256": "3ca634ed0cab6104be2a232ca9c0bf11fb0ca7e198fbf0eeac3c2ec5ec1132d1",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  },
+  "oracles": {
+    "tasks": 30,
+    "attempts_per_task": 5,
+    "total_attempts": 150,
+    "n_concurrent": 2,
+    "native_job_result_sha256": "c1c0e8b74cfc04d1a17ad3e1d2af31507538a21056175a31658679d5537d4fb8",
+    "cases": {
+      "a01": {
+        "task_id": "workflow-v11-a01",
+        "task_sha256": "19bc700bd98d97cfa4a879a8f1a79a4d45018621c3c728393e2e7b37dec64f0d",
+        "split": "development",
+        "attempts": [
+          {
+            "task": "workflow-v11-a01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "6a3cf53b8e2ad3759c0c9f97fa4950682b27fbcc2a58b8b0713aadb93466a553",
+            "verdict_sha256": "0ef1577fa6f4199c11206c9fde43a94726b6b027301798fcdd98d34e10d1ee06",
+            "retained_answer_sha256": "1341a7f4d2ed6903530968b0f6c51bbe1e7f6c10704bde47e688615fea81a050",
+            "retained_sql_sha256": {
+              "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6",
+              "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+              "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199"
+            }
+          },
+          {
+            "task": "workflow-v11-a01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "bc10ea52f54bedba9ff6f392d5d3bcd7912a95bbe2325a5c72bf0ed6fe87b11f",
+            "verdict_sha256": "0ef1577fa6f4199c11206c9fde43a94726b6b027301798fcdd98d34e10d1ee06",
+            "retained_answer_sha256": "1341a7f4d2ed6903530968b0f6c51bbe1e7f6c10704bde47e688615fea81a050",
+            "retained_sql_sha256": {
+              "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6",
+              "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+              "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199"
+            }
+          },
+          {
+            "task": "workflow-v11-a01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "37f93c177be29f45b3b36016caab3b5132a43abc1140769d1a40b63219595731",
+            "verdict_sha256": "0ef1577fa6f4199c11206c9fde43a94726b6b027301798fcdd98d34e10d1ee06",
+            "retained_answer_sha256": "1341a7f4d2ed6903530968b0f6c51bbe1e7f6c10704bde47e688615fea81a050",
+            "retained_sql_sha256": {
+              "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6",
+              "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+              "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199"
+            }
+          },
+          {
+            "task": "workflow-v11-a01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "9a6ada7a76b78f7d33c13b4fc6788be98d0a3e2cc695bd122d5a9de0fb7fd6ee",
+            "verdict_sha256": "0ef1577fa6f4199c11206c9fde43a94726b6b027301798fcdd98d34e10d1ee06",
+            "retained_answer_sha256": "1341a7f4d2ed6903530968b0f6c51bbe1e7f6c10704bde47e688615fea81a050",
+            "retained_sql_sha256": {
+              "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6",
+              "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+              "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199"
+            }
+          },
+          {
+            "task": "workflow-v11-a01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "72a33e035173ad0687262bc0268f946352568efbe60a9b897c45cd1f50a7b4d5",
+            "verdict_sha256": "0ef1577fa6f4199c11206c9fde43a94726b6b027301798fcdd98d34e10d1ee06",
+            "retained_answer_sha256": "1341a7f4d2ed6903530968b0f6c51bbe1e7f6c10704bde47e688615fea81a050",
+            "retained_sql_sha256": {
+              "quarter_reconciliation.sql": "d00e0ebc695dbace96230f0f935cbe8b0c94824935ff5175f709ef8935c90ad6",
+              "quarter_model.sql": "77fa7f04ca34a45601689a2f12333b1b7250845319e2eeb127f258df76e9b593",
+              "guidance_bridge.sql": "cd729a069e29e54b8e4de92c08ac8cc444dc62cda8192fc13546166cdd665199"
+            }
+          }
+        ]
+      },
+      "b01": {
+        "task_id": "workflow-v11-b01",
+        "task_sha256": "44c645c7ba00e1b75cc454115df4bfd0e0ac12af588419a783992f4dc51ca68c",
+        "split": "development",
+        "attempts": [
+          {
+            "task": "workflow-v11-b01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "ae8c4489e5f2535d77fdc7d6240bc3cf90380d9851cbd9dbc490efac8968c1b2",
+            "verdict_sha256": "fdd27a14bba9c5727724474f93573fea7c91e4c6ba7f537086f38183942f8eb8",
+            "retained_answer_sha256": "0303cdef0fc34cc126807d53af71547a29278d568bb6072a6fce64a88dc2f8ac",
+            "retained_sql_sha256": {
+              "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+              "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc",
+              "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429"
+            }
+          },
+          {
+            "task": "workflow-v11-b01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "5686e13185ab0233994b0ed9f118f7aa30561b25ad593cce28e6adcc11723ba8",
+            "verdict_sha256": "fdd27a14bba9c5727724474f93573fea7c91e4c6ba7f537086f38183942f8eb8",
+            "retained_answer_sha256": "0303cdef0fc34cc126807d53af71547a29278d568bb6072a6fce64a88dc2f8ac",
+            "retained_sql_sha256": {
+              "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+              "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc",
+              "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429"
+            }
+          },
+          {
+            "task": "workflow-v11-b01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "ea0b01648dfb2b60d1034e9ee727dff9d2942bfe55c58b7648cad467b56be38d",
+            "verdict_sha256": "fdd27a14bba9c5727724474f93573fea7c91e4c6ba7f537086f38183942f8eb8",
+            "retained_answer_sha256": "0303cdef0fc34cc126807d53af71547a29278d568bb6072a6fce64a88dc2f8ac",
+            "retained_sql_sha256": {
+              "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+              "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc",
+              "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429"
+            }
+          },
+          {
+            "task": "workflow-v11-b01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "e5dbd7b1865cc7ee6fd67513ad5a2f235818c190651f0fcc45072c508cd2d17c",
+            "verdict_sha256": "fdd27a14bba9c5727724474f93573fea7c91e4c6ba7f537086f38183942f8eb8",
+            "retained_answer_sha256": "0303cdef0fc34cc126807d53af71547a29278d568bb6072a6fce64a88dc2f8ac",
+            "retained_sql_sha256": {
+              "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+              "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc",
+              "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429"
+            }
+          },
+          {
+            "task": "workflow-v11-b01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "365fc3279c47010442137b75e493d36b37e5d9c70d48e52e6873d75b41eb66d5",
+            "verdict_sha256": "fdd27a14bba9c5727724474f93573fea7c91e4c6ba7f537086f38183942f8eb8",
+            "retained_answer_sha256": "0303cdef0fc34cc126807d53af71547a29278d568bb6072a6fce64a88dc2f8ac",
+            "retained_sql_sha256": {
+              "reserve_bridge.sql": "9da5fe0c2a7c7c4aa6a27ca67fea49e62556e0a80111dcd8396ab60458233130",
+              "signature_lag.sql": "a79b298ad46b96028d41e3a86a7e7b3146b6e82c8c8112a5002d56ea2ea764dc",
+              "reserve_coverage.sql": "8e6eb1caf65e8db95560a01437e3e3a8750c6fe7f087f02806b7fbe3d4957429"
+            }
+          }
+        ]
+      },
+      "c01": {
+        "task_id": "workflow-v11-c01",
+        "task_sha256": "630ddb6bfb86517177439a571fed1bcb0c25b5ae0483df6eb89152477ee093f4",
+        "split": "development",
+        "attempts": [
+          {
+            "task": "workflow-v11-c01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "1cf0656da7f8f64401c97be55912d5e931b3d0942c96e353d0b82956b605f7a4",
+            "verdict_sha256": "9457526d32683d824fb8badb19c5eb23092b26d5fcd4d60878afe355f01f7c57",
+            "retained_answer_sha256": "1e31045b534a57120e702faede99e470f2a0b85f6c41ef2b77482c776c05768e",
+            "retained_sql_sha256": {
+              "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+              "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+              "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3"
+            }
+          },
+          {
+            "task": "workflow-v11-c01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "66dfba4985282cee2aa09053c84efd58ee3b277cbc1ae6f3ef9c1f9d2e54a2de",
+            "verdict_sha256": "9457526d32683d824fb8badb19c5eb23092b26d5fcd4d60878afe355f01f7c57",
+            "retained_answer_sha256": "1e31045b534a57120e702faede99e470f2a0b85f6c41ef2b77482c776c05768e",
+            "retained_sql_sha256": {
+              "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+              "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+              "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3"
+            }
+          },
+          {
+            "task": "workflow-v11-c01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "d879c97477406edf696ec3fdd9a23fa73c3aa96345b86bbc777ac99ab33af62d",
+            "verdict_sha256": "9457526d32683d824fb8badb19c5eb23092b26d5fcd4d60878afe355f01f7c57",
+            "retained_answer_sha256": "1e31045b534a57120e702faede99e470f2a0b85f6c41ef2b77482c776c05768e",
+            "retained_sql_sha256": {
+              "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+              "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+              "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3"
+            }
+          },
+          {
+            "task": "workflow-v11-c01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "b00f05bd239dde4ba622be80f73ff91e93a9fa19fda96205ddb980269cbfd607",
+            "verdict_sha256": "9457526d32683d824fb8badb19c5eb23092b26d5fcd4d60878afe355f01f7c57",
+            "retained_answer_sha256": "1e31045b534a57120e702faede99e470f2a0b85f6c41ef2b77482c776c05768e",
+            "retained_sql_sha256": {
+              "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+              "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+              "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3"
+            }
+          },
+          {
+            "task": "workflow-v11-c01",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "53508e9474d82ec0e914114f364a7e0a51200c1ecad4129537201305324f24fa",
+            "verdict_sha256": "9457526d32683d824fb8badb19c5eb23092b26d5fcd4d60878afe355f01f7c57",
+            "retained_answer_sha256": "1e31045b534a57120e702faede99e470f2a0b85f6c41ef2b77482c776c05768e",
+            "retained_sql_sha256": {
+              "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+              "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+              "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3"
+            }
+          }
+        ]
+      },
+      "a02": {
+        "task_id": "workflow-v11-a02",
+        "task_sha256": "fc77da51bb0ab10d353df339061a293d9d6fe1204ba7a52ad805b93cd23a8966",
+        "split": "development",
+        "attempts": [
+          {
+            "task": "workflow-v11-a02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "2ffccc4834647490f884f2f8b0c75c030879fed625c0ab2a11cdfc1f84b31b09",
+            "verdict_sha256": "df26ddbcaf6aecb3533079b19e56ac77fa3806f0dd7d67711f54b1f0ca9f97f6",
+            "retained_answer_sha256": "f470abde33430c518e2f26a0be4c1365f5ae50a8c638cfec5b160702a396a8e0",
+            "retained_sql_sha256": {
+              "segment_model.sql": "cca511c5066a2347e390cb0c702611a2416641033cf74474f77b85981fd85fa3",
+              "cash_model.sql": "3a00e064b27902b151d944617fbe8e3c2d65bcf146f7f0ba168d2c7e19c90e1c",
+              "operating_cash_bridge.sql": "f31dc620e1cccb2c8c078f380dda76013135a1160b2185ec865b1cf33945e9d1"
+            }
+          },
+          {
+            "task": "workflow-v11-a02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "8fd88641f5ff99f69afc480405c912a9931a53e5185c99b2c1ad3eba0d0d92d0",
+            "verdict_sha256": "df26ddbcaf6aecb3533079b19e56ac77fa3806f0dd7d67711f54b1f0ca9f97f6",
+            "retained_answer_sha256": "f470abde33430c518e2f26a0be4c1365f5ae50a8c638cfec5b160702a396a8e0",
+            "retained_sql_sha256": {
+              "segment_model.sql": "cca511c5066a2347e390cb0c702611a2416641033cf74474f77b85981fd85fa3",
+              "cash_model.sql": "3a00e064b27902b151d944617fbe8e3c2d65bcf146f7f0ba168d2c7e19c90e1c",
+              "operating_cash_bridge.sql": "f31dc620e1cccb2c8c078f380dda76013135a1160b2185ec865b1cf33945e9d1"
+            }
+          },
+          {
+            "task": "workflow-v11-a02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "dd08603adb5725193a3bae645dcc6ead201ecf300ae92ceac434415adb29d217",
+            "verdict_sha256": "df26ddbcaf6aecb3533079b19e56ac77fa3806f0dd7d67711f54b1f0ca9f97f6",
+            "retained_answer_sha256": "f470abde33430c518e2f26a0be4c1365f5ae50a8c638cfec5b160702a396a8e0",
+            "retained_sql_sha256": {
+              "segment_model.sql": "cca511c5066a2347e390cb0c702611a2416641033cf74474f77b85981fd85fa3",
+              "cash_model.sql": "3a00e064b27902b151d944617fbe8e3c2d65bcf146f7f0ba168d2c7e19c90e1c",
+              "operating_cash_bridge.sql": "f31dc620e1cccb2c8c078f380dda76013135a1160b2185ec865b1cf33945e9d1"
+            }
+          },
+          {
+            "task": "workflow-v11-a02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "94f0c732c20883e810d2d63b6de4fd15e20283999aed458dc65719f277eaffce",
+            "verdict_sha256": "df26ddbcaf6aecb3533079b19e56ac77fa3806f0dd7d67711f54b1f0ca9f97f6",
+            "retained_answer_sha256": "f470abde33430c518e2f26a0be4c1365f5ae50a8c638cfec5b160702a396a8e0",
+            "retained_sql_sha256": {
+              "segment_model.sql": "cca511c5066a2347e390cb0c702611a2416641033cf74474f77b85981fd85fa3",
+              "cash_model.sql": "3a00e064b27902b151d944617fbe8e3c2d65bcf146f7f0ba168d2c7e19c90e1c",
+              "operating_cash_bridge.sql": "f31dc620e1cccb2c8c078f380dda76013135a1160b2185ec865b1cf33945e9d1"
+            }
+          },
+          {
+            "task": "workflow-v11-a02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "04fd7830a6f8e634fff6a8a040222ebaa37f22291b3d52ce0ec34fe71904c261",
+            "verdict_sha256": "df26ddbcaf6aecb3533079b19e56ac77fa3806f0dd7d67711f54b1f0ca9f97f6",
+            "retained_answer_sha256": "f470abde33430c518e2f26a0be4c1365f5ae50a8c638cfec5b160702a396a8e0",
+            "retained_sql_sha256": {
+              "segment_model.sql": "cca511c5066a2347e390cb0c702611a2416641033cf74474f77b85981fd85fa3",
+              "cash_model.sql": "3a00e064b27902b151d944617fbe8e3c2d65bcf146f7f0ba168d2c7e19c90e1c",
+              "operating_cash_bridge.sql": "f31dc620e1cccb2c8c078f380dda76013135a1160b2185ec865b1cf33945e9d1"
+            }
+          }
+        ]
+      },
+      "b02": {
+        "task_id": "workflow-v11-b02",
+        "task_sha256": "5e9f7af73812fda2af787affb21414d9e2464772f2445947812232bfb2830d22",
+        "split": "development",
+        "attempts": [
+          {
+            "task": "workflow-v11-b02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "1b208ddf1adae930018496596f41a07b7db0564ee1d47eec1b042b5bcf67b247",
+            "verdict_sha256": "a8133664bd30fd4bd57f45e6b3948672f1c00c003b1c5efd113482ba03db7aef",
+            "retained_answer_sha256": "77161415c902ba1048a2b3696a05f0fa8bf882bbfa9abf3dca56c1aca3e2f7ab",
+            "retained_sql_sha256": {
+              "qualified_coverage.sql": "9bc0574b6f9740125fb7749861d12fd60b4d47e526a5533fdcbed65a32ce9137",
+              "treasury_valuation.sql": "b2d86238f079ef59328cb4c4b2218e2b078527fa9e4d7de38c4e29e997af70c3",
+              "stock_bridge.sql": "f18aee6f76edaefb6e0caae73bac785153f21d266cbd3446946b0baf42eb9328"
+            }
+          },
+          {
+            "task": "workflow-v11-b02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "1f42dbf5d5f52161f0fb6706b9f939aca0645d3fdeb723ba62a5e04e2c872ff3",
+            "verdict_sha256": "a8133664bd30fd4bd57f45e6b3948672f1c00c003b1c5efd113482ba03db7aef",
+            "retained_answer_sha256": "77161415c902ba1048a2b3696a05f0fa8bf882bbfa9abf3dca56c1aca3e2f7ab",
+            "retained_sql_sha256": {
+              "qualified_coverage.sql": "9bc0574b6f9740125fb7749861d12fd60b4d47e526a5533fdcbed65a32ce9137",
+              "treasury_valuation.sql": "b2d86238f079ef59328cb4c4b2218e2b078527fa9e4d7de38c4e29e997af70c3",
+              "stock_bridge.sql": "f18aee6f76edaefb6e0caae73bac785153f21d266cbd3446946b0baf42eb9328"
+            }
+          },
+          {
+            "task": "workflow-v11-b02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "d203edeb132d19b90f883a9a346caf99aa997f00b5e13659cdd837d4c9631fff",
+            "verdict_sha256": "a8133664bd30fd4bd57f45e6b3948672f1c00c003b1c5efd113482ba03db7aef",
+            "retained_answer_sha256": "77161415c902ba1048a2b3696a05f0fa8bf882bbfa9abf3dca56c1aca3e2f7ab",
+            "retained_sql_sha256": {
+              "qualified_coverage.sql": "9bc0574b6f9740125fb7749861d12fd60b4d47e526a5533fdcbed65a32ce9137",
+              "treasury_valuation.sql": "b2d86238f079ef59328cb4c4b2218e2b078527fa9e4d7de38c4e29e997af70c3",
+              "stock_bridge.sql": "f18aee6f76edaefb6e0caae73bac785153f21d266cbd3446946b0baf42eb9328"
+            }
+          },
+          {
+            "task": "workflow-v11-b02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "3fb38db7c044d9763f64f908d08f187eb85f87424d96f91d1e3a73f61b3f7676",
+            "verdict_sha256": "a8133664bd30fd4bd57f45e6b3948672f1c00c003b1c5efd113482ba03db7aef",
+            "retained_answer_sha256": "77161415c902ba1048a2b3696a05f0fa8bf882bbfa9abf3dca56c1aca3e2f7ab",
+            "retained_sql_sha256": {
+              "qualified_coverage.sql": "9bc0574b6f9740125fb7749861d12fd60b4d47e526a5533fdcbed65a32ce9137",
+              "treasury_valuation.sql": "b2d86238f079ef59328cb4c4b2218e2b078527fa9e4d7de38c4e29e997af70c3",
+              "stock_bridge.sql": "f18aee6f76edaefb6e0caae73bac785153f21d266cbd3446946b0baf42eb9328"
+            }
+          },
+          {
+            "task": "workflow-v11-b02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "7b3fece1395d6048c9c6471682ee8a10f02410ba4b79542629036e3580cb394e",
+            "verdict_sha256": "a8133664bd30fd4bd57f45e6b3948672f1c00c003b1c5efd113482ba03db7aef",
+            "retained_answer_sha256": "77161415c902ba1048a2b3696a05f0fa8bf882bbfa9abf3dca56c1aca3e2f7ab",
+            "retained_sql_sha256": {
+              "qualified_coverage.sql": "9bc0574b6f9740125fb7749861d12fd60b4d47e526a5533fdcbed65a32ce9137",
+              "treasury_valuation.sql": "b2d86238f079ef59328cb4c4b2218e2b078527fa9e4d7de38c4e29e997af70c3",
+              "stock_bridge.sql": "f18aee6f76edaefb6e0caae73bac785153f21d266cbd3446946b0baf42eb9328"
+            }
+          }
+        ]
+      },
+      "c02": {
+        "task_id": "workflow-v11-c02",
+        "task_sha256": "2cda1903a581401047a7902105bae41895e1fdd54a9e0538c49b00994f9af626",
+        "split": "development",
+        "attempts": [
+          {
+            "task": "workflow-v11-c02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "76a168c1cf7dc0eb4bacc729124929dfa9f0a7276b3d4de3cada1e50d1b25cb6",
+            "verdict_sha256": "fb2b72b99a22eb34fc002e30033da961e46ba4bcf737243d8d430e96fa1339ad",
+            "retained_answer_sha256": "6a633bfeca0374654416b350ba27c22ec24b61e86a9922027210f7e03549bce5",
+            "retained_sql_sha256": {
+              "operating_reconciliation.sql": "20aec68b50c907967652a91824271658971be059cd280d26e2c83fca5fad79f5",
+              "adjustment_attribution.sql": "3d5c5911096643f5dbe4b2dc6c01c8b44f54498030c2dec251f08cadebbc56a8",
+              "arr_guidance_bridge.sql": "bbd43630df6c191d4ad35a34b71074309038c165d5f852849711e85c16ba30b8"
+            }
+          },
+          {
+            "task": "workflow-v11-c02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "f4c40e0bd45a0a69becf0767cc799bdfb71e263418943289ae22df064b62392e",
+            "verdict_sha256": "fb2b72b99a22eb34fc002e30033da961e46ba4bcf737243d8d430e96fa1339ad",
+            "retained_answer_sha256": "6a633bfeca0374654416b350ba27c22ec24b61e86a9922027210f7e03549bce5",
+            "retained_sql_sha256": {
+              "operating_reconciliation.sql": "20aec68b50c907967652a91824271658971be059cd280d26e2c83fca5fad79f5",
+              "adjustment_attribution.sql": "3d5c5911096643f5dbe4b2dc6c01c8b44f54498030c2dec251f08cadebbc56a8",
+              "arr_guidance_bridge.sql": "bbd43630df6c191d4ad35a34b71074309038c165d5f852849711e85c16ba30b8"
+            }
+          },
+          {
+            "task": "workflow-v11-c02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "c0632de0e5810432b1b72c138e67f4476fa526541db1e141e405dc676b3896d2",
+            "verdict_sha256": "fb2b72b99a22eb34fc002e30033da961e46ba4bcf737243d8d430e96fa1339ad",
+            "retained_answer_sha256": "6a633bfeca0374654416b350ba27c22ec24b61e86a9922027210f7e03549bce5",
+            "retained_sql_sha256": {
+              "operating_reconciliation.sql": "20aec68b50c907967652a91824271658971be059cd280d26e2c83fca5fad79f5",
+              "adjustment_attribution.sql": "3d5c5911096643f5dbe4b2dc6c01c8b44f54498030c2dec251f08cadebbc56a8",
+              "arr_guidance_bridge.sql": "bbd43630df6c191d4ad35a34b71074309038c165d5f852849711e85c16ba30b8"
+            }
+          },
+          {
+            "task": "workflow-v11-c02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "c89e93b909f49fd4476cfbd2a305c131db7c94fa38f416a55edcf48193375ff7",
+            "verdict_sha256": "fb2b72b99a22eb34fc002e30033da961e46ba4bcf737243d8d430e96fa1339ad",
+            "retained_answer_sha256": "6a633bfeca0374654416b350ba27c22ec24b61e86a9922027210f7e03549bce5",
+            "retained_sql_sha256": {
+              "operating_reconciliation.sql": "20aec68b50c907967652a91824271658971be059cd280d26e2c83fca5fad79f5",
+              "adjustment_attribution.sql": "3d5c5911096643f5dbe4b2dc6c01c8b44f54498030c2dec251f08cadebbc56a8",
+              "arr_guidance_bridge.sql": "bbd43630df6c191d4ad35a34b71074309038c165d5f852849711e85c16ba30b8"
+            }
+          },
+          {
+            "task": "workflow-v11-c02",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "095ad6ba9a93cd93d05d6446856141c93091d688f2196964e1611c0e1374071b",
+            "verdict_sha256": "fb2b72b99a22eb34fc002e30033da961e46ba4bcf737243d8d430e96fa1339ad",
+            "retained_answer_sha256": "6a633bfeca0374654416b350ba27c22ec24b61e86a9922027210f7e03549bce5",
+            "retained_sql_sha256": {
+              "operating_reconciliation.sql": "20aec68b50c907967652a91824271658971be059cd280d26e2c83fca5fad79f5",
+              "adjustment_attribution.sql": "3d5c5911096643f5dbe4b2dc6c01c8b44f54498030c2dec251f08cadebbc56a8",
+              "arr_guidance_bridge.sql": "bbd43630df6c191d4ad35a34b71074309038c165d5f852849711e85c16ba30b8"
+            }
+          }
+        ]
+      },
+      "a03": {
+        "task_id": "workflow-v11-a03",
+        "task_sha256": "0659e4d1a0a5c8d314a128c59f31f8274e5f81b89331d585d3875d1d9668a880",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-a03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "b774509a68095533f348bf521b979ee08a51a4e238bb77dba9de439853b585db",
+            "verdict_sha256": "226bfa17ee2aed81a6351ccead61db97d6e5a33ee9047dc4f576e7ba902cdb89",
+            "retained_answer_sha256": "8107b0f04b73e1c8dafa0815e6b6153c82abb5864b0dcbfc66f18d89ea3fe343",
+            "retained_sql_sha256": {
+              "expense_model.sql": "fc2d839e90775e03e494ca40f00e5edacc204a80169a53f61eeb1f7e7bf7da96",
+              "operating_margins.sql": "5b03d1df8df19ec2ecfe44ffead8c5792b44b5672e13d98ec2971a7bf04c0edb",
+              "definition_attribution.sql": "188ee2c377ff369af809ace8a72ab9e31f8f619a025403a6bdc0bd85e058d01a"
+            }
+          },
+          {
+            "task": "workflow-v11-a03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "3e624decb0511ab7e0567ae8f49c0def082151e1b420fafba341376c96bc6bbb",
+            "verdict_sha256": "226bfa17ee2aed81a6351ccead61db97d6e5a33ee9047dc4f576e7ba902cdb89",
+            "retained_answer_sha256": "8107b0f04b73e1c8dafa0815e6b6153c82abb5864b0dcbfc66f18d89ea3fe343",
+            "retained_sql_sha256": {
+              "expense_model.sql": "fc2d839e90775e03e494ca40f00e5edacc204a80169a53f61eeb1f7e7bf7da96",
+              "operating_margins.sql": "5b03d1df8df19ec2ecfe44ffead8c5792b44b5672e13d98ec2971a7bf04c0edb",
+              "definition_attribution.sql": "188ee2c377ff369af809ace8a72ab9e31f8f619a025403a6bdc0bd85e058d01a"
+            }
+          },
+          {
+            "task": "workflow-v11-a03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "d48364adf0d2c54dbe11d89629c8f093c048c6b091c5d1efec46d718a270c9bb",
+            "verdict_sha256": "226bfa17ee2aed81a6351ccead61db97d6e5a33ee9047dc4f576e7ba902cdb89",
+            "retained_answer_sha256": "8107b0f04b73e1c8dafa0815e6b6153c82abb5864b0dcbfc66f18d89ea3fe343",
+            "retained_sql_sha256": {
+              "expense_model.sql": "fc2d839e90775e03e494ca40f00e5edacc204a80169a53f61eeb1f7e7bf7da96",
+              "operating_margins.sql": "5b03d1df8df19ec2ecfe44ffead8c5792b44b5672e13d98ec2971a7bf04c0edb",
+              "definition_attribution.sql": "188ee2c377ff369af809ace8a72ab9e31f8f619a025403a6bdc0bd85e058d01a"
+            }
+          },
+          {
+            "task": "workflow-v11-a03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "7cc51b5f5920f54feb988cb58964f44740a6a98c2d48d455588edc1a7f291529",
+            "verdict_sha256": "226bfa17ee2aed81a6351ccead61db97d6e5a33ee9047dc4f576e7ba902cdb89",
+            "retained_answer_sha256": "8107b0f04b73e1c8dafa0815e6b6153c82abb5864b0dcbfc66f18d89ea3fe343",
+            "retained_sql_sha256": {
+              "expense_model.sql": "fc2d839e90775e03e494ca40f00e5edacc204a80169a53f61eeb1f7e7bf7da96",
+              "operating_margins.sql": "5b03d1df8df19ec2ecfe44ffead8c5792b44b5672e13d98ec2971a7bf04c0edb",
+              "definition_attribution.sql": "188ee2c377ff369af809ace8a72ab9e31f8f619a025403a6bdc0bd85e058d01a"
+            }
+          },
+          {
+            "task": "workflow-v11-a03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "80f86f19eae07d56ec4664a632d68cd52552627d431466eea041e4ab8ec9feb8",
+            "verdict_sha256": "226bfa17ee2aed81a6351ccead61db97d6e5a33ee9047dc4f576e7ba902cdb89",
+            "retained_answer_sha256": "8107b0f04b73e1c8dafa0815e6b6153c82abb5864b0dcbfc66f18d89ea3fe343",
+            "retained_sql_sha256": {
+              "expense_model.sql": "fc2d839e90775e03e494ca40f00e5edacc204a80169a53f61eeb1f7e7bf7da96",
+              "operating_margins.sql": "5b03d1df8df19ec2ecfe44ffead8c5792b44b5672e13d98ec2971a7bf04c0edb",
+              "definition_attribution.sql": "188ee2c377ff369af809ace8a72ab9e31f8f619a025403a6bdc0bd85e058d01a"
+            }
+          }
+        ]
+      },
+      "b03": {
+        "task_id": "workflow-v11-b03",
+        "task_sha256": "4d95c00b71f0ef437aabc3931dfa8df4f16b1b7f8cfb7ce909ac8adaf620b1fe",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-b03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "05fde878a66c17f6ad7ca146216b9da3f10b3713531aac137cd1246d6c884479",
+            "verdict_sha256": "b98c9f115b82ce3b761628c35749b1eb8c13ac4530b88ce410bfe55b5a40a770",
+            "retained_answer_sha256": "ee1935d427039f8499c45ccc4072374ac9a4e07a0614db01ecee45939e3a7ca0",
+            "retained_sql_sha256": {
+              "usdc_booked_ratio.sql": "9bb4b606517afd300944166bbd665a5bcdc771f3ff172f185004d46d67ce96bd",
+              "spot_revenue_proxy.sql": "c27cd745672fd4f610fbd36ce77b36972f07806f32a636a9a20920171ae72740",
+              "annual_revenue_bridge.sql": "e226c1fdae5f752ddeff4ca65586f521a05d6e822e86e5efcd839f863488ca04"
+            }
+          },
+          {
+            "task": "workflow-v11-b03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "e6efc73e2ecf75b5321c2d4c378212ace188519696b466b363361cf7f3fdbdac",
+            "verdict_sha256": "b98c9f115b82ce3b761628c35749b1eb8c13ac4530b88ce410bfe55b5a40a770",
+            "retained_answer_sha256": "ee1935d427039f8499c45ccc4072374ac9a4e07a0614db01ecee45939e3a7ca0",
+            "retained_sql_sha256": {
+              "usdc_booked_ratio.sql": "9bb4b606517afd300944166bbd665a5bcdc771f3ff172f185004d46d67ce96bd",
+              "spot_revenue_proxy.sql": "c27cd745672fd4f610fbd36ce77b36972f07806f32a636a9a20920171ae72740",
+              "annual_revenue_bridge.sql": "e226c1fdae5f752ddeff4ca65586f521a05d6e822e86e5efcd839f863488ca04"
+            }
+          },
+          {
+            "task": "workflow-v11-b03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "d6ad4f4c673b02d082437d80c696bcbeb67652158423276ca4ab35b5d04ef964",
+            "verdict_sha256": "b98c9f115b82ce3b761628c35749b1eb8c13ac4530b88ce410bfe55b5a40a770",
+            "retained_answer_sha256": "ee1935d427039f8499c45ccc4072374ac9a4e07a0614db01ecee45939e3a7ca0",
+            "retained_sql_sha256": {
+              "usdc_booked_ratio.sql": "9bb4b606517afd300944166bbd665a5bcdc771f3ff172f185004d46d67ce96bd",
+              "spot_revenue_proxy.sql": "c27cd745672fd4f610fbd36ce77b36972f07806f32a636a9a20920171ae72740",
+              "annual_revenue_bridge.sql": "e226c1fdae5f752ddeff4ca65586f521a05d6e822e86e5efcd839f863488ca04"
+            }
+          },
+          {
+            "task": "workflow-v11-b03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "ebe2dabb8acfaf94d9b3eb49d0d5cab5714f135f720edc5980858175d95fa145",
+            "verdict_sha256": "b98c9f115b82ce3b761628c35749b1eb8c13ac4530b88ce410bfe55b5a40a770",
+            "retained_answer_sha256": "ee1935d427039f8499c45ccc4072374ac9a4e07a0614db01ecee45939e3a7ca0",
+            "retained_sql_sha256": {
+              "usdc_booked_ratio.sql": "9bb4b606517afd300944166bbd665a5bcdc771f3ff172f185004d46d67ce96bd",
+              "spot_revenue_proxy.sql": "c27cd745672fd4f610fbd36ce77b36972f07806f32a636a9a20920171ae72740",
+              "annual_revenue_bridge.sql": "e226c1fdae5f752ddeff4ca65586f521a05d6e822e86e5efcd839f863488ca04"
+            }
+          },
+          {
+            "task": "workflow-v11-b03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "5407d3c4fc1362bf3549a6596816e0b7f51a9c383d939e832f0cef6802743fa1",
+            "verdict_sha256": "b98c9f115b82ce3b761628c35749b1eb8c13ac4530b88ce410bfe55b5a40a770",
+            "retained_answer_sha256": "ee1935d427039f8499c45ccc4072374ac9a4e07a0614db01ecee45939e3a7ca0",
+            "retained_sql_sha256": {
+              "usdc_booked_ratio.sql": "9bb4b606517afd300944166bbd665a5bcdc771f3ff172f185004d46d67ce96bd",
+              "spot_revenue_proxy.sql": "c27cd745672fd4f610fbd36ce77b36972f07806f32a636a9a20920171ae72740",
+              "annual_revenue_bridge.sql": "e226c1fdae5f752ddeff4ca65586f521a05d6e822e86e5efcd839f863488ca04"
+            }
+          }
+        ]
+      },
+      "b05": {
+        "task_id": "workflow-v11-b05",
+        "task_sha256": "14b84764dd568e7e5580113525f54550fd48792fdd9fbd389c1a5236679bd3f3",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-b05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "f044ce212777722952b3f719848d0ccd6481fe0959d6cddcfbbcac2644484cd2",
+            "verdict_sha256": "7d404196e84ab86ef47af42f145ef3f6b187528efc90fecea6f8945058b02a9d",
+            "retained_answer_sha256": "940c18d8ed32cf27fe0882af5a15291f9d732e331d1c35d1a65b2fd8a86f68be",
+            "retained_sql_sha256": {
+              "quarter_activity.sql": "2590308086afc8402db1a2b5ddb1dbc01becabfb4c64f15b10de9d5df4a0cb79",
+              "margin_reconciliation.sql": "939e823bab287a8ee006505406bd5c84990f999313b7804fe080664da44341e6",
+              "annual_activity_bridge.sql": "236b395eb83c81420997816f667c654305c20249a7bf993d7dfd2fde92558ee9"
+            }
+          },
+          {
+            "task": "workflow-v11-b05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "cb02082c3a3ce898d17916c2a5fd460153fcbb2ee676492d4d99610283ee00c5",
+            "verdict_sha256": "7d404196e84ab86ef47af42f145ef3f6b187528efc90fecea6f8945058b02a9d",
+            "retained_answer_sha256": "940c18d8ed32cf27fe0882af5a15291f9d732e331d1c35d1a65b2fd8a86f68be",
+            "retained_sql_sha256": {
+              "quarter_activity.sql": "2590308086afc8402db1a2b5ddb1dbc01becabfb4c64f15b10de9d5df4a0cb79",
+              "margin_reconciliation.sql": "939e823bab287a8ee006505406bd5c84990f999313b7804fe080664da44341e6",
+              "annual_activity_bridge.sql": "236b395eb83c81420997816f667c654305c20249a7bf993d7dfd2fde92558ee9"
+            }
+          },
+          {
+            "task": "workflow-v11-b05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "6f11bd0f003268218cc1ccd8a054e169640f4076f7afe4d2d3eedc4901fed6da",
+            "verdict_sha256": "7d404196e84ab86ef47af42f145ef3f6b187528efc90fecea6f8945058b02a9d",
+            "retained_answer_sha256": "940c18d8ed32cf27fe0882af5a15291f9d732e331d1c35d1a65b2fd8a86f68be",
+            "retained_sql_sha256": {
+              "quarter_activity.sql": "2590308086afc8402db1a2b5ddb1dbc01becabfb4c64f15b10de9d5df4a0cb79",
+              "margin_reconciliation.sql": "939e823bab287a8ee006505406bd5c84990f999313b7804fe080664da44341e6",
+              "annual_activity_bridge.sql": "236b395eb83c81420997816f667c654305c20249a7bf993d7dfd2fde92558ee9"
+            }
+          },
+          {
+            "task": "workflow-v11-b05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "a3e03c3d7b9d3cae2eeeceb260f5acfde698038b3fa6d27d65f579b4ed92c21c",
+            "verdict_sha256": "7d404196e84ab86ef47af42f145ef3f6b187528efc90fecea6f8945058b02a9d",
+            "retained_answer_sha256": "940c18d8ed32cf27fe0882af5a15291f9d732e331d1c35d1a65b2fd8a86f68be",
+            "retained_sql_sha256": {
+              "quarter_activity.sql": "2590308086afc8402db1a2b5ddb1dbc01becabfb4c64f15b10de9d5df4a0cb79",
+              "margin_reconciliation.sql": "939e823bab287a8ee006505406bd5c84990f999313b7804fe080664da44341e6",
+              "annual_activity_bridge.sql": "236b395eb83c81420997816f667c654305c20249a7bf993d7dfd2fde92558ee9"
+            }
+          },
+          {
+            "task": "workflow-v11-b05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "52a94317c569f6cb3537db1369ce508eba3529c052ef43ad5535263212da9275",
+            "verdict_sha256": "7d404196e84ab86ef47af42f145ef3f6b187528efc90fecea6f8945058b02a9d",
+            "retained_answer_sha256": "940c18d8ed32cf27fe0882af5a15291f9d732e331d1c35d1a65b2fd8a86f68be",
+            "retained_sql_sha256": {
+              "quarter_activity.sql": "2590308086afc8402db1a2b5ddb1dbc01becabfb4c64f15b10de9d5df4a0cb79",
+              "margin_reconciliation.sql": "939e823bab287a8ee006505406bd5c84990f999313b7804fe080664da44341e6",
+              "annual_activity_bridge.sql": "236b395eb83c81420997816f667c654305c20249a7bf993d7dfd2fde92558ee9"
+            }
+          }
+        ]
+      },
+      "b04": {
+        "task_id": "workflow-v11-b04",
+        "task_sha256": "b179ab87b87a388e9be540b6d9d6d6b5d897d44fe2a32c14d7134a3c1616c0f4",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-b04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "3d43dfe23f7610068107ba4e2cde1735da57991980e06526e979c1cf519033fc",
+            "verdict_sha256": "a7147270cfec8cc83220a0c5691e8f460cfac03ebb94a19562f1f74c9fa98dd8",
+            "retained_answer_sha256": "a143c0765b5d80f9a31d7409627fcd673108504e21ef52c6e0e7f6e0d92d0515",
+            "retained_sql_sha256": {
+              "expense_audit.sql": "5398a05852533c0b91bfaabbd48abba734647eaa1993ebb239c6b7d35e4c2f6f",
+              "crypto_scope.sql": "a88262605769af745b61acf149e2fb0fce402d827bd542a6ef03dfe5598f22a1",
+              "annual_revenue_bridge.sql": "e568f85490ed055a0224ef0ca84ed85633fdecca04c48e34c1288a4560a5faaa"
+            }
+          },
+          {
+            "task": "workflow-v11-b04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "6443644da9e209900a048fe86f51eec3991c5c66745b1d33c2e66f40f0c75f7b",
+            "verdict_sha256": "a7147270cfec8cc83220a0c5691e8f460cfac03ebb94a19562f1f74c9fa98dd8",
+            "retained_answer_sha256": "a143c0765b5d80f9a31d7409627fcd673108504e21ef52c6e0e7f6e0d92d0515",
+            "retained_sql_sha256": {
+              "expense_audit.sql": "5398a05852533c0b91bfaabbd48abba734647eaa1993ebb239c6b7d35e4c2f6f",
+              "crypto_scope.sql": "a88262605769af745b61acf149e2fb0fce402d827bd542a6ef03dfe5598f22a1",
+              "annual_revenue_bridge.sql": "e568f85490ed055a0224ef0ca84ed85633fdecca04c48e34c1288a4560a5faaa"
+            }
+          },
+          {
+            "task": "workflow-v11-b04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "7605404514ab6e7d4b7a70cead62d46d0ab508889c27ed355bfdd025ee5d9719",
+            "verdict_sha256": "a7147270cfec8cc83220a0c5691e8f460cfac03ebb94a19562f1f74c9fa98dd8",
+            "retained_answer_sha256": "a143c0765b5d80f9a31d7409627fcd673108504e21ef52c6e0e7f6e0d92d0515",
+            "retained_sql_sha256": {
+              "expense_audit.sql": "5398a05852533c0b91bfaabbd48abba734647eaa1993ebb239c6b7d35e4c2f6f",
+              "crypto_scope.sql": "a88262605769af745b61acf149e2fb0fce402d827bd542a6ef03dfe5598f22a1",
+              "annual_revenue_bridge.sql": "e568f85490ed055a0224ef0ca84ed85633fdecca04c48e34c1288a4560a5faaa"
+            }
+          },
+          {
+            "task": "workflow-v11-b04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "b12a26a5f9d1cbbeb17db73aa8a29aa1949170305dc649458021e85a4b04f133",
+            "verdict_sha256": "a7147270cfec8cc83220a0c5691e8f460cfac03ebb94a19562f1f74c9fa98dd8",
+            "retained_answer_sha256": "a143c0765b5d80f9a31d7409627fcd673108504e21ef52c6e0e7f6e0d92d0515",
+            "retained_sql_sha256": {
+              "expense_audit.sql": "5398a05852533c0b91bfaabbd48abba734647eaa1993ebb239c6b7d35e4c2f6f",
+              "crypto_scope.sql": "a88262605769af745b61acf149e2fb0fce402d827bd542a6ef03dfe5598f22a1",
+              "annual_revenue_bridge.sql": "e568f85490ed055a0224ef0ca84ed85633fdecca04c48e34c1288a4560a5faaa"
+            }
+          },
+          {
+            "task": "workflow-v11-b04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "fdeaeeb4501634c96ec7a7f5c29b3811bc7705d5445bc8808a24d56132d0231b",
+            "verdict_sha256": "a7147270cfec8cc83220a0c5691e8f460cfac03ebb94a19562f1f74c9fa98dd8",
+            "retained_answer_sha256": "a143c0765b5d80f9a31d7409627fcd673108504e21ef52c6e0e7f6e0d92d0515",
+            "retained_sql_sha256": {
+              "expense_audit.sql": "5398a05852533c0b91bfaabbd48abba734647eaa1993ebb239c6b7d35e4c2f6f",
+              "crypto_scope.sql": "a88262605769af745b61acf149e2fb0fce402d827bd542a6ef03dfe5598f22a1",
+              "annual_revenue_bridge.sql": "e568f85490ed055a0224ef0ca84ed85633fdecca04c48e34c1288a4560a5faaa"
+            }
+          }
+        ]
+      },
+      "c03": {
+        "task_id": "workflow-v11-c03",
+        "task_sha256": "65aab01dbd2621f1d6d2fa7a0b1abc39c5242bab2f93f721e997464ce06e15a6",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-c03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "b0e7673606de93bbc561497e353c1d047f0e8883372462059846f7c3ad368b1c",
+            "verdict_sha256": "511827065e2acec22396c98bc559e674e46530201712e526a216e178ae711331",
+            "retained_answer_sha256": "f11ec5e021bb46c79f7f7fb1e8f5a5b2bced315cbf2b5ac79471abc41d4e2bba",
+            "retained_sql_sha256": {
+              "gross_to_net.sql": "3f9f75a7fe1f545582512985c2c9c1dcd0bec600d458f4e0935d9ec7a1b20634",
+              "income_growth_bridge.sql": "7095b71d64eed9817bdb34ea96342895c64cfb19738ab20165f299388e31c63c",
+              "net_income_reconciliation.sql": "24a841d36a566a8d8245b925106eef18f0a72f62fed84637e17a15d4a90b9a98"
+            }
+          },
+          {
+            "task": "workflow-v11-c03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "9d9053ae8fdcb8cee20a7f9743522b4a2b0419e78c7c06ea059a0e6e0be39437",
+            "verdict_sha256": "511827065e2acec22396c98bc559e674e46530201712e526a216e178ae711331",
+            "retained_answer_sha256": "f11ec5e021bb46c79f7f7fb1e8f5a5b2bced315cbf2b5ac79471abc41d4e2bba",
+            "retained_sql_sha256": {
+              "gross_to_net.sql": "3f9f75a7fe1f545582512985c2c9c1dcd0bec600d458f4e0935d9ec7a1b20634",
+              "income_growth_bridge.sql": "7095b71d64eed9817bdb34ea96342895c64cfb19738ab20165f299388e31c63c",
+              "net_income_reconciliation.sql": "24a841d36a566a8d8245b925106eef18f0a72f62fed84637e17a15d4a90b9a98"
+            }
+          },
+          {
+            "task": "workflow-v11-c03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "686166b6b4072d0a191b78c09915fcf8c1c7528215551ad28793128e2a305b9f",
+            "verdict_sha256": "511827065e2acec22396c98bc559e674e46530201712e526a216e178ae711331",
+            "retained_answer_sha256": "f11ec5e021bb46c79f7f7fb1e8f5a5b2bced315cbf2b5ac79471abc41d4e2bba",
+            "retained_sql_sha256": {
+              "gross_to_net.sql": "3f9f75a7fe1f545582512985c2c9c1dcd0bec600d458f4e0935d9ec7a1b20634",
+              "income_growth_bridge.sql": "7095b71d64eed9817bdb34ea96342895c64cfb19738ab20165f299388e31c63c",
+              "net_income_reconciliation.sql": "24a841d36a566a8d8245b925106eef18f0a72f62fed84637e17a15d4a90b9a98"
+            }
+          },
+          {
+            "task": "workflow-v11-c03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "6b94f4e6ce6f26f8b74ccca5d9ff2acdff71934fdba89bb01bbf7fe9b8832069",
+            "verdict_sha256": "511827065e2acec22396c98bc559e674e46530201712e526a216e178ae711331",
+            "retained_answer_sha256": "f11ec5e021bb46c79f7f7fb1e8f5a5b2bced315cbf2b5ac79471abc41d4e2bba",
+            "retained_sql_sha256": {
+              "gross_to_net.sql": "3f9f75a7fe1f545582512985c2c9c1dcd0bec600d458f4e0935d9ec7a1b20634",
+              "income_growth_bridge.sql": "7095b71d64eed9817bdb34ea96342895c64cfb19738ab20165f299388e31c63c",
+              "net_income_reconciliation.sql": "24a841d36a566a8d8245b925106eef18f0a72f62fed84637e17a15d4a90b9a98"
+            }
+          },
+          {
+            "task": "workflow-v11-c03",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "9d3165e28962d6f32de1357ca0e68007c8bc79054b21ce830eba58441758463e",
+            "verdict_sha256": "511827065e2acec22396c98bc559e674e46530201712e526a216e178ae711331",
+            "retained_answer_sha256": "f11ec5e021bb46c79f7f7fb1e8f5a5b2bced315cbf2b5ac79471abc41d4e2bba",
+            "retained_sql_sha256": {
+              "gross_to_net.sql": "3f9f75a7fe1f545582512985c2c9c1dcd0bec600d458f4e0935d9ec7a1b20634",
+              "income_growth_bridge.sql": "7095b71d64eed9817bdb34ea96342895c64cfb19738ab20165f299388e31c63c",
+              "net_income_reconciliation.sql": "24a841d36a566a8d8245b925106eef18f0a72f62fed84637e17a15d4a90b9a98"
+            }
+          }
+        ]
+      },
+      "c04": {
+        "task_id": "workflow-v11-c04",
+        "task_sha256": "a361f19647a019cc1b4f4a938c28fef6d4baef2410fba43514162a14830094a6",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-c04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "05dd8d73db180e6ba5d14381951cad06cac8d18791baf8a5d21a9fb9bb3854f5",
+            "verdict_sha256": "51626d8e6ddc41118d5673fc693a9a70913fc81b46c25aebdc7b323d2e080070",
+            "retained_answer_sha256": "5d9989d66cb41cf252b397e903c351b9156aa1b9c514e6d7912c129f79c73a7c",
+            "retained_sql_sha256": {
+              "company_margin_bridge.sql": "48a7bd62f2896486f82fb8bc4dfb30fc9ceb4a0198399366101217e681efa46c",
+              "regional_attribution.sql": "26f4e77dd20e4e60bc0092bc6f74fbea00546a7086343049a8e994b9b7fe644e",
+              "worldwide_reconciliation.sql": "434ca146ad5e8bce89ac68357d9b26c89eed8299359f40f0fc6dd3fb0bacf4c5"
+            }
+          },
+          {
+            "task": "workflow-v11-c04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "7bba045ee15cd1b99df67eb798020c77f96b27769e6b6036243dcf86bca644de",
+            "verdict_sha256": "51626d8e6ddc41118d5673fc693a9a70913fc81b46c25aebdc7b323d2e080070",
+            "retained_answer_sha256": "5d9989d66cb41cf252b397e903c351b9156aa1b9c514e6d7912c129f79c73a7c",
+            "retained_sql_sha256": {
+              "company_margin_bridge.sql": "48a7bd62f2896486f82fb8bc4dfb30fc9ceb4a0198399366101217e681efa46c",
+              "regional_attribution.sql": "26f4e77dd20e4e60bc0092bc6f74fbea00546a7086343049a8e994b9b7fe644e",
+              "worldwide_reconciliation.sql": "434ca146ad5e8bce89ac68357d9b26c89eed8299359f40f0fc6dd3fb0bacf4c5"
+            }
+          },
+          {
+            "task": "workflow-v11-c04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "feacc030bdbe366e5b4be5a1c60bbc91531cdf5aa6177cece5e70b2cffe68eb2",
+            "verdict_sha256": "51626d8e6ddc41118d5673fc693a9a70913fc81b46c25aebdc7b323d2e080070",
+            "retained_answer_sha256": "5d9989d66cb41cf252b397e903c351b9156aa1b9c514e6d7912c129f79c73a7c",
+            "retained_sql_sha256": {
+              "company_margin_bridge.sql": "48a7bd62f2896486f82fb8bc4dfb30fc9ceb4a0198399366101217e681efa46c",
+              "regional_attribution.sql": "26f4e77dd20e4e60bc0092bc6f74fbea00546a7086343049a8e994b9b7fe644e",
+              "worldwide_reconciliation.sql": "434ca146ad5e8bce89ac68357d9b26c89eed8299359f40f0fc6dd3fb0bacf4c5"
+            }
+          },
+          {
+            "task": "workflow-v11-c04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "5296537c08820ddd27744ef862ea6dc2190cb7a7e4425eeff41f54528d316955",
+            "verdict_sha256": "51626d8e6ddc41118d5673fc693a9a70913fc81b46c25aebdc7b323d2e080070",
+            "retained_answer_sha256": "5d9989d66cb41cf252b397e903c351b9156aa1b9c514e6d7912c129f79c73a7c",
+            "retained_sql_sha256": {
+              "company_margin_bridge.sql": "48a7bd62f2896486f82fb8bc4dfb30fc9ceb4a0198399366101217e681efa46c",
+              "regional_attribution.sql": "26f4e77dd20e4e60bc0092bc6f74fbea00546a7086343049a8e994b9b7fe644e",
+              "worldwide_reconciliation.sql": "434ca146ad5e8bce89ac68357d9b26c89eed8299359f40f0fc6dd3fb0bacf4c5"
+            }
+          },
+          {
+            "task": "workflow-v11-c04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "b5c266590c1c77b67046198c9bc075d8da85f758024355044424cc7c5f0fd34e",
+            "verdict_sha256": "51626d8e6ddc41118d5673fc693a9a70913fc81b46c25aebdc7b323d2e080070",
+            "retained_answer_sha256": "5d9989d66cb41cf252b397e903c351b9156aa1b9c514e6d7912c129f79c73a7c",
+            "retained_sql_sha256": {
+              "company_margin_bridge.sql": "48a7bd62f2896486f82fb8bc4dfb30fc9ceb4a0198399366101217e681efa46c",
+              "regional_attribution.sql": "26f4e77dd20e4e60bc0092bc6f74fbea00546a7086343049a8e994b9b7fe644e",
+              "worldwide_reconciliation.sql": "434ca146ad5e8bce89ac68357d9b26c89eed8299359f40f0fc6dd3fb0bacf4c5"
+            }
+          }
+        ]
+      },
+      "a04": {
+        "task_id": "workflow-v11-a04",
+        "task_sha256": "4e1398fd63e51b7a7d4cfe4ac3833976d73ae306b554d4fe3d133e429bc6797d",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-a04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "b7947c8f48f02234d0e8ef27f9bb0cc4a2f8c6dc2e82186ef5ea5c021b57fd3b",
+            "verdict_sha256": "0e7fea4800e87cab0cf3c464e5655347429ee070feb525a6df963a3a99c28832",
+            "retained_answer_sha256": "60db086759b6cc7d4b1408568200cd0b728da7e7eacef984ab0eae2fe4578f06",
+            "retained_sql_sha256": {
+              "noncash_capital.sql": "26caf2284c7ff16fab507a81993d6d90a1277e0bb23e1b401005f70385410404",
+              "cash_movement.sql": "0834c33364da618c3402169a942d5b98e4dd29933fbdbb1b865825fc80c3c983",
+              "cash_generation.sql": "52d067ed2a792a96e23ed33f23d5487974fa89aef0655b850f677fc239bbee70"
+            }
+          },
+          {
+            "task": "workflow-v11-a04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "9469603c4ce54c3a6d71d4bea5a015898fc7f0a9d17b165a9f2efe91793e8782",
+            "verdict_sha256": "0e7fea4800e87cab0cf3c464e5655347429ee070feb525a6df963a3a99c28832",
+            "retained_answer_sha256": "60db086759b6cc7d4b1408568200cd0b728da7e7eacef984ab0eae2fe4578f06",
+            "retained_sql_sha256": {
+              "noncash_capital.sql": "26caf2284c7ff16fab507a81993d6d90a1277e0bb23e1b401005f70385410404",
+              "cash_movement.sql": "0834c33364da618c3402169a942d5b98e4dd29933fbdbb1b865825fc80c3c983",
+              "cash_generation.sql": "52d067ed2a792a96e23ed33f23d5487974fa89aef0655b850f677fc239bbee70"
+            }
+          },
+          {
+            "task": "workflow-v11-a04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "ba2f770ec0cf449dcb22625f2a1d4d7ef7c3c1acc6a9955b891f843b9fa5a5c9",
+            "verdict_sha256": "0e7fea4800e87cab0cf3c464e5655347429ee070feb525a6df963a3a99c28832",
+            "retained_answer_sha256": "60db086759b6cc7d4b1408568200cd0b728da7e7eacef984ab0eae2fe4578f06",
+            "retained_sql_sha256": {
+              "noncash_capital.sql": "26caf2284c7ff16fab507a81993d6d90a1277e0bb23e1b401005f70385410404",
+              "cash_movement.sql": "0834c33364da618c3402169a942d5b98e4dd29933fbdbb1b865825fc80c3c983",
+              "cash_generation.sql": "52d067ed2a792a96e23ed33f23d5487974fa89aef0655b850f677fc239bbee70"
+            }
+          },
+          {
+            "task": "workflow-v11-a04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "29390b032cc4abbccf711c54fb3edffd8c0d1ee2ec45b51fbf6d9886c1bfe30d",
+            "verdict_sha256": "0e7fea4800e87cab0cf3c464e5655347429ee070feb525a6df963a3a99c28832",
+            "retained_answer_sha256": "60db086759b6cc7d4b1408568200cd0b728da7e7eacef984ab0eae2fe4578f06",
+            "retained_sql_sha256": {
+              "noncash_capital.sql": "26caf2284c7ff16fab507a81993d6d90a1277e0bb23e1b401005f70385410404",
+              "cash_movement.sql": "0834c33364da618c3402169a942d5b98e4dd29933fbdbb1b865825fc80c3c983",
+              "cash_generation.sql": "52d067ed2a792a96e23ed33f23d5487974fa89aef0655b850f677fc239bbee70"
+            }
+          },
+          {
+            "task": "workflow-v11-a04",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "2c7769ee57580f0ecd1192682a6f3bb91971a0ce00149ab1abf7c84226947737",
+            "verdict_sha256": "0e7fea4800e87cab0cf3c464e5655347429ee070feb525a6df963a3a99c28832",
+            "retained_answer_sha256": "60db086759b6cc7d4b1408568200cd0b728da7e7eacef984ab0eae2fe4578f06",
+            "retained_sql_sha256": {
+              "noncash_capital.sql": "26caf2284c7ff16fab507a81993d6d90a1277e0bb23e1b401005f70385410404",
+              "cash_movement.sql": "0834c33364da618c3402169a942d5b98e4dd29933fbdbb1b865825fc80c3c983",
+              "cash_generation.sql": "52d067ed2a792a96e23ed33f23d5487974fa89aef0655b850f677fc239bbee70"
+            }
+          }
+        ]
+      },
+      "a05": {
+        "task_id": "workflow-v11-a05",
+        "task_sha256": "eb72cb0bdc6b79eaf2032397bf2b20cbd1d0745af70eb27194c8bb75c53d192d",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-a05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "3aa86b95a1df18a334e43986d6c24e38d2a646f33ea4fc2b84d8e72ec82bd4ff",
+            "verdict_sha256": "7fbed6ca8fb79b40c6cd77a8e456b36449148b7968e61b3d9386929844c78296",
+            "retained_answer_sha256": "86302b5c1bc96c7fa337652241702a58511a22367c04726d8763010dfde93d96",
+            "retained_sql_sha256": {
+              "income_model.sql": "6e9e057c3d941287b94c962ced7b8ee6dd217073c7e7c0514e0fcc921c64da5a",
+              "operating_growth_bridge.sql": "eca1c0aa716db78d28e2344e61c5958482375b1f74baeb9f1d3d41b711408dd7",
+              "membership_accrual_bridge.sql": "44a6e09c6232845568f87c7b4d02b8d82704fbcfc09459aee64bb0757534535e"
+            }
+          },
+          {
+            "task": "workflow-v11-a05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "1c34c5dfd89b795779fa4914175d0eb02dffd06c4623e3b5b7d65d9ac04d0847",
+            "verdict_sha256": "7fbed6ca8fb79b40c6cd77a8e456b36449148b7968e61b3d9386929844c78296",
+            "retained_answer_sha256": "86302b5c1bc96c7fa337652241702a58511a22367c04726d8763010dfde93d96",
+            "retained_sql_sha256": {
+              "income_model.sql": "6e9e057c3d941287b94c962ced7b8ee6dd217073c7e7c0514e0fcc921c64da5a",
+              "operating_growth_bridge.sql": "eca1c0aa716db78d28e2344e61c5958482375b1f74baeb9f1d3d41b711408dd7",
+              "membership_accrual_bridge.sql": "44a6e09c6232845568f87c7b4d02b8d82704fbcfc09459aee64bb0757534535e"
+            }
+          },
+          {
+            "task": "workflow-v11-a05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "9b587d08ab0c1cc295e1fb89fb7ab721dd9e3e187650365e888fe520a7f750d9",
+            "verdict_sha256": "7fbed6ca8fb79b40c6cd77a8e456b36449148b7968e61b3d9386929844c78296",
+            "retained_answer_sha256": "86302b5c1bc96c7fa337652241702a58511a22367c04726d8763010dfde93d96",
+            "retained_sql_sha256": {
+              "income_model.sql": "6e9e057c3d941287b94c962ced7b8ee6dd217073c7e7c0514e0fcc921c64da5a",
+              "operating_growth_bridge.sql": "eca1c0aa716db78d28e2344e61c5958482375b1f74baeb9f1d3d41b711408dd7",
+              "membership_accrual_bridge.sql": "44a6e09c6232845568f87c7b4d02b8d82704fbcfc09459aee64bb0757534535e"
+            }
+          },
+          {
+            "task": "workflow-v11-a05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "7214df91628ab4421d97ce56f049302ffe51a2aed6df42016e8c2aa567751cbd",
+            "verdict_sha256": "7fbed6ca8fb79b40c6cd77a8e456b36449148b7968e61b3d9386929844c78296",
+            "retained_answer_sha256": "86302b5c1bc96c7fa337652241702a58511a22367c04726d8763010dfde93d96",
+            "retained_sql_sha256": {
+              "income_model.sql": "6e9e057c3d941287b94c962ced7b8ee6dd217073c7e7c0514e0fcc921c64da5a",
+              "operating_growth_bridge.sql": "eca1c0aa716db78d28e2344e61c5958482375b1f74baeb9f1d3d41b711408dd7",
+              "membership_accrual_bridge.sql": "44a6e09c6232845568f87c7b4d02b8d82704fbcfc09459aee64bb0757534535e"
+            }
+          },
+          {
+            "task": "workflow-v11-a05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "5779fc2cbadfa352b6936478398468d73d322661f43c2062f600e4d223970e53",
+            "verdict_sha256": "7fbed6ca8fb79b40c6cd77a8e456b36449148b7968e61b3d9386929844c78296",
+            "retained_answer_sha256": "86302b5c1bc96c7fa337652241702a58511a22367c04726d8763010dfde93d96",
+            "retained_sql_sha256": {
+              "income_model.sql": "6e9e057c3d941287b94c962ced7b8ee6dd217073c7e7c0514e0fcc921c64da5a",
+              "operating_growth_bridge.sql": "eca1c0aa716db78d28e2344e61c5958482375b1f74baeb9f1d3d41b711408dd7",
+              "membership_accrual_bridge.sql": "44a6e09c6232845568f87c7b4d02b8d82704fbcfc09459aee64bb0757534535e"
+            }
+          }
+        ]
+      },
+      "a06": {
+        "task_id": "workflow-v11-a06",
+        "task_sha256": "fb05d2136e5ef517e326470a2ee4b6ed734aec35fb9d3dcf157e34337b857d37",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-a06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "48e57215eb5c04fd89a597d467ca42e6b87450801ee3680df83d15dcef776ed4",
+            "verdict_sha256": "5963524f3b0f730513c0be563a7a06ba4590beb404c17a9cd9103bbfdb7e8a47",
+            "retained_answer_sha256": "0b185e544df59474655daa7eaa9c0d008c9288143f22ec2304720393e58959ca",
+            "retained_sql_sha256": {
+              "income_model.sql": "b460753def03b4f41b1d62c3c3e22a08eafe3e4c2c8343f865cc99dc397ac830",
+              "adjustment_bridge.sql": "4a8c79b23c9b1e5071f4d24a641d66082aaa01085ef68c10e384f22bc94a66fb",
+              "year_to_date_cash.sql": "e1989d23e5933db86e8aac364c56faf904df443312fa015ef1b805d377f65547"
+            }
+          },
+          {
+            "task": "workflow-v11-a06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "a4dc4e64ffebe06223315d0a6160626ca44ad68f9e1a65caf7c2a0f2b0d82eb6",
+            "verdict_sha256": "5963524f3b0f730513c0be563a7a06ba4590beb404c17a9cd9103bbfdb7e8a47",
+            "retained_answer_sha256": "0b185e544df59474655daa7eaa9c0d008c9288143f22ec2304720393e58959ca",
+            "retained_sql_sha256": {
+              "income_model.sql": "b460753def03b4f41b1d62c3c3e22a08eafe3e4c2c8343f865cc99dc397ac830",
+              "adjustment_bridge.sql": "4a8c79b23c9b1e5071f4d24a641d66082aaa01085ef68c10e384f22bc94a66fb",
+              "year_to_date_cash.sql": "e1989d23e5933db86e8aac364c56faf904df443312fa015ef1b805d377f65547"
+            }
+          },
+          {
+            "task": "workflow-v11-a06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "e97a8789ed6a3becdf1ad3ee2fa045a54f1289c899551e6d88bfe6629103c133",
+            "verdict_sha256": "5963524f3b0f730513c0be563a7a06ba4590beb404c17a9cd9103bbfdb7e8a47",
+            "retained_answer_sha256": "0b185e544df59474655daa7eaa9c0d008c9288143f22ec2304720393e58959ca",
+            "retained_sql_sha256": {
+              "income_model.sql": "b460753def03b4f41b1d62c3c3e22a08eafe3e4c2c8343f865cc99dc397ac830",
+              "adjustment_bridge.sql": "4a8c79b23c9b1e5071f4d24a641d66082aaa01085ef68c10e384f22bc94a66fb",
+              "year_to_date_cash.sql": "e1989d23e5933db86e8aac364c56faf904df443312fa015ef1b805d377f65547"
+            }
+          },
+          {
+            "task": "workflow-v11-a06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "8e42d5e011e1a465d01ce3815f34405d745e6a194aa2ef60f425f8c859e70016",
+            "verdict_sha256": "5963524f3b0f730513c0be563a7a06ba4590beb404c17a9cd9103bbfdb7e8a47",
+            "retained_answer_sha256": "0b185e544df59474655daa7eaa9c0d008c9288143f22ec2304720393e58959ca",
+            "retained_sql_sha256": {
+              "income_model.sql": "b460753def03b4f41b1d62c3c3e22a08eafe3e4c2c8343f865cc99dc397ac830",
+              "adjustment_bridge.sql": "4a8c79b23c9b1e5071f4d24a641d66082aaa01085ef68c10e384f22bc94a66fb",
+              "year_to_date_cash.sql": "e1989d23e5933db86e8aac364c56faf904df443312fa015ef1b805d377f65547"
+            }
+          },
+          {
+            "task": "workflow-v11-a06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "9c630adb5020627e248485e44e0ca0caf12a78be2c0f9aef1ca55566d6175e04",
+            "verdict_sha256": "5963524f3b0f730513c0be563a7a06ba4590beb404c17a9cd9103bbfdb7e8a47",
+            "retained_answer_sha256": "0b185e544df59474655daa7eaa9c0d008c9288143f22ec2304720393e58959ca",
+            "retained_sql_sha256": {
+              "income_model.sql": "b460753def03b4f41b1d62c3c3e22a08eafe3e4c2c8343f865cc99dc397ac830",
+              "adjustment_bridge.sql": "4a8c79b23c9b1e5071f4d24a641d66082aaa01085ef68c10e384f22bc94a66fb",
+              "year_to_date_cash.sql": "e1989d23e5933db86e8aac364c56faf904df443312fa015ef1b805d377f65547"
+            }
+          }
+        ]
+      },
+      "b06": {
+        "task_id": "workflow-v11-b06",
+        "task_sha256": "272948dff4806b8df3d2913cb2ddf25f4cb77ee1c933649c1083bc9f2c160a1f",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-b06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "ccd04242e66082c5e1e980c45c4bcd0a2b1b5b992ef16897d1ae848ed0ef49bd",
+            "verdict_sha256": "03cd587b86e87027cedf018c86e5614274203b8202233eae0848d3e26c3a2930",
+            "retained_answer_sha256": "9a34ca1e3524e71bca8ae3ce3e9e4694e2182137ddef838fd32fa7ccf562f0b9",
+            "retained_sql_sha256": {
+              "segment_metrics.sql": "1f4a2f61f5ba6f510894114d8be03903aa955151f29e45d12ce9d4c135eda10e",
+              "consumer_activity.sql": "831046215f7233bd564d3569c48166a7f5eb4e03dfed941d1c630f5fe4527909",
+              "corporate_bridge.sql": "20f97695108a52bd9c5ed57316e499b183ce2110e0486a6e9f00b964639da452"
+            }
+          },
+          {
+            "task": "workflow-v11-b06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "414feb359b6b9fb9461bb2b517e574f8a52267d9452142b90e585a77eea5a959",
+            "verdict_sha256": "03cd587b86e87027cedf018c86e5614274203b8202233eae0848d3e26c3a2930",
+            "retained_answer_sha256": "9a34ca1e3524e71bca8ae3ce3e9e4694e2182137ddef838fd32fa7ccf562f0b9",
+            "retained_sql_sha256": {
+              "segment_metrics.sql": "1f4a2f61f5ba6f510894114d8be03903aa955151f29e45d12ce9d4c135eda10e",
+              "consumer_activity.sql": "831046215f7233bd564d3569c48166a7f5eb4e03dfed941d1c630f5fe4527909",
+              "corporate_bridge.sql": "20f97695108a52bd9c5ed57316e499b183ce2110e0486a6e9f00b964639da452"
+            }
+          },
+          {
+            "task": "workflow-v11-b06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "ff53595d2e29e5c1f24906faa9cf429b515ea770b38f24ae1fdf835b607e5e03",
+            "verdict_sha256": "03cd587b86e87027cedf018c86e5614274203b8202233eae0848d3e26c3a2930",
+            "retained_answer_sha256": "9a34ca1e3524e71bca8ae3ce3e9e4694e2182137ddef838fd32fa7ccf562f0b9",
+            "retained_sql_sha256": {
+              "segment_metrics.sql": "1f4a2f61f5ba6f510894114d8be03903aa955151f29e45d12ce9d4c135eda10e",
+              "consumer_activity.sql": "831046215f7233bd564d3569c48166a7f5eb4e03dfed941d1c630f5fe4527909",
+              "corporate_bridge.sql": "20f97695108a52bd9c5ed57316e499b183ce2110e0486a6e9f00b964639da452"
+            }
+          },
+          {
+            "task": "workflow-v11-b06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "e0be00af215568a58027a0ece1589e1dc51f2d31670a13989e8cc42bddc542b4",
+            "verdict_sha256": "03cd587b86e87027cedf018c86e5614274203b8202233eae0848d3e26c3a2930",
+            "retained_answer_sha256": "9a34ca1e3524e71bca8ae3ce3e9e4694e2182137ddef838fd32fa7ccf562f0b9",
+            "retained_sql_sha256": {
+              "segment_metrics.sql": "1f4a2f61f5ba6f510894114d8be03903aa955151f29e45d12ce9d4c135eda10e",
+              "consumer_activity.sql": "831046215f7233bd564d3569c48166a7f5eb4e03dfed941d1c630f5fe4527909",
+              "corporate_bridge.sql": "20f97695108a52bd9c5ed57316e499b183ce2110e0486a6e9f00b964639da452"
+            }
+          },
+          {
+            "task": "workflow-v11-b06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "6149e13a77ead5b2abd8f3c00e274641b021b55f7c23b3eecd1ea420bbd4875d",
+            "verdict_sha256": "03cd587b86e87027cedf018c86e5614274203b8202233eae0848d3e26c3a2930",
+            "retained_answer_sha256": "9a34ca1e3524e71bca8ae3ce3e9e4694e2182137ddef838fd32fa7ccf562f0b9",
+            "retained_sql_sha256": {
+              "segment_metrics.sql": "1f4a2f61f5ba6f510894114d8be03903aa955151f29e45d12ce9d4c135eda10e",
+              "consumer_activity.sql": "831046215f7233bd564d3569c48166a7f5eb4e03dfed941d1c630f5fe4527909",
+              "corporate_bridge.sql": "20f97695108a52bd9c5ed57316e499b183ce2110e0486a6e9f00b964639da452"
+            }
+          }
+        ]
+      },
+      "b07": {
+        "task_id": "workflow-v11-b07",
+        "task_sha256": "4cf1a5a2da60e23538b57c5cd9fd81c9e19ca232dee2fcd925e55368b2312f93",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-b07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "8360b0fbc70a64afb916fe6d3fac74ec506b64b38c4f3dce3e923b2ac4f4683b",
+            "verdict_sha256": "a042b10f04a34059d088802671475017b7e97f543f5c615eb14baae0384cc928",
+            "retained_answer_sha256": "7479b6e2807e9d86e5e28634c3a54f6683b1197d3222a545bc5180538c428d9e",
+            "retained_sql_sha256": {
+              "quarter_cash.sql": "b191657ea3b4928e00b0761e7730a38fb9a2b07f302ec8457100bba0e00d2020",
+              "rolling_cash.sql": "3b4096dbdb92088ea1d6ab5a97b6af07d288c6d21c5486ef0aa79d638238d318",
+              "booking_ratios.sql": "37031def23406ec3ac3d502041481bd876011f68ed98ca7f8dc14d792622db6f"
+            }
+          },
+          {
+            "task": "workflow-v11-b07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "7eac9d4835810639f16166dae5999aa47cb1c2a0bc75eb32452c561d56d3ad78",
+            "verdict_sha256": "a042b10f04a34059d088802671475017b7e97f543f5c615eb14baae0384cc928",
+            "retained_answer_sha256": "7479b6e2807e9d86e5e28634c3a54f6683b1197d3222a545bc5180538c428d9e",
+            "retained_sql_sha256": {
+              "quarter_cash.sql": "b191657ea3b4928e00b0761e7730a38fb9a2b07f302ec8457100bba0e00d2020",
+              "rolling_cash.sql": "3b4096dbdb92088ea1d6ab5a97b6af07d288c6d21c5486ef0aa79d638238d318",
+              "booking_ratios.sql": "37031def23406ec3ac3d502041481bd876011f68ed98ca7f8dc14d792622db6f"
+            }
+          },
+          {
+            "task": "workflow-v11-b07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "49aa7b4f0192e5fbb3eb08e090b7f91a7ec4e37198fb029ea0ac692353cfb2d2",
+            "verdict_sha256": "a042b10f04a34059d088802671475017b7e97f543f5c615eb14baae0384cc928",
+            "retained_answer_sha256": "7479b6e2807e9d86e5e28634c3a54f6683b1197d3222a545bc5180538c428d9e",
+            "retained_sql_sha256": {
+              "quarter_cash.sql": "b191657ea3b4928e00b0761e7730a38fb9a2b07f302ec8457100bba0e00d2020",
+              "rolling_cash.sql": "3b4096dbdb92088ea1d6ab5a97b6af07d288c6d21c5486ef0aa79d638238d318",
+              "booking_ratios.sql": "37031def23406ec3ac3d502041481bd876011f68ed98ca7f8dc14d792622db6f"
+            }
+          },
+          {
+            "task": "workflow-v11-b07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "931b04f91037a28fe5837b9e4269da8732a0b207e421bfe123c483206d795822",
+            "verdict_sha256": "a042b10f04a34059d088802671475017b7e97f543f5c615eb14baae0384cc928",
+            "retained_answer_sha256": "7479b6e2807e9d86e5e28634c3a54f6683b1197d3222a545bc5180538c428d9e",
+            "retained_sql_sha256": {
+              "quarter_cash.sql": "b191657ea3b4928e00b0761e7730a38fb9a2b07f302ec8457100bba0e00d2020",
+              "rolling_cash.sql": "3b4096dbdb92088ea1d6ab5a97b6af07d288c6d21c5486ef0aa79d638238d318",
+              "booking_ratios.sql": "37031def23406ec3ac3d502041481bd876011f68ed98ca7f8dc14d792622db6f"
+            }
+          },
+          {
+            "task": "workflow-v11-b07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "099f56c536e6a63f16816425bb03c48287d34783c5f8ab80542e93ba8dce826f",
+            "verdict_sha256": "a042b10f04a34059d088802671475017b7e97f543f5c615eb14baae0384cc928",
+            "retained_answer_sha256": "7479b6e2807e9d86e5e28634c3a54f6683b1197d3222a545bc5180538c428d9e",
+            "retained_sql_sha256": {
+              "quarter_cash.sql": "b191657ea3b4928e00b0761e7730a38fb9a2b07f302ec8457100bba0e00d2020",
+              "rolling_cash.sql": "3b4096dbdb92088ea1d6ab5a97b6af07d288c6d21c5486ef0aa79d638238d318",
+              "booking_ratios.sql": "37031def23406ec3ac3d502041481bd876011f68ed98ca7f8dc14d792622db6f"
+            }
+          }
+        ]
+      },
+      "b08": {
+        "task_id": "workflow-v11-b08",
+        "task_sha256": "307446678fbecd8fb276c815a47a9ad058436889d62e604ef11e8a974708ba17",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-b08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "b9560bf4bf9f9431f4ca416ad32f0bf2136858d30886a6749a7b87868b5b93d6",
+            "verdict_sha256": "d7032edbbc61f70ddeed23dbf2bf263638c73d1995ff0e5c6f754f0c036c5112",
+            "retained_answer_sha256": "b1bb7bb1026454a19596c87b1e70598757b5b9df442a7ae08fa6db63c3bddc31",
+            "retained_sql_sha256": {
+              "category_economics.sql": "ce57f889878d39e49d8e2a8a67d7b0facda1146237db442748a7c06dd7bf746e",
+              "subscription_stock_bridge.sql": "4d722624874f3681494165db71434efe062bae13795d096b07cf627fa2fa3eee",
+              "cash_generation.sql": "553e1d3ce13a5bb7a8df563aa14eefe2e97c70e28e81fb9500a51ca1af4918f1"
+            }
+          },
+          {
+            "task": "workflow-v11-b08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "3d15fafcced928d89872f5a259a9666278d02d13c12600562835eee6dedbeb89",
+            "verdict_sha256": "d7032edbbc61f70ddeed23dbf2bf263638c73d1995ff0e5c6f754f0c036c5112",
+            "retained_answer_sha256": "b1bb7bb1026454a19596c87b1e70598757b5b9df442a7ae08fa6db63c3bddc31",
+            "retained_sql_sha256": {
+              "category_economics.sql": "ce57f889878d39e49d8e2a8a67d7b0facda1146237db442748a7c06dd7bf746e",
+              "subscription_stock_bridge.sql": "4d722624874f3681494165db71434efe062bae13795d096b07cf627fa2fa3eee",
+              "cash_generation.sql": "553e1d3ce13a5bb7a8df563aa14eefe2e97c70e28e81fb9500a51ca1af4918f1"
+            }
+          },
+          {
+            "task": "workflow-v11-b08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "5a25673b43dd48066578e15e149744eb6c2d478c36c85c228958ad9083248851",
+            "verdict_sha256": "d7032edbbc61f70ddeed23dbf2bf263638c73d1995ff0e5c6f754f0c036c5112",
+            "retained_answer_sha256": "b1bb7bb1026454a19596c87b1e70598757b5b9df442a7ae08fa6db63c3bddc31",
+            "retained_sql_sha256": {
+              "category_economics.sql": "ce57f889878d39e49d8e2a8a67d7b0facda1146237db442748a7c06dd7bf746e",
+              "subscription_stock_bridge.sql": "4d722624874f3681494165db71434efe062bae13795d096b07cf627fa2fa3eee",
+              "cash_generation.sql": "553e1d3ce13a5bb7a8df563aa14eefe2e97c70e28e81fb9500a51ca1af4918f1"
+            }
+          },
+          {
+            "task": "workflow-v11-b08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "1091d57dd1bc320613333a5303db815d38b69d2d997296f084ae5cecfe0dafaf",
+            "verdict_sha256": "d7032edbbc61f70ddeed23dbf2bf263638c73d1995ff0e5c6f754f0c036c5112",
+            "retained_answer_sha256": "b1bb7bb1026454a19596c87b1e70598757b5b9df442a7ae08fa6db63c3bddc31",
+            "retained_sql_sha256": {
+              "category_economics.sql": "ce57f889878d39e49d8e2a8a67d7b0facda1146237db442748a7c06dd7bf746e",
+              "subscription_stock_bridge.sql": "4d722624874f3681494165db71434efe062bae13795d096b07cf627fa2fa3eee",
+              "cash_generation.sql": "553e1d3ce13a5bb7a8df563aa14eefe2e97c70e28e81fb9500a51ca1af4918f1"
+            }
+          },
+          {
+            "task": "workflow-v11-b08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "bffc124b802058af32529a449ba72b870060d51fad7ffd026a68e838e57c4df2",
+            "verdict_sha256": "d7032edbbc61f70ddeed23dbf2bf263638c73d1995ff0e5c6f754f0c036c5112",
+            "retained_answer_sha256": "b1bb7bb1026454a19596c87b1e70598757b5b9df442a7ae08fa6db63c3bddc31",
+            "retained_sql_sha256": {
+              "category_economics.sql": "ce57f889878d39e49d8e2a8a67d7b0facda1146237db442748a7c06dd7bf746e",
+              "subscription_stock_bridge.sql": "4d722624874f3681494165db71434efe062bae13795d096b07cf627fa2fa3eee",
+              "cash_generation.sql": "553e1d3ce13a5bb7a8df563aa14eefe2e97c70e28e81fb9500a51ca1af4918f1"
+            }
+          }
+        ]
+      },
+      "c05": {
+        "task_id": "workflow-v11-c05",
+        "task_sha256": "992b9aa3ac2bb2f23e7087f879845446c6d3862d4df2e4cb149beae7fc1aac15",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-c05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "fbd02d99fa5796336def9c4761dd7bac2d3110cd60b5767d6ca504a840f1b3e9",
+            "verdict_sha256": "e4e0903e38b3891364173a55fd3bdb1393c34d9341b9aad3f5cd13130d8dcd7b",
+            "retained_answer_sha256": "c1f8dfee3a536028960906c43e6c40c87dd57a8ccd4fe5aef15a56b7c89f1a51",
+            "retained_sql_sha256": {
+              "category_margin.sql": "ecdb3ed1cf3ff5d2b9e69caf24dcd74a264cb862551c788354b45e6e8348095a",
+              "prior_tax_baseline.sql": "32bb6e670f681576c3f660038008eb4fc0ce418fe62a3b22e51c4e1726963e03",
+              "net_income_growth_bridge.sql": "00b43410a144189ca9df4f070dffdb5682bc9d641cc60e91b727bd4ded11d92d"
+            }
+          },
+          {
+            "task": "workflow-v11-c05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "27d21063dd3c6043bad4f8dbd8778cd33a06cc06f382b95cb6abe8e55542c8e1",
+            "verdict_sha256": "e4e0903e38b3891364173a55fd3bdb1393c34d9341b9aad3f5cd13130d8dcd7b",
+            "retained_answer_sha256": "c1f8dfee3a536028960906c43e6c40c87dd57a8ccd4fe5aef15a56b7c89f1a51",
+            "retained_sql_sha256": {
+              "category_margin.sql": "ecdb3ed1cf3ff5d2b9e69caf24dcd74a264cb862551c788354b45e6e8348095a",
+              "prior_tax_baseline.sql": "32bb6e670f681576c3f660038008eb4fc0ce418fe62a3b22e51c4e1726963e03",
+              "net_income_growth_bridge.sql": "00b43410a144189ca9df4f070dffdb5682bc9d641cc60e91b727bd4ded11d92d"
+            }
+          },
+          {
+            "task": "workflow-v11-c05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "d8fda5753dace4818fcdb8e4ab5f499884645a92c9f0fe88fe773f125eb79866",
+            "verdict_sha256": "e4e0903e38b3891364173a55fd3bdb1393c34d9341b9aad3f5cd13130d8dcd7b",
+            "retained_answer_sha256": "c1f8dfee3a536028960906c43e6c40c87dd57a8ccd4fe5aef15a56b7c89f1a51",
+            "retained_sql_sha256": {
+              "category_margin.sql": "ecdb3ed1cf3ff5d2b9e69caf24dcd74a264cb862551c788354b45e6e8348095a",
+              "prior_tax_baseline.sql": "32bb6e670f681576c3f660038008eb4fc0ce418fe62a3b22e51c4e1726963e03",
+              "net_income_growth_bridge.sql": "00b43410a144189ca9df4f070dffdb5682bc9d641cc60e91b727bd4ded11d92d"
+            }
+          },
+          {
+            "task": "workflow-v11-c05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "6bde2930738de43c0bdbc04321319c056f4c6c5f8c1078a40427723f46417533",
+            "verdict_sha256": "e4e0903e38b3891364173a55fd3bdb1393c34d9341b9aad3f5cd13130d8dcd7b",
+            "retained_answer_sha256": "c1f8dfee3a536028960906c43e6c40c87dd57a8ccd4fe5aef15a56b7c89f1a51",
+            "retained_sql_sha256": {
+              "category_margin.sql": "ecdb3ed1cf3ff5d2b9e69caf24dcd74a264cb862551c788354b45e6e8348095a",
+              "prior_tax_baseline.sql": "32bb6e670f681576c3f660038008eb4fc0ce418fe62a3b22e51c4e1726963e03",
+              "net_income_growth_bridge.sql": "00b43410a144189ca9df4f070dffdb5682bc9d641cc60e91b727bd4ded11d92d"
+            }
+          },
+          {
+            "task": "workflow-v11-c05",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "5e7a2f703b4432ffce8b0575103efdd4344321a7e6ab6275f8caef3401bcb03a",
+            "verdict_sha256": "e4e0903e38b3891364173a55fd3bdb1393c34d9341b9aad3f5cd13130d8dcd7b",
+            "retained_answer_sha256": "c1f8dfee3a536028960906c43e6c40c87dd57a8ccd4fe5aef15a56b7c89f1a51",
+            "retained_sql_sha256": {
+              "category_margin.sql": "ecdb3ed1cf3ff5d2b9e69caf24dcd74a264cb862551c788354b45e6e8348095a",
+              "prior_tax_baseline.sql": "32bb6e670f681576c3f660038008eb4fc0ce418fe62a3b22e51c4e1726963e03",
+              "net_income_growth_bridge.sql": "00b43410a144189ca9df4f070dffdb5682bc9d641cc60e91b727bd4ded11d92d"
+            }
+          }
+        ]
+      },
+      "c06": {
+        "task_id": "workflow-v11-c06",
+        "task_sha256": "11d4e000d63d2651ffef87b62621b0026bbb996d84962b6a26679a1572014a14",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-c06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "6d67ed36f3b5244ef494829d8cae648c80a1ec2f028ec801af95048e4a869467",
+            "verdict_sha256": "b49089b12a0774d14ea07dab524ad19f67088b7e18ddb672f9f3c3bc113f8f07",
+            "retained_answer_sha256": "8e4e6628972e16fbbef2d76308482f95a5cb55f84ab588ae593b9f9c6791ea87",
+            "retained_sql_sha256": {
+              "consolidated_currency_bridge.sql": "d03fd2b02344d8cbcce79770deb7754da39e58116f7a6cd8d0c85b76da23b029",
+              "revenue_growth_components.sql": "e369f3e3516f7cb70b5eefc7fcead5c6ab7723dcedf096a5080b41f18e7335d9",
+              "geographic_currency.sql": "2c70feb454f5f2a0e235a3f11cfb858bd4a0034f22931ef47406a945e5030f33"
+            }
+          },
+          {
+            "task": "workflow-v11-c06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "3974c32b774d017f8923edcd53baaa50233414bc45f3efe2e8224c5ec5f0f295",
+            "verdict_sha256": "b49089b12a0774d14ea07dab524ad19f67088b7e18ddb672f9f3c3bc113f8f07",
+            "retained_answer_sha256": "8e4e6628972e16fbbef2d76308482f95a5cb55f84ab588ae593b9f9c6791ea87",
+            "retained_sql_sha256": {
+              "consolidated_currency_bridge.sql": "d03fd2b02344d8cbcce79770deb7754da39e58116f7a6cd8d0c85b76da23b029",
+              "revenue_growth_components.sql": "e369f3e3516f7cb70b5eefc7fcead5c6ab7723dcedf096a5080b41f18e7335d9",
+              "geographic_currency.sql": "2c70feb454f5f2a0e235a3f11cfb858bd4a0034f22931ef47406a945e5030f33"
+            }
+          },
+          {
+            "task": "workflow-v11-c06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "4869637c3dbe05ab38845198ae5c94c7e4aff5207be9aec96fb0d58c3b674f1c",
+            "verdict_sha256": "b49089b12a0774d14ea07dab524ad19f67088b7e18ddb672f9f3c3bc113f8f07",
+            "retained_answer_sha256": "8e4e6628972e16fbbef2d76308482f95a5cb55f84ab588ae593b9f9c6791ea87",
+            "retained_sql_sha256": {
+              "consolidated_currency_bridge.sql": "d03fd2b02344d8cbcce79770deb7754da39e58116f7a6cd8d0c85b76da23b029",
+              "revenue_growth_components.sql": "e369f3e3516f7cb70b5eefc7fcead5c6ab7723dcedf096a5080b41f18e7335d9",
+              "geographic_currency.sql": "2c70feb454f5f2a0e235a3f11cfb858bd4a0034f22931ef47406a945e5030f33"
+            }
+          },
+          {
+            "task": "workflow-v11-c06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "f1e51fa7d7769809987b7be8a2b0dc0f0b8fd9da112629ac57dc10a3a5001c67",
+            "verdict_sha256": "b49089b12a0774d14ea07dab524ad19f67088b7e18ddb672f9f3c3bc113f8f07",
+            "retained_answer_sha256": "8e4e6628972e16fbbef2d76308482f95a5cb55f84ab588ae593b9f9c6791ea87",
+            "retained_sql_sha256": {
+              "consolidated_currency_bridge.sql": "d03fd2b02344d8cbcce79770deb7754da39e58116f7a6cd8d0c85b76da23b029",
+              "revenue_growth_components.sql": "e369f3e3516f7cb70b5eefc7fcead5c6ab7723dcedf096a5080b41f18e7335d9",
+              "geographic_currency.sql": "2c70feb454f5f2a0e235a3f11cfb858bd4a0034f22931ef47406a945e5030f33"
+            }
+          },
+          {
+            "task": "workflow-v11-c06",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "613024d67a42cc09d03fd2d30f093a8aa78f511167c9d8dbe0ee5ad329908aab",
+            "verdict_sha256": "b49089b12a0774d14ea07dab524ad19f67088b7e18ddb672f9f3c3bc113f8f07",
+            "retained_answer_sha256": "8e4e6628972e16fbbef2d76308482f95a5cb55f84ab588ae593b9f9c6791ea87",
+            "retained_sql_sha256": {
+              "consolidated_currency_bridge.sql": "d03fd2b02344d8cbcce79770deb7754da39e58116f7a6cd8d0c85b76da23b029",
+              "revenue_growth_components.sql": "e369f3e3516f7cb70b5eefc7fcead5c6ab7723dcedf096a5080b41f18e7335d9",
+              "geographic_currency.sql": "2c70feb454f5f2a0e235a3f11cfb858bd4a0034f22931ef47406a945e5030f33"
+            }
+          }
+        ]
+      },
+      "c07": {
+        "task_id": "workflow-v11-c07",
+        "task_sha256": "ae55e93ffce7a7198f3fe6cde33d782ce8e418f35572f264b2588dfa5a2f6bdb",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-c07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "d8686c40f1868a600a219ab78a884a86d0de9d183dd47458281245a894a08b53",
+            "verdict_sha256": "93b8f64dfc9146b3aa102360cc023c102cb99ea31b88f942215e52575066a1e6",
+            "retained_answer_sha256": "60266ed5af8139b44601594ea3de5f46b4811d509e41a31c05f792a40e9640d5",
+            "retained_sql_sha256": {
+              "cash_revision_bridge.sql": "89f670439e976ed65baf167cc65a41fe176fc87882e4150829b1af966731e9a0",
+              "financial_versions.sql": "f641192fa1f5238856b420897de8417ad1364b90f2a565c9bca4a3f2ff2c0aa9",
+              "settlement_revision_bridge.sql": "220c2bce7d01225b2eba0e78a88d1e0d461148eb38d8a48c3b10842606d3337f"
+            }
+          },
+          {
+            "task": "workflow-v11-c07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "aaf3dd0df1a5caad505a125191a2d2fa71a5f44d912d2b2c62736f20ae3be844",
+            "verdict_sha256": "93b8f64dfc9146b3aa102360cc023c102cb99ea31b88f942215e52575066a1e6",
+            "retained_answer_sha256": "60266ed5af8139b44601594ea3de5f46b4811d509e41a31c05f792a40e9640d5",
+            "retained_sql_sha256": {
+              "cash_revision_bridge.sql": "89f670439e976ed65baf167cc65a41fe176fc87882e4150829b1af966731e9a0",
+              "financial_versions.sql": "f641192fa1f5238856b420897de8417ad1364b90f2a565c9bca4a3f2ff2c0aa9",
+              "settlement_revision_bridge.sql": "220c2bce7d01225b2eba0e78a88d1e0d461148eb38d8a48c3b10842606d3337f"
+            }
+          },
+          {
+            "task": "workflow-v11-c07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "04c1f5d1fb8edad6175885c5a85fd91544db9c2c3bb5331cf8f0c354d3e21d4e",
+            "verdict_sha256": "93b8f64dfc9146b3aa102360cc023c102cb99ea31b88f942215e52575066a1e6",
+            "retained_answer_sha256": "60266ed5af8139b44601594ea3de5f46b4811d509e41a31c05f792a40e9640d5",
+            "retained_sql_sha256": {
+              "cash_revision_bridge.sql": "89f670439e976ed65baf167cc65a41fe176fc87882e4150829b1af966731e9a0",
+              "financial_versions.sql": "f641192fa1f5238856b420897de8417ad1364b90f2a565c9bca4a3f2ff2c0aa9",
+              "settlement_revision_bridge.sql": "220c2bce7d01225b2eba0e78a88d1e0d461148eb38d8a48c3b10842606d3337f"
+            }
+          },
+          {
+            "task": "workflow-v11-c07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "204c305ff35a83505307d32b73c0049d1929fbd0df8192c0371deafbe0edd4b6",
+            "verdict_sha256": "93b8f64dfc9146b3aa102360cc023c102cb99ea31b88f942215e52575066a1e6",
+            "retained_answer_sha256": "60266ed5af8139b44601594ea3de5f46b4811d509e41a31c05f792a40e9640d5",
+            "retained_sql_sha256": {
+              "cash_revision_bridge.sql": "89f670439e976ed65baf167cc65a41fe176fc87882e4150829b1af966731e9a0",
+              "financial_versions.sql": "f641192fa1f5238856b420897de8417ad1364b90f2a565c9bca4a3f2ff2c0aa9",
+              "settlement_revision_bridge.sql": "220c2bce7d01225b2eba0e78a88d1e0d461148eb38d8a48c3b10842606d3337f"
+            }
+          },
+          {
+            "task": "workflow-v11-c07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "1d8aae6e4b7ea75f966cc1cb05ef23fc2ab6de7fb5ef44df523d960d98024c60",
+            "verdict_sha256": "93b8f64dfc9146b3aa102360cc023c102cb99ea31b88f942215e52575066a1e6",
+            "retained_answer_sha256": "60266ed5af8139b44601594ea3de5f46b4811d509e41a31c05f792a40e9640d5",
+            "retained_sql_sha256": {
+              "cash_revision_bridge.sql": "89f670439e976ed65baf167cc65a41fe176fc87882e4150829b1af966731e9a0",
+              "financial_versions.sql": "f641192fa1f5238856b420897de8417ad1364b90f2a565c9bca4a3f2ff2c0aa9",
+              "settlement_revision_bridge.sql": "220c2bce7d01225b2eba0e78a88d1e0d461148eb38d8a48c3b10842606d3337f"
+            }
+          }
+        ]
+      },
+      "a07": {
+        "task_id": "workflow-v11-a07",
+        "task_sha256": "1d34b1f6fa5b6f4765b371c5a14d69455016abc348f3d29404de6c25cc356a78",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-a07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "7f8d04dfab19009113a317e74136a188bde8539998655b98ce404735c24cf9c6",
+            "verdict_sha256": "f2072ce966a8201b6549cb51a4917ce5a455ac4134bae5d4ec4d64d6dbfc4f08",
+            "retained_answer_sha256": "c7b723e726ae2809fda031a5a380695ba4a48b2991f59e58a48ea5051d0f1e32",
+            "retained_sql_sha256": {
+              "gross_profit_bases.sql": "6a9ef6e35224eada23fe43de1d3bbe6e6056753b864f2c5bbf203b7fa46252e9",
+              "current_h20_bridge.sql": "f8951712149a8aa01b83e360498883e63655205979a879457ffd75d89bbe57b5",
+              "cash_generation.sql": "948c70780a1b063de1ea9f80db9ca21d35765f6e0f6ade513386c778e2fd9d60"
+            }
+          },
+          {
+            "task": "workflow-v11-a07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "28bc21f3b64c955722fc959052c50b34742cb454b9bccab61e638eac4afea11d",
+            "verdict_sha256": "f2072ce966a8201b6549cb51a4917ce5a455ac4134bae5d4ec4d64d6dbfc4f08",
+            "retained_answer_sha256": "c7b723e726ae2809fda031a5a380695ba4a48b2991f59e58a48ea5051d0f1e32",
+            "retained_sql_sha256": {
+              "gross_profit_bases.sql": "6a9ef6e35224eada23fe43de1d3bbe6e6056753b864f2c5bbf203b7fa46252e9",
+              "current_h20_bridge.sql": "f8951712149a8aa01b83e360498883e63655205979a879457ffd75d89bbe57b5",
+              "cash_generation.sql": "948c70780a1b063de1ea9f80db9ca21d35765f6e0f6ade513386c778e2fd9d60"
+            }
+          },
+          {
+            "task": "workflow-v11-a07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "b20ddcb6df53db11660fb202acab94c835159a640bddc9a01fe617878a324a1e",
+            "verdict_sha256": "f2072ce966a8201b6549cb51a4917ce5a455ac4134bae5d4ec4d64d6dbfc4f08",
+            "retained_answer_sha256": "c7b723e726ae2809fda031a5a380695ba4a48b2991f59e58a48ea5051d0f1e32",
+            "retained_sql_sha256": {
+              "gross_profit_bases.sql": "6a9ef6e35224eada23fe43de1d3bbe6e6056753b864f2c5bbf203b7fa46252e9",
+              "current_h20_bridge.sql": "f8951712149a8aa01b83e360498883e63655205979a879457ffd75d89bbe57b5",
+              "cash_generation.sql": "948c70780a1b063de1ea9f80db9ca21d35765f6e0f6ade513386c778e2fd9d60"
+            }
+          },
+          {
+            "task": "workflow-v11-a07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "3e24d37024bdb50584ed1d5d549a5819ea7c6fb3391f94ef9a4011d733b21b1c",
+            "verdict_sha256": "f2072ce966a8201b6549cb51a4917ce5a455ac4134bae5d4ec4d64d6dbfc4f08",
+            "retained_answer_sha256": "c7b723e726ae2809fda031a5a380695ba4a48b2991f59e58a48ea5051d0f1e32",
+            "retained_sql_sha256": {
+              "gross_profit_bases.sql": "6a9ef6e35224eada23fe43de1d3bbe6e6056753b864f2c5bbf203b7fa46252e9",
+              "current_h20_bridge.sql": "f8951712149a8aa01b83e360498883e63655205979a879457ffd75d89bbe57b5",
+              "cash_generation.sql": "948c70780a1b063de1ea9f80db9ca21d35765f6e0f6ade513386c778e2fd9d60"
+            }
+          },
+          {
+            "task": "workflow-v11-a07",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "886248ee7a31cea16ed1454faaa3be1e89d3851bc8a0de1faf277a23fae78033",
+            "verdict_sha256": "f2072ce966a8201b6549cb51a4917ce5a455ac4134bae5d4ec4d64d6dbfc4f08",
+            "retained_answer_sha256": "c7b723e726ae2809fda031a5a380695ba4a48b2991f59e58a48ea5051d0f1e32",
+            "retained_sql_sha256": {
+              "gross_profit_bases.sql": "6a9ef6e35224eada23fe43de1d3bbe6e6056753b864f2c5bbf203b7fa46252e9",
+              "current_h20_bridge.sql": "f8951712149a8aa01b83e360498883e63655205979a879457ffd75d89bbe57b5",
+              "cash_generation.sql": "948c70780a1b063de1ea9f80db9ca21d35765f6e0f6ade513386c778e2fd9d60"
+            }
+          }
+        ]
+      },
+      "a08": {
+        "task_id": "workflow-v11-a08",
+        "task_sha256": "f803f87564149d1c0a1c19beb18d2a1e6d6bbdd85af44c420ae25a3f78bfef55",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-a08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "1ae54ab879babf0dfabd1d537176112b72f79de58cc25db774b25ec32819bd69",
+            "verdict_sha256": "f67b8d2dcdc59e3795fcb5b925e410ea58020c23e930b283feb3daccd7e7568e",
+            "retained_answer_sha256": "7fbe265e02fa5906821522032d7d1724f2fb1eae7cc807554d043382ebdb443e",
+            "retained_sql_sha256": {
+              "income_model.sql": "955081acb80905e48facfa306ca0ad9317097eb9f746179770b84374e196bc4d",
+              "operating_adjustment_bridge.sql": "ee4bbd00ea3d1e3725c1519a6881e8bfbcf81db15aec94568505eb59cca25675",
+              "acquisition_scope.sql": "9f164c6c488bd8893934720025b7e465fb73ff06e491da8713495b3153ed8eae"
+            }
+          },
+          {
+            "task": "workflow-v11-a08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "4a7e94d43ad87056d90a7d215d0cacc9bfd7ae2d71668a55a12e03f5ca4d5337",
+            "verdict_sha256": "f67b8d2dcdc59e3795fcb5b925e410ea58020c23e930b283feb3daccd7e7568e",
+            "retained_answer_sha256": "7fbe265e02fa5906821522032d7d1724f2fb1eae7cc807554d043382ebdb443e",
+            "retained_sql_sha256": {
+              "income_model.sql": "955081acb80905e48facfa306ca0ad9317097eb9f746179770b84374e196bc4d",
+              "operating_adjustment_bridge.sql": "ee4bbd00ea3d1e3725c1519a6881e8bfbcf81db15aec94568505eb59cca25675",
+              "acquisition_scope.sql": "9f164c6c488bd8893934720025b7e465fb73ff06e491da8713495b3153ed8eae"
+            }
+          },
+          {
+            "task": "workflow-v11-a08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "795b7e19cb2cf1c480379c38bad73a87ecc70b8d783661006a2d40d843742e5a",
+            "verdict_sha256": "f67b8d2dcdc59e3795fcb5b925e410ea58020c23e930b283feb3daccd7e7568e",
+            "retained_answer_sha256": "7fbe265e02fa5906821522032d7d1724f2fb1eae7cc807554d043382ebdb443e",
+            "retained_sql_sha256": {
+              "income_model.sql": "955081acb80905e48facfa306ca0ad9317097eb9f746179770b84374e196bc4d",
+              "operating_adjustment_bridge.sql": "ee4bbd00ea3d1e3725c1519a6881e8bfbcf81db15aec94568505eb59cca25675",
+              "acquisition_scope.sql": "9f164c6c488bd8893934720025b7e465fb73ff06e491da8713495b3153ed8eae"
+            }
+          },
+          {
+            "task": "workflow-v11-a08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "1a8ad6156f3ac7436730eaecedde93559c862b189c2d171594d4ba0de863a3a7",
+            "verdict_sha256": "f67b8d2dcdc59e3795fcb5b925e410ea58020c23e930b283feb3daccd7e7568e",
+            "retained_answer_sha256": "7fbe265e02fa5906821522032d7d1724f2fb1eae7cc807554d043382ebdb443e",
+            "retained_sql_sha256": {
+              "income_model.sql": "955081acb80905e48facfa306ca0ad9317097eb9f746179770b84374e196bc4d",
+              "operating_adjustment_bridge.sql": "ee4bbd00ea3d1e3725c1519a6881e8bfbcf81db15aec94568505eb59cca25675",
+              "acquisition_scope.sql": "9f164c6c488bd8893934720025b7e465fb73ff06e491da8713495b3153ed8eae"
+            }
+          },
+          {
+            "task": "workflow-v11-a08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "4fc3d9c9c5ec353eb2c6b4e9611bdb67419e164c6c7ad8d0ed662cb0d10d6a53",
+            "verdict_sha256": "f67b8d2dcdc59e3795fcb5b925e410ea58020c23e930b283feb3daccd7e7568e",
+            "retained_answer_sha256": "7fbe265e02fa5906821522032d7d1724f2fb1eae7cc807554d043382ebdb443e",
+            "retained_sql_sha256": {
+              "income_model.sql": "955081acb80905e48facfa306ca0ad9317097eb9f746179770b84374e196bc4d",
+              "operating_adjustment_bridge.sql": "ee4bbd00ea3d1e3725c1519a6881e8bfbcf81db15aec94568505eb59cca25675",
+              "acquisition_scope.sql": "9f164c6c488bd8893934720025b7e465fb73ff06e491da8713495b3153ed8eae"
+            }
+          }
+        ]
+      },
+      "a09": {
+        "task_id": "workflow-v11-a09",
+        "task_sha256": "6ae91696ba3285c57cd840028fa5bfba76eb86a621add83e8836ef05b69a9ca3",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-a09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "aae4c69e2ddedfce5575a955d972e00582be44d7c6fab8b2ccb209a08189336d",
+            "verdict_sha256": "9d4b47b25e90dbc9695f2af5f348f0bb2dc63d70045a7928440aa36ac3b2805d",
+            "retained_answer_sha256": "bc6f0031d690815de363a29ead68b197bf9c62f741c180716c2a07c92bfa29cc",
+            "retained_sql_sha256": {
+              "segment_model.sql": "e06af82fa18fc761fd7334184b15c1ef6b6653610fab14c9074cf2d9f41e365c",
+              "consolidated_bridge.sql": "20fc2f707be2fbf555a90d6bfb23980f9b7e6c2442c86e6f33bdf978b9e16dea",
+              "service_subscriptions.sql": "9683df112e25921fc246f1a877ecc2e8514a533986c4cda2db38b4243de16f4a"
+            }
+          },
+          {
+            "task": "workflow-v11-a09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "a6a7aaf1c39c8ebda371ce3c3af646c7b5bb46c27d39652759e3696eda2223a5",
+            "verdict_sha256": "9d4b47b25e90dbc9695f2af5f348f0bb2dc63d70045a7928440aa36ac3b2805d",
+            "retained_answer_sha256": "bc6f0031d690815de363a29ead68b197bf9c62f741c180716c2a07c92bfa29cc",
+            "retained_sql_sha256": {
+              "segment_model.sql": "e06af82fa18fc761fd7334184b15c1ef6b6653610fab14c9074cf2d9f41e365c",
+              "consolidated_bridge.sql": "20fc2f707be2fbf555a90d6bfb23980f9b7e6c2442c86e6f33bdf978b9e16dea",
+              "service_subscriptions.sql": "9683df112e25921fc246f1a877ecc2e8514a533986c4cda2db38b4243de16f4a"
+            }
+          },
+          {
+            "task": "workflow-v11-a09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "c4b04b2ef2ebf1ab3516583161354f32a8e80753256e3026ad0f68f5d8d28960",
+            "verdict_sha256": "9d4b47b25e90dbc9695f2af5f348f0bb2dc63d70045a7928440aa36ac3b2805d",
+            "retained_answer_sha256": "bc6f0031d690815de363a29ead68b197bf9c62f741c180716c2a07c92bfa29cc",
+            "retained_sql_sha256": {
+              "segment_model.sql": "e06af82fa18fc761fd7334184b15c1ef6b6653610fab14c9074cf2d9f41e365c",
+              "consolidated_bridge.sql": "20fc2f707be2fbf555a90d6bfb23980f9b7e6c2442c86e6f33bdf978b9e16dea",
+              "service_subscriptions.sql": "9683df112e25921fc246f1a877ecc2e8514a533986c4cda2db38b4243de16f4a"
+            }
+          },
+          {
+            "task": "workflow-v11-a09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "e450e8b356ff83d3849ff57641b23d504674e274df8166bf432c42531ce0fbef",
+            "verdict_sha256": "9d4b47b25e90dbc9695f2af5f348f0bb2dc63d70045a7928440aa36ac3b2805d",
+            "retained_answer_sha256": "bc6f0031d690815de363a29ead68b197bf9c62f741c180716c2a07c92bfa29cc",
+            "retained_sql_sha256": {
+              "segment_model.sql": "e06af82fa18fc761fd7334184b15c1ef6b6653610fab14c9074cf2d9f41e365c",
+              "consolidated_bridge.sql": "20fc2f707be2fbf555a90d6bfb23980f9b7e6c2442c86e6f33bdf978b9e16dea",
+              "service_subscriptions.sql": "9683df112e25921fc246f1a877ecc2e8514a533986c4cda2db38b4243de16f4a"
+            }
+          },
+          {
+            "task": "workflow-v11-a09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "feb72967220d0cbcdf4918bb5faae36c25d92b5bb255b91601eec52ea58bdfda",
+            "verdict_sha256": "9d4b47b25e90dbc9695f2af5f348f0bb2dc63d70045a7928440aa36ac3b2805d",
+            "retained_answer_sha256": "bc6f0031d690815de363a29ead68b197bf9c62f741c180716c2a07c92bfa29cc",
+            "retained_sql_sha256": {
+              "segment_model.sql": "e06af82fa18fc761fd7334184b15c1ef6b6653610fab14c9074cf2d9f41e365c",
+              "consolidated_bridge.sql": "20fc2f707be2fbf555a90d6bfb23980f9b7e6c2442c86e6f33bdf978b9e16dea",
+              "service_subscriptions.sql": "9683df112e25921fc246f1a877ecc2e8514a533986c4cda2db38b4243de16f4a"
+            }
+          }
+        ]
+      },
+      "a10": {
+        "task_id": "workflow-v11-a10",
+        "task_sha256": "038e143d30cc16e36b2ec2668e2ca90cbb085f8f964257330f1ac5d5d5896acf",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-a10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "7b6a724096116861a4c91f9dffd7c753c11a7c19c99bfad67dbc20fc5d29433e",
+            "verdict_sha256": "ffe74a686873434a63d61b2a83b22a69f76f9880a21101389981ea8a08b7281d",
+            "retained_answer_sha256": "04f9a1e915efa9da5783747c503873d3335249809089a127123aa6312401240e",
+            "retained_sql_sha256": {
+              "income_model.sql": "4c1c1f55bf4e7bfdedd5d15fad3945b8a599dc807acd364610274852f7c31219",
+              "currency_and_network.sql": "fc732a3166d59f9b2bdc22cf345172113804db70544d704c631109b19c3f68ce",
+              "revenue_growth_bridge.sql": "fc330dad66b65fa5dd57056e3e9fe28ccf5cb1bd498c3f01940828db950c9483"
+            }
+          },
+          {
+            "task": "workflow-v11-a10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "706138bac96a38f205b0c77941a516a7a18d4be5734883213f121f8b0c86a83f",
+            "verdict_sha256": "ffe74a686873434a63d61b2a83b22a69f76f9880a21101389981ea8a08b7281d",
+            "retained_answer_sha256": "04f9a1e915efa9da5783747c503873d3335249809089a127123aa6312401240e",
+            "retained_sql_sha256": {
+              "income_model.sql": "4c1c1f55bf4e7bfdedd5d15fad3945b8a599dc807acd364610274852f7c31219",
+              "currency_and_network.sql": "fc732a3166d59f9b2bdc22cf345172113804db70544d704c631109b19c3f68ce",
+              "revenue_growth_bridge.sql": "fc330dad66b65fa5dd57056e3e9fe28ccf5cb1bd498c3f01940828db950c9483"
+            }
+          },
+          {
+            "task": "workflow-v11-a10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "7ce63dd28d595c894d94bb9037b152763cbfc9b1e79ef94dd3e518cfe4c00bbf",
+            "verdict_sha256": "ffe74a686873434a63d61b2a83b22a69f76f9880a21101389981ea8a08b7281d",
+            "retained_answer_sha256": "04f9a1e915efa9da5783747c503873d3335249809089a127123aa6312401240e",
+            "retained_sql_sha256": {
+              "income_model.sql": "4c1c1f55bf4e7bfdedd5d15fad3945b8a599dc807acd364610274852f7c31219",
+              "currency_and_network.sql": "fc732a3166d59f9b2bdc22cf345172113804db70544d704c631109b19c3f68ce",
+              "revenue_growth_bridge.sql": "fc330dad66b65fa5dd57056e3e9fe28ccf5cb1bd498c3f01940828db950c9483"
+            }
+          },
+          {
+            "task": "workflow-v11-a10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "3282f31b20616192d3c9976611ce8229479e1ccae752c7388b101f77c2ed9071",
+            "verdict_sha256": "ffe74a686873434a63d61b2a83b22a69f76f9880a21101389981ea8a08b7281d",
+            "retained_answer_sha256": "04f9a1e915efa9da5783747c503873d3335249809089a127123aa6312401240e",
+            "retained_sql_sha256": {
+              "income_model.sql": "4c1c1f55bf4e7bfdedd5d15fad3945b8a599dc807acd364610274852f7c31219",
+              "currency_and_network.sql": "fc732a3166d59f9b2bdc22cf345172113804db70544d704c631109b19c3f68ce",
+              "revenue_growth_bridge.sql": "fc330dad66b65fa5dd57056e3e9fe28ccf5cb1bd498c3f01940828db950c9483"
+            }
+          },
+          {
+            "task": "workflow-v11-a10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "b6fefb8377fd12f86cfcf659957780a8a23cc47caf2d0e4ad919a7d6f088bfc1",
+            "verdict_sha256": "ffe74a686873434a63d61b2a83b22a69f76f9880a21101389981ea8a08b7281d",
+            "retained_answer_sha256": "04f9a1e915efa9da5783747c503873d3335249809089a127123aa6312401240e",
+            "retained_sql_sha256": {
+              "income_model.sql": "4c1c1f55bf4e7bfdedd5d15fad3945b8a599dc807acd364610274852f7c31219",
+              "currency_and_network.sql": "fc732a3166d59f9b2bdc22cf345172113804db70544d704c631109b19c3f68ce",
+              "revenue_growth_bridge.sql": "fc330dad66b65fa5dd57056e3e9fe28ccf5cb1bd498c3f01940828db950c9483"
+            }
+          }
+        ]
+      },
+      "b09": {
+        "task_id": "workflow-v11-b09",
+        "task_sha256": "e1ccd7e0c05f10721af5f3af99358d19272319734074c9364bd0869230e813a6",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-b09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "0277fe9ca0ac4976178b69bca9d134c5b4e786930346790531e2b78aa85176c7",
+            "verdict_sha256": "ecbf79070fd78d9be774cd0d090458b6b2412f4a5d82bb0bd8fc792d10c00e0f",
+            "retained_answer_sha256": "c6fb449a10fcf0ec9150877d9ad8e4a962811e363cc525f57ead6c2e5750d943",
+            "retained_sql_sha256": {
+              "income_reconciliation.sql": "53f67d4906744bb1e2724ffea0827e9501c76c000cf603dd9a2c463d5fb21c13",
+              "share_basis.sql": "5a82064d6ee5b150ddea651a7eda3f2e2b4d1c01ebce5578548413d1d6576f56",
+              "operating_reconciliation.sql": "9afb1be25989bb8343c6308584fb5897c4e0b675c6e570387ea458a8957246cc"
+            }
+          },
+          {
+            "task": "workflow-v11-b09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "3ef257b1cfc7e01648e8fe528d82f335ddfc593124c297df2f45beb8ce5480cd",
+            "verdict_sha256": "ecbf79070fd78d9be774cd0d090458b6b2412f4a5d82bb0bd8fc792d10c00e0f",
+            "retained_answer_sha256": "c6fb449a10fcf0ec9150877d9ad8e4a962811e363cc525f57ead6c2e5750d943",
+            "retained_sql_sha256": {
+              "income_reconciliation.sql": "53f67d4906744bb1e2724ffea0827e9501c76c000cf603dd9a2c463d5fb21c13",
+              "share_basis.sql": "5a82064d6ee5b150ddea651a7eda3f2e2b4d1c01ebce5578548413d1d6576f56",
+              "operating_reconciliation.sql": "9afb1be25989bb8343c6308584fb5897c4e0b675c6e570387ea458a8957246cc"
+            }
+          },
+          {
+            "task": "workflow-v11-b09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "04275276d4e6b5973424f7028be8f9be037f82a0572594c4e4b377829eebdede",
+            "verdict_sha256": "ecbf79070fd78d9be774cd0d090458b6b2412f4a5d82bb0bd8fc792d10c00e0f",
+            "retained_answer_sha256": "c6fb449a10fcf0ec9150877d9ad8e4a962811e363cc525f57ead6c2e5750d943",
+            "retained_sql_sha256": {
+              "income_reconciliation.sql": "53f67d4906744bb1e2724ffea0827e9501c76c000cf603dd9a2c463d5fb21c13",
+              "share_basis.sql": "5a82064d6ee5b150ddea651a7eda3f2e2b4d1c01ebce5578548413d1d6576f56",
+              "operating_reconciliation.sql": "9afb1be25989bb8343c6308584fb5897c4e0b675c6e570387ea458a8957246cc"
+            }
+          },
+          {
+            "task": "workflow-v11-b09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "2aeca59d54a4c136a4f66fc40ac865dee61b69ab5c05155647581533221c6c05",
+            "verdict_sha256": "ecbf79070fd78d9be774cd0d090458b6b2412f4a5d82bb0bd8fc792d10c00e0f",
+            "retained_answer_sha256": "c6fb449a10fcf0ec9150877d9ad8e4a962811e363cc525f57ead6c2e5750d943",
+            "retained_sql_sha256": {
+              "income_reconciliation.sql": "53f67d4906744bb1e2724ffea0827e9501c76c000cf603dd9a2c463d5fb21c13",
+              "share_basis.sql": "5a82064d6ee5b150ddea651a7eda3f2e2b4d1c01ebce5578548413d1d6576f56",
+              "operating_reconciliation.sql": "9afb1be25989bb8343c6308584fb5897c4e0b675c6e570387ea458a8957246cc"
+            }
+          },
+          {
+            "task": "workflow-v11-b09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "fb559c28ab4e2d301985802d15dfd8c6c069089c2b5da2219291ed159e26880b",
+            "verdict_sha256": "ecbf79070fd78d9be774cd0d090458b6b2412f4a5d82bb0bd8fc792d10c00e0f",
+            "retained_answer_sha256": "c6fb449a10fcf0ec9150877d9ad8e4a962811e363cc525f57ead6c2e5750d943",
+            "retained_sql_sha256": {
+              "income_reconciliation.sql": "53f67d4906744bb1e2724ffea0827e9501c76c000cf603dd9a2c463d5fb21c13",
+              "share_basis.sql": "5a82064d6ee5b150ddea651a7eda3f2e2b4d1c01ebce5578548413d1d6576f56",
+              "operating_reconciliation.sql": "9afb1be25989bb8343c6308584fb5897c4e0b675c6e570387ea458a8957246cc"
+            }
+          }
+        ]
+      },
+      "b10": {
+        "task_id": "workflow-v11-b10",
+        "task_sha256": "35f716549d4db40aa00d009128392540b08cb0c895ca7e6abc03ee89f1e7106b",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-b10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "3141de5f1b3e481041e0bdf6e28e04c2387a11a9180b78feb5f5c1535127881f",
+            "verdict_sha256": "155bec39b6b9286a9560e575f55344bd622734fc69a6ebf042f39a98a11db5c4",
+            "retained_answer_sha256": "e6df8efbb1958675e2ce9ac46bc368dd1c31aee94efd57ce33a9b15f1d499cf0",
+            "retained_sql_sha256": {
+              "parent_earnings_bridge.sql": "a4296a0dfee17e03861e1de52783e02b2dd2cd63ffd35023d9e88a2e74e32ae8",
+              "investment_gain_bridge.sql": "60a8ed195050c46d85ab972b8cee29786989e234251ab1b2e66b791178afe6dd",
+              "consolidated_cash_bridge.sql": "25051e19aa04962f0215c8785180ace7c0ccef21c21903162e18282caa61b0e3"
+            }
+          },
+          {
+            "task": "workflow-v11-b10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "a128dba8893fc79e67b1cae25aae5b7afb9236ea6b15f03782a528448e5a19bb",
+            "verdict_sha256": "155bec39b6b9286a9560e575f55344bd622734fc69a6ebf042f39a98a11db5c4",
+            "retained_answer_sha256": "e6df8efbb1958675e2ce9ac46bc368dd1c31aee94efd57ce33a9b15f1d499cf0",
+            "retained_sql_sha256": {
+              "parent_earnings_bridge.sql": "a4296a0dfee17e03861e1de52783e02b2dd2cd63ffd35023d9e88a2e74e32ae8",
+              "investment_gain_bridge.sql": "60a8ed195050c46d85ab972b8cee29786989e234251ab1b2e66b791178afe6dd",
+              "consolidated_cash_bridge.sql": "25051e19aa04962f0215c8785180ace7c0ccef21c21903162e18282caa61b0e3"
+            }
+          },
+          {
+            "task": "workflow-v11-b10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "b661cf2a850188e0f6e07df29bfcf02363aab15e7ae36c937982d115f166b809",
+            "verdict_sha256": "155bec39b6b9286a9560e575f55344bd622734fc69a6ebf042f39a98a11db5c4",
+            "retained_answer_sha256": "e6df8efbb1958675e2ce9ac46bc368dd1c31aee94efd57ce33a9b15f1d499cf0",
+            "retained_sql_sha256": {
+              "parent_earnings_bridge.sql": "a4296a0dfee17e03861e1de52783e02b2dd2cd63ffd35023d9e88a2e74e32ae8",
+              "investment_gain_bridge.sql": "60a8ed195050c46d85ab972b8cee29786989e234251ab1b2e66b791178afe6dd",
+              "consolidated_cash_bridge.sql": "25051e19aa04962f0215c8785180ace7c0ccef21c21903162e18282caa61b0e3"
+            }
+          },
+          {
+            "task": "workflow-v11-b10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "b16a729932b3b55b3a6a1c866746a26aecdf84e18b411374b7363ad0e731af42",
+            "verdict_sha256": "155bec39b6b9286a9560e575f55344bd622734fc69a6ebf042f39a98a11db5c4",
+            "retained_answer_sha256": "e6df8efbb1958675e2ce9ac46bc368dd1c31aee94efd57ce33a9b15f1d499cf0",
+            "retained_sql_sha256": {
+              "parent_earnings_bridge.sql": "a4296a0dfee17e03861e1de52783e02b2dd2cd63ffd35023d9e88a2e74e32ae8",
+              "investment_gain_bridge.sql": "60a8ed195050c46d85ab972b8cee29786989e234251ab1b2e66b791178afe6dd",
+              "consolidated_cash_bridge.sql": "25051e19aa04962f0215c8785180ace7c0ccef21c21903162e18282caa61b0e3"
+            }
+          },
+          {
+            "task": "workflow-v11-b10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "306e17e878f4e2d03ba244b8df4eff86f7a257c1dca402259e2622a858722258",
+            "verdict_sha256": "155bec39b6b9286a9560e575f55344bd622734fc69a6ebf042f39a98a11db5c4",
+            "retained_answer_sha256": "e6df8efbb1958675e2ce9ac46bc368dd1c31aee94efd57ce33a9b15f1d499cf0",
+            "retained_sql_sha256": {
+              "parent_earnings_bridge.sql": "a4296a0dfee17e03861e1de52783e02b2dd2cd63ffd35023d9e88a2e74e32ae8",
+              "investment_gain_bridge.sql": "60a8ed195050c46d85ab972b8cee29786989e234251ab1b2e66b791178afe6dd",
+              "consolidated_cash_bridge.sql": "25051e19aa04962f0215c8785180ace7c0ccef21c21903162e18282caa61b0e3"
+            }
+          }
+        ]
+      },
+      "c08": {
+        "task_id": "workflow-v11-c08",
+        "task_sha256": "bd964dddd27bbeeeaef6b176ce568cbd38265eb1e130466e268308aa862a89b6",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-c08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "3c2648fe48852e8639f1191480a685415e8bc32eed64fadde3d75be13bd9dde5",
+            "verdict_sha256": "0e7e4c678f33eacf74e26dc28b7a5ef863a517592b213c583e169b5eb0d02d7e",
+            "retained_answer_sha256": "b63c76b515c73059d3916a1d761d931490e9120ae8f0a745155a790b2a9b9ef6",
+            "retained_sql_sha256": {
+              "income_reconciliation.sql": "58482d48839f059846f4f33dfd16b687e347799ec207b810d6c9aff424d44fa2",
+              "share_basis.sql": "b295be33d95e9d1de0339484e9754586595fb497094e3f6650968f0d08fb5cfe",
+              "segment_growth_bridge.sql": "41118daf13bbfbb2145b90726520c509768b2e788ad7edca6d86d01227562bc1"
+            }
+          },
+          {
+            "task": "workflow-v11-c08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "436c798ac6f84f7de8411729af8e0642592a31288bcec4bfda5cf472dba16eef",
+            "verdict_sha256": "0e7e4c678f33eacf74e26dc28b7a5ef863a517592b213c583e169b5eb0d02d7e",
+            "retained_answer_sha256": "b63c76b515c73059d3916a1d761d931490e9120ae8f0a745155a790b2a9b9ef6",
+            "retained_sql_sha256": {
+              "income_reconciliation.sql": "58482d48839f059846f4f33dfd16b687e347799ec207b810d6c9aff424d44fa2",
+              "share_basis.sql": "b295be33d95e9d1de0339484e9754586595fb497094e3f6650968f0d08fb5cfe",
+              "segment_growth_bridge.sql": "41118daf13bbfbb2145b90726520c509768b2e788ad7edca6d86d01227562bc1"
+            }
+          },
+          {
+            "task": "workflow-v11-c08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "1618e8a5d98dc04440b7966e0e8fbd622c7fe5f653ff777e5335950a62f190cf",
+            "verdict_sha256": "0e7e4c678f33eacf74e26dc28b7a5ef863a517592b213c583e169b5eb0d02d7e",
+            "retained_answer_sha256": "b63c76b515c73059d3916a1d761d931490e9120ae8f0a745155a790b2a9b9ef6",
+            "retained_sql_sha256": {
+              "income_reconciliation.sql": "58482d48839f059846f4f33dfd16b687e347799ec207b810d6c9aff424d44fa2",
+              "share_basis.sql": "b295be33d95e9d1de0339484e9754586595fb497094e3f6650968f0d08fb5cfe",
+              "segment_growth_bridge.sql": "41118daf13bbfbb2145b90726520c509768b2e788ad7edca6d86d01227562bc1"
+            }
+          },
+          {
+            "task": "workflow-v11-c08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "4113e38209377b6c1db327a7b0e5dbc332b71eb96d5129508f49d58838aa33f8",
+            "verdict_sha256": "0e7e4c678f33eacf74e26dc28b7a5ef863a517592b213c583e169b5eb0d02d7e",
+            "retained_answer_sha256": "b63c76b515c73059d3916a1d761d931490e9120ae8f0a745155a790b2a9b9ef6",
+            "retained_sql_sha256": {
+              "income_reconciliation.sql": "58482d48839f059846f4f33dfd16b687e347799ec207b810d6c9aff424d44fa2",
+              "share_basis.sql": "b295be33d95e9d1de0339484e9754586595fb497094e3f6650968f0d08fb5cfe",
+              "segment_growth_bridge.sql": "41118daf13bbfbb2145b90726520c509768b2e788ad7edca6d86d01227562bc1"
+            }
+          },
+          {
+            "task": "workflow-v11-c08",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "d2a9222fe258b4135a3b9892b4615f7caf82b3680146fa6f63f47b470dd1628d",
+            "verdict_sha256": "0e7e4c678f33eacf74e26dc28b7a5ef863a517592b213c583e169b5eb0d02d7e",
+            "retained_answer_sha256": "b63c76b515c73059d3916a1d761d931490e9120ae8f0a745155a790b2a9b9ef6",
+            "retained_sql_sha256": {
+              "income_reconciliation.sql": "58482d48839f059846f4f33dfd16b687e347799ec207b810d6c9aff424d44fa2",
+              "share_basis.sql": "b295be33d95e9d1de0339484e9754586595fb497094e3f6650968f0d08fb5cfe",
+              "segment_growth_bridge.sql": "41118daf13bbfbb2145b90726520c509768b2e788ad7edca6d86d01227562bc1"
+            }
+          }
+        ]
+      },
+      "c09": {
+        "task_id": "workflow-v11-c09",
+        "task_sha256": "cd408fda7cbc8d1db727179fa26bb458977ca900c8ae123b7b9244b61e6131ee",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-c09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "adb81c4643ef59aeb637bb40e1e38adb724c146c31a8a648d9bc8d997eb69917",
+            "verdict_sha256": "722f92803a719d8f16bc8eeba9af27865b006c045ff6770e3eb1a2f2644a709d",
+            "retained_answer_sha256": "284f7e2a8145b545939ccf3add7977079c3fada0ec27215618f740b47d92a31a",
+            "retained_sql_sha256": {
+              "bank_basis_bridge.sql": "77d74009057d9fad82d0f9e2bda41540d48007ee55692174ad55798f24d2b271",
+              "annual_exclusion_components.sql": "4d7cb4109e48192547d3d8917d61e05a11952dabb5ba06dacce14d4aba10045a",
+              "significant_item_bridge.sql": "be6e82dded603b7cb74e71f9f8f99536053c5763b85998dea3caa07a5053f18c"
+            }
+          },
+          {
+            "task": "workflow-v11-c09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "e5f653b1ab14397bd88a116ea1ebf287297ac4836f49beeafd07997b0a618e2b",
+            "verdict_sha256": "722f92803a719d8f16bc8eeba9af27865b006c045ff6770e3eb1a2f2644a709d",
+            "retained_answer_sha256": "284f7e2a8145b545939ccf3add7977079c3fada0ec27215618f740b47d92a31a",
+            "retained_sql_sha256": {
+              "bank_basis_bridge.sql": "77d74009057d9fad82d0f9e2bda41540d48007ee55692174ad55798f24d2b271",
+              "annual_exclusion_components.sql": "4d7cb4109e48192547d3d8917d61e05a11952dabb5ba06dacce14d4aba10045a",
+              "significant_item_bridge.sql": "be6e82dded603b7cb74e71f9f8f99536053c5763b85998dea3caa07a5053f18c"
+            }
+          },
+          {
+            "task": "workflow-v11-c09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "785c23675383297301713743490dd0efd81f2357dda4b4cff356cccb61a48bdf",
+            "verdict_sha256": "722f92803a719d8f16bc8eeba9af27865b006c045ff6770e3eb1a2f2644a709d",
+            "retained_answer_sha256": "284f7e2a8145b545939ccf3add7977079c3fada0ec27215618f740b47d92a31a",
+            "retained_sql_sha256": {
+              "bank_basis_bridge.sql": "77d74009057d9fad82d0f9e2bda41540d48007ee55692174ad55798f24d2b271",
+              "annual_exclusion_components.sql": "4d7cb4109e48192547d3d8917d61e05a11952dabb5ba06dacce14d4aba10045a",
+              "significant_item_bridge.sql": "be6e82dded603b7cb74e71f9f8f99536053c5763b85998dea3caa07a5053f18c"
+            }
+          },
+          {
+            "task": "workflow-v11-c09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "6be7c3c73939af28e9df5fad4d355fc9afbb00e757adc105f7bef37c06720852",
+            "verdict_sha256": "722f92803a719d8f16bc8eeba9af27865b006c045ff6770e3eb1a2f2644a709d",
+            "retained_answer_sha256": "284f7e2a8145b545939ccf3add7977079c3fada0ec27215618f740b47d92a31a",
+            "retained_sql_sha256": {
+              "bank_basis_bridge.sql": "77d74009057d9fad82d0f9e2bda41540d48007ee55692174ad55798f24d2b271",
+              "annual_exclusion_components.sql": "4d7cb4109e48192547d3d8917d61e05a11952dabb5ba06dacce14d4aba10045a",
+              "significant_item_bridge.sql": "be6e82dded603b7cb74e71f9f8f99536053c5763b85998dea3caa07a5053f18c"
+            }
+          },
+          {
+            "task": "workflow-v11-c09",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "a3988a01632473eaeb8f976f8ba9dec66c65aa01af2be3faac2a5dcb331a3734",
+            "verdict_sha256": "722f92803a719d8f16bc8eeba9af27865b006c045ff6770e3eb1a2f2644a709d",
+            "retained_answer_sha256": "284f7e2a8145b545939ccf3add7977079c3fada0ec27215618f740b47d92a31a",
+            "retained_sql_sha256": {
+              "bank_basis_bridge.sql": "77d74009057d9fad82d0f9e2bda41540d48007ee55692174ad55798f24d2b271",
+              "annual_exclusion_components.sql": "4d7cb4109e48192547d3d8917d61e05a11952dabb5ba06dacce14d4aba10045a",
+              "significant_item_bridge.sql": "be6e82dded603b7cb74e71f9f8f99536053c5763b85998dea3caa07a5053f18c"
+            }
+          }
+        ]
+      },
+      "c10": {
+        "task_id": "workflow-v11-c10",
+        "task_sha256": "a59f3f5172ad9165f34a9fa7f5c5f2bc01a502b32656ef2b7dc8d041af00d370",
+        "split": "evaluation",
+        "attempts": [
+          {
+            "task": "workflow-v11-c10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "2cae4cbd1f2d08b3fbcf372861c92c5d98b86e871b824797fdedc4b910ff6ac1",
+            "verdict_sha256": "b9a110815d45837939158611746894ac1c684eb1d5fe1305402fa3a07b50d2a0",
+            "retained_answer_sha256": "238fdfcd4c048044523475a6509edef46892cc9b9eba40436b056f216f9b136d",
+            "retained_sql_sha256": {
+              "regional_currency.sql": "656a9e8721b1c1347c0ecbaed48a9221d34c2b49031158f0edb367ea4d8381d1",
+              "annual_currency_margin.sql": "56040be2b7de5f3d0a56b8eb94ceb4f4b0ae3aaaae7241997c0cc715f29e2d0e",
+              "forecast_bounds.sql": "d68699fea40c5ea0c0c2e0019a4f3d41736ab8c7c49349c770df1fa5de6b7e34"
+            }
+          },
+          {
+            "task": "workflow-v11-c10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "bb7ddfc1b32697e440c5e313f099776bdfb45c984f99acf5e9243ffcdce933dc",
+            "verdict_sha256": "b9a110815d45837939158611746894ac1c684eb1d5fe1305402fa3a07b50d2a0",
+            "retained_answer_sha256": "238fdfcd4c048044523475a6509edef46892cc9b9eba40436b056f216f9b136d",
+            "retained_sql_sha256": {
+              "regional_currency.sql": "656a9e8721b1c1347c0ecbaed48a9221d34c2b49031158f0edb367ea4d8381d1",
+              "annual_currency_margin.sql": "56040be2b7de5f3d0a56b8eb94ceb4f4b0ae3aaaae7241997c0cc715f29e2d0e",
+              "forecast_bounds.sql": "d68699fea40c5ea0c0c2e0019a4f3d41736ab8c7c49349c770df1fa5de6b7e34"
+            }
+          },
+          {
+            "task": "workflow-v11-c10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "7cfeaab8cda756db17cf364cbe6384194367c3123bbf02161ebc1304952f0adf",
+            "verdict_sha256": "b9a110815d45837939158611746894ac1c684eb1d5fe1305402fa3a07b50d2a0",
+            "retained_answer_sha256": "238fdfcd4c048044523475a6509edef46892cc9b9eba40436b056f216f9b136d",
+            "retained_sql_sha256": {
+              "regional_currency.sql": "656a9e8721b1c1347c0ecbaed48a9221d34c2b49031158f0edb367ea4d8381d1",
+              "annual_currency_margin.sql": "56040be2b7de5f3d0a56b8eb94ceb4f4b0ae3aaaae7241997c0cc715f29e2d0e",
+              "forecast_bounds.sql": "d68699fea40c5ea0c0c2e0019a4f3d41736ab8c7c49349c770df1fa5de6b7e34"
+            }
+          },
+          {
+            "task": "workflow-v11-c10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "24c52173f490932dd93fc1b8d8eab53d2c81957379d7a9dcee4a7f89cb1829b7",
+            "verdict_sha256": "b9a110815d45837939158611746894ac1c684eb1d5fe1305402fa3a07b50d2a0",
+            "retained_answer_sha256": "238fdfcd4c048044523475a6509edef46892cc9b9eba40436b056f216f9b136d",
+            "retained_sql_sha256": {
+              "regional_currency.sql": "656a9e8721b1c1347c0ecbaed48a9221d34c2b49031158f0edb367ea4d8381d1",
+              "annual_currency_margin.sql": "56040be2b7de5f3d0a56b8eb94ceb4f4b0ae3aaaae7241997c0cc715f29e2d0e",
+              "forecast_bounds.sql": "d68699fea40c5ea0c0c2e0019a4f3d41736ab8c7c49349c770df1fa5de6b7e34"
+            }
+          },
+          {
+            "task": "workflow-v11-c10",
+            "reward": 1.0,
+            "isolation": {
+              "network_probe_blocked": true,
+              "network_namespace_none": true,
+              "no_inference_key": true,
+              "no_docker_socket": true
+            },
+            "native_result_sha256": "64479d6d3d64b2c05638ef96a6f9ce165d9aaffab6d51930c69bcbc7c784685c",
+            "verdict_sha256": "b9a110815d45837939158611746894ac1c684eb1d5fe1305402fa3a07b50d2a0",
+            "retained_answer_sha256": "238fdfcd4c048044523475a6509edef46892cc9b9eba40436b056f216f9b136d",
+            "retained_sql_sha256": {
+              "regional_currency.sql": "656a9e8721b1c1347c0ecbaed48a9221d34c2b49031158f0edb367ea4d8381d1",
+              "annual_currency_margin.sql": "56040be2b7de5f3d0a56b8eb94ceb4f4b0ae3aaaae7241997c0cc715f29e2d0e",
+              "forecast_bounds.sql": "d68699fea40c5ea0c0c2e0019a4f3d41736ab8c7c49349c770df1fa5de6b7e34"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "quickstart": {
+    "task": "workflow-v11-c01",
+    "reward": 1.0,
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    },
+    "native_result_sha256": "353fe65011e161b90e3c1c10ce38b65ffdb9c895f065e9f26c8bc9e38fde24ad",
+    "verdict_sha256": "9457526d32683d824fb8badb19c5eb23092b26d5fcd4d60878afe355f01f7c57",
+    "retained_answer_sha256": "1e31045b534a57120e702faede99e470f2a0b85f6c41ef2b77482c776c05768e",
+    "retained_sql_sha256": {
+      "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+      "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+      "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3"
+    }
+  },
+  "scripted_agent_validation": {
+    "kind": "scripted_native_harbor_agent_fixture",
+    "harbor_version": "0.23.0",
+    "repo": null,
+    "inference": false,
+    "model_performance_evaluation": false,
+    "external_service_spend_usd": 0,
+    "cases": [
+      {
+        "variant": "reference",
+        "agent": "terminus-2",
+        "task": "workflow-v11-c01",
+        "reward": 1.0,
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        },
+        "native_result_sha256": "f951e3f37d015d8972e5d37daeb521748a1a2ab42ba0c3e1cb5de0d5ffbfbef1",
+        "verdict_sha256": "9457526d32683d824fb8badb19c5eb23092b26d5fcd4d60878afe355f01f7c57",
+        "retained_answer_sha256": "e119d260eead30695b6bcfd3c9ca09120b0b69b97ef26afe958498f5b1276da3",
+        "retained_sql_sha256": {
+          "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+          "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+          "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3"
+        },
+        "native_job_result_sha256": "38fbdf0cdde754d5165145ddb5db1c88769aa1133c9f5ff54b0072d97831d070",
+        "requests": [
+          {
+            "terminal_completion_observed": false,
+            "generation": {
+              "max_tokens": 16384,
+              "reasoning_effort": "high"
+            }
+          },
+          {
+            "terminal_completion_observed": true,
+            "generation": {
+              "max_tokens": 16384,
+              "reasoning_effort": "high"
+            }
+          },
+          {
+            "terminal_completion_observed": true,
+            "generation": {
+              "max_tokens": 16384,
+              "reasoning_effort": "high"
+            }
+          }
+        ],
+        "candidate_received_test_key": true,
+        "candidate_external_tls_probe_blocked": true,
+        "candidate_reference_paths_absent": true
+      },
+      {
+        "variant": "invalid",
+        "agent": "terminus-2",
+        "task": "workflow-v11-c01",
+        "reward": 0.0,
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        },
+        "native_result_sha256": "f629f3975ae9e18349ac9e9796f4282087027947f75689782577c32ed2346a12",
+        "verdict_sha256": "1f3b99de3d9e871ea6bd9b8765e0e870796306f9b0a3acdcf4796f2edd640057",
+        "retained_answer_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "retained_sql_sha256": {},
+        "native_job_result_sha256": "c7fbe59bbd87a83a16e77e4f72980d458cb5a7158b9c90169cca2c5a2dbf2e33",
+        "requests": [
+          {
+            "terminal_completion_observed": false,
+            "generation": {
+              "max_tokens": 16384,
+              "reasoning_effort": "high"
+            }
+          },
+          {
+            "terminal_completion_observed": true,
+            "generation": {
+              "max_tokens": 16384,
+              "reasoning_effort": "high"
+            }
+          },
+          {
+            "terminal_completion_observed": true,
+            "generation": {
+              "max_tokens": 16384,
+              "reasoning_effort": "high"
+            }
+          }
+        ],
+        "candidate_received_test_key": true,
+        "candidate_external_tls_probe_blocked": true,
+        "candidate_reference_paths_absent": true
+      }
+    ],
+    "comparison_recipe": {
+      "protocol_version": "construction-comparison-1",
+      "configuration_sha256": "10b36c8d0d633547bc75eb7c332dd4857e1cd414bf7c9f461273080b502da113",
+      "agent_kwargs": {
+        "max_turns": 24,
+        "parser_name": "json",
+        "enable_summarize": false,
+        "proactive_summarization_threshold": 0,
+        "use_responses_api": false,
+        "reasoning_effort": "high",
+        "interleaved_thinking": true,
+        "model_info": {
+          "max_input_tokens": 65536,
+          "max_output_tokens": 16384
+        },
+        "llm_call_kwargs": {
+          "max_tokens": 16384
+        }
+      }
+    },
+    "source": {
+      "kind": "checkout",
+      "manifest_id": "workflow-v11-canonical-99f9af5fc8cb",
+      "task_sha256": "630ddb6bfb86517177439a571fed1bcb0c25b5ae0483df6eb89152477ee093f4"
+    }
+  }
+}

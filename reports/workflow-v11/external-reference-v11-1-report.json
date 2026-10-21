@@ -1,0 +1,224 @@
+{
+  "report_version": "workpaper-1.2",
+  "attempts": [
+    {
+      "attempt_id": "external-reference-v11-1",
+      "execution_profile": "isolated-linux",
+      "manifest_id": "workflow-v11-canonical-99f9af5fc8cb",
+      "task_id": "workflow-v11-c01",
+      "task_sha256": "630ddb6bfb86517177439a571fed1bcb0c25b5ae0483df6eb89152477ee093f4",
+      "scorer_version": "workflow-1.2.1",
+      "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+      "started_at": "2026-10-21T06:03:43.683245+00:00",
+      "external_service_spend_usd": 0,
+      "status": "verified",
+      "inference": false,
+      "source_kind": "submitted_artifact_replay",
+      "configuration_evidence": "Declared model revision, serving runtime, model ID and generation settings. Native version is checked. Server identity and enforcement are not independently observed.",
+      "evaluation_track": "construction",
+      "task_split": "development",
+      "requested_tables": [
+        "revenue_bridge",
+        "profit_bridge",
+        "reconciliation"
+      ],
+      "execution_files_sha256": {
+        "scripts/local_trial.py": "2bd3f7098e2134c7be159d60fbe458077e454d676bbafcd757f09b553b454d7d",
+        "scripts/fresh_replay.py": "5080fe34f107752dc11b2f1f5f569bf52ffb81f5e034f9208ef0e4573894f8ca",
+        "scripts/fix_native_version.py": "bd59fa32f0b6c33ec05fee77f12dd5a36142ea7b97fea73ca5a7303e88b40d86",
+        "scripts/native_run.py": "d44b7cc5754c1c59c2dd9055aead7ca8f6924846ca0a9af48de93a98704381ac",
+        "config/runtime.json": "18566361ab2ddf5d4198adf3c4e096984903acf8725a955e4df743a2a6c8e0d5"
+      },
+      "model_endpoint": null,
+      "effective_task_sha256": "d171413c97d24fbc1a5c3141375fa97bd566378dee577e53442bff40c5c24f48",
+      "candidate_network_policy": "Loopback and declared endpoint IP addresses/TCP port only. IPv6 endpoints additionally allow neighbor solicitation/advertisement with hop limit 255. Other ICMP, DNS and nonendpoint traffic are dropped.",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "verdict_sha256": "9457526d32683d824fb8badb19c5eb23092b26d5fcd4d60878afe355f01f7c57",
+      "sql_file_sha256": {
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+      },
+      "raw_answer_sha256": "1e31045b534a57120e702faede99e470f2a0b85f6c41ef2b77482c776c05768e",
+      "normalized_answer_sha256": "1e31045b534a57120e702faede99e470f2a0b85f6c41ef2b77482c776c05768e",
+      "finished_at": "2026-10-21T06:04:24.373434+00:00"
+    }
+  ],
+  "evaluation_track": "construction",
+  "diagnostics": [
+    {
+      "attempt_id": "external-reference-v11-1",
+      "task_id": "workflow-v11-c01",
+      "evaluation_track": "construction",
+      "condition": "fresh",
+      "source_kind": "submitted_artifact_replay",
+      "baseline_matched": false,
+      "baseline_note": "No starting SQL is supplied. Repair and preservation are not applicable.",
+      "failure_dimensions": {
+        "reasoning_or_calculation": "pass",
+        "evidence": "pass",
+        "robustness": "pass",
+        "delivery": "pass",
+        "infrastructure": "pass"
+      },
+      "candidate_error_type": null,
+      "tables": {
+        "profit_bridge": {
+          "original_error": null,
+          "failed_controls": {}
+        },
+        "reconciliation": {
+          "original_error": null,
+          "failed_controls": {}
+        },
+        "revenue_bridge": {
+          "original_error": null,
+          "failed_controls": {}
+        }
+      },
+      "table_outcomes": {
+        "profit_bridge": {
+          "original_inputs": "Correct",
+          "original_and_controls": "Correct"
+        },
+        "reconciliation": {
+          "original_inputs": "Correct",
+          "original_and_controls": "Correct"
+        },
+        "revenue_bridge": {
+          "original_inputs": "Correct",
+          "original_and_controls": "Correct"
+        }
+      },
+      "outcome_counts": {
+        "original_inputs": {
+          "Correct": 3
+        },
+        "original_and_controls": {
+          "Correct": 3
+        }
+      },
+      "transition_counts": null,
+      "opportunities": null
+    }
+  ],
+  "summary": {
+    "attempts": 1,
+    "distinct_tasks": 1,
+    "repeated_tasks": {},
+    "task_splits": {
+      "development": 1
+    },
+    "model_attempts_by_split": {},
+    "fully_correct_workpapers": 1,
+    "infrastructure_failures": 0,
+    "table_outcomes": {
+      "original_inputs": {
+        "Correct": 3
+      },
+      "original_and_controls": {
+        "Correct": 3
+      }
+    },
+    "external_service_spend_usd": 0,
+    "cost_evidence": "Sum of recorded costs"
+  },
+  "baseline_sources_sha256": {},
+  "interpretation": "Construction reports correctness without a starting-query baseline. Maintenance transitions use matching original inputs and controls. Missing delivery or infrastructure leaves semantic outcomes unassessed. Reasoning or calculation describes observed output failure, not its internal cause. Repeated tasks are not independent observations. Different budgets and continuations are not controlled comparisons.",
+  "external_service_spend_usd": 0
+}
