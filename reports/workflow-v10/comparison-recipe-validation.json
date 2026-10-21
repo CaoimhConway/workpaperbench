@@ -1,0 +1,125 @@
+{
+  "kind": "scripted_native_harbor_agent_fixture",
+  "harbor_version": "0.23.0",
+  "repo": null,
+  "inference": false,
+  "model_performance_evaluation": false,
+  "external_service_spend_usd": 0,
+  "cases": [
+    {
+      "variant": "reference",
+      "agent": "terminus-2",
+      "task": "workflow-v10-c01",
+      "reward": 1.0,
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "native_result_sha256": "b84cbb6b882672b7d5a339da30d2e3181a4f4e6af0f7ad61670663f7b7ba5854",
+      "verdict_sha256": "4482d6136589cc8c46544875bc1f3e9e58226868786dd6847ec01b834cb5dcc3",
+      "retained_answer_sha256": "06f9589f249c187bdb29dd674649e4992c19fc68df47d953b9fbdfeb8ed9efde",
+      "retained_sql_sha256": {
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4"
+      },
+      "native_job_result_sha256": "cbee62e6647c78b5f4c28525cb62bd5fc689bad662496aea450ad94ca1878001",
+      "requests": [
+        {
+          "terminal_completion_observed": false,
+          "generation": {
+            "max_tokens": 16384,
+            "reasoning_effort": "high"
+          }
+        },
+        {
+          "terminal_completion_observed": true,
+          "generation": {
+            "max_tokens": 16384,
+            "reasoning_effort": "high"
+          }
+        },
+        {
+          "terminal_completion_observed": true,
+          "generation": {
+            "max_tokens": 16384,
+            "reasoning_effort": "high"
+          }
+        }
+      ],
+      "candidate_received_test_key": true,
+      "candidate_external_tls_probe_blocked": true,
+      "candidate_reference_paths_absent": true
+    },
+    {
+      "variant": "invalid",
+      "agent": "terminus-2",
+      "task": "workflow-v10-c01",
+      "reward": 0.0,
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "native_result_sha256": "61e4336b86934fb04d38124f8ff8f22356ace9f4b8cf50b1bdf168867e5665e0",
+      "verdict_sha256": "1f3b99de3d9e871ea6bd9b8765e0e870796306f9b0a3acdcf4796f2edd640057",
+      "retained_answer_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "retained_sql_sha256": {},
+      "native_job_result_sha256": "c2abf21ecdb5a7e16f4704957d90298a58023166b5919a29a27ad7d533705af7",
+      "requests": [
+        {
+          "terminal_completion_observed": false,
+          "generation": {
+            "max_tokens": 16384,
+            "reasoning_effort": "high"
+          }
+        },
+        {
+          "terminal_completion_observed": true,
+          "generation": {
+            "max_tokens": 16384,
+            "reasoning_effort": "high"
+          }
+        },
+        {
+          "terminal_completion_observed": true,
+          "generation": {
+            "max_tokens": 16384,
+            "reasoning_effort": "high"
+          }
+        }
+      ],
+      "candidate_received_test_key": true,
+      "candidate_external_tls_probe_blocked": true,
+      "candidate_reference_paths_absent": true
+    }
+  ],
+  "comparison_recipe": {
+    "protocol_version": "construction-comparison-1",
+    "configuration_sha256": "1ba312bc7c8d112e91e43f45250c85c5b11ceeb9f29f84baadcb884a208ccd64",
+    "agent_kwargs": {
+      "max_turns": 24,
+      "parser_name": "json",
+      "enable_summarize": false,
+      "proactive_summarization_threshold": 0,
+      "use_responses_api": false,
+      "reasoning_effort": "high",
+      "interleaved_thinking": true,
+      "model_info": {
+        "max_input_tokens": 65536,
+        "max_output_tokens": 16384
+      },
+      "llm_call_kwargs": {
+        "max_tokens": 16384
+      }
+    }
+  },
+  "source": {
+    "kind": "checkout",
+    "manifest_id": "workflow-v10-canonical-b514bac2274f",
+    "task_sha256": "58c3e6c27e41d0f531991c6cb487ff0090a577f574968ee30bcaccbdf94b9f7f"
+  }
+}

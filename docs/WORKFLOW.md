@@ -1,14 +1,14 @@
 # Workflow methods
 
-The default catalog is `workflow-v9-canonical-7441313f1a0b` (construction), using
-scorer `workflow-1.2.0`. Six development and 24 evaluation cases each request three
+The default catalog is `workflow-v10-canonical-b514bac2274f` (construction), using
+scorer `workflow-1.2.1`. Six development and 24 evaluation cases each request three
 SQL result tables and three claim verdicts. All 30 cases are available for external
 model execution. Deliver `answer.json` and three named `.sql` files. The
-[Block example](../examples/block-workpaper-v9) is an authored reference.
+[Block example](../examples/block-workpaper-v10) is an authored reference.
 
 ## Construction and maintenance
 
-| Condition | Construction, workflow-v9 | Maintenance, workflow-v7 |
+| Condition | Construction, workflow-v10 | Maintenance, workflow-v7 |
 | --- | --- | --- |
 | Candidate receives | Dossier, normalized observations and output contract | Same financial inputs plus three starting queries |
 | Starting SQL | None | 61/90 queries already correct across the catalog |
@@ -171,12 +171,12 @@ without any Mac/Lima dependency:
 ```sh
 .venv/bin/pip install -e '.[test]'
 .venv/bin/python -m pytest -q
-.venv/bin/python scripts/build_workflow_pyusd_revision.py --check
+.venv/bin/python scripts/build_workflow_contract_revision.py --check
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v9 --native-prefix my-validity \
+  --dataset workflow-v10 --native-prefix my-validity \
   --output .local/my-validity-prototypes.json
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v9 --tasks all --output .local/my-validity-suite.json
+  --dataset workflow-v10 --tasks all --output .local/my-validity-suite.json
 ```
 
 The explicit `--executor local-lima` option retains the owner-specific maintenance
@@ -213,9 +213,22 @@ The `workflow-v9` revision accepts the January and February report summaries as
 sufficient support for the PYUSD asset-coverage claim. It also defines Treasury
 valuation residuals as deduplicated holding fair value less the reported Treasury
 category. Financial observations, targets, controls and scorer code are unchanged.
-The [current native validation](../reports/workflow-v9/direct-harbor-validation.json)
+The [preserved native validation](../reports/workflow-v9/direct-harbor-validation.json)
 records the revised catalog separately. Earlier task versions and results remain
 available under their original identities.
+
+The `workflow-v10` revision removes the numerical row key from Block's singleton
+reconciliation, preserving its declared cell tolerances. It specifies reconstructed
+EBITDA and residual directions for Uber, and reported stocks for the PYUSD bridge.
+Uber's commission claim also accepts its sufficient segment-comparison source alone.
+Scorer `workflow-1.2.1` retains the 16,384-byte SQL limit and accepts the full bounded
+JSON envelope after escaping. The [versioned builder](../scripts/build_workflow_contract_revision.py)
+preserves source observations, reference SQL, numerical targets and synthetic
+controls. Earlier catalogs and results keep their original identities.
+
+Use the [comparison recipe](COMPARISON.md) to freeze agent and execution settings
+before a model comparison. These corrections and authored checks do not establish
+model performance on the revised catalog.
 
 ## Evaluation limits
 

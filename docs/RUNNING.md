@@ -20,8 +20,8 @@ solutions five times before evaluating a model in a new environment:
 
 ```sh
 harbor run \
-  --repo CaoimhConway/workpaperbench@v0.6.1-rc.1 \
-  -p datasets/workflow-v9/tasks \
+  --repo CaoimhConway/workpaperbench@v0.6.2-rc.1 \
+  -p datasets/workflow-v10/tasks \
   --agent oracle -k 5 \
   --n-concurrent 2 --env docker
 ```
@@ -37,8 +37,8 @@ through its environment variables and choose its Harbor model name:
 
 ```sh
 harbor run \
-  --repo CaoimhConway/workpaperbench@v0.6.1-rc.1 \
-  -p datasets/workflow-v9/tasks \
+  --repo CaoimhConway/workpaperbench@v0.6.2-rc.1 \
+  -p datasets/workflow-v10/tasks \
   --agent terminus-2 --model '<provider/model>' \
   --ak max_turns=24 \
   --n-concurrent 2 --env docker
@@ -50,8 +50,8 @@ from the controller. For example, with a server already running locally:
 
 ```sh
 OPENAI_API_KEY=local-only harbor run \
-  --repo CaoimhConway/workpaperbench@v0.6.1-rc.1 \
-  -p datasets/workflow-v9/tasks -i c01 \
+  --repo CaoimhConway/workpaperbench@v0.6.2-rc.1 \
+  -p datasets/workflow-v10/tasks -i c01 \
   --agent terminus-2 --model openai/my-model \
   --ak api_base=http://127.0.0.1:8000/v1 \
   --ak 'model_info={"max_input_tokens":65536,"max_output_tokens":4096,"input_cost_per_token":0,"output_cost_per_token":0,"litellm_provider":"openai","mode":"chat"}' \
@@ -87,6 +87,9 @@ Use `-i c01` to select one development task. The complete development set is
 -x a01 -x a02 -x b01 -x b02 -x c01 -x c02
 ```
 
+The [comparison recipe](COMPARISON.md) fixes the agent, budgets and result metadata
+for a declared comparison. The quickstart above is an execution example.
+
 Use development tasks to select configurations before an evaluation comparison.
 Set `--job-name` and `--jobs-dir` for identifiable new jobs. `-k` controls repeated
 attempts, and `--n-concurrent` controls simultaneous trials. Keep failed attempts
@@ -117,7 +120,7 @@ authorization and bounded workers constrain replay. These checks do not prove
 security for arbitrary workloads. Modal and other sandbox backends have not been
 validated against this verifier's network-namespace requirements.
 
-The [direct validation record](../reports/workflow-v9/direct-harbor-validation.json)
+The [direct validation record](../reports/workflow-v10/direct-harbor-validation.json)
 binds the oracle sweep and local scripted Terminus-2 fixtures. The fixtures check
 native API transport, terminal feedback, retained delivery, positive and negative
 grader outcomes, and isolation on development task `c01`. They make no inference
@@ -162,15 +165,26 @@ python3 scripts/workflow_regression.py \
   --output .local/my-workflow-regression.json
 ```
 
-This checks the checkout's oracle solutions for `a01`, `b01`, `b02` and `c01`, followed
+This checks the checkout's oracle solutions for `a01`, `b01`, `b02`, `b06` and `c01`, followed
 by correct and invalid scripted deliveries through native Terminus-2. It makes
 no model calls. Missing diagnostics, infrastructure errors, changed artifacts
 or unexpected rewards fail the command and remain in the result ledger. Use a
 fresh output path. Raw native logs remain local beside the summary.
-The [current recorded regression](../reports/workflow-v9/native-regression-v1.json) passed
-all four oracles and both scripted deliveries without retries or inference.
+The [current recorded regression](../reports/workflow-v10/native-regression-v1.json) passed
+all five oracles and both scripted deliveries without retries or inference.
 
-The same command is available through the
+To reproduce the corrected arithmetic, citation and SQL transport cases:
+
+```sh
+python3 scripts/validate_workflow_contract_revision.py \
+  --output .local/my-contract-validation.json
+```
+
+The [contract validation record](../reports/workflow-v10/contract-validation.json)
+includes accepted alternatives and rejected financial, citation and delivery
+errors. These authored checks make no model calls.
+
+The maintained regression command is also available through the
 [WorkpaperBench workflow regression](../.github/workflows/workflow-regression.yml)
 manual GitHub Actions dispatch. It runs the current construction checks and
 uploads their summary separately from historical reports.
@@ -182,7 +196,7 @@ Hermes compatibility, identity-bound receipts and detailed financial reports.
 It uses one tool-capable Chat Completions endpoint. No Mac, Lima, owner account,
 environment marker or development-only permission is required.
 
-The default `workflow-v9` construction track supplies source observations and an
+The default `workflow-v10` construction track supplies source observations and an
 output contract, with no starting SQL. Models write all three queries.
 `--dataset workflow-v7` selects the separate maintenance track with supplied SQL
 and repair/preservation reporting. Keep results from these conditions separate.
@@ -214,7 +228,7 @@ docker compose version
 
 git clone https://github.com/CaoimhConway/workpaperbench.git
 cd workpaperbench
-git checkout v0.6.1-rc.1
+git checkout v0.6.2-rc.1
 python3 -m venv .venv
 .venv/bin/pip install -e . harbor==0.23.0
 mkdir -p .local

@@ -1,7 +1,7 @@
 # Task authoring
 
-The default suite is `workflow-v9`, the construction track with 30 tasks and
-scorer `workflow-1.2.0`. Each task requests three SQL result tables and three
+The default suite is `workflow-v10`, the construction track with 30 tasks and
+scorer `workflow-1.2.1`. Each task requests three SQL result tables and three
 claim verdicts. Candidates receive observations and an output contract, with no
 starting SQL. The six development and 24 evaluation cases have separate source
 groups. The [methods](WORKFLOW.md) describe the measurement contract and splits.
@@ -14,8 +14,8 @@ not an interchangeable source of construction results.
 
 ## Package and output contract
 
-Use [construction task c01](../datasets/workflow-v9/tasks/c01/) and its
-[candidate request](../datasets/workflow-v9/tasks/c01/instruction.md) as a concrete
+Use [construction task c01](../datasets/workflow-v10/tasks/c01/) and its
+[candidate request](../datasets/workflow-v10/tasks/c01/instruction.md) as a concrete
 package example:
 
 | File | Responsibility |
@@ -55,7 +55,9 @@ For each new case:
 2. Independently calculate reference tables and claim verdicts from the supplied
    evidence. Declare unique row keys, required columns, numeric tolerances,
    canonical labels and any legitimate source-label aliases. Do not normalize
-   different economic categories, periods or measures into the same label.
+   different economic categories, periods or measures into the same label. Use
+   stable entity or period keys, with `keys: []` for a singleton table. Specify
+   residual subtraction directions and reported versus reconstructed bases.
 3. Verify alternative correct SQL, reordered rows and columns, relevant extra
    context and sufficient citation alternatives. Test duplicate keys, omitted
    rows, swapped categories, wrong periods, wrong units, percent scaling, unrelated
@@ -79,11 +81,11 @@ From a checkout with the [documented installation](RUNNING.md), reconstruct the
 frozen construction catalog without changing it and check the example JSON:
 
 ```sh
-.venv/bin/python scripts/build_workflow_pyusd_revision.py --check
-./wpb validate examples/block-workpaper-v9/answer.json
+.venv/bin/python scripts/build_workflow_contract_revision.py --check
+./wpb validate examples/block-workpaper-v10/answer.json
 ```
 
-The versioned builder reconstructs `workflow-v9` from `workflow-v8` in a temporary
+The versioned builder reconstructs `workflow-v10` from `workflow-v9` in a temporary
 directory and compares the output with the frozen package. It is not a generic
 new-task generator. Do not edit published packages and regenerate them in place.
 A future catalog needs its own reviewed construction and freeze process.
@@ -92,8 +94,8 @@ On the installed Linux Docker controller, verify all four submitted files in a
 fresh separate verifier and inspect the report:
 
 ```sh
-./wpb grade --dataset workflow-v9 --task c01 \
-  --artifacts examples/block-workpaper-v9 --attempt authoring-reference-1
+./wpb grade --dataset workflow-v10 --task c01 \
+  --artifacts examples/block-workpaper-v10 --attempt authoring-reference-1
 ./wpb report --attempts authoring-reference-1 \
   --output .local/authoring-reference-report.json
 ```
@@ -109,7 +111,7 @@ on that controller without model calls:
 
 ```sh
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v9 --tasks c01 \
+  --dataset workflow-v10 --tasks c01 \
   --output .local/authoring-c01-controls.json
 ```
 

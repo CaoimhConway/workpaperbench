@@ -1,0 +1,136 @@
+{
+  "tables": {
+    "reserve_coverage": {
+      "columns": {
+        "report_date": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "2025-05-31",
+            "2025-06-30"
+          ]
+        },
+        "reserves_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "issued_sbc": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "coverage_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "residual_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "report_date"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "signature_lag": {
+      "columns": {
+        "report_date": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "2025-05-31",
+            "2025-06-30"
+          ]
+        },
+        "report_signed_date": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "2025-06-12",
+            "2025-07-16"
+          ]
+        },
+        "days_to_signature": {
+          "type": "integer",
+          "unit": "count"
+        }
+      },
+      "keys": [
+        "report_date"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "reserve_bridge": {
+      "columns": {
+        "prior_date": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "2025-05-31"
+          ]
+        },
+        "current_date": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "2025-06-30"
+          ]
+        },
+        "cash_change_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "debt_change_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "reserve_change_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "circulation_change_sbc": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "coverage_change_bps": {
+          "type": "real",
+          "unit": "basis_points",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "prior_date",
+        "current_date"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "More SBC units were transferred in payments during June 2025 than were in circulation at the June 30 observation.",
+    "claim_2": "The June report was signed more calendar days after its economic observation than the May report.",
+    "claim_3": "At least one observation date shows reserve assets greater than issued SBC units at USD 1 per token."
+  },
+  "definitions": {
+    "reserve_coverage": "Coverage compares same-date cash plus government debt with issued SBC. Residual is component reserves less reported reserve fair value.",
+    "reserve_bridge": "Changes are June less May stocks, not transaction flows. Signature lags are calendar days, not known publication delays."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

@@ -40,7 +40,7 @@ def artifacts(task, variant, covered):
             for entry in answer[role]:
                 spec = gold[role][entry['id']]
                 entry['evidence'] = sorted(set(spec['evidence'][-1] + spec['context_evidence_allowed']))
-                if gold['scorer_version'] == 'workflow-1.2.0':
+                if gold['scorer_version'] in ('workflow-1.2.0', 'workflow-1.2.1'):
                     entry['evidence'] = [' and '.join(entry['evidence']) + ' - supplied facts and context', 'Definition: see output_contract.json']
         for name, spec in gold['tables'].items():
             sql = files[name + '.sql'].strip().rstrip(';')
@@ -81,7 +81,7 @@ def expected(variant, revised=False):
 
 
 def validate(verdict, variant, covered):
-    if verdict['checks'] != expected(variant, verdict['scorer_version'] == 'workflow-1.2.0') or not all(verdict['isolation'].values()):
+    if verdict['checks'] != expected(variant, verdict['scorer_version'] in ('workflow-1.2.0', 'workflow-1.2.1')) or not all(verdict['isolation'].values()):
         raise ValueError('unexpected_quality_verdict:' + json.dumps(verdict))
     if variant == 'constant_residual':
         for name in {table for table, _ in covered}:
@@ -93,7 +93,7 @@ def validate(verdict, variant, covered):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--dataset', default='workflow-v9', choices=['workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9'])
+    parser.add_argument('--dataset', default='workflow-v10', choices=['workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9', 'workflow-v10'])
     parser.add_argument('--executor', choices=['docker', 'local-lima'], default='docker',
                         help='Docker on this Linux controller, or the historical owner maintenance wrapper')
     parser.add_argument('--tasks', nargs='+', default=['a01', 'b01', 'c01'])
@@ -150,7 +150,7 @@ def main():
         execute('python3', '-c', VERIFIER_BUILD, builder + '/' + spec['path'] + '/tests', tag, capture_output=True)
         image_id = execute('docker', 'image', 'inspect', '--format={{.Id}}', tag, capture_output=True).stdout.decode().strip()
         covered = review['residual_controls'].get(key, {}).get('covered', [])
-        for variant in ['reference', 'context', 'citation_dump'] + (['constant_residual'] if covered else []) + (['always_unresolved'] if manifest['scorer_version'] == 'workflow-1.2.0' else []):
+        for variant in ['reference', 'context', 'citation_dump'] + (['constant_residual'] if covered else []) + (['always_unresolved'] if manifest['scorer_version'] in ('workflow-1.2.0', 'workflow-1.2.1') else []):
             files = artifacts(task, variant, covered)
             payload = json.dumps({name: base64.b64encode(data).decode() for name, data in files.items()}).encode()
             result = execute('docker', 'run', '--rm', '--network', 'none', '--read-only', '--memory', '384m',

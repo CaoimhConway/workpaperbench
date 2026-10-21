@@ -16,8 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from workpaperbench.catalog import load
 
-REPO = 'CaoimhConway/workpaperbench@v0.6.1-rc.1'
-TASKS = 'datasets/workflow-v9/tasks'
+REPO = 'CaoimhConway/workpaperbench@v0.6.2-rc.1'
+TASKS = 'datasets/workflow-v10/tasks'
 MODEL = 'workpaperbench-direct-fixture'
 KEY = 'fixture-only-no-provider-credential'
 MARKER = 'WPB_DIRECT_AGENT_OK'
@@ -143,9 +143,10 @@ print({MARKER!r},flush=True)
 
 
 class Fixture(BaseHTTPRequestHandler):
-    def __init__(self, *args, commands, requests, **kwargs):
+    def __init__(self, *args, commands, requests, expected_generation=None, **kwargs):
         self.commands = commands
         self.requests = requests
+        self.expected_generation = expected_generation
         super().__init__(*args, **kwargs)
 
     def log_message(self, *args):
@@ -163,9 +164,17 @@ class Fixture(BaseHTTPRequestHandler):
         if request.get('model') != MODEL:
             self.send_error(400)
             return
+        generation = {'max_tokens': request.get('max_completion_tokens', request.get('max_tokens')),
+                      'reasoning_effort': request.get('reasoning_effort')}
+        if self.expected_generation is not None and generation != self.expected_generation:
+            self.send_error(400)
+            return
         observed = any(row.get('role') == 'user' and MARKER in str(row.get('content'))
                        for row in request['messages'])
-        self.requests.append({'terminal_completion_observed': observed})
+        observation = {'terminal_completion_observed': observed}
+        if self.expected_generation is not None:
+            observation['generation'] = generation
+        self.requests.append(observation)
         content = json.dumps({'analysis': 'Scripted protocol fixture.',
             'plan': 'Deliver the verifier fixture.' if not observed else 'Finish the fixture.',
             'commands': [] if observed else [{'keystrokes': self.commands, 'duration': 3.0}],
@@ -182,20 +191,27 @@ class Fixture(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
 
-def validate(binary, output, checkout=False):
+def validate(binary, output, checkout=False, comparison_recipe=False):
     if output.exists() or output.parent.joinpath(output.stem + '-jobs').exists():
         raise ValueError('validation_output_already_exists')
     if subprocess.check_output([binary, '--version'], text=True, timeout=30,
                                env=child_environment()).strip() != '0.23.0':
         raise ValueError('unexpected_harbor_version')
-    manifest, spec, task = load(ROOT, 'workflow-v9', 'c01')
+    manifest, spec, task = load(ROOT, 'workflow-v10', 'c01')
+    recipe = None
+    if comparison_recipe:
+        recipe = json.loads((ROOT / 'config/construction-comparison.json').read_text())
+        if recipe['task_source']['manifest_id'] != manifest['manifest_id']:
+            raise ValueError('comparison_recipe_catalog_mismatch')
     output.parent.mkdir(parents=True, exist_ok=True)
     jobs = output.parent / (output.stem + '-jobs')
     results = []
     for variant, expected in [('reference', 1.0), ('invalid', 0.0)]:
         requests = []
         server = ThreadingHTTPServer(('127.0.0.1', 0), partial(Fixture,
-            commands=command(task, variant), requests=requests))
+            commands=command(task, variant), requests=requests,
+            expected_generation={'max_tokens': recipe['runtime']['agent_kwargs']['llm_call_kwargs']['max_tokens'],
+                                 'reasoning_effort': recipe['runtime']['agent_kwargs']['reasoning_effort']} if recipe else None))
         worker = threading.Thread(target=server.serve_forever, daemon=True)
         worker.start()
         endpoint = f'http://127.0.0.1:{server.server_port}/v1'
@@ -204,11 +220,18 @@ def validate(binary, output, checkout=False):
             'litellm_provider': 'openai', 'mode': 'chat'}
         arguments = [binary, 'run', *task_arguments(checkout), '-i', 'c01',
             '--agent', 'terminus-2', '--model', 'openai/' + MODEL,
-            '--ak', 'api_base=' + endpoint, '--ak', 'max_turns=5',
-            '--ak', 'model_info=' + json.dumps(model_info),
+            '--ak', 'api_base=' + endpoint,
             '--ae', 'WPB_DIRECT_FIXTURE_API_KEY=' + KEY,
             '--n-concurrent', '1', '--max-retries', '0', '--env', 'docker', '--jobs-dir', str(jobs),
             '--job-name', variant]
+        options = {'max_turns': 5, 'model_info': model_info}
+        if recipe:
+            options.update(recipe['runtime']['agent_kwargs'])
+            options['model_info'] = {**model_info, **options['model_info']}
+            arguments += ['--agent-timeout-multiplier', str(recipe['runtime']['agent_timeout_multiplier'])]
+        for name, value in options.items():
+            encoded = json.dumps(value) if not isinstance(value, str) else value
+            arguments += ['--ak', name + '=' + encoded]
         environment = dict(child_environment(), OPENAI_API_KEY=KEY)
         try:
             with (output.parent / (output.stem + '-' + variant + '.log')).open('x') as log:
@@ -231,12 +254,16 @@ def validate(binary, output, checkout=False):
             **result, 'native_job_result_sha256': job_sha256, 'requests': requests,
             'candidate_received_test_key': True, 'candidate_external_tls_probe_blocked': True,
             'candidate_reference_paths_absent': True})
-    current, current_spec, _ = load(ROOT, 'workflow-v9', 'c01')
+    current, current_spec, _ = load(ROOT, 'workflow-v10', 'c01')
     if current['manifest_id'] != manifest['manifest_id'] or current_spec['task_sha256'] != spec['task_sha256']:
         raise ValueError('fixture_inputs_changed_during_execution')
     report = {'kind': 'scripted_native_harbor_agent_fixture', 'harbor_version': '0.23.0',
         'repo': REPO, 'inference': False, 'model_performance_evaluation': False,
         'external_service_spend_usd': 0, 'cases': results}
+    if recipe:
+        report['comparison_recipe'] = {'protocol_version': recipe['protocol_version'],
+            'configuration_sha256': hashlib.sha256((ROOT / 'config/construction-comparison.json').read_bytes()).hexdigest(),
+            'agent_kwargs': recipe['runtime']['agent_kwargs']}
     if checkout:
         report['repo'] = None
         report['source'] = {'kind': 'checkout', 'manifest_id': manifest['manifest_id'],
@@ -252,10 +279,12 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--checkout', action='store_true',
                         help='Run the current checkout task bytes instead of the pinned public release')
+    parser.add_argument('--comparison-recipe', action='store_true',
+                        help='Check the frozen comparison settings with scripted responses, without inference')
     args = parser.parse_args()
     if not args.harbor:
         raise ValueError('harbor_not_installed')
-    validate(args.harbor, args.output.resolve(), args.checkout)
+    validate(args.harbor, args.output.resolve(), args.checkout, args.comparison_recipe)
 
 
 if __name__ == '__main__':

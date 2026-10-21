@@ -1,0 +1,53 @@
+{
+  "task_id": "workflow-v10-b09",
+  "tables": [
+    {
+      "id": "operating_reconciliation",
+      "file": "operating_reconciliation.sql",
+      "evidence": [
+        "b09:s01",
+        "b09:s02"
+      ]
+    },
+    {
+      "id": "income_reconciliation",
+      "file": "income_reconciliation.sql",
+      "evidence": [
+        "b09:s01",
+        "b09:s02"
+      ]
+    },
+    {
+      "id": "share_basis",
+      "file": "share_basis.sql",
+      "evidence": [
+        "b09:s01",
+        "b09:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": [
+        "b09:s01",
+        "b09:s03"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "b09:s01"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "contradicted",
+      "evidence": [
+        "b09:s02"
+      ]
+    }
+  ]
+}

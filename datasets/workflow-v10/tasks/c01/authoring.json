@@ -1,0 +1,85 @@
+{
+  "rationale": "Build an annual consolidated revenue and gross-profit attribution for Block using the FY2024 filing and its own FY2023 comparator. Show each revenue category's change, contribution to total revenue growth, annual shares and share change. Build a gross-profit bridge including acquired-technology amortization, reconcile both bridges to reported totals, and quantify Bitcoin gross-profit growth. Determine whether Bitcoin explains a majority of consolidated revenue growth and assess the stated claim about the contribution of higher Bitcoin prices.",
+  "source_group": "block-fy2024-fy2023-bitcoin-revenue-costs",
+  "source_catalog": "challenge-v2-canonical-cb40dc200fda",
+  "source_task_sha256": "2b4587f3d899ee0f524b0bb3ce7b3c525fd426d90ccefd44e9b857c17a2108da",
+  "split": "development",
+  "exposure": "Previously published source group, never held out",
+  "observations": "authentic permitted capture",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source rows, separate from submitted SQL",
+  "human_review": "pending",
+  "prototype_task_sha256": "ffba946ed7be80479a167ca256d8783abb3a1bec5c369d9685185091da56a75a",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "ae8213b9c79bc0df5f29c069f5dcff656be94bb612360a455070fd05776dbef7",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "becd34e0d049da8c9929287023ebe6ad4cb9d8edf5512f3814af294b5e05eea0",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "7da61ce37cc2ebf3299fc4a847546691820d992cba2728d102c6f3ee1ce774d3",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "ca99d37c4bae432e9cfa2b65314f48dbb4017646874fc6a7dff262c566f4cff3",
+    "claim_mapping": {
+      "bitcoin_price_effect_identifiable": "claim_1",
+      "bitcoin_majority_of_total_revenue_increase": "claim_2",
+      "all_components_reconcile": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "bitcoin_price_effect_identifiable",
+      "assertion": "Higher Bitcoin selling prices caused more than half of the increase in Block Bitcoin revenue from FY2023 to FY2024.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "c03:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s01",
+        "c03:s02",
+        "c03:s05"
+      ],
+      "source_grounded_reason": "Bitcoin revenue is the full customer sale value and depends on both customer demand and market price. The annual revenue and cost totals provide no price-volume decomposition. The claim is about an economic causal majority, not whether a disclosure exists."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "0950c3ec508d27eb571be6a392cb3d03e30e2dda659d419dda9281bfd6349450",
+    "maintenance_rationale": "The analytical decision concerns growth attribution rather than annual mix. Dependencies include scope, contribution denominators, cost matching, the negative amortization component, residuals and the limits of price/volume attribution. The starting share-versus-contribution defect is authored, not a claimed vendor bug.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_profit_bridge.sql",
+      "starting_reconciliation.sql",
+      "starting_revenue_bridge.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "74a530698e01e43838ae0c7c68d4f13154ab254bbad34d49d67c944a0aeb1dfe",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {
+      "reconciliation_keys": [],
+      "reason": "The reconciliation is a singleton table. Measurements retain their numerical tolerances instead of serving as exact row identifiers."
+    },
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  }
+}

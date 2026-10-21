@@ -120,7 +120,7 @@ def test_regression_retains_failures_and_uses_current_checkout(tmp_path, monkeyp
         jobs = Path(command[command.index('--jobs-dir') + 1]) / 'oracles'
         for key in REGRESSION.TASKS:
             trial(jobs / (key + '__fixture'), key)
-        job = {'n_total_trials': 4, 'stats': {'n_completed_trials': 4, 'n_errored_trials': 0,
+        job = {'n_total_trials': 5, 'stats': {'n_completed_trials': 5, 'n_errored_trials': 0,
             'n_running_trials': 0, 'n_pending_trials': 0, 'n_cancelled_trials': 0, 'n_retries': 0}}
         if failure == 'job-diagnostics':
             job['stats'].pop('n_retries')
@@ -147,7 +147,7 @@ def test_regression_retains_failures_and_uses_current_checkout(tmp_path, monkeyp
         assert not fixtures
     else:
         report = REGRESSION.run('harbor', output)
-        assert report['status'] == 'passed' and len(report['oracles']) == 4
+        assert report['status'] == 'passed' and len(report['oracles']) == 5
         assert report['source']['kind'] == 'checkout' and fixtures
         assert report['inference'] is False and report['model_performance_evaluation'] is False
     assert len(calls) == 1

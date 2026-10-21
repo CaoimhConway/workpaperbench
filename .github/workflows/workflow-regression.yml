@@ -21,10 +21,10 @@ jobs:
       - name: Install pinned harness and project dependencies
         run: python -m pip install 'harbor==0.23.0' -e .
       - name: Check current references and native agent transport
-        run: python -u scripts/workflow_regression.py --output integration-results/workflow-v9/regression.json
+        run: python -u scripts/workflow_regression.py --output integration-results/workflow-v10/regression.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: workflow-regression-${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
-          path: integration-results/workflow-v9/regression.json
+          path: integration-results/workflow-v10/regression.json
           retention-days: 7
