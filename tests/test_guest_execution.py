@@ -23,6 +23,29 @@ def configuration(tmp_path):
     return path, spec
 
 
+def batch_inputs(tmp_path, monkeypatch, dataset='fixture'):
+    for name in ('scripts/guest_bench.py', 'scripts/local_trial.py', 'scripts/fix_native_version.py',
+                 'scripts/fresh_replay.py', 'config/runtime.json'):
+        target = tmp_path / name
+        target.parent.mkdir(exist_ok=True)
+        target.write_bytes((ROOT / name).read_bytes())
+    manifest = {'manifest_id': 'fixture', 'scorer_sha256': 'fixture', 'tasks': {
+        key: {'split': split, 'task_sha256': key}
+        for key, split in [('a01', 'development'), ('a03', 'evaluation')]}}
+    monkeypatch.setattr(guest_bench, 'ROOT', tmp_path)
+    monkeypatch.setattr(guest_bench, 'preflight', lambda: None)
+    monkeypatch.setattr(guest_bench, 'load', lambda *args: manifest)
+    return manifest
+
+
+def batch_receipt(args, profile):
+    import hashlib
+    return {'attempt_id': args.attempt, 'task_id': args.dataset + '-' + args.task,
+        'manifest_id': 'fixture', 'scorer_sha256': 'fixture', 'task_sha256': args.task,
+        'model_configuration_sha256': hashlib.sha256(profile.read_bytes()).hexdigest(),
+        'status': 'candidate_failed' if args.task == 'a01' else 'verified'}
+
+
 @pytest.mark.parametrize('field,value', [
     ('turns', 0), ('turns', True), ('wall_seconds', -1), ('wall_seconds', 0),
 ])
@@ -304,10 +327,7 @@ def test_authenticated_batch_preserves_key_in_memory_across_cleaned_attempts(tmp
     sentinel = 'synthetic-batch-token-not-a-provider-key'
     monkeypatch.setattr(local_trial.os, 'environ', {'PATH': '/bin', 'WPB_TEST_KEY': sentinel})
     monkeypatch.setattr(local_trial.platform, 'system', lambda: 'Linux')
-    monkeypatch.setattr(guest_bench, 'ROOT', tmp_path)
-    monkeypatch.setattr(guest_bench, 'preflight', lambda: None)
-    monkeypatch.setattr(guest_bench, 'load', lambda *args: {'tasks': {
-        'a01': {'split': 'development'}, 'a03': {'split': 'evaluation'}}})
+    batch_inputs(tmp_path, monkeypatch)
     calls = []
 
     async def fake_run(args, credential=None):
@@ -315,8 +335,7 @@ def test_authenticated_batch_preserves_key_in_memory_across_cleaned_attempts(tmp
         local_trial.clean_environment(external=True)
         directory = tmp_path / '.raw/local-trials' / args.attempt
         directory.mkdir(parents=True)
-        (directory / 'receipt.json').write_text(json.dumps({
-            'task_id': 'fixture-' + args.task, 'status': 'candidate_failed' if args.task == 'a01' else 'verified'}))
+        (directory / 'receipt.json').write_text(json.dumps(batch_receipt(args, path)))
 
     monkeypatch.setattr(guest_bench, 'run', fake_run)
     args = argparse.Namespace(dataset='fixture', tasks=None, split='all', profile=path, attempt='batch-1')
@@ -328,6 +347,93 @@ def test_authenticated_batch_preserves_key_in_memory_across_cleaned_attempts(tmp
     assert all(sentinel.encode() not in file.read_bytes() for file in tmp_path.rglob('*') if file.is_file())
     with pytest.raises(ValueError, match='already_exists'):
         monkeypatch.setitem(local_trial.os.environ, 'WPB_TEST_KEY', sentinel)
+        guest_bench.batch(args)
+
+
+@pytest.mark.parametrize('status', ['verified', 'candidate_failed', 'infrastructure_failed', 'cancelled'])
+def test_batch_resume_retains_every_terminal_outcome(tmp_path, monkeypatch, status):
+    path, _ = configuration(tmp_path)
+    batch_inputs(tmp_path, monkeypatch)
+    calls = []
+
+    async def fake_run(args, credential=None):
+        calls.append(args.attempt)
+        assert args.continue_from is None
+        directory = tmp_path / '.raw/local-trials' / args.attempt
+        directory.mkdir()
+        (directory / 'receipt.json').write_text(json.dumps({**batch_receipt(args, path), 'status': status}))
+
+    monkeypatch.setattr(guest_bench, 'run', fake_run)
+    args = argparse.Namespace(dataset='fixture', tasks=['a01', 'a03'], split=None,
+                              profile=path, attempt='retained')
+    for resume in (False, True):
+        args.resume = resume
+        if status in ('verified', 'candidate_failed'):
+            guest_bench.batch(args)
+        else:
+            with pytest.raises(SystemExit, match='infrastructure failures'):
+                guest_bench.batch(args)
+    assert calls == ['retained-a01', 'retained-a03']
+    summary = json.loads((tmp_path / '.raw/local-trials/retained-batch.json').read_text())
+    assert [row['status'] for row in summary['attempts']] == [status, status]
+
+
+@pytest.mark.parametrize('candidate_directory', [False, True])
+def test_batch_crash_keeps_ambiguous_slot_and_runs_only_unstarted(tmp_path, monkeypatch, candidate_directory):
+    path, _ = configuration(tmp_path)
+    batch_inputs(tmp_path, monkeypatch)
+    calls = []
+
+    async def fake_run(args, credential=None):
+        calls.append(args.attempt)
+        directory = tmp_path / '.raw/local-trials' / args.attempt
+        if args.task == 'a01':
+            if candidate_directory:
+                directory.mkdir()
+            raise KeyboardInterrupt()
+        directory.mkdir()
+        (directory / 'receipt.json').write_text(json.dumps(batch_receipt(args, path)))
+
+    monkeypatch.setattr(guest_bench, 'run', fake_run)
+    args = argparse.Namespace(dataset='fixture', tasks=['a01', 'a03'], split=None,
+                              profile=path, attempt='crash')
+    with pytest.raises(KeyboardInterrupt):
+        guest_bench.batch(args)
+    args.resume = True
+    with pytest.raises(SystemExit, match='infrastructure failures'):
+        guest_bench.batch(args)
+    with pytest.raises(SystemExit, match='infrastructure failures'):
+        guest_bench.batch(args)
+    assert calls == ['crash-a01', 'crash-a03']
+    summary = json.loads((tmp_path / '.raw/local-trials/crash-batch.json').read_text())
+    assert [row['status'] for row in summary['attempts']] == ['interrupted', 'verified']
+
+
+def test_batch_resume_rejects_changed_identity_and_receipt(tmp_path, monkeypatch):
+    path, _ = configuration(tmp_path)
+    batch_inputs(tmp_path, monkeypatch)
+
+    async def fake_run(args, credential=None):
+        directory = tmp_path / '.raw/local-trials' / args.attempt
+        directory.mkdir()
+        (directory / 'receipt.json').write_text(json.dumps(batch_receipt(args, path)))
+
+    monkeypatch.setattr(guest_bench, 'run', fake_run)
+    args = argparse.Namespace(dataset='fixture', tasks=['a03'], split=None,
+                              profile=path, attempt='identity')
+    guest_bench.batch(args)
+    args.resume = True
+    original = path.read_bytes()
+    path.write_bytes(original + b'\n')
+    with pytest.raises(ValueError, match='configuration_identity_changed'):
+        guest_bench.batch(args)
+    path.write_bytes(original)
+    receipt = tmp_path / '.raw/local-trials/identity-a03/receipt.json'
+    receipt.write_bytes(receipt.read_bytes() + b'\n')
+    with pytest.raises(ValueError, match='batch_receipt_changed'):
+        guest_bench.batch(args)
+    receipt.unlink()
+    with pytest.raises(ValueError, match='batch_receipt_missing'):
         guest_bench.batch(args)
 
 
@@ -410,14 +516,13 @@ def test_retention_failure_overrides_verified_receipt_and_fails_batch(tmp_path, 
     assert receipt['verdict'] == verdict
 
     path, _ = configuration(tmp_path)
-    monkeypatch.setattr(guest_bench, 'ROOT', tmp_path)
-    monkeypatch.setattr(guest_bench, 'preflight', lambda: None)
-    monkeypatch.setattr(guest_bench, 'load', lambda *args: {'tasks': {'a01': {'split': 'evaluation'}}})
+    batch_inputs(tmp_path, monkeypatch)
 
     async def failed_run(args, credential=None):
         directory = tmp_path / '.raw/local-trials' / args.attempt
         directory.mkdir()
-        (directory / 'receipt.json').write_text(json.dumps(receipt))
+        (directory / 'receipt.json').write_text(json.dumps({**batch_receipt(args, path),
+                                                         'status': receipt['status']}))
         raise ValueError('credential_in_retained_artifact')
 
     monkeypatch.setattr(guest_bench, 'run', failed_run)

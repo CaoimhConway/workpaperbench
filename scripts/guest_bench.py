@@ -1,7 +1,9 @@
 """Run the existing native harness directly in a dedicated Linux guest."""
 import argparse
 import asyncio
+import fcntl
 from functools import partial
+import hashlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 from pathlib import Path
@@ -16,6 +18,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / 'scripts'))
 from local_trial import external_configuration, model_credential, run
 from local_bench import report
+from native_run import write_record
 from workpaperbench.catalog import load
 
 
@@ -46,34 +49,87 @@ def selected_tasks(dataset, tasks=None, split='all'):
 
 def batch(args):
     selected = selected_tasks(args.dataset, args.tasks, args.split or 'all')
-    configurations, _ = external_configuration(args.profile)
-    credential = model_credential(configurations)
+    configuration, raw = external_configuration(args.profile)
+    manifest = load(ROOT, args.dataset)
     trials = [trial_arguments(argparse.Namespace(**{**vars(args), 'task': task,
                                'attempt': args.attempt + '-' + task}), args.profile) for task in selected]
     output = ROOT / '.raw/local-trials'
     summary = output / (args.attempt + '-batch.json')
-    if summary.exists() or any((output / trial.attempt).exists() for trial in trials):
-        raise ValueError('attempt_already_exists')
-    preflight()
+    identity = {'dataset': args.dataset, 'manifest_id': manifest['manifest_id'],
+        'scorer_sha256': manifest['scorer_sha256'],
+        'model_configuration_sha256': hashlib.sha256(raw).hexdigest(),
+        'tasks': {task: manifest['tasks'][task]['task_sha256'] for task in selected},
+        'attempts': [trial.attempt for trial in trials], 'concurrent_trials': 1,
+        'execution_files_sha256': {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest()
+            for name in ('scripts/guest_bench.py', 'scripts/local_trial.py',
+                         'scripts/fix_native_version.py', 'scripts/fresh_replay.py', 'config/runtime.json')}}
     output.mkdir(parents=True, exist_ok=True)
-    with summary.open('x') as stream:
-        stream.write(json.dumps({'status': 'started', 'attempts': []}) + '\n')
+    with (output / (args.attempt + '-batch.lock')).open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        if getattr(args, 'resume', False):
+            saved = json.loads(summary.read_text())
+            if saved.get('identity') != identity:
+                raise ValueError('batch_configuration_identity_changed')
+        elif summary.exists() or any((output / trial.attempt).exists() for trial in trials):
+            raise ValueError('attempt_already_exists')
+        else:
+            saved = {'batch_version': 2, 'identity': identity, 'status': 'started', 'attempts': []}
+            write_record(summary, saved)
+        asyncio.run(continue_batch(trials, configuration, output, summary, saved))
+
+
+async def continue_batch(trials, configuration, output, summary, saved):
+    """Only launch slots with no durable start marker or existing candidate state."""
     outcomes = []
+    recorded = {row['attempt_id']: row for row in saved['attempts']}
+    credential = None
     for trial in trials:
-        try:
-            asyncio.run(run(trial, credential=credential))
-        except Exception:
-            receipt = output / trial.attempt / 'receipt.json'
-            if not receipt.is_file():
-                summary.write_text(json.dumps({'status': 'infrastructure_failed',
-                    'failed_to_start': trial.attempt, 'attempts': outcomes}, indent=2) + '\n')
-                raise
-        row = json.loads((output / trial.attempt / 'receipt.json').read_text())
-        outcomes.append({'attempt_id': trial.attempt, 'task_id': row['task_id'], 'status': row['status']})
-        summary.write_text(json.dumps({'status': 'running', 'attempts': outcomes}, indent=2) + '\n')
+        directory = output / trial.attempt
+        receipt = directory / 'receipt.json'
+        previous = recorded.get(trial.attempt)
+        if previous and previous.get('receipt_sha256') and not receipt.is_file():
+            raise ValueError('batch_receipt_missing')
+        if not receipt.exists() and not directory.exists() and previous is None:
+            if credential is None:
+                credential = model_credential(configuration)
+                preflight()
+            marker = {'attempt_id': trial.attempt, 'task_id': trial.dataset + '-' + trial.task,
+                      'status': 'started'}
+            saved.update(status='running', attempts=outcomes + [marker] + [
+                row for name, row in recorded.items() if name not in {item['attempt_id'] for item in outcomes} and name != trial.attempt])
+            write_record(summary, saved)
+            try:
+                await run(trial, credential=credential)
+            except Exception:
+                # A missing receipt is ambiguous, even if setup failed before inference.
+                # Never retry that slot under the same attempt identity.
+                pass
+        if receipt.is_file():
+            data = receipt.read_bytes()
+            row = json.loads(data)
+            identity = saved['identity']
+            expected = {'attempt_id': trial.attempt, 'task_id': trial.dataset + '-' + trial.task,
+                'manifest_id': identity['manifest_id'], 'scorer_sha256': identity['scorer_sha256'],
+                'task_sha256': identity['tasks'][trial.task],
+                'model_configuration_sha256': identity['model_configuration_sha256']}
+            if any(row.get(key) != value for key, value in expected.items()):
+                raise ValueError('batch_receipt_identity_changed')
+            checksum = hashlib.sha256(data).hexdigest()
+            if previous and previous.get('receipt_sha256') not in (None, checksum):
+                raise ValueError('batch_receipt_changed')
+            outcome = {**expected, 'status': row['status'], 'receipt_sha256': checksum}
+            if row['status'] not in ('verified', 'candidate_failed', 'infrastructure_failed', 'cancelled'):
+                outcome['status'] = 'interrupted'
+        else:
+            outcome = {'attempt_id': trial.attempt, 'task_id': trial.dataset + '-' + trial.task,
+                       'status': 'interrupted', 'receipt_sha256': None}
+        outcomes.append(outcome)
+        saved.update(status='running', attempts=outcomes + [
+            row for name, row in recorded.items() if name not in {item['attempt_id'] for item in outcomes}])
+        write_record(summary, saved)
     failed = any(row['status'] not in ('verified', 'candidate_failed') for row in outcomes)
-    summary.write_text(json.dumps({'status': 'infrastructure_failed' if failed else 'completed',
-                                  'attempts': outcomes}, indent=2) + '\n')
+    saved.update(status='infrastructure_failed' if failed else 'completed', attempts=outcomes)
+    write_record(summary, saved)
     if failed:
         raise SystemExit('Batch retained infrastructure failures. Inspect individual receipts.')
 
@@ -220,6 +276,8 @@ def main():
     selection.add_argument('--split', choices=('development', 'evaluation', 'all'))
     batching.add_argument('--profile', type=Path, required=True)
     batching.add_argument('--attempt', required=True)
+    batching.add_argument('--resume', action='store_true',
+                          help='Continue matching unstarted slots, retaining failures and interruptions')
     for name in ('run', 'grade', 'smoke'):
         command = commands.add_parser(name)
         command.add_argument('--dataset', default='workflow-v11')
