@@ -437,6 +437,48 @@ def test_batch_resume_rejects_changed_identity_and_receipt(tmp_path, monkeypatch
         guest_bench.batch(args)
 
 
+def test_batch_busy_runtime_stops_without_spending_unstarted_slots(tmp_path, monkeypatch):
+    path, _ = configuration(tmp_path)
+    batch_inputs(tmp_path, monkeypatch)
+    calls = []
+
+    async def fake_run(args, credential=None):
+        calls.append(args.attempt)
+        if len(calls) == 1:
+            raise local_trial.TrialBusyError('another_local_trial_is_running')
+        directory = tmp_path / '.raw/local-trials' / args.attempt
+        directory.mkdir()
+        (directory / 'receipt.json').write_text(json.dumps(batch_receipt(args, path)))
+
+    monkeypatch.setattr(guest_bench, 'run', fake_run)
+    args = argparse.Namespace(dataset='fixture', tasks=['a01', 'a03'], split=None,
+                              profile=path, attempt='busy')
+    with pytest.raises(local_trial.TrialBusyError):
+        guest_bench.batch(args)
+    ledger = tmp_path / '.raw/local-trials/busy-batch.json'
+    saved = json.loads(ledger.read_text())
+    assert saved['attempts'][0]['status'] == 'not_started_lock_busy'
+    assert not (ledger.parent / 'busy-a01').exists()
+    args.resume = True
+    guest_bench.batch(args)
+    assert calls == ['busy-a01', 'busy-a01', 'busy-a03']
+    assert json.loads(ledger.read_text())['blocked_dispatches'][0]['execution_started'] is False
+
+
+def test_native_runtime_contention_is_typed_before_attempt_creation(tmp_path, monkeypatch):
+    import fcntl
+    batch_inputs(tmp_path, monkeypatch)
+    monkeypatch.setattr(local_trial, 'ROOT', tmp_path)
+    monkeypatch.setattr(local_trial, 'clean_environment', lambda **kwargs: None)
+    (tmp_path / '.local').mkdir()
+    with (tmp_path / '.local/local-trial.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        args = guest_bench.trial_arguments(argparse.Namespace(dataset='fixture', task='a01', attempt='busy'))
+        with pytest.raises(local_trial.TrialBusyError):
+            asyncio.run(local_trial.run(args))
+    assert not (tmp_path / '.raw/local-trials/busy').exists()
+
+
 def test_secret_redaction_handles_json_escaped_values():
     secret = 'synthetic"\\token'
     value = {'error': 'failed: ' + secret, 'details': [secret]}

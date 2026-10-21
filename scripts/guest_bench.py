@@ -16,7 +16,7 @@ import threading
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / 'scripts'))
-from local_trial import external_configuration, model_credential, run
+from local_trial import TrialBusyError, external_configuration, model_credential, run
 from local_bench import report
 from native_run import write_record
 from workpaperbench.catalog import load
@@ -89,7 +89,8 @@ async def continue_batch(trials, configuration, output, summary, saved):
         previous = recorded.get(trial.attempt)
         if previous and previous.get('receipt_sha256') and not receipt.is_file():
             raise ValueError('batch_receipt_missing')
-        if not receipt.exists() and not directory.exists() and previous is None:
+        if (not receipt.exists() and not directory.exists()
+                and (previous is None or previous['status'] == 'not_started_lock_busy')):
             if credential is None:
                 credential = model_credential(configuration)
                 preflight()
@@ -100,6 +101,13 @@ async def continue_batch(trials, configuration, output, summary, saved):
             write_record(summary, saved)
             try:
                 await run(trial, credential=credential)
+            except TrialBusyError:
+                marker['status'] = 'not_started_lock_busy'
+                saved.update(status='blocked')
+                saved.setdefault('blocked_dispatches', []).append({
+                    'attempt_id': trial.attempt, 'reason': 'trial_lock_busy', 'execution_started': False})
+                write_record(summary, saved)
+                raise
             except Exception:
                 # A missing receipt is ambiguous, even if setup failed before inference.
                 # Never retry that slot under the same attempt identity.

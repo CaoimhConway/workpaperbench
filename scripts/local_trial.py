@@ -31,6 +31,10 @@ DOCKER_CLIENT_ENV = {'DOCKER_HOST', 'DOCKER_CONTEXT', 'DOCKER_CONFIG', 'XDG_RUNT
                      'DOCKER_TLS_VERIFY', 'DOCKER_CERT_PATH', 'DOCKER_API_VERSION', 'DOCKER_DEFAULT_PLATFORM'}
 
 
+class TrialBusyError(ValueError):
+    """No attempt started because another process owns the native runtime."""
+
+
 def endpoint_url(value):
     if not isinstance(value, str) or any(c.isspace() or ord(c) < 32 for c in value):
         raise ValueError('invalid_model_endpoint')
@@ -378,7 +382,7 @@ async def run(arguments, credential=None):
     try:
         fcntl.flock(trial_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError as error:
-        raise ValueError('another_local_trial_is_running') from error
+        raise TrialBusyError('another_local_trial_is_running') from error
     manifest, spec, source = load(ROOT, arguments.dataset, arguments.task)
     configuration = None
     if arguments.configuration:
