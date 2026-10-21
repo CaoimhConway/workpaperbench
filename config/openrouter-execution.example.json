@@ -1,0 +1,20 @@
+{
+  "execution_version": "execution-efficiency-1",
+  "status": "provider_configuration_example",
+  "llm_call_kwargs": {
+    "max_tokens": 16384,
+    "caching": false,
+    "extra_headers": {
+      "X-OpenRouter-Cache": "false"
+    },
+    "extra_body": {
+      "provider": {
+        "only": ["<chosen-provider-endpoint-slug>"],
+        "allow_fallbacks": false,
+        "require_parameters": true
+      }
+    }
+  },
+  "session_id": "<unique-attempt-affinity-id>",
+  "policy": "Resolve the endpoint slug and assign a fresh session_id per attempt. Use the same session_id across that attempt's turns. Metadata stays outside messages. Keep the frozen model, generation settings, timeouts and retries. Prompt caching depends on the endpoint. Full response replay is disabled. This example is a separately identified route, not an update to the frozen serial comparison."
+}

@@ -395,6 +395,25 @@ Use one native trial per installed harness environment. Independent workers need
 separate Python environments and output directories. A new batch prefix always
 starts fresh work. Previously completed attempts are not silently resumed.
 
+To continue the same configured batch, repeat its exact arguments with `--resume`:
+
+```sh
+./wpb batch --split evaluation --profile .local/my-model.json \
+  --attempt my-model-eval-1 --resume
+```
+
+The version 2 ledger binds task hashes, scorer, configuration bytes, execution
+files, task order and serial concurrency. Resume retains successes, failures,
+cancellations and interruptions. Only genuinely unstarted slots run. A start
+marker without a receipt is `interrupted`, even if no candidate directory appeared.
+Missing or altered recorded receipts and changed configurations are rejected.
+Keep interrupted directories and ledgers. Those outcomes remain unassessed,
+never zero-score answers or automatic replacement attempts. Intentional repetitions
+need a new prefix and remain distinct attempts. Older ledgers cannot be resumed.
+Proven runtime-lock contention stops dispatch before candidate creation and leaves
+the slot explicitly `not_started_lock_busy`. Resume can dispatch it later. This
+case is recorded separately from ambiguous starts and does not consume later slots.
+
 ## Read, replay and audit results
 
 A zero process exit means the native run produced a receipt. Read the verdict to
@@ -419,3 +438,149 @@ and grader corrections do not become new model evaluations.
 The [methods](WORKFLOW.md) include a portable all-task reference/control sweep.
 The historical installed `workpaperbench` console entry point remains unchanged.
 Use `./wpb` for this public interface.
+
+## Efficient execution and offline analysis
+
+The `execution-efficiency-1` setup reuses native infrastructure. Task instructions,
+financial inputs, references, accepted alternatives, scoring and per-attempt
+budgets remain the selected catalog's bytes. Record the checkout commit, profile
+hash, native job `config.json` and `lock.json`, installed dependencies and image
+identities before a comparison. Keep the frozen serial comparison unchanged.
+Select any different routing or concurrency condition before starting a campaign.
+
+### Immutable preparation
+
+Install Harbor once on the controller and retain its dependency cache. Harbor
+0.23.0 hashes Dockerfile contents, context files and modes, build arguments and
+platform, and reuses content-addressed images under a build lock. Docker reuses
+common base layers between tasks. Leave `force_build` false and keep the same
+Docker daemon/cache. A cache hit still creates fresh writable candidate and
+separate verifier containers. Never reuse candidate-modified filesystems.
+
+The existing oracle qualification warms images without inference. For a small
+setup measurement, run the same task twice under distinct job names:
+
+```sh
+harbor run -p datasets/workflow-v11/tasks -i c01 --agent oracle -k 1 \
+  --n-concurrent 1 --max-retries 0 --env docker \
+  --jobs-dir .local/setup-check --job-name first
+harbor run -p datasets/workflow-v11/tasks -i c01 --agent oracle -k 1 \
+  --n-concurrent 1 --max-retries 0 --env docker \
+  --jobs-dir .local/setup-check --job-name warm
+docker image ls --no-trunc --digests --format '{{json .}}' > .local/image-identities.jsonl
+python -m pip freeze > .local/controller-dependencies.txt
+./wpb analyze --jobs .local/setup-check/first .local/setup-check/warm \
+  --output .local/setup-analysis.json
+```
+
+Call the first observation cold only if the relevant images were absent. Do not
+delete caches to obtain that label. Setup includes container/network preparation
+and does not isolate build time. The configured Hermes route downloads and checks
+its installer once in `.local/hermes-install.sh`. Installation still occurs per
+candidate and bootstrap dependencies are not fully locked. Current Terminus-2
+comparisons already avoid that installed-agent bootstrap.
+
+### Connections and caching
+
+LiteLLM already caches SDK clients and HTTP transports. Hermes has its own native
+client lifecycle. No pool, polling loop, request timeout, computation budget or
+retry policy is replaced here. `--max-retries 0` disables trial retries, not all
+request retries. Harbor 0.23.0 permits up to three attempts at each of its LLM-call
+and Terminus query layers, in addition to SDK behavior. Retain observed retries
+or unknowns. All waits and retries remain inside the original execution deadline.
+
+For LiteLLM execution, add `"caching": false` to the existing `llm_call_kwargs`
+object to disable full-response caching. This leaves provider prompt/KV caching
+available. Every measured attempt must generate fresh responses. Keep messages,
+tools and their order unchanged. IDs and timestamps belong in transport metadata.
+
+The optional [OpenRouter example](../config/openrouter-execution.example.json)
+uses existing Terminus-2 hooks. Resolve its endpoint slug and merge its
+`llm_call_kwargs` into your frozen configuration. For one configured pilot job:
+
+```bash
+call_kwargs=$(python3 -c 'import json; print(json.dumps(json.load(open(".local/resolved-openrouter.json"))["llm_call_kwargs"]))')
+harbor run "${recipe[@]}" -i c01 -k 1 \
+  --ak "llm_call_kwargs=$call_kwargs" --ak "session_id=$attempt_id" \
+  --jobs-dir "$jobs_dir" --job-name "$attempt_id"
+```
+
+`recipe`, `attempt_id` and `jobs_dir` are the frozen campaign values from the
+[pilot](PILOT.md) or [comparison](COMPARISON.md). Assign a unique affinity ID per
+attempt and retain it across that attempt's turns, outside messages. Pin one
+endpoint with `provider.only` and disable fallback. Sticky affinity alone permits
+fallback. `X-OpenRouter-Cache: false` disables full-response replay. Prompt caching
+is capability-specific. Some endpoints cache automatically, others require
+markers. Do not silently insert markers or substitute unsupported options during
+a campaign. See OpenRouter's [prompt caching](https://openrouter.ai/docs/guides/best-practices/prompt-caching),
+[provider selection](https://openrouter.ai/docs/guides/routing/provider-selection)
+and [response caching](https://openrouter.ai/docs/guides/features/response-caching).
+OpenRouter remains optional.
+
+### Saved-artifact workflows
+
+Native Harbor already supports inference-free regrading into a new job:
+
+```sh
+harbor job regrade .local/jobs/original-job \
+  -p datasets/workflow-v11/tasks --env docker --n-concurrent 1 \
+  --jobs-dir .local/regrades --job-name original-job-review-1
+./wpb analyze --jobs .local/jobs/original-job \
+  --output .local/original-job-analysis-1.json
+```
+
+Regrading uses the selected scorer and records `source_trial` provenance. Preserve
+original results and workpaper bytes. Bind the selected catalog/scorer hashes
+separately, especially when changing scorers. A regrade is analysis of an existing
+attempt, never another model attempt. Use `./wpb grade` and `./wpb report` above
+for standalone workpapers. Read native `verifier/verdict.json` or configured
+`verifier.json` for original-input and changed-input diagnostics. These workflows
+need no model credentials or inference.
+Usage copied into a native regrade is labeled `inherited_model_metrics` and is
+excluded from new-execution timing and token totals.
+
+`./wpb analyze` reads local files without importing Harbor or contacting services.
+Regenerate reports with fresh output filenames. It retains exceptions, interrupted
+directories, unrecorded counts, configuration/lock hashes, declared execution
+settings, returned model IDs and native timing/usage. New configured receipts also
+retain these metrics. `wpb report` version `workpaper-1.3` adds coverage-aware
+timing/token summaries and reads older receipts.
+
+Prompt counts include cached tokens. Completion counts include reported reasoning
+tokens. Neither subset is added again. Missing fields are `null`, not zero.
+Native `cost_usd` can be a LiteLLM estimate and is labeled `reported_or_estimated`.
+For saved OpenRouter response JSON, `--usage .local/response.json` extracts normal
+usage fields and `usage.cost` in USD-denominated OpenRouter credits. That source
+is never added to native totals or confused with credit-purchase fees.
+Duplicate response IDs are rejected. Keep failed-call and retry usage where
+available. Missing usage does not establish free calls. Review raw logs for keys
+before sharing.
+
+Request time comes from native request timers. Wall, setup, execution and verifier
+time come from native timestamps. Tool execution and build-only time remain
+unknown if not measured. Requested terminal wait durations are not measured tool
+time. Reporting time measures this local analysis. Partial sums carry coverage.
+
+### Concurrency and continuation
+
+Harbor's `--n-concurrent N` uses independent conversations and writable containers.
+Give any parallel condition a separate profile hash before launch. Keep each
+task's CPU, memory, time and token limits. Provision the sum of active limits plus
+controller, sidecar, verifier and model-server resources. Check rate limits and
+contention before choosing N. The qualified six-CPU, 12-GiB controller retains
+one model trial at a time. No parallel model profile is qualified here. The
+configured `wpb` installed-agent route remains serial because its adapter and
+environment setup are process-global.
+
+Use `wpb batch --resume` for its configured ledger. For native pilot jobs, retain
+every scheduled job identity and use the manifest to schedule only never-started
+slots. Do not use default `harbor job resume` to erase interrupted outcomes:
+Harbor 0.23.0 removes result-less trial directories and its CLI defaults to removing
+cancelled trials. Preserve those outcomes and evidence. Do not restart the pilot
+shell loop over existing job names.
+
+At the next authorized provider smoke, retain actual request/response model and
+endpoint IDs, cache reads/writes, reasoning usage, provider charges, failed calls
+and request retries. Compare setup with recorded cache state, then request,
+execution and verifier latency under the frozen deadline. The offline adapter and
+scripted fixtures establish runner behavior, not hosted latency or cost savings.

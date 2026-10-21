@@ -64,6 +64,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='command',required=True)
     sub.add_parser('demo',help='Show a reference and preserved historical submissions')
+    analysis = sub.add_parser('analyze', help='Analyze saved native timing and usage without inference')
+    analysis.add_argument('--jobs', type=Path, nargs='+', required=True)
+    analysis.add_argument('--usage', type=Path, help='Saved OpenRouter response JSON or array, USD-denominated credits')
+    analysis.add_argument('--output', type=Path, required=True)
     for name,description in (
         ('guest','Alias for the portable native harness'),
         ('local','Use the owner-specific historical Mac/Lima profile'),
@@ -86,6 +90,10 @@ def main():
     args = parser.parse_args(arguments)
     if args.command == 'demo':
         demo()
+        return
+    if args.command == 'analyze':
+        from .execution_report import analyze
+        analyze(args.jobs, args.output, args.usage)
         return
     answer = parse(args.path.read_bytes())
     identifier = str(answer.get('task_id',''))

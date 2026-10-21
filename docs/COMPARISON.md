@@ -31,6 +31,11 @@ accounting and a requested 16,384 output tokens per call. Record the provider's
 effective context and output limits, including how reasoning consumes them.
 Model metadata does not configure a server or prove that it enforces a limit.
 
+The [efficient execution guide](RUNNING.md#efficient-execution-and-offline-analysis)
+covers native image/client reuse, provider-specific prompt caching, saved-artifact
+analysis and honest continuation. Optional routing or concurrency changes require
+a separate frozen condition. This recipe's serial settings remain unchanged.
+
 Use high reasoning, JSON terminal parsing, Chat Completions and preserved
 interleaved reasoning where required. Disable summarization and model fallback.
 Leave sampling parameters unset and record the effective provider defaults and

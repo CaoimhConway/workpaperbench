@@ -642,6 +642,13 @@ BOUNDARIES
         finally:
             if arguments.model and 'original' in locals():
                 adapter.write_bytes(original)
+            native_result = output / 'trials' / arguments.attempt / 'result.json'
+            if native_result.is_file():
+                from workpaperbench.execution_report import trial_metrics
+                try:
+                    receipt['execution_metrics'] = trial_metrics(native_result)
+                except (OSError, ValueError, TypeError):
+                    receipt['execution_metrics'] = None
             receipt["finished_at"] = datetime.now(timezone.utc).isoformat()
             if secret:
                 receipt = redact_secret(receipt, secret)

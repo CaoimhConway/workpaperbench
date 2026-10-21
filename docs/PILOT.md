@@ -24,7 +24,8 @@ mark unavailable fields unknown. Never store credentials in these records.
 Use the comparison's 24 turns, 3,600 agent seconds, 65,536 input context tokens,
 requested 16,384 output tokens, high reasoning, JSON terminal parser, preserved
 interleaved reasoning where required, Chat Completions, no summarization, fallback
-or retries, and one concurrent attempt. Leave sampling unset. Reasoning may consume
+or trial retries, and one concurrent attempt. Native request retries remain inside
+the deadline and are recorded separately. Leave sampling unset. Reasoning may consume
 the output budget. A provider that cannot support an option requires an explicit
 configuration decision and separate identity. Inspect `harbor agent schema terminus-2`
 and provider documentation before accepting the configuration. Never silently
@@ -109,6 +110,11 @@ including cache and reasoning, retries, exceptions, observable costs and unknown
 Keep credentials out of configurations, receipts and shared artifacts. Inspect raw
 logs before sharing. Native installed execution may expose its dedicated inference
 key to candidate terminal tools. The separate verifier has no key or network.
+
+Use the [efficient execution guide](RUNNING.md#efficient-execution-and-offline-analysis)
+for immutable image preparation, optional provider cache settings, saved-artifact
+analysis and continuation boundaries. Select and hash any routing changes before
+launch. This pilot remains serial and retains every interrupted or failed slot.
 
 Harbor reward is complete-workpaper completion. Report it alongside numerical
 original tables, claim verdicts, evidence, changed-input robustness and delivery.

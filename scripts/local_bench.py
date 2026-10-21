@@ -415,7 +415,9 @@ def report(attempts, destination):
         baseline_sources[path.relative_to(ROOT).as_posix()] = digest(path)
     diagnostics = [summarize(row, baselines) for row in rows]
     summary = aggregate(rows, diagnostics)
-    result = {'report_version': 'workpaper-1.2', 'attempts': rows,
+    from workpaperbench.execution_report import summarize_metrics
+    result = {'report_version': 'workpaper-1.3', 'attempts': rows,
+              'execution_metrics': summarize_metrics([row.get('execution_metrics') for row in rows]),
               'evaluation_track': rows[0].get('evaluation_track', 'maintenance'),
               'diagnostics': diagnostics, 'summary': summary,
               'baseline_sources_sha256': baseline_sources,
