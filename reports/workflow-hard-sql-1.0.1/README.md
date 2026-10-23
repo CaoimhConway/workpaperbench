@@ -39,3 +39,9 @@ worker correction cannot affect them. This prevents filtered exports from
 accidentally repairing extra-file delivery failures. Missing or indeterminate
 verdicts remain separate infrastructure statuses. All twelve slots stay in the
 reporting denominator.
+
+All four revised packages also pass [native reference execution](native-verification.json).
+All twenty [runtime materialization records](materialization.json) match their
+frozen package identities. These checks use no inference. The existing external
+endpoint fixture remains applicable because candidate-visible files and the
+execution interface are unchanged.
