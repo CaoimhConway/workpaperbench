@@ -1,0 +1,99 @@
+{
+  "configuration_id": "hard-evaluation-20261023-r2-sol-high",
+  "source_commit": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+  "dataset": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "harbor_version": "0.23.0",
+  "agent": "codex",
+  "model": "gpt-6.1-sol",
+  "client_version": "0.162.0-alpha.17.2",
+  "auth": {
+    "mode": "chatgpt",
+    "mechanism": "Native CODEX_AUTH_JSON_PATH route",
+    "api_key": false,
+    "paid_api_fallback": false,
+    "fresh_candidate_codex_home": "/tmp/codex-home",
+    "credential_visibility": "Native terminal tools can read the injected subscription credential. No secret-isolation claim."
+  },
+  "agent_kwargs": {
+    "version": "0.162.0-alpha.17.2",
+    "reasoning_effort": "high",
+    "web_search": "disabled",
+    "config": {
+      "forced_login_method": "chatgpt",
+      "project_doc_max_bytes": 0,
+      "features": {
+        "apps": false,
+        "memories": false,
+        "plugins": false,
+        "multi_agent": false
+      },
+      "memories": {
+        "generate_memories": false,
+        "use_memories": false
+      },
+      "analytics": {
+        "enabled": false
+      }
+    }
+  },
+  "limits": {
+    "candidate_wall_seconds": 3600,
+    "turn_limit": null,
+    "requested_output_tokens_per_call": null,
+    "context_window_override": null,
+    "compaction_override": null,
+    "compaction": "Native automatic compaction defaults, record actual events",
+    "context_metadata_at_preparation": 500000,
+    "effective_context_window_percent": 95,
+    "whole_trial_retries": 0,
+    "concurrent_trials": 1
+  },
+  "network_allowlist_additions": [
+    "chatgpt.com",
+    "auth.openai.com"
+  ],
+  "differences_from_glm": [
+    "Native Codex agent and subscription inference replace Terminus-2 and LiteLLM OpenRouter.",
+    "No supported Harbor Codex turn or per-call output cap. No 24-turn or 16384-output enforcement claimed.",
+    "Native context and automatic compaction defaults retained. GLM has 65536 input metadata and no summarization.",
+    "Native tools, prompt and provider-managed cache behavior differ.",
+    "No personal config, instructions, sessions, memories, plugins, skills or MCP servers are transferred."
+  ],
+  "catalog_observation": {
+    "slug": "gpt-6.1-sol",
+    "display_name": "GPT-6.1-Sol",
+    "default_reasoning_level": "low",
+    "supported_reasoning_levels": [
+      {
+        "effort": "low",
+        "description": "Fast responses with lighter reasoning"
+      },
+      {
+        "effort": "medium",
+        "description": "Balances speed and reasoning depth for everyday tasks"
+      },
+      {
+        "effort": "high",
+        "description": "Greater reasoning depth for complex problems"
+      },
+      {
+        "effort": "xhigh",
+        "description": "Extra high reasoning depth for complex problems"
+      },
+      {
+        "effort": "max",
+        "description": "Maximum reasoning depth for the hardest problems"
+      },
+      {
+        "effort": "ultra",
+        "description": "Maximum reasoning with automatic task delegation"
+      }
+    ],
+    "context_window": 500000,
+    "max_context_window": 872000,
+    "effective_context_window_percent": 95
+  },
+  "catalog_fetched_at": "2026-10-23T07:24:21.326331Z",
+  "npm_integrity": "sha512-ROnG1gIMwmeO39yUEB/aGcuv/Ha8HOP6Z5BJFOq3shFsnkqaMFWvpovlvMLTk4LwA8a8ugngFMgZ2cj1wZ5DgQ==",
+  "adapter_sha256": "ee0ca8ec43617f3909d2195afe8f9e7cbd7313a8b3b558b01fde388f65b7c39c"
+}
