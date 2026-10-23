@@ -1,0 +1,119 @@
+{
+  "dataset": "workflow-hard-eval-v1",
+  "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "manifest_sha256": "dbe2ddef7270548bd7e1d0cf8e0f4040491276371c909fe507e82f1c53888b4f",
+  "package_checkpoint": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+  "scope": "Financial-reference and package verification, separate from candidate-model results",
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "independent_human_review": "pending",
+  "controller": {
+    "os": "Ubuntu 24.04",
+    "architecture": "x86_64",
+    "builder_sqlite": "3.45.1",
+    "verifier_sqlite": "3.40.1",
+    "harbor": "0.23.0"
+  },
+  "positive_cases": 20,
+  "negative_cases": 49,
+  "changed_input_databases": 36,
+  "native_references": 4,
+  "materialization_records": 20,
+  "external_interface_scripted_cases": 2,
+  "checks": {
+    "focused_controller_tests": {
+      "passed": 44,
+      "skipped": 0,
+      "seconds": 12.4,
+      "sqlite": "3.45.1",
+      "command": "PYTHONPATH=. /home/wpb/runtime/bin/python -m pytest -q tests/test_workflow_hard_evaluation.py tests/test_hard_borrowing_base.py tests/test_hard_acquisition.py tests/test_hard_receivables.py tests/test_hard_waterfall.py"
+    },
+    "repository_audit": {
+      "command": ".venv/bin/python scripts/audit_current.py",
+      "passed": true
+    },
+    "baseline_unchanged": {
+      "base_commit": "c9afff4ba933ff3bb98e5357818ac20aff4eb052",
+      "paths": [
+        "datasets/workflow-v15",
+        "config/scorers/workflow-1.2.1.py",
+        "config/scorers/workflow_sql_worker-1.2.1.py",
+        "config/workflow-publication.json"
+      ],
+      "diff_empty": true
+    },
+    "alternative_isolated_sql": {
+      "task": "b02",
+      "query": "sale_allocations",
+      "original_and_controls": 10,
+      "seconds_range": [
+        0.046,
+        0.049
+      ],
+      "passes": 10,
+      "limits_unchanged": true
+    },
+    "public_text_and_relative_links": {
+      "files": 62,
+      "passed": true
+    },
+    "structure_validation": {
+      "command": "./wpb validate datasets/workflow-hard-eval-v1/tasks/c01/solution/answer.json",
+      "passed": true
+    },
+    "git_diff_check": true,
+    "final_fixture_correction": {
+      "scope": "Remove unused table access from ignore-mandatory negative fixture. Financial error and scoring unchanged.",
+      "isolated_execution_rows": 88
+    },
+    "final_focused_controller_tests": {
+      "passed": 5,
+      "seconds": 6.13,
+      "command": "PYTHONPATH=. /home/wpb/runtime/bin/python -m pytest -q tests/test_workflow_hard_evaluation.py",
+      "scope": "Final evidence-path and worker bindings, reproducible build, original and control SQL/reference comparisons"
+    },
+    "prior_package_checks": "workflow-hard-eval-v1-canonical-e446e23f71d7",
+    "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+    "experimental_worker_checks": {
+      "passed": 48,
+      "sql_probes": 47,
+      "verifier_sqlite": "3.40.1",
+      "runtime": "Pinned Debian bookworm verifier image, network none, read-only root, bounded memory, CPU and process count",
+      "command": "PYTHONPATH=. /home/wpb/runtime/bin/python -m pytest -q tests/test_workflow_hard_sql_worker.py"
+    },
+    "pre_inference_revision": {
+      "candidate_visible_files_unchanged": 32,
+      "numerical_gold_unchanged": true,
+      "controls_unchanged": true,
+      "prior_evidence_paths_preserved": true,
+      "reason": "Correct counted SQL compatibility and accept independently reviewed sufficient evidence paths"
+    }
+  },
+  "host_test_run": {
+    "command": ".venv/bin/python -m pytest -q",
+    "passed": 771,
+    "skipped": 76,
+    "duration_seconds": 79.54,
+    "platform": "macOS x86_64",
+    "scope": "Full repository test suite with experimental worker registration. 47 worker execution checks are skipped on macOS and pass separately in the pinned Linux verifier. Final evidence-path additions validated separately by pinned-controller rebuild and isolated package checks."
+  },
+  "protected_hashes": {
+    "datasets/workflow-v15/manifest.json": "37af80bffedb92166a41494b64834d616bba32a6af76850af473ae6f9532a588",
+    "datasets/workflow-hard-pilot-v1/manifest.json": "8f402cf6d76aa7637f3d7c3f612d0fd2e12a4de97542a1969e0683f4e12fcd22",
+    "datasets/workflow-hard-pilot-v2/manifest.json": "dc2080f25ff4f7e625ada611c5c229e0d3acd069a989e0e07e34a3c4c9ca6636",
+    "config/workflow-publication.json": "9658cd301d3b56e84b11799c88fce20142ebb234660c02ea17eaf2930462bc42",
+    "config/scorers/workflow-1.2.1.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "config/scorers/workflow_sql_worker-1.2.1.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "config/hard-calibration-20261023/manifest.json": "e9fb4b81f29ed9584c6d1e156cbe5123fc0af82359ba6ccce2d034d197d137b7",
+    "reports/hard-calibration-20261023/results.json": "5bcaae29e4c74938bac6e184eb0bdc168cfd0441ba694c6f64f79b580b1d99c4",
+    "config/hard-development-20261023/manifest.json": "e34f2e8f680438c5cbde9387bb6f61374c9371849cac30e80b3d5431066bbcd9"
+  },
+  "artifacts_sha256": {
+    "materialization.json": "1626f94875c605bd93cfb225b0804f1bb0459e2f36f155cfd72930c5b63ba520",
+    "verification.json": "4a2622682704db3c051a377d4f4a26db7c25069b6d4c8d1817e5c825d0ba627e",
+    "external-interface.json": "7fe4aeeedb4288f57524f7894d88bb95ac44c30babf9bde9c2f5e99fe41a0eb2"
+  },
+  "sql_worker_version": "workflow-hard-sql-1.0.0",
+  "sql_worker_sha256": "4103f82f9b3af6fce87f0db2235f581bceee7cabc0ab88822280950e914ec7e4",
+  "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607"
+}

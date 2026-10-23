@@ -1,0 +1,81 @@
+{
+  "kind": "scripted_native_harbor_agent_fixture",
+  "harbor_version": "0.23.0",
+  "repo": null,
+  "inference": false,
+  "model_performance_evaluation": false,
+  "external_service_spend_usd": 0,
+  "cases": [
+    {
+      "variant": "reference",
+      "agent": "terminus-2",
+      "task": "workflow-hard-eval-v1-c01",
+      "reward": 1.0,
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "native_result_sha256": "cd8c2adceff4d1f7c24ea5d2b65efaee7e51e9a8ba0c1b06bb890025400ddb09",
+      "verdict_sha256": "81ed94ba1d6ba6729a9049d0eeb297f3dea082e58201f7e18d09e72d9362c77e",
+      "retained_answer_sha256": "c3666ece58f1137792291b446da4a26de35b431acff2af305c469fe95e383f74",
+      "retained_sql_sha256": {
+        "retained_interest_bridge.sql": "f36f99d58dc34808127229e7e42fe18a5d0fef28526515757547631bfba63dc2",
+        "cashflow_recast.sql": "984440fe9e9b6677923ed5f2a1ab48843d744be1791a7ddf31ee5a137118a142",
+        "cash_generation_change.sql": "c8f6c03bd2693303d2ca276392d193f7a5d1b09a9214c323acc70af10177d26d"
+      },
+      "native_job_result_sha256": "f256950d64b0b4abe4e5bc3e3b3014ccf3dbd024d57b347c9a4907e2d16fdd25",
+      "requests": [
+        {
+          "terminal_completion_observed": false
+        },
+        {
+          "terminal_completion_observed": true
+        },
+        {
+          "terminal_completion_observed": true
+        }
+      ],
+      "candidate_received_test_key": true,
+      "candidate_external_tls_probe_blocked": true,
+      "candidate_reference_paths_absent": true
+    },
+    {
+      "variant": "invalid",
+      "agent": "terminus-2",
+      "task": "workflow-hard-eval-v1-c01",
+      "reward": 0.0,
+      "isolation": {
+        "network_probe_blocked": true,
+        "network_namespace_none": true,
+        "no_inference_key": true,
+        "no_docker_socket": true
+      },
+      "native_result_sha256": "07a84543c0703b50be3cb5c71c5ef8b617f891c192270758e746a98fb9bc2c61",
+      "verdict_sha256": "1f3b99de3d9e871ea6bd9b8765e0e870796306f9b0a3acdcf4796f2edd640057",
+      "retained_answer_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "retained_sql_sha256": {},
+      "native_job_result_sha256": "2c5756ee43e27971bc0075418f3d8df07e5f34c655f9fd16cb2319caad032bae",
+      "requests": [
+        {
+          "terminal_completion_observed": false
+        },
+        {
+          "terminal_completion_observed": true
+        },
+        {
+          "terminal_completion_observed": true
+        }
+      ],
+      "candidate_received_test_key": true,
+      "candidate_external_tls_probe_blocked": true,
+      "candidate_reference_paths_absent": true
+    }
+  ],
+  "source": {
+    "kind": "checkout",
+    "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+    "task_sha256": "6c1e549084beb479b93b8917520327bb50a41e35c88adbeb9071b6fc91558012"
+  }
+}
