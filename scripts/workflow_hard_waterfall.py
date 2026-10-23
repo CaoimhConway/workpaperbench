@@ -231,9 +231,9 @@ def specification():
             'conversion_frontiers': declaration([('series','label'),('proceeds_usd_million','usd_million'),('common_payout_per_share','usd_per_share')], ['series'], [support,alternate]),
             'owner_funding': declaration([('target_case','label'),('proceeds_infimum_usd_million','usd_million'),('attained','indicator')], ['target_case'], [support,alternate])},
         'claims': {
-            'claim_1': {'assertion': 'Every original security cohort receives at least as much cash in the USD 241 million offer as in the USD 240 million offer.', 'verdict': 'contradicted', 'evidence': [support,alternate]},
-            'claim_2': {'assertion': 'The Series A-1 cohort receives no cash at the USD 240 million offer but receives positive cash at the USD 2,500 million offer.', 'verdict': 'supported', 'evidence': [support,alternate]},
-            'claim_3': {'assertion': 'The total contractual cash settlement owed to all unissued equity award holders in an actual liquidation would be zero.', 'verdict': 'unresolved', 'evidence': [['b02:s05','b02:s06']]}}
+            'claim_1': {'assertion': 'Every original security cohort receives at least as much cash in the USD 241 million offer as in the USD 240 million offer.', 'verdict': 'contradicted', 'evidence': [support,alternate,['b02:s01','b02:s04','b02:s05']]},
+            'claim_2': {'assertion': 'The Series A-1 cohort receives no cash at the USD 240 million offer but receives positive cash at the USD 2,500 million offer.', 'verdict': 'supported', 'evidence': [support,alternate,['b02:s01','b02:s04','b02:s05']]},
+            'claim_3': {'assertion': 'The total contractual cash settlement owed to all unissued equity award holders in an actual liquidation would be zero.', 'verdict': 'unresolved', 'evidence': [['b02:s05','b02:s06'],['b02:s06']]}}
     }
 
 

@@ -144,7 +144,7 @@ def specification():
       'claims':{
         'claim_1':{'assertion':'MyoKardia\'s reported allocation cost equals the listed cash consideration net of cash acquired.','verdict':'contradicted','evidence':[['b01:s02']]},
         'claim_2':{'assertion':'The Otezla disposal generated cash proceeds without a reported pretax divestiture gain.','verdict':'supported','evidence':[['b01:s07']]},
-        'claim_3':{'assertion':'BMS organic revenue growth in 2020 exceeded six percent.','verdict':'unresolved','evidence':[['b01:s06','b01:s08']]}
+        'claim_3':{'assertion':'BMS organic revenue growth in 2020 exceeded six percent.','verdict':'unresolved','evidence':[['b01:s06','b01:s08'],['b01:s06'],['b01:s08']]}
       }
     }
 

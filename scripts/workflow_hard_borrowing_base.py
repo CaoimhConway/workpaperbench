@@ -123,7 +123,7 @@ def table(columns, keys):
 def specification():
     source=json.loads((Path(__file__).resolve().parents[1]/'datasets/workflow-hard-eval-v1/sources/albertsons-2025.json').read_text())
     support=[['a01:s01','a01:s02','a01:s03','a01:s05'],['a01:s02','a01:s03','a01:s04','a01:s05']]
-    def claim(assertion,verdict):return {'assertion':assertion,'verdict':verdict,'evidence':support,'context_evidence_allowed':[]}
+    def claim(assertion,verdict,evidence=None):return {'assertion':assertion,'verdict':verdict,'evidence':support if evidence is None else evidence,'context_evidence_allowed':[]}
     return {'source':'albertsons-2025','calculate':calculate,'sql':SQL,
       'title':'Albertsons collateral availability and inventory purchase funding',
       'nearest':['workflow-hard-pilot-v2/a01','workflow-hard-pilot-v1/c01'],
@@ -139,9 +139,9 @@ def specification():
         'purchase_plans':table(['scenario','period','proposal','borrowing_base_usd_million','revolving_exposure_usd_million','funding_surplus_usd_million','feasible'],['scenario','period','proposal']),
         'funding_limits':table(['scenario','period','maximum_purchase_usd_million','borrowing_base_usd_million','funding_surplus_usd_million'],['scenario','period'])},
       'claims':{
-        'capacity_only':claim('In case_b at ordinary advance rates, unused aggregate commitment is sufficient evidence that plan_2 can be fully funded.','contradicted'),
+        'capacity_only':claim('In case_b at ordinary advance rates, unused aggregate commitment is sufficient evidence that plan_2 can be fully funded.','contradicted',[*support,['a01:s01','a01:s05'],['a01:s04','a01:s05']]),
         'collateral_feedback':claim('In case_a at ordinary advance rates, the largest permitted purchase exceeds the cash borrowing available before that purchase.','supported'),
-        'issuer_actual':claim('Albertsons actual excess availability was at least USD 1,000 million on August 27, 2025.','unresolved')}}
+        'issuer_actual':claim('Albertsons actual excess availability was at least USD 1,000 million on August 27, 2025.','unresolved',[['a01:s05'],*support])}}
 
 
 def controls(data):

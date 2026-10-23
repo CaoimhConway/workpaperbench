@@ -45,7 +45,8 @@ def construct(destination):
         raise ValueError('Build with SQLite 3.45.1 on the supported Ubuntu 24.04 controller')
     manifest={'dataset_id':DATASET,'status':'Evaluation supplement frozen before candidate trials, empirical results reported separately',
       'evaluation_track':'construction','scorer_version':'workflow-1.2.1',
-      'scorer_path':'config/scorers/workflow-1.2.1.py','sql_worker_path':'config/scorers/workflow_sql_worker-1.2.1.py',
+      'scorer_path':'config/scorers/workflow-1.2.1.py','sql_worker_path':'config/scorers/workflow_hard_sql_worker-1.0.0.py',
+      'sql_worker_version':'workflow-hard-sql-1.0.0',
       'starting_commit':'bdaabd3f526b05553efdc0f40af1d5e0576b0142',
       'task_design':'Four source-grounded financial reasoning tasks. Initial package freeze precedes all candidate trials.',
       'human_review':'pending','tasks':{},'hashes':{}}
@@ -97,6 +98,7 @@ def construct(destination):
         for name in ['Dockerfile','docker-compose.yaml','verify.py','test.sh']:
             shutil.copyfile(BASE/'tests'/name,task/'tests'/name)
         shutil.copytree(BASE/'tests/workpaperbench',task/'tests/workpaperbench',ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+        shutil.copyfile(ROOT/manifest['sql_worker_path'],task/'tests/workpaperbench/workflow_sql_worker.py')
         instruction='# '+s['title']+'\n\n'+s['request']+'\n\n'
         instruction+='Read /workspace/sources.md and /workspace/evidence.json. Query /workspace/data.sqlite. The definitions, required columns, row keys, units, precision and assertions are in /workspace/output_contract.json. There is no starting SQL.\n\n'
         instruction+='Deliver exactly /logs/artifacts/answer.json and the three SQL files named '+', '.join(n+'.sql' for n in s['tables'])+'. Each JSON table entry names its SQL file and evidence IDs. Supply each requested table and claim exactly once, with no extra files. Use supported, contradicted or unresolved claim verdicts against the original dossier. The JSON schema is /workspace/schema.json. Optional notes are not semantically graded.\n\n'
@@ -128,7 +130,7 @@ def construct(destination):
             'reference_method':'Executable economic model with a separate derivation, valid alternative SQL and financial invariant checks',
             'controls':reasons,'human_review':'pending','source_review':'Primary source headings, definitions and factual values inspected. Independent human review remains pending.',
             'model_exposure':'No candidate trials before initial freeze. Source groups are separate from development tasks. Published references remain a contamination risk.',
-            'execution':'Baseline task resources and frozen scorer reused. Qualified GLM uses 3600 seconds and 24 turns. Native Sol uses 3600 seconds and has no equivalent turn cap.'})
+            'execution':'Baseline task resources and frozen financial scorer reused. Experimental SQL worker 1.0.0 permits zero-column reads for ordinary COUNT/EXISTS and CTE inputs while retaining schema/module restrictions. Qualified GLM uses 3600 seconds and 24 turns. Native Sol uses 3600 seconds and has no equivalent turn cap.'})
         manifest['tasks'][key]={'task_id':identifier,'path':'datasets/'+DATASET+'/tasks/'+key,'task_sha256':tree_hash(task),
             'split':'evaluation','source_group':s['source'],'evaluation_track':'construction'}
     bound=['scripts/build_workflow_hard_evaluation.py','scripts/workflow_hard_evaluation_cases.py',
@@ -136,7 +138,7 @@ def construct(destination):
            'scripts/workflow_hard_receivables.py','scripts/workflow_hard_waterfall.py',
            'scripts/validate_workflow_hard_evaluation.py','tests/test_workflow_hard_evaluation.py',
            'tests/test_hard_borrowing_base.py','tests/test_hard_acquisition.py',
-           'tests/test_hard_receivables.py','tests/test_hard_waterfall.py',manifest['scorer_path'],manifest['sql_worker_path']]
+           'tests/test_hard_receivables.py','tests/test_hard_waterfall.py','tests/test_workflow_hard_sql_worker.py',manifest['scorer_path'],manifest['sql_worker_path']]
     bound += [p.relative_to(ROOT).as_posix() for p in sorted(SOURCES.glob('*.json'))]
     bound += [p.relative_to(ROOT).as_posix() for p in sorted((SOURCES.parent/'references').glob('*.md'))]
     for name in bound: manifest['hashes'][name]=digest(ROOT/name)

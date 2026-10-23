@@ -135,8 +135,8 @@ def specification():
             'cash_generation_change':declaration([(k,'usd_million') for k in ['reported_operating_change','normalized_operating_change','presentation_effect','collateral_change','other_operating_change','normalized_after_capex_change','other_after_capex_change']],[],cash_support),
             'retained_interest_bridge':declaration([('period','label')]+[(k,'usd_million') for k in ['new_dpp_from_transfers','funding_change','reported_dpp_change','explained_dpp_change','unallocated_dpp_change']],['period'],bridge_support)},
         'claims':{
-            'claim_1':{'assertion':'On the NER-consistent presentation, operating cash generation increased in the nine months ended September 30, 2025 versus the same 2024 period.','verdict':'contradicted','evidence':cash_support},
-            'claim_2':{'assertion':'The NER-consistent presentation preserves the reported 2024 nine-month increase in cash, restricted cash and cash equivalents.','verdict':'supported','evidence':cash_support+[['c01:s01','c01:s07']]},
+            'claim_1':{'assertion':'On the NER-consistent presentation, operating cash generation increased in the nine months ended September 30, 2025 versus the same 2024 period.','verdict':'contradicted','evidence':cash_support+[['c01:s01','c01:s02','c01:s03']]},
+            'claim_2':{'assertion':'The NER-consistent presentation preserves the reported 2024 nine-month increase in cash, restricted cash and cash equivalents.','verdict':'supported','evidence':cash_support+[['c01:s01','c01:s07'],['c01:s01','c01:s02','c01:s03']]},
             'claim_3':{'assertion':'Separate tariff receivables sales had no cash-timing benefit in the 2025 nine-month period.','verdict':'unresolved','evidence':[['c01:s04'],['c01:s03','c01:s04','c01:s07']]}}
     }
 

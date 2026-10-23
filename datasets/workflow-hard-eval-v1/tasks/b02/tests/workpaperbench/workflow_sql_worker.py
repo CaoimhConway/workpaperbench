@@ -33,13 +33,28 @@ def run(db, sql):
     connection = sqlite3.connect(Path(db).resolve().as_uri() + '?mode=ro', uri=True)
     connection.enable_load_extension(False)
     connection.execute('PRAGMA query_only=ON')
-    tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+    # SQLite reports some COUNT/EXISTS inputs as unqualified, zero-column reads.
+    # Logical CTE inputs have no persistent schema entry. Keep schema objects
+    # and table-valued modules outside that exception.
+    ascii_lower = str.maketrans('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')
+    fold = lambda name: (name or '').translate(ascii_lower)
+    objects = {fold(name): kind for name, kind in connection.execute('SELECT name,type FROM sqlite_master')}
+    tables = {name for name, kind in objects.items() if kind == 'table'}
+    reserved = set(objects) - tables
+    reserved.update(fold(row[0]) for row in connection.execute('PRAGMA module_list'))
+    reserved.update({'sqlite_master', 'sqlite_schema', 'sqlite_temp_master', 'sqlite_temp_schema',
+                     'json_each', 'json_tree', 'jsonb_each', 'jsonb_tree'})
     dates = install_dates(connection)
     def authorize(action, a, b, database, trigger):
         if action in (sqlite3.SQLITE_SELECT, sqlite3.SQLITE_RECURSIVE):
             return sqlite3.SQLITE_OK
-        if action == sqlite3.SQLITE_READ and database == 'main' and a in tables:
-            return sqlite3.SQLITE_OK
+        if action == sqlite3.SQLITE_READ:
+            name = fold(a)
+            if fold(database) == 'main' and name in tables:
+                return sqlite3.SQLITE_OK
+            if database is None and b == '' and (name in tables or (
+                    bool(name) and name not in reserved and not name.startswith('pragma_'))):
+                return sqlite3.SQLITE_OK
         if action == sqlite3.SQLITE_FUNCTION and (b or '').lower() in SAFE_FUNCTIONS | DATE_FUNCTIONS:
             return sqlite3.SQLITE_OK
         return sqlite3.SQLITE_DENY

@@ -116,9 +116,6 @@ cat > /logs/artifacts/answer.json <<'ANSWER'
       "id": "issuer_actual",
       "verdict": "unresolved",
       "evidence": [
-        "a01:s01",
-        "a01:s02",
-        "a01:s03",
         "a01:s05"
       ]
     }

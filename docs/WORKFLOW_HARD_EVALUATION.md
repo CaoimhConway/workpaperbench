@@ -83,6 +83,13 @@ sufficient alternative evidence paths pass. Optional explanations are not
 semantically verified, and arbitrary choices between equivalent financial
 witnesses are not graded.
 
+The supplement versions its SQL worker as `workflow-hard-sql-1.0.0`. It accepts
+ordinary `COUNT(*)`, counted CTEs and identifier casing that the earlier worker
+incorrectly rejected. Schema objects and table-valued modules remain prohibited.
+CTE aliases that use reserved schema or module names remain unsupported. The
+financial scorer, SQL resource limits and existing dataset workers are unchanged.
+This execution difference was frozen before any evaluation inference.
+
 Candidate resources are unchanged. The qualified Terminus-2 conditions use
 3,600 seconds and 24 turns. Native Codex uses the same wall time but has no
 supported equivalent turn cap. Agent tools, context management and inference
