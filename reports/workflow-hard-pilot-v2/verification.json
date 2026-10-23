@@ -1,0 +1,4411 @@
+{
+  "dataset": "workflow-hard-pilot-v2",
+  "manifest_id": "workflow-hard-pilot-v2-canonical-5034f88e23bf",
+  "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+  "validator_sha256": "c9df87af00de862cc2eb3d6f8ea432efbea201d4aff80f88caa11b67a9894cbe",
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "scope": "Authored reference, alternative and analytical mutation verification, not model performance",
+  "native": [
+    {
+      "task": "a01",
+      "receipt_sha256": "3e90afa980f0e8b7b31b3153c6632cb396c15b6f7f89a26b46103e7abedc6622",
+      "manifest_id": "workflow-hard-pilot-v2-canonical-5034f88e23bf",
+      "task_sha256": "039136ea5280f0c0db81930481c6af9c23265b5e766634ffff4c4ec5b5fb2178",
+      "verdict_sha256": "988e4b2ace4c5c53d6a20b859d5643e8b4c2721448aca99abd2af511249d5d25",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "runtime_integrity": {
+        "environment": "workpaperbench.runtime_integrity:VerifiedDockerEnvironment",
+        "runtime_sha256": "9715ba881d3cd9397a11f1cf52c28a80c25b2a882fd98ecc610a41393feab740",
+        "expected_manifest": "workflow-hard-pilot-v2-canonical-5034f88e23bf",
+        "expected_task": "workflow-hard-pilot-v2-a01",
+        "diagnostics": "Local controller-only runtime-integrity directory, review before sharing"
+      }
+    },
+    {
+      "task": "b01",
+      "receipt_sha256": "d39d22b1be7e4af208eaadb3c1a434189aa6753d4145df0d606de2b0803f764c",
+      "manifest_id": "workflow-hard-pilot-v2-canonical-5034f88e23bf",
+      "task_sha256": "d72ba10862be9cd47f7cbda22a9ccfb7995401ab5c5e73b24aeab7e800de07b1",
+      "verdict_sha256": "85a82767ed90b254eee0f8b23788f92f31ef3a9eed864bba1cf0f6440770ce3a",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "runtime_integrity": {
+        "environment": "workpaperbench.runtime_integrity:VerifiedDockerEnvironment",
+        "runtime_sha256": "9715ba881d3cd9397a11f1cf52c28a80c25b2a882fd98ecc610a41393feab740",
+        "expected_manifest": "workflow-hard-pilot-v2-canonical-5034f88e23bf",
+        "expected_task": "workflow-hard-pilot-v2-b01",
+        "diagnostics": "Local controller-only runtime-integrity directory, review before sharing"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "task": "a01",
+      "variant": "reference",
+      "expected_failure": null,
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "alternative",
+      "expected_failure": null,
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "alternative_evidence",
+      "expected_failure": null,
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "reordered_with_context",
+      "expected_failure": null,
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "optional_notes",
+      "expected_failure": null,
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "always_test_covenant",
+      "expected_failure": "proposal_tests",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": false,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": false,
+                "suppressed_and_lc_context": false,
+                "monetary_scale": false,
+                "row_order": false
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": "numeric",
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": "numeric",
+                "suppressed_and_lc_context": "numeric",
+                "monetary_scale": "numeric",
+                "row_order": "numeric"
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "proposal_tests:original",
+          "proposal_tests:control:threshold_at_commitment",
+          "proposal_tests:control:earnings",
+          "proposal_tests:control:suppressed_and_lc_context",
+          "proposal_tests:control:monetary_scale",
+          "proposal_tests:control:row_order"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "never_test_covenant",
+      "expected_failure": "proposal_tests",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": false,
+                "working_capital": false,
+                "earnings": false,
+                "suppressed_and_lc_context": false,
+                "monetary_scale": false,
+                "row_order": false
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": "numeric",
+                "working_capital": "numeric",
+                "earnings": "numeric",
+                "suppressed_and_lc_context": "numeric",
+                "monetary_scale": "numeric",
+                "row_order": "numeric"
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "proposal_tests:original",
+          "proposal_tests:control:interest_cost",
+          "proposal_tests:control:working_capital",
+          "proposal_tests:control:earnings",
+          "proposal_tests:control:suppressed_and_lc_context",
+          "proposal_tests:control:monetary_scale",
+          "proposal_tests:control:row_order"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "ignore_incremental_interest",
+      "expected_failure": "proposal_tests",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": false,
+                "threshold_at_commitment": false,
+                "interest_cost": false,
+                "working_capital": false,
+                "earnings": false,
+                "suppressed_and_lc_context": false,
+                "monetary_scale": false,
+                "row_order": false
+              },
+              "control_errors": {
+                "commitment_before_trigger": "numeric",
+                "threshold_at_commitment": "numeric",
+                "interest_cost": "numeric",
+                "working_capital": "numeric",
+                "earnings": "numeric",
+                "suppressed_and_lc_context": "numeric",
+                "monetary_scale": "numeric",
+                "row_order": "numeric"
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "proposal_tests:original",
+          "proposal_tests:control:commitment_before_trigger",
+          "proposal_tests:control:threshold_at_commitment",
+          "proposal_tests:control:interest_cost",
+          "proposal_tests:control:working_capital",
+          "proposal_tests:control:earnings",
+          "proposal_tests:control:suppressed_and_lc_context",
+          "proposal_tests:control:monetary_scale",
+          "proposal_tests:control:row_order"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "suppressed_as_commitment",
+      "expected_failure": "distribution_frontier",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": false,
+                "threshold_at_commitment": false,
+                "interest_cost": false,
+                "working_capital": false,
+                "earnings": false,
+                "suppressed_and_lc_context": false,
+                "monetary_scale": false,
+                "row_order": false
+              },
+              "control_errors": {
+                "commitment_before_trigger": "numeric",
+                "threshold_at_commitment": "numeric",
+                "interest_cost": "numeric",
+                "working_capital": "numeric",
+                "earnings": "numeric",
+                "suppressed_and_lc_context": "numeric",
+                "monetary_scale": "numeric",
+                "row_order": "numeric"
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "distribution_frontier:original",
+          "distribution_frontier:control:commitment_before_trigger",
+          "distribution_frontier:control:threshold_at_commitment",
+          "distribution_frontier:control:interest_cost",
+          "distribution_frontier:control:working_capital",
+          "distribution_frontier:control:earnings",
+          "distribution_frontier:control:suppressed_and_lc_context",
+          "distribution_frontier:control:monetary_scale",
+          "distribution_frontier:control:row_order"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "subtract_lc_twice",
+      "expected_failure": "distribution_frontier",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": false,
+                "threshold_at_commitment": false,
+                "interest_cost": false,
+                "working_capital": false,
+                "earnings": false,
+                "suppressed_and_lc_context": false,
+                "monetary_scale": false,
+                "row_order": false
+              },
+              "control_errors": {
+                "commitment_before_trigger": "numeric",
+                "threshold_at_commitment": "numeric",
+                "interest_cost": "numeric",
+                "working_capital": "numeric",
+                "earnings": "numeric",
+                "suppressed_and_lc_context": "numeric",
+                "monetary_scale": "numeric",
+                "row_order": "numeric"
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "distribution_frontier:original",
+          "distribution_frontier:control:commitment_before_trigger",
+          "distribution_frontier:control:threshold_at_commitment",
+          "distribution_frontier:control:interest_cost",
+          "distribution_frontier:control:working_capital",
+          "distribution_frontier:control:earnings",
+          "distribution_frontier:control:suppressed_and_lc_context",
+          "distribution_frontier:control:monetary_scale",
+          "distribution_frontier:control:row_order"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "always_attainable",
+      "expected_failure": "distribution_frontier",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": false,
+                "interest_cost": false,
+                "working_capital": true,
+                "earnings": false,
+                "suppressed_and_lc_context": false,
+                "monetary_scale": false,
+                "row_order": false
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": "numeric",
+                "interest_cost": "numeric",
+                "working_capital": null,
+                "earnings": "numeric",
+                "suppressed_and_lc_context": "numeric",
+                "monetary_scale": "numeric",
+                "row_order": "numeric"
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "distribution_frontier:original",
+          "distribution_frontier:control:threshold_at_commitment",
+          "distribution_frontier:control:interest_cost",
+          "distribution_frontier:control:earnings",
+          "distribution_frontier:control:suppressed_and_lc_context",
+          "distribution_frontier:control:monetary_scale",
+          "distribution_frontier:control:row_order"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "equity_as_ebitda_cure",
+      "expected_failure": "equity_support",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": false,
+                "interest_cost": false,
+                "working_capital": false,
+                "earnings": false,
+                "suppressed_and_lc_context": false,
+                "monetary_scale": false,
+                "row_order": false
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": "numeric",
+                "interest_cost": "numeric",
+                "working_capital": "numeric",
+                "earnings": "numeric",
+                "suppressed_and_lc_context": "numeric",
+                "monetary_scale": "numeric",
+                "row_order": "numeric"
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "equity_support:original",
+          "equity_support:control:threshold_at_commitment",
+          "equity_support:control:interest_cost",
+          "equity_support:control:working_capital",
+          "equity_support:control:earnings",
+          "equity_support:control:suppressed_and_lc_context",
+          "equity_support:control:monetary_scale",
+          "equity_support:control:row_order"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "constant_original_answers",
+      "expected_failure": "all",
+      "scope": "controls",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": false,
+                "threshold_at_commitment": false,
+                "interest_cost": false,
+                "working_capital": false,
+                "earnings": false,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": false,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": "numeric",
+                "threshold_at_commitment": "numeric",
+                "interest_cost": "numeric",
+                "working_capital": "numeric",
+                "earnings": "numeric",
+                "suppressed_and_lc_context": null,
+                "monetary_scale": "numeric",
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": false,
+                "threshold_at_commitment": false,
+                "interest_cost": false,
+                "working_capital": false,
+                "earnings": false,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": false,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": "numeric",
+                "threshold_at_commitment": "numeric",
+                "interest_cost": "numeric",
+                "working_capital": "numeric",
+                "earnings": "numeric",
+                "suppressed_and_lc_context": null,
+                "monetary_scale": "numeric",
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": false,
+                "threshold_at_commitment": false,
+                "interest_cost": false,
+                "working_capital": false,
+                "earnings": false,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": false,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": "numeric",
+                "threshold_at_commitment": "numeric",
+                "interest_cost": "numeric",
+                "working_capital": "numeric",
+                "earnings": "numeric",
+                "suppressed_and_lc_context": null,
+                "monetary_scale": "numeric",
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "proposal_tests:control:commitment_before_trigger",
+          "proposal_tests:control:threshold_at_commitment",
+          "proposal_tests:control:interest_cost",
+          "proposal_tests:control:working_capital",
+          "proposal_tests:control:earnings",
+          "proposal_tests:control:monetary_scale",
+          "distribution_frontier:control:commitment_before_trigger",
+          "distribution_frontier:control:threshold_at_commitment",
+          "distribution_frontier:control:interest_cost",
+          "distribution_frontier:control:working_capital",
+          "distribution_frontier:control:earnings",
+          "distribution_frontier:control:monetary_scale",
+          "equity_support:control:commitment_before_trigger",
+          "equity_support:control:threshold_at_commitment",
+          "equity_support:control:interest_cost",
+          "equity_support:control:working_capital",
+          "equity_support:control:earnings",
+          "equity_support:control:monetary_scale"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "wrong_claim",
+      "expected_failure": "claim",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": true,
+          "claim_verdicts": false,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": false,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "claim_1:verdict"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "missing_support",
+      "expected_failure": "evidence",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": false,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "proposal_tests:evidence"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "a01",
+      "variant": "unknown_evidence",
+      "expected_failure": "evidence",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": false,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "proposal_tests": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "distribution_frontier": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "equity_support": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "commitment_before_trigger": true,
+                "threshold_at_commitment": true,
+                "interest_cost": true,
+                "working_capital": true,
+                "earnings": true,
+                "suppressed_and_lc_context": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "commitment_before_trigger": null,
+                "threshold_at_commitment": null,
+                "interest_cost": null,
+                "working_capital": null,
+                "earnings": null,
+                "suppressed_and_lc_context": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "proposal_tests:evidence"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "reference",
+      "expected_failure": null,
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "alternative",
+      "expected_failure": null,
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "alternative_evidence",
+      "expected_failure": null,
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "reordered_with_context",
+      "expected_failure": null,
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "optional_notes",
+      "expected_failure": null,
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "carrying_as_face",
+      "expected_failure": "settlement_scenarios",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "scale": false,
+                "row_order": false,
+                "dilution_order": false,
+                "out_of_money": false,
+                "carrying_only": false,
+                "cash_principal": false,
+                "target_shift": false,
+                "neutrality_tie": false
+              },
+              "control_errors": {
+                "scale": "numeric",
+                "row_order": "numeric",
+                "dilution_order": "numeric",
+                "out_of_money": "numeric",
+                "carrying_only": "numeric",
+                "cash_principal": "numeric",
+                "target_shift": "numeric",
+                "neutrality_tie": "numeric"
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "settlement_scenarios:original",
+          "settlement_scenarios:control:scale",
+          "settlement_scenarios:control:row_order",
+          "settlement_scenarios:control:dilution_order",
+          "settlement_scenarios:control:out_of_money",
+          "settlement_scenarios:control:carrying_only",
+          "settlement_scenarios:control:cash_principal",
+          "settlement_scenarios:control:target_shift",
+          "settlement_scenarios:control:neutrality_tie"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "all_principal_cash",
+      "expected_failure": "settlement_scenarios",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "scale": false,
+                "row_order": false,
+                "dilution_order": false,
+                "out_of_money": true,
+                "carrying_only": false,
+                "cash_principal": false,
+                "target_shift": false,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": "numeric",
+                "row_order": "numeric",
+                "dilution_order": "numeric",
+                "out_of_money": null,
+                "carrying_only": "numeric",
+                "cash_principal": "numeric",
+                "target_shift": "numeric",
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "settlement_scenarios:original",
+          "settlement_scenarios:control:scale",
+          "settlement_scenarios:control:row_order",
+          "settlement_scenarios:control:dilution_order",
+          "settlement_scenarios:control:carrying_only",
+          "settlement_scenarios:control:cash_principal",
+          "settlement_scenarios:control:target_shift"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "all_notes_full_shares",
+      "expected_failure": "diluted_eps",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "scale": false,
+                "row_order": false,
+                "dilution_order": false,
+                "out_of_money": false,
+                "carrying_only": false,
+                "cash_principal": false,
+                "target_shift": false,
+                "neutrality_tie": false
+              },
+              "control_errors": {
+                "scale": "numeric",
+                "row_order": "numeric",
+                "dilution_order": "numeric",
+                "out_of_money": "numeric",
+                "carrying_only": "numeric",
+                "cash_principal": "numeric",
+                "target_shift": "numeric",
+                "neutrality_tie": "numeric"
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "diluted_eps:original",
+          "diluted_eps:control:scale",
+          "diluted_eps:control:row_order",
+          "diluted_eps:control:dilution_order",
+          "diluted_eps:control:out_of_money",
+          "diluted_eps:control:carrying_only",
+          "diluted_eps:control:cash_principal",
+          "diluted_eps:control:target_shift",
+          "diluted_eps:control:neutrality_tie"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "maturity_choice_as_eps",
+      "expected_failure": "diluted_eps",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "scale": false,
+                "row_order": false,
+                "dilution_order": false,
+                "out_of_money": false,
+                "carrying_only": false,
+                "cash_principal": false,
+                "target_shift": false,
+                "neutrality_tie": false
+              },
+              "control_errors": {
+                "scale": "numeric",
+                "row_order": "numeric",
+                "dilution_order": "numeric",
+                "out_of_money": "numeric",
+                "carrying_only": "numeric",
+                "cash_principal": "numeric",
+                "target_shift": "numeric",
+                "neutrality_tie": "numeric"
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "diluted_eps:original",
+          "diluted_eps:control:scale",
+          "diluted_eps:control:row_order",
+          "diluted_eps:control:dilution_order",
+          "diluted_eps:control:out_of_money",
+          "diluted_eps:control:carrying_only",
+          "diluted_eps:control:cash_principal",
+          "diluted_eps:control:target_shift",
+          "diluted_eps:control:neutrality_tie"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "cash_principal_interest_addback",
+      "expected_failure": "diluted_eps",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "scale": false,
+                "row_order": false,
+                "dilution_order": false,
+                "out_of_money": true,
+                "carrying_only": false,
+                "cash_principal": false,
+                "target_shift": false,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": "numeric",
+                "row_order": "numeric",
+                "dilution_order": "numeric",
+                "out_of_money": null,
+                "carrying_only": "numeric",
+                "cash_principal": "numeric",
+                "target_shift": "numeric",
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "diluted_eps:original",
+          "diluted_eps:control:scale",
+          "diluted_eps:control:row_order",
+          "diluted_eps:control:dilution_order",
+          "diluted_eps:control:carrying_only",
+          "diluted_eps:control:cash_principal",
+          "diluted_eps:control:target_shift"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "always_include",
+      "expected_failure": "diluted_eps",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "scale": false,
+                "row_order": false,
+                "dilution_order": false,
+                "out_of_money": false,
+                "carrying_only": false,
+                "cash_principal": false,
+                "target_shift": false,
+                "neutrality_tie": false
+              },
+              "control_errors": {
+                "scale": "numeric",
+                "row_order": "numeric",
+                "dilution_order": "numeric",
+                "out_of_money": "numeric",
+                "carrying_only": "numeric",
+                "cash_principal": "numeric",
+                "target_shift": "numeric",
+                "neutrality_tie": "numeric"
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "diluted_eps:original",
+          "diluted_eps:control:scale",
+          "diluted_eps:control:row_order",
+          "diluted_eps:control:dilution_order",
+          "diluted_eps:control:out_of_money",
+          "diluted_eps:control:carrying_only",
+          "diluted_eps:control:cash_principal",
+          "diluted_eps:control:target_shift",
+          "diluted_eps:control:neutrality_tie"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "standalone_eps",
+      "expected_failure": "diluted_eps",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "scale": false,
+                "row_order": false,
+                "dilution_order": false,
+                "out_of_money": true,
+                "carrying_only": false,
+                "cash_principal": false,
+                "target_shift": false,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": "numeric",
+                "row_order": "numeric",
+                "dilution_order": "numeric",
+                "out_of_money": null,
+                "carrying_only": "numeric",
+                "cash_principal": "numeric",
+                "target_shift": "numeric",
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "diluted_eps:original",
+          "diluted_eps:control:scale",
+          "diluted_eps:control:row_order",
+          "diluted_eps:control:dilution_order",
+          "diluted_eps:control:carrying_only",
+          "diluted_eps:control:cash_principal",
+          "diluted_eps:control:target_shift"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "standalone_boundary",
+      "expected_failure": "thresholds",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": true,
+              "controls": {
+                "scale": false,
+                "row_order": false,
+                "dilution_order": false,
+                "out_of_money": false,
+                "carrying_only": false,
+                "cash_principal": false,
+                "target_shift": false,
+                "neutrality_tie": false
+              },
+              "control_errors": {
+                "scale": "numeric",
+                "row_order": "numeric",
+                "dilution_order": "numeric",
+                "out_of_money": "numeric",
+                "carrying_only": "numeric",
+                "cash_principal": "numeric",
+                "target_shift": "numeric",
+                "neutrality_tie": "numeric"
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "thresholds:original",
+          "thresholds:control:scale",
+          "thresholds:control:row_order",
+          "thresholds:control:dilution_order",
+          "thresholds:control:out_of_money",
+          "thresholds:control:carrying_only",
+          "thresholds:control:cash_principal",
+          "thresholds:control:target_shift",
+          "thresholds:control:neutrality_tie"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "constant_original_answers",
+      "expected_failure": "all",
+      "scope": "controls",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": false,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": false,
+                "carrying_only": true,
+                "cash_principal": false,
+                "target_shift": true,
+                "neutrality_tie": false
+              },
+              "control_errors": {
+                "scale": "numeric",
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": "numeric",
+                "carrying_only": null,
+                "cash_principal": "numeric",
+                "target_shift": null,
+                "neutrality_tie": "numeric"
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": false,
+                "out_of_money": false,
+                "carrying_only": true,
+                "cash_principal": false,
+                "target_shift": true,
+                "neutrality_tie": false
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": "numeric",
+                "out_of_money": "numeric",
+                "carrying_only": null,
+                "cash_principal": "numeric",
+                "target_shift": null,
+                "neutrality_tie": "numeric"
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": false,
+                "row_order": true,
+                "dilution_order": false,
+                "out_of_money": false,
+                "carrying_only": true,
+                "cash_principal": false,
+                "target_shift": false,
+                "neutrality_tie": false
+              },
+              "control_errors": {
+                "scale": "numeric",
+                "row_order": null,
+                "dilution_order": "numeric",
+                "out_of_money": "numeric",
+                "carrying_only": null,
+                "cash_principal": "numeric",
+                "target_shift": "numeric",
+                "neutrality_tie": "numeric"
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "settlement_scenarios:control:scale",
+          "settlement_scenarios:control:out_of_money",
+          "settlement_scenarios:control:cash_principal",
+          "settlement_scenarios:control:neutrality_tie",
+          "diluted_eps:control:dilution_order",
+          "diluted_eps:control:out_of_money",
+          "diluted_eps:control:cash_principal",
+          "diluted_eps:control:neutrality_tie",
+          "thresholds:control:scale",
+          "thresholds:control:dilution_order",
+          "thresholds:control:out_of_money",
+          "thresholds:control:cash_principal",
+          "thresholds:control:target_shift",
+          "thresholds:control:neutrality_tie"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "wrong_claim",
+      "expected_failure": "claim",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": true,
+          "claim_verdicts": false,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": false,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "claim_1:verdict"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "missing_support",
+      "expected_failure": "evidence",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": false,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "settlement_scenarios:evidence"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "b01",
+      "variant": "unknown_evidence",
+      "expected_failure": "evidence",
+      "scope": "original",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": false,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "settlement_scenarios": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "diluted_eps": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            },
+            "thresholds": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "dilution_order": true,
+                "out_of_money": true,
+                "carrying_only": true,
+                "cash_principal": true,
+                "target_shift": true,
+                "neutrality_tie": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "dilution_order": null,
+                "out_of_money": null,
+                "carrying_only": null,
+                "cash_principal": null,
+                "target_shift": null,
+                "neutrality_tie": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "settlement_scenarios:evidence"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    }
+  ]
+}

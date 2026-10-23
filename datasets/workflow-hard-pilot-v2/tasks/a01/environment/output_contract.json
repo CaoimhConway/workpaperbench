@@ -1,0 +1,114 @@
+{
+  "tables": {
+    "proposal_tests": {
+      "columns": {
+        "scenario": {
+          "type": "text",
+          "unit": "label"
+        },
+        "proposal": {
+          "type": "text",
+          "unit": "label"
+        },
+        "required_draw_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "covenant_availability_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "fixed_charge_ratio": {
+          "type": "real",
+          "unit": "ratio",
+          "tolerance": 1e-07
+        },
+        "covenant_tested": {
+          "type": "integer",
+          "unit": "indicator"
+        },
+        "feasible": {
+          "type": "integer",
+          "unit": "indicator"
+        }
+      },
+      "keys": [
+        "scenario",
+        "proposal"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "distribution_frontier": {
+      "columns": {
+        "scenario": {
+          "type": "text",
+          "unit": "label"
+        },
+        "upper_limit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "attainable": {
+          "type": "integer",
+          "unit": "indicator"
+        }
+      },
+      "keys": [
+        "scenario"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "equity_support": {
+      "columns": {
+        "scenario": {
+          "type": "text",
+          "unit": "label"
+        },
+        "target": {
+          "type": "text",
+          "unit": "label"
+        },
+        "lower_limit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "attainable": {
+          "type": "integer",
+          "unit": "indicator"
+        }
+      },
+      "keys": [
+        "scenario",
+        "target"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    }
+  },
+  "definitions": {
+    "proposal_tests": "One row for every planning_cases scenario and proposals proposal. required_draw is the smallest nonnegative additional borrowing that funds the proposal and all listed cash uses, before applying facility and covenant restrictions. Report the resulting covenant_availability and fixed_charge_ratio even if that proposed borrowing is not permitted. covenant_tested is 1 when the disclosed test applies. feasible is 1 only if this funding choice satisfies the commitment, applicable covenant and ending cash requirements. No new equity.",
+    "distribution_frontier": "One row per planning scenario. upper_limit is the sharp upper limit on the nonnegative special cash dividend with no new equity, subject to the stated funding constraints. attainable is the defined indicator. Do not report an arbitrary near-limit amount.",
+    "equity_support": "One row for every planning scenario and equity_targets target. lower_limit is the sharp lower limit on nonnegative new cash equity sufficient to fund that target special dividend while satisfying all constraints, with additional borrowing chosen freely. attainable is the defined indicator."
+  },
+  "claim_assertions": {
+    "claim_1": "Suppressed availability can be added to the committed facility amount as cash borrowing capacity without a commitment increase.",
+    "claim_2": "Under case_a, a USD 800 million special dividend can be funded without new equity despite a fixed-charge ratio below one at the required draw.",
+    "claim_3": "Currency translation alone explains the difference between reported covenant availability and commitment less utilisation."
+  },
+  "numeric_policy": "Displayed-value arithmetic. Absolute tolerances are computational, not claims of source precision.",
+  "assumptions": [
+    "All amounts in facility, planning_cases, proposals and equity_targets are USD million, except new_debt_cash_rate, an annual decimal rate. facility contains source observations. The other tables are authored planning assumptions, not issuer forecasts.",
+    "Use the disclosed covenant summary as the complete financial-performance test for this exercise. All other draw conditions are satisfied. No commitment increase, accordion, refinancing or alternative debt is available. Keep the separately reported covenant availability independent of unused commitment. Its difference from commitment less utilisation is not explained by the supplied extract.",
+    "Additional cash borrowing increases utilisation and reduces covenant availability dollar for dollar. Letters of credit and the borrowing base otherwise remain unchanged. The supplied new_debt_cash_rate is the full cash cost of additional borrowing for the whole planning period. It replaces the disclosed rate grid only for these scenarios. Existing cash interest is already included in planning_cases. Scheduled principal repays debt outside this ABL and does not restore ABL drawing capacity.",
+    "Each planning case covers one simultaneous pro forma twelve-month test period. Use its EBITDA before exceptional items, net capital expenditure paid in cash, scheduled principal, existing cash interest, cash tax and ordinary dividends on the disclosed covenant basis. No IFRS-to-covenant adjustment is required. Working-capital outflow is an additional cash use outside those amounts.",
+    "Opening usable cash above the required operating cash floor is zero. EBITDA is cash generated before the listed cash uses and working-capital outflow. There are no other cash flows. Ending cash must remain at or above that floor. A special dividend is paid in cash in the same test period and is a dividend for covenant purposes.",
+    "Borrowing and cash equity are nonnegative continuous amounts. Cash equity has no fees, interest or effect on EBITDA, fixed charges or the borrowing base. It is available solely in equity_support. No intra-period liquidity path or covenant cure by increasing EBITDA is modeled.",
+    "An upper or lower limit is the sharp supremum or infimum over the allowed funding choices. attainable is 1 only if a feasible choice reaches the exact limit and 0 otherwise. Do not round a strict covenant trigger into an inclusive exemption."
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "task_id": "workflow-hard-pilot-v2-b01",
+  "tables": [
+    {
+      "id": "settlement_scenarios",
+      "file": "settlement_scenarios.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s08"
+      ]
+    },
+    {
+      "id": "diluted_eps",
+      "file": "diluted_eps.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s08",
+        "b01:s02",
+        "b01:s06",
+        "b01:s07"
+      ]
+    },
+    {
+      "id": "thresholds",
+      "file": "thresholds.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s08",
+        "b01:s02",
+        "b01:s06",
+        "b01:s07"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": [
+        "b01:s01",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s08",
+        "b01:s02",
+        "b01:s06",
+        "b01:s07"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "b01:s05"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": [
+        "b01:s06",
+        "b01:s08"
+      ]
+    }
+  ]
+}

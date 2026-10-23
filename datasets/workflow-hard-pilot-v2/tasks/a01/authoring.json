@@ -1,0 +1,51 @@
+{
+  "split": "development",
+  "evaluation_track": "construction",
+  "source_group": "ashtead-2025",
+  "nearest_existing_counterparts": [
+    "workflow-v15/c10",
+    "workflow-hard-pilot-v1/c01"
+  ],
+  "additional_analytical_decisions": "Construct a joint cash-funding and contractual-covenant feasibility model. Borrowing finances distributions while adding cash interest and can activate a previously inapplicable test. Optimize across the resulting regimes and distinguish an achievable amount from an open-boundary limit.",
+  "source_snapshot": "datasets/workflow-hard-pilot-v2/sources/ashtead-2025.json",
+  "source_snapshot_sha256": "378d3c702f5c55aed821d807fdd14458a9ea57a17e9402a77a6070f9626f207b",
+  "reference_method": "Decimal economic model with separate derivation, valid alternative SQL and regime checks",
+  "controls": [
+    {
+      "name": "commitment_before_trigger",
+      "rationale": "The committed ceiling can bind while the covenant remains inapplicable."
+    },
+    {
+      "name": "threshold_at_commitment",
+      "rationale": "Equality activates the covenant even at the final committed dollar."
+    },
+    {
+      "name": "interest_cost",
+      "rationale": "Borrowing cost affects both funding and the fixed-charge denominator."
+    },
+    {
+      "name": "working_capital",
+      "rationale": "Cash absorption changes funding without changing covenant EBITDA."
+    },
+    {
+      "name": "earnings",
+      "rationale": "Covenant headroom and cash generation move together when earnings change."
+    },
+    {
+      "name": "suppressed_and_lc_context",
+      "rationale": "Suppressed availability is not commitment. LC is already included in utilisation."
+    },
+    {
+      "name": "monetary_scale",
+      "rationale": "Double monetary amounts while preserving ratios, decisions and endpoint closure."
+    },
+    {
+      "name": "row_order",
+      "rationale": "Row order carries no financial meaning."
+    }
+  ],
+  "human_review": "pending",
+  "source_review": "Primary source headings, definitions and factual values inspected. Independent human review remains pending.",
+  "model_exposure": "No model trials. Published references are a contamination risk. Development tasks only.",
+  "execution": "Baseline task resources and frozen scorer reused. Qualified GLM uses 3600 seconds and 24 turns. Native Sol uses 3600 seconds and has no equivalent turn cap."
+}

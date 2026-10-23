@@ -1,0 +1,55 @@
+{
+  "dataset": "workflow-hard-pilot-v2",
+  "manifest_id": "workflow-hard-pilot-v2-canonical-5034f88e23bf",
+  "starting_commit": "2a4455935a7bfd5fb9d46b7f3ecdbb2d3a3d9688",
+  "scope": "Deterministic financial-reference and task-package verification, not model performance",
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "independent_human_review": "pending",
+  "controller": {
+    "os": "Ubuntu 24.04",
+    "architecture": "x86_64",
+    "python": "3.12.3",
+    "sqlite": "3.45.1",
+    "harbor": "0.23.0"
+  },
+  "checks": [
+    {
+      "command": "python scripts/build_workflow_hard_followup.py",
+      "outcome": "built both task packages on pinned SQLite"
+    },
+    {
+      "command": "python -m pytest -q tests/test_workflow_hard_followup.py tests/test_hard_convertibles.py",
+      "outcome": "14 passed on pinned controller, including byte-for-byte reconstruction"
+    },
+    {
+      "command": "python scripts/validate_workflow_hard_followup.py --output .local/followup-verification-20261023.json --native-prefix hard-followup-20261023",
+      "outcome": "33 isolated cases and 2 native executions verified"
+    },
+    {
+      "command": ".venv/bin/python -m pytest -q",
+      "outcome": "727 passed, 28 skipped in 70.13 seconds on macOS"
+    },
+    {
+      "command": ".venv/bin/python scripts/audit.py",
+      "outcome": "Publication-context, credential, frozen-contract and versioned-implementation checks passed"
+    }
+  ],
+  "positive_cases": 10,
+  "negative_cases": 23,
+  "materialization_records": 10,
+  "protected_starting_hashes": {
+    "datasets/workflow-v15/manifest.json": "37af80bffedb92166a41494b64834d616bba32a6af76850af473ae6f9532a588",
+    "datasets/workflow-hard-pilot-v1/manifest.json": "8f402cf6d76aa7637f3d7c3f612d0fd2e12a4de97542a1969e0683f4e12fcd22",
+    "config/workflow-publication.json": "9658cd301d3b56e84b11799c88fce20142ebb234660c02ea17eaf2930462bc42",
+    "config/scorers/workflow-1.2.1.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "config/scorers/workflow_sql_worker-1.2.1.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "config/hard-calibration-20261023/manifest.json": "e9fb4b81f29ed9584c6d1e156cbe5123fc0af82359ba6ccce2d034d197d137b7",
+    "reports/hard-calibration-20261023/results.json": "5bcaae29e4c74938bac6e184eb0bdc168cfd0441ba694c6f64f79b580b1d99c4"
+  },
+  "artifacts_sha256": {
+    "verification.json": "f36406e79a64ef3ffe2fa8548c5989539866fa44a9952bbcf8297ec128c8679b",
+    "materialization.json": "cacb5eaf6edd92d7a8b5b5dfe6d52f0ba1fd14b086157c643a5f445c74f4720b"
+  },
+  "manifest_sha256": "dc2080f25ff4f7e625ada611c5c229e0d3acd069a989e0e07e34a3c4c9ca6636"
+}

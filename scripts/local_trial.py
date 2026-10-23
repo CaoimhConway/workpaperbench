@@ -566,7 +566,7 @@ BOUNDARIES
                      "override_timeout_sec": arguments.wall, "override_setup_timeout_sec": 1200,
                      "kwargs": {"version": "v0.21.4+canary.20261004T084456Z", "toolsets": configuration["candidate"].get("toolsets", "file,terminal,skills") if configuration else "file,terminal,skills"}}
         environment = {"type": "docker"}
-        if arguments.dataset in ("workflow-v12", "workflow-v13", "workflow-v14", "workflow-v15", "workflow-hard-pilot-v1"):
+        if arguments.dataset in ("workflow-v12", "workflow-v13", "workflow-v14", "workflow-v15", "workflow-hard-pilot-v1", "workflow-hard-pilot-v2"):
             environment.update(
                 import_path="workpaperbench.runtime_integrity:VerifiedDockerEnvironment",
                 kwargs={"canonical_root": str(ROOT), "expected_manifest": manifest["manifest_id"],

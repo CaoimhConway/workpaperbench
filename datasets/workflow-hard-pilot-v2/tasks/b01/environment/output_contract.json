@@ -1,0 +1,90 @@
+{
+  "tables": {
+    "settlement_scenarios": {
+      "columns": {
+        "price_case": {
+          "type": "text",
+          "unit": "label"
+        },
+        "note": {
+          "type": "text",
+          "unit": "label"
+        },
+        "cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "gross_shares_million": {
+          "type": "real",
+          "unit": "million_shares",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "price_case",
+        "note"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "diluted_eps": {
+      "columns": {
+        "price_case": {
+          "type": "text",
+          "unit": "label"
+        },
+        "income_case": {
+          "type": "text",
+          "unit": "label"
+        },
+        "basic_eps": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-09
+        },
+        "diluted_eps": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-09
+        }
+      },
+      "keys": [
+        "price_case",
+        "income_case"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "thresholds": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "value": {
+          "type": "real",
+          "unit": "measure_dependent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    }
+  },
+  "definitions": {
+    "settlement_scenarios": "One row for every price_case and note. Cash is positive principal or conversion cash funding in USD million. gross_shares_million is gross common shares issued under the authored maturity election. Neither value is the debt carrying amount or a GAAP diluted share count.",
+    "diluted_eps": "One row per price_case and income_case. basic_eps and diluted_eps are USD per share. Fixed award shares affect dilution and do not enter basic EPS. Return the greatest dilution consistent with the supplied accounting definitions. Equivalent inclusion choices at a neutrality tie are accepted because only EPS is graded.",
+    "thresholds": "Three rows. measure share_price has value in USD per share and is the price where aggregate gross note issuance reaches threshold_case.target_shares million. Measures earnings_2025 and earnings_2027 have value in USD million and identify the net-income neutrality boundary at threshold_case.price. These boundaries concern the complete note portfolio. Both endpoints of an EPS tie produce the same graded EPS."
+  },
+  "claim_assertions": {
+    "claim_1": "At the authored USD 12 maturity price, no notes convert under the holder election, yet the EPS sensitivity at reported FY2024 net income includes dilution beyond fixed award shares.",
+    "claim_2": "The 2029 note principal can be settled entirely in shares under the supplied contractual terms.",
+    "claim_3": "Gross note shares equal net company share dilution after all capped-call transactions."
+  },
+  "numeric_policy": "Displayed-value arithmetic. Absolute tolerances are computational, not claims of source precision.",
+  "assumptions": "Authored scenarios: Freeze the disclosed year-end principal balances and use the indenture conversion rates in contract_terms, including 34.2185 for 2029. Preserve the 10-K rate observation separately. Assume no conversion-rate adjustments, make-whole events, early conversions or repurchases. Each maturity scenario applies its price at each note's own maturity and throughout every relevant observation day, not at one common maturity date. Holders choose conversion only when its value exceeds face and cash repayment at equality. For converted 2025 and 2027 notes the issuer elects physical share settlement. For 2029 it elects shares for the amount above mandatory cash principal. Ignore interest cash, fractional-share rounding and all separate capped-call positions. Report gross note issuance, not net company dilution. EPS is a separate hypothetical full period with all notes outstanding throughout. Use the disclosed basic weighted shares and incremental award shares as fixed inputs, regardless of scenario price. All income cases are positive income from continuing operations available to common shareholders, with no preferred dividends or discontinued operations. Preserve disclosed note coupon and amortization expense for numerator treatment with no additional tax adjustment. A neutrality boundary is the income where adding that issue has zero incremental EPS effect after accounting for other eligible issues. Grade the unique EPS value, not arbitrary tied inclusion witnesses."
+}

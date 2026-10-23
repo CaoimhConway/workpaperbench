@@ -1,0 +1,48 @@
+{
+  "dataset_id": "workflow-hard-pilot-v2",
+  "status": "Experimental development only, empirical difficulty unmeasured",
+  "evaluation_track": "construction",
+  "scorer_version": "workflow-1.2.1",
+  "scorer_path": "config/scorers/workflow-1.2.1.py",
+  "sql_worker_path": "config/scorers/workflow_sql_worker-1.2.1.py",
+  "starting_commit": "2a4455935a7bfd5fb9d46b7f3ecdbb2d3a3d9688",
+  "task_design": "Two source-grounded contractual decision tasks. No candidate-model trials.",
+  "human_review": "pending",
+  "tasks": {
+    "a01": {
+      "task_id": "workflow-hard-pilot-v2-a01",
+      "path": "datasets/workflow-hard-pilot-v2/tasks/a01",
+      "task_sha256": "039136ea5280f0c0db81930481c6af9c23265b5e766634ffff4c4ec5b5fb2178",
+      "split": "development",
+      "source_group": "ashtead-2025",
+      "evaluation_track": "construction"
+    },
+    "b01": {
+      "task_id": "workflow-hard-pilot-v2-b01",
+      "path": "datasets/workflow-hard-pilot-v2/tasks/b01",
+      "task_sha256": "d72ba10862be9cd47f7cbda22a9ccfb7995401ab5c5e73b24aeab7e800de07b1",
+      "split": "development",
+      "source_group": "veeco-2024",
+      "evaluation_track": "construction"
+    }
+  },
+  "hashes": {
+    "scripts/build_workflow_hard_followup.py": "317cd767e7ef45bf7eae901d3632d0c26bf0d7a285d260180d99dca0e506ee3a",
+    "scripts/workflow_hard_followup_cases.py": "ff2c99304b32b0e4de3fb3f7fbfcae855f5de074d7e8b61017318c6f3ca97eb6",
+    "scripts/workflow_hard_covenant.py": "1d02c60d0413e5710b4c01ee891d79e52b595633ca42ef454c00e6a6167910f9",
+    "scripts/workflow_hard_convertibles.py": "54a3bf587a8631f4effffb26138f792339170bba1890975aa6d7e9acd98b1077",
+    "scripts/validate_workflow_hard_followup.py": "c9df87af00de862cc2eb3d6f8ea432efbea201d4aff80f88caa11b67a9894cbe",
+    "tests/test_workflow_hard_followup.py": "8adf5c36eab5f8cc5fc8170e3c374b8f828971462ebd0b7cc65147f1857cb7c6",
+    "tests/test_hard_convertibles.py": "5a59d6790be07e0cf20d3f25ba2360eaf32772fa698e0db3170a54c4cc0b9fea",
+    "config/scorers/workflow-1.2.1.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "config/scorers/workflow_sql_worker-1.2.1.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "datasets/workflow-hard-pilot-v2/sources/ashtead-2025.json": "378d3c702f5c55aed821d807fdd14458a9ea57a17e9402a77a6070f9626f207b",
+    "datasets/workflow-hard-pilot-v2/sources/veeco-2024.json": "7bb4210b1cc18ae2048922b125161686235afbf689bbc62d7f2a1fddafe9d3a0",
+    "datasets/workflow-hard-pilot-v2/references/a01.md": "c3419d26a6114720da91de3af6a8c44be28833f5f28a4c8fa2af3d5e835eeba9",
+    "datasets/workflow-hard-pilot-v2/references/b01.md": "738bd77855787f8109d3a8b2ecae7103e883083d6015eadced9d028b6e916b7b"
+  },
+  "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+  "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+  "content_hash": "5034f88e23bf6a6c93d276f05a8cc206c3d049ac58a233c2a24bd44b46316d6a",
+  "manifest_id": "workflow-hard-pilot-v2-canonical-5034f88e23bf"
+}

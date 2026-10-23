@@ -1,0 +1,52 @@
+{
+  "split": "development",
+  "evaluation_track": "construction",
+  "source_group": "veeco-2024",
+  "nearest_existing_counterparts": [
+    "workflow-v15/b09",
+    "workflow-v15/c08",
+    "workflow-hard-pilot-v1/b01"
+  ],
+  "additional_analytical_decisions": "Derive cash and share settlement by instrument, distinguish maturity conversion economics from EPS potential shares, and find earnings inclusion boundaries after other dilutive instruments. Construct the portfolio denominator from conditional instruments instead of selecting an already supplied denominator or matching reported share bases.",
+  "source_snapshot": "datasets/workflow-hard-pilot-v2/sources/veeco-2024.json",
+  "source_snapshot_sha256": "7bb4210b1cc18ae2048922b125161686235afbf689bbc62d7f2a1fddafe9d3a0",
+  "reference_method": "Decimal economic model with separate derivation, valid alternative SQL and regime checks",
+  "controls": [
+    {
+      "name": "scale",
+      "rationale": "Double all principal, carrying, expense, share and earnings quantities, including the share target. Prices and EPS stay invariant."
+    },
+    {
+      "name": "row_order",
+      "rationale": "Reverse input rows without changing their financial identities."
+    },
+    {
+      "name": "dilution_order",
+      "rationale": "A higher synthetic noncash expense on the 2027 series reverses incremental-EPS ordering. Face values and contractual conversion terms stay fixed."
+    },
+    {
+      "name": "out_of_money",
+      "rationale": "All maturity conversions are out of the money, while full-share EPS treatment for issuer-choice notes still depends on income."
+    },
+    {
+      "name": "carrying_only",
+      "rationale": "A changed unamortized debt discount changes carrying value alone at the snapshot. Face obligations, fixed scenario expenses and all outputs remain unchanged."
+    },
+    {
+      "name": "cash_principal",
+      "rationale": "A synthetic larger 2029 tranche scales its face, carrying value and expenses proportionately. Contract rates and the gross-share target stay fixed."
+    },
+    {
+      "name": "target_shift",
+      "rationale": "Change the authored target to six million gross shares, retaining a feasible continuous conversion-excess threshold."
+    },
+    {
+      "name": "neutrality_tie",
+      "rationale": "Authored parameters make the 2027 issue exactly neutral at income 5.5 after 11 million base-plus-award shares. Including or excluding it yields the same graded EPS."
+    }
+  ],
+  "human_review": "pending",
+  "source_review": "Primary source headings, definitions and factual values inspected. Independent human review remains pending.",
+  "model_exposure": "No model trials. Published references are a contamination risk. Development tasks only.",
+  "execution": "Baseline task resources and frozen scorer reused. Qualified GLM uses 3600 seconds and 24 turns. Native Sol uses 3600 seconds and has no equivalent turn cap."
+}
