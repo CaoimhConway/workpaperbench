@@ -1,0 +1,160 @@
+{
+  "runtime": {
+    "harbor_version": "0.23.0",
+    "agent": "terminus-2",
+    "inference_transport": "LiteLLM Chat Completions",
+    "environment": "workpaperbench.runtime_integrity:VerifiedDockerEnvironment",
+    "concurrent_trials": 1,
+    "trial_retries": 0,
+    "fresh_session_per_attempt": true,
+    "fresh_candidate_environment_per_attempt": true,
+    "model_fallback": false,
+    "agent_timeout_multiplier": 6,
+    "agent_seconds": 3600,
+    "agent_kwargs": {
+      "max_turns": 24,
+      "parser_name": "json",
+      "enable_summarize": false,
+      "proactive_summarization_threshold": 0,
+      "use_responses_api": false,
+      "reasoning_effort": "high",
+      "interleaved_thinking": true,
+      "model_info": {
+        "max_input_tokens": 65536,
+        "max_output_tokens": 16384,
+        "supports_reasoning": true
+      },
+      "llm_call_kwargs": {
+        "max_tokens": 16384,
+        "caching": false,
+        "extra_headers": {
+          "X-OpenRouter-Cache": "false"
+        },
+        "extra_body": {
+          "provider": {
+            "only": [
+              "wafer/us"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          }
+        }
+      },
+      "store_all_messages": true
+    },
+    "sampling": {
+      "request_parameters": {},
+      "policy": "Provider defaults, with effective settings or unavailable observations recorded before execution"
+    }
+  },
+  "deployment_identity": "glm-5.3__openrouter-wafer-us__high",
+  "credential_delivery": {
+    "key_location": ".secrets/openrouter.key",
+    "same_key_for_all_generations_retries_and_recovery": true,
+    "delivery": "OPENROUTER_API_KEY on isolated Linux controller via stdin, never model-visible configuration or arguments",
+    "state": "existing key explicitly authorized, settings unchanged",
+    "existing_shared_key_preserved": true
+  },
+  "affinity_policy": "Each slot uses its unique slot_id as session_id across turns, outside messages",
+  "dependency_identities": {
+    "harbor": {
+      "version": "0.23.0",
+      "files": {
+        "harbor/agents/terminus_2/terminus_2.py": "00105976f913b49ba3d2074562adbd9cde7b8882a5aaf1f2dbb2a22204644e31",
+        "harbor/llms/lite_llm.py": "8faa5941aee862bdb9c020874ec721e348165a9b907c5a3509381a2ab50ec5a8"
+      }
+    },
+    "openai": {
+      "version": "2.54.0",
+      "files": {
+        "openai/_base_client.py": "5539c83d01c27e1bbf1ad34e59cc872202feb6c8bf81b56fadbeeb2b81a3e869"
+      }
+    },
+    "litellm": {
+      "version": "1.104.2",
+      "files": {
+        "litellm/llms/openrouter/chat/transformation.py": "f6cf4733c03c0b993f009dadc3fc9636434ad47cee20a4cefde2c70078578bec"
+      }
+    },
+    "httpx": {
+      "version": "0.28.1"
+    },
+    "docker": {
+      "version": "29.1.3"
+    },
+    "controller": "Existing workpaperbench-local dedicated Linux guest",
+    "inference": "Native Harbor Terminus-2 through LiteLLM Chat Completions, unchanged retry and output-limit recovery code"
+  },
+  "runtime_input_binding": "Canonical v15 task identity with unchanged content staging and external candidate/trusted runtime checks",
+  "endpoint_metadata": {
+    "name": "Wafer | z-ai/glm-5.3-20260816",
+    "model_id": "z-ai/glm-5.3",
+    "model_name": "Z.ai: GLM 5.3",
+    "context_length": 1048576,
+    "pricing": {
+      "prompt": "0.000000079",
+      "completion": "0.0000014",
+      "input_cache_read": "0.000000078",
+      "discount": 0
+    },
+    "provider_name": "Wafer",
+    "tag": "wafer/us",
+    "service_tier": null,
+    "quantization": "fp4",
+    "max_completion_tokens": 943718,
+    "max_prompt_tokens": null,
+    "supported_parameters": [
+      "reasoning",
+      "include_reasoning",
+      "temperature",
+      "top_p",
+      "top_k",
+      "min_p",
+      "frequency_penalty",
+      "presence_penalty",
+      "repetition_penalty",
+      "stop",
+      "seed",
+      "max_tokens",
+      "logit_bias",
+      "response_format",
+      "structured_outputs",
+      "tools",
+      "tool_choice",
+      "logprobs",
+      "top_logprobs",
+      "reasoning_effort"
+    ],
+    "supports_tool_choice": {
+      "none": true,
+      "auto": true,
+      "required": true,
+      "function": true
+    },
+    "status": 0,
+    "uptime_last_30m": 100,
+    "uptime_last_5m": 100,
+    "uptime_last_1d": 100,
+    "supports_implicit_caching": true,
+    "native_tools": {},
+    "supports_voice_cloning": false,
+    "supports_multiple_audio_references": false,
+    "supports_image_reference": false,
+    "supports_diarization": false,
+    "latency_last_30m": null,
+    "throughput_last_30m": null
+  },
+  "reasoning_verification": "High reasoning explicitly requested. Offline outgoing-request verification is not independent attestation of provider internal reasoning effort.",
+  "cache_policy": "Full-response replay disabled by existing LiteLLM caching false and X-OpenRouter-Cache false. Existing permitted provider prefix caching retained.",
+  "configuration_id": "hard-20261023-glm53-wafer-high",
+  "source_commit": "e554adcfdf36088cb507e5beeaf4cfa6d01f8508",
+  "dataset": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+  "endpoint_preflight_sha256": "5ed6de5372ef6231d8e615cf35ae711107fd7766649f6719fb54f14175271ca3",
+  "native_retries": {
+    "whole_trial": 0,
+    "lite_llm_call_attempts": 3,
+    "query_llm_attempts": 3,
+    "output_length_recovery": "Qualified native behavior unchanged",
+    "sdk_retries": "Not independently observable, retained usage includes returned charged generations"
+  }
+}
