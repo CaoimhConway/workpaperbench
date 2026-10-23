@@ -1,0 +1,35 @@
+{
+  "protocol_id": "hard-evaluation-20261023-r2-evidence-reassessment-v1",
+  "frozen_at": "2026-10-23T20:38:49.517560+00:00",
+  "original_execution_id": "hard-evaluation-20261023-r2-a800d4271843",
+  "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "reassessment_manifest_id": "workflow-hard-eval-v1-canonical-372b3270ea4b",
+  "original_sql_worker_sha256": "4103f82f9b3af6fce87f0db2235f581bceee7cabc0ab88822280950e914ec7e4",
+  "reassessment_sql_worker_sha256": "06394ab7e7d12d1d952bb9d1e5c355b7b4b7ef387821d8832ae9912940482ca9",
+  "reason": "Accept two independently reviewed sufficient evidence paths. No numerical answers, controls, candidate-visible materials, claim verdicts or submissions change.",
+  "evidence": {
+    "datasets/workflow-hard-eval-v1/tasks/b01/environment/evidence.json": "e95909b2976ea1d3b28d8d395f43158884e5a3b4f2e41292955409d28de93b13",
+    "datasets/workflow-hard-eval-v1/tasks/c01/environment/evidence.json": "869a27f5cbaff57e21402ad953f7052ba1b2846d5f54410aec176af7f15db001"
+  },
+  "candidate_outputs_or_scores_inspected_before_freeze": true,
+  "financial_inputs_and_rules_unchanged": true,
+  "scheduled_slots": 12,
+  "population": "Every scheduled slot in the original matrix, including missing or delivery-failed submissions. No selection based on original outcome.",
+  "procedure": "Regrade the exact saved answer.json and SQL bytes against original and all control databases using the revised isolated verifier. Do not edit, repair or regenerate submissions. Preserve original results and hashes alongside revised results.",
+  "inference": false,
+  "new_model_attempts": 0,
+  "interpretation": "Uniform reassessment of all twelve saved submissions after review of sufficient evidence paths. Original scores and worker-only reassessment are retained. No new inference, replacement or submission editing. This is not a fresh campaign under the corrected identity.",
+  "timing": "After all final outputs were inspected. This is a grading correction, not a predeclared model condition.",
+  "previous_reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+  "changed_evidence_paths": {
+    "b01.performance_views": [
+      "b01:s05",
+      "b01:s06",
+      "b01:s08"
+    ],
+    "c01.retained_interest_bridge": [
+      "c01:s02",
+      "c01:s05"
+    ]
+  }
+}

@@ -118,7 +118,7 @@ def specification():
     cash_support = [['c01:s01','c01:s02','c01:s03','c01:s07'],
                     ['c01:s01','c01:s02','c01:s07']]
     bridge_support = [['c01:s01','c01:s02','c01:s05','c01:s07'],
-                      ['c01:s02','c01:s05','c01:s07']]
+                      ['c01:s02','c01:s05','c01:s07'],['c01:s02','c01:s05']]
     return {
         'source':'constellation-2025','calculate':calculate,'sql':SQL,
         'title':'Customer collections through a receivables-financing transition',

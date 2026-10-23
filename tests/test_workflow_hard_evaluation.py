@@ -109,3 +109,16 @@ def test_evaluation_source_groups_are_separate():
     for dataset in ['workflow-v15','workflow-hard-pilot-v1','workflow-hard-pilot-v2']:
         prior=load(ROOT,dataset)
         assert groups.isdisjoint({t['source_group'] for t in prior['tasks'].values()})
+
+
+@pytest.mark.parametrize('task,table,sufficient,insufficient', [
+    ('b01','performance_views',['b01:s05','b01:s06','b01:s08'],['b01:s05','b01:s08']),
+    ('c01','retained_interest_bridge',['c01:s02','c01:s05'],['c01:s02']),
+])
+def test_sufficient_disclosure_paths_without_redundant_locators(task, table, sufficient, insufficient):
+    module=importlib.util.spec_from_file_location('workpaperbench.evidence_scorer',ROOT/'config/scorers/workflow-1.2.1.py')
+    scorer=importlib.util.module_from_spec(module)
+    module.loader.exec_module(scorer)
+    declaration=specifications()[task]['tables'][table]
+    assert scorer.supported(sufficient,declaration['evidence'],[])
+    assert not scorer.supported(insufficient,declaration['evidence'],[])

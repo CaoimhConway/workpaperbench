@@ -117,7 +117,8 @@ def declaration(columns,keys,evidence,context=()):
 def specification():
     bases=[['b01:s01','b01:s02','b01:s07','b01:s08']]
     cash=[['b01:s01','b01:s02','b01:s03','b01:s04','b01:s07','b01:s08']]
-    performance=[['b01:s02','b01:s05','b01:s06','b01:s08'],['b01:s02','b01:s03','b01:s05','b01:s06','b01:s08']]
+    performance=[['b01:s02','b01:s05','b01:s06','b01:s08'],['b01:s02','b01:s03','b01:s05','b01:s06','b01:s08'],
+                 ['b01:s05','b01:s06','b01:s08']]
     return {
       'source':'bms-2020','calculate':calculate,'sql':SQL,
       'title':'BMS acquisition costs, cash funding and performance bases',
