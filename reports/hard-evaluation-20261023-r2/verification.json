@@ -1,0 +1,90 @@
+{
+  "frozen_dataset": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "source_commit": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+  "configuration_commit": "61b969f054846a33310000a8da80ff64f50d11b7",
+  "canonical_hash_checks": "All four executed packages, manifest, frozen scorer and SQL worker match the retained source archive",
+  "executed_source_verification": {
+    "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+    "sql_worker_sha256": "4103f82f9b3af6fce87f0db2235f581bceee7cabc0ab88822280950e914ec7e4",
+    "tasks": {
+      "a01": "bd9ae1655ccdecb8d90551c327bff984b37cd39b4b1bd8442e731dcb7d52edd8",
+      "b01": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+      "c01": "6c1e549084beb479b93b8917520327bb50a41e35c88adbeb9071b6fc91558012",
+      "b02": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b"
+    },
+    "source_commit": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+    "source_archive_sha256": "fe234884ff75bc2d3460e516233e368ad2f4f2dd9f9fc36cbe2e69b9ff1ce658",
+    "scope": "Frozen executed source archive, independent of later checkout revisions",
+    "all_bound_inputs_and_task_hashes_match": true,
+    "archive_commit_header": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+    "executed_manifest_sha256": "dbe2ddef7270548bd7e1d0cf8e0f4040491276371c909fe507e82f1c53888b4f"
+  },
+  "preparation": {
+    "controller": "/home/wpb/hard-evaluation-20261023-r2",
+    "source_commit": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+    "archives_sha256": {
+      "source.tar": "fe234884ff75bc2d3460e516233e368ad2f4f2dd9f9fc36cbe2e69b9ff1ce658",
+      "execution-inputs.tar": "e8c411312cd48284dd09f3aae69de57f3bcb75012e4d8bf7326bfacefb56d230"
+    },
+    "candidate_context": "Canonical task environment only, controller source has no Git history"
+  },
+  "controller_recovery": {
+    "recovered_at": "2026-10-23T20:11:32.811503+00:00",
+    "slot_id": "hard-evaluation-20261023-r2-deepseek-c01-1",
+    "execution_id": "hard-evaluation-20261023-r2-a800d4271843",
+    "native_result_already_finished": true,
+    "scores_and_workpapers_inspected": false,
+    "replacement_or_relaunched_attempts": 0,
+    "remaining_unstarted_slots": 4,
+    "metadata": {
+      "trial_started_at": "2026-10-23T12:57:59.431654Z",
+      "trial_finished_at": "2026-10-23T13:58:35.847590Z",
+      "agent_execution": {
+        "started_at": "2026-10-23T12:58:28.365779Z",
+        "finished_at": "2026-10-23T13:58:04.145521Z"
+      },
+      "verifier": {
+        "started_at": "2026-10-23T13:58:17.195996Z",
+        "finished_at": "2026-10-23T13:58:35.847573Z"
+      }
+    },
+    "controller_exit_status": "unknown"
+  },
+  "controller_continuation": {
+    "continued_at": "2026-10-23T20:12:04.554242+00:00",
+    "execution_id": "hard-evaluation-20261023-r2-a800d4271843",
+    "source_commit": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+    "checkpoint": "0c85d9698064d539bdd1c89bb8bf4961a379d2b5",
+    "scope": "Launch only the four originally scheduled, unstarted Sol slots. No existing candidate is relaunched or resumed."
+  },
+  "runtime_integrity_proofs": 60,
+  "all_runtime_materializations_match": true,
+  "original_table_comparisons_passed": 23,
+  "control_table_comparisons_passed": 211,
+  "claim_verdicts_and_support_passed": 24,
+  "separate_verifier_boundary_checks": {
+    "attempts": 12,
+    "network_blocked": true,
+    "no_inference_credential": true,
+    "no_docker_socket": true
+  },
+  "credential_pattern_review": {
+    "output_files": "passed",
+    "raw_native_archive_members_checked": 441,
+    "authentication_credential_matches": 0,
+    "account_identifiers_in_output_files": 0,
+    "private_native_traces_local_only": true
+  },
+  "test_scope": "Focused offline configuration/hash verification and twelve scheduled native attempts with isolated grading. No broad infrastructure test suite or additional inference attempts.",
+  "completion_checks": {
+    "current_manifest_id": "workflow-hard-eval-v1-canonical-372b3270ea4b",
+    "correction_checkpoint": "09f598c",
+    "baseline_and_preexisting_pilots_unchanged_from": "3e29c2c18415c9816b4a59b410f0ef6abd84edb6",
+    "all_report_local_links_resolve": true,
+    "completed_inference_containers_remaining": 0,
+    "temporary_subscription_auth_directories_remaining": 0,
+    "execution_host": "MacPro7,1",
+    "funding_settings_changed": false,
+    "pushed_or_published": false
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "task_id": "workflow-hard-eval-v1-b02",
+  "tables": [
+    {
+      "id": "sale_allocations",
+      "file": "sale_allocations.sql",
+      "evidence": [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s05"
+      ]
+    },
+    {
+      "id": "conversion_frontiers",
+      "file": "conversion_frontiers.sql",
+      "evidence": [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s05"
+      ]
+    },
+    {
+      "id": "owner_funding",
+      "file": "owner_funding.sql",
+      "evidence": [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s05"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s05"
+      ],
+      "note": "Above USD 240 million, A is forced to convert and loses its senior shortfall payment. Its cohort receives cash at 240 but zero at 241."
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s05"
+      ],
+      "note": "At 240, A-1 is junior to an underfunded senior rank. At 2500 it participates as common after mandatory conversion and receives positive cash."
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": [
+        "b02:s05",
+        "b02:s06"
+      ],
+      "note": "Excluding unissued awards from the stockholder pool does not determine their separate contractual settlement. The retained award data omit necessary individual terms."
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "execution_id": "hard-evaluation-20261023-r2-a800d4271843",
+  "scheduled_attempts": 12,
+  "new_model_attempts_during_reassessment": 0,
+  "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "worker_reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+  "current_manifest_id": "workflow-hard-eval-v1-canonical-372b3270ea4b",
+  "original_scores": {
+    "glm": {
+      "complete": 1,
+      "scheduled": 4
+    },
+    "deepseek": {
+      "complete": 1,
+      "scheduled": 4
+    },
+    "sol": {
+      "complete": 3,
+      "scheduled": 4
+    }
+  },
+  "worker_only_scores": {
+    "glm": {
+      "complete": 1,
+      "scheduled": 4
+    },
+    "deepseek": {
+      "complete": 1,
+      "scheduled": 4
+    },
+    "sol": {
+      "complete": 3,
+      "scheduled": 4
+    }
+  },
+  "corrected_scores": {
+    "glm": {
+      "complete": 2,
+      "scheduled": 4
+    },
+    "deepseek": {
+      "complete": 1,
+      "scheduled": 4
+    },
+    "sol": {
+      "complete": 3,
+      "scheduled": 4
+    }
+  },
+  "completion_changed_slots": [
+    "hard-evaluation-20261023-r2-glm-c01-1"
+  ],
+  "final_matrix_settled_openrouter_usd": "1.393635383",
+  "retained_generation_cost_usd": "1.383924533",
+  "unattributed_settled_charge_usd": "0.009710850",
+  "development_and_final_matrix_openrouter_usd": "2.005901718",
+  "final_observed_remaining_usd": "5.152327731",
+  "subscription_charge_usd": null,
+  "financial_numerical_and_control_passes_among_valid_deliveries": {
+    "glm": {
+      "passed": 2,
+      "valid_deliveries": 2,
+      "scheduled": 4
+    },
+    "deepseek": {
+      "passed": 2,
+      "valid_deliveries": 2,
+      "scheduled": 4
+    },
+    "sol": {
+      "passed": 3,
+      "valid_deliveries": 4,
+      "scheduled": 4
+    }
+  },
+  "interpretation": "Descriptive outcomes for three complete model-and-agent configurations. Four tasks and one attempt each do not establish a stable general ranking. Delivery failures have unassessed financial dimensions.",
+  "limitations": [
+    "Independent human financial/source review pending",
+    "Actual external-user validation pending",
+    "Public sources and references can be present in training data",
+    "Native agent tools and output/turn budgets differ",
+    "The final DeepSeek slot timed out during output-length recovery",
+    "The narrow c01 loss-to-DPP inference remains a financial judgment, with its wording limitation documented"
+  ]
+}

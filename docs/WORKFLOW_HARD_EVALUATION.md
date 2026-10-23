@@ -118,3 +118,11 @@ records the revised worker and its verification. Development catalogs retain the
 historical contracts. The [second development calibration](../reports/hard-development-20261023/README.md)
 documents known worker and evidence-path defects, so its strict completion
 counts should not be interpreted as financial reasoning pass rates.
+
+The [three-configuration calibration](../reports/hard-evaluation-20261023-r2/README.md)
+retains all twelve scheduled attempts, original scores and unchanged-submission
+reassessments. The current manifest also includes two reviewed evidence-path
+corrections, accepting sufficient disclosures without redundant citations.
+These followed outcome review and are documented separately from the executed
+condition in the [evidence correction record](../reports/workflow-hard-evidence-v1/README.md).
+Numerical answers, controls and candidate-visible materials are unchanged.

@@ -1,0 +1,206 @@
+{
+  "slot_id": "hard-evaluation-20261023-r2-deepseek-c01-1",
+  "configuration": "deepseek",
+  "task": "c01",
+  "attempt": 1,
+  "task_id": "workflow-hard-eval-v1-c01",
+  "task_sha256": "6c1e549084beb479b93b8917520327bb50a41e35c88adbeb9071b6fc91558012",
+  "configuration_path": "config/hard-evaluation-20261023-r2/deepseek.json",
+  "configuration_sha256": "436570947b4e5b0d36a7504d33d359fbf505fb1ebd9a14323c71929eba1870b8",
+  "command_argv_sha256": "666f6028f03c78640defeea099a9262d3b30edf22f56a8f788c4d9721aa88738",
+  "status": "finalized",
+  "source_commit": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+  "execution_id": "hard-evaluation-20261023-r2-a800d4271843",
+  "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "workpaper_sha256": {},
+  "workpaper_export_scope": "answer.json and SQL files only. The original native archive and delivery verdict preserve other entries.",
+  "native_artifact_archive_sha256": "33d212bab861119862aa0a40e2da0b0d390282e6f188707619d3b4d940383c95",
+  "observed": {
+    "models": [
+      "deepseek/deepseek-v4.1-flash-1017"
+    ],
+    "providers": [
+      "DeepSeek"
+    ],
+    "reasoning_effort_on_all_requests": "high",
+    "provider_internal_reasoning_effort": "unknown",
+    "generation_models": [
+      "deepseek/deepseek-v4.1-flash-20261017"
+    ],
+    "generation_providers": [
+      "DeepSeek"
+    ]
+  },
+  "complete_workpaper": false,
+  "score": 0.0,
+  "verifier": {
+    "scorer_version": "workflow-1.2.1",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "financial_answer": null,
+      "numerical_tables": null,
+      "claim_verdicts": null,
+      "evidence": null,
+      "robustness": null,
+      "delivery": false
+    },
+    "details": {
+      "tables": {},
+      "claims": {}
+    },
+    "errors": [
+      "delivery:FileNotFoundError"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "runtime_integrity": {
+    "all_identities_and_bytes_match": true,
+    "candidate_setup": true,
+    "candidate_before_agent": true,
+    "verifier_setup": true,
+    "verifier_before_grading": true,
+    "proofs": [
+      {
+        "role": "candidate",
+        "phase": "before-agent",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-c01",
+        "task_sha256": "6c1e549084beb479b93b8917520327bb50a41e35c88adbeb9071b6fc91558012",
+        "instruction_sha256": "bcd5f26c85926fa1f8743a7345b2418259cfbe379d7bbbe444ff45ea34912108",
+        "context_identity": "2d6eca592f3fb25e74c518cb15cb4f06709aefbb2e7657d070eb25537eb15b02",
+        "session_id": "c01__uiscJxU__env",
+        "container_id": "4654c1f563ab3a1fd6d6d360410ff4cb7101bbff0d77c805da504383c336bd76",
+        "image_id": "sha256:e72d86d3ce815edcad3db15b3c402cb7dd84dc1a87e65e8ba975839915f3616e",
+        "mismatches": [],
+        "diagnostic_sha256": "5a2508054bd278e030e4eee28ace429b9f4fa4188695fae8a4fbc591ed35d851"
+      },
+      {
+        "role": "candidate",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-c01",
+        "task_sha256": "6c1e549084beb479b93b8917520327bb50a41e35c88adbeb9071b6fc91558012",
+        "instruction_sha256": "bcd5f26c85926fa1f8743a7345b2418259cfbe379d7bbbe444ff45ea34912108",
+        "context_identity": "2d6eca592f3fb25e74c518cb15cb4f06709aefbb2e7657d070eb25537eb15b02",
+        "session_id": "c01__uiscJxU__env",
+        "container_id": "4654c1f563ab3a1fd6d6d360410ff4cb7101bbff0d77c805da504383c336bd76",
+        "image_id": "sha256:e72d86d3ce815edcad3db15b3c402cb7dd84dc1a87e65e8ba975839915f3616e",
+        "mismatches": [],
+        "diagnostic_sha256": "4a535d8bde2e7a0dcccc220364e75e32ff519648e129a66599e2871b37059951"
+      },
+      {
+        "role": "verifier",
+        "phase": "before-grading",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-c01",
+        "task_sha256": "6c1e549084beb479b93b8917520327bb50a41e35c88adbeb9071b6fc91558012",
+        "instruction_sha256": null,
+        "context_identity": "14ba482ca38e8972c64e7dfc621c413826b19a27ccd6847945b3acb6a61bb352",
+        "session_id": "c01__uiscJxU__verifier__trial",
+        "container_id": "532245e0cd45e18e4c38aa0808eb3cbefa66b6b6d3fe0a7ade705180535e5b82",
+        "image_id": "sha256:dbdcbea4488d27496c8af4a51e658a6bc6a968dc210f21c8db61fb1d97c3a028",
+        "mismatches": [],
+        "diagnostic_sha256": "ccacc7944aca3783f9d62b0a09b3b49536cd8b462544de98d88004b7019af6ca"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-c01",
+        "task_sha256": "6c1e549084beb479b93b8917520327bb50a41e35c88adbeb9071b6fc91558012",
+        "instruction_sha256": null,
+        "context_identity": "14ba482ca38e8972c64e7dfc621c413826b19a27ccd6847945b3acb6a61bb352",
+        "session_id": "c01__uiscJxU__verifier__trial",
+        "container_id": "532245e0cd45e18e4c38aa0808eb3cbefa66b6b6d3fe0a7ade705180535e5b82",
+        "image_id": "sha256:dbdcbea4488d27496c8af4a51e658a6bc6a968dc210f21c8db61fb1d97c3a028",
+        "mismatches": [],
+        "diagnostic_sha256": "2137c5302755a5d6712384e4353b618c48a2a1d68715a5596b0deb10240f39e7"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-c01",
+        "task_sha256": "6c1e549084beb479b93b8917520327bb50a41e35c88adbeb9071b6fc91558012",
+        "instruction_sha256": null,
+        "context_identity": "14ba482ca38e8972c64e7dfc621c413826b19a27ccd6847945b3acb6a61bb352",
+        "session_id": "wpb-trusted-157f150a9a979ad84c550ca7",
+        "container_id": "1ed48c3a6488d0974c986375ff3900afac69c017b14b717f4d5f6075fe201085",
+        "image_id": "sha256:dbe49be201b324772c25f07cdfa36375f7b6b7d184e367ef78939b64c5efbe99",
+        "mismatches": [],
+        "diagnostic_sha256": "8488dd1975876619708b2e43527345e7ce705ca170e9247b621065825aaec30c"
+      }
+    ],
+    "candidate_checked_before_first_observable_request_or_session": true
+  },
+  "native_result_sha256": "10e18efb760d6812f9f522f8bea080fc7c2dd41f4c3beefa394ba2b0e6567067",
+  "verdict_sha256": "2946771ebc137a0b37f1b0748ccea6a312141aa67e49a95f1058c1529479c51d",
+  "wall_time": {
+    "native_controller_seconds": null,
+    "agent_execution": {
+      "started_at": "2026-10-23T12:58:28.365779Z",
+      "finished_at": "2026-10-23T13:58:04.145521Z"
+    },
+    "agent_setup": {
+      "started_at": "2026-10-23T12:58:19.803888Z",
+      "finished_at": "2026-10-23T12:58:28.365637Z"
+    }
+  },
+  "termination_reason": "AgentTimeoutError",
+  "exception": {
+    "exception_type": "AgentTimeoutError",
+    "exception_message": "Agent execution timed out after 3600.0 seconds",
+    "occurred_at": "2026-10-23T13:58:04.164074Z"
+  },
+  "controller_recovery": {
+    "controller_interruption": true,
+    "timing_scope": "finished_at is recovery collection time. Controller exit status and elapsed time were not retained. Native execution times are preserved separately.",
+    "trial_started_at": "2026-10-23T12:57:59.431654Z",
+    "trial_finished_at": "2026-10-23T13:58:35.847590Z"
+  },
+  "tokens": {
+    "input_including_cached": 763855,
+    "output_including_reasoning": 592866,
+    "cached_input_subset": 706816,
+    "reasoning_output_subset": 589381
+  },
+  "charges": {
+    "settled_key_usage_delta_usd": "0.359245248",
+    "settled_key_reconciled": false,
+    "settlement_observation": "Post-campaign settlement snapshot",
+    "recorded_openrouter_usd": "0.349534398",
+    "generation_records_total_usd": "0.349534398",
+    "key_usage_delta_usd": "0.359245248",
+    "response_and_key_reconciled": false,
+    "generation_records_reconciled": true,
+    "remaining_unchanged_key_allowance_usd": 5.152327731,
+    "remaining_account_balance_usd": 5.152327731,
+    "lifetime_limit_usd": 20.0,
+    "reset_is_null": true
+  },
+  "subscription": null,
+  "requests": {
+    "observed_requests": 48,
+    "retained_provider_generations": 47,
+    "failure_events": 0,
+    "identical_full_body_repeats": 0,
+    "output_limit_recovery_calls": 29,
+    "length_responses": 29,
+    "whole_trial_retries": 0,
+    "requests_without_retained_response": 1,
+    "sdk_retries": "unknown",
+    "request_configuration_violations": []
+  }
+}

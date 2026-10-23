@@ -1,0 +1,40 @@
+{
+  "task_id": "workflow-hard-eval-v1-b01",
+  "tables": [
+    {
+      "id": "acquisition_bases",
+      "file": "acquisition_bases.sql",
+      "evidence": ["b01:s01", "b01:s02", "b01:s07", "b01:s08", "b01:s09"]
+    },
+    {
+      "id": "cash_coverage",
+      "file": "cash_coverage.sql",
+      "evidence": ["b01:s01", "b01:s02", "b01:s03", "b01:s04", "b01:s07", "b01:s08"]
+    },
+    {
+      "id": "performance_views",
+      "file": "performance_views.sql",
+      "evidence": ["b01:s02", "b01:s05", "b01:s06", "b01:s08"]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": ["b01:s02", "b01:s08"],
+      "note": "Allocation cost is 13,089 - 482 + 53 = 12,660; listed cash net of acquired cash is 13,089 - 861 = 12,228. Capitalized transaction costs do not establish cash payment timing."
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": ["b01:s07"],
+      "note": "Otezla generated 13,400 of cash proceeds; the divestiture table reports no Otezla pretax gain."
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": ["b01:s05", "b01:s06", "b01:s08"],
+      "note": "Actual revenue grew 62.6238%; growth against the supplied 2019 pro forma baseline was 6.9393%. Neither comparison establishes organic growth."
+    }
+  ]
+}

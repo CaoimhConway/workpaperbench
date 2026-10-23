@@ -1,0 +1,301 @@
+{
+  "slot_id": "hard-evaluation-20261023-r2-glm-b01-1",
+  "configuration": "glm",
+  "task": "b01",
+  "attempt": 1,
+  "task_id": "workflow-hard-eval-v1-b01",
+  "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+  "configuration_path": "config/hard-evaluation-20261023-r2/glm.json",
+  "configuration_sha256": "055cb0435fac89d0366a202826385bbc880e87a8b1e1d6abd6a83d4b3673c0c1",
+  "command_argv_sha256": "c1ebee8cc46632d0e2c0ebe9768fde7516c4f6652709daa9dd0598b619214fd7",
+  "status": "finalized",
+  "source_commit": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+  "execution_id": "hard-evaluation-20261023-r2-a800d4271843",
+  "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "workpaper_sha256": {
+    "cash_coverage.sql": "70d1b1c02acf7919fbcea146cd7c3ddf72ff692b0fcd2e25caae49b8ce396ca8",
+    "performance_views.sql": "7d8942c53cd903c7c5c4e2c91058bad70db37821adc865f119b1df3db5351fb2",
+    "acquisition_bases.sql": "e99a0996435e3de3c98b383857227272ac941bef60df64efa0a206153106b595",
+    "answer.json": "710d2437e5d9a1e224f047fad539a5269151f9cbaa4a8b747254b168f8185431"
+  },
+  "workpaper_export_scope": "answer.json and SQL files only. The original native archive and delivery verdict preserve other entries.",
+  "native_artifact_archive_sha256": "f06e14689c58fc97ef2d363a10421eb8d9a7ede7b7e9c2b292efbaa972272186",
+  "observed": {
+    "models": [
+      "z-ai/glm-5.3"
+    ],
+    "providers": [
+      "Wafer"
+    ],
+    "reasoning_effort_on_all_requests": "high",
+    "provider_internal_reasoning_effort": "unknown",
+    "generation_models": [
+      "z-ai/glm-5.3-20260816"
+    ],
+    "generation_providers": [
+      "Wafer"
+    ]
+  },
+  "complete_workpaper": true,
+  "score": 1.0,
+  "verifier": {
+    "scorer_version": "workflow-1.2.1",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": true,
+      "robustness": true,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "acquisition_bases": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "compensation_classification": true,
+            "acquired_cash": true,
+            "accrued_transaction_cost": true,
+            "share_valuation": true,
+            "noncash_remeasurement": true,
+            "reported_total": true,
+            "preacquisition_revenue": true,
+            "current_revenue": true,
+            "monetary_scale": true,
+            "row_order": true
+          },
+          "control_errors": {
+            "compensation_classification": null,
+            "acquired_cash": null,
+            "accrued_transaction_cost": null,
+            "share_valuation": null,
+            "noncash_remeasurement": null,
+            "reported_total": null,
+            "preacquisition_revenue": null,
+            "current_revenue": null,
+            "monetary_scale": null,
+            "row_order": null
+          }
+        },
+        "cash_coverage": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "compensation_classification": true,
+            "acquired_cash": true,
+            "accrued_transaction_cost": true,
+            "share_valuation": true,
+            "noncash_remeasurement": true,
+            "reported_total": true,
+            "preacquisition_revenue": true,
+            "current_revenue": true,
+            "monetary_scale": true,
+            "row_order": true
+          },
+          "control_errors": {
+            "compensation_classification": null,
+            "acquired_cash": null,
+            "accrued_transaction_cost": null,
+            "share_valuation": null,
+            "noncash_remeasurement": null,
+            "reported_total": null,
+            "preacquisition_revenue": null,
+            "current_revenue": null,
+            "monetary_scale": null,
+            "row_order": null
+          }
+        },
+        "performance_views": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "compensation_classification": true,
+            "acquired_cash": true,
+            "accrued_transaction_cost": true,
+            "share_valuation": true,
+            "noncash_remeasurement": true,
+            "reported_total": true,
+            "preacquisition_revenue": true,
+            "current_revenue": true,
+            "monetary_scale": true,
+            "row_order": true
+          },
+          "control_errors": {
+            "compensation_classification": null,
+            "acquired_cash": null,
+            "accrued_transaction_cost": null,
+            "share_valuation": null,
+            "noncash_remeasurement": null,
+            "reported_total": null,
+            "preacquisition_revenue": null,
+            "current_revenue": null,
+            "monetary_scale": null,
+            "row_order": null
+          }
+        }
+      },
+      "claims": {
+        "claim_1": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_2": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_3": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "runtime_integrity": {
+    "all_identities_and_bytes_match": true,
+    "candidate_setup": true,
+    "candidate_before_agent": true,
+    "verifier_setup": true,
+    "verifier_before_grading": true,
+    "proofs": [
+      {
+        "role": "candidate",
+        "phase": "before-agent",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b01",
+        "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+        "instruction_sha256": "01fffe84b8df80a6d98d8f58f85ad5bf62159269f7ecbf6ea3a80099e9b279cd",
+        "context_identity": "272b8138ebbf3b89615ed153d79b4d5c81cbc30d49d6c43ea630321ad397abef",
+        "session_id": "b01__XzEm4rd__env",
+        "container_id": "376854a802fb95653118ef2c03c8de80f382fbcc8d153a8e19980dce1e298b26",
+        "image_id": "sha256:abe37b4c3b0ed377863cbb3b41ed3ca1e5025efe650dbd982aafbe60f144cf8f",
+        "mismatches": [],
+        "diagnostic_sha256": "550aa83efe743a63d7e2b31304b722920aceb85a243813f2a452fa39d29634d0"
+      },
+      {
+        "role": "candidate",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b01",
+        "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+        "instruction_sha256": "01fffe84b8df80a6d98d8f58f85ad5bf62159269f7ecbf6ea3a80099e9b279cd",
+        "context_identity": "272b8138ebbf3b89615ed153d79b4d5c81cbc30d49d6c43ea630321ad397abef",
+        "session_id": "b01__XzEm4rd__env",
+        "container_id": "376854a802fb95653118ef2c03c8de80f382fbcc8d153a8e19980dce1e298b26",
+        "image_id": "sha256:abe37b4c3b0ed377863cbb3b41ed3ca1e5025efe650dbd982aafbe60f144cf8f",
+        "mismatches": [],
+        "diagnostic_sha256": "9972f6916b6fd3961f6158d10dff5cc6f4271c41d44878fb32a11131b58dff58"
+      },
+      {
+        "role": "verifier",
+        "phase": "before-grading",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b01",
+        "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+        "instruction_sha256": null,
+        "context_identity": "c3aeac77b8d02dea9911d9a47f624b1e71a892ec7ca59febe27bb2e0adb23fb2",
+        "session_id": "b01__XzEm4rd__verifier__trial",
+        "container_id": "29796940fd3ed2c1168ede0ab148ee15f651d249a810151e3c0bd96544330e0a",
+        "image_id": "sha256:efcca741153a172eace8ee4a3742b041093bbd1bb66b930e8c30d9ca600a4058",
+        "mismatches": [],
+        "diagnostic_sha256": "afb16105a06a0f8726dc7b529de4f1121a92eebec1287da1d781d21d16b78dc3"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b01",
+        "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+        "instruction_sha256": null,
+        "context_identity": "c3aeac77b8d02dea9911d9a47f624b1e71a892ec7ca59febe27bb2e0adb23fb2",
+        "session_id": "b01__XzEm4rd__verifier__trial",
+        "container_id": "29796940fd3ed2c1168ede0ab148ee15f651d249a810151e3c0bd96544330e0a",
+        "image_id": "sha256:efcca741153a172eace8ee4a3742b041093bbd1bb66b930e8c30d9ca600a4058",
+        "mismatches": [],
+        "diagnostic_sha256": "75109299598f0b9b2f82c8d4818958bbe5f5d9dce1277fdb0ade4ca7c2d279a4"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b01",
+        "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+        "instruction_sha256": null,
+        "context_identity": "c3aeac77b8d02dea9911d9a47f624b1e71a892ec7ca59febe27bb2e0adb23fb2",
+        "session_id": "wpb-trusted-01441477b9fd18fe2f0c0539",
+        "container_id": "982d80d054d8f82fa52abb388fd348d23f20b98aece46d59220be761340d5d28",
+        "image_id": "sha256:ad42a89d387883d591a75a89b5b74178f165153def201f5a21ef54edb2377a96",
+        "mismatches": [],
+        "diagnostic_sha256": "d126a89b2d4a631b7438e819458069f4d05540cdca52b9ecff9486e2a0e555ec"
+      }
+    ],
+    "candidate_checked_before_first_observable_request_or_session": true
+  },
+  "native_result_sha256": "205e3402908ccde649174771946e76a525df6cf7c726e57a9c03bbdd9483fd60",
+  "verdict_sha256": "cbfb05538b6ed98bebd86d293062916cb41f98e77ddfa13fb5dfdc89b1c202a1",
+  "wall_time": {
+    "native_controller_seconds": 596.5972648349998,
+    "agent_execution": {
+      "started_at": "2026-10-23T11:20:49.778329Z",
+      "finished_at": "2026-10-23T11:29:40.973967Z"
+    },
+    "agent_setup": {
+      "started_at": "2026-10-23T11:20:41.367507Z",
+      "finished_at": "2026-10-23T11:20:49.778188Z"
+    }
+  },
+  "termination_reason": "confirmed_task_complete",
+  "exception": null,
+  "controller_recovery": null,
+  "tokens": {
+    "input_including_cached": 246702,
+    "output_including_reasoning": 88015,
+    "cached_input_subset": 194496,
+    "reasoning_output_subset": 79062
+  },
+  "charges": {
+    "settled_key_usage_delta_usd": "0.142515962",
+    "settled_key_reconciled": true,
+    "settlement_observation": "Next scheduled paid preflight snapshot",
+    "recorded_openrouter_usd": "0.142515962",
+    "generation_records_total_usd": "0.142515962",
+    "key_usage_delta_usd": "0.142515962",
+    "response_and_key_reconciled": true,
+    "generation_records_reconciled": true,
+    "remaining_unchanged_key_allowance_usd": 6.230298509000001,
+    "remaining_account_balance_usd": 6.230298509000001,
+    "lifetime_limit_usd": 20.0,
+    "reset_is_null": true
+  },
+  "subscription": null,
+  "requests": {
+    "observed_requests": 15,
+    "retained_provider_generations": 15,
+    "failure_events": 0,
+    "identical_full_body_repeats": 0,
+    "output_limit_recovery_calls": 1,
+    "length_responses": 1,
+    "whole_trial_retries": 0,
+    "requests_without_retained_response": 0,
+    "sdk_retries": "unknown",
+    "request_configuration_violations": []
+  }
+}

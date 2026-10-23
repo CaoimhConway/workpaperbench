@@ -1,0 +1,74 @@
+{
+  "task_id": "workflow-hard-eval-v1-a01",
+  "tables": [
+    {
+      "id": "certificates",
+      "file": "certificates.sql",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s04",
+        "a01:s05"
+      ]
+    },
+    {
+      "id": "purchase_plans",
+      "file": "purchase_plans.sql",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s04",
+        "a01:s05"
+      ]
+    },
+    {
+      "id": "funding_limits",
+      "file": "funding_limits.sql",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s04",
+        "a01:s05"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "capacity_only",
+      "verdict": "contradicted",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s04",
+        "a01:s05"
+      ],
+      "note": "In case_b ordinary plan_2, the post-purchase borrowing base is below the required revolving exposure despite unused aggregate commitment."
+    },
+    {
+      "id": "collateral_feedback",
+      "verdict": "supported",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s04",
+        "a01:s05"
+      ],
+      "note": "In case_a ordinary, the purchased eligible inventory raises the borrowing base, so the maximum simultaneously funded purchase exceeds the opening available cash draw."
+    },
+    {
+      "id": "issuer_actual",
+      "verdict": "unresolved",
+      "evidence": [
+        "a01:s01",
+        "a01:s04",
+        "a01:s05"
+      ],
+      "note": "The dossier provides facility terms and hypothetical eligible collateral, not an observed issuer collateral certificate or actual revolving exposure on the source date."
+    }
+  ]
+}

@@ -1,0 +1,1802 @@
+{
+  "protocol_id": "hard-evaluation-20261023-r2-sql-1.0.1-reassessment",
+  "protocol_sha256": "9b93db434df41cef5905860da4ac59ba8f29fb47c13db7e319787a3df578c54c",
+  "delivery_addendum_sha256": "a2d30cd1f5f11102ccd167a12d1f37ab64cb8cfa53ea80dda5635591130725d1",
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "scheduled": 12,
+  "finalized": 12,
+  "all_saved_submissions_unchanged": true,
+  "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+  "sql_worker_sha256": "06394ab7e7d12d1d952bb9d1e5c355b7b4b7ef387821d8832ae9912940482ca9",
+  "scores": {
+    "glm": {
+      "complete": 1,
+      "scheduled": 4
+    },
+    "deepseek": {
+      "complete": 1,
+      "scheduled": 4
+    },
+    "sol": {
+      "complete": 3,
+      "scheduled": 4
+    }
+  },
+  "records": [
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-a01-1",
+      "task": "a01",
+      "configuration": "glm",
+      "original_receipt_sha256": "9d49999462225bf89103b34be2fea583b73c53e0eb2ba74c37d64aaba0d44df3",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": false,
+      "unchanged_workpaper_sha256": {
+        "certificates.sql": "93101cc1bed851a4615738677aee6b97b8f2a638f26ebc3fd2f074dfe0284c4e",
+        "funding_limits.sql": "1d859505a841b38f7a1e5e6abc33f94033aa9a52e7ca32e49814cd5387706f0e",
+        "purchase_plans.sql": "f19deb169186b95921bfdc7690ea2731569a4ff1e6dd2ec70f73ba5f16107bd3"
+      },
+      "assessment_method": "unchanged_delivery_failure",
+      "original_native_artifact_archive_sha256": "641b9de38b10d317c1fddf6723a6e9da04a54d99f6a04ef2cb07e5b421d27edf",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": null,
+          "numerical_tables": null,
+          "claim_verdicts": null,
+          "evidence": null,
+          "robustness": null,
+          "delivery": false
+        },
+        "details": {
+          "tables": {},
+          "claims": {}
+        },
+        "errors": [
+          "delivery:FileNotFoundError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "reassessment_complete": false,
+      "new_verifier_execution": false
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-b01-1",
+      "task": "b01",
+      "configuration": "glm",
+      "original_receipt_sha256": "4888a43d5b5502f947a047661af3f23c4b5b89200a86c7d380ca8861cea83fa3",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": true,
+      "unchanged_workpaper_sha256": {
+        "cash_coverage.sql": "70d1b1c02acf7919fbcea146cd7c3ddf72ff692b0fcd2e25caae49b8ce396ca8",
+        "performance_views.sql": "7d8942c53cd903c7c5c4e2c91058bad70db37821adc865f119b1df3db5351fb2",
+        "acquisition_bases.sql": "e99a0996435e3de3c98b383857227272ac941bef60df64efa0a206153106b595",
+        "answer.json": "710d2437e5d9a1e224f047fad539a5269151f9cbaa4a8b747254b168f8185431"
+      },
+      "assessment_method": "native_isolated_replay",
+      "reassessment_attempt": "hard-memory-glm-b01-1",
+      "reassessment_receipt_sha256": "430bb0dc906956bc3e5f2023d6d03b90cd76d5ff9c8a3d5d228700da48d44b31",
+      "reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "reassessment_task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "reassessment_complete": true,
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "acquisition_bases": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "compensation_classification": true,
+                "acquired_cash": true,
+                "accrued_transaction_cost": true,
+                "share_valuation": true,
+                "noncash_remeasurement": true,
+                "reported_total": true,
+                "preacquisition_revenue": true,
+                "current_revenue": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "compensation_classification": null,
+                "acquired_cash": null,
+                "accrued_transaction_cost": null,
+                "share_valuation": null,
+                "noncash_remeasurement": null,
+                "reported_total": null,
+                "preacquisition_revenue": null,
+                "current_revenue": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "cash_coverage": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "compensation_classification": true,
+                "acquired_cash": true,
+                "accrued_transaction_cost": true,
+                "share_valuation": true,
+                "noncash_remeasurement": true,
+                "reported_total": true,
+                "preacquisition_revenue": true,
+                "current_revenue": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "compensation_classification": null,
+                "acquired_cash": null,
+                "accrued_transaction_cost": null,
+                "share_valuation": null,
+                "noncash_remeasurement": null,
+                "reported_total": null,
+                "preacquisition_revenue": null,
+                "current_revenue": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "performance_views": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "compensation_classification": true,
+                "acquired_cash": true,
+                "accrued_transaction_cost": true,
+                "share_valuation": true,
+                "noncash_remeasurement": true,
+                "reported_total": true,
+                "preacquisition_revenue": true,
+                "current_revenue": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "compensation_classification": null,
+                "acquired_cash": null,
+                "accrued_transaction_cost": null,
+                "share_valuation": null,
+                "noncash_remeasurement": null,
+                "reported_total": null,
+                "preacquisition_revenue": null,
+                "current_revenue": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "copied_submission_hashes_match": true,
+      "verdict_sha256": "cbfb05538b6ed98bebd86d293062916cb41f98e77ddfa13fb5dfdc89b1c202a1"
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-b02-1",
+      "task": "b02",
+      "configuration": "glm",
+      "original_receipt_sha256": "b20702fe9c2f58e5a51e7896ba1dd327dbda22b7a47ab90ff0e64ed23cc4d7fd",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": false,
+      "unchanged_workpaper_sha256": {
+        "conversion_frontiers.sql": "91a1c2afe6fcd0e9db3a572ea0312e945e75bb1c46e4eede6b696b8de085fb5c",
+        "sale_allocations.sql": "16cd7760ac62dcb83b98f3b815a3823dc93fcb92f3f3b2e95d60042ea67b1cf0"
+      },
+      "assessment_method": "unchanged_delivery_failure",
+      "original_native_artifact_archive_sha256": "fe687f8ab086b61823d7f961e9091b557e79c399c71e5635b19cc6e15d802e5b",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": null,
+          "numerical_tables": null,
+          "claim_verdicts": null,
+          "evidence": null,
+          "robustness": null,
+          "delivery": false
+        },
+        "details": {
+          "tables": {},
+          "claims": {}
+        },
+        "errors": [
+          "delivery:FileNotFoundError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "reassessment_complete": false,
+      "new_verifier_execution": false
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-c01-1",
+      "task": "c01",
+      "configuration": "glm",
+      "original_receipt_sha256": "efcbc4b8e5f1fe438a07542dfb23f3ac24214c1c2c0550fb4e2c78f7e1b2336b",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": false,
+      "unchanged_workpaper_sha256": {
+        "cash_generation_change.sql": "fb108fc582422985e3179f09c9a0e20bcb312de4490f348a659afa5984693489",
+        "cashflow_recast.sql": "fb2b24e6ae1e5e0f84ce0058912d175d8e350e375084397f385a05918ab37b6f",
+        "retained_interest_bridge.sql": "cddc8890e0d206c1aea10e05c907e3058ddaf96ae960d47774864406acb0422a",
+        "answer.json": "0a24274f4733be840216a3b1991043426c0abf609f488227cd3fc47bfe9f35de"
+      },
+      "assessment_method": "native_isolated_replay",
+      "reassessment_attempt": "hard-memory-glm-c01-1",
+      "reassessment_receipt_sha256": "2115da1630d44f63ee2d48d97ea01a509a472f03e0ad026f4f0f46dd4006e3a3",
+      "reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "reassessment_task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "reassessment_complete": false,
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": false,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "cashflow_recast": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "customer_collection": true,
+                "funding_draw": true,
+                "noncash_originations": true,
+                "unallocated_movement": true,
+                "collateral_cash": true,
+                "capex_cash": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "customer_collection": null,
+                "funding_draw": null,
+                "noncash_originations": null,
+                "unallocated_movement": null,
+                "collateral_cash": null,
+                "capex_cash": null
+              }
+            },
+            "cash_generation_change": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "customer_collection": true,
+                "funding_draw": true,
+                "noncash_originations": true,
+                "unallocated_movement": true,
+                "collateral_cash": true,
+                "capex_cash": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "customer_collection": null,
+                "funding_draw": null,
+                "noncash_originations": null,
+                "unallocated_movement": null,
+                "collateral_cash": null,
+                "capex_cash": null
+              }
+            },
+            "retained_interest_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "customer_collection": true,
+                "funding_draw": true,
+                "noncash_originations": true,
+                "unallocated_movement": true,
+                "collateral_cash": true,
+                "capex_cash": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "customer_collection": null,
+                "funding_draw": null,
+                "noncash_originations": null,
+                "unallocated_movement": null,
+                "collateral_cash": null,
+                "capex_cash": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "retained_interest_bridge:evidence"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "copied_submission_hashes_match": true,
+      "verdict_sha256": "ca8d087fb0f86fcb6f6bc2ebab93e7dbbcef3855c37e93424a4562e7926b7ba6"
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-a01-1",
+      "task": "a01",
+      "configuration": "deepseek",
+      "original_receipt_sha256": "a0b7ff91a4ee35d166bd45c0c81b9a3f2616b78d13b06e3614490ebcfd81c68c",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": true,
+      "unchanged_workpaper_sha256": {
+        "certificates.sql": "4566862bce266996f84500114cddeef2282fc0db26a541b16051462f4d008e38",
+        "funding_limits.sql": "16b4b539215f8cf3212354af03f23aa63d3fe3b9920bbb4bc36fb5ce8acbe858",
+        "purchase_plans.sql": "05de8cfb8f44c9a3d0fbc4842a1aad14b992a1dc996f066ced9cdb817b857bb9",
+        "answer.json": "93f4718ea8342087de6017d1fa71ba59eb147cbb3e19169511d00486dcb06357"
+      },
+      "assessment_method": "native_isolated_replay",
+      "reassessment_attempt": "hard-memory-deepseek-a01-1",
+      "reassessment_receipt_sha256": "5acd7d89b75e915e55d99e8ce66ebdd1d7f205a5c1f89ca1a1de0e11400f14d2",
+      "reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "reassessment_task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "reassessment_complete": true,
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "certificates": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "row_order": true,
+                "scale": true,
+                "letters_of_credit": true,
+                "reserves": true,
+                "purchase_mix": true,
+                "commitment": true,
+                "dollar_cap": true,
+                "sublimits": true,
+                "seasonal_rate": true
+              },
+              "control_errors": {
+                "row_order": null,
+                "scale": null,
+                "letters_of_credit": null,
+                "reserves": null,
+                "purchase_mix": null,
+                "commitment": null,
+                "dollar_cap": null,
+                "sublimits": null,
+                "seasonal_rate": null
+              }
+            },
+            "purchase_plans": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "row_order": true,
+                "scale": true,
+                "letters_of_credit": true,
+                "reserves": true,
+                "purchase_mix": true,
+                "commitment": true,
+                "dollar_cap": true,
+                "sublimits": true,
+                "seasonal_rate": true
+              },
+              "control_errors": {
+                "row_order": null,
+                "scale": null,
+                "letters_of_credit": null,
+                "reserves": null,
+                "purchase_mix": null,
+                "commitment": null,
+                "dollar_cap": null,
+                "sublimits": null,
+                "seasonal_rate": null
+              }
+            },
+            "funding_limits": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "row_order": true,
+                "scale": true,
+                "letters_of_credit": true,
+                "reserves": true,
+                "purchase_mix": true,
+                "commitment": true,
+                "dollar_cap": true,
+                "sublimits": true,
+                "seasonal_rate": true
+              },
+              "control_errors": {
+                "row_order": null,
+                "scale": null,
+                "letters_of_credit": null,
+                "reserves": null,
+                "purchase_mix": null,
+                "commitment": null,
+                "dollar_cap": null,
+                "sublimits": null,
+                "seasonal_rate": null
+              }
+            }
+          },
+          "claims": {
+            "capacity_only": {
+              "verdict": true,
+              "evidence": true
+            },
+            "collateral_feedback": {
+              "verdict": true,
+              "evidence": true
+            },
+            "issuer_actual": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "copied_submission_hashes_match": true,
+      "verdict_sha256": "6253ae03e80024b780abd45ac0f58e4e329897e39a060b25cd6e3a84ee3a4645"
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-b01-1",
+      "task": "b01",
+      "configuration": "deepseek",
+      "original_receipt_sha256": "fd54acd0cac443f0fea54072cdb942e03d3fb923e3b137416cc0000495736011",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": false,
+      "unchanged_workpaper_sha256": {
+        "cash_coverage.sql": "ba5092bf7ed22ae41c64c6632035f754bbdba971b18ff42f63cebf7588fede0e",
+        "performance_views.sql": "a1e1fbf75afb30a00b810ac2bf331e91c156ddbd4b6ce183853464dbbc8bbbd0",
+        "acquisition_bases.sql": "259ed9d0eb70544687287a0ec3ea207be5046ecf02ed5df4fc4cd4df6357e49d",
+        "answer.json": "7d3918b2385cdc87035b7b67a56c91637cfba64037cbe3a43c59f974a8d0c718"
+      },
+      "assessment_method": "native_isolated_replay",
+      "reassessment_attempt": "hard-memory-deepseek-b01-1",
+      "reassessment_receipt_sha256": "74527925d3bf06371c052201f25d246c41997817b6c6f4f3e84ddbe9bccd2e2a",
+      "reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "reassessment_task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "reassessment_complete": false,
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": false,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "acquisition_bases": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "compensation_classification": true,
+                "acquired_cash": true,
+                "accrued_transaction_cost": true,
+                "share_valuation": true,
+                "noncash_remeasurement": true,
+                "reported_total": true,
+                "preacquisition_revenue": true,
+                "current_revenue": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "compensation_classification": null,
+                "acquired_cash": null,
+                "accrued_transaction_cost": null,
+                "share_valuation": null,
+                "noncash_remeasurement": null,
+                "reported_total": null,
+                "preacquisition_revenue": null,
+                "current_revenue": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "cash_coverage": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "compensation_classification": true,
+                "acquired_cash": true,
+                "accrued_transaction_cost": true,
+                "share_valuation": true,
+                "noncash_remeasurement": true,
+                "reported_total": true,
+                "preacquisition_revenue": true,
+                "current_revenue": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "compensation_classification": null,
+                "acquired_cash": null,
+                "accrued_transaction_cost": null,
+                "share_valuation": null,
+                "noncash_remeasurement": null,
+                "reported_total": null,
+                "preacquisition_revenue": null,
+                "current_revenue": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "performance_views": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "compensation_classification": true,
+                "acquired_cash": true,
+                "accrued_transaction_cost": true,
+                "share_valuation": true,
+                "noncash_remeasurement": true,
+                "reported_total": true,
+                "preacquisition_revenue": true,
+                "current_revenue": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "compensation_classification": null,
+                "acquired_cash": null,
+                "accrued_transaction_cost": null,
+                "share_valuation": null,
+                "noncash_remeasurement": null,
+                "reported_total": null,
+                "preacquisition_revenue": null,
+                "current_revenue": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "acquisition_bases:evidence",
+          "cash_coverage:evidence",
+          "performance_views:evidence"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "copied_submission_hashes_match": true,
+      "verdict_sha256": "636dce809973f4ba034128e538d5f7c431d1f8699f2b7036058a4e9f4b671766"
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-b02-1",
+      "task": "b02",
+      "configuration": "deepseek",
+      "original_receipt_sha256": "fab7ec9abeed262ea427c7ed4dd59475344368d8179a50819640efc6260279d3",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": false,
+      "unchanged_workpaper_sha256": {
+        "owner_funding.sql": "82d8289a79e898388857d747c24467fc77c734c7880875ef23d650996471d934",
+        "conversion_frontiers.sql": "bf91c1e476f9bef398de162763d019ae51be4ab1c2dcd144604d3d954653cf21",
+        "sale_allocations.sql": "45e163de9c8d24bbd96644457311d5828a0c92d7f203f7d15372913d7d00c6b1"
+      },
+      "assessment_method": "unchanged_delivery_failure",
+      "original_native_artifact_archive_sha256": "ea9d36db4e21e3494c1bf607c00830b16b7875986f3a7a786c94b47f6a01bfde",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": null,
+          "numerical_tables": null,
+          "claim_verdicts": null,
+          "evidence": null,
+          "robustness": null,
+          "delivery": false
+        },
+        "details": {
+          "tables": {},
+          "claims": {}
+        },
+        "errors": [
+          "delivery:FileNotFoundError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "reassessment_complete": false,
+      "new_verifier_execution": false
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-c01-1",
+      "task": "c01",
+      "configuration": "deepseek",
+      "original_receipt_sha256": "0a167aef6f1727d631852fab24886e2221c5d2aa583b71bd788a5b1e80f8816d",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": false,
+      "unchanged_workpaper_sha256": {},
+      "assessment_method": "unchanged_delivery_failure",
+      "original_native_artifact_archive_sha256": "33d212bab861119862aa0a40e2da0b0d390282e6f188707619d3b4d940383c95",
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": null,
+          "numerical_tables": null,
+          "claim_verdicts": null,
+          "evidence": null,
+          "robustness": null,
+          "delivery": false
+        },
+        "details": {
+          "tables": {},
+          "claims": {}
+        },
+        "errors": [
+          "delivery:FileNotFoundError"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "reassessment_complete": false,
+      "new_verifier_execution": false
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-a01-1",
+      "task": "a01",
+      "configuration": "sol",
+      "original_receipt_sha256": "e688c2bcacad57d29feab2cde877eca3476e3a220de8c78ba1ad711ee106c15c",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": true,
+      "unchanged_workpaper_sha256": {
+        "certificates.sql": "6bf1414deed92d0b9432eab034d80668130f14dfa1c0164b3f0c9fade23dcca9",
+        "funding_limits.sql": "f15ffc40d0572f710651bda3f8257cf981b77baa45c787de77e0dc32dca8174e",
+        "purchase_plans.sql": "4d9243e249337e774a64a71f2cb8edc98064d665d0aa448779d668dfdaef6f90",
+        "answer.json": "ef05f33ae848b5dcfe7536e3e026c86a052ccd57ef278f10ebf1ab38d6f377a8"
+      },
+      "assessment_method": "native_isolated_replay",
+      "reassessment_attempt": "hard-memory-sol-a01-1",
+      "reassessment_receipt_sha256": "6abbc60ee3b654b8d8e7fe1a56de7f2c82957584e5100778690985ca549d662b",
+      "reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "reassessment_task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "reassessment_complete": true,
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "certificates": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "row_order": true,
+                "scale": true,
+                "letters_of_credit": true,
+                "reserves": true,
+                "purchase_mix": true,
+                "commitment": true,
+                "dollar_cap": true,
+                "sublimits": true,
+                "seasonal_rate": true
+              },
+              "control_errors": {
+                "row_order": null,
+                "scale": null,
+                "letters_of_credit": null,
+                "reserves": null,
+                "purchase_mix": null,
+                "commitment": null,
+                "dollar_cap": null,
+                "sublimits": null,
+                "seasonal_rate": null
+              }
+            },
+            "purchase_plans": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "row_order": true,
+                "scale": true,
+                "letters_of_credit": true,
+                "reserves": true,
+                "purchase_mix": true,
+                "commitment": true,
+                "dollar_cap": true,
+                "sublimits": true,
+                "seasonal_rate": true
+              },
+              "control_errors": {
+                "row_order": null,
+                "scale": null,
+                "letters_of_credit": null,
+                "reserves": null,
+                "purchase_mix": null,
+                "commitment": null,
+                "dollar_cap": null,
+                "sublimits": null,
+                "seasonal_rate": null
+              }
+            },
+            "funding_limits": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "row_order": true,
+                "scale": true,
+                "letters_of_credit": true,
+                "reserves": true,
+                "purchase_mix": true,
+                "commitment": true,
+                "dollar_cap": true,
+                "sublimits": true,
+                "seasonal_rate": true
+              },
+              "control_errors": {
+                "row_order": null,
+                "scale": null,
+                "letters_of_credit": null,
+                "reserves": null,
+                "purchase_mix": null,
+                "commitment": null,
+                "dollar_cap": null,
+                "sublimits": null,
+                "seasonal_rate": null
+              }
+            }
+          },
+          "claims": {
+            "capacity_only": {
+              "verdict": true,
+              "evidence": true
+            },
+            "collateral_feedback": {
+              "verdict": true,
+              "evidence": true
+            },
+            "issuer_actual": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "copied_submission_hashes_match": true,
+      "verdict_sha256": "6253ae03e80024b780abd45ac0f58e4e329897e39a060b25cd6e3a84ee3a4645"
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b01-1",
+      "task": "b01",
+      "configuration": "sol",
+      "original_receipt_sha256": "3ca6bc968bc2b5f07ecef87902a35369a77fe574958e0e2ac7a7a12b329e11e3",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": true,
+      "unchanged_workpaper_sha256": {
+        "cash_coverage.sql": "363dd64a4a60d40db5df1fddb3d523522d85417c6cadf83228228890d938fcde",
+        "performance_views.sql": "42e2e6454e9a258fcd4a574d077f144aaa9a50cb3bc6a3be5b5b1fefaa077a1c",
+        "acquisition_bases.sql": "732dbe9dd4843830dda451ff6a2e2c73f4d32c404768d495f5eadf66b610563a",
+        "answer.json": "67ef76f6aae1ed8cc350c0a2a783c515e680af83a59e9c2a750ff17e0ec7b9b1"
+      },
+      "assessment_method": "native_isolated_replay",
+      "reassessment_attempt": "hard-memory-sol-b01-1",
+      "reassessment_receipt_sha256": "13ff9c918985a3426ead2e5aa70d88e8a1f768d9dd23c1e719afa634f0ab0c89",
+      "reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "reassessment_task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "reassessment_complete": true,
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "acquisition_bases": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "compensation_classification": true,
+                "acquired_cash": true,
+                "accrued_transaction_cost": true,
+                "share_valuation": true,
+                "noncash_remeasurement": true,
+                "reported_total": true,
+                "preacquisition_revenue": true,
+                "current_revenue": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "compensation_classification": null,
+                "acquired_cash": null,
+                "accrued_transaction_cost": null,
+                "share_valuation": null,
+                "noncash_remeasurement": null,
+                "reported_total": null,
+                "preacquisition_revenue": null,
+                "current_revenue": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "cash_coverage": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "compensation_classification": true,
+                "acquired_cash": true,
+                "accrued_transaction_cost": true,
+                "share_valuation": true,
+                "noncash_remeasurement": true,
+                "reported_total": true,
+                "preacquisition_revenue": true,
+                "current_revenue": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "compensation_classification": null,
+                "acquired_cash": null,
+                "accrued_transaction_cost": null,
+                "share_valuation": null,
+                "noncash_remeasurement": null,
+                "reported_total": null,
+                "preacquisition_revenue": null,
+                "current_revenue": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            },
+            "performance_views": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "compensation_classification": true,
+                "acquired_cash": true,
+                "accrued_transaction_cost": true,
+                "share_valuation": true,
+                "noncash_remeasurement": true,
+                "reported_total": true,
+                "preacquisition_revenue": true,
+                "current_revenue": true,
+                "monetary_scale": true,
+                "row_order": true
+              },
+              "control_errors": {
+                "compensation_classification": null,
+                "acquired_cash": null,
+                "accrued_transaction_cost": null,
+                "share_valuation": null,
+                "noncash_remeasurement": null,
+                "reported_total": null,
+                "preacquisition_revenue": null,
+                "current_revenue": null,
+                "monetary_scale": null,
+                "row_order": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "copied_submission_hashes_match": true,
+      "verdict_sha256": "cbfb05538b6ed98bebd86d293062916cb41f98e77ddfa13fb5dfdc89b1c202a1"
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b02-1",
+      "task": "b02",
+      "configuration": "sol",
+      "original_receipt_sha256": "3ff7cf5de06c002596d9d44243cd053b3d8efcec25026df9a27b10e68dc6935b",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": true,
+      "unchanged_workpaper_sha256": {
+        "owner_funding.sql": "ca24a2a0a9c4680aa1906260931f8c92e188ff060ade664720f0ccd209ae20e0",
+        "conversion_frontiers.sql": "17e298393a5ce47336bec874a8a36cae1f0bc698aad0810b89d4b93d177ddd42",
+        "sale_allocations.sql": "4cf5a1de689091ed5ac25cce1c537168958202918a1dc59187b2d0bd9eebd7b5",
+        "answer.json": "bfacca65daac0c29e56c8be20c353b4eeb1429e68d063b9af6ea9361d23a18c2"
+      },
+      "assessment_method": "native_isolated_replay",
+      "reassessment_attempt": "hard-memory-sol-b02-1",
+      "reassessment_receipt_sha256": "c057b3891fc0b81822f2e019d5f1fc715dec61999f71dd73f1c61a886cc277ae",
+      "reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "reassessment_task_sha256": "dbdf9a347eb0fca9928f356168eb3d070d0f40bfd29691eb91de504070615ef2",
+      "reassessment_complete": true,
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "sale_allocations": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "row_order": true,
+                "scale": true,
+                "carrying_only": true,
+                "trigger_lower": true,
+                "trigger_higher": true,
+                "junior_seniority": true,
+                "preference_right": true,
+                "conversion_ratio": true,
+                "target_shift": true
+              },
+              "control_errors": {
+                "row_order": null,
+                "scale": null,
+                "carrying_only": null,
+                "trigger_lower": null,
+                "trigger_higher": null,
+                "junior_seniority": null,
+                "preference_right": null,
+                "conversion_ratio": null,
+                "target_shift": null
+              }
+            },
+            "conversion_frontiers": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "row_order": true,
+                "scale": true,
+                "carrying_only": true,
+                "trigger_lower": true,
+                "trigger_higher": true,
+                "junior_seniority": true,
+                "preference_right": true,
+                "conversion_ratio": true,
+                "target_shift": true
+              },
+              "control_errors": {
+                "row_order": null,
+                "scale": null,
+                "carrying_only": null,
+                "trigger_lower": null,
+                "trigger_higher": null,
+                "junior_seniority": null,
+                "preference_right": null,
+                "conversion_ratio": null,
+                "target_shift": null
+              }
+            },
+            "owner_funding": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "row_order": true,
+                "scale": true,
+                "carrying_only": true,
+                "trigger_lower": true,
+                "trigger_higher": true,
+                "junior_seniority": true,
+                "preference_right": true,
+                "conversion_ratio": true,
+                "target_shift": true
+              },
+              "control_errors": {
+                "row_order": null,
+                "scale": null,
+                "carrying_only": null,
+                "trigger_lower": null,
+                "trigger_higher": null,
+                "junior_seniority": null,
+                "preference_right": null,
+                "conversion_ratio": null,
+                "target_shift": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "copied_submission_hashes_match": true,
+      "verdict_sha256": "23aa524b53e0553fb2b079ff5cde7d60a8e011c61888b47417640c8b18f096ab"
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-c01-1",
+      "task": "c01",
+      "configuration": "sol",
+      "original_receipt_sha256": "6a62d19439933018a2cb703ebbd41f72a49b17d9a2e9f70f13022c48ee3895cd",
+      "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+      "original_complete": false,
+      "unchanged_workpaper_sha256": {
+        "cash_generation_change.sql": "1d16d55fb6d12aeff129065a6a900399122cfe4702126b511ab48714da9ad0c3",
+        "cashflow_recast.sql": "56fd8521f58dd834067b05a1a9707f9c1c57397bceabbcf452f5106cb59d5e59",
+        "retained_interest_bridge.sql": "d623df7127e4d98742ad3142c2a2f8c3295aba67be6f64750b41b360f0a45ff4",
+        "answer.json": "23dd53c4dc6b073082d23ccb9c5f74a91588373e83e9e46d4fc7b60c9950154f"
+      },
+      "assessment_method": "native_isolated_replay",
+      "reassessment_attempt": "hard-memory-sol-c01-1",
+      "reassessment_receipt_sha256": "8d92be37428b7a26e50cd79ab665bb7986bdba26f58bdc0327137d2a073c64fa",
+      "reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "reassessment_task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "reassessment_complete": false,
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": false,
+          "claim_verdicts": true,
+          "evidence": false,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "cashflow_recast": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "customer_collection": true,
+                "funding_draw": true,
+                "noncash_originations": true,
+                "unallocated_movement": true,
+                "collateral_cash": true,
+                "capex_cash": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "customer_collection": null,
+                "funding_draw": null,
+                "noncash_originations": null,
+                "unallocated_movement": null,
+                "collateral_cash": null,
+                "capex_cash": null
+              }
+            },
+            "cash_generation_change": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scale": true,
+                "row_order": true,
+                "customer_collection": true,
+                "funding_draw": true,
+                "noncash_originations": true,
+                "unallocated_movement": true,
+                "collateral_cash": true,
+                "capex_cash": true
+              },
+              "control_errors": {
+                "scale": null,
+                "row_order": null,
+                "customer_collection": null,
+                "funding_draw": null,
+                "noncash_originations": null,
+                "unallocated_movement": null,
+                "collateral_cash": null,
+                "capex_cash": null
+              }
+            },
+            "retained_interest_bridge": {
+              "original": false,
+              "original_error": "numeric",
+              "evidence": false,
+              "controls": {
+                "scale": false,
+                "row_order": false,
+                "customer_collection": false,
+                "funding_draw": false,
+                "noncash_originations": false,
+                "unallocated_movement": false,
+                "collateral_cash": false,
+                "capex_cash": false
+              },
+              "control_errors": {
+                "scale": "numeric",
+                "row_order": "numeric",
+                "customer_collection": "numeric",
+                "funding_draw": "numeric",
+                "noncash_originations": "numeric",
+                "unallocated_movement": "numeric",
+                "collateral_cash": "numeric",
+                "capex_cash": "numeric"
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "retained_interest_bridge:original",
+          "retained_interest_bridge:evidence",
+          "retained_interest_bridge:control:scale",
+          "retained_interest_bridge:control:row_order",
+          "retained_interest_bridge:control:customer_collection",
+          "retained_interest_bridge:control:funding_draw",
+          "retained_interest_bridge:control:noncash_originations",
+          "retained_interest_bridge:control:unallocated_movement",
+          "retained_interest_bridge:control:collateral_cash",
+          "retained_interest_bridge:control:capex_cash"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      },
+      "copied_submission_hashes_match": true,
+      "verdict_sha256": "451717a76db20619d0271f614260f8dd7608eaf277df423dd68b435487eaf2bf"
+    }
+  ],
+  "runtime_materialization_proofs": [
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-b01-1",
+      "role": "candidate",
+      "phase": "before-agent",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "2e63ffd30b1988fb0c7e088b751adbf8ea7a275994dedebee143202e62b52109",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-b01-1",
+      "role": "candidate",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "f2f8a6ba3a0200921694dc1f1a5b54b2e94ee05b7ac232abcc814ab656e61ac7",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-b01-1",
+      "role": "verifier",
+      "phase": "before-grading",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "a9abd68b35a5672d95502dda46db1b2a8fff26f4132fca9059ee9488ec65d720",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-b01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "76a996d9de0e20f254b263cf4a2b1d37b94aaf4ebbe6b3887b928448eb4decec",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-b01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "574f79df56bdf30ebed903657abe9146ec4a038ca558a2d976af5e2a9562d2ac",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-c01-1",
+      "role": "candidate",
+      "phase": "before-agent",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-c01",
+      "task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "original_record_sha256": "376299570bd891ae7520ce2a8395bb2bbb2bf3b83e67091656fe4a62bc9d7c95",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-c01-1",
+      "role": "candidate",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-c01",
+      "task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "original_record_sha256": "5ead1e2eac4cc8445ec6eb6a98296d4fa79c9ae03c19e12bf8d950003396adb7",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-c01-1",
+      "role": "verifier",
+      "phase": "before-grading",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-c01",
+      "task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "original_record_sha256": "40a38f4bfbc9291713b9c828e60c3238440204143590b1adc94c6d78c6a986da",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-c01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-c01",
+      "task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "original_record_sha256": "275276c7ebc130b829f2701ba97e3edbde672952915962b13c92556fb734cb96",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-glm-c01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-c01",
+      "task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "original_record_sha256": "bf57a4fcf49dee3ff59128bdff493e86200f7967c73f45735b22c02083c44cda",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-a01-1",
+      "role": "candidate",
+      "phase": "before-agent",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-a01",
+      "task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "original_record_sha256": "7bcd109fc49641ecb5bb67100e1e668e72e493ee72cd9f7982737a3a731b9dd1",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-a01-1",
+      "role": "candidate",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-a01",
+      "task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "original_record_sha256": "f253df386a547060d2a1b938ae137a99089e6bfa1da172d83011855c162beb05",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-a01-1",
+      "role": "verifier",
+      "phase": "before-grading",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-a01",
+      "task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "original_record_sha256": "a91b997ffd02cd8d3211231161dceafd5ec3fb95563a4d5b2d10ba65df30af86",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-a01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-a01",
+      "task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "original_record_sha256": "a065b61da65d4d674da41950b6559251f9b46af5357f2f25a773aa4a7022e031",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-a01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-a01",
+      "task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "original_record_sha256": "773780e8c8cfd9a9b98e1cc3acf4017ac01c5c535f00cecb2201add862d29988",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-b01-1",
+      "role": "candidate",
+      "phase": "before-agent",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "3b42dff2cae3729b63e69cbd5a121e39e2c2f7235d327a123c5ef922a00b44cb",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-b01-1",
+      "role": "candidate",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "b09dac03fca2b9ab23a436235a7f8cf7da6dad43ed3702cb933d7f644218dc02",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-b01-1",
+      "role": "verifier",
+      "phase": "before-grading",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "60001df4571a249a5a821d3b6dabec59a98ca3c2afd650aa222ca113d2e57eb2",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-b01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "04ff61f21883b00bf2515cff1b573de561315031978246b933dc009e508d0eec",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-deepseek-b01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "8602d749591a52ac92e9ddf91c51741cbafc9f7ff44529157b30624fa91fe3f7",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-a01-1",
+      "role": "candidate",
+      "phase": "before-agent",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-a01",
+      "task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "original_record_sha256": "3b3d2a37aa0b0ba9394e2b294d2f899d7fc60e1ff8d1019e37935e0dfad54076",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-a01-1",
+      "role": "candidate",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-a01",
+      "task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "original_record_sha256": "ad7c7d7ebffee2e0bf1c441a3592a56edf2e00e03b213149c23f4f68b10dfde2",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-a01-1",
+      "role": "verifier",
+      "phase": "before-grading",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-a01",
+      "task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "original_record_sha256": "8f9d40ed84e4e74c4eb7bfe7e06f6ec1495f1120d6e6edb904e142d2f5ac1bbf",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-a01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-a01",
+      "task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "original_record_sha256": "0f4469d2ea3952cab1ed66451b98d8b34ba5d55bdf9530684605fbcf130ee237",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-a01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-a01",
+      "task_sha256": "4638b96e3315e913587b43670793b6ee6c42bfc4b3a14b549e58a2cd1cb76239",
+      "original_record_sha256": "bc3cc38537239d751e3ce3fa9dc2421c60fcd182cf78ddd9fe01a0559a5df0f8",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b01-1",
+      "role": "candidate",
+      "phase": "before-agent",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "6ed06d9e2dd36774262bf7ee98bb54e3cdf2c43aefa7aa182710a24af3d3a232",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b01-1",
+      "role": "candidate",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "ae55aa26d3184390f6d9994baffca84036a76ba46c4f99bd69f1de4713cc8e3d",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b01-1",
+      "role": "verifier",
+      "phase": "before-grading",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "dd9188f800d21da051d1560872f0761e56baeb88aeb75a0ac337a7ba392eb76a",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "0a20a5d3e6815cd0bed3a64e7540b96b3a2dbfb8c2282523d5be7bfbc75ea917",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b01",
+      "task_sha256": "3bc620390182a499b7368d5f2deb199bb6bed927f6a8e5702a64d369915ffd57",
+      "original_record_sha256": "8fbb61f07cf59c45703f7134f333dfe1be19423e9f5994cec459ea5db420020e",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b02-1",
+      "role": "candidate",
+      "phase": "before-agent",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b02",
+      "task_sha256": "dbdf9a347eb0fca9928f356168eb3d070d0f40bfd29691eb91de504070615ef2",
+      "original_record_sha256": "84ffdea02561b9c4e33aa3c9830ae55e769b9b311dacfb7cea93b74a048a2687",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b02-1",
+      "role": "candidate",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b02",
+      "task_sha256": "dbdf9a347eb0fca9928f356168eb3d070d0f40bfd29691eb91de504070615ef2",
+      "original_record_sha256": "327723b3cb8e40e25cff02dc72b2c465120d790c22156ec788a9202c6b88bed0",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b02-1",
+      "role": "verifier",
+      "phase": "before-grading",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b02",
+      "task_sha256": "dbdf9a347eb0fca9928f356168eb3d070d0f40bfd29691eb91de504070615ef2",
+      "original_record_sha256": "503a9b5464bcf4336be95d207f46fd0b1ff80a41d24d235d062f13235d1b8328",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b02-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b02",
+      "task_sha256": "dbdf9a347eb0fca9928f356168eb3d070d0f40bfd29691eb91de504070615ef2",
+      "original_record_sha256": "886785b36acd04ab2570322edf7ce78ce92a695dae588e9848f496dd69292984",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-b02-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-b02",
+      "task_sha256": "dbdf9a347eb0fca9928f356168eb3d070d0f40bfd29691eb91de504070615ef2",
+      "original_record_sha256": "e8da2aff6400cc251090ecb51d7e8454293db2662618782e5bcd81aa6ce9e3b5",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-c01-1",
+      "role": "candidate",
+      "phase": "before-agent",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-c01",
+      "task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "original_record_sha256": "0ff8bc64094a2e6681659bcc2bf6df7b844f244e74d96d78ab8af1e9a35ac6e9",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-c01-1",
+      "role": "candidate",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-c01",
+      "task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "original_record_sha256": "6e00f19135fe1c174c92afdc5cf942118bfbc14f278e46986b3226f7b53a8d01",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-c01-1",
+      "role": "verifier",
+      "phase": "before-grading",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-c01",
+      "task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "original_record_sha256": "00cd47ebbd520acb260edcf93ebe295e72b9a8aa460019ac463fb3ba6d23a2f5",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-c01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-c01",
+      "task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "original_record_sha256": "01ac36780dd38f86ff9f6996f2e66be9772af8b01bc3fb803651850f91d1a747",
+      "all_expected_files_match": true
+    },
+    {
+      "slot_id": "hard-evaluation-20261023-r2-sol-c01-1",
+      "role": "verifier",
+      "phase": "setup",
+      "outcome": "verified",
+      "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+      "task_id": "workflow-hard-eval-v1-c01",
+      "task_sha256": "c10b219267427073f0cc8b4373e6fb5f7aab533a4aa566fd520809e940c06929",
+      "original_record_sha256": "a8c90a03ea257ba7e9c33ce8226a81e7c1df4fd1a7c9cc36763b53953339eb8e",
+      "all_expected_files_match": true
+    }
+  ],
+  "interpretation": "Unchanged-submission compatibility reassessment. This is not new inference or a campaign executed wholly under SQL worker 1.0.1. Original inference used worker 1.0.0."
+}

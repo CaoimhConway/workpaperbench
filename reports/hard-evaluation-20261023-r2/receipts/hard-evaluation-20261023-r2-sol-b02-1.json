@@ -1,0 +1,377 @@
+{
+  "slot_id": "hard-evaluation-20261023-r2-sol-b02-1",
+  "configuration": "sol",
+  "task": "b02",
+  "attempt": 1,
+  "task_id": "workflow-hard-eval-v1-b02",
+  "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+  "configuration_path": "config/hard-evaluation-20261023-r2/sol.json",
+  "configuration_sha256": "2bc385ae37a5ccc66ee09f8504cbf4473b8bf15cec16b92cb7f23b50a71b5db3",
+  "command_argv_sha256": "59ad02a1c31fa2edef9489056e8c1398cf0e4fa303b317c74055dead1b83fadc",
+  "status": "finalized",
+  "source_commit": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+  "execution_id": "hard-evaluation-20261023-r2-a800d4271843",
+  "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "workpaper_sha256": {
+    "owner_funding.sql": "ca24a2a0a9c4680aa1906260931f8c92e188ff060ade664720f0ccd209ae20e0",
+    "conversion_frontiers.sql": "17e298393a5ce47336bec874a8a36cae1f0bc698aad0810b89d4b93d177ddd42",
+    "sale_allocations.sql": "4cf5a1de689091ed5ac25cce1c537168958202918a1dc59187b2d0bd9eebd7b5",
+    "answer.json": "bfacca65daac0c29e56c8be20c353b4eeb1429e68d063b9af6ea9361d23a18c2"
+  },
+  "workpaper_export_scope": "answer.json and SQL files only. The original native archive and delivery verdict preserve other entries.",
+  "native_artifact_archive_sha256": "495bb91a13f72bfee4cded9115d7d8c729cca51bea68008adc82615314edf2ee",
+  "observed": {
+    "models": [
+      "gpt-6.1-sol"
+    ],
+    "native_model_providers": [
+      "openai"
+    ],
+    "reasoning_efforts": [
+      "high"
+    ],
+    "client_versions": [
+      "0.162.0-alpha.17.2"
+    ],
+    "auth_mode": "chatgpt",
+    "compaction_events": 0,
+    "model_context_windows": [
+      475000
+    ],
+    "native_event_counts": {
+      "thread.started": 1,
+      "turn.started": 1,
+      "item.completed": 10,
+      "item.started": 6,
+      "turn.completed": 1
+    },
+    "model_identity_scope": "Native session model and reasoning metadata, not independent backend attestation"
+  },
+  "complete_workpaper": true,
+  "score": 1.0,
+  "verifier": {
+    "scorer_version": "workflow-1.2.1",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": true,
+      "robustness": true,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "sale_allocations": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "row_order": true,
+            "scale": true,
+            "carrying_only": true,
+            "trigger_lower": true,
+            "trigger_higher": true,
+            "junior_seniority": true,
+            "preference_right": true,
+            "conversion_ratio": true,
+            "target_shift": true
+          },
+          "control_errors": {
+            "row_order": null,
+            "scale": null,
+            "carrying_only": null,
+            "trigger_lower": null,
+            "trigger_higher": null,
+            "junior_seniority": null,
+            "preference_right": null,
+            "conversion_ratio": null,
+            "target_shift": null
+          }
+        },
+        "conversion_frontiers": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "row_order": true,
+            "scale": true,
+            "carrying_only": true,
+            "trigger_lower": true,
+            "trigger_higher": true,
+            "junior_seniority": true,
+            "preference_right": true,
+            "conversion_ratio": true,
+            "target_shift": true
+          },
+          "control_errors": {
+            "row_order": null,
+            "scale": null,
+            "carrying_only": null,
+            "trigger_lower": null,
+            "trigger_higher": null,
+            "junior_seniority": null,
+            "preference_right": null,
+            "conversion_ratio": null,
+            "target_shift": null
+          }
+        },
+        "owner_funding": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "row_order": true,
+            "scale": true,
+            "carrying_only": true,
+            "trigger_lower": true,
+            "trigger_higher": true,
+            "junior_seniority": true,
+            "preference_right": true,
+            "conversion_ratio": true,
+            "target_shift": true
+          },
+          "control_errors": {
+            "row_order": null,
+            "scale": null,
+            "carrying_only": null,
+            "trigger_lower": null,
+            "trigger_higher": null,
+            "junior_seniority": null,
+            "preference_right": null,
+            "conversion_ratio": null,
+            "target_shift": null
+          }
+        }
+      },
+      "claims": {
+        "claim_1": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_2": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_3": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "runtime_integrity": {
+    "all_identities_and_bytes_match": true,
+    "candidate_setup": true,
+    "candidate_before_agent": true,
+    "verifier_setup": true,
+    "verifier_before_grading": true,
+    "proofs": [
+      {
+        "role": "candidate",
+        "phase": "before-agent",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b02",
+        "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+        "instruction_sha256": "d99c24540dcb454c21554d2a3466e450c244f7ef5df771b5c5f20290f9ff1d43",
+        "context_identity": "30155a6dc456b4411c398208c2acdeae8aa62d21655bde183250e47f1f4d798f",
+        "session_id": "b02__wMJwo9b__env",
+        "container_id": "087f00ce69dd4cee3c706e207557ad60ad34dfb975792c610352081d2381bba3",
+        "image_id": "sha256:4bf0a80319919f59a6428fdc92b22c4d19d05a999ebf3c13ac55fc7fdc9193ad",
+        "mismatches": [],
+        "diagnostic_sha256": "1ceed589bb6a75c2bd4df2d77a78eff16bb5caff098fdb66ca71d3e867600f1d"
+      },
+      {
+        "role": "candidate",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b02",
+        "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+        "instruction_sha256": "d99c24540dcb454c21554d2a3466e450c244f7ef5df771b5c5f20290f9ff1d43",
+        "context_identity": "30155a6dc456b4411c398208c2acdeae8aa62d21655bde183250e47f1f4d798f",
+        "session_id": "b02__wMJwo9b__env",
+        "container_id": "087f00ce69dd4cee3c706e207557ad60ad34dfb975792c610352081d2381bba3",
+        "image_id": "sha256:4bf0a80319919f59a6428fdc92b22c4d19d05a999ebf3c13ac55fc7fdc9193ad",
+        "mismatches": [],
+        "diagnostic_sha256": "49b62efbcea3b330e836ef5992fe7ed73b8a90b90b079fd39dbb4784040cbabf"
+      },
+      {
+        "role": "verifier",
+        "phase": "before-grading",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b02",
+        "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+        "instruction_sha256": null,
+        "context_identity": "43a60777e44b0215fad57f7774872976e25b2f2b938ffc2dd0eaf4c6b96e6fcf",
+        "session_id": "b02__wMJwo9b__verifier__trial",
+        "container_id": "f0dccff2d5ec6c73c7be9ee04575229c27b6c628f86754cc06472ad64fa45f64",
+        "image_id": "sha256:326cf635205017a8ee1ca228e612182de2197e5999a1031b8dbf607ac509c14d",
+        "mismatches": [],
+        "diagnostic_sha256": "f708cc78b56103b86e6e9b62880aa8bdeb3fa1fdce7418da8bc3a7cf1e2d9009"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b02",
+        "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+        "instruction_sha256": null,
+        "context_identity": "43a60777e44b0215fad57f7774872976e25b2f2b938ffc2dd0eaf4c6b96e6fcf",
+        "session_id": "b02__wMJwo9b__verifier__trial",
+        "container_id": "f0dccff2d5ec6c73c7be9ee04575229c27b6c628f86754cc06472ad64fa45f64",
+        "image_id": "sha256:326cf635205017a8ee1ca228e612182de2197e5999a1031b8dbf607ac509c14d",
+        "mismatches": [],
+        "diagnostic_sha256": "7469a12e4f0d4f0e98415aa2f7bb637bdc28d4ec70bc85736f07b6efe3bfed89"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b02",
+        "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+        "instruction_sha256": null,
+        "context_identity": "43a60777e44b0215fad57f7774872976e25b2f2b938ffc2dd0eaf4c6b96e6fcf",
+        "session_id": "wpb-trusted-ecdcef3f404a04e7a8c85a62",
+        "container_id": "7dc53b8c22c925088c0c6de31f0b09f32dc78257b3262d9bc24a9fddf7d39fa4",
+        "image_id": "sha256:3b45dd78c324d615231afd8ee442ed422e6dd4aed02d3aca1eabff9a8630477d",
+        "mismatches": [],
+        "diagnostic_sha256": "2421e4bd89830838daf7b3425be2327f752e9d66be2fdc2c1dc63402badb8c5e"
+      }
+    ],
+    "candidate_checked_before_first_observable_request_or_session": true
+  },
+  "native_result_sha256": "fc381568d870276b33654a19cecbad701bca4e6d59179c891a53788fdc97466c",
+  "verdict_sha256": "23aa524b53e0553fb2b079ff5cde7d60a8e011c61888b47417640c8b18f096ab",
+  "wall_time": {
+    "native_controller_seconds": 355.0067455369863,
+    "agent_execution": {
+      "started_at": "2026-10-23T20:21:30.486298Z",
+      "finished_at": "2026-10-23T20:25:08.946616Z"
+    },
+    "agent_setup": {
+      "started_at": "2026-10-23T20:20:12.460864Z",
+      "finished_at": "2026-10-23T20:21:30.486070Z"
+    }
+  },
+  "termination_reason": "native_turn_completed",
+  "exception": null,
+  "controller_recovery": null,
+  "tokens": {
+    "input_tokens": 156352,
+    "cached_input_tokens": 141568,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 8842,
+    "reasoning_output_tokens": 4178,
+    "total_tokens": 165194
+  },
+  "charges": null,
+  "subscription": {
+    "rate_limit_observations": [
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 2.0,
+          "window_minutes": 10080,
+          "resets_at": 1793390814
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      },
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 2.0,
+          "window_minutes": 10080,
+          "resets_at": 1793390814
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      },
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 2.0,
+          "window_minutes": 10080,
+          "resets_at": 1793390814
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      },
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 2.0,
+          "window_minutes": 10080,
+          "resets_at": 1793390814
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      },
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 2.0,
+          "window_minutes": 10080,
+          "resets_at": 1793390814
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      },
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 2.0,
+          "window_minutes": 10080,
+          "resets_at": 1793390814
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      },
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 2.0,
+          "window_minutes": 10080,
+          "resets_at": 1793390814
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      }
+    ],
+    "actual_subscription_charge_usd": null,
+    "billing_measurement": "Unknown. Native token and rate-window telemetry only, no API-equivalent estimate treated as a charge."
+  },
+  "requests": {
+    "observed_requests": null,
+    "retained_provider_generations": null,
+    "failure_events": null,
+    "identical_full_body_repeats": null,
+    "output_limit_recovery_calls": null,
+    "length_responses": null,
+    "whole_trial_retries": 0,
+    "requests_without_retained_response": null,
+    "sdk_retries": "unknown",
+    "request_configuration_violations": []
+  }
+}

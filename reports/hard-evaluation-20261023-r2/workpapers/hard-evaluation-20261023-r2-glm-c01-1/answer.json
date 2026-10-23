@@ -1,0 +1,37 @@
+{
+  "task_id": "workflow-hard-eval-v1-c01",
+  "tables": [
+    {
+      "id": "cashflow_recast",
+      "file": "cashflow_recast.sql",
+      "evidence": ["c01:s01", "c01:s02", "c01:s03", "c01:s07"]
+    },
+    {
+      "id": "cash_generation_change",
+      "file": "cash_generation_change.sql",
+      "evidence": ["c01:s01", "c01:s02", "c01:s03", "c01:s07"]
+    },
+    {
+      "id": "retained_interest_bridge",
+      "file": "retained_interest_bridge.sql",
+      "evidence": ["c01:s02", "c01:s05"]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": ["c01:s01", "c01:s02", "c01:s03", "c01:s07"]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": ["c01:s01", "c01:s02", "c01:s07"]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": ["c01:s04", "c01:s07"]
+    }
+  ]
+}

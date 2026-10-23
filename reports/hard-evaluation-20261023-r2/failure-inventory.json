@@ -1,0 +1,234 @@
+[
+  {
+    "slot_id": "hard-evaluation-20261023-r2-deepseek-a01-1",
+    "configuration": "deepseek",
+    "task": "a01",
+    "original_complete": true,
+    "termination_reason": "turn_limit",
+    "native_artifact_entries": [
+      "answer.json",
+      "certificates.sql",
+      "funding_limits.sql",
+      "purchase_plans.sql"
+    ],
+    "delivery": true,
+    "missing_required_files": [],
+    "failed_tables": {}
+  },
+  {
+    "slot_id": "hard-evaluation-20261023-r2-deepseek-b01-1",
+    "configuration": "deepseek",
+    "task": "b01",
+    "original_complete": false,
+    "termination_reason": "confirmed_task_complete",
+    "native_artifact_entries": [
+      "acquisition_bases.sql",
+      "answer.json",
+      "cash_coverage.sql",
+      "performance_views.sql"
+    ],
+    "delivery": true,
+    "missing_required_files": [],
+    "failed_tables": {
+      "acquisition_bases": {
+        "original_error": null,
+        "failed_controls": [],
+        "evidence": false
+      },
+      "cash_coverage": {
+        "original_error": null,
+        "failed_controls": [],
+        "evidence": false
+      },
+      "performance_views": {
+        "original_error": null,
+        "failed_controls": [],
+        "evidence": false
+      }
+    }
+  },
+  {
+    "slot_id": "hard-evaluation-20261023-r2-deepseek-b02-1",
+    "configuration": "deepseek",
+    "task": "b02",
+    "original_complete": false,
+    "termination_reason": "turn_limit",
+    "native_artifact_entries": [
+      "conversion_frontiers.sql",
+      "owner_funding.sql",
+      "sale_allocations.sql"
+    ],
+    "delivery": false,
+    "missing_required_files": [
+      "answer.json"
+    ],
+    "failed_tables": {}
+  },
+  {
+    "slot_id": "hard-evaluation-20261023-r2-deepseek-c01-1",
+    "configuration": "deepseek",
+    "task": "c01",
+    "original_complete": false,
+    "termination_reason": "AgentTimeoutError",
+    "native_artifact_entries": [],
+    "delivery": false,
+    "missing_required_files": [
+      "answer.json",
+      "cash_generation_change.sql",
+      "cashflow_recast.sql",
+      "retained_interest_bridge.sql"
+    ],
+    "failed_tables": {}
+  },
+  {
+    "slot_id": "hard-evaluation-20261023-r2-glm-a01-1",
+    "configuration": "glm",
+    "task": "a01",
+    "original_complete": false,
+    "termination_reason": "turn_limit",
+    "native_artifact_entries": [
+      "certificates.sql",
+      "funding_limits.sql",
+      "purchase_plans.sql"
+    ],
+    "delivery": false,
+    "missing_required_files": [
+      "answer.json"
+    ],
+    "failed_tables": {}
+  },
+  {
+    "slot_id": "hard-evaluation-20261023-r2-glm-b01-1",
+    "configuration": "glm",
+    "task": "b01",
+    "original_complete": true,
+    "termination_reason": "confirmed_task_complete",
+    "native_artifact_entries": [
+      "acquisition_bases.sql",
+      "answer.json",
+      "cash_coverage.sql",
+      "performance_views.sql"
+    ],
+    "delivery": true,
+    "missing_required_files": [],
+    "failed_tables": {}
+  },
+  {
+    "slot_id": "hard-evaluation-20261023-r2-glm-b02-1",
+    "configuration": "glm",
+    "task": "b02",
+    "original_complete": false,
+    "termination_reason": "turn_limit",
+    "native_artifact_entries": [
+      "conversion_frontiers.sql",
+      "sale_allocations.sql"
+    ],
+    "delivery": false,
+    "missing_required_files": [
+      "answer.json",
+      "owner_funding.sql"
+    ],
+    "failed_tables": {}
+  },
+  {
+    "slot_id": "hard-evaluation-20261023-r2-glm-c01-1",
+    "configuration": "glm",
+    "task": "c01",
+    "original_complete": false,
+    "termination_reason": "confirmed_task_complete",
+    "native_artifact_entries": [
+      "answer.json",
+      "cash_generation_change.sql",
+      "cashflow_recast.sql",
+      "retained_interest_bridge.sql"
+    ],
+    "delivery": true,
+    "missing_required_files": [],
+    "failed_tables": {
+      "retained_interest_bridge": {
+        "original_error": null,
+        "failed_controls": [],
+        "evidence": false
+      }
+    }
+  },
+  {
+    "slot_id": "hard-evaluation-20261023-r2-sol-a01-1",
+    "configuration": "sol",
+    "task": "a01",
+    "original_complete": true,
+    "termination_reason": "native_turn_completed",
+    "native_artifact_entries": [
+      "answer.json",
+      "certificates.sql",
+      "funding_limits.sql",
+      "purchase_plans.sql"
+    ],
+    "delivery": true,
+    "missing_required_files": [],
+    "failed_tables": {}
+  },
+  {
+    "slot_id": "hard-evaluation-20261023-r2-sol-b01-1",
+    "configuration": "sol",
+    "task": "b01",
+    "original_complete": true,
+    "termination_reason": "native_turn_completed",
+    "native_artifact_entries": [
+      "acquisition_bases.sql",
+      "answer.json",
+      "cash_coverage.sql",
+      "performance_views.sql"
+    ],
+    "delivery": true,
+    "missing_required_files": [],
+    "failed_tables": {}
+  },
+  {
+    "slot_id": "hard-evaluation-20261023-r2-sol-b02-1",
+    "configuration": "sol",
+    "task": "b02",
+    "original_complete": true,
+    "termination_reason": "native_turn_completed",
+    "native_artifact_entries": [
+      "answer.json",
+      "conversion_frontiers.sql",
+      "owner_funding.sql",
+      "sale_allocations.sql"
+    ],
+    "delivery": true,
+    "missing_required_files": [],
+    "failed_tables": {}
+  },
+  {
+    "slot_id": "hard-evaluation-20261023-r2-sol-c01-1",
+    "configuration": "sol",
+    "task": "c01",
+    "original_complete": false,
+    "termination_reason": "native_turn_completed",
+    "native_artifact_entries": [
+      "answer.json",
+      "cash_generation_change.sql",
+      "cashflow_recast.sql",
+      "retained_interest_bridge.sql"
+    ],
+    "delivery": true,
+    "missing_required_files": [],
+    "failed_tables": {
+      "retained_interest_bridge": {
+        "original_error": "numeric",
+        "failed_controls": [
+          "scale",
+          "row_order",
+          "customer_collection",
+          "funding_draw",
+          "noncash_originations",
+          "unallocated_movement",
+          "collateral_cash",
+          "capex_cash"
+        ],
+        "evidence": false
+      }
+    }
+  }
+]

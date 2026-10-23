@@ -1,0 +1,201 @@
+{
+  "slot_id": "hard-evaluation-20261023-r2-deepseek-b02-1",
+  "configuration": "deepseek",
+  "task": "b02",
+  "attempt": 1,
+  "task_id": "workflow-hard-eval-v1-b02",
+  "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+  "configuration_path": "config/hard-evaluation-20261023-r2/deepseek.json",
+  "configuration_sha256": "436570947b4e5b0d36a7504d33d359fbf505fb1ebd9a14323c71929eba1870b8",
+  "command_argv_sha256": "f527259fd03b1ef3c837755ba3e8c0b6163fe01196b8261e5c1e57f8f26c9a9e",
+  "status": "finalized",
+  "source_commit": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+  "execution_id": "hard-evaluation-20261023-r2-a800d4271843",
+  "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "workpaper_sha256": {
+    "owner_funding.sql": "82d8289a79e898388857d747c24467fc77c734c7880875ef23d650996471d934",
+    "conversion_frontiers.sql": "bf91c1e476f9bef398de162763d019ae51be4ab1c2dcd144604d3d954653cf21",
+    "sale_allocations.sql": "45e163de9c8d24bbd96644457311d5828a0c92d7f203f7d15372913d7d00c6b1"
+  },
+  "workpaper_export_scope": "answer.json and SQL files only. The original native archive and delivery verdict preserve other entries.",
+  "native_artifact_archive_sha256": "ea9d36db4e21e3494c1bf607c00830b16b7875986f3a7a786c94b47f6a01bfde",
+  "observed": {
+    "models": [
+      "deepseek/deepseek-v4.1-flash-1017"
+    ],
+    "providers": [
+      "DeepSeek"
+    ],
+    "reasoning_effort_on_all_requests": "high",
+    "provider_internal_reasoning_effort": "unknown",
+    "generation_models": [
+      "deepseek/deepseek-v4.1-flash-20261017"
+    ],
+    "generation_providers": [
+      "DeepSeek"
+    ]
+  },
+  "complete_workpaper": false,
+  "score": 0.0,
+  "verifier": {
+    "scorer_version": "workflow-1.2.1",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "financial_answer": null,
+      "numerical_tables": null,
+      "claim_verdicts": null,
+      "evidence": null,
+      "robustness": null,
+      "delivery": false
+    },
+    "details": {
+      "tables": {},
+      "claims": {}
+    },
+    "errors": [
+      "delivery:FileNotFoundError"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "runtime_integrity": {
+    "all_identities_and_bytes_match": true,
+    "candidate_setup": true,
+    "candidate_before_agent": true,
+    "verifier_setup": true,
+    "verifier_before_grading": true,
+    "proofs": [
+      {
+        "role": "candidate",
+        "phase": "before-agent",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b02",
+        "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+        "instruction_sha256": "d99c24540dcb454c21554d2a3466e450c244f7ef5df771b5c5f20290f9ff1d43",
+        "context_identity": "30155a6dc456b4411c398208c2acdeae8aa62d21655bde183250e47f1f4d798f",
+        "session_id": "b02__JaHRDrG__env",
+        "container_id": "c2886167c2ebee4a5517f7887300613eacb45b899a319f2530d14c5ae662d850",
+        "image_id": "sha256:2304839b6354447faa7f14feb8608c892a618952a91e98e1fbf868c895c00cb3",
+        "mismatches": [],
+        "diagnostic_sha256": "5eacaa0e62853a7f9bd09df68baf7874c6ce3c2f8217bf3fd717b1f1c39bf0d0"
+      },
+      {
+        "role": "candidate",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b02",
+        "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+        "instruction_sha256": "d99c24540dcb454c21554d2a3466e450c244f7ef5df771b5c5f20290f9ff1d43",
+        "context_identity": "30155a6dc456b4411c398208c2acdeae8aa62d21655bde183250e47f1f4d798f",
+        "session_id": "b02__JaHRDrG__env",
+        "container_id": "c2886167c2ebee4a5517f7887300613eacb45b899a319f2530d14c5ae662d850",
+        "image_id": "sha256:2304839b6354447faa7f14feb8608c892a618952a91e98e1fbf868c895c00cb3",
+        "mismatches": [],
+        "diagnostic_sha256": "a2766689dedfb74b9713192aa7a54c458ad18da8563f5c005625f26c2e4fd79b"
+      },
+      {
+        "role": "verifier",
+        "phase": "before-grading",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b02",
+        "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+        "instruction_sha256": null,
+        "context_identity": "43a60777e44b0215fad57f7774872976e25b2f2b938ffc2dd0eaf4c6b96e6fcf",
+        "session_id": "b02__JaHRDrG__verifier__trial",
+        "container_id": "b33255741578feabefac78a1dc9aa479567960f8482a159895bf3aa242632651",
+        "image_id": "sha256:6b33506c8ea7460cd6df69b88e748b6fe810f2bba191d6fd95bc0a5607c588fa",
+        "mismatches": [],
+        "diagnostic_sha256": "537463874879184f7085869736b9401f9c976345f216524da88dab216e2148ce"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b02",
+        "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+        "instruction_sha256": null,
+        "context_identity": "43a60777e44b0215fad57f7774872976e25b2f2b938ffc2dd0eaf4c6b96e6fcf",
+        "session_id": "b02__JaHRDrG__verifier__trial",
+        "container_id": "b33255741578feabefac78a1dc9aa479567960f8482a159895bf3aa242632651",
+        "image_id": "sha256:6b33506c8ea7460cd6df69b88e748b6fe810f2bba191d6fd95bc0a5607c588fa",
+        "mismatches": [],
+        "diagnostic_sha256": "091a6c20c01fb079ef733e12205b23cbfa15feecabcbdee3ae14fa199de08c55"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b02",
+        "task_sha256": "24e172959a7086b2e64810dfc5febb36641cbff381ab7ac35dc30ff8e2a4b98b",
+        "instruction_sha256": null,
+        "context_identity": "43a60777e44b0215fad57f7774872976e25b2f2b938ffc2dd0eaf4c6b96e6fcf",
+        "session_id": "wpb-trusted-74ec4a9dff867ce43c43dbb4",
+        "container_id": "bc8c4141c8f229e8328439eabcd11eef98f05c4a22e5315b4f8d8e82d76c0132",
+        "image_id": "sha256:48ca29ed726a88fc07e254e66455d30afe2e545636fbe96351807a374d1b9945",
+        "mismatches": [],
+        "diagnostic_sha256": "5ddc7036c821b40519df9e6e7a6ac0c8b56cf7d16a0d6d92202b9a3028db3b2f"
+      }
+    ],
+    "candidate_checked_before_first_observable_request_or_session": true
+  },
+  "native_result_sha256": "1292b4788cd52a3115b6e94f48d3741adaa5e45b2461ad01b56bd8a94cc4d122",
+  "verdict_sha256": "2946771ebc137a0b37f1b0748ccea6a312141aa67e49a95f1058c1529479c51d",
+  "wall_time": {
+    "native_controller_seconds": 1526.0814728649857,
+    "agent_execution": {
+      "started_at": "2026-10-23T12:32:52.525738Z",
+      "finished_at": "2026-10-23T12:57:13.938758Z"
+    },
+    "agent_setup": {
+      "started_at": "2026-10-23T12:32:44.174834Z",
+      "finished_at": "2026-10-23T12:32:52.525589Z"
+    }
+  },
+  "termination_reason": "turn_limit",
+  "exception": null,
+  "controller_recovery": null,
+  "tokens": {
+    "input_including_cached": 986799,
+    "output_including_reasoning": 237475,
+    "cached_input_subset": 921344,
+    "reasoning_output_subset": 211943
+  },
+  "charges": {
+    "settled_key_usage_delta_usd": "0.155067282",
+    "settled_key_reconciled": true,
+    "settlement_observation": "Next scheduled paid preflight snapshot",
+    "recorded_openrouter_usd": "0.155067282",
+    "generation_records_total_usd": "0.155067282",
+    "key_usage_delta_usd": "0.155067282",
+    "response_and_key_reconciled": true,
+    "generation_records_reconciled": true,
+    "remaining_unchanged_key_allowance_usd": 5.511572979,
+    "remaining_account_balance_usd": 5.511572979,
+    "lifetime_limit_usd": 20.0,
+    "reset_is_null": true
+  },
+  "subscription": null,
+  "requests": {
+    "observed_requests": 28,
+    "retained_provider_generations": 28,
+    "failure_events": 0,
+    "identical_full_body_repeats": 0,
+    "output_limit_recovery_calls": 4,
+    "length_responses": 4,
+    "whole_trial_retries": 0,
+    "requests_without_retained_response": 0,
+    "sdk_retries": "unknown",
+    "request_configuration_violations": []
+  }
+}

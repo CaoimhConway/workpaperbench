@@ -1,0 +1,305 @@
+{
+  "slot_id": "hard-evaluation-20261023-r2-deepseek-b01-1",
+  "configuration": "deepseek",
+  "task": "b01",
+  "attempt": 1,
+  "task_id": "workflow-hard-eval-v1-b01",
+  "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+  "configuration_path": "config/hard-evaluation-20261023-r2/deepseek.json",
+  "configuration_sha256": "436570947b4e5b0d36a7504d33d359fbf505fb1ebd9a14323c71929eba1870b8",
+  "command_argv_sha256": "1ccbce4267c73a8721dd8f6c8a26444c0157a6e685dade2af4bff4e0b6d9f416",
+  "status": "finalized",
+  "source_commit": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+  "execution_id": "hard-evaluation-20261023-r2-a800d4271843",
+  "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "workpaper_sha256": {
+    "cash_coverage.sql": "ba5092bf7ed22ae41c64c6632035f754bbdba971b18ff42f63cebf7588fede0e",
+    "performance_views.sql": "a1e1fbf75afb30a00b810ac2bf331e91c156ddbd4b6ce183853464dbbc8bbbd0",
+    "acquisition_bases.sql": "259ed9d0eb70544687287a0ec3ea207be5046ecf02ed5df4fc4cd4df6357e49d",
+    "answer.json": "7d3918b2385cdc87035b7b67a56c91637cfba64037cbe3a43c59f974a8d0c718"
+  },
+  "workpaper_export_scope": "answer.json and SQL files only. The original native archive and delivery verdict preserve other entries.",
+  "native_artifact_archive_sha256": "5fb2d0cfc0587cda94d860921b21fe278de2dafab67a12cd48741a70672b295b",
+  "observed": {
+    "models": [
+      "deepseek/deepseek-v4.1-flash-1017"
+    ],
+    "providers": [
+      "DeepSeek"
+    ],
+    "reasoning_effort_on_all_requests": "high",
+    "provider_internal_reasoning_effort": "unknown",
+    "generation_models": [
+      "deepseek/deepseek-v4.1-flash-20261017"
+    ],
+    "generation_providers": [
+      "DeepSeek"
+    ]
+  },
+  "complete_workpaper": false,
+  "score": 0.0,
+  "verifier": {
+    "scorer_version": "workflow-1.2.1",
+    "complete": false,
+    "verified_research_completion": false,
+    "strict_delivery_completion": false,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": false,
+      "robustness": true,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "acquisition_bases": {
+          "original": true,
+          "original_error": null,
+          "evidence": false,
+          "controls": {
+            "compensation_classification": true,
+            "acquired_cash": true,
+            "accrued_transaction_cost": true,
+            "share_valuation": true,
+            "noncash_remeasurement": true,
+            "reported_total": true,
+            "preacquisition_revenue": true,
+            "current_revenue": true,
+            "monetary_scale": true,
+            "row_order": true
+          },
+          "control_errors": {
+            "compensation_classification": null,
+            "acquired_cash": null,
+            "accrued_transaction_cost": null,
+            "share_valuation": null,
+            "noncash_remeasurement": null,
+            "reported_total": null,
+            "preacquisition_revenue": null,
+            "current_revenue": null,
+            "monetary_scale": null,
+            "row_order": null
+          }
+        },
+        "cash_coverage": {
+          "original": true,
+          "original_error": null,
+          "evidence": false,
+          "controls": {
+            "compensation_classification": true,
+            "acquired_cash": true,
+            "accrued_transaction_cost": true,
+            "share_valuation": true,
+            "noncash_remeasurement": true,
+            "reported_total": true,
+            "preacquisition_revenue": true,
+            "current_revenue": true,
+            "monetary_scale": true,
+            "row_order": true
+          },
+          "control_errors": {
+            "compensation_classification": null,
+            "acquired_cash": null,
+            "accrued_transaction_cost": null,
+            "share_valuation": null,
+            "noncash_remeasurement": null,
+            "reported_total": null,
+            "preacquisition_revenue": null,
+            "current_revenue": null,
+            "monetary_scale": null,
+            "row_order": null
+          }
+        },
+        "performance_views": {
+          "original": true,
+          "original_error": null,
+          "evidence": false,
+          "controls": {
+            "compensation_classification": true,
+            "acquired_cash": true,
+            "accrued_transaction_cost": true,
+            "share_valuation": true,
+            "noncash_remeasurement": true,
+            "reported_total": true,
+            "preacquisition_revenue": true,
+            "current_revenue": true,
+            "monetary_scale": true,
+            "row_order": true
+          },
+          "control_errors": {
+            "compensation_classification": null,
+            "acquired_cash": null,
+            "accrued_transaction_cost": null,
+            "share_valuation": null,
+            "noncash_remeasurement": null,
+            "reported_total": null,
+            "preacquisition_revenue": null,
+            "current_revenue": null,
+            "monetary_scale": null,
+            "row_order": null
+          }
+        }
+      },
+      "claims": {
+        "claim_1": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_2": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_3": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [
+      "acquisition_bases:evidence",
+      "cash_coverage:evidence",
+      "performance_views:evidence"
+    ],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "runtime_integrity": {
+    "all_identities_and_bytes_match": true,
+    "candidate_setup": true,
+    "candidate_before_agent": true,
+    "verifier_setup": true,
+    "verifier_before_grading": true,
+    "proofs": [
+      {
+        "role": "candidate",
+        "phase": "before-agent",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b01",
+        "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+        "instruction_sha256": "01fffe84b8df80a6d98d8f58f85ad5bf62159269f7ecbf6ea3a80099e9b279cd",
+        "context_identity": "272b8138ebbf3b89615ed153d79b4d5c81cbc30d49d6c43ea630321ad397abef",
+        "session_id": "b01__7ZrCXh9__env",
+        "container_id": "29dd382bf07ace725fe400fb333c25928adfdba63df07dd5e13447bc4587418e",
+        "image_id": "sha256:7a8b223e745d7d4afc4a43c2276a0bb5549bfc0c1555b5fb3c2dddb4beb9dd0c",
+        "mismatches": [],
+        "diagnostic_sha256": "5555d9de4c8e09b7e8066f5b26935d726b84ae61ef42717289d908b07a239516"
+      },
+      {
+        "role": "candidate",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b01",
+        "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+        "instruction_sha256": "01fffe84b8df80a6d98d8f58f85ad5bf62159269f7ecbf6ea3a80099e9b279cd",
+        "context_identity": "272b8138ebbf3b89615ed153d79b4d5c81cbc30d49d6c43ea630321ad397abef",
+        "session_id": "b01__7ZrCXh9__env",
+        "container_id": "29dd382bf07ace725fe400fb333c25928adfdba63df07dd5e13447bc4587418e",
+        "image_id": "sha256:7a8b223e745d7d4afc4a43c2276a0bb5549bfc0c1555b5fb3c2dddb4beb9dd0c",
+        "mismatches": [],
+        "diagnostic_sha256": "29bd1bb0ae158fe83f4ed9c1d3cf4a7410f1ecb7babba6062a2b4613429fcc4a"
+      },
+      {
+        "role": "verifier",
+        "phase": "before-grading",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b01",
+        "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+        "instruction_sha256": null,
+        "context_identity": "c3aeac77b8d02dea9911d9a47f624b1e71a892ec7ca59febe27bb2e0adb23fb2",
+        "session_id": "b01__7ZrCXh9__verifier__trial",
+        "container_id": "683a532310690067c7bdff78e008cd5ac84b7212e5568208f6aa679a6f4929e3",
+        "image_id": "sha256:e4bae7376121b2f8f4521a4815507f0267f217afc93f5862e2a4fe16472f0898",
+        "mismatches": [],
+        "diagnostic_sha256": "b9897605f3d4e5cc7ae00a977bc23761f601fc07eda19e5e5fb6cb929917e8c0"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b01",
+        "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+        "instruction_sha256": null,
+        "context_identity": "c3aeac77b8d02dea9911d9a47f624b1e71a892ec7ca59febe27bb2e0adb23fb2",
+        "session_id": "b01__7ZrCXh9__verifier__trial",
+        "container_id": "683a532310690067c7bdff78e008cd5ac84b7212e5568208f6aa679a6f4929e3",
+        "image_id": "sha256:e4bae7376121b2f8f4521a4815507f0267f217afc93f5862e2a4fe16472f0898",
+        "mismatches": [],
+        "diagnostic_sha256": "b530ec8e265339bee5ef28ca8a557f5ecc10cf5512fc2c1e11fb78645f4c6249"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-b01",
+        "task_sha256": "8b65e8ae29acbb6586c5b1eb352c4c3f4b6c72c501bb2933b7beccc8f2047a04",
+        "instruction_sha256": null,
+        "context_identity": "c3aeac77b8d02dea9911d9a47f624b1e71a892ec7ca59febe27bb2e0adb23fb2",
+        "session_id": "wpb-trusted-01d9f4732874ec1208674551",
+        "container_id": "11e8fff2b088a120f03a7e83f13f93e8b80b84d8242ccefb2cd2aed12038589a",
+        "image_id": "sha256:98ff23b0a42180b2d53b22357e394bfa1bd6b3f2149f58b92f6475509740e135",
+        "mismatches": [],
+        "diagnostic_sha256": "6042d3daaa865f4373d1b97cefecbc68cc2dfcb9c7af78772dacbb2009350bb7"
+      }
+    ],
+    "candidate_checked_before_first_observable_request_or_session": true
+  },
+  "native_result_sha256": "5cf67368fb4f664a0da59a0fe09a13e4821acb793f8c3a85b8e8cceeb5390c6c",
+  "verdict_sha256": "636dce809973f4ba034128e538d5f7c431d1f8699f2b7036058a4e9f4b671766",
+  "wall_time": {
+    "native_controller_seconds": 704.8818690939806,
+    "agent_execution": {
+      "started_at": "2026-10-23T12:21:02.318454Z",
+      "finished_at": "2026-10-23T12:31:41.313515Z"
+    },
+    "agent_setup": {
+      "started_at": "2026-10-23T12:20:53.883536Z",
+      "finished_at": "2026-10-23T12:21:02.318310Z"
+    }
+  },
+  "termination_reason": "confirmed_task_complete",
+  "exception": null,
+  "controller_recovery": null,
+  "tokens": {
+    "input_including_cached": 262742,
+    "output_including_reasoning": 111713,
+    "cached_input_subset": 236160,
+    "reasoning_output_subset": 104780
+  },
+  "charges": {
+    "settled_key_usage_delta_usd": "0.071723580",
+    "settled_key_reconciled": true,
+    "settlement_observation": "Next scheduled paid preflight snapshot",
+    "recorded_openrouter_usd": "0.071723580",
+    "generation_records_total_usd": "0.071723580",
+    "key_usage_delta_usd": "0.071723580",
+    "response_and_key_reconciled": true,
+    "generation_records_reconciled": true,
+    "remaining_unchanged_key_allowance_usd": 5.6666402609999995,
+    "remaining_account_balance_usd": 5.6666402609999995,
+    "lifetime_limit_usd": 20.0,
+    "reset_is_null": true
+  },
+  "subscription": null,
+  "requests": {
+    "observed_requests": 16,
+    "retained_provider_generations": 16,
+    "failure_events": 0,
+    "identical_full_body_repeats": 0,
+    "output_limit_recovery_calls": 2,
+    "length_responses": 2,
+    "whole_trial_retries": 0,
+    "requests_without_retained_response": 0,
+    "sdk_retries": "unknown",
+    "request_configuration_violations": []
+  }
+}

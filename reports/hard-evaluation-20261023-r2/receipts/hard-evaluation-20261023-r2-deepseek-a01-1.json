@@ -1,0 +1,295 @@
+{
+  "slot_id": "hard-evaluation-20261023-r2-deepseek-a01-1",
+  "configuration": "deepseek",
+  "task": "a01",
+  "attempt": 1,
+  "task_id": "workflow-hard-eval-v1-a01",
+  "task_sha256": "bd9ae1655ccdecb8d90551c327bff984b37cd39b4b1bd8442e731dcb7d52edd8",
+  "configuration_path": "config/hard-evaluation-20261023-r2/deepseek.json",
+  "configuration_sha256": "436570947b4e5b0d36a7504d33d359fbf505fb1ebd9a14323c71929eba1870b8",
+  "command_argv_sha256": "9bfaded7e26ad70b36688c1b523eb7b7eba183ea674c2aaa120a927fd94a6c5e",
+  "status": "finalized",
+  "source_commit": "3fbc022233bf2b6f3c621228fcd8659d37795552",
+  "execution_id": "hard-evaluation-20261023-r2-a800d4271843",
+  "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "workpaper_sha256": {
+    "certificates.sql": "4566862bce266996f84500114cddeef2282fc0db26a541b16051462f4d008e38",
+    "funding_limits.sql": "16b4b539215f8cf3212354af03f23aa63d3fe3b9920bbb4bc36fb5ce8acbe858",
+    "purchase_plans.sql": "05de8cfb8f44c9a3d0fbc4842a1aad14b992a1dc996f066ced9cdb817b857bb9",
+    "answer.json": "93f4718ea8342087de6017d1fa71ba59eb147cbb3e19169511d00486dcb06357"
+  },
+  "workpaper_export_scope": "answer.json and SQL files only. The original native archive and delivery verdict preserve other entries.",
+  "native_artifact_archive_sha256": "ab8bcbc70cbe55cbeeee08f09a40acd082644dcfb7ba5091a63f39fa223a69a1",
+  "observed": {
+    "models": [
+      "deepseek/deepseek-v4.1-flash-1017"
+    ],
+    "providers": [
+      "DeepSeek"
+    ],
+    "reasoning_effort_on_all_requests": "high",
+    "provider_internal_reasoning_effort": "unknown",
+    "generation_models": [
+      "deepseek/deepseek-v4.1-flash-20261017"
+    ],
+    "generation_providers": [
+      "DeepSeek"
+    ]
+  },
+  "complete_workpaper": true,
+  "score": 1.0,
+  "verifier": {
+    "scorer_version": "workflow-1.2.1",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": true,
+      "robustness": true,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "certificates": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "row_order": true,
+            "scale": true,
+            "letters_of_credit": true,
+            "reserves": true,
+            "purchase_mix": true,
+            "commitment": true,
+            "dollar_cap": true,
+            "sublimits": true,
+            "seasonal_rate": true
+          },
+          "control_errors": {
+            "row_order": null,
+            "scale": null,
+            "letters_of_credit": null,
+            "reserves": null,
+            "purchase_mix": null,
+            "commitment": null,
+            "dollar_cap": null,
+            "sublimits": null,
+            "seasonal_rate": null
+          }
+        },
+        "purchase_plans": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "row_order": true,
+            "scale": true,
+            "letters_of_credit": true,
+            "reserves": true,
+            "purchase_mix": true,
+            "commitment": true,
+            "dollar_cap": true,
+            "sublimits": true,
+            "seasonal_rate": true
+          },
+          "control_errors": {
+            "row_order": null,
+            "scale": null,
+            "letters_of_credit": null,
+            "reserves": null,
+            "purchase_mix": null,
+            "commitment": null,
+            "dollar_cap": null,
+            "sublimits": null,
+            "seasonal_rate": null
+          }
+        },
+        "funding_limits": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "row_order": true,
+            "scale": true,
+            "letters_of_credit": true,
+            "reserves": true,
+            "purchase_mix": true,
+            "commitment": true,
+            "dollar_cap": true,
+            "sublimits": true,
+            "seasonal_rate": true
+          },
+          "control_errors": {
+            "row_order": null,
+            "scale": null,
+            "letters_of_credit": null,
+            "reserves": null,
+            "purchase_mix": null,
+            "commitment": null,
+            "dollar_cap": null,
+            "sublimits": null,
+            "seasonal_rate": null
+          }
+        }
+      },
+      "claims": {
+        "capacity_only": {
+          "verdict": true,
+          "evidence": true
+        },
+        "collateral_feedback": {
+          "verdict": true,
+          "evidence": true
+        },
+        "issuer_actual": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "runtime_integrity": {
+    "all_identities_and_bytes_match": true,
+    "candidate_setup": true,
+    "candidate_before_agent": true,
+    "verifier_setup": true,
+    "verifier_before_grading": true,
+    "proofs": [
+      {
+        "role": "candidate",
+        "phase": "before-agent",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-a01",
+        "task_sha256": "bd9ae1655ccdecb8d90551c327bff984b37cd39b4b1bd8442e731dcb7d52edd8",
+        "instruction_sha256": "edda237f06102be4ad7eee86720103b834cd82267da09144cb73441a0e72f2f9",
+        "context_identity": "b49b96b8c7e2a733c82c291b71fd2942849889006309c86dbbb40f31e7e02db0",
+        "session_id": "a01__K7JiWe3__env",
+        "container_id": "72e8e0da334cf01d5900656e341988a2b1f7b05b3a14a4233e71d7938faabbfe",
+        "image_id": "sha256:fa985577d05dd1edf57e00deda8ec42ba91332cf25bdee4abeeec3e407bf7d16",
+        "mismatches": [],
+        "diagnostic_sha256": "4ac7452cc84bc449eb20176b562b3764dc323b3cbbe29587bd1640c545f2aece"
+      },
+      {
+        "role": "candidate",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-a01",
+        "task_sha256": "bd9ae1655ccdecb8d90551c327bff984b37cd39b4b1bd8442e731dcb7d52edd8",
+        "instruction_sha256": "edda237f06102be4ad7eee86720103b834cd82267da09144cb73441a0e72f2f9",
+        "context_identity": "b49b96b8c7e2a733c82c291b71fd2942849889006309c86dbbb40f31e7e02db0",
+        "session_id": "a01__K7JiWe3__env",
+        "container_id": "72e8e0da334cf01d5900656e341988a2b1f7b05b3a14a4233e71d7938faabbfe",
+        "image_id": "sha256:fa985577d05dd1edf57e00deda8ec42ba91332cf25bdee4abeeec3e407bf7d16",
+        "mismatches": [],
+        "diagnostic_sha256": "c61b6a6bf9fd0d5b9520e5586601f8ee9b7db7ac405223c4515063d160707e3f"
+      },
+      {
+        "role": "verifier",
+        "phase": "before-grading",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-a01",
+        "task_sha256": "bd9ae1655ccdecb8d90551c327bff984b37cd39b4b1bd8442e731dcb7d52edd8",
+        "instruction_sha256": null,
+        "context_identity": "f5ed7cf477320dfa8ac9f813bf804fc232bccdb12443524add065f01e5a5d5ba",
+        "session_id": "a01__K7JiWe3__verifier__trial",
+        "container_id": "d1c7512f3e8bc0769e9da354cbb30b60be1cf4f6a43837580ce6c2d6cbc882c7",
+        "image_id": "sha256:deb21dbe63f7884dc789a3593bada4d13d39a6248bb816a47742e7bfd9b30d71",
+        "mismatches": [],
+        "diagnostic_sha256": "92b3696efa244e27a2bf640b31910d1e6e099180d084c8a042140df8f38e38ba"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-a01",
+        "task_sha256": "bd9ae1655ccdecb8d90551c327bff984b37cd39b4b1bd8442e731dcb7d52edd8",
+        "instruction_sha256": null,
+        "context_identity": "f5ed7cf477320dfa8ac9f813bf804fc232bccdb12443524add065f01e5a5d5ba",
+        "session_id": "a01__K7JiWe3__verifier__trial",
+        "container_id": "d1c7512f3e8bc0769e9da354cbb30b60be1cf4f6a43837580ce6c2d6cbc882c7",
+        "image_id": "sha256:deb21dbe63f7884dc789a3593bada4d13d39a6248bb816a47742e7bfd9b30d71",
+        "mismatches": [],
+        "diagnostic_sha256": "cb5ebd9ddc13c11dd52a4b2769da1e72776460e660af4802cf5bf81b9eeece23"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+        "task_id": "workflow-hard-eval-v1-a01",
+        "task_sha256": "bd9ae1655ccdecb8d90551c327bff984b37cd39b4b1bd8442e731dcb7d52edd8",
+        "instruction_sha256": null,
+        "context_identity": "f5ed7cf477320dfa8ac9f813bf804fc232bccdb12443524add065f01e5a5d5ba",
+        "session_id": "wpb-trusted-a3c234979335ed36c4157156",
+        "container_id": "b0d29fa413993474aaad253588d111c83d35429f47697d05742799715fb4ccbd",
+        "image_id": "sha256:d5c303ccbb4e0254c52a69468d2451d409cd0951ba2dddfa349300602469c56f",
+        "mismatches": [],
+        "diagnostic_sha256": "e24774ea8997036d29665e176929682cc6e5c00a557fcae52aac06284967204e"
+      }
+    ],
+    "candidate_checked_before_first_observable_request_or_session": true
+  },
+  "native_result_sha256": "0cf8b8a2cab84bc43c6d6443d106c32c11b6e0da8e81eacc6adde2cf02dfd9c6",
+  "verdict_sha256": "6253ae03e80024b780abd45ac0f58e4e329897e39a060b25cd6e3a84ee3a4645",
+  "wall_time": {
+    "native_controller_seconds": 1126.3048194949806,
+    "agent_execution": {
+      "started_at": "2026-10-23T12:02:07.736767Z",
+      "finished_at": "2026-10-23T12:19:48.390535Z"
+    },
+    "agent_setup": {
+      "started_at": "2026-10-23T12:01:59.368888Z",
+      "finished_at": "2026-10-23T12:02:07.736626Z"
+    }
+  },
+  "termination_reason": "turn_limit",
+  "exception": null,
+  "controller_recovery": null,
+  "tokens": {
+    "input_including_cached": 691122,
+    "output_including_reasoning": 176595,
+    "cached_input_subset": 646528,
+    "reasoning_output_subset": 160963
+  },
+  "charges": {
+    "settled_key_usage_delta_usd": "0.114585684",
+    "settled_key_reconciled": true,
+    "settlement_observation": "Next scheduled paid preflight snapshot",
+    "recorded_openrouter_usd": "0.114585684",
+    "generation_records_total_usd": "0.114585684",
+    "key_usage_delta_usd": "0.114585684",
+    "response_and_key_reconciled": true,
+    "generation_records_reconciled": true,
+    "remaining_unchanged_key_allowance_usd": 5.738363841,
+    "remaining_account_balance_usd": 5.738363841,
+    "lifetime_limit_usd": 20.0,
+    "reset_is_null": true
+  },
+  "subscription": null,
+  "requests": {
+    "observed_requests": 26,
+    "retained_provider_generations": 26,
+    "failure_events": 0,
+    "identical_full_body_repeats": 0,
+    "output_limit_recovery_calls": 2,
+    "length_responses": 2,
+    "whole_trial_retries": 0,
+    "requests_without_retained_response": 0,
+    "sdk_retries": "unknown",
+    "request_configuration_violations": []
+  }
+}

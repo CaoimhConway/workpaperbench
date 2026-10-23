@@ -37,6 +37,8 @@ adds four evaluation tasks on borrowing capacity, acquisition accounting,
 receivables financing and liquidation rights. Five experimental development
 tasks remain in their own catalogs. These additions preserve the core suite and
 its historical scores. Supplementary results should be reported separately.
+The [three-configuration calibration](reports/hard-evaluation-20261023-r2/README.md)
+records per-task outcomes, grading corrections and the limits of this small sample.
 
 ## Evaluation
 
