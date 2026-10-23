@@ -1,0 +1,45 @@
+{
+  "manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+  "manifest_sha256": "7df177f2840cf67b4d468a0d0ee6510af815824ba64fedfe533b0c2e3c2851d7",
+  "sql_worker_version": "workflow-hard-sql-1.0.1",
+  "sql_worker_sha256": "06394ab7e7d12d1d952bb9d1e5c355b7b4b7ef387821d8832ae9912940482ca9",
+  "financial_scorer_unchanged": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+  "scope": "Authored regression and compatibility verification, no model inference",
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "isolated_boundary_probes": 47,
+  "grouped_original_and_control_comparisons": 10,
+  "static_immutability_guards": 1,
+  "package_tests": 5,
+  "focused_tests_passed": 63,
+  "isolated_valid_variants": 20,
+  "isolated_incorrect_variants": 49,
+  "controller_sqlite": "3.45.1",
+  "verifier_sqlite": "3.40.1",
+  "comparison": {
+    "prior_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+    "current_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+    "changed_package_files": [
+      "datasets/workflow-hard-eval-v1/tasks/a01/authoring.json",
+      "datasets/workflow-hard-eval-v1/tasks/a01/tests/gold.json",
+      "datasets/workflow-hard-eval-v1/tasks/a01/tests/workpaperbench/workflow_sql_worker.py",
+      "datasets/workflow-hard-eval-v1/tasks/b01/authoring.json",
+      "datasets/workflow-hard-eval-v1/tasks/b01/tests/gold.json",
+      "datasets/workflow-hard-eval-v1/tasks/b01/tests/workpaperbench/workflow_sql_worker.py",
+      "datasets/workflow-hard-eval-v1/tasks/c01/authoring.json",
+      "datasets/workflow-hard-eval-v1/tasks/c01/tests/gold.json",
+      "datasets/workflow-hard-eval-v1/tasks/c01/tests/workpaperbench/workflow_sql_worker.py",
+      "datasets/workflow-hard-eval-v1/tasks/b02/authoring.json",
+      "datasets/workflow-hard-eval-v1/tasks/b02/tests/gold.json",
+      "datasets/workflow-hard-eval-v1/tasks/b02/tests/workpaperbench/workflow_sql_worker.py"
+    ],
+    "candidate_visible_files_unchanged": 32,
+    "financial_gold_control_databases_evidence_claims_and_references_unchanged": true
+  },
+  "native_execution": "Recorded separately after the serial inference campaign",
+  "artifacts_sha256": {
+    "grouped-query-regression.json": "511001c93d24afcc46a670737c3e9cb1b420f72cdf911295aed3265db4075e39",
+    "verification.json": "ef6ca054e1f140e05c2beda80aa55af20c449b7f48c2a0bc7341a0d9e708278a",
+    "package-comparison.json": "7fea05ec91b375455eb1f58ee10c716c8b6734afc579e192c80abd58904567b3"
+  }
+}

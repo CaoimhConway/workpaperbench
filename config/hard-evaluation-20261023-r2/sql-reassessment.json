@@ -1,0 +1,20 @@
+{
+  "protocol_id": "hard-evaluation-20261023-r2-sql-1.0.1-reassessment",
+  "frozen_at": "2026-10-23T11:46:07.782179+00:00",
+  "original_execution_id": "hard-evaluation-20261023-r2-a800d4271843",
+  "original_manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "reassessment_manifest_id": "workflow-hard-eval-v1-canonical-f683af9b3079",
+  "original_sql_worker_sha256": "4103f82f9b3af6fce87f0db2235f581bceee7cabc0ab88822280950e914ec7e4",
+  "reassessment_sql_worker_sha256": "06394ab7e7d12d1d952bb9d1e5c355b7b4b7ef387821d8832ae9912940482ca9",
+  "reason": "An independently checked prefreeze authored grouped alternative requires temporary query storage. Memory-backed temporary storage resolves SQLITE_IOERR_WRITE within the unchanged resource limits.",
+  "evidence": "reports/workflow-hard-sql-1.0.1/grouped-query-regression.json",
+  "evidence_sha256": "511001c93d24afcc46a670737c3e9cb1b420f72cdf911295aed3265db4075e39",
+  "candidate_outputs_or_scores_inspected_before_freeze": false,
+  "financial_inputs_and_rules_unchanged": true,
+  "scheduled_slots": 12,
+  "population": "Every scheduled slot in the original matrix, including missing or delivery-failed submissions. No selection based on original outcome.",
+  "procedure": "Regrade the exact saved answer.json and SQL bytes against original and all control databases using the revised isolated verifier. Do not edit, repair or regenerate submissions. Preserve original results and hashes alongside revised results.",
+  "inference": false,
+  "new_model_attempts": 0,
+  "interpretation": "Unchanged-submission compatibility reassessment. This is not new inference or a campaign executed wholly under SQL worker 1.0.1. Original inference used worker 1.0.0."
+}

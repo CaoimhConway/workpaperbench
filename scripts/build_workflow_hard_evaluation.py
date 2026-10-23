@@ -43,10 +43,10 @@ def database(path, schemas, data):
 def construct(destination):
     if sqlite3.sqlite_version!='3.45.1':
         raise ValueError('Build with SQLite 3.45.1 on the supported Ubuntu 24.04 controller')
-    manifest={'dataset_id':DATASET,'status':'Evaluation supplement frozen before candidate trials, empirical results reported separately',
+    manifest={'dataset_id':DATASET,'status':'Evaluation inputs and financial rules frozen before candidate trials. SQL compatibility revision and empirical results have separate identities.',
       'evaluation_track':'construction','scorer_version':'workflow-1.2.1',
-      'scorer_path':'config/scorers/workflow-1.2.1.py','sql_worker_path':'config/scorers/workflow_hard_sql_worker-1.0.0.py',
-      'sql_worker_version':'workflow-hard-sql-1.0.0',
+      'scorer_path':'config/scorers/workflow-1.2.1.py','sql_worker_path':'config/scorers/workflow_hard_sql_worker-1.0.1.py',
+      'sql_worker_version':'workflow-hard-sql-1.0.1',
       'starting_commit':'bdaabd3f526b05553efdc0f40af1d5e0576b0142',
       'task_design':'Four source-grounded financial reasoning tasks. Initial package freeze precedes all candidate trials.',
       'human_review':'pending','tasks':{},'hashes':{}}
@@ -130,7 +130,7 @@ def construct(destination):
             'reference_method':'Executable economic model with a separate derivation, valid alternative SQL and financial invariant checks',
             'controls':reasons,'human_review':'pending','source_review':'Primary source headings, definitions and factual values inspected. Independent human review remains pending.',
             'model_exposure':'No candidate trials before initial freeze. Source groups are separate from development tasks. Published references remain a contamination risk.',
-            'execution':'Baseline task resources and frozen financial scorer reused. Experimental SQL worker 1.0.0 permits zero-column reads for ordinary COUNT/EXISTS and CTE inputs while retaining schema/module restrictions. Qualified GLM uses 3600 seconds and 24 turns. Native Sol uses 3600 seconds and has no equivalent turn cap.'})
+            'execution':'Baseline task resources and frozen financial scorer reused. Experimental SQL worker 1.0.1 permits zero-column reads for ordinary COUNT/EXISTS and CTE inputs and keeps temporary query storage within the unchanged memory allowance. Schema/module and filesystem restrictions remain. Qualified GLM uses 3600 seconds and 24 turns. Native Sol uses 3600 seconds and has no equivalent turn cap.'})
         manifest['tasks'][key]={'task_id':identifier,'path':'datasets/'+DATASET+'/tasks/'+key,'task_sha256':tree_hash(task),
             'split':'evaluation','source_group':s['source'],'evaluation_track':'construction'}
     bound=['scripts/build_workflow_hard_evaluation.py','scripts/workflow_hard_evaluation_cases.py',
@@ -138,7 +138,7 @@ def construct(destination):
            'scripts/workflow_hard_receivables.py','scripts/workflow_hard_waterfall.py',
            'scripts/validate_workflow_hard_evaluation.py','tests/test_workflow_hard_evaluation.py',
            'tests/test_hard_borrowing_base.py','tests/test_hard_acquisition.py',
-           'tests/test_hard_receivables.py','tests/test_hard_waterfall.py','tests/test_workflow_hard_sql_worker.py',manifest['scorer_path'],manifest['sql_worker_path']]
+           'tests/test_hard_receivables.py','tests/test_hard_waterfall.py','tests/test_workflow_hard_sql_worker.py','tests/fixtures/workflow_hard_grouped_sale_allocations.sql',manifest['scorer_path'],manifest['sql_worker_path']]
     bound += [p.relative_to(ROOT).as_posix() for p in sorted(SOURCES.glob('*.json'))]
     bound += [p.relative_to(ROOT).as_posix() for p in sorted((SOURCES.parent/'references').glob('*.md'))]
     for name in bound: manifest['hashes'][name]=digest(ROOT/name)

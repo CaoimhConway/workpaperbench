@@ -33,6 +33,7 @@ def run(db, sql):
     connection = sqlite3.connect(Path(db).resolve().as_uri() + '?mode=ro', uri=True)
     connection.enable_load_extension(False)
     connection.execute('PRAGMA query_only=ON')
+    connection.execute('PRAGMA temp_store=MEMORY')
     # SQLite reports some COUNT/EXISTS inputs as unqualified, zero-column reads.
     # Logical CTE inputs have no persistent schema entry. Keep schema objects
     # and table-valued modules outside that exception.

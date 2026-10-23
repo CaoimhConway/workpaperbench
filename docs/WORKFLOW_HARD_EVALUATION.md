@@ -9,8 +9,9 @@ results.
 
 The supplement tests construction of a financial model from disclosed rights,
 accounting treatments and cash movements. Its source groups are separate from
-those used in development. The four packages are frozen before their first
-candidate trials. Public financial sources and distributed reference workpapers
+those used in development. The financial definitions and candidate inputs were
+frozen before their first candidate trials. SQL compatibility revisions carry
+separate execution identities. Public financial sources and distributed reference workpapers
 preclude a claim that the cases are free from training contamination.
 
 | Task | Analyst question | Additional reasoning |
@@ -83,12 +84,16 @@ sufficient alternative evidence paths pass. Optional explanations are not
 semantically verified, and arbitrary choices between equivalent financial
 witnesses are not graded.
 
-The supplement versions its SQL worker as `workflow-hard-sql-1.0.0`. It accepts
+The supplement versions its SQL worker as `workflow-hard-sql-1.0.1`. It accepts
 ordinary `COUNT(*)`, counted CTEs and identifier casing that the earlier worker
 incorrectly rejected. Schema objects and table-valued modules remain prohibited.
 CTE aliases that use reserved schema or module names remain unsupported. The
 financial scorer, SQL resource limits and existing dataset workers are unchanged.
-This execution difference was frozen before any evaluation inference.
+The first correction was frozen before evaluation inference. Version 1.0.1 also
+keeps temporary sorting and grouping data in memory, within the same 256 MiB
+process limit. Its authored regression was verified before any evaluation
+submission or score was inspected. Original executed scores and any subsequent
+unchanged-submission reassessment are reported separately.
 
 Candidate resources are unchanged. The qualified Terminus-2 conditions use
 3,600 seconds and 24 turns. Native Codex uses the same wall time but has no
@@ -107,3 +112,9 @@ other benchmarks or tune task selection to a desired pass rate.
 Independent human financial/source review and actual external-user testing are
 separate from software validation and remain pending. The initial development
 and final evaluation results are recorded under distinct experiment identities.
+The [package verification report](../reports/workflow-hard-eval-v1/README.md)
+records the original software gates. The [SQL compatibility correction](../reports/workflow-hard-sql-1.0.1/README.md)
+records the revised worker and its verification. Development catalogs retain their
+historical contracts. The [second development calibration](../reports/hard-development-20261023/README.md)
+documents known worker and evidence-path defects, so its strict completion
+counts should not be interpreted as financial reasoning pass rates.

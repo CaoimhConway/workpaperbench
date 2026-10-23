@@ -1,0 +1,573 @@
+{
+  "scope": "Only the retained prefreeze authored grouped b02 alternative, original and nine synthetic controls. No candidate submissions, scores or inference.",
+  "manifest_id": "workflow-hard-eval-v1-canonical-a13e5bdb16c3",
+  "source_sql": "tests/fixtures/workflow_hard_grouped_sale_allocations.sql",
+  "image": "python:3.12-slim-bookworm@sha256:54c85f3c47607a77f32adec749d3c81d1348bf25833671f512b26a9b6d778cb3",
+  "hashes": {
+    "original_worker": "4103f82f9b3af6fce87f0db2235f581bceee7cabc0ab88822280950e914ec7e4",
+    "memory_worker": "06394ab7e7d12d1d952bb9d1e5c355b7b4b7ef387821d8832ae9912940482ca9",
+    "sql": "ee38fb12c920ada9753557746c345b7dbaa0b60aa3213ce7006fa23bf906af3f",
+    "gold": "3546db87b0877e8f0db5d805753c4de59880f08a86f0bbac542a1d07c4f62411",
+    "helper": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4"
+  },
+  "change": "Add connection.execute('PRAGMA temp_store=MEMORY') immediately after query_only=ON. All other worker bytes unchanged.",
+  "total_elapsed_seconds": 3.4267905300075654,
+  "sqlite_version": "3.40.1",
+  "temporary_storage_compile_options": [
+    "TEMP_STORE=1"
+  ],
+  "records": [
+    {
+      "case": "original",
+      "worker": "original",
+      "database_sha256": "f8280d2c3b47a82497df2cab32db1f1038a7236df96f68ff30f0e3aae83bc660",
+      "returncode": 0,
+      "error": "OperationalError",
+      "message": "disk I/O error",
+      "sqlite_errorcode": 778,
+      "sqlite_errorname": "SQLITE_IOERR_WRITE",
+      "elapsed_seconds": 0.01842008599487599,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "database_unchanged": true
+    },
+    {
+      "case": "original",
+      "worker": "memory",
+      "database_sha256": "f8280d2c3b47a82497df2cab32db1f1038a7236df96f68ff30f0e3aae83bc660",
+      "returncode": 0,
+      "elapsed_seconds": 0.034315066994167864,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "output_sha256": "752e187492c0da204e44c59efdd8c7d46b367f3108fbd5da58eef747ba3255d4",
+      "gold_match": true,
+      "row_count": 88,
+      "max_absolute_numeric_error": 4.547473508864641e-13,
+      "comparison_errors": [],
+      "database_unchanged": true
+    },
+    {
+      "case": "row_order",
+      "worker": "original",
+      "database_sha256": "1c2b0023d104f129ee98292b021d994ca3f21f9986bb8754e9a3e56da8983af2",
+      "returncode": 0,
+      "error": "OperationalError",
+      "message": "disk I/O error",
+      "sqlite_errorcode": 778,
+      "sqlite_errorname": "SQLITE_IOERR_WRITE",
+      "elapsed_seconds": 0.01855508099833969,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "database_unchanged": true
+    },
+    {
+      "case": "row_order",
+      "worker": "memory",
+      "database_sha256": "1c2b0023d104f129ee98292b021d994ca3f21f9986bb8754e9a3e56da8983af2",
+      "returncode": 0,
+      "elapsed_seconds": 0.03519822700036457,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "output_sha256": "6b2f3ae525089e642a8d886250b6650dfe0cac12fab046f6332bfd6aada3921b",
+      "gold_match": true,
+      "row_count": 88,
+      "max_absolute_numeric_error": 4.547473508864641e-13,
+      "comparison_errors": [],
+      "database_unchanged": true
+    },
+    {
+      "case": "scale",
+      "worker": "original",
+      "database_sha256": "f4754b708a1f770590eecbc0cfeda15b9bb6ece7959849b202bba086ee59094b",
+      "returncode": 0,
+      "error": "OperationalError",
+      "message": "disk I/O error",
+      "sqlite_errorcode": 778,
+      "sqlite_errorname": "SQLITE_IOERR_WRITE",
+      "elapsed_seconds": 0.018923231000371743,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "database_unchanged": true
+    },
+    {
+      "case": "scale",
+      "worker": "memory",
+      "database_sha256": "f4754b708a1f770590eecbc0cfeda15b9bb6ece7959849b202bba086ee59094b",
+      "returncode": 0,
+      "elapsed_seconds": 0.03441397999995388,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "output_sha256": "f55dddbd38a875a8bc82fb0e8853eb89bfaff88c550efb2eb2a446971e1683de",
+      "gold_match": true,
+      "row_count": 88,
+      "max_absolute_numeric_error": 9.094947017729282e-13,
+      "comparison_errors": [],
+      "database_unchanged": true
+    },
+    {
+      "case": "carrying_only",
+      "worker": "original",
+      "database_sha256": "c2b88eea3ed39f264db0e44561c84c3963143c9c66bb48dfd9ac1f235aba5421",
+      "returncode": 0,
+      "error": "OperationalError",
+      "message": "disk I/O error",
+      "sqlite_errorcode": 778,
+      "sqlite_errorname": "SQLITE_IOERR_WRITE",
+      "elapsed_seconds": 0.018503095998312347,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "database_unchanged": true
+    },
+    {
+      "case": "carrying_only",
+      "worker": "memory",
+      "database_sha256": "c2b88eea3ed39f264db0e44561c84c3963143c9c66bb48dfd9ac1f235aba5421",
+      "returncode": 0,
+      "elapsed_seconds": 0.03444880799361272,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "output_sha256": "752e187492c0da204e44c59efdd8c7d46b367f3108fbd5da58eef747ba3255d4",
+      "gold_match": true,
+      "row_count": 88,
+      "max_absolute_numeric_error": 4.547473508864641e-13,
+      "comparison_errors": [],
+      "database_unchanged": true
+    },
+    {
+      "case": "trigger_lower",
+      "worker": "original",
+      "database_sha256": "b9e8138e27ff5f57f282920f8d827521e03f66e38a5335ced2ffb799da64a066",
+      "returncode": 0,
+      "error": "OperationalError",
+      "message": "disk I/O error",
+      "sqlite_errorcode": 778,
+      "sqlite_errorname": "SQLITE_IOERR_WRITE",
+      "elapsed_seconds": 0.018250761000672355,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "database_unchanged": true
+    },
+    {
+      "case": "trigger_lower",
+      "worker": "memory",
+      "database_sha256": "b9e8138e27ff5f57f282920f8d827521e03f66e38a5335ced2ffb799da64a066",
+      "returncode": 0,
+      "elapsed_seconds": 0.032562560998485424,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "output_sha256": "d37cf1a594885543c0e9cee7e63ba01d6cab13d530b81948ca6eaae763621d88",
+      "gold_match": true,
+      "row_count": 88,
+      "max_absolute_numeric_error": 4.547473508864641e-13,
+      "comparison_errors": [],
+      "database_unchanged": true
+    },
+    {
+      "case": "trigger_higher",
+      "worker": "original",
+      "database_sha256": "79c01b9ea2f4ee0d99e069582ab46518bd985305f07e09b2967b8a68a3004781",
+      "returncode": 0,
+      "error": "OperationalError",
+      "message": "disk I/O error",
+      "sqlite_errorcode": 778,
+      "sqlite_errorname": "SQLITE_IOERR_WRITE",
+      "elapsed_seconds": 0.01909015699493466,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "database_unchanged": true
+    },
+    {
+      "case": "trigger_higher",
+      "worker": "memory",
+      "database_sha256": "79c01b9ea2f4ee0d99e069582ab46518bd985305f07e09b2967b8a68a3004781",
+      "returncode": 0,
+      "elapsed_seconds": 0.03758376999758184,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "output_sha256": "06a40c3c5e8ed6ee337b2dcb9866a23bb2ccfe69dbad800201761058cd3f960c",
+      "gold_match": true,
+      "row_count": 88,
+      "max_absolute_numeric_error": 4.547473508864641e-13,
+      "comparison_errors": [],
+      "database_unchanged": true
+    },
+    {
+      "case": "junior_seniority",
+      "worker": "original",
+      "database_sha256": "d5b3504afee3106cd84400f5357dca0e7859683cd0e4aee3e37a5f43b3f4f1c5",
+      "returncode": 0,
+      "error": "OperationalError",
+      "message": "disk I/O error",
+      "sqlite_errorcode": 778,
+      "sqlite_errorname": "SQLITE_IOERR_WRITE",
+      "elapsed_seconds": 0.01846179400308756,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "database_unchanged": true
+    },
+    {
+      "case": "junior_seniority",
+      "worker": "memory",
+      "database_sha256": "d5b3504afee3106cd84400f5357dca0e7859683cd0e4aee3e37a5f43b3f4f1c5",
+      "returncode": 0,
+      "elapsed_seconds": 0.034556095000880305,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "output_sha256": "2feb14a7dcd0cec8670ceba59eb60f644c607351e465d037c78c912ac540ae01",
+      "gold_match": true,
+      "row_count": 88,
+      "max_absolute_numeric_error": 4.547473508864641e-13,
+      "comparison_errors": [],
+      "database_unchanged": true
+    },
+    {
+      "case": "preference_right",
+      "worker": "original",
+      "database_sha256": "be6f58191968d9a6a98060e8d80cf05ed8e3d6545bd5be486dcbeffdd7bee0e7",
+      "returncode": 0,
+      "error": "OperationalError",
+      "message": "disk I/O error",
+      "sqlite_errorcode": 778,
+      "sqlite_errorname": "SQLITE_IOERR_WRITE",
+      "elapsed_seconds": 0.018481137994967867,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "database_unchanged": true
+    },
+    {
+      "case": "preference_right",
+      "worker": "memory",
+      "database_sha256": "be6f58191968d9a6a98060e8d80cf05ed8e3d6545bd5be486dcbeffdd7bee0e7",
+      "returncode": 0,
+      "elapsed_seconds": 0.03510200799792074,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "output_sha256": "05f09414c82bb9dc59eb30de3c614ae6f2612259d2413176aced144ba3d81040",
+      "gold_match": true,
+      "row_count": 88,
+      "max_absolute_numeric_error": 4.547473508864641e-13,
+      "comparison_errors": [],
+      "database_unchanged": true
+    },
+    {
+      "case": "conversion_ratio",
+      "worker": "original",
+      "database_sha256": "a4771c07394c198961a4851a92934e83aadecdb40eac3b1551b502493f473b65",
+      "returncode": 0,
+      "error": "OperationalError",
+      "message": "disk I/O error",
+      "sqlite_errorcode": 778,
+      "sqlite_errorname": "SQLITE_IOERR_WRITE",
+      "elapsed_seconds": 0.018387855001492426,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "database_unchanged": true
+    },
+    {
+      "case": "conversion_ratio",
+      "worker": "memory",
+      "database_sha256": "a4771c07394c198961a4851a92934e83aadecdb40eac3b1551b502493f473b65",
+      "returncode": 0,
+      "elapsed_seconds": 0.03462319100071909,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "output_sha256": "41b7395f112785ea98fa52799b2cff43b1199b09bb54d241520123e29cb89528",
+      "gold_match": true,
+      "row_count": 88,
+      "max_absolute_numeric_error": 4.547473508864641e-13,
+      "comparison_errors": [],
+      "database_unchanged": true
+    },
+    {
+      "case": "target_shift",
+      "worker": "original",
+      "database_sha256": "2a5eb86a3ede4091f58025ed48b68c44822bec976ab22cb8854ed251aee17dbf",
+      "returncode": 0,
+      "error": "OperationalError",
+      "message": "disk I/O error",
+      "sqlite_errorcode": 778,
+      "sqlite_errorname": "SQLITE_IOERR_WRITE",
+      "elapsed_seconds": 0.018888339996919967,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "database_unchanged": true
+    },
+    {
+      "case": "target_shift",
+      "worker": "memory",
+      "database_sha256": "2a5eb86a3ede4091f58025ed48b68c44822bec976ab22cb8854ed251aee17dbf",
+      "returncode": 0,
+      "elapsed_seconds": 0.035594573004345875,
+      "peak_rss_kib": 22004,
+      "limits": {
+        "RLIMIT_AS": [
+          268435456,
+          268435456
+        ],
+        "RLIMIT_CPU": [
+          2,
+          2
+        ],
+        "RLIMIT_FSIZE": [
+          0,
+          0
+        ]
+      },
+      "output_sha256": "752e187492c0da204e44c59efdd8c7d46b367f3108fbd5da58eef747ba3255d4",
+      "gold_match": true,
+      "row_count": 88,
+      "max_absolute_numeric_error": 4.547473508864641e-13,
+      "comparison_errors": [],
+      "database_unchanged": true
+    }
+  ],
+  "original_receipt_sha256": "f74aa59366c816f0dbe412b6edfb7f60b2ab3f1af6113bc4c7e513d3eec5cf58",
+  "publication_note": "Public copy changes the internal SQL locator only and separately binds the retained original receipt."
+}

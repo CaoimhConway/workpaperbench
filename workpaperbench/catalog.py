@@ -12,7 +12,7 @@ WORKFLOW_CONTRACT_SCORER_SHA256 = 'a515f5d124a925bc8652f48fe92d8cad6a991580d5c61
 
 WORKFLOW_CONTRACT_WORKER_SHA256 = '07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200'
 
-WORKFLOW_HARD_WORKER_SHA256 = '4103f82f9b3af6fce87f0db2235f581bceee7cabc0ab88822280950e914ec7e4'
+WORKFLOW_HARD_WORKER_SHA256 = '06394ab7e7d12d1d952bb9d1e5c355b7b4b7ef387821d8832ae9912940482ca9'
 
 WORKFLOW_REVIEW_SCORER_SHA256 = 'f8e733696dbf51923b6f751da57ca9e60ed5c5ebe565c96c998a6989bd1e924d'
 
@@ -70,7 +70,7 @@ def load(root, dataset="challenge-v2", task=None):
             or manifest.get('scorer_path') != 'config/scorers/workflow-1.2.0.py'
             or manifest.get('scorer_sha256') != WORKFLOW_VALIDITY_SCORER_SHA256):
         raise ValueError('catalog_scorer_identity_mismatch')
-    worker_path, worker_hash = ('config/scorers/workflow_hard_sql_worker-1.0.0.py', WORKFLOW_HARD_WORKER_SHA256) if dataset == 'workflow-hard-eval-v1' else ('config/scorers/workflow_sql_worker-1.2.1.py', WORKFLOW_CONTRACT_WORKER_SHA256)
+    worker_path, worker_hash = ('config/scorers/workflow_hard_sql_worker-1.0.1.py', WORKFLOW_HARD_WORKER_SHA256) if dataset == 'workflow-hard-eval-v1' else ('config/scorers/workflow_sql_worker-1.2.1.py', WORKFLOW_CONTRACT_WORKER_SHA256)
     if dataset in ('workflow-v10', 'workflow-v11', 'workflow-v12', 'workflow-v13', 'workflow-v14', 'workflow-v15', 'workflow-hard-pilot-v1', 'workflow-hard-pilot-v2', 'workflow-hard-eval-v1') and (manifest.get('scorer_version') != 'workflow-1.2.1'
             or manifest.get('scorer_path') != 'config/scorers/workflow-1.2.1.py'
             or manifest.get('scorer_sha256') != WORKFLOW_CONTRACT_SCORER_SHA256
