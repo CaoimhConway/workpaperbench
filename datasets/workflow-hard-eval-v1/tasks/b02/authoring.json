@@ -1,0 +1,56 @@
+{
+  "split": "evaluation",
+  "evaluation_track": "construction",
+  "source_group": "reddit-2023",
+  "nearest_existing_counterparts": [
+    "workflow-hard-pilot-v2/b01",
+    "workflow-v15/b09",
+    "workflow-v15/c08"
+  ],
+  "additional_analytical_decisions": "Infer an endogenous common-share payout from a preference waterfall, mandatory and value-dependent conversions. Find owner funding requirements across a discontinuous contractual trigger, including an unattained infimum. Share voting power, reported carrying value and simple fully converted ownership do not determine cash entitlement.",
+  "source_snapshot": "datasets/workflow-hard-eval-v1/sources/reddit-2023.json",
+  "source_snapshot_sha256": "457b05043da41b821d1bf6ac6547d3d259b3c1da621d7f39b23acf9d97f83915",
+  "reference_method": "Executable economic model with a separate derivation, valid alternative SQL and financial invariant checks",
+  "controls": [
+    {
+      "name": "row_order",
+      "rationale": "Reorder all rows without changing their identities or rights."
+    },
+    {
+      "name": "scale",
+      "rationale": "Double issued shares and every aggregate cash amount and threshold. Per-share rights and per-share payouts stay fixed."
+    },
+    {
+      "name": "carrying_only",
+      "rationale": "Change preferred book carrying values alone. Contractual liquidation rights do not change."
+    },
+    {
+      "name": "trigger_lower",
+      "rationale": "Lower only the synthetic contractual mandatory-conversion threshold to USD 120 million."
+    },
+    {
+      "name": "trigger_higher",
+      "rationale": "Raise the synthetic mandatory threshold above some voluntary conversions. Remaining rights are unchanged."
+    },
+    {
+      "name": "junior_seniority",
+      "rationale": "Promote the synthetic A-1 claim to the same liquidation rank as other preferred claims. This changes distressed recoveries, not share counts."
+    },
+    {
+      "name": "preference_right",
+      "rationale": "Give synthetic Series E a 1.5-times liquidation preference and adjust its contextual preference observation. Original issue price and conversion ratio stay fixed."
+    },
+    {
+      "name": "conversion_ratio",
+      "rationale": "Give synthetic Series E 1.2 common shares per preferred share. Issued preferred shares, issue price, preference and other rights stay fixed."
+    },
+    {
+      "name": "target_shift",
+      "rationale": "Replace the Series F target near the discontinuity with USD 55 million, which requires a larger attained funding amount."
+    }
+  ],
+  "human_review": "pending",
+  "source_review": "Primary source headings, definitions and factual values inspected. Independent human review remains pending.",
+  "model_exposure": "No candidate trials before initial freeze. Source groups are separate from development tasks. Published references remain a contamination risk.",
+  "execution": "Baseline task resources and frozen scorer reused. Qualified GLM uses 3600 seconds and 24 turns. Native Sol uses 3600 seconds and has no equivalent turn cap."
+}

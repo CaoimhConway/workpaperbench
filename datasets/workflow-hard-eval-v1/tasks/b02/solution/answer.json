@@ -1,0 +1,65 @@
+{
+  "task_id": "workflow-hard-eval-v1-b02",
+  "tables": [
+    {
+      "id": "sale_allocations",
+      "file": "sale_allocations.sql",
+      "evidence": [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s05"
+      ]
+    },
+    {
+      "id": "conversion_frontiers",
+      "file": "conversion_frontiers.sql",
+      "evidence": [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s05"
+      ]
+    },
+    {
+      "id": "owner_funding",
+      "file": "owner_funding.sql",
+      "evidence": [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s05"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s05"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "b02:s01",
+        "b02:s02",
+        "b02:s03",
+        "b02:s05"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": [
+        "b02:s05",
+        "b02:s06"
+      ]
+    }
+  ]
+}

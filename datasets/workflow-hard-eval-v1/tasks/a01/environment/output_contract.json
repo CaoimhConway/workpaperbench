@@ -1,0 +1,131 @@
+{
+  "tables": {
+    "certificates": {
+      "columns": {
+        "scenario": {
+          "type": "text",
+          "unit": "label"
+        },
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "uncapped_advance_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "borrowing_base_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "available_draw_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        }
+      },
+      "keys": [
+        "scenario",
+        "period"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "purchase_plans": {
+      "columns": {
+        "scenario": {
+          "type": "text",
+          "unit": "label"
+        },
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "proposal": {
+          "type": "text",
+          "unit": "label"
+        },
+        "borrowing_base_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "revolving_exposure_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "funding_surplus_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "feasible": {
+          "type": "integer",
+          "unit": "indicator"
+        }
+      },
+      "keys": [
+        "scenario",
+        "period",
+        "proposal"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "funding_limits": {
+      "columns": {
+        "scenario": {
+          "type": "text",
+          "unit": "label"
+        },
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "maximum_purchase_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "borrowing_base_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "funding_surplus_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        }
+      },
+      "keys": [
+        "scenario",
+        "period"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    }
+  },
+  "definitions": {
+    "certificates": "One row per collateral scenario and period. uncapped_advance is the advance value after reserves with concentration limits removed. borrowing_base applies the disclosed concentration limits. available_draw is the additional cash borrowing available before any purchase, after existing loans and letters of credit.",
+    "purchase_plans": "One row per scenario, period and purchase proposal. Report the post-purchase borrowing_base, total revolving_exposure including required purchase borrowing and letters of credit, and funding_surplus equal to the applicable loan limit less that total exposure. A negative surplus is a funding shortfall. feasible is 1 if the purchase can be funded and 0 otherwise.",
+    "funding_limits": "One row per scenario and period. Report the sharp maximum continuous purchase cost, the resulting borrowing_base and funding_surplus on the same basis as purchase_plans. Do not report a selected arbitrary near-limit purchase or an allocation witness."
+  },
+  "claim_assertions": {
+    "capacity_only": "In case_b at ordinary advance rates, unused aggregate commitment is sufficient evidence that plan_2 can be fully funded.",
+    "collateral_feedback": "In case_a at ordinary advance rates, the largest permitted purchase exceeds the cash borrowing available before that purchase.",
+    "issuer_actual": "Albertsons actual excess availability was at least USD 1,000 million on August 27, 2025."
+  },
+  "numeric_policy": "Displayed-value arithmetic. Absolute tolerances are computational, not claims of source precision.",
+  "assumptions": [
+    "This is an instantaneous, hypothetical borrowing-base funding exercise under the August 27, 2025 Albertsons terms. It is not the issuer's observed collateral certificate or a forecast. Amounts are USD million, except decimal rates and fractions.",
+    "All receivables, scripts and inventory supplied in collateral_cases satisfy the agreement's eligibility conditions. Inventory costs and script values are already net of their specific reserves. pharmacy_receivables is net of its receivables reserves. There is no eligible pharmacy inventory. availability_reserves includes all remaining borrowing-base deductions, including any maturing indebtedness reserve.",
+    "Use the stated concentration percentages at their contractual maximum. A borrowing-base calculation without a named cap removes only that cap and retains all other applicable definitions. The ordinary and seasonal cases refer to the disclosed regular rate and the three eligible four-week periods, respectively. No interest-rate or elapsed-time calculation is requested.",
+    "For each scenario, the purchase plan is a continuous nonnegative cash purchase of otherwise eligible regular and perishable inventory, divided by regular_purchase_fraction. Its cost increases those two inventory cost balances immediately. Their appraised-value percentages remain unchanged. Scripts, receivables, reserves, outstanding loans and letters of credit otherwise stay fixed.",
+    "The purchase and funding close simultaneously. There is no usable opening cash, new equity, supplier credit, disposal, tax, fee or other cash flow. Additional revolving cash borrowing is the only funding source. All other draw conditions and financial covenants are satisfied. No accordion commitment, overadvance, FILO loan or other borrowing is available. The letter-of-credit and swingline subfacilities do not increase aggregate commitment.",
+    "The maximum purchase is the largest exact purchase cost that can be paid while respecting both aggregate commitment and the post-purchase borrowing base. No minimum excess-availability buffer is imposed in this exercise. All comparisons use unrounded values."
+  ]
+}

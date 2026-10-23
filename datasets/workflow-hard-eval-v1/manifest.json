@@ -1,0 +1,73 @@
+{
+  "dataset_id": "workflow-hard-eval-v1",
+  "status": "Evaluation supplement frozen before candidate trials, empirical results reported separately",
+  "evaluation_track": "construction",
+  "scorer_version": "workflow-1.2.1",
+  "scorer_path": "config/scorers/workflow-1.2.1.py",
+  "sql_worker_path": "config/scorers/workflow_sql_worker-1.2.1.py",
+  "starting_commit": "bdaabd3f526b05553efdc0f40af1d5e0576b0142",
+  "task_design": "Four source-grounded financial reasoning tasks. Initial package freeze precedes all candidate trials.",
+  "human_review": "pending",
+  "tasks": {
+    "a01": {
+      "task_id": "workflow-hard-eval-v1-a01",
+      "path": "datasets/workflow-hard-eval-v1/tasks/a01",
+      "task_sha256": "bfbcd74dacb56264b6cf3c7b323f8b93b009f6f79cd43d46994467ee7e7f7b74",
+      "split": "evaluation",
+      "source_group": "albertsons-2025",
+      "evaluation_track": "construction"
+    },
+    "b01": {
+      "task_id": "workflow-hard-eval-v1-b01",
+      "path": "datasets/workflow-hard-eval-v1/tasks/b01",
+      "task_sha256": "6f6c33edf43a6fbb043f2aa6516429f6561392903002e3b8c4d02130d6001334",
+      "split": "evaluation",
+      "source_group": "bms-2020",
+      "evaluation_track": "construction"
+    },
+    "c01": {
+      "task_id": "workflow-hard-eval-v1-c01",
+      "path": "datasets/workflow-hard-eval-v1/tasks/c01",
+      "task_sha256": "a77435879ad80636498575ebe353eb39fa92c8e8c0bec23db4305dda2068f055",
+      "split": "evaluation",
+      "source_group": "constellation-2025",
+      "evaluation_track": "construction"
+    },
+    "b02": {
+      "task_id": "workflow-hard-eval-v1-b02",
+      "path": "datasets/workflow-hard-eval-v1/tasks/b02",
+      "task_sha256": "9782907677e93b71a9fcb148b7e7ce4e8633980e0236cc7a488a5627983b2fc7",
+      "split": "evaluation",
+      "source_group": "reddit-2023",
+      "evaluation_track": "construction"
+    }
+  },
+  "hashes": {
+    "scripts/build_workflow_hard_evaluation.py": "07ebed67e9d7112cf6def4f375907f70ff67fbebbfe2ec3d774d541e2ac1d0de",
+    "scripts/workflow_hard_evaluation_cases.py": "02b5ac18b844a7eddbf83585c024c24b1aeec201d712206952f88ab5a2f49628",
+    "scripts/workflow_hard_borrowing_base.py": "4d35bcae7c3effa703099a5a26205319d22c1ebeede9d8bd9e4e4c81a2951929",
+    "scripts/workflow_hard_acquisition.py": "069331ad6f41f5b487953fd50a099be2189b69616ebedfacaacde0346c1470ac",
+    "scripts/workflow_hard_receivables.py": "da1c437a168e12ed8bab8820437bf325cc3d887a8dcd801b690cc3947d8a53e9",
+    "scripts/workflow_hard_waterfall.py": "6453f0e555ccda43ce1dc93be65d141dd8b96945295246a06a16ddfda3368b5d",
+    "scripts/validate_workflow_hard_evaluation.py": "703407258c429fa0161f904f575ff53e7e00130d984f653f309b1f774dad9b64",
+    "tests/test_workflow_hard_evaluation.py": "35778b5489e89091d949112b33aa5d818e7b97f2a3549b4384acbb927fc80863",
+    "tests/test_hard_borrowing_base.py": "290578b6e8b91cb461ea77f9b5ef27d68d0e45ede1ed349ea4b56a0e674e53d8",
+    "tests/test_hard_acquisition.py": "f8bc454624cc580d6e0bb8acbc5e6b2d991f0ce1946ffea6bbe925ca835fc521",
+    "tests/test_hard_receivables.py": "18de9c5817ef5ef46321e59a735435266a001f87b8c757de7e7080cd62e37621",
+    "tests/test_hard_waterfall.py": "732122324ae2fb801f6782e68727ad7800bc0162f491a9d057505086d0fdcb59",
+    "config/scorers/workflow-1.2.1.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "config/scorers/workflow_sql_worker-1.2.1.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "datasets/workflow-hard-eval-v1/sources/albertsons-2025.json": "3c9a75d5b69545012fc7e8094234ace404f44a9a45d821351e288c66f0a98e93",
+    "datasets/workflow-hard-eval-v1/sources/bms-2020.json": "c87e9fc5a3344f16485c319bb9beac291f636013298eb5a055a723b943a43a8f",
+    "datasets/workflow-hard-eval-v1/sources/constellation-2025.json": "2eab93f4e36740a32e84baf9470cf090d2b0ed9007e6aef5df5e5189731b7bd6",
+    "datasets/workflow-hard-eval-v1/sources/reddit-2023.json": "457b05043da41b821d1bf6ac6547d3d259b3c1da621d7f39b23acf9d97f83915",
+    "datasets/workflow-hard-eval-v1/references/a01.md": "2b9cfc85f931a3e749b96535dfc51c5b36e54a579a946bc7d495cf112d74ebbe",
+    "datasets/workflow-hard-eval-v1/references/b01.md": "fae209c61e2fa464480dc818efdff4625085fdfbe75d123a831d013cadef3b0d",
+    "datasets/workflow-hard-eval-v1/references/b02.md": "8d55d9fcddbc9caa5c8d8ed1cb5d93952220951f3ea7e4cf22e9c3b350bac454",
+    "datasets/workflow-hard-eval-v1/references/c01.md": "5745b2180b59968623e50f166b584571cd5dcb670b1e680a6ac639c204fd9197"
+  },
+  "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+  "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+  "content_hash": "e446e23f71d772e3c3c459aba11382690253016f35599c35f66578811986fb87",
+  "manifest_id": "workflow-hard-eval-v1-canonical-e446e23f71d7"
+}

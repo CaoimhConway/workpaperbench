@@ -33,7 +33,7 @@ def task_arguments(checkout=False, dataset='workflow-v11'):
 
 
 def environment_arguments(manifest, spec, checkout=False):
-    if checkout and manifest['dataset_id'] in ('workflow-v12', 'workflow-v13', 'workflow-v14', 'workflow-v15'):
+    if checkout and manifest['dataset_id'] in ('workflow-v12', 'workflow-v13', 'workflow-v14', 'workflow-v15', 'workflow-hard-eval-v1'):
         return ['--env', 'workpaperbench.runtime_integrity:VerifiedDockerEnvironment',
                 '--ek', 'canonical_root=' + str(ROOT),
                 '--ek', 'expected_manifest=' + manifest['manifest_id'],

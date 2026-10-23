@@ -1,0 +1,55 @@
+{
+  "split": "evaluation",
+  "evaluation_track": "construction",
+  "source_group": "albertsons-2025",
+  "nearest_existing_counterparts": [
+    "workflow-hard-pilot-v2/a01",
+    "workflow-hard-pilot-v1/c01"
+  ],
+  "additional_analytical_decisions": "Reconstruct collateral capacity from concentration definitions with distinct counterfactual denominators, then connect an inventory purchase to both its cash funding and its changing collateral value. Reverse-solve the largest self-funded purchase across binding regimes.",
+  "source_snapshot": "datasets/workflow-hard-eval-v1/sources/albertsons-2025.json",
+  "source_snapshot_sha256": "3c9a75d5b69545012fc7e8094234ace404f44a9a45d821351e288c66f0a98e93",
+  "reference_method": "Executable economic model with a separate derivation, valid alternative SQL and financial invariant checks",
+  "controls": [
+    {
+      "name": "row_order",
+      "rationale": "Ordering of input rows has no financial meaning."
+    },
+    {
+      "name": "scale",
+      "rationale": "Scale every monetary input, including dollar caps, while retaining rates."
+    },
+    {
+      "name": "letters_of_credit",
+      "rationale": "Letters of credit consume aggregate facility capacity."
+    },
+    {
+      "name": "reserves",
+      "rationale": "Additional reserves affect concentration denominators as well as total collateral."
+    },
+    {
+      "name": "purchase_mix",
+      "rationale": "Changing inventory composition changes collateral created by the same cash purchase."
+    },
+    {
+      "name": "commitment",
+      "rationale": "Lower lender commitment can bind independently of collateral capacity."
+    },
+    {
+      "name": "dollar_cap",
+      "rationale": "A higher scripts dollar cap exposes the distinct percentage limit."
+    },
+    {
+      "name": "sublimits",
+      "rationale": "Unused subfacility size alone does not create aggregate borrowing capacity."
+    },
+    {
+      "name": "seasonal_rate",
+      "rationale": "The applicable inventory rate affects both collateral categories and the funding frontier."
+    }
+  ],
+  "human_review": "pending",
+  "source_review": "Primary source headings, definitions and factual values inspected. Independent human review remains pending.",
+  "model_exposure": "No candidate trials before initial freeze. Source groups are separate from development tasks. Published references remain a contamination risk.",
+  "execution": "Baseline task resources and frozen scorer reused. Qualified GLM uses 3600 seconds and 24 turns. Native Sol uses 3600 seconds and has no equivalent turn cap."
+}

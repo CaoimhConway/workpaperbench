@@ -1,0 +1,90 @@
+{
+  "tables": {
+    "sale_allocations": {
+      "columns": {
+        "sale_case": {
+          "type": "text",
+          "unit": "label"
+        },
+        "security": {
+          "type": "text",
+          "unit": "label"
+        },
+        "cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-08
+        },
+        "payout_per_share": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-08
+        }
+      },
+      "keys": [
+        "sale_case",
+        "security"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "conversion_frontiers": {
+      "columns": {
+        "series": {
+          "type": "text",
+          "unit": "label"
+        },
+        "proceeds_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-08
+        },
+        "common_payout_per_share": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-08
+        }
+      },
+      "keys": [
+        "series"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "owner_funding": {
+      "columns": {
+        "target_case": {
+          "type": "text",
+          "unit": "label"
+        },
+        "proceeds_infimum_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-08
+        },
+        "attained": {
+          "type": "real",
+          "unit": "indicator",
+          "tolerance": 1e-08
+        }
+      },
+      "keys": [
+        "target_case"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    }
+  },
+  "definitions": {
+    "sale_allocations": "One row for each sale_case and original security cohort. Use each preferred series label and the common stock labels common_A and common_B. Cash is USD million received by that entire original cohort, including proceeds after conversion. payout_per_share is USD per original share, not voting power or per newly converted share.",
+    "conversion_frontiers": "One row for each series with forced_eligible=0. proceeds_usd_million is the liquidation consideration at which retaining its preference and receiving common-stock proceeds are economically equal, accounting for all other series. common_payout_per_share is the corresponding USD per common share. Equal conversion alternatives at a tie receive the same cash.",
+    "owner_funding": "One row per target_case. proceeds_infimum_usd_million is the greatest lower bound on nonnegative liquidation proceeds that gives the specified original cohort at least cash_target USD million. attained is 1 if the infimum itself meets the cash target, otherwise 0. A value that becomes feasible only immediately above the boundary is not an attained minimum."
+  },
+  "claim_assertions": {
+    "claim_1": "Every original security cohort receives at least as much cash in the USD 241 million offer as in the USD 240 million offer.",
+    "claim_2": "The Series A-1 cohort receives no cash at the USD 240 million offer but receives positive cash at the USD 2,500 million offer.",
+    "claim_3": "The total contractual cash settlement owed to all unissued equity award holders in an actual liquidation would be zero."
+  },
+  "numeric_policy": "Displayed-value arithmetic. Absolute tolerances are computational, not claims of source precision.",
+  "assumptions": "Authored scenario: Each offer qualifies as a Liquidation Event with all necessary approvals and no waiver of the supplied economic rights. For these scenarios, company valuation for the contractual trigger equals the net cash proceeds legally distributable to the listed stockholders. Freeze the issued shares and conversion ratios at December 31, 2023, with no other mandatory-conversion event, new dividends, recapitalizations or rate adjustments. Use the charter issue prices and preference multiples at their displayed precision. Reported aggregate preferences and carrying values remain contextual observations. Treat all claims outside the listed issued stock, including unissued equity awards, as settled outside this cash pool with no new shares entering it. No award-settlement amount is inferred. Cash proceeds are nonnegative and divisible, with no cent rounding or taxes. Track cash by original cohort even after conversion. Apply the contractual deemed-conversion provision, with no preferential distribution retained on shares treated as converted. Only cash amounts and numerical frontiers are graded, not arbitrary conversion choices at an indifference tie. All owner targets are positive."
+}

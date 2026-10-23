@@ -1,0 +1,60 @@
+{
+  "split": "evaluation",
+  "evaluation_track": "construction",
+  "source_group": "bms-2020",
+  "nearest_existing_counterparts": [
+    "workflow-v15/c07",
+    "workflow-hard-pilot-v1/a01",
+    "workflow-hard-pilot-v1/b01"
+  ],
+  "additional_analytical_decisions": "Distinguish business-combination consideration from asset-acquisition cost and cash paid, separate cash compensation embedded in a transaction, and connect those classifications to company operating and investing cash without counting the same payment twice. Compare revenue on a disclosed acquisition/divestiture perimeter while keeping an explicitly limited earnings diagnostic separate.",
+  "source_snapshot": "datasets/workflow-hard-eval-v1/sources/bms-2020.json",
+  "source_snapshot_sha256": "c87e9fc5a3344f16485c319bb9beac291f636013298eb5a055a723b943a43a8f",
+  "reference_method": "Executable economic model with a separate derivation, valid alternative SQL and financial invariant checks",
+  "controls": [
+    {
+      "name": "compensation_classification",
+      "rationale": "A greater portion of unchanged closing cash settles unvested service awards. Investing cash and asset cost fall as operating compensation rises. Total cash and immediate expense remain unchanged."
+    },
+    {
+      "name": "acquired_cash",
+      "rationale": "More acquired cash offsets goodwill and reduces net investing cash without changing consideration."
+    },
+    {
+      "name": "accrued_transaction_cost",
+      "rationale": "Additional unpaid acquisition costs are allocated to IPRD and expensed. They change cost and earnings, with no new cash payment."
+    },
+    {
+      "name": "share_valuation",
+      "rationale": "A higher closing value for issued shares raises consideration and goodwill but not closing cash."
+    },
+    {
+      "name": "noncash_remeasurement",
+      "rationale": "A smaller noncash fair-value gain reduces reported earnings while the selected-effects diagnostic and cash remain invariant."
+    },
+    {
+      "name": "reported_total",
+      "rationale": "An independent source-total discrepancy must remain visible in the stated residual."
+    },
+    {
+      "name": "preacquisition_revenue",
+      "rationale": "Additional prior-year target revenue before the actual acquisition date changes the pro forma comparator without changing statutory BMS revenue."
+    },
+    {
+      "name": "current_revenue",
+      "rationale": "Incremental zero-margin current-year sales change both revenue comparisons while pretax earnings and cash are unchanged."
+    },
+    {
+      "name": "monetary_scale",
+      "rationale": "Scale all monetary observations together. Growth percentages remain invariant."
+    },
+    {
+      "name": "row_order",
+      "rationale": "Input row order has no financial meaning."
+    }
+  ],
+  "human_review": "pending",
+  "source_review": "Primary source headings, definitions and factual values inspected. Independent human review remains pending.",
+  "model_exposure": "No candidate trials before initial freeze. Source groups are separate from development tasks. Published references remain a contamination risk.",
+  "execution": "Baseline task resources and frozen scorer reused. Qualified GLM uses 3600 seconds and 24 turns. Native Sol uses 3600 seconds and has no equivalent turn cap."
+}

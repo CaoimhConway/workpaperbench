@@ -1,0 +1,61 @@
+{
+  "task_id": "workflow-hard-eval-v1-b01",
+  "tables": [
+    {
+      "id": "acquisition_bases",
+      "file": "acquisition_bases.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s07",
+        "b01:s08"
+      ]
+    },
+    {
+      "id": "cash_coverage",
+      "file": "cash_coverage.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04",
+        "b01:s07",
+        "b01:s08"
+      ]
+    },
+    {
+      "id": "performance_views",
+      "file": "performance_views.sql",
+      "evidence": [
+        "b01:s02",
+        "b01:s05",
+        "b01:s06",
+        "b01:s08"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "b01:s02"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "b01:s07"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": [
+        "b01:s06",
+        "b01:s08"
+      ]
+    }
+  ]
+}

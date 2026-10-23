@@ -1,0 +1,53 @@
+{
+  "split": "evaluation",
+  "evaluation_track": "construction",
+  "source_group": "constellation-2025",
+  "nearest_existing_counterparts": [
+    "workflow-v15/a07",
+    "workflow-v15/b10",
+    "workflow-v15/c07",
+    "workflow-hard-pilot-v1/b01"
+  ],
+  "additional_analytical_decisions": "Construct a consistent cash classification across receivables sales with retained interests and secured borrowing. Separate customer receipts, recycled transfer proceeds, net purchaser funding and noncash retained-interest creation, then preserve the stock-flow residual.",
+  "source_snapshot": "datasets/workflow-hard-eval-v1/sources/constellation-2025.json",
+  "source_snapshot_sha256": "2eab93f4e36740a32e84baf9470cf090d2b0ed9007e6aef5df5e5189731b7bd6",
+  "reference_method": "Executable economic model with a separate derivation, valid alternative SQL and financial invariant checks",
+  "controls": [
+    {
+      "name": "scale",
+      "rationale": "Double all monetary observations while preserving periods and classifications."
+    },
+    {
+      "name": "row_order",
+      "rationale": "Reverse rows without changing dates or sequence identities."
+    },
+    {
+      "name": "customer_collection",
+      "rationale": "A further customer collection reduces retained receivables and raises old-basis investing cash. Funding is unchanged."
+    },
+    {
+      "name": "funding_draw",
+      "rationale": "Replace the 300 principal repayment with a 200 net funding receipt. Closing purchaser funding becomes 500 and DPP falls by 500. Customer collections do not change."
+    },
+    {
+      "name": "noncash_originations",
+      "rationale": "Additional receivables are transferred entirely for retained consideration. They increase the DPP asset without changing any cash flow."
+    },
+    {
+      "name": "unallocated_movement",
+      "rationale": "A synthetic additional fair-value movement increases the pool and retained interest without cash. It changes the unexplained residual."
+    },
+    {
+      "name": "collateral_cash",
+      "rationale": "Reduce collateral cash posted in 2025 by 100, increasing reported cash. The collateral-neutral change remains invariant."
+    },
+    {
+      "name": "capex_cash",
+      "rationale": "An additional 50 capital expenditure payment changes cash after capex but not operating cash generation."
+    }
+  ],
+  "human_review": "pending",
+  "source_review": "Primary source headings, definitions and factual values inspected. Independent human review remains pending.",
+  "model_exposure": "No candidate trials before initial freeze. Source groups are separate from development tasks. Published references remain a contamination risk.",
+  "execution": "Baseline task resources and frozen scorer reused. Qualified GLM uses 3600 seconds and 24 turns. Native Sol uses 3600 seconds and has no equivalent turn cap."
+}

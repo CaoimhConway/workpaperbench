@@ -1,0 +1,681 @@
+{
+  "task_id": "workflow-hard-eval-v1-c01",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "cashflow_recast": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "operating_cash": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "investing_cash": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "financing_cash": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "total_cash": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s02",
+          "c01:s03",
+          "c01:s07"
+        ],
+        [
+          "c01:s01",
+          "c01:s02",
+          "c01:s07"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04",
+        "c01:s05",
+        "c01:s06",
+        "c01:s07"
+      ],
+      "rows": [
+        [
+          "2024-9m",
+          5956.0,
+          -2048.0,
+          -2480.0,
+          1428.0
+        ],
+        [
+          "2025-9m",
+          3432.0,
+          -2221.0,
+          -249.0,
+          962.0
+        ]
+      ]
+    },
+    "cash_generation_change": {
+      "columns": {
+        "reported_operating_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "normalized_operating_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "presentation_effect": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "collateral_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "other_operating_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "normalized_after_capex_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "other_after_capex_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s02",
+          "c01:s03",
+          "c01:s07"
+        ],
+        [
+          "c01:s01",
+          "c01:s02",
+          "c01:s07"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04",
+        "c01:s05",
+        "c01:s06",
+        "c01:s07"
+      ],
+      "rows": [
+        [
+          4880.0,
+          -2524.0,
+          7404.0,
+          -1687.0,
+          -837.0,
+          -2651.0,
+          -964.0
+        ]
+      ]
+    },
+    "retained_interest_bridge": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "new_dpp_from_transfers": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "funding_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "reported_dpp_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "explained_dpp_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "unallocated_dpp_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s02",
+          "c01:s05",
+          "c01:s07"
+        ],
+        [
+          "c01:s02",
+          "c01:s05",
+          "c01:s07"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04",
+        "c01:s05",
+        "c01:s06",
+        "c01:s07"
+      ],
+      "rows": [
+        [
+          "2024-9m",
+          7682.0,
+          -300.0,
+          550.0,
+          578.0,
+          -28.0
+        ]
+      ]
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "assertion": "On the NER-consistent presentation, operating cash generation increased in the nine months ended September 30, 2025 versus the same 2024 period.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s02",
+          "c01:s03",
+          "c01:s07"
+        ],
+        [
+          "c01:s01",
+          "c01:s02",
+          "c01:s07"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04",
+        "c01:s05",
+        "c01:s06",
+        "c01:s07"
+      ]
+    },
+    "claim_2": {
+      "assertion": "The NER-consistent presentation preserves the reported 2024 nine-month increase in cash, restricted cash and cash equivalents.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s02",
+          "c01:s03",
+          "c01:s07"
+        ],
+        [
+          "c01:s01",
+          "c01:s02",
+          "c01:s07"
+        ],
+        [
+          "c01:s01",
+          "c01:s07"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04",
+        "c01:s05",
+        "c01:s06",
+        "c01:s07"
+      ]
+    },
+    "claim_3": {
+      "assertion": "Separate tariff receivables sales had no cash-timing benefit in the 2025 nine-month period.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "c01:s04"
+        ],
+        [
+          "c01:s03",
+          "c01:s04",
+          "c01:s07"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04",
+        "c01:s05",
+        "c01:s06",
+        "c01:s07"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "scale",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cashflow_recast": [
+          [
+            "2024-9m",
+            11912.0,
+            -4096.0,
+            -4960.0,
+            2856.0
+          ],
+          [
+            "2025-9m",
+            6864.0,
+            -4442.0,
+            -498.0,
+            1924.0
+          ]
+        ],
+        "cash_generation_change": [
+          [
+            9760.0,
+            -5048.0,
+            14808.0,
+            -3374.0,
+            -1674.0,
+            -5302.0,
+            -1928.0
+          ]
+        ],
+        "retained_interest_bridge": [
+          [
+            "2024-9m",
+            15364.0,
+            -600.0,
+            1100.0,
+            1156.0,
+            -56.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "row_order",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cashflow_recast": [
+          [
+            "2024-9m",
+            5956.0,
+            -2048.0,
+            -2480.0,
+            1428.0
+          ],
+          [
+            "2025-9m",
+            3432.0,
+            -2221.0,
+            -249.0,
+            962.0
+          ]
+        ],
+        "cash_generation_change": [
+          [
+            4880.0,
+            -2524.0,
+            7404.0,
+            -1687.0,
+            -837.0,
+            -2651.0,
+            -964.0
+          ]
+        ],
+        "retained_interest_bridge": [
+          [
+            "2024-9m",
+            7682.0,
+            -300.0,
+            550.0,
+            578.0,
+            -28.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "customer_collection",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cashflow_recast": [
+          [
+            "2024-9m",
+            6056.0,
+            -2048.0,
+            -2480.0,
+            1528.0
+          ],
+          [
+            "2025-9m",
+            3432.0,
+            -2221.0,
+            -249.0,
+            962.0
+          ]
+        ],
+        "cash_generation_change": [
+          [
+            4880.0,
+            -2624.0,
+            7504.0,
+            -1687.0,
+            -937.0,
+            -2751.0,
+            -1064.0
+          ]
+        ],
+        "retained_interest_bridge": [
+          [
+            "2024-9m",
+            7682.0,
+            -300.0,
+            450.0,
+            478.0,
+            -28.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "funding_draw",
+      "database": "control-4.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cashflow_recast": [
+          [
+            "2024-9m",
+            5956.0,
+            -2048.0,
+            -1980.0,
+            1928.0
+          ],
+          [
+            "2025-9m",
+            3432.0,
+            -2221.0,
+            -249.0,
+            962.0
+          ]
+        ],
+        "cash_generation_change": [
+          [
+            4880.0,
+            -2524.0,
+            7404.0,
+            -1687.0,
+            -837.0,
+            -2651.0,
+            -964.0
+          ]
+        ],
+        "retained_interest_bridge": [
+          [
+            "2024-9m",
+            7682.0,
+            200.0,
+            50.0,
+            78.0,
+            -28.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "noncash_originations",
+      "database": "control-5.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cashflow_recast": [
+          [
+            "2024-9m",
+            5956.0,
+            -2048.0,
+            -2480.0,
+            1428.0
+          ],
+          [
+            "2025-9m",
+            3432.0,
+            -2221.0,
+            -249.0,
+            962.0
+          ]
+        ],
+        "cash_generation_change": [
+          [
+            4880.0,
+            -2524.0,
+            7404.0,
+            -1687.0,
+            -837.0,
+            -2651.0,
+            -964.0
+          ]
+        ],
+        "retained_interest_bridge": [
+          [
+            "2024-9m",
+            7932.0,
+            -300.0,
+            800.0,
+            828.0,
+            -28.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "unallocated_movement",
+      "database": "control-6.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cashflow_recast": [
+          [
+            "2024-9m",
+            5956.0,
+            -2048.0,
+            -2480.0,
+            1428.0
+          ],
+          [
+            "2025-9m",
+            3432.0,
+            -2221.0,
+            -249.0,
+            962.0
+          ]
+        ],
+        "cash_generation_change": [
+          [
+            4880.0,
+            -2524.0,
+            7404.0,
+            -1687.0,
+            -837.0,
+            -2651.0,
+            -964.0
+          ]
+        ],
+        "retained_interest_bridge": [
+          [
+            "2024-9m",
+            7682.0,
+            -300.0,
+            570.0,
+            578.0,
+            -8.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "collateral_cash",
+      "database": "control-7.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cashflow_recast": [
+          [
+            "2024-9m",
+            5956.0,
+            -2048.0,
+            -2480.0,
+            1428.0
+          ],
+          [
+            "2025-9m",
+            3532.0,
+            -2221.0,
+            -249.0,
+            1062.0
+          ]
+        ],
+        "cash_generation_change": [
+          [
+            4980.0,
+            -2424.0,
+            7404.0,
+            -1587.0,
+            -837.0,
+            -2551.0,
+            -964.0
+          ]
+        ],
+        "retained_interest_bridge": [
+          [
+            "2024-9m",
+            7682.0,
+            -300.0,
+            550.0,
+            578.0,
+            -28.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "capex_cash",
+      "database": "control-8.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cashflow_recast": [
+          [
+            "2024-9m",
+            5956.0,
+            -2048.0,
+            -2480.0,
+            1428.0
+          ],
+          [
+            "2025-9m",
+            3432.0,
+            -2271.0,
+            -249.0,
+            912.0
+          ]
+        ],
+        "cash_generation_change": [
+          [
+            4880.0,
+            -2524.0,
+            7404.0,
+            -1687.0,
+            -837.0,
+            -2701.0,
+            -1014.0
+          ]
+        ],
+        "retained_interest_bridge": [
+          [
+            "2024-9m",
+            7682.0,
+            -300.0,
+            550.0,
+            578.0,
+            -28.0
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "a5a04afc831418dd719010bdf880ec59065ad26e444b0a63bdb25405c38b6785",
+    "control-2.sqlite": "a46f95a25443a8b78fdd6e000212078918db95268ec4f61450a1a612ccadbeaf",
+    "control-3.sqlite": "574406976986c098e5cc614eb8c62d2a51ee2c6828d977ca9992bd67f265e2d6",
+    "control-4.sqlite": "642e40263dfd041e6c858a1124341309764d787cb8b054b2b225f26636def780",
+    "control-5.sqlite": "fc900aa878db917a941f3edb78318d854aecd329825963ee2d1fd3c49656117f",
+    "control-6.sqlite": "06021b666f237b79852bdc25284253a670d3f13535fcc3fc20a5969ed848ba04",
+    "control-7.sqlite": "cd87bc706fe5b5410e73d84b3248be24ecf278c1c249c52d05ba82ca76cf6291",
+    "control-8.sqlite": "36cb989a48f3c2e0480bceb0a3d70c7ac7f3d7e2a624ca03b494ad3bfc4e4a5a",
+    "data.sqlite": "49b0ebc00f9a50134cc0b84d6a1e743286159e33d0fb23e90cc4abf5ed15d602",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "869a27f5cbaff57e21402ad953f7052ba1b2846d5f54410aec176af7f15db001",
+    "reference.json": "8f909ebaacba0d4b8e1e02b77fa788477eac08b4f02e01559e85e9dafc916daf",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "c95a17daa518ece9cf6d790b95f3234cb2dcf20455553a06a52be1594db48b32",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

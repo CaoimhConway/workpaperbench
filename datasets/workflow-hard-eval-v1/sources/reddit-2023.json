@@ -1,0 +1,355 @@
+{
+  "issuer": "Reddit, Inc.",
+  "url": "https://www.sec.gov/Archives/edgar/data/1713445/000162828024012380/reddit-final424b4.htm",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1713445/000162828024012380/reddit-final424b4.htm",
+  "title": "Reddit December 2023 issued capital and pre-IPO liquidation rights",
+  "publication_date": "2024-03-21",
+  "publication_time": null,
+  "unit": "Issued share counts are shares. Contract issue prices are USD per preferred share. Aggregate proceeds, preferences, carrying values and owner targets are USD million. Conversion ratios are common shares per preferred share.",
+  "evidence": [
+    {
+      "id": "b02:s01",
+      "locator": "Consolidated Balance Sheets, F-3, December 31, 2023 actual column. Note 12, F-23 to F-25, preferred-capital table, Dividends and Conversion. Note 13, F-25, common stock rights.",
+      "facts": "Issued and outstanding common stock is 7,099,700 Class A and 53,904,204 Class B shares. The preferred table records 73,021,449 shares in nine series, with the per-series counts, aggregate liquidation preferences and net carrying amounts retained in preferred. These are actual balances, not IPO pro forma shares or authorized shares. Each preferred series has a 1:1 common-stock conversion ratio. Series F-1 converts to Class A and the others to Class B. No dividends were declared or paid through December 31, 2023. Common A and B economic rights are identical, while votes per share differ.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1713445/000162828024012380/reddit-final424b4.htm",
+      "publication_date": "2024-03-21",
+      "source_title": "Reddit final IPO prospectus dated March 20, 2024",
+      "table": "preferred"
+    },
+    {
+      "id": "b02:s02",
+      "locator": "Pre-IPO certificate of incorporation, section IV.E.1(d), printed p. 8, and IV.E.3(a)-(b), pp. 15-16.",
+      "facts": "Original issue prices by series are A 2.6667, A-1 5.9259, B 6.2631, C 15.7739, D and D-1 21.6863, E 42.4742, F and F-1 61.7944 USD. Series A has a 1.75-times liquidation preference. Every other series has a 1-times preference. Declared unpaid dividends are additional. Unconverted A-1 is junior to all other preferred series. Within a priority rank, insufficient proceeds are allocated in proportion to full preferential entitlements.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1713445/000162828024006294/exhibit31-sx1.htm",
+      "publication_date": "2024-02-22",
+      "source_title": "Reddit amended and restated certificate of incorporation, Exhibit 3.1",
+      "table": "terms"
+    },
+    {
+      "id": "b02:s03",
+      "locator": "Pre-IPO certificate, sections IV.E.3(a), IV.E.3(c)-(d), pp. 15-16, and IV.E.5(p)(i), p. 26.",
+      "facts": "A Liquidation Event valuing the company at more than USD 240,000,000 automatically converts Series A and A-1 into Class B common stock. Residual proceeds go to common holders in proportion to shares. Preferred holders are deemed converted when conversion would deliver a greater aggregate distribution. A converted holder no longer receives a preferred distribution. Other conversion triggers include a qualified public offering and specified shareholder elections.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1713445/000162828024006294/exhibit31-sx1.htm",
+      "publication_date": "2024-02-22",
+      "source_title": "Reddit amended and restated certificate of incorporation, Exhibit 3.1",
+      "table": "trigger"
+    },
+    {
+      "id": "b02:s04",
+      "locator": "Note 12, Convertible Preferred Stock, F-23 to F-25, Liquidation Preference and Conversion. Note 13, F-25.",
+      "facts": "Unconverted A-1 ranks after the other preferred series and before common. Senior shortfalls are allocated by full preference. Holders may convert 1:1 instead. A and A-1 automatically convert in a liquidation valuing Reddit above USD 240 million. Common classes have equal economic rights.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1713445/000162828024012380/reddit-final424b4.htm",
+      "publication_date": "2024-03-21",
+      "source_title": "Reddit final IPO prospectus dated March 20, 2024",
+      "dossier_scope_note": "This alternative evidence path combines the disclosed voluntary conversion choice with the explicit scenario scope. The charter supplies exact issue prices through s02."
+    },
+    {
+      "id": "b02:s05",
+      "locator": "Authored liquidation offers, owner cash targets and interpretation of the contractual valuation trigger.",
+      "facts": "sale_cases and owner_targets are authored sensitivities, not observed transactions or issuer forecasts. For these hypothetical cash liquidations, trigger valuation equals the proceeds distributable to the listed issued stock. Issued capital and displayed charter terms remain frozen. All necessary approvals are assumed, with no waiver, new dividends or other conversion event. Unissued awards and all other claims are settled outside this pool without new shares. No amount for those excluded settlements is supplied or inferred.",
+      "source_url": "authored:workflow-hard-eval-v1/b02",
+      "publication_date": "2026-10-23",
+      "source_title": "Authored analytical scenario assumptions",
+      "origin": "authored_assumption",
+      "table": "sale_cases"
+    },
+    {
+      "id": "b02:s06",
+      "locator": "Note 13, F-25, Common Stock Reserved for Issuance. Note 14, F-29, stock-option activity table and following paragraph.",
+      "facts": "Outstanding options cover 29,795,909 common shares with weighted-average exercise price USD 17.83. Outstanding RSUs cover 27,627,171 shares. These are potentially issuable rather than issued shares. The retained excerpts omit some award-specific vesting, exercise and change-of-control settlement terms.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1713445/000162828024012380/reddit-final424b4.htm",
+      "publication_date": "2024-03-21",
+      "source_title": "Reddit final IPO prospectus dated March 20, 2024",
+      "dossier_scope_note": "Aggregate award quantities do not identify the cash settlement of every award in an actual sale."
+    }
+  ],
+  "tables": {
+    "preferred": {
+      "columns": {
+        "series": "TEXT",
+        "shares": "INTEGER",
+        "reported_preference": "REAL",
+        "carrying": "REAL"
+      },
+      "rows": [
+        [
+          "A",
+          7500000,
+          35,
+          21.67
+        ],
+        [
+          "A-1",
+          114746,
+          0.68,
+          0.68
+        ],
+        [
+          "B",
+          17564937,
+          110.011,
+          130.567
+        ],
+        [
+          "C",
+          10073589,
+          158.9,
+          158.048
+        ],
+        [
+          "D",
+          10290493,
+          223.163,
+          223.092
+        ],
+        [
+          "D-1",
+          3543124,
+          76.837,
+          76.687
+        ],
+        [
+          "E",
+          12195638,
+          518.002,
+          517.577
+        ],
+        [
+          "F",
+          6634905,
+          410,
+          409.862
+        ],
+        [
+          "F-1",
+          5104017,
+          315.4,
+          315.309
+        ]
+      ],
+      "origin": "authentic_source_facts"
+    },
+    "common": {
+      "columns": {
+        "security": "TEXT",
+        "shares": "INTEGER"
+      },
+      "rows": [
+        [
+          "common_A",
+          7099700
+        ],
+        [
+          "common_B",
+          53904204
+        ]
+      ],
+      "origin": "authentic_source_facts"
+    },
+    "terms": {
+      "columns": {
+        "series": "TEXT",
+        "issue_price": "REAL",
+        "preference_multiple": "REAL",
+        "conversion_ratio": "REAL",
+        "rank": "INTEGER",
+        "forced_eligible": "INTEGER"
+      },
+      "rows": [
+        [
+          "A",
+          2.6667,
+          1.75,
+          1,
+          1,
+          1
+        ],
+        [
+          "A-1",
+          5.9259,
+          1,
+          1,
+          2,
+          1
+        ],
+        [
+          "B",
+          6.2631,
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          "C",
+          15.7739,
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          "D",
+          21.6863,
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          "D-1",
+          21.6863,
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          "E",
+          42.4742,
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          "F",
+          61.7944,
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          "F-1",
+          61.7944,
+          1,
+          1,
+          1,
+          0
+        ]
+      ],
+      "origin": "authentic_source_facts"
+    },
+    "trigger": {
+      "columns": {
+        "valuation": "REAL"
+      },
+      "rows": [
+        [
+          240.0
+        ]
+      ],
+      "origin": "authentic_source_facts"
+    },
+    "sale_cases": {
+      "columns": {
+        "sale_case": "TEXT",
+        "proceeds": "REAL"
+      },
+      "rows": [
+        [
+          "v200",
+          200
+        ],
+        [
+          "v240",
+          240
+        ],
+        [
+          "v241",
+          241
+        ],
+        [
+          "v1850",
+          1850
+        ],
+        [
+          "v2500",
+          2500
+        ],
+        [
+          "v4000",
+          4000
+        ],
+        [
+          "v6000",
+          6000
+        ],
+        [
+          "v9000",
+          9000
+        ]
+      ],
+      "origin": "authored_assumption"
+    },
+    "owner_targets": {
+      "columns": {
+        "target_case": "TEXT",
+        "security": "TEXT",
+        "cash_target": "REAL"
+      },
+      "rows": [
+        [
+          "A_4",
+          "A",
+          4
+        ],
+        [
+          "A_10",
+          "A",
+          10
+        ],
+        [
+          "F_54",
+          "F",
+          54
+        ],
+        [
+          "common_A_50",
+          "common_A",
+          50
+        ],
+        [
+          "common_B_2000",
+          "common_B",
+          2000
+        ]
+      ],
+      "origin": "authored_assumption"
+    }
+  },
+  "table_origins": {
+    "preferred": "authentic_source_facts",
+    "common": "authentic_source_facts",
+    "terms": "authentic_source_facts",
+    "trigger": "authentic_source_facts",
+    "sale_cases": "authored_assumption",
+    "owner_targets": "authored_assumption"
+  },
+  "precision": "Exact issued share counts and the four-decimal charter issue prices are retained. Scenario arithmetic treats their displayed precision as fixed. The prospectus aggregate preferences and carrying amounts are in USD thousands, normalized to millions. Do not force computed contractual preferences to the rounded aggregate observations. Publication dates are SEC filing dates. The prospectus itself is dated March 20, 2024.",
+  "rights": "Attributed financial facts and concise contract definitions only. Issuer material is excluded from the project MIT license. Full source documents are not redistributed.",
+  "retrieved_date": "2026-10-23",
+  "extract_origin": "Normalized factual observations with separately identified authored scenario inputs, checked against the retained primary HTML documents.",
+  "captures": [
+    {
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1713445/000162828024012380/reddit-final424b4.htm",
+      "source_title": "Reddit final IPO prospectus",
+      "sha256": "5dae22f6814c369e063d1ffe9b77b3c4b562acdbb57204d7a8355a8ca17369ef",
+      "bytes": 3959554,
+      "capture_date": "2026-10-23",
+      "redistributed": false
+    },
+    {
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1713445/000162828024006294/exhibit31-sx1.htm",
+      "source_title": "Reddit pre-IPO certificate, Exhibit 3.1",
+      "sha256": "11cd71d8c30832fad559922bf5e00688ad5120bc6c7a90df33eb1ce53ff35750",
+      "bytes": 260426,
+      "capture_date": "2026-10-23",
+      "redistributed": false
+    }
+  ],
+  "capture_limitations": "The exact downloaded primary HTML bytes are retained locally and hashed. Their factual extracts, not full documents, enter the task. This scenario does not assert the feasibility of a real transaction approval or identify settlements excluded from its cash pool.",
+  "human_review": "Independent human financial and source review remains pending.",
+  "extract_sha256": "b5797bf04cc815d26f7c36be01147981f6d061953233b219701f508e4d1863c1"
+}

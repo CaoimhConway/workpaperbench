@@ -1,0 +1,129 @@
+{
+  "tables": {
+    "cashflow_recast": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "operating_cash": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "investing_cash": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "financing_cash": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "total_cash": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "cash_generation_change": {
+      "columns": {
+        "reported_operating_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "normalized_operating_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "presentation_effect": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "collateral_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "other_operating_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "normalized_after_capex_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "other_after_capex_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "retained_interest_bridge": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "new_dpp_from_transfers": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "funding_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "reported_dpp_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "explained_dpp_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "unallocated_dpp_change": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    }
+  },
+  "definitions": {
+    "cashflow_recast": "One row per cash-flow period, with operating_cash, investing_cash, financing_cash and total_cash in USD million. Preserve the observed total cash movement while constructing the NER-consistent classification.",
+    "cash_generation_change": "One row with 2025 nine-month amounts minus 2024 nine-month amounts, all USD million. reported_operating_change uses reported CFO. normalized_operating_change uses the NER-consistent CFO. presentation_effect is the portion of the reported change caused by this difference in presentation. collateral_change is the signed collateral cash change. other_operating_change excludes that collateral contribution from the NER-consistent change. normalized_after_capex_change and other_after_capex_change apply the respective bases after capex. The remaining other change is not assigned a cause.",
+    "retained_interest_bridge": "One row for 2024-9m, all amounts USD million. new_dpp_from_transfers is the retained consideration implied by receivables transferred and cash proceeds. funding_change is closing less opening purchaser funding. reported_dpp_change is closing less opening DPP. explained_dpp_change is the retained-interest movement explained by the supplied period transactions and funding structure. unallocated_dpp_change is reported movement less the explained movement. Preserve the net residual without assigning it a specific cause."
+  },
+  "claim_assertions": {
+    "claim_1": "On the NER-consistent presentation, operating cash generation increased in the nine months ended September 30, 2025 versus the same 2024 period.",
+    "claim_2": "The NER-consistent presentation preserves the reported 2024 nine-month increase in cash, restricted cash and cash equivalents.",
+    "claim_3": "Separate tariff receivables sales had no cash-timing benefit in the 2025 nine-month period."
+  },
+  "numeric_policy": "Displayed-value arithmetic. Absolute tolerances are computational, not claims of source precision.",
+  "assumptions": "Authored analytical presentation: adjust only the NER facility to put customer collection cash in operating activities and net purchaser principal cash in financing activities for both periods. This is an analytical presentation, not a correction of the issuer's GAAP statements. Other cash flows retain their reported classifications. Ignore no actual cash item, and do not invent collections or timing benefits for separate tariff receivables sales. Compare the CEG Parent consolidated group, not the separately presented Generation LLC group. Cash after capex means cash remaining after the reported capital expenditure payments, without changing any other investing activity. Collateral-neutral measures exclude only the signed Collateral received (posted), net operating line. These definitions do not establish sustainable or companywide financing-free cash generation."
+}

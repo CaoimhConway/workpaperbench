@@ -1,0 +1,948 @@
+{
+  "task_id": "workflow-hard-eval-v1-b01",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "acquisition_bases": {
+      "columns": {
+        "deal": {
+          "type": "text",
+          "unit": "label"
+        },
+        "accounting_basis_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "reported_basis_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "noncash_consideration_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "net_cash_paid_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "noncompensation_net_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "post_disposal_net_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        }
+      },
+      "keys": [
+        "deal"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "b01:s01",
+          "b01:s02",
+          "b01:s07",
+          "b01:s08"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s06",
+        "b01:s07",
+        "b01:s08",
+        "b01:s09"
+      ],
+      "rows": [
+        [
+          "Celgene",
+          80269.0,
+          0.0,
+          44524.0,
+          24566.0,
+          24566.0,
+          11166.0
+        ],
+        [
+          "MyoKardia",
+          12660.0,
+          0.0,
+          0.0,
+          12228.0,
+          11746.0,
+          12228.0
+        ]
+      ]
+    },
+    "cash_coverage": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "year"
+        },
+        "operating_cash_before_deal_compensation_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "identified_noncompensation_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "other_acquisition_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "other_divestiture_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "cash_after_portfolio_investment_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        }
+      },
+      "keys": [
+        "year"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "b01:s01",
+          "b01:s02",
+          "b01:s03",
+          "b01:s04",
+          "b01:s07",
+          "b01:s08"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s06",
+        "b01:s07",
+        "b01:s08",
+        "b01:s09"
+      ],
+      "rows": [
+        [
+          2019,
+          8210.0,
+          24566.0,
+          211.0,
+          2452.0,
+          -1551.0
+        ],
+        [
+          2020,
+          14534.0,
+          11746.0,
+          1338.0,
+          870.0,
+          1085.0
+        ]
+      ]
+    },
+    "performance_views": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "value": {
+          "type": "real",
+          "unit": "measure_dependent",
+          "tolerance": 1e-07
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "b01:s02",
+          "b01:s05",
+          "b01:s06",
+          "b01:s08"
+        ],
+        [
+          "b01:s02",
+          "b01:s03",
+          "b01:s05",
+          "b01:s06",
+          "b01:s08"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s06",
+        "b01:s07",
+        "b01:s08",
+        "b01:s09"
+      ],
+      "rows": [
+        [
+          "reported_revenue_growth_percent",
+          62.62382864792503
+        ],
+        [
+          "proforma_baseline_revenue_growth_percent",
+          6.939309338766066
+        ],
+        [
+          "immediate_myokardia_expenses_usd_million",
+          11920.0
+        ],
+        [
+          "selected_effects_excluded_pretax_usd_million",
+          3292.0
+        ]
+      ]
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "assertion": "MyoKardia's reported allocation cost equals the listed cash consideration net of cash acquired.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b01:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s06",
+        "b01:s07",
+        "b01:s08",
+        "b01:s09"
+      ]
+    },
+    "claim_2": {
+      "assertion": "The Otezla disposal generated cash proceeds without a reported pretax divestiture gain.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "b01:s07"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s06",
+        "b01:s07",
+        "b01:s08",
+        "b01:s09"
+      ]
+    },
+    "claim_3": {
+      "assertion": "BMS organic revenue growth in 2020 exceeded six percent.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "b01:s06",
+          "b01:s08"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s06",
+        "b01:s07",
+        "b01:s08",
+        "b01:s09"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "compensation_classification",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "acquisition_bases": [
+          [
+            "Celgene",
+            80269.0,
+            0.0,
+            44524.0,
+            24566.0,
+            24566.0,
+            11166.0
+          ],
+          [
+            "MyoKardia",
+            12542.0,
+            0.0,
+            0.0,
+            12228.0,
+            11628.0,
+            12228.0
+          ]
+        ],
+        "cash_coverage": [
+          [
+            2019,
+            8210.0,
+            24566.0,
+            211.0,
+            2452.0,
+            -1551.0
+          ],
+          [
+            2020,
+            14534.0,
+            11628.0,
+            1338.0,
+            870.0,
+            1085.0
+          ]
+        ],
+        "performance_views": [
+          [
+            "reported_revenue_growth_percent",
+            62.62382864792503
+          ],
+          [
+            "proforma_baseline_revenue_growth_percent",
+            6.939309338766066
+          ],
+          [
+            "immediate_myokardia_expenses_usd_million",
+            11920.0
+          ],
+          [
+            "selected_effects_excluded_pretax_usd_million",
+            3292.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "acquired_cash",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "acquisition_bases": [
+          [
+            "Celgene",
+            80269.0,
+            0.0,
+            44524.0,
+            24366.0,
+            24366.0,
+            10966.0
+          ],
+          [
+            "MyoKardia",
+            12660.0,
+            0.0,
+            0.0,
+            12228.0,
+            11746.0,
+            12228.0
+          ]
+        ],
+        "cash_coverage": [
+          [
+            2019,
+            8210.0,
+            24366.0,
+            211.0,
+            2452.0,
+            -1351.0
+          ],
+          [
+            2020,
+            14534.0,
+            11746.0,
+            1338.0,
+            870.0,
+            1085.0
+          ]
+        ],
+        "performance_views": [
+          [
+            "reported_revenue_growth_percent",
+            62.62382864792503
+          ],
+          [
+            "proforma_baseline_revenue_growth_percent",
+            6.939309338766066
+          ],
+          [
+            "immediate_myokardia_expenses_usd_million",
+            11920.0
+          ],
+          [
+            "selected_effects_excluded_pretax_usd_million",
+            3292.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "accrued_transaction_cost",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "acquisition_bases": [
+          [
+            "Celgene",
+            80269.0,
+            0.0,
+            44524.0,
+            24566.0,
+            24566.0,
+            11166.0
+          ],
+          [
+            "MyoKardia",
+            12680.0,
+            0.0,
+            0.0,
+            12228.0,
+            11746.0,
+            12228.0
+          ]
+        ],
+        "cash_coverage": [
+          [
+            2019,
+            8210.0,
+            24566.0,
+            211.0,
+            2452.0,
+            -1551.0
+          ],
+          [
+            2020,
+            14534.0,
+            11746.0,
+            1338.0,
+            870.0,
+            1085.0
+          ]
+        ],
+        "performance_views": [
+          [
+            "reported_revenue_growth_percent",
+            62.62382864792503
+          ],
+          [
+            "proforma_baseline_revenue_growth_percent",
+            6.939309338766066
+          ],
+          [
+            "immediate_myokardia_expenses_usd_million",
+            11940.0
+          ],
+          [
+            "selected_effects_excluded_pretax_usd_million",
+            3292.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "share_valuation",
+      "database": "control-4.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "acquisition_bases": [
+          [
+            "Celgene",
+            80769.0,
+            0.0,
+            45024.0,
+            24566.0,
+            24566.0,
+            11166.0
+          ],
+          [
+            "MyoKardia",
+            12660.0,
+            0.0,
+            0.0,
+            12228.0,
+            11746.0,
+            12228.0
+          ]
+        ],
+        "cash_coverage": [
+          [
+            2019,
+            8210.0,
+            24566.0,
+            211.0,
+            2452.0,
+            -1551.0
+          ],
+          [
+            2020,
+            14534.0,
+            11746.0,
+            1338.0,
+            870.0,
+            1085.0
+          ]
+        ],
+        "performance_views": [
+          [
+            "reported_revenue_growth_percent",
+            62.62382864792503
+          ],
+          [
+            "proforma_baseline_revenue_growth_percent",
+            6.939309338766066
+          ],
+          [
+            "immediate_myokardia_expenses_usd_million",
+            11920.0
+          ],
+          [
+            "selected_effects_excluded_pretax_usd_million",
+            3292.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "noncash_remeasurement",
+      "database": "control-5.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "acquisition_bases": [
+          [
+            "Celgene",
+            80269.0,
+            0.0,
+            44524.0,
+            24566.0,
+            24566.0,
+            11166.0
+          ],
+          [
+            "MyoKardia",
+            12660.0,
+            0.0,
+            0.0,
+            12228.0,
+            11746.0,
+            12228.0
+          ]
+        ],
+        "cash_coverage": [
+          [
+            2019,
+            8210.0,
+            24566.0,
+            211.0,
+            2452.0,
+            -1551.0
+          ],
+          [
+            2020,
+            14534.0,
+            11746.0,
+            1338.0,
+            870.0,
+            1085.0
+          ]
+        ],
+        "performance_views": [
+          [
+            "reported_revenue_growth_percent",
+            62.62382864792503
+          ],
+          [
+            "proforma_baseline_revenue_growth_percent",
+            6.939309338766066
+          ],
+          [
+            "immediate_myokardia_expenses_usd_million",
+            11920.0
+          ],
+          [
+            "selected_effects_excluded_pretax_usd_million",
+            3292.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "reported_total",
+      "database": "control-6.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "acquisition_bases": [
+          [
+            "Celgene",
+            80269.0,
+            -40.0,
+            44524.0,
+            24566.0,
+            24566.0,
+            11166.0
+          ],
+          [
+            "MyoKardia",
+            12660.0,
+            0.0,
+            0.0,
+            12228.0,
+            11746.0,
+            12228.0
+          ]
+        ],
+        "cash_coverage": [
+          [
+            2019,
+            8210.0,
+            24566.0,
+            211.0,
+            2452.0,
+            -1551.0
+          ],
+          [
+            2020,
+            14534.0,
+            11746.0,
+            1338.0,
+            870.0,
+            1085.0
+          ]
+        ],
+        "performance_views": [
+          [
+            "reported_revenue_growth_percent",
+            62.62382864792503
+          ],
+          [
+            "proforma_baseline_revenue_growth_percent",
+            6.939309338766066
+          ],
+          [
+            "immediate_myokardia_expenses_usd_million",
+            11920.0
+          ],
+          [
+            "selected_effects_excluded_pretax_usd_million",
+            3292.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "preacquisition_revenue",
+      "database": "control-7.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "acquisition_bases": [
+          [
+            "Celgene",
+            80269.0,
+            0.0,
+            44524.0,
+            24566.0,
+            24566.0,
+            11166.0
+          ],
+          [
+            "MyoKardia",
+            12660.0,
+            0.0,
+            0.0,
+            12228.0,
+            11746.0,
+            12228.0
+          ]
+        ],
+        "cash_coverage": [
+          [
+            2019,
+            8210.0,
+            24566.0,
+            211.0,
+            2452.0,
+            -1551.0
+          ],
+          [
+            2020,
+            14534.0,
+            11746.0,
+            1338.0,
+            870.0,
+            1085.0
+          ]
+        ],
+        "performance_views": [
+          [
+            "reported_revenue_growth_percent",
+            62.62382864792503
+          ],
+          [
+            "proforma_baseline_revenue_growth_percent",
+            5.61116768921235
+          ],
+          [
+            "immediate_myokardia_expenses_usd_million",
+            11920.0
+          ],
+          [
+            "selected_effects_excluded_pretax_usd_million",
+            3292.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "current_revenue",
+      "database": "control-8.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "acquisition_bases": [
+          [
+            "Celgene",
+            80269.0,
+            0.0,
+            44524.0,
+            24566.0,
+            24566.0,
+            11166.0
+          ],
+          [
+            "MyoKardia",
+            12660.0,
+            0.0,
+            0.0,
+            12228.0,
+            11746.0,
+            12228.0
+          ]
+        ],
+        "cash_coverage": [
+          [
+            2019,
+            8210.0,
+            24566.0,
+            211.0,
+            2452.0,
+            -1551.0
+          ],
+          [
+            2020,
+            14534.0,
+            11746.0,
+            1338.0,
+            870.0,
+            1085.0
+          ]
+        ],
+        "performance_views": [
+          [
+            "reported_revenue_growth_percent",
+            66.44865174985657
+          ],
+          [
+            "proforma_baseline_revenue_growth_percent",
+            9.454463140421037
+          ],
+          [
+            "immediate_myokardia_expenses_usd_million",
+            11920.0
+          ],
+          [
+            "selected_effects_excluded_pretax_usd_million",
+            3292.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "monetary_scale",
+      "database": "control-9.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "acquisition_bases": [
+          [
+            "Celgene",
+            160538.0,
+            0.0,
+            89048.0,
+            49132.0,
+            49132.0,
+            22332.0
+          ],
+          [
+            "MyoKardia",
+            25320.0,
+            0.0,
+            0.0,
+            24456.0,
+            23492.0,
+            24456.0
+          ]
+        ],
+        "cash_coverage": [
+          [
+            2019,
+            16420.0,
+            49132.0,
+            422.0,
+            4904.0,
+            -3102.0
+          ],
+          [
+            2020,
+            29068.0,
+            23492.0,
+            2676.0,
+            1740.0,
+            2170.0
+          ]
+        ],
+        "performance_views": [
+          [
+            "reported_revenue_growth_percent",
+            62.62382864792503
+          ],
+          [
+            "proforma_baseline_revenue_growth_percent",
+            6.939309338766066
+          ],
+          [
+            "immediate_myokardia_expenses_usd_million",
+            23840.0
+          ],
+          [
+            "selected_effects_excluded_pretax_usd_million",
+            6584.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "row_order",
+      "database": "control-10.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "acquisition_bases": [
+          [
+            "MyoKardia",
+            12660.0,
+            0.0,
+            0.0,
+            12228.0,
+            11746.0,
+            12228.0
+          ],
+          [
+            "Celgene",
+            80269.0,
+            0.0,
+            44524.0,
+            24566.0,
+            24566.0,
+            11166.0
+          ]
+        ],
+        "cash_coverage": [
+          [
+            2020,
+            14534.0,
+            11746.0,
+            1338.0,
+            870.0,
+            1085.0
+          ],
+          [
+            2019,
+            8210.0,
+            24566.0,
+            211.0,
+            2452.0,
+            -1551.0
+          ]
+        ],
+        "performance_views": [
+          [
+            "reported_revenue_growth_percent",
+            62.62382864792503
+          ],
+          [
+            "proforma_baseline_revenue_growth_percent",
+            6.939309338766066
+          ],
+          [
+            "immediate_myokardia_expenses_usd_million",
+            11920.0
+          ],
+          [
+            "selected_effects_excluded_pretax_usd_million",
+            3292.0
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "a06d1302a91766d3f9c1307d3ca7052b8c48b7fbb13a2d3b705ccfa1e56c2c05",
+    "control-10.sqlite": "81d2a365f5ef2caa5103e5f8ead4f41849f18c1d5d21142697be5d61891e6ca5",
+    "control-2.sqlite": "2c164c3c4f2af25173ab999936a5e02cdf1b9d0cd49afdd23d125ee253ba2725",
+    "control-3.sqlite": "8a743cb4beef058a188ff7d5dab38e7ada4f3a0c015721b0d3b81f64242479b3",
+    "control-4.sqlite": "403f30f00ab774740a1fc13baf87cda5a6b627307070da934c8cd24b56f8b08e",
+    "control-5.sqlite": "317fc2dbc68f6cafa2a4cdf650e414732adcd7d376c2d8af2b1aa2c733cf512f",
+    "control-6.sqlite": "fb3f57554395017e58fbe33235edd36d1a5cc750b0768a9b7a1639ca141fc99f",
+    "control-7.sqlite": "dc655eabda35f5d5f0f543a7ae7bdf4af964b4f48683992484651414ffd557a1",
+    "control-8.sqlite": "ca252295d55294d623a2c76b47657137a80fb05d598f9296e4d0047183fb79bb",
+    "control-9.sqlite": "91bebaa551228a0b0c5c2664f6e3068c15e324ff44f0652b420537b2e857a132",
+    "data.sqlite": "b6cbfa96df0e07e88676420eab3d776f02bf31ba43023a17383872cbe31b4d39",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "e95909b2976ea1d3b28d8d395f43158884e5a3b4f2e41292955409d28de93b13",
+    "reference.json": "3ece06418d45ca2f99fe21262b0fce459aa81eb528bc69716a1436e26005a405",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "98d1250622a714ea857049d62fe506466b02bd2cf0a909c90ce164450e0cb6a9",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

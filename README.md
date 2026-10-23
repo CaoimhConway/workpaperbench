@@ -8,7 +8,7 @@ WorkpaperBench tests whether agents can reconcile financial sources, calculate m
 
 ## Scope
 
-The benchmark contains 30 source-backed tasks across three financial workflows,
+The core benchmark contains 30 source-backed tasks across three financial workflows,
 with six development cases and 24 evaluation cases. All tasks are available to
 external teams using a compatible model.
 
@@ -31,6 +31,12 @@ selection, and claim verdicts assess bounded assertions.
 
 Tests include independently calculated reference answers, alternative correct
 solutions and targeted counterexamples.
+
+The separate [financial reasoning supplement](docs/WORKFLOW_HARD_EVALUATION.md)
+adds four evaluation tasks on borrowing capacity, acquisition accounting,
+receivables financing and liquidation rights. Five experimental development
+tasks remain in their own catalogs. These additions preserve the core suite and
+its historical scores. Supplementary results should be reported separately.
 
 ## Evaluation
 

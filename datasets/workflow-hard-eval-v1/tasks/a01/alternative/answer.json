@@ -1,0 +1,67 @@
+{
+  "task_id": "workflow-hard-eval-v1-a01",
+  "tables": [
+    {
+      "id": "certificates",
+      "file": "certificates.sql",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s05"
+      ]
+    },
+    {
+      "id": "purchase_plans",
+      "file": "purchase_plans.sql",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s05"
+      ]
+    },
+    {
+      "id": "funding_limits",
+      "file": "funding_limits.sql",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s05"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "capacity_only",
+      "verdict": "contradicted",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s05"
+      ]
+    },
+    {
+      "id": "collateral_feedback",
+      "verdict": "supported",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s05"
+      ]
+    },
+    {
+      "id": "issuer_actual",
+      "verdict": "unresolved",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s05"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "issuer": "Constellation Energy Corporation and Subsidiary Companies",
+  "url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827525000092/ceg-20250930.htm",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827525000092/ceg-20250930.htm",
+  "title": "Constellation Energy receivables financing and nine-month cash flows",
+  "publication_date": "2025-11-07",
+  "publication_time": null,
+  "unit": "USD million. Receipts are positive and payments negative in cash-flow statement totals. Capex is a positive payment magnitude. purchaser_payment is a signed net principal payment, positive for cash paid to purchasers and negative for cash received from them.",
+  "evidence": [
+    {
+      "id": "c01:s01",
+      "locator": "CEG Parent Consolidated Statements of Cash Flows, printed p. 6, nine months ended September 30, 2025 and 2024",
+      "facts": "Use the Constellation Energy Corporation consolidated statement. The separately presented Generation LLC statement has different amounts. Collateral received or posted is a signed operating cash-flow item. The DPP supplemental amount is a noncash investing and financing disclosure.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827525000092/ceg-20250930.htm",
+      "publication_date": "2025-11-07",
+      "source_title": "Constellation Energy Corporation Q3 2025 Form 10-Q",
+      "table": "cash_flows"
+    },
+    {
+      "id": "c01:s02",
+      "locator": "Note 7, Accounts Receivable, Sales of Customer Accounts Receivable, printed p. 24, prior-facility flow table and footnotes",
+      "facts": "Receivables were sold for cash and a subordinated retained interest called DPP. DPP collections were investing cash flow. The 2024 table shows 1,688 proceeds from new transfers, 7,404 DPP collections and 9,092 cash collections reinvested. Receivables sold were 9,370. The DPP collection figure excludes a 300 net cash payment to reduce purchaser funding. Net DPP investing cash was 7,104.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827525000092/ceg-20250930.htm",
+      "publication_date": "2025-11-07",
+      "source_title": "Constellation Energy Corporation Q3 2025 Form 10-Q",
+      "table": "facility_flows"
+    },
+    {
+      "id": "c01:s03",
+      "locator": "Note 7, printed p. 24, December 31, 2024 amendment. Note 12, Accounts Receivable Facility, printed p. 34. MD&A cash flows, printed pp. 63-64",
+      "facts": "The amended facility retains receivables and uses secured revolving loans. Customer collections now enter operating activities and facility draws and repayments enter financing activities. Outstanding DPP was forgiven in exchange for reassigned receivables of 1,529 at December 31, 2024. Facility draws were zero at December 31, 2024 and September 30, 2025.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827525000092/ceg-20250930.htm",
+      "publication_date": "2025-11-07",
+      "source_title": "Constellation Energy Corporation Q3 2025 Form 10-Q",
+      "table": "transition"
+    },
+    {
+      "id": "c01:s04",
+      "locator": "Note 7, printed p. 24, Other Sales of Customer Accounts Receivables",
+      "facts": "Separate supplier tariffs require receivables sales to utility companies at nominal discounts. Gross sales were 3,207 and 228 in the nine-month periods of 2025 and 2024. Some receivables subject to these tariffs previously went through the NER facility.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827525000092/ceg-20250930.htm",
+      "publication_date": "2025-11-07",
+      "source_title": "Constellation Energy Corporation Q3 2025 Form 10-Q",
+      "table": "other_sales"
+    },
+    {
+      "id": "c01:s05",
+      "locator": "Q3 2024 Form 10-Q, Note 6, Accounts Receivable, printed p. 24, opening and closing fair-value, funding and DPP table",
+      "facts": "At December 31, 2023, derecognized receivables at fair value were 1,516, purchaser funding was 300 and DPP was 1,216. At September 30, 2024, those amounts were 1,766, zero and 1,766. Changes in purchaser cash funding affect DPP.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827524000069/ceg-20240930.htm",
+      "publication_date": "2024-11-04",
+      "source_title": "Constellation Energy Corporation Q3 2024 Form 10-Q",
+      "table": "facility_balances"
+    },
+    {
+      "id": "c01:s06",
+      "locator": "Q3 2024 Form 10-Q, Note 6, printed p. 24, loss-on-sale table and footnote",
+      "facts": "The nine-month loss on sales of receivables was 43, representing discounts limited to credit losses.",
+      "source_url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827524000069/ceg-20240930.htm",
+      "publication_date": "2024-11-04",
+      "source_title": "Constellation Energy Corporation Q3 2024 Form 10-Q",
+      "table": "credit_losses"
+    },
+    {
+      "id": "c01:s07",
+      "locator": "Authored analytical presentation and comparison scope",
+      "facts": "The requested presentation puts customer collections in operating activities and net NER purchaser principal cash in financing activities, for both periods. It changes only the NER facility treatment. Separate tariff sales and other cash flows retain their reported treatment. The additional comparison removes the signed collateral cash-flow item and reports cash after capital expenditures.",
+      "source_url": "authored:workflow-hard-eval-v1/c01",
+      "publication_date": "2026-10-23",
+      "source_title": "Authored analytical presentation scope",
+      "origin": "authored_assumption"
+    }
+  ],
+  "tables": {
+    "cash_flows": {
+      "columns": {
+        "period": "TEXT",
+        "sequence": "INTEGER",
+        "operating": "REAL",
+        "investing": "REAL",
+        "financing": "REAL",
+        "net_cash_change": "REAL",
+        "collateral": "REAL",
+        "capex": "REAL",
+        "noncash_dpp": "REAL",
+        "net_dpp_investing": "REAL"
+      },
+      "rows": [
+        [
+          "2024-9m",
+          1,
+          -1448,
+          5056,
+          -2180,
+          1428,
+          1495,
+          1836,
+          7682,
+          7104
+        ],
+        [
+          "2025-9m",
+          2,
+          3432,
+          -2221,
+          -249,
+          962,
+          -192,
+          1963,
+          0,
+          0
+        ]
+      ],
+      "origin": "authentic_source_facts"
+    },
+    "facility_flows": {
+      "columns": {
+        "period": "TEXT",
+        "receivables_sold": "REAL",
+        "new_transfer_cash": "REAL",
+        "dpp_collections": "REAL",
+        "cash_reinvested": "REAL",
+        "purchaser_payment": "REAL"
+      },
+      "rows": [
+        [
+          "2024-9m",
+          9370,
+          1688,
+          7404,
+          9092,
+          300
+        ]
+      ],
+      "origin": "authentic_source_facts"
+    },
+    "facility_policy": {
+      "columns": {
+        "period": "TEXT",
+        "basis": "TEXT"
+      },
+      "rows": [
+        [
+          "2024-9m",
+          "sale"
+        ],
+        [
+          "2025-9m",
+          "secured"
+        ]
+      ],
+      "origin": "authentic_source_facts"
+    },
+    "facility_balances": {
+      "columns": {
+        "as_of": "TEXT",
+        "sequence": "INTEGER",
+        "pool_fair_value": "REAL",
+        "purchaser_funding": "REAL",
+        "dpp": "REAL"
+      },
+      "rows": [
+        [
+          "2023-12-31",
+          1,
+          1516,
+          300,
+          1216
+        ],
+        [
+          "2024-09-30",
+          2,
+          1766,
+          0,
+          1766
+        ]
+      ],
+      "origin": "authentic_source_facts"
+    },
+    "transition": {
+      "columns": {
+        "as_of": "TEXT",
+        "dpp_reassigned": "REAL",
+        "commitment": "REAL",
+        "opening_draws": "REAL",
+        "closing_draws": "REAL"
+      },
+      "rows": [
+        [
+          "2024-12-31",
+          1529,
+          1500,
+          0,
+          0
+        ]
+      ],
+      "origin": "authentic_source_facts"
+    },
+    "other_sales": {
+      "columns": {
+        "period": "TEXT",
+        "gross_receivables_sold": "REAL"
+      },
+      "rows": [
+        [
+          "2024-9m",
+          228
+        ],
+        [
+          "2025-9m",
+          3207
+        ]
+      ],
+      "origin": "authentic_source_facts"
+    },
+    "credit_losses": {
+      "columns": {
+        "period": "TEXT",
+        "loss_on_sale": "REAL"
+      },
+      "rows": [
+        [
+          "2024-9m",
+          43
+        ]
+      ],
+      "origin": "authentic_source_facts"
+    }
+  },
+  "precision": "Displayed whole USD million throughout. The 2024 and 2025 cash-flow periods both end September 30 and cover nine months. Balance dates are separate. The December 31, 2024 amendment is outside the earlier cash-flow window. Source policy classifications are normalized in facility_policy. No undisclosed customer-collection total or cash-timing advantage is inferred for separate tariff sales.",
+  "rights": "Attributed financial observations and concise definitions only. Issuer documents are excluded from the project MIT license. Full documents are not redistributed.",
+  "retrieved_date": "2026-10-23",
+  "extract_origin": "Normalized primary-filing facts checked against the retained SEC HTML filings and issuer PDF text index. Authored analytical presentation scope is separate. The normalized extract is distinct from the original filing captures.",
+  "captures": [
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827525000092/ceg-20250930.htm",
+      "sha256": "f0a016f2b4296fd6e706ddeb3ca6d428af57756b3e6a34e46fe468104b654c15",
+      "bytes": 3198632,
+      "redistributed": false,
+      "name": "ceg-2025-q3"
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827524000069/ceg-20240930.htm",
+      "sha256": "9127e08c8f0044a29a4f9a62102263a5b6b2700ef1736e83e4f89f8225f2d425",
+      "bytes": 3443035,
+      "redistributed": false,
+      "name": "ceg-2024-q3"
+    }
+  ],
+  "capture_limitations": "Original SEC HTML response bytes for both filings are retained locally and bound by the listed SHA-256 hashes. Full source documents are not redistributed. Direct download of the issuer Q3 2025 PDF returned HTTP 403, so no original PDF capture or visual-layout check is claimed. Filing dates were checked at the issuer filing-detail pages for accessions 0001868275-25-000092 and 0001868275-24-000069.",
+  "human_review": "Independent human source and financial review remains pending.",
+  "extract_sha256": "e9ffb3920a512c724ad4a2af540ef93b822cf1974978525ed55582d7d3898f64"
+}

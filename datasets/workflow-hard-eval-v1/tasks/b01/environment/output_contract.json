@@ -1,0 +1,121 @@
+{
+  "tables": {
+    "acquisition_bases": {
+      "columns": {
+        "deal": {
+          "type": "text",
+          "unit": "label"
+        },
+        "accounting_basis_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "reported_basis_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "noncash_consideration_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "net_cash_paid_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "noncompensation_net_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "post_disposal_net_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        }
+      },
+      "keys": [
+        "deal"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "cash_coverage": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "year"
+        },
+        "operating_cash_before_deal_compensation_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "identified_noncompensation_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "other_acquisition_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "other_divestiture_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        },
+        "cash_after_portfolio_investment_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-07
+        }
+      },
+      "keys": [
+        "year"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "performance_views": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "value": {
+          "type": "real",
+          "unit": "measure_dependent",
+          "tolerance": 1e-07
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    }
+  },
+  "definitions": {
+    "acquisition_bases": "One row per deal. accounting_basis is consideration transferred for the business combination or cost allocated for the asset acquisition. reported_basis_residual is reconstructed basis less its independently reported total. noncash_consideration is the fair value of listed consideration not paid in cash at closing. net_cash_paid is listed cash paid less cash acquired. noncompensation_net_cash excludes cash paid for compensation from that net cash. post_disposal_net_cash deducts the specified required divestiture from net_cash_paid. These cash metrics exclude fees, taxes and financing.",
+    "cash_coverage": "One row per year. operating_cash_before_deal_compensation removes the cash effect of compensation contained in that year's listed acquisition payments from reported operating cash. identified_noncompensation_cash is the listed acquisition consideration, net of acquired cash, outside compensation. other_acquisition_cash is reported acquisition/other investing payments less that identified amount. other_divestiture_cash is reported divestiture/other proceeds less the specified required divestiture. cash_after_portfolio_investment is operating cash remaining after capital expenditure and the reported net acquisition/other and divestiture/other investing flows, excluding securities turnover and financing. Positive amounts mean cash available, negative amounts mean cash absorbed beyond operating generation.",
+    "performance_views": "Four measure rows. reported_revenue_growth_percent compares actual 2020 with actual 2019. proforma_baseline_revenue_growth_percent compares actual 2020 with the supplied 2019 pro forma revenue. immediate_myokardia_expenses_usd_million is the acquisition-date expense recognized from that transaction. selected_effects_excluded_pretax_usd_million is 2020 reported pretax earnings with the two specified classes of effect excluded. A percentage measure uses percent units, the other two measures use USD million."
+  },
+  "claim_assertions": {
+    "claim_1": "MyoKardia's reported allocation cost equals the listed cash consideration net of cash acquired.",
+    "claim_2": "The Otezla disposal generated cash proceeds without a reported pretax divestiture gain.",
+    "claim_3": "BMS organic revenue growth in 2020 exceeded six percent."
+  },
+  "numeric_policy": "Displayed-value arithmetic. Absolute tolerances are computational, not claims of source precision.",
+  "assumptions": [
+    "Deal cash metrics cover only the listed cash consideration and acquired cash, with Otezla as the sole specified required divestiture. They exclude transaction fees, financing flows and taxes. The source does not establish cash payment timing for the capitalized MyoKardia transaction costs. Do not infer that accounting cost is a cash payment.",
+    "The disclosed transaction-cost amounts retain their source accounting bases: Celgene acquisition expenses and MyoKardia costs included in asset allocation. Zero components in acquisitions are structurally absent from the listed consideration, not a claim that every other possible transaction cash flow was zero.",
+    "For cash_coverage, retain the reported operating cash and investing-category totals. Do not attempt to allocate the remaining acquisition/other payments to individual undisclosed fees or other transactions. Equity and debt financing and marketable-security turnover are outside the requested cash remainder.",
+    "The earnings diagnostic excludes only acquisition-date MyoKardia expenses and all contingent-consideration fair-value changes in 2020. Keep other income-statement items unchanged and make no tax adjustment. It is not issuer non-GAAP earnings or a fully normalized continuing-business result.",
+    "The revenue comparison uses actual 2020 revenue and the supplied 2019 Celgene/Otezla pro forma baseline. It does not assert constant currency, organic growth or a forecast. Source pro forma qualifications remain applicable."
+  ]
+}
