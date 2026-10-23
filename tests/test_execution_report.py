@@ -5,7 +5,8 @@ import sys
 
 import pytest
 
-from workpaperbench.execution_report import analyze, response_usage, summarize_metrics, trial_metrics
+from workpaperbench.execution_report import (analyze, normalize_responses, response_usage,
+    summarize_metrics, summarize_responses, trial_metrics)
 
 
 def native_job(root):
@@ -94,14 +95,91 @@ def test_invalid_native_usage_is_unknown(tmp_path, value):
     assert trial_metrics(path)['tokens']['prompt_tokens'] is None
 
 
-def test_analysis_rejects_duplicate_jobs_and_response_ids(tmp_path):
+def test_analysis_rejects_duplicate_jobs(tmp_path):
     job, _ = native_job(tmp_path)
     with pytest.raises(ValueError, match='duplicate_execution_job'):
         analyze([job, job], tmp_path / 'analysis.json')
+
+
+def completion(identifier, prompt, output, cost, cached, reasoning, finish='stop'):
+    return {'id': identifier, 'model': 'fixed-model', 'provider': 'fixed-provider',
+        'choices': [{'finish_reason': finish}],
+        'usage': {'prompt_tokens': prompt, 'completion_tokens': output, 'cost': cost,
+            'prompt_tokens_details': {'cached_tokens': cached},
+            'completion_tokens_details': {'reasoning_tokens': reasoning}}}
+
+
+def test_all_generations_include_charged_truncation_recovery_and_deduplicate_observations(tmp_path):
+    job, trial = native_job(tmp_path)
+    native = json.loads((trial / 'result.json').read_text())
+    native['agent_result'].update(n_input_tokens=300, n_output_tokens=50, cost_usd=0.003)
+    (trial / 'result.json').write_text(json.dumps(native))
+    regrade = job / 'regrade'
+    regrade.mkdir()
+    native.update(trial_name='regrade', config={'source_trial': {'path': 'trial'}})
+    (regrade / 'result.json').write_text(json.dumps(native))
+    normal = completion('gen-normal', 100, 20, 0.001, 60, 15)
+    truncated = completion('gen-truncated', 200, 16384, 0.01, 150, 16000, 'length')
+    recovery = completion('gen-recovery', 200, 30, 0.002, 150, 25)
+    # Identical requests can produce distinct, chargeable generations.
+    for response in (truncated, recovery):
+        response['request'] = {'messages': ['same retained request']}
+    observations = [normal, {'id': 'gen-normal'}, truncated, dict(truncated), recovery]
     usage = tmp_path / 'usage.json'
-    usage.write_text(json.dumps([{'id': 'same'}, {'id': 'same'}]))
-    with pytest.raises(ValueError, match='duplicate_response_usage'):
-        analyze([job], tmp_path / 'analysis.json', usage)
+    usage.write_text(json.dumps(observations))
+    original = usage.read_bytes()
+    result = analyze([job], tmp_path / 'analysis.json', usage)
+    summary = result['provider_usage_summary']
+    assert summary['observations'] == 5
+    assert summary['identified_generations'] == 3
+    assert summary['duplicate_observations'] == 2
+    assert summary['length_truncated_generations'] == 1
+    assert summary['provider_charge']['total'] == pytest.approx(0.013)
+    assert summary['provider_charge']['observed_generations'] == 3
+    assert summary['tokens']['prompt_tokens']['total'] == 500
+    assert summary['tokens']['completion_tokens']['total'] == 16434
+    assert summary['tokens']['cached_tokens']['total'] == 360
+    assert summary['tokens']['reasoning_tokens']['total'] == 16040
+    assert summary['tokens']['total_tokens']['total'] == 16934
+    # Provider actuals remain separate from native estimates and inherited regrade usage.
+    assert result['summary']['tokens']['prompt_tokens']['observed_sum'] == 300
+    assert result['summary']['tokens']['completion_tokens']['observed_sum'] == 50
+    inherited = next(row for row in result['jobs'][0]['attempts'] if row.get('source_trial'))
+    assert inherited['metrics']['native_cost']['amount'] is None
+    assert inherited['metrics']['inherited_model_metrics']['native_cost']['amount'] == 0.003
+    assert result['response_usage'] == normalize_responses(list(reversed(observations)))
+    assert usage.read_bytes() == original
+
+
+def test_conflicting_observations_remain_unknown_without_selecting_a_charge():
+    first = completion('gen-conflict', 100, 20, 0.003, 60, 15)
+    second = completion('gen-conflict', 101, 20, 0.004, 60, 15)
+    rows = normalize_responses([first, second])
+    assert rows == normalize_responses([second, first])
+    assert rows[0]['conflicts'] == {'prompt_tokens': [100, 101], 'provider_charge': [0.003, 0.004]}
+    assert rows[0]['prompt_tokens'] is None
+    assert rows[0]['provider_charge']['amount'] is None
+    summary = summarize_responses(rows)
+    assert summary['conflicting_generations'] == 1
+    assert summary['tokens']['total_tokens']['total'] is None
+    assert summary['tokens']['completion_tokens']['total'] == 20
+    assert summary['provider_charge']['total'] is None
+    assert summary['provider_charge']['unknown_generations'] == 1
+
+
+def test_missing_identity_or_usage_preserves_coverage_and_unknowns():
+    known = completion('gen-known', 100, 20, 0, 60, 15)
+    anonymous = completion(None, 200, 30, 0.002, None, None)
+    rows = normalize_responses([known, {'id': 'gen-missing-usage'}, anonymous, anonymous])
+    summary = summarize_responses(rows)
+    assert summary['identified_generations'] == 2
+    assert summary['unidentified_observations'] == 2
+    assert summary['duplicate_observations'] == 0
+    assert summary['tokens']['prompt_tokens'] == {
+        'total': None, 'observed_sum': 100, 'observed_generations': 1, 'unknown_generations': 1}
+    assert summary['provider_charge']['total'] is None
+    assert summary['provider_charge']['observed_sum'] == 0
+    assert sum(row['response_id'] is None for row in rows) == 2
 
 
 def test_analysis_cli_needs_no_native_runtime_or_key(tmp_path):

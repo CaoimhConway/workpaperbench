@@ -1,0 +1,90 @@
+{
+  "rationale": "Build NVIDIA gross-profit and cash-generation workpapers through Q2FY2026. Reconstruct Q1 for both years from first-half and Q2 inputs, calculate standard gross-profit bases, and add the current-year H20 charge/release bridge without treating missing prior exclusions as zero. Reconcile issuer cash generation and assess the geographical and forward-looking H20 statements.",
+  "source_group": "nvidia-q2fy2026-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "48a3162358bd3a698f2c5f120272e511d2386b7f4728f6ae154fe6e25c670c93",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "c29437ed69ef727fb99f714fe066cb4f863459623e0de7ffc88e9277fa259a57",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "369c21b9a064f55bbcbdb0fd27cdfa3a253f775f02598d2c0f40412cf98a7370",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "919fd2f6dba2200cd4660372a26304e26c689a99f93e8f1bddd1df435cb86e80",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "5be95627403b982a0fd1c08379e7cffe81a1e6bd453c429f6831d6a43d587e11",
+    "claim_mapping": {
+      "release_raises_excluded_margin": "claim_1",
+      "exact_future_china_shipments": "claim_2",
+      "china_zero_means_global_zero": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_future_china_shipments",
+      "assertion": "NVIDIA made no H20 shipments to China during Q3 FY2026.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "a07:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "The supplied Q2 release contains a Q3 guidance assumption of no China H20 shipments. It supplies no realized Q3 shipments, so neither zero nor nonzero actual shipments are established."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "64eb00d11e089e2170de4fc7e61d4dd6b2e86c2cd308eb871aa0132230526d20",
+    "maintenance_rationale": "Inventory releases reverse the sign of an exclusion while multiple margin bases coexist. Half-year reconstruction, cash principal and absent geographic observations make this an interacting update rather than a revenue lookup.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_cash_generation.sql",
+      "starting_current_h20_bridge.sql",
+      "starting_gross_profit_bases.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "30ac1cea65e96edf4ca133b104fd0a9489a117a32793cb0b3b25e06d64661471",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "measurement_revision": {
+    "prior_task_sha256": "70e562bb8dd90a9bb29e616266e6c36f056b31cd695538d7e9d1fa3c51f6f229",
+    "public_definition_addenda": {
+      "gross_profit_bases": "Adjusted gross profit is GAAP gross profit plus signed standard adjustments. residual_usd_million is reconstructed adjusted gross profit less reported adjusted gross profit.",
+      "current_h20_bridge": "excluded_gross_profit_usd_million is standard adjusted gross profit plus the source-signed H20 charge or release. excluded_gross_margin_pct is 100 times that reconstructed amount divided by matching revenue. residual_usd_million is reconstructed excluded gross profit less independently reported excluded gross profit.",
+      "cash_generation": "Issuer FCF is operating cash flow less positive property and intangible purchases and less disclosed positive property and intangible principal. residual_usd_million is reconstructed FCF less independently reported FCF for the same period."
+    },
+    "new_public_definitions": {},
+    "additional_context_evidence": {},
+    "financial_inputs_changed": false,
+    "reference_sql_changed": false,
+    "human_review": "pending"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v15-c01",
+  "tables": [
+    {
+      "id": "revenue_bridge",
+      "file": "revenue_bridge.sql",
+      "evidence": [
+        "c03:s01"
+      ]
+    },
+    {
+      "id": "profit_bridge",
+      "file": "profit_bridge.sql",
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ]
+    },
+    {
+      "id": "reconciliation",
+      "file": "reconciliation.sql",
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "unresolved",
+      "evidence": [
+        "c03:s03"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "c03:s01"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "supported",
+      "evidence": [
+        "c03:s01",
+        "c03:s02"
+      ]
+    }
+  ]
+}

@@ -51,7 +51,7 @@ def tree_hash(path):
 
 
 def load(root, dataset="challenge-v2", task=None):
-    if dataset not in ('challenge-v2', 'workflow-v1', 'workflow-v2', 'workflow-v3', 'workflow-v4', 'workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9', 'workflow-v10', 'workflow-v11'):
+    if dataset not in ('challenge-v2', 'workflow-v1', 'workflow-v2', 'workflow-v3', 'workflow-v4', 'workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9', 'workflow-v10', 'workflow-v11', 'workflow-v12', 'workflow-v13', 'workflow-v14', 'workflow-v15'):
         raise ValueError("unsupported_current_dataset")
     root = Path(root)
     path = file_path(root, "datasets/" + dataset + "/manifest.json")
@@ -68,7 +68,7 @@ def load(root, dataset="challenge-v2", task=None):
             or manifest.get('scorer_path') != 'config/scorers/workflow-1.2.0.py'
             or manifest.get('scorer_sha256') != WORKFLOW_VALIDITY_SCORER_SHA256):
         raise ValueError('catalog_scorer_identity_mismatch')
-    if dataset in ('workflow-v10', 'workflow-v11') and (manifest.get('scorer_version') != 'workflow-1.2.1'
+    if dataset in ('workflow-v10', 'workflow-v11', 'workflow-v12', 'workflow-v13', 'workflow-v14', 'workflow-v15') and (manifest.get('scorer_version') != 'workflow-1.2.1'
             or manifest.get('scorer_path') != 'config/scorers/workflow-1.2.1.py'
             or manifest.get('scorer_sha256') != WORKFLOW_CONTRACT_SCORER_SHA256
             or manifest.get('sql_worker_path') != 'config/scorers/workflow_sql_worker-1.2.1.py'
@@ -78,7 +78,7 @@ def load(root, dataset="challenge-v2", task=None):
             or manifest.get('scorer_path') != 'config/scorers/workflow-1.1.0.py'
             or manifest.get('scorer_sha256') != WORKFLOW_REVIEW_SCORER_SHA256):
         raise ValueError('catalog_scorer_identity_mismatch')
-    if dataset.startswith('workflow-') and dataset not in ('workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9', 'workflow-v10', 'workflow-v11') and (manifest.get('scorer_version') != 'workflow-1.0.0'
+    if dataset.startswith('workflow-') and dataset not in ('workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9', 'workflow-v10', 'workflow-v11', 'workflow-v12', 'workflow-v13', 'workflow-v14', 'workflow-v15') and (manifest.get('scorer_version') != 'workflow-1.0.0'
             or manifest.get('scorer_path') != 'workpaperbench/workflow_grading.py'
             or manifest.get('scorer_sha256') != WORKFLOW_SCORER_SHA256):
         raise ValueError('catalog_scorer_identity_mismatch')
@@ -99,6 +99,6 @@ def load(root, dataset="challenge-v2", task=None):
     module = 'challenge_grading.py' if dataset == 'challenge-v2' else 'workflow_grading.py'
     if hashlib.sha256((task_path / 'tests/workpaperbench' / module).read_bytes()).hexdigest() != manifest["scorer_sha256"]:
         raise ValueError("catalog_embedded_scorer_changed")
-    if dataset in ('workflow-v10', 'workflow-v11') and hashlib.sha256((task_path / 'tests/workpaperbench/workflow_sql_worker.py').read_bytes()).hexdigest() != manifest['sql_worker_sha256']:
+    if dataset in ('workflow-v10', 'workflow-v11', 'workflow-v12', 'workflow-v13', 'workflow-v14', 'workflow-v15') and hashlib.sha256((task_path / 'tests/workpaperbench/workflow_sql_worker.py').read_bytes()).hexdigest() != manifest['sql_worker_sha256']:
         raise ValueError('catalog_embedded_sql_worker_changed')
     return manifest, spec, task_path

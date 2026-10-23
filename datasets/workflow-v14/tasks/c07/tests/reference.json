@@ -1,0 +1,53 @@
+{
+  "task_id": "workflow-v14-c07",
+  "tables": [
+    {
+      "id": "financial_versions",
+      "file": "financial_versions.sql",
+      "evidence": [
+        "c07:s01",
+        "c07:s02"
+      ]
+    },
+    {
+      "id": "settlement_revision_bridge",
+      "file": "settlement_revision_bridge.sql",
+      "evidence": [
+        "c07:s01",
+        "c07:s02"
+      ]
+    },
+    {
+      "id": "cash_revision_bridge",
+      "file": "cash_revision_bridge.sql",
+      "evidence": [
+        "c07:s01",
+        "c07:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": [
+        "c07:s01",
+        "c07:s02"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "c07:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "contradicted",
+      "evidence": [
+        "c07:s02"
+      ]
+    }
+  ]
+}

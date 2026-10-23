@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v15-b10",
+  "tables": [
+    {
+      "id": "parent_earnings_bridge",
+      "file": "parent_earnings_bridge.sql",
+      "evidence": [
+        "b10:s01"
+      ]
+    },
+    {
+      "id": "consolidated_cash_bridge",
+      "file": "consolidated_cash_bridge.sql",
+      "evidence": [
+        "b10:s01",
+        "b10:s02"
+      ]
+    },
+    {
+      "id": "investment_gain_bridge",
+      "file": "investment_gain_bridge.sql",
+      "evidence": [
+        "b10:s02",
+        "b10:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "unresolved",
+      "evidence": [
+        "b10:s03"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "b10:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "contradicted",
+      "evidence": [
+        "b10:s01",
+        "b10:s02"
+      ]
+    }
+  ]
+}

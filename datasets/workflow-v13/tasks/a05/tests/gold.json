@@ -1,0 +1,979 @@
+{
+  "task_id": "workflow-v13-a05",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "income_model": {
+      "columns": {
+        "fiscal_year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "weeks": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "net_sales_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "membership_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "merchandise_gross_profit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "merchandise_gross_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "fiscal_year",
+        "weeks"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "a05:s01"
+        ]
+      ],
+      "rows": [
+        [
+          2024,
+          16,
+          78185.0,
+          1512.0,
+          8597.0,
+          10.995715290656776,
+          3042.0,
+          0.0
+        ],
+        [
+          2024,
+          36,
+          171440.0,
+          3316.0,
+          18670.0,
+          10.890107326178255,
+          6243.0,
+          0.0
+        ],
+        [
+          2024,
+          52,
+          249625.0,
+          4828.0,
+          27267.0,
+          10.923184777165748,
+          9285.0,
+          0.0
+        ],
+        [
+          2025,
+          16,
+          84432.0,
+          1724.0,
+          9395.0,
+          11.12729770703051,
+          3341.0,
+          0.0
+        ],
+        [
+          2025,
+          36,
+          185480.0,
+          3599.0,
+          20631.0,
+          11.12303213284451,
+          7042.0,
+          0.0
+        ],
+        [
+          2025,
+          52,
+          269912.0,
+          5323.0,
+          30026.0,
+          11.124366460179614,
+          10383.0,
+          0.0
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a05:s02"
+      ]
+    },
+    "operating_growth_bridge": {
+      "columns": {
+        "weeks": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "membership_fees",
+            "merchandise_gross_profit",
+            "sga"
+          ]
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_operating_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "weeks",
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "a05:s01"
+        ]
+      ],
+      "rows": [
+        [
+          16,
+          "merchandise_gross_profit",
+          8597.0,
+          9395.0,
+          798.0,
+          266.88963210702343
+        ],
+        [
+          16,
+          "membership_fees",
+          1512.0,
+          1724.0,
+          212.0,
+          70.90301003344482
+        ],
+        [
+          16,
+          "sga",
+          -7067.0,
+          -7778.0,
+          -711.0,
+          -237.79264214046822
+        ],
+        [
+          36,
+          "merchandise_gross_profit",
+          18670.0,
+          20631.0,
+          1961.0,
+          245.43178973717147
+        ],
+        [
+          36,
+          "membership_fees",
+          3316.0,
+          3599.0,
+          283.0,
+          35.41927409261577
+        ],
+        [
+          36,
+          "sga",
+          -15743.0,
+          -17188.0,
+          -1445.0,
+          -180.85106382978722
+        ],
+        [
+          52,
+          "merchandise_gross_profit",
+          27267.0,
+          30026.0,
+          2759.0,
+          251.27504553734062
+        ],
+        [
+          52,
+          "membership_fees",
+          4828.0,
+          5323.0,
+          495.0,
+          45.08196721311475
+        ],
+        [
+          52,
+          "sga",
+          -22810.0,
+          -24966.0,
+          -2156.0,
+          -196.35701275045537
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "membership_accrual_bridge": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2025"
+          ]
+        },
+        "earned_fees_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "opening_deferred_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "closing_deferred_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "deferred_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "mechanical_accrual_bridge_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "a05:s01",
+          "a05:s02"
+        ]
+      ],
+      "rows": [
+        [
+          "FY2025",
+          5323.0,
+          2501.0,
+          2854.0,
+          353.0,
+          5676.0
+        ]
+      ],
+      "context_evidence_allowed": []
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a05:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a05:s02"
+      ]
+    },
+    "claim_2": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "a05:s01"
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "claim_3": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a05:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a05:s02"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "scaled_amounts_preserve_ratios",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "income_model": [
+          [
+            2024,
+            16,
+            156370.0,
+            3024.0,
+            17194.0,
+            10.995715290656776,
+            6084.0,
+            0.0
+          ],
+          [
+            2024,
+            36,
+            342880.0,
+            6632.0,
+            37340.0,
+            10.890107326178255,
+            12486.0,
+            0.0
+          ],
+          [
+            2024,
+            52,
+            499250.0,
+            9656.0,
+            54534.0,
+            10.923184777165748,
+            18570.0,
+            0.0
+          ],
+          [
+            2025,
+            16,
+            168864.0,
+            3448.0,
+            18790.0,
+            11.12729770703051,
+            6682.0,
+            0.0
+          ],
+          [
+            2025,
+            36,
+            370960.0,
+            7198.0,
+            41262.0,
+            11.12303213284451,
+            14084.0,
+            0.0
+          ],
+          [
+            2025,
+            52,
+            539824.0,
+            10646.0,
+            60052.0,
+            11.124366460179614,
+            20766.0,
+            0.0
+          ]
+        ],
+        "operating_growth_bridge": [
+          [
+            16,
+            "merchandise_gross_profit",
+            17194.0,
+            18790.0,
+            1596.0,
+            266.88963210702343
+          ],
+          [
+            16,
+            "membership_fees",
+            3024.0,
+            3448.0,
+            424.0,
+            70.90301003344482
+          ],
+          [
+            16,
+            "sga",
+            -14134.0,
+            -15556.0,
+            -1422.0,
+            -237.79264214046822
+          ],
+          [
+            36,
+            "merchandise_gross_profit",
+            37340.0,
+            41262.0,
+            3922.0,
+            245.43178973717147
+          ],
+          [
+            36,
+            "membership_fees",
+            6632.0,
+            7198.0,
+            566.0,
+            35.41927409261577
+          ],
+          [
+            36,
+            "sga",
+            -31486.0,
+            -34376.0,
+            -2890.0,
+            -180.85106382978722
+          ],
+          [
+            52,
+            "merchandise_gross_profit",
+            54534.0,
+            60052.0,
+            5518.0,
+            251.27504553734062
+          ],
+          [
+            52,
+            "membership_fees",
+            9656.0,
+            10646.0,
+            990.0,
+            45.08196721311475
+          ],
+          [
+            52,
+            "sga",
+            -45620.0,
+            -49932.0,
+            -4312.0,
+            -196.35701275045537
+          ]
+        ],
+        "membership_accrual_bridge": [
+          [
+            "FY2025",
+            10646.0,
+            5002.0,
+            5708.0,
+            706.0,
+            11352.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "earned_membership_changes_not_merchandise_margin",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "income_model": [
+          [
+            2024,
+            16,
+            78185.0,
+            1512.0,
+            8597.0,
+            10.995715290656776,
+            3042.0,
+            0.0
+          ],
+          [
+            2024,
+            36,
+            171440.0,
+            3316.0,
+            18670.0,
+            10.890107326178255,
+            6243.0,
+            0.0
+          ],
+          [
+            2024,
+            52,
+            249625.0,
+            4828.0,
+            27267.0,
+            10.923184777165748,
+            9285.0,
+            0.0
+          ],
+          [
+            2025,
+            16,
+            84432.0,
+            1734.0,
+            9395.0,
+            11.12729770703051,
+            3351.0,
+            0.0
+          ],
+          [
+            2025,
+            36,
+            185480.0,
+            3599.0,
+            20631.0,
+            11.12303213284451,
+            7042.0,
+            0.0
+          ],
+          [
+            2025,
+            52,
+            269912.0,
+            5333.0,
+            30026.0,
+            11.124366460179614,
+            10393.0,
+            0.0
+          ]
+        ],
+        "operating_growth_bridge": [
+          [
+            16,
+            "merchandise_gross_profit",
+            8597.0,
+            9395.0,
+            798.0,
+            258.252427184466
+          ],
+          [
+            16,
+            "membership_fees",
+            1512.0,
+            1734.0,
+            222.0,
+            71.84466019417475
+          ],
+          [
+            16,
+            "sga",
+            -7067.0,
+            -7778.0,
+            -711.0,
+            -230.09708737864077
+          ],
+          [
+            36,
+            "merchandise_gross_profit",
+            18670.0,
+            20631.0,
+            1961.0,
+            245.43178973717147
+          ],
+          [
+            36,
+            "membership_fees",
+            3316.0,
+            3599.0,
+            283.0,
+            35.41927409261577
+          ],
+          [
+            36,
+            "sga",
+            -15743.0,
+            -17188.0,
+            -1445.0,
+            -180.85106382978722
+          ],
+          [
+            52,
+            "merchandise_gross_profit",
+            27267.0,
+            30026.0,
+            2759.0,
+            249.0072202166065
+          ],
+          [
+            52,
+            "membership_fees",
+            4828.0,
+            5333.0,
+            505.0,
+            45.57761732851986
+          ],
+          [
+            52,
+            "sga",
+            -22810.0,
+            -24966.0,
+            -2156.0,
+            -194.58483754512636
+          ]
+        ],
+        "membership_accrual_bridge": [
+          [
+            "FY2025",
+            5333.0,
+            2501.0,
+            2854.0,
+            353.0,
+            5686.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "irrelevant_later_periods",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "income_model": [
+          [
+            2024,
+            16,
+            78185.0,
+            1512.0,
+            8597.0,
+            10.995715290656776,
+            3042.0,
+            0.0
+          ],
+          [
+            2024,
+            36,
+            171440.0,
+            3316.0,
+            18670.0,
+            10.890107326178255,
+            6243.0,
+            0.0
+          ],
+          [
+            2024,
+            52,
+            249625.0,
+            4828.0,
+            27267.0,
+            10.923184777165748,
+            9285.0,
+            0.0
+          ],
+          [
+            2025,
+            16,
+            84432.0,
+            1724.0,
+            9395.0,
+            11.12729770703051,
+            3341.0,
+            0.0
+          ],
+          [
+            2025,
+            36,
+            185480.0,
+            3599.0,
+            20631.0,
+            11.12303213284451,
+            7042.0,
+            0.0
+          ],
+          [
+            2025,
+            52,
+            269912.0,
+            5323.0,
+            30026.0,
+            11.124366460179614,
+            10383.0,
+            0.0
+          ]
+        ],
+        "operating_growth_bridge": [
+          [
+            16,
+            "merchandise_gross_profit",
+            8597.0,
+            9395.0,
+            798.0,
+            266.88963210702343
+          ],
+          [
+            16,
+            "membership_fees",
+            1512.0,
+            1724.0,
+            212.0,
+            70.90301003344482
+          ],
+          [
+            16,
+            "sga",
+            -7067.0,
+            -7778.0,
+            -711.0,
+            -237.79264214046822
+          ],
+          [
+            36,
+            "merchandise_gross_profit",
+            18670.0,
+            20631.0,
+            1961.0,
+            245.43178973717147
+          ],
+          [
+            36,
+            "membership_fees",
+            3316.0,
+            3599.0,
+            283.0,
+            35.41927409261577
+          ],
+          [
+            36,
+            "sga",
+            -15743.0,
+            -17188.0,
+            -1445.0,
+            -180.85106382978722
+          ],
+          [
+            52,
+            "merchandise_gross_profit",
+            27267.0,
+            30026.0,
+            2759.0,
+            251.27504553734062
+          ],
+          [
+            52,
+            "membership_fees",
+            4828.0,
+            5323.0,
+            495.0,
+            45.08196721311475
+          ],
+          [
+            52,
+            "sga",
+            -22810.0,
+            -24966.0,
+            -2156.0,
+            -196.35701275045537
+          ]
+        ],
+        "membership_accrual_bridge": [
+          [
+            "FY2025",
+            5323.0,
+            2501.0,
+            2854.0,
+            353.0,
+            5676.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "independent_disclosure_discrepancy",
+      "database": "control-discrepancy.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "changes": [
+        [
+          "income",
+          0,
+          "net_sales_usd_million",
+          17
+        ]
+      ],
+      "tables": {
+        "income_model": [
+          [
+            2024,
+            16,
+            78185.0,
+            1512.0,
+            8597.0,
+            10.995715290656776,
+            3042.0,
+            0.0
+          ],
+          [
+            2024,
+            36,
+            171440.0,
+            3316.0,
+            18670.0,
+            10.890107326178255,
+            6243.0,
+            0.0
+          ],
+          [
+            2024,
+            52,
+            249625.0,
+            4828.0,
+            27267.0,
+            10.923184777165748,
+            9285.0,
+            0.0
+          ],
+          [
+            2025,
+            16,
+            84449.0,
+            1724.0,
+            9412.0,
+            11.145188220109178,
+            3358.0,
+            17.0
+          ],
+          [
+            2025,
+            36,
+            185463.0,
+            3599.0,
+            20614.0,
+            11.114885448849636,
+            7025.0,
+            -17.0
+          ],
+          [
+            2025,
+            52,
+            269912.0,
+            5323.0,
+            30026.0,
+            11.124366460179614,
+            10383.0,
+            0.0
+          ]
+        ],
+        "operating_growth_bridge": [
+          [
+            16,
+            "merchandise_gross_profit",
+            8597.0,
+            9412.0,
+            815.0,
+            272.5752508361204
+          ],
+          [
+            16,
+            "membership_fees",
+            1512.0,
+            1724.0,
+            212.0,
+            70.90301003344482
+          ],
+          [
+            16,
+            "sga",
+            -7067.0,
+            -7778.0,
+            -711.0,
+            -237.79264214046822
+          ],
+          [
+            36,
+            "merchandise_gross_profit",
+            18670.0,
+            20614.0,
+            1944.0,
+            243.3041301627034
+          ],
+          [
+            36,
+            "membership_fees",
+            3316.0,
+            3599.0,
+            283.0,
+            35.41927409261577
+          ],
+          [
+            36,
+            "sga",
+            -15743.0,
+            -17188.0,
+            -1445.0,
+            -180.85106382978722
+          ],
+          [
+            52,
+            "merchandise_gross_profit",
+            27267.0,
+            30026.0,
+            2759.0,
+            251.27504553734062
+          ],
+          [
+            52,
+            "membership_fees",
+            4828.0,
+            5323.0,
+            495.0,
+            45.08196721311475
+          ],
+          [
+            52,
+            "sga",
+            -22810.0,
+            -24966.0,
+            -2156.0,
+            -196.35701275045537
+          ]
+        ],
+        "membership_accrual_bridge": [
+          [
+            "FY2025",
+            5323.0,
+            2501.0,
+            2854.0,
+            353.0,
+            5676.0
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "d817e976886533e33645bb76d9582350a4b0d2ed1e5e85460367f5702a7c00d5",
+    "control-2.sqlite": "816affa1d88006601fe309dbb67b6c27cebc0d55a2aed8dde020d5637c5b87d7",
+    "control-3.sqlite": "0764c0cff9c89025d3e8ae14351bee9b2ee0826e3123718f24ad6d4a5c6f3e54",
+    "control-discrepancy.sqlite": "c4d2b1b884f987d7f66e771a017bed766258bbbcc3931c24474a9a7e7339d009",
+    "data.sqlite": "da06ec14ed1498630df62eabf0d6ee434399b028320ffb3e65499439116f2136",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "4c30ad7b08ba397d9e7060c4f18a2fbe7f323201c35b76c171be7f0535e30dea",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "a40210b9ad8f7203b188b0240a5239c2b4f5dd49c74b0d9de45a75699378c67f",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

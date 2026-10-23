@@ -1,0 +1,767 @@
+{
+  "task_id": "workflow-v15-b04",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "expense_audit": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2024",
+            "FY2025",
+            "Q3FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "gaap_expense_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_expense_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_including_sbc_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "removal_of_settlement_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "comparable_credit_excluded_expense_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "b04:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "Q4FY2024",
+          458.0,
+          431.0,
+          508.0,
+          50.0,
+          0.0,
+          412.0
+        ],
+        [
+          "Q4FY2025",
+          633.0,
+          521.0,
+          597.0,
+          0.0,
+          0.0,
+          521.0
+        ],
+        [
+          "Q3FY2025",
+          639.0,
+          535.0,
+          613.0,
+          0.0,
+          0.0,
+          535.0
+        ],
+        [
+          "FY2024",
+          1897.0,
+          1633.0,
+          1937.0,
+          40.0,
+          0.0,
+          1557.0
+        ],
+        [
+          "FY2025",
+          2379.0,
+          1960.0,
+          2265.0,
+          0.0,
+          0.0,
+          1960.0
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "annual_revenue_bridge": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "interest",
+            "other",
+            "transaction"
+          ]
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_total_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "b04:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "transaction",
+          1647.0,
+          2628.0,
+          981.0,
+          64.45466491458608
+        ],
+        [
+          "interest",
+          1109.0,
+          1514.0,
+          405.0,
+          26.609724047306177
+        ],
+        [
+          "other",
+          195.0,
+          331.0,
+          136.0,
+          8.935611038107753
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "crypto_scope": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "January2026",
+            "Q4FY2025"
+          ]
+        },
+        "scope": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "app",
+            "bitstamp"
+          ]
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "volume_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "share_of_combined_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "monthly_average_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period",
+        "scope"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "b04:s02"
+        ]
+      ],
+      "rows": [
+        [
+          "Q4FY2025",
+          "app",
+          3,
+          34.0,
+          41.46341463414634,
+          11.333333333333334
+        ],
+        [
+          "Q4FY2025",
+          "bitstamp",
+          3,
+          48.0,
+          58.53658536585366,
+          16.0
+        ],
+        [
+          "January2026",
+          "app",
+          1,
+          8.7,
+          37.99126637554585,
+          8.7
+        ],
+        [
+          "January2026",
+          "bitstamp",
+          1,
+          14.2,
+          62.00873362445415,
+          14.2
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b04:s03"
+      ]
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "b04:s03"
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "claim_2": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b04:s01"
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "claim_3": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "b04:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b04:s03"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "scaled_amounts_preserve_ratios",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "expense_audit": [
+          [
+            "Q4FY2024",
+            916.0,
+            862.0,
+            1016.0,
+            100.0,
+            0.0,
+            824.0
+          ],
+          [
+            "Q4FY2025",
+            1266.0,
+            1042.0,
+            1194.0,
+            0.0,
+            0.0,
+            1042.0
+          ],
+          [
+            "Q3FY2025",
+            1278.0,
+            1070.0,
+            1226.0,
+            0.0,
+            0.0,
+            1070.0
+          ],
+          [
+            "FY2024",
+            3794.0,
+            3266.0,
+            3874.0,
+            80.0,
+            0.0,
+            3114.0
+          ],
+          [
+            "FY2025",
+            4758.0,
+            3920.0,
+            4530.0,
+            0.0,
+            0.0,
+            3920.0
+          ]
+        ],
+        "annual_revenue_bridge": [
+          [
+            "transaction",
+            3294.0,
+            5256.0,
+            1962.0,
+            64.45466491458608
+          ],
+          [
+            "interest",
+            2218.0,
+            3028.0,
+            810.0,
+            26.609724047306177
+          ],
+          [
+            "other",
+            390.0,
+            662.0,
+            272.0,
+            8.935611038107753
+          ]
+        ],
+        "crypto_scope": [
+          [
+            "Q4FY2025",
+            "app",
+            3,
+            68.0,
+            41.46341463414634,
+            22.666666666666668
+          ],
+          [
+            "Q4FY2025",
+            "bitstamp",
+            3,
+            96.0,
+            58.53658536585366,
+            32.0
+          ],
+          [
+            "January2026",
+            "app",
+            1,
+            17.4,
+            37.99126637554585,
+            17.4
+          ],
+          [
+            "January2026",
+            "bitstamp",
+            1,
+            28.4,
+            62.00873362445415,
+            28.4
+          ]
+        ]
+      }
+    },
+    {
+      "name": "credit_loss_changes_gaap_not_adjusted",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "expense_audit": [
+          [
+            "Q4FY2024",
+            458.0,
+            431.0,
+            508.0,
+            50.0,
+            0.0,
+            412.0
+          ],
+          [
+            "Q4FY2025",
+            643.0,
+            521.0,
+            597.0,
+            0.0,
+            0.0,
+            521.0
+          ],
+          [
+            "Q3FY2025",
+            639.0,
+            535.0,
+            613.0,
+            0.0,
+            0.0,
+            535.0
+          ],
+          [
+            "FY2024",
+            1897.0,
+            1633.0,
+            1937.0,
+            40.0,
+            0.0,
+            1557.0
+          ],
+          [
+            "FY2025",
+            2389.0,
+            1960.0,
+            2265.0,
+            0.0,
+            0.0,
+            1960.0
+          ]
+        ],
+        "annual_revenue_bridge": [
+          [
+            "transaction",
+            1647.0,
+            2628.0,
+            981.0,
+            64.45466491458608
+          ],
+          [
+            "interest",
+            1109.0,
+            1514.0,
+            405.0,
+            26.609724047306177
+          ],
+          [
+            "other",
+            195.0,
+            331.0,
+            136.0,
+            8.935611038107753
+          ]
+        ],
+        "crypto_scope": [
+          [
+            "Q4FY2025",
+            "app",
+            3,
+            34.0,
+            41.46341463414634,
+            11.333333333333334
+          ],
+          [
+            "Q4FY2025",
+            "bitstamp",
+            3,
+            48.0,
+            58.53658536585366,
+            16.0
+          ],
+          [
+            "January2026",
+            "app",
+            1,
+            8.7,
+            37.99126637554585,
+            8.7
+          ],
+          [
+            "January2026",
+            "bitstamp",
+            1,
+            14.2,
+            62.00873362445415,
+            14.2
+          ]
+        ]
+      }
+    },
+    {
+      "name": "irrelevant_later_disclosures",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "expense_audit": [
+          [
+            "Q4FY2024",
+            458.0,
+            431.0,
+            508.0,
+            50.0,
+            0.0,
+            412.0
+          ],
+          [
+            "Q4FY2025",
+            633.0,
+            521.0,
+            597.0,
+            0.0,
+            0.0,
+            521.0
+          ],
+          [
+            "Q3FY2025",
+            639.0,
+            535.0,
+            613.0,
+            0.0,
+            0.0,
+            535.0
+          ],
+          [
+            "FY2024",
+            1897.0,
+            1633.0,
+            1937.0,
+            40.0,
+            0.0,
+            1557.0
+          ],
+          [
+            "FY2025",
+            2379.0,
+            1960.0,
+            2265.0,
+            0.0,
+            0.0,
+            1960.0
+          ]
+        ],
+        "annual_revenue_bridge": [
+          [
+            "transaction",
+            1647.0,
+            2628.0,
+            981.0,
+            64.45466491458608
+          ],
+          [
+            "interest",
+            1109.0,
+            1514.0,
+            405.0,
+            26.609724047306177
+          ],
+          [
+            "other",
+            195.0,
+            331.0,
+            136.0,
+            8.935611038107753
+          ]
+        ],
+        "crypto_scope": [
+          [
+            "Q4FY2025",
+            "app",
+            3,
+            34.0,
+            41.46341463414634,
+            11.333333333333334
+          ],
+          [
+            "Q4FY2025",
+            "bitstamp",
+            3,
+            48.0,
+            58.53658536585366,
+            16.0
+          ],
+          [
+            "January2026",
+            "app",
+            1,
+            8.7,
+            37.99126637554585,
+            8.7
+          ],
+          [
+            "January2026",
+            "bitstamp",
+            1,
+            14.2,
+            62.00873362445415,
+            14.2
+          ]
+        ]
+      }
+    },
+    {
+      "name": "independent_disclosure_discrepancy",
+      "database": "control-discrepancy.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "changes": [
+        [
+          "expenses",
+          0,
+          "gaap_expense_usd_million",
+          17
+        ]
+      ],
+      "tables": {
+        "expense_audit": [
+          [
+            "Q4FY2024",
+            475.0,
+            448.0,
+            525.0,
+            50.0,
+            17.0,
+            429.0
+          ],
+          [
+            "Q4FY2025",
+            633.0,
+            521.0,
+            597.0,
+            0.0,
+            0.0,
+            521.0
+          ],
+          [
+            "Q3FY2025",
+            639.0,
+            535.0,
+            613.0,
+            0.0,
+            0.0,
+            535.0
+          ],
+          [
+            "FY2024",
+            1897.0,
+            1633.0,
+            1937.0,
+            40.0,
+            0.0,
+            1557.0
+          ],
+          [
+            "FY2025",
+            2379.0,
+            1960.0,
+            2265.0,
+            0.0,
+            0.0,
+            1960.0
+          ]
+        ],
+        "annual_revenue_bridge": [
+          [
+            "transaction",
+            1647.0,
+            2628.0,
+            981.0,
+            64.45466491458608
+          ],
+          [
+            "interest",
+            1109.0,
+            1514.0,
+            405.0,
+            26.609724047306177
+          ],
+          [
+            "other",
+            195.0,
+            331.0,
+            136.0,
+            8.935611038107753
+          ]
+        ],
+        "crypto_scope": [
+          [
+            "Q4FY2025",
+            "app",
+            3,
+            34.0,
+            41.46341463414634,
+            11.333333333333334
+          ],
+          [
+            "Q4FY2025",
+            "bitstamp",
+            3,
+            48.0,
+            58.53658536585366,
+            16.0
+          ],
+          [
+            "January2026",
+            "app",
+            1,
+            8.7,
+            37.99126637554585,
+            8.7
+          ],
+          [
+            "January2026",
+            "bitstamp",
+            1,
+            14.2,
+            62.00873362445415,
+            14.2
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "2395b40ce9a0140bb7899f4f274d743863bf58757a8e951f3f1e422494e57222",
+    "control-2.sqlite": "ae3c962e56a5cf6c283890bfe993029610b9eee48104ae8a4704aa02352f3be5",
+    "control-3.sqlite": "4c5ad156abef470b6738d7cbb92a892c9f5d1a501e210ce685b16630d3915f97",
+    "control-discrepancy.sqlite": "5f78c3bcbf25adc31120e764120980df0f91ec97072c55d42a5105b0f4babe54",
+    "data.sqlite": "fdb472a6933158e623f745791499c36286341d7acadc48ffc33fc092e9a83bee",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "665a254bbbc24640183cff4382c0327dbc629f15b50640a2d778bca95f1fec9c",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "d79f3a0aa48ee96de1e7bb92ca1d1d9fe0b46057995dd79538cd42871750cda5",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

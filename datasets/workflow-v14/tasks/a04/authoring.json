@@ -1,0 +1,134 @@
+{
+  "rationale": "Build Amazon cash-generation and capital-funding analysis for FY2024, FY2025 and both Q4 periods. Reconstruct nine-month flows and reconcile total cash movement. Apply the issuer net-property-spending definition before showing separate analyst cash-flow measures after finance-lease and financing-obligation principal. Keep supplemental noncash acquisition observations outside cash spending.",
+  "source_group": "amazon-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "96ac92a81b8d4fca1879beb08db388cc432c17eb2f00b607185b46ad6ed31855",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "9968fde5377dbeb80a449e93e55248f69d155a0f80c963a84e1dd2746c0c7152",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "45e0a6a38c285a09e3f9e192952a59828194350d2c4af3a0e4226fb917d571dc",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "50b167f39ef202b272089a9e7681b1de40473337997cc1c6941c25d1c9b625e9",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "3b02ced0384bfcfdfaab18f9eb557ac8170d876a22ab27c5db2622fd9983f106",
+    "claim_mapping": {
+      "exact_ai_cash_spending_identified": "claim_1",
+      "annual_fcf_increased": "claim_2",
+      "unpaid_property_is_cash_outflow": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_ai_cash_spending_identified",
+      "assertion": "The supplied cash-flow statement contains a separate FY2025 cash property-purchase amount for artificial-intelligence projects.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "a04:s01",
+          "a04:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a04:s03"
+      ],
+      "source_grounded_reason": "The cash-flow statement has total property purchases. The narrative says the increase is primarily for artificial intelligence without a precise project allocation. The claim describes a line in the supplied document, so its absence from the complete supplied table is a contradiction, not an unresolved economic amount."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "58c9f7e6622a2f27f2047c6f496b192a624298895beba146eb8ffc63bbe9bc91",
+    "maintenance_rationale": "Cash capex, net incentives, finance-lease principal and acquired-but-unpaid assets answer different funding questions. An update must preserve their statement scope and cumulative periods rather than inflate cash spending or rename an analyst measure as issuer free cash flow.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_cash_generation.sql",
+      "starting_cash_movement.sql",
+      "starting_noncash_capital.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "87726e3c116863f686e96763381fafe64406d28eb7e32ef71c57bffd185cdf0c",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "grading_contract_revision": {
+    "prior_task_sha256": "4e1398fd63e51b7a7d4cfe4ac3833976d73ae306b554d4fe3d133e429bc6797d",
+    "additional_sufficient_evidence": {
+      "claim_1": [
+        [
+          "a04:s02"
+        ]
+      ],
+      "claim_3": [
+        [
+          "a04:s03"
+        ]
+      ]
+    },
+    "public_definitions": {},
+    "observation_date_context_added": false,
+    "original_observations_changed": false,
+    "original_targets_changed": false,
+    "human_review": "pending"
+  },
+  "evidence_revision": {
+    "review_id": "workflow-evidence-contract-review-20261022",
+    "prior_task_sha256": "d159e3c2f24854449a8f4727e45f600db074a7895c899ab5c70bcf206a1c251d",
+    "changes": [
+      {
+        "group": "claims",
+        "output": "claim_2",
+        "before": {
+          "evidence": [
+            [
+              "a04:s01",
+              "a04:s02"
+            ]
+          ],
+          "context_evidence_allowed": []
+        },
+        "after": {
+          "evidence": [
+            [
+              "a04:s01",
+              "a04:s02"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "a04:s03"
+          ]
+        }
+      }
+    ],
+    "grading_only": true,
+    "authored_reference_citations": {},
+    "public_requirements_changed": false,
+    "human_review": "pending"
+  }
+}

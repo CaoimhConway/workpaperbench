@@ -15,7 +15,7 @@ python3 scripts/validate_direct_harbor.py --checkout --comparison-recipe \
 
 ## Freeze the configuration
 
-Use Harbor 0.23.0 with the prepared, unpublished `v0.6.3-rc.1` local checkout, catalog
+Use Harbor 0.23.0 from this checkout with catalog
 `workflow-v11-canonical-99f9af5fc8cb` and scorer `workflow-1.2.1`. Complete the
 [environment and oracle checks](RUNNING.md#direct-harbor-execution) first.
 

@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v12-b06",
+  "tables": [
+    {
+      "id": "segment_metrics",
+      "file": "segment_metrics.sql",
+      "evidence": [
+        "b06:s01"
+      ]
+    },
+    {
+      "id": "corporate_bridge",
+      "file": "corporate_bridge.sql",
+      "evidence": [
+        "b06:s01"
+      ]
+    },
+    {
+      "id": "consumer_activity",
+      "file": "consumer_activity.sql",
+      "evidence": [
+        "b06:s02",
+        "b06:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "b06:s01",
+        "b06:s03"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "b06:s01"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "supported",
+      "evidence": [
+        "b06:s02",
+        "b06:s03"
+      ]
+    }
+  ]
+}

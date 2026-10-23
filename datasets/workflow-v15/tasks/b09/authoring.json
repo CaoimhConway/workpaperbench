@@ -1,0 +1,203 @@
+{
+  "rationale": "Build Intuit FY2025 adjusted-metric workpapers including all FY2024 quarters and both full years. Reconcile operating and net-income exclusion scopes separately, compute matching diluted EPS and quantify the denominator effect. Determine whether the new exclusions permit an exact prior-year restatement.",
+  "source_group": "intuit-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "3bab670a8a51d52224b990f41b88b75e7ff8be77947d5ade6d26ac3cde54805b",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "a04b5fdb7dc0f2dd65b65e4a17567ef84c59c0d2961221b320b41e63bb0e29c7",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "b24b7fd862078322053b7da9bfb9934f9512bf0da5e427a5e7f0576db01d5cf7",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "08d44a36adf91b7a31ddc3f3d30f7607a3a9bd24bd3a13ba491de4b3089ef42c",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "53a6abecf4d9262d4b714caae0690d59b256274954fd8ee27b4536173ca106cf",
+    "claim_mapping": {
+      "loss_period_share_bases_differ": "claim_1",
+      "deferred_rows_cancel_exactly": "claim_2",
+      "exact_prior_restatement_identified": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_prior_restatement_identified",
+      "assertion": "The supplied FY2024 non-GAAP comparison has been restated using the new FY2025 deferred-compensation exclusions.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b09:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b09:s01"
+      ],
+      "source_grounded_reason": "The issuer explicitly says the new exclusions were not applied to prior periods because the impact was immaterial. Absence of prior adjustments is not proof of zero prior economic activity."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "a237c9bde7ed150f7b78086001d30ce2f150a3b4e67371a856b850fb55528984",
+    "maintenance_rationale": "The same deferred plan produces adjustments above and below operating income, while a prior GAAP loss changes dilution. Preserving genuine unchanged periods requires financial scope decisions and a supported non-answer to an unavailable restatement.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_income_reconciliation.sql",
+      "starting_operating_reconciliation.sql",
+      "starting_share_basis.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "46b30e3ba34bf147edd39674e151ec3d8b108045a7cb0ad9604ed36269635e48",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "grading_contract_revision": {
+    "prior_task_sha256": "e1ccd7e0c05f10721af5f3af99358d19272319734074c9364bd0869230e813a6",
+    "additional_sufficient_evidence": {
+      "claim_1": [
+        [
+          "b09:s03"
+        ]
+      ]
+    },
+    "public_definitions": {},
+    "observation_date_context_added": false,
+    "original_observations_changed": false,
+    "original_targets_changed": false,
+    "human_review": "pending"
+  },
+  "measurement_revision": {
+    "prior_task_sha256": "b429e136fb6dcca0f5a44a62c1d40307e755cf64acc89acac7505a13cac3ab40",
+    "public_definition_addenda": {
+      "operating_reconciliation": "residual_usd_million is reconstructed adjusted operating income less independently reported adjusted operating income."
+    },
+    "new_public_definitions": {},
+    "additional_context_evidence": {},
+    "financial_inputs_changed": false,
+    "reference_sql_changed": false,
+    "human_review": "pending"
+  },
+  "evidence_revision": {
+    "review_id": "workflow-evidence-contract-review-20261022",
+    "prior_task_sha256": "04203d207d0f6f40865d20476e4996c5b20a37ab35a8973b94537183d7cc8c40",
+    "changes": [
+      {
+        "group": "tables",
+        "output": "operating_reconciliation",
+        "before": {
+          "evidence": [
+            [
+              "b09:s01",
+              "b09:s02"
+            ]
+          ],
+          "context_evidence_allowed": []
+        },
+        "after": {
+          "evidence": [
+            [
+              "b09:s01",
+              "b09:s02"
+            ],
+            [
+              "b09:s01"
+            ]
+          ],
+          "context_evidence_allowed": []
+        }
+      },
+      {
+        "group": "tables",
+        "output": "income_reconciliation",
+        "before": {
+          "evidence": [
+            [
+              "b09:s01",
+              "b09:s02"
+            ]
+          ],
+          "context_evidence_allowed": []
+        },
+        "after": {
+          "evidence": [
+            [
+              "b09:s01",
+              "b09:s02"
+            ],
+            [
+              "b09:s01"
+            ]
+          ],
+          "context_evidence_allowed": []
+        }
+      },
+      {
+        "group": "tables",
+        "output": "share_basis",
+        "before": {
+          "evidence": [
+            [
+              "b09:s01",
+              "b09:s03"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b09:s02"
+          ]
+        },
+        "after": {
+          "evidence": [
+            [
+              "b09:s01",
+              "b09:s03"
+            ],
+            [
+              "b09:s01"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b09:s02"
+          ]
+        }
+      }
+    ],
+    "grading_only": true,
+    "authored_reference_citations": {},
+    "public_requirements_changed": false,
+    "human_review": "pending"
+  },
+  "contract_adjudication": {
+    "review_id": "workflow-v15-contract-adjudication-1",
+    "prior_task_sha256": "512b3faf7c817be5bcaf526d179324f75e9a53beca1931cd7264999fa60d325d",
+    "evidence_changes": [],
+    "model_visible_clarification": false,
+    "reference_sql_corrections": [],
+    "saved_output_compatibility": "compatible_grading_only",
+    "human_review": "pending"
+  }
+}

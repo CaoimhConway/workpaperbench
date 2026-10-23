@@ -87,13 +87,15 @@ def validate(verdict, variant, covered):
         for name in {table for table, _ in covered}:
             checks = verdict['details']['tables'][name]
             assert checks['original']
-            assert checks['controls']['independent_disclosure_discrepancy'] is False
-            assert all(value for key, value in checks['controls'].items() if key != 'independent_disclosure_discrepancy')
+            expected_failures = {'independent_disclosure_discrepancy'}
+            if name == 'reserve_coverage' and 'reported_reserve_changes_with_components_fixed' in checks['controls']:
+                expected_failures.add('reported_reserve_changes_with_components_fixed')
+            assert {key for key, value in checks['controls'].items() if not value} == expected_failures
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--dataset', default='workflow-v11', choices=['workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9', 'workflow-v10', 'workflow-v11'])
+    parser.add_argument('--dataset', default='workflow-v11', choices=['workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9', 'workflow-v10', 'workflow-v11', 'workflow-v12'])
     parser.add_argument('--executor', choices=['docker', 'local-lima'], default='docker',
                         help='Docker on this Linux controller, or the historical owner maintenance wrapper')
     parser.add_argument('--tasks', nargs='+', default=['a01', 'b01', 'c01'])

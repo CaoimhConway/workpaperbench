@@ -1,0 +1,662 @@
+{
+  "task_id": "workflow-v12-c02",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "operating_reconciliation": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2024",
+            "FY2025",
+            "Q3FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "gaap_operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "adjustments_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "adjusted_operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c02:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "FY2024",
+          6741.0,
+          3278.0,
+          10019.0,
+          0.0
+        ],
+        [
+          "FY2025",
+          8706.0,
+          2280.0,
+          10986.0,
+          0.0
+        ],
+        [
+          "Q4FY2024",
+          1957.0,
+          639.0,
+          2596.0,
+          0.0
+        ],
+        [
+          "Q3FY2025",
+          2173.0,
+          600.0,
+          2773.0,
+          0.0
+        ],
+        [
+          "Q4FY2025",
+          2261.0,
+          563.0,
+          2824.0,
+          0.0
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c02:s03"
+      ]
+    },
+    "adjustment_attribution": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "acquisition_expense",
+            "amortization",
+            "lease_impairment",
+            "loss_contingency_reversal",
+            "stock_based_deferred_compensation"
+          ]
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "contribution_to_gap_change_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c02:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "stock_based_deferred_compensation",
+          1881.0,
+          1973.0,
+          92.0,
+          -9.218436873747494
+        ],
+        [
+          "amortization",
+          334.0,
+          306.0,
+          -28.0,
+          2.80561122244489
+        ],
+        [
+          "acquisition_expense",
+          1007.0,
+          1.0,
+          -1006.0,
+          100.80160320641282
+        ],
+        [
+          "loss_contingency_reversal",
+          -44.0,
+          0.0,
+          44.0,
+          -4.408817635270541
+        ],
+        [
+          "lease_impairment",
+          100.0,
+          0.0,
+          -100.0,
+          10.02004008016032
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c02:s03"
+      ]
+    },
+    "arr_guidance_bridge": {
+      "columns": {
+        "fiscal_year": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2026"
+          ]
+        },
+        "observed_exit_arr_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "revalued_opening_arr_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "revaluation_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "target_arr_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "implied_target_arr_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c02:s02"
+        ]
+      ],
+      "rows": [
+        [
+          "FY2026",
+          25.2,
+          25.66,
+          460.0,
+          10.2,
+          28.27732
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c02:s03"
+      ]
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c02:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c02:s03"
+      ]
+    },
+    "claim_2": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c02:s02",
+          "c02:s03"
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "claim_3": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c02:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c02:s03"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "scaled_amounts_preserve_ratios",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "operating_reconciliation": [
+          [
+            "FY2024",
+            13482.0,
+            6556.0,
+            20038.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            17412.0,
+            4560.0,
+            21972.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            3914.0,
+            1278.0,
+            5192.0,
+            0.0
+          ],
+          [
+            "Q3FY2025",
+            4346.0,
+            1200.0,
+            5546.0,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            4522.0,
+            1126.0,
+            5648.0,
+            0.0
+          ]
+        ],
+        "adjustment_attribution": [
+          [
+            "stock_based_deferred_compensation",
+            3762.0,
+            3946.0,
+            184.0,
+            -9.218436873747494
+          ],
+          [
+            "amortization",
+            668.0,
+            612.0,
+            -56.0,
+            2.80561122244489
+          ],
+          [
+            "acquisition_expense",
+            2014.0,
+            2.0,
+            -2012.0,
+            100.80160320641282
+          ],
+          [
+            "loss_contingency_reversal",
+            -88.0,
+            0.0,
+            88.0,
+            -4.408817635270541
+          ],
+          [
+            "lease_impairment",
+            200.0,
+            0.0,
+            -200.0,
+            10.02004008016032
+          ]
+        ],
+        "arr_guidance_bridge": [
+          [
+            "FY2026",
+            50.4,
+            51.32,
+            920.0,
+            10.2,
+            56.55464
+          ]
+        ]
+      }
+    },
+    {
+      "name": "prior_acquisition_adjustment_changes_attribution",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "operating_reconciliation": [
+          [
+            "FY2024",
+            6641.0,
+            3378.0,
+            10019.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            8706.0,
+            2280.0,
+            10986.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            1957.0,
+            639.0,
+            2596.0,
+            0.0
+          ],
+          [
+            "Q3FY2025",
+            2173.0,
+            600.0,
+            2773.0,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            2261.0,
+            563.0,
+            2824.0,
+            0.0
+          ]
+        ],
+        "adjustment_attribution": [
+          [
+            "stock_based_deferred_compensation",
+            1881.0,
+            1973.0,
+            92.0,
+            -8.37887067395264
+          ],
+          [
+            "amortization",
+            334.0,
+            306.0,
+            -28.0,
+            2.5500910746812386
+          ],
+          [
+            "acquisition_expense",
+            1107.0,
+            1.0,
+            -1106.0,
+            100.72859744990893
+          ],
+          [
+            "loss_contingency_reversal",
+            -44.0,
+            0.0,
+            44.0,
+            -4.007285974499089
+          ],
+          [
+            "lease_impairment",
+            100.0,
+            0.0,
+            -100.0,
+            9.107468123861567
+          ]
+        ],
+        "arr_guidance_bridge": [
+          [
+            "FY2026",
+            25.2,
+            25.66,
+            460.0,
+            10.2,
+            28.27732
+          ]
+        ]
+      }
+    },
+    {
+      "name": "irrelevant_later_disclosure",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "operating_reconciliation": [
+          [
+            "FY2024",
+            6741.0,
+            3278.0,
+            10019.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            8706.0,
+            2280.0,
+            10986.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            1957.0,
+            639.0,
+            2596.0,
+            0.0
+          ],
+          [
+            "Q3FY2025",
+            2173.0,
+            600.0,
+            2773.0,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            2261.0,
+            563.0,
+            2824.0,
+            0.0
+          ]
+        ],
+        "adjustment_attribution": [
+          [
+            "stock_based_deferred_compensation",
+            1881.0,
+            1973.0,
+            92.0,
+            -9.218436873747494
+          ],
+          [
+            "amortization",
+            334.0,
+            306.0,
+            -28.0,
+            2.80561122244489
+          ],
+          [
+            "acquisition_expense",
+            1007.0,
+            1.0,
+            -1006.0,
+            100.80160320641282
+          ],
+          [
+            "loss_contingency_reversal",
+            -44.0,
+            0.0,
+            44.0,
+            -4.408817635270541
+          ],
+          [
+            "lease_impairment",
+            100.0,
+            0.0,
+            -100.0,
+            10.02004008016032
+          ]
+        ],
+        "arr_guidance_bridge": [
+          [
+            "FY2026",
+            25.2,
+            25.66,
+            460.0,
+            10.2,
+            28.27732
+          ]
+        ]
+      }
+    },
+    {
+      "name": "independent_disclosure_discrepancy",
+      "database": "control-discrepancy.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "changes": [
+        [
+          "operating_reconciliation",
+          0,
+          "amount",
+          17
+        ]
+      ],
+      "tables": {
+        "operating_reconciliation": [
+          [
+            "FY2024",
+            6741.0,
+            3278.0,
+            10019.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            8706.0,
+            2280.0,
+            10986.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            1957.0,
+            639.0,
+            2596.0,
+            0.0
+          ],
+          [
+            "Q3FY2025",
+            2173.0,
+            600.0,
+            2773.0,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            2278.0,
+            563.0,
+            2824.0,
+            17.0
+          ]
+        ],
+        "adjustment_attribution": [
+          [
+            "stock_based_deferred_compensation",
+            1881.0,
+            1973.0,
+            92.0,
+            -9.218436873747494
+          ],
+          [
+            "amortization",
+            334.0,
+            306.0,
+            -28.0,
+            2.80561122244489
+          ],
+          [
+            "acquisition_expense",
+            1007.0,
+            1.0,
+            -1006.0,
+            100.80160320641282
+          ],
+          [
+            "loss_contingency_reversal",
+            -44.0,
+            0.0,
+            44.0,
+            -4.408817635270541
+          ],
+          [
+            "lease_impairment",
+            100.0,
+            0.0,
+            -100.0,
+            10.02004008016032
+          ]
+        ],
+        "arr_guidance_bridge": [
+          [
+            "FY2026",
+            25.2,
+            25.66,
+            460.0,
+            10.2,
+            28.27732
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "16e7047c0251f64b7f8e462f71f3c03d396da604da3580b987fb3b0eaf82d996",
+    "control-2.sqlite": "e0c0b2553db98e69068b4d30d8eff1e3bd6b6cea6b444b0d5e0c35f6f1b2c731",
+    "control-3.sqlite": "c4fc6c65a862924d5af724f8f1d177fe39ce9c28bc4e1a16b406c7687f264067",
+    "control-discrepancy.sqlite": "53c604dd60b2252c06fb4771e66d6a3526160d0cfd02ee8366d97c4f01243f70",
+    "data.sqlite": "3455aeec4a701b86604efc4a4c5f6b8ef743b3532dcb36af8cba9a7cf210739a",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "fb939a87c5be57a1aa0fc261c2601d96e6bab0d28a8a15662fb77dfdbc315497",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "38bc3923dedfdda0532fcd7b39372efc681af99a0cd126f33514ba7d1df297ed",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

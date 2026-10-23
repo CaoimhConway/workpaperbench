@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v15-b05",
+  "tables": [
+    {
+      "id": "quarter_activity",
+      "file": "quarter_activity.sql",
+      "evidence": [
+        "b05:s01",
+        "b05:s02"
+      ]
+    },
+    {
+      "id": "margin_reconciliation",
+      "file": "margin_reconciliation.sql",
+      "evidence": [
+        "b05:s03"
+      ]
+    },
+    {
+      "id": "annual_activity_bridge",
+      "file": "annual_activity_bridge.sql",
+      "evidence": [
+        "b05:s01",
+        "b05:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": [
+        "b05:s03"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "b05:s01"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "contradicted",
+      "evidence": [
+        "b05:s01",
+        "b05:s02"
+      ]
+    }
+  ]
+}

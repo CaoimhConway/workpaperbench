@@ -1,0 +1,145 @@
+{
+  "tables": {
+    "operating_reconciliation": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2024",
+            "FY2025",
+            "Q3FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "gaap_operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "adjustments_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "adjusted_operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "adjustment_attribution": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "acquisition_expense",
+            "amortization",
+            "lease_impairment",
+            "loss_contingency_reversal",
+            "stock_based_deferred_compensation"
+          ]
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "contribution_to_gap_change_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "arr_guidance_bridge": {
+      "columns": {
+        "fiscal_year": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2026"
+          ]
+        },
+        "observed_exit_arr_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "revalued_opening_arr_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "revaluation_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "target_arr_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "implied_target_arr_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "fiscal_year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "Annual non-GAAP operating income grew more slowly than GAAP operating income from FY2024 to FY2025.",
+    "claim_2": "The USD 460 million ARR revaluation is recognized FY2025 revenue.",
+    "claim_3": "Applying the 10.2 percent FY2026 ARR growth target to the revalued opening ARR basis implies ending ARR of USD 28.27732 billion."
+  },
+  "definitions": {
+    "operating_reconciliation": "Include FY2024, FY2025, Q4FY2024, Q3FY2025 and Q4FY2025. The adjusted_operating_income_usd_million column retains independently reported non-GAAP operating income. Adjustments sum the signed adjustment rows. Residual is GAAP plus those adjustments less reported non-GAAP operating income.",
+    "adjustment_attribution": "Each contribution divides its FY2025 less FY2024 change by the change in the total non-GAAP minus GAAP adjustment gap. Signed contributions may exceed 100% or be negative.",
+    "arr_guidance_bridge": "Use the revalued opening FY2026 ARR basis for the 10.2% target. The implied target is arithmetic on rounded disclosure amounts, not an observed forecast outcome."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

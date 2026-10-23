@@ -1,0 +1,96 @@
+{
+  "rationale": "Build American Express FY2025 payment-economics workpapers using the seven-period income statements and both release and statistical supplement. Reconcile revenue to earnings, attribute annual and Q4 revenue growth by component, and produce reported/FX growth plus the implied processed-volume bridge while respecting source scope.",
+  "source_group": "amex-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "e752e426968b26def5de96d46e1f0d28d6dc9e410c015d67dd44c995af9cadf8",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "25b531e0814e066a433cb3f5440b6164dc1350188806fa19a9695bbe32f2c2e0",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "360c8fcb3fee8efdf379edb77c916ffde8c95d6418950777c5c321a77e6cc93f",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "60adfca8a813202a286aaf89cca9f67d64d4312eefe22990677b40d1bafb354e",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "e8445820f4a8c8d1ad4e89a5227c74360ad5ec5d59ebf2d8a980dd0d25605892",
+    "claim_mapping": {
+      "exact_discount_price_effect": "claim_1",
+      "fx_restates_prior": "claim_2",
+      "billed_equals_network": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_discount_price_effect",
+      "assertion": "Using the supplied annual values, FY2025 discount revenue divided by billed business is approximately 2.24 percent.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a10:s01",
+          "a10:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a10:s03"
+      ],
+      "source_grounded_reason": "Annual discount revenue is in USD million and billed business is in USD billion. Their descriptive ratio can be computed even though it does not identify causal pricing.",
+      "independent_calculation": "37401 / (1669.8 * 1000) * 100 = 2.2398490837226013 percent"
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "248cb39a25f2faeed42e498bd87079838aa2a1ae873ecb694f58384517d51697",
+    "maintenance_rationale": "A payment model must reconcile two primary disclosures, translate the correct period, distinguish issued from processed card flows and avoid treating aggregate fee growth as an identified price effect.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_currency_and_network.sql",
+      "starting_income_model.sql",
+      "starting_revenue_growth_bridge.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "bcc26b8c4785ba50293dcd882f58e560ff7064296893d11c10dab69dc76fdf93",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "grading_contract_revision": {
+    "prior_task_sha256": "038e143d30cc16e36b2ec2668e2ca90cbb085f8f964257330f1ac5d5d5896acf",
+    "additional_sufficient_evidence": {
+      "claim_2": [
+        [
+          "a10:s02"
+        ]
+      ]
+    },
+    "public_definitions": {},
+    "observation_date_context_added": false,
+    "original_observations_changed": false,
+    "original_targets_changed": false,
+    "human_review": "pending"
+  }
+}

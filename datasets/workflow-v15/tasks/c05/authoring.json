@@ -1,0 +1,133 @@
+{
+  "rationale": "Reconcile Apple FY2025 and Q4 earnings growth across category profitability, operating expenses, signed other income and tax. Include both years, attribute the net-income change by component, and compare current GAAP income with both prior GAAP and the explicitly adjusted prior tax baseline.",
+  "source_group": "apple-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "ec9c9b7c7a9f83a97b16df997e70dcbc44b589b194e1d77e85240ef197315d34",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "93b1fec2bf3b3dba6e23eb5916afded7f180fc979196b4db7d6c39ab8bcea22a",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "fe0991fda965182496d733ccb33ba44fc95ea48c00d99325d2a93ce589adef4a",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "53fe78fb64cc87963979a8517243094991540c4a68375fb7ea70038929495fc8",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "8819c80b262fd0da72c448cdf2133e67c411cd5c832fc2ee595f28ac660a3598",
+    "claim_mapping": {
+      "entire_net_growth_is_operating": "claim_1",
+      "exact_product_price_effect_identified": "claim_2",
+      "prior_tax_charge_exceeds_half_growth": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_product_price_effect_identified",
+      "assertion": "The supplied product-category tables include separate dollar contributions from price changes and unit-volume changes to FY2025 product revenue growth.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c05:s01",
+          "c05:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "The category tables report sales and costs, without separate price and unit-volume contributions. Their absence from the complete supplied table contradicts the stated disclosure claim."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "a4d6d307bc1a7194e77cd06105348eec04c920c7304fdec38fe63ce4d0e38e72",
+    "maintenance_rationale": "A prior tax charge dominates headline net-income growth without being operating growth or a new current charge. Signed component attribution and matched category margins must coexist with a properly labeled adjusted prior comparison.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_category_margin.sql",
+      "starting_net_income_growth_bridge.sql",
+      "starting_prior_tax_baseline.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "1167ebb6134cc2f34f9fea1e8e7b415a1ac0249221df5d16396a336120a838ea",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "measurement_revision": {
+    "prior_task_sha256": "bf4ddf644f0ad7b51cbb67bb97f29e10de285ac39815e6a60c9510b5ffabb689",
+    "public_definition_addenda": {
+      "prior_tax_baseline": "residual_usd_million is adjusted prior net income less independently reported adjusted prior net income."
+    },
+    "new_public_definitions": {},
+    "additional_context_evidence": {},
+    "financial_inputs_changed": false,
+    "reference_sql_changed": false,
+    "human_review": "pending"
+  },
+  "evidence_revision": {
+    "review_id": "workflow-evidence-contract-review-20261022",
+    "prior_task_sha256": "dc92f40628569a0bdbce60d04d330a265098e4f6419abc7588005b69f214c930",
+    "changes": [
+      {
+        "group": "claims",
+        "output": "claim_2",
+        "before": {
+          "evidence": [
+            [
+              "c05:s01",
+              "c05:s03"
+            ]
+          ],
+          "context_evidence_allowed": []
+        },
+        "after": {
+          "evidence": [
+            [
+              "c05:s01",
+              "c05:s03"
+            ],
+            [
+              "c05:s03"
+            ]
+          ],
+          "context_evidence_allowed": []
+        }
+      }
+    ],
+    "grading_only": true,
+    "authored_reference_citations": {},
+    "public_requirements_changed": false,
+    "human_review": "pending"
+  },
+  "contract_adjudication": {
+    "review_id": "workflow-v15-contract-adjudication-1",
+    "prior_task_sha256": "f84326f2624b79abc437fccb3182add734abe8d711a3e717183425a7aa28a824",
+    "evidence_changes": [],
+    "model_visible_clarification": false,
+    "reference_sql_corrections": [],
+    "saved_output_compatibility": "compatible_grading_only",
+    "human_review": "pending"
+  }
+}

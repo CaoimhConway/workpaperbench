@@ -1,0 +1,269 @@
+{
+  "rationale": "Build Airbnb booking and cash-conversion workpapers through FY2025. Produce eight quarterly outputs, retain the discrepancy between rounded-input ADR and reported ADR, and calculate the four FY2025 rolling cash windows. Distinguish the hybrid booked unit, revenue recognition timing, implied take rate and same-period financial margins.",
+  "source_group": "airbnb-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "39caacc92bfe3ab3f16f1bac1cd6124cf24ad9d830066c6ab1167f2f3fb57b13",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "1e69e7a145ffbb53a134ec6c7eca0adb414e8a7a7d03c370ad404797b6855089",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "8f6e02f418d3c765feef97d55a88ff622bef9b80e714adc192025c586f706b8f",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "228f1fc05f0d4a2c50f8f47cb74540abc09466d8b2af1d63b0b7354408dbe998",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "79cbda74cc063fe5c73a39bc8a2899e9ec44eb6ec02c6b0a8e950401f7865713",
+    "claim_mapping": {
+      "booking_ratio_identifies_fee": "claim_1",
+      "q4_annualization_equals_ttm": "claim_2",
+      "ttm_fcf_increased": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "booking_ratio_identifies_fee",
+      "assertion": "Airbnb increased its contractual booking fee percentage from FY2024 to FY2025.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "b07:s01",
+          "b07:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b07:s03"
+      ],
+      "source_grounded_reason": "Revenue and GBV have different recognition timing and GBV includes taxes, cleaning fees and host earnings. The revenue-to-GBV ratio cannot establish the direction of a contractual fee change."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "281b3ad3c7767fd5a9a7852c1ef871cc216a6f7c374493bc2028dd674d45c7b6",
+    "maintenance_rationale": "Booking-unit scope and recognition timing limit fee inference, and quarter annualization fails under actual seasonality. A repair must combine the correct rolling window and denominator while retaining honest rounding discrepancies.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_booking_ratios.sql",
+      "starting_quarter_cash.sql",
+      "starting_rolling_cash.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "2c01f7435bf8e11c9437008d07a06ba2d8a30b7aaac4cbf299d9e026cf8ed8fd",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "measurement_revision": {
+    "prior_task_sha256": "040c5da5ac9fb0b5cdb5adb56a3bf64bfd7f3220a6ac9cfea367e947cc1b23e7",
+    "public_definition_addenda": {
+      "booking_ratios": "adr_rounding_residual_usd is the rounded-input GBV quotient less published ADR.",
+      "rolling_cash": "ttm_fcf_margin_pct is 100 times the reconstructed four-quarter FCF sum divided by the matching four-quarter revenue sum. revenue_residual_usd_million and fcf_residual_usd_million are the corresponding reconstructed four-quarter sums less reported TTM disclosures."
+    },
+    "new_public_definitions": {},
+    "additional_context_evidence": {},
+    "financial_inputs_changed": false,
+    "reference_sql_changed": false,
+    "human_review": "pending"
+  },
+  "evidence_revision": {
+    "review_id": "workflow-evidence-contract-review-20261022",
+    "prior_task_sha256": "c7b830217869d6a9839a1b20082a7ef6fc66ff09856cf5684755c144fc71e52d",
+    "changes": [
+      {
+        "group": "tables",
+        "output": "booking_ratios",
+        "before": {
+          "evidence": [
+            [
+              "b07:s01",
+              "b07:s02"
+            ]
+          ],
+          "context_evidence_allowed": []
+        },
+        "after": {
+          "evidence": [
+            [
+              "b07:s01",
+              "b07:s02"
+            ],
+            [
+              "b07:s01"
+            ]
+          ],
+          "context_evidence_allowed": []
+        }
+      },
+      {
+        "group": "tables",
+        "output": "quarter_cash",
+        "before": {
+          "evidence": [
+            [
+              "b07:s02",
+              "b07:s03"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b07:s01"
+          ]
+        },
+        "after": {
+          "evidence": [
+            [
+              "b07:s01"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b07:s02",
+            "b07:s03"
+          ]
+        }
+      },
+      {
+        "group": "tables",
+        "output": "rolling_cash",
+        "before": {
+          "evidence": [
+            [
+              "b07:s03"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b07:s02"
+          ]
+        },
+        "after": {
+          "evidence": [
+            [
+              "b07:s03"
+            ],
+            [
+              "b07:s01"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b07:s02"
+          ]
+        }
+      },
+      {
+        "group": "claims",
+        "output": "claim_1",
+        "before": {
+          "evidence": [
+            [
+              "b07:s01",
+              "b07:s02"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b07:s03"
+          ]
+        },
+        "after": {
+          "evidence": [
+            [
+              "b07:s01",
+              "b07:s02"
+            ],
+            [
+              "b07:s02"
+            ]
+          ],
+          "context_evidence_allowed": []
+        }
+      },
+      {
+        "group": "claims",
+        "output": "claim_2",
+        "before": {
+          "evidence": [
+            [
+              "b07:s03"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b07:s02"
+          ]
+        },
+        "after": {
+          "evidence": [
+            [
+              "b07:s03"
+            ],
+            [
+              "b07:s01"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b07:s02"
+          ]
+        }
+      },
+      {
+        "group": "claims",
+        "output": "claim_3",
+        "before": {
+          "evidence": [
+            [
+              "b07:s03"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b07:s02"
+          ]
+        },
+        "after": {
+          "evidence": [
+            [
+              "b07:s03"
+            ],
+            [
+              "b07:s01"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b07:s02"
+          ]
+        }
+      }
+    ],
+    "grading_only": true,
+    "authored_reference_citations": {
+      "tables": {
+        "quarter_cash": [
+          "b07:s01",
+          "b07:s02",
+          "b07:s03"
+        ]
+      }
+    },
+    "public_requirements_changed": false,
+    "human_review": "pending"
+  }
+}

@@ -565,9 +565,23 @@ BOUNDARIES
             agent = {"name": "hermes", "model_name": "custom/" + arguments.model,
                      "override_timeout_sec": arguments.wall, "override_setup_timeout_sec": 1200,
                      "kwargs": {"version": "v0.21.4+canary.20261004T084456Z", "toolsets": configuration["candidate"].get("toolsets", "file,terminal,skills") if configuration else "file,terminal,skills"}}
+        environment = {"type": "docker"}
+        if arguments.dataset in ("workflow-v12", "workflow-v13", "workflow-v14", "workflow-v15"):
+            environment.update(
+                import_path="workpaperbench.runtime_integrity:VerifiedDockerEnvironment",
+                kwargs={"canonical_root": str(ROOT), "expected_manifest": manifest["manifest_id"],
+                        "expected_task": spec["task_id"],
+                        "execution_instruction_sha256": hashlib.sha256(
+                            (task / "instruction.md").read_bytes()).hexdigest()})
+            receipt["runtime_integrity"] = {
+                "environment": environment["import_path"],
+                "runtime_sha256": hashlib.sha256(
+                    (ROOT / "workpaperbench/runtime_integrity.py").read_bytes()).hexdigest(),
+                "expected_manifest": manifest["manifest_id"], "expected_task": spec["task_id"],
+                "diagnostics": "Local controller-only runtime-integrity directory, review before sharing"}
         config = TrialConfig.model_validate({"task": {"path": str(task)}, "trial_name": arguments.attempt,
                                            "trials_dir": str(output / "trials"), "agent": agent,
-                                           "environment": {"type": "docker"}})
+                                           "environment": environment})
         trial = await Trial.create(config)
         async def enforce_local_network(event):
             command = ['docker', 'ps', '--filter', 'label=com.docker.compose.project=' + arguments.attempt + '__env',

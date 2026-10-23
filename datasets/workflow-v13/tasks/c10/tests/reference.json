@@ -1,0 +1,51 @@
+{
+  "task_id": "workflow-v13-c10",
+  "tables": [
+    {
+      "id": "regional_currency",
+      "file": "regional_currency.sql",
+      "evidence": [
+        "c10:s01"
+      ]
+    },
+    {
+      "id": "annual_currency_margin",
+      "file": "annual_currency_margin.sql",
+      "evidence": [
+        "c10:s02"
+      ]
+    },
+    {
+      "id": "forecast_bounds",
+      "file": "forecast_bounds.sql",
+      "evidence": [
+        "c10:s02",
+        "c10:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "c10:s01",
+        "c10:s02"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "c10:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "supported",
+      "evidence": [
+        "c10:s03"
+      ]
+    }
+  ]
+}

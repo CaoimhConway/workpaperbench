@@ -1,0 +1,90 @@
+{
+  "rationale": "Build the Circle workpaper through FY2025 under both disclosed adjusted-expense definitions. Include the seven disclosed annual/quarterly periods and reconstruct first-nine-month expense bridges for FY2024 and FY2025. Attribute the annual change in additional exclusions by component. Reconcile reserve and other income with distribution costs, then calculate the two issuer-defined margins for FY2024, FY2025 and both Q4 comparisons. Keep definition changes separate from an economic improvement claim.",
+  "source_group": "circle-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "ebf75570394ebc061c7d3088cbd8f08b123b75cd0a6abe59b9b73fd24fae93e0",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "f2189c9b09adb2699ff79d30c4c6f1f91ed93e115ea202731d0f31be0916b876",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "7edb01623410f1cf6efba20e66dd56274da064784716b8472cd75d951cd1e37b",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "55193fdfac34b5b54808a95ec64dd97d6d2df66055a8e40e7ed0f336fec369e2",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "08f941df1742b4b9560ce728ce4dd9d277aa9e8960fa37548b4c536c69462944",
+    "claim_mapping": {
+      "new_definition_lower": "claim_1",
+      "constant_balance_rate_effect_identified": "claim_2",
+      "ebitda_margin_uses_revenue": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "constant_balance_rate_effect_identified",
+      "assertion": "Reserve-yield changes contributed more than half of the FY2024-to-FY2025 change in reserve income.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "a03:s02",
+          "a03:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "The supplied operations provide annual reserve income. The definitions state that yield and average circulation both affect reserve income, but do not provide the separate constant-balance rate contribution needed to decide this causal majority claim."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "2ac9e78fe2f16dfc76e52453a30374921110d31931223d1991187d704b11d949",
+    "maintenance_rationale": "A stablecoin issuer cost model can appear to improve solely because the adjusted definition changes. Updating both bases, deriving nine-month comparisons and reconciling two different margin denominators produces an actionable research artifact without inventing an interest-rate attribution.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_definition_attribution.sql",
+      "starting_expense_model.sql",
+      "starting_operating_margins.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "efbc9722527ed5aa2c6eb41fdda8e5af80649679e4299bcd616c7cae6cff97c7",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "measurement_revision": {
+    "prior_task_sha256": "b7b97c5667ea572df3427d6d7f4966171145544474f848f99c434082b0e3e8ef",
+    "public_definition_addenda": {
+      "expense_model": "prior_residual_usd_thousand is reconstructed prior-definition expense (GAAP expense plus signed prior adjustments) less independently reported prior-definition expense. new_residual_usd_thousand is reconstructed new-definition expense (GAAP expense plus signed prior and extra adjustments) less independently reported new-definition expense.",
+      "operating_margins": "Reconstructed revenue is reserve income plus other revenue. Reconstructed costs are distribution plus other costs. RLDC is reconstructed revenue less reconstructed costs. revenue_usd_thousand is the reconstructed component sum. rldc_margin_pct is 100 times reconstructed RLDC divided by reconstructed revenue. adjusted_ebitda_margin_pct is 100 times independently reported adjusted EBITDA divided by reconstructed RLDC. revenue_residual_usd_thousand is reconstructed revenue less independently reported total revenue. cost_residual_usd_thousand is reconstructed costs less independently reported total costs. The component-based RLDC margin is an analytical reconstruction and can differ from the issuer-reported margin when the reported total differs from its components."
+    },
+    "new_public_definitions": {},
+    "additional_context_evidence": {},
+    "financial_inputs_changed": false,
+    "reference_sql_changed": false,
+    "human_review": "pending"
+  }
+}

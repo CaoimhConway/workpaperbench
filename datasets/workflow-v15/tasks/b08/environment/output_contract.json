@@ -1,0 +1,153 @@
+{
+  "tables": {
+    "category_economics": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "subscription_gp_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "merchant_gp_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "subscription_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "merchant_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "operating_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "merchant_revenue_to_gmv_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year",
+        "months"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "cash_generation": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fcf_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fcf_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "year",
+        "months"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "subscription_stock_bridge": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "mrr_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "exit_annual_run_rate_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "observed_annual_subscription_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "run_rate_minus_observed_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "run_rate_gap_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "The December exit MRR annual run rate equals observed annual subscription revenue in FY2025.",
+    "claim_2": "Merchant solutions has a lower FY2025 gross margin percentage than subscription solutions.",
+    "claim_3": "From FY2024 to FY2025, merchant-solutions gross profit increased by USD 767 million, exceeding the USD 316 million increase in subscription-solutions gross profit."
+  },
+  "definitions": {
+    "category_economics": "Both years, months=3 Q4, 9 first nine months, 12 annual. Category gross margins use their own revenue denominators. operating_income_usd_million is reconstructed as subscription and merchant revenue less their costs and operating expense. residual_usd_million is that reconstructed operating income less the independently reported operating-income observation. Keep the reported observation independent when they disagree.",
+    "cash_generation": "FCF is reconstructed as operating cash less capital expenditure, including for fcf_usd_million and the FCF-margin numerator. FCF margin uses total company revenue and matched periods. residual_usd_million is reconstructed FCF less the independent reported FCF observation. Do not replace the reported observation with the reconstruction.",
+    "subscription_stock_bridge": "Two December stocks. Twelve times exit MRR is a hypothetical annual run rate. Gap is run rate less actual annual subscription revenue, with percentage denominator actual revenue."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

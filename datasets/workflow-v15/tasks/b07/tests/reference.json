@@ -1,0 +1,53 @@
+{
+  "task_id": "workflow-v15-b07",
+  "tables": [
+    {
+      "id": "booking_ratios",
+      "file": "booking_ratios.sql",
+      "evidence": [
+        "b07:s01",
+        "b07:s02"
+      ]
+    },
+    {
+      "id": "quarter_cash",
+      "file": "quarter_cash.sql",
+      "evidence": [
+        "b07:s01",
+        "b07:s02",
+        "b07:s03"
+      ]
+    },
+    {
+      "id": "rolling_cash",
+      "file": "rolling_cash.sql",
+      "evidence": [
+        "b07:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "unresolved",
+      "evidence": [
+        "b07:s01",
+        "b07:s02"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "b07:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "supported",
+      "evidence": [
+        "b07:s03"
+      ]
+    }
+  ]
+}

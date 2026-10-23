@@ -4,7 +4,7 @@ Reproducible evaluations for financial research agents
 
 WorkpaperBench tests whether agents can reconcile financial sources, calculate metrics consistently and support their conclusions with frozen financial evidence.
 
-[Quickstart](#quickstart) · [Execution guide](docs/RUNNING.md) · [Methods](docs/WORKFLOW.md) · [Task contract](datasets/workflow-v11/tasks/c01/instruction.md) · [Prepared release](reports/workflow-v11/README.md)
+[Quickstart](#quickstart) · [Execution guide](docs/RUNNING.md) · [Methods](docs/WORKFLOW.md) · [Task contract](datasets/workflow-v11/tasks/c01/instruction.md) · [Validation record](reports/workflow-v11/README.md)
 
 ## Scope
 
@@ -63,8 +63,8 @@ Use a Linux controller with uv, Docker Engine and Docker Compose installed:
 uv tool install --python 3.12 'harbor==0.23.0'
 ```
 
-The prepared `v0.6.3-rc.1` release is local and unpublished. From this checkout,
-run one `c01` oracle attempt. This uses the authored solution with no model calls:
+From this checkout, run one `c01` oracle attempt. This uses the authored solution
+with no model calls:
 
 ```sh
 harbor run -p datasets/workflow-v11/tasks -i c01 --agent oracle -k 1 \

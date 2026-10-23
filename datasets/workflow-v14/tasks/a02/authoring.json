@@ -1,0 +1,105 @@
+{
+  "rationale": "Build the Meta cash-generation and segment workpaper for FY2024 and FY2025. Reconstruct the first nine months from full-year and Q4 disclosures, and report Q4, first-nine-month and annual outputs for both years. Reconcile operating cash flow from net income, noncash adjustments and operating working-capital changes. Apply the issuer free-cash-flow definition, including finance-lease principal. Calculate both segment margins without double-counting advertising within Family of Apps.",
+  "source_group": "meta-fy2025-cashflow-segments",
+  "split": "development",
+  "exposure": "Newly authored development case, never held out",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "05225e95ad0d134d01fc874003deb6396b411fae34cfe9809b0c8bfb63770312",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "011b734316e1b8063f3f35b11427946e1e97222b24676c49d9fe6f8df2eba26f",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "8350bf388552e86605cbe0c36faf1a6e7eee0a29f6aa8ea5375267631d79f497",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "2cbcfcb425f27939e49a55777af60d3ec1c32ba61a2e662dbbe2c9131f23fcf9",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "524ffc064e1d084a147902b47b1ccaf024dadab4640cfbc557aa405451fa9c34",
+    "claim_mapping": {
+      "annual_fcf_increased": "claim_1",
+      "foa_income_covers_rl_loss": "claim_2",
+      "tax_adjustment_future_cash_identifiable": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "tax_adjustment_future_cash_identifiable",
+      "assertion": "Using the issuer free-cash-flow definition, free cash flow for the first nine months of FY2025 was USD 29,508 million.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a02:s01",
+          "a02:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "Subtract Q4 from annual operating cash, property purchases and finance-lease principal, preserving the cash-outflow signs. This tests duration and issuer-definition reconciliation without repeating the annual direction claim.",
+      "independent_calculation": "(115800 - 36214) - (69691 - 21383) - (2524 - 754) = 29508 USD million"
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "b8584b69cdd06fe6e6ccb2d262b12dfbbc0a384bf71e6bc41c42c6553cdae9ba",
+    "maintenance_rationale": "An analyst updating a cash-conversion model must reconcile statement sections and retain lease-funded capital spending. The period bridge and segment model provide different views of economic performance, while a noncash tax adjustment alone cannot quantify a future cash benefit.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_cash_model.sql",
+      "starting_operating_cash_bridge.sql",
+      "starting_segment_model.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "762dcb47c21c10fca42907205fa694c213ce2eaf0088ce73339959fbad734215",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "grading_contract_revision": {
+    "prior_task_sha256": "fc77da51bb0ab10d353df339061a293d9d6fe1204ba7a52ad805b93cd23a8966",
+    "additional_sufficient_evidence": {
+      "claim_1": [
+        [
+          "a02:s03"
+        ]
+      ]
+    },
+    "public_definitions": {},
+    "observation_date_context_added": false,
+    "original_observations_changed": false,
+    "original_targets_changed": false,
+    "human_review": "pending"
+  },
+  "measurement_revision": {
+    "prior_task_sha256": "219a451397b67312121db97393218f1fbf64b3cdcc6beed3a19fa1e162a3a4ad",
+    "public_definition_addenda": {
+      "segment_model": "For each segment and matching period, operating_margin_pct is 100 times that segment's operating income divided by that segment's revenue. Use the same segment and period for both values."
+    },
+    "new_public_definitions": {},
+    "additional_context_evidence": {},
+    "financial_inputs_changed": false,
+    "reference_sql_changed": false,
+    "human_review": "pending"
+  }
+}

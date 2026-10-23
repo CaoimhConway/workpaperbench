@@ -1,0 +1,80 @@
+{
+  "rationale": "Build a PayPal engagement and margin workpaper through FY2025. Include all five quarter rows, distinguish quarterly from trailing-year engagement, and reconstruct the annual activity and revenue bridge from four quarters. Reconcile transaction margin and its customer-interest exclusion for both annual and Q4 comparisons. Report rounding residuals instead of forcing them to zero, and distinguish payment value, recognized revenue and account activity.",
+  "source_group": "paypal-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "e6d5b4c449f511a4b2ac8cb5bd7242f402c73128fa1ddbab81314bb77ae36c42",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "18739b5dd2353afac8f63d55848711511086ee5304e91ebf3812e756dc91bd2f",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "a7f15969e9d95d4ac05238698fc515eca96ddb7e65f3785b1c3fb52b4bed5315",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "5d9835c07e96ae34d6ecd542047c8dd114ded838d041797d752411ef95dda887",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "97db342b09ff914fc6a81d558230a0580cae4d25845e12644fa467f4947f1006",
+    "claim_mapping": {
+      "annual_ex_interest_margin_dollars_increased": "claim_1",
+      "unique_people_identifiable": "claim_2",
+      "quarter_ratio_equals_ttm": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "unique_people_identifiable",
+      "assertion": "Using the supplied rounded values, Q4 FY2025 payment transactions divided by December 2025 active accounts is approximately 15.38 transactions per account.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "b05:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b05:s02"
+      ],
+      "source_grounded_reason": "Both quarterly transactions and period-end active accounts are supplied. The descriptive quarter ratio is computable even though the issuer activity metric uses trailing-twelve-month transactions and accounts are not unique people.",
+      "independent_calculation": "6754 / 439 = 15.38496583143508 transactions per account"
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "7a1974168225906b956c52fe4f437f00b7a211e89c66441335723529b43318d7",
+    "maintenance_rationale": "Quarterly transactions are often paired with a trailing-year account metric. Fixing that period mismatch must preserve the valid quarter calculations and margin reconciliation. The revenue bridge and interest exclusion prevent payment value, pricing and financial margin from being treated as interchangeable.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_annual_activity_bridge.sql",
+      "starting_margin_reconciliation.sql",
+      "starting_quarter_activity.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "ad36802f49f84d34cabb605327bd745a1f53bb1f582b7167f3e2d3e2e6bbe5d5",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  }
+}

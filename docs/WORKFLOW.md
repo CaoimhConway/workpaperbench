@@ -179,8 +179,8 @@ without any Mac/Lima dependency:
   --dataset workflow-v11 --tasks all --output .local/my-validity-suite.json
 ```
 
-The explicit `--executor local-lima` option retains the owner-specific maintenance
-wrapper for historical work. It is not the public execution default. Historical
+The explicit `--executor local-lima` option retains the historical Mac/Lima maintenance
+wrapper. It is not the public execution default. Historical
 corrected-replay receipts and scripts retain their original identities.
 
 Use fresh output paths and attempt prefixes. The prototype command runs Microsoft,
@@ -255,7 +255,7 @@ retain derivations. Independent financial-domain review remains pending.
 
 A measured comparison requires frozen profiles and budgets, all failures retained,
 task-level paired reporting, and uncertainty that accounts for repeated attempts.
-The owner's [historical comparison plan](../config/future-comparison.json) remains disabled.
+The [historical comparison proposal](../config/future-comparison.json) was not executed.
 It does not restrict external task selection. The
 three corrected development replays use different settings and include a continued
 session. They do not establish construction accuracy or a model ranking. Human

@@ -7,6 +7,67 @@ The tested guest has six CPUs and 12 GiB RAM. Use one concurrent candidate trial
 and at most two oracle trials. All inference examples in this guide are prepared
 but not executed for workflow-v11.
 
+## Runtime input integrity
+
+Canonical task runs should use the checked Docker environment from this source
+checkout. It gives every copied build input a content-specific path, verifies
+candidate inputs and separate verifier assets against the controller's selected
+catalog before agent execution, and rechecks trusted files before grading.
+Dependency layers remain cacheable. Each run must bind one task and its complete
+manifest ID explicitly.
+
+For a selected task, replace `--env docker` in a native Harbor command with:
+
+```sh
+--env workpaperbench.runtime_integrity:VerifiedDockerEnvironment \
+  --ek canonical_root="$PWD" \
+  --ek expected_manifest='<complete canonical manifest ID>' \
+  --ek expected_task='<dataset-task ID>'
+```
+
+Run Harbor with `PYTHONPATH="$PWD"` from the exact checkout so it can load the
+environment and existing diagnostic sanitizer. Use one selected task per
+invocation, with a distinct trial identity and no automatic retries. This
+environment supports the prepared single-step tasks through the plain agent
+route, their Python/SQLite Dockerfiles and the network-only verifier Compose
+override. User-agent bridges have not been validated with this guard. It rejects unsupported ignore rules,
+Compose paths and COPY options rather than silently changing their meaning.
+
+A mismatch raises `RuntimeInputIntegrityError` and is an infrastructure failure,
+not a scored financial answer. No semantic verifier runs after a failed
+trusted-file check. The frozen verifier's own trusted-input guard stays active.
+A mismatch after candidate execution still consumes that attempt under its
+campaign's accounting rules.
+
+The controller keeps filenames, expected and actual hashes, selected catalog
+identity, image/container identities and build/copy logs in the trial's
+`runtime-integrity` directory. Small offending inputs are retained before cleanup
+when the credential-pattern scan permits. These restricted local diagnostics
+can include trusted task data and controller paths. Review and sanitize them
+before sharing. They are outside candidate log mounts.
+
+Reproduce the inference-free checks on the dedicated Linux controller:
+
+```sh
+python3 scripts/validate_runtime_integrity.py --dataset workflow-v13 \
+  --output .local/runtime-integrity-regressions
+python3 scripts/validate_runtime_integrity.py --mode cold \
+  --output .local/runtime-integrity-copy-cold
+python3 scripts/validate_runtime_integrity.py --dataset workflow-v13 \
+  --mode ordered --output .local/runtime-integrity-ordered
+python3 scripts/validate_runtime_integrity.py --dataset workflow-v13 \
+  --mode grading --output .local/runtime-integrity-grading
+```
+
+The first command tests warm sequential tasks, equal-size/equal-time synthetic
+SQLite contexts, fresh candidate state, native scripted endpoint preflight
+rejections and trusted-file rejection before grading. The cold fixture changes
+a harmless COPY operand, retaining reusable dependency layers. The ordered check
+materializes the 24 evaluation tasks in queue order without inference. The grading
+check accepts authored references and rejects frozen-derived and forced-zero
+residual queries in the constrained separate verifier. These checks establish no
+model-performance result.
+
 ## Direct Harbor execution
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and
@@ -17,8 +78,8 @@ then install the pinned harness:
 uv tool install --python 3.12 'harbor==0.23.0'
 ```
 
-The prepared release is `v0.6.3-rc.1`, not yet published. Use the exact local
-checkout for every command below. Start with the [single-task quickstart](../README.md#quickstart).
+The commands below use `workflow-v11` from this checkout.
+Start with the [single-task quickstart](../README.md#quickstart).
 Full qualification then runs all 30 oracle solutions five times before model evaluation:
 
 ```sh
@@ -234,8 +295,8 @@ frozen configurations and all scheduled outcomes. Follow the
 
 The `wpb` interface below adds explicit endpoint-and-port restrictions, pinned
 Hermes compatibility, identity-bound receipts and detailed financial reports.
-It uses one tool-capable Chat Completions endpoint. No Mac, Lima, owner account,
-environment marker or development-only permission is required.
+It uses one tool-capable Chat Completions endpoint from a qualified Linux
+controller. The native execution route is portable across compatible controllers.
 
 The default `workflow-v11` construction track supplies source observations and an
 output contract, with no starting SQL. Models write all three queries.
@@ -496,11 +557,18 @@ tools and their order unchanged. IDs and timestamps belong in transport metadata
 
 The optional [OpenRouter example](../config/openrouter-execution.example.json)
 uses existing Terminus-2 hooks. Resolve its endpoint slug and merge its
-`llm_call_kwargs` into your frozen configuration. For one configured pilot job:
+`llm_call_kwargs` into your frozen configuration. Its `model_info` is specific to
+the named DeepSeek model. Preserve `supports_reasoning: true` there so LiteLLM
+forwards the requested high reasoning setting. Verify the selected model's
+capabilities before using that metadata with another model. The flag describes
+support and does not enable reasoning for a model that lacks it.
+For one configured pilot job using the example's named model:
 
 ```bash
 call_kwargs=$(python3 -c 'import json; print(json.dumps(json.load(open(".local/resolved-openrouter.json"))["llm_call_kwargs"]))')
+model_info=$(python3 -c 'import json; print(json.dumps(json.load(open(".local/resolved-openrouter.json"))["model_info"]))')
 harbor run "${recipe[@]}" -i c01 -k 1 \
+  --ak "model_info=$model_info" \
   --ak "llm_call_kwargs=$call_kwargs" --ak "session_id=$attempt_id" \
   --jobs-dir "$jobs_dir" --job-name "$attempt_id"
 ```
@@ -540,6 +608,24 @@ Usage copied into a native regrade is labeled `inherited_model_metrics` and is
 excluded from new-execution timing and token totals.
 
 `./wpb analyze` reads local files without importing Harbor or contacting services.
+Supply the complete retained OpenRouter response array with `--usage`, including
+length-truncated responses followed by recovery:
+
+```sh
+./wpb analyze --jobs .local/jobs/original-job \
+  --usage .local/original-job-provider-responses.json \
+  --output .local/original-job-analysis-2.json
+```
+
+`provider_usage_summary` counts distinct generation IDs and merges repeated
+observations of the same generation. Conflicting measurements remain unknown.
+Its coverage describes the supplied records, without attributing them to new
+execution during a regrade. Missing IDs or usage leave complete totals unknown.
+Cached input is included in input, and reasoning output is included in output.
+Keep these provider charges separate from the native `summary` estimates, which
+can omit truncated calls. Generation charges, key-usage deltas and account deltas
+are reconciliation observations, not additional costs to add to response charges.
+
 Regenerate reports with fresh output filenames. It retains exceptions, interrupted
 directories, unrecorded counts, configuration/lock hashes, declared execution
 settings, returned model IDs and native timing/usage. New configured receipts also
@@ -579,7 +665,7 @@ Harbor 0.23.0 removes result-less trial directories and its CLI defaults to remo
 cancelled trials. Preserve those outcomes and evidence. Do not restart the pilot
 shell loop over existing job names.
 
-At the next authorized provider smoke, retain actual request/response model and
+For a provider compatibility check, retain actual request/response model and
 endpoint IDs, cache reads/writes, reasoning usage, provider charges, failed calls
 and request retries. Compare setup with recorded cache state, then request,
 execution and verifier latency under the frozen deadline. The offline adapter and

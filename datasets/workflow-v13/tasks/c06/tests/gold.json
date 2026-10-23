@@ -1,0 +1,1079 @@
+{
+  "task_id": "workflow-v13-c06",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "geographic_currency": {
+      "columns": {
+        "comparison": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "quarter_over_quarter",
+            "year_over_year"
+          ]
+        },
+        "region": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "APAC",
+            "EMEA",
+            "Other Americas",
+            "United States"
+          ]
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fx_effect_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "reported_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "cc_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "comparison",
+        "region"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c06:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "year_over_year",
+          "United States",
+          41196.0,
+          46063.0,
+          0.0,
+          46063.0,
+          11.814253811049616,
+          11.814253811049616
+        ],
+        [
+          "year_over_year",
+          "EMEA",
+          24683.0,
+          28262.0,
+          780.0,
+          27482.0,
+          14.499858202001377,
+          11.339788518413483
+        ],
+        [
+          "year_over_year",
+          "APAC",
+          13823.0,
+          16480.0,
+          115.0,
+          16365.0,
+          19.221587209722927,
+          18.389640454315273
+        ],
+        [
+          "year_over_year",
+          "Other Americas",
+          4938.0,
+          5735.0,
+          -352.0,
+          6087.0,
+          16.140137707573917,
+          23.268529769137302
+        ],
+        [
+          "quarter_over_quarter",
+          "United States",
+          43964.0,
+          46063.0,
+          0.0,
+          46063.0,
+          4.7743608406878355,
+          4.7743608406878355
+        ],
+        [
+          "quarter_over_quarter",
+          "EMEA",
+          25923.0,
+          28262.0,
+          1270.0,
+          26992.0,
+          9.022875438799522,
+          4.123751109053736
+        ],
+        [
+          "quarter_over_quarter",
+          "APAC",
+          14854.0,
+          16480.0,
+          242.0,
+          16238.0,
+          10.946546384812171,
+          9.317355594452673
+        ],
+        [
+          "quarter_over_quarter",
+          "Other Americas",
+          5233.0,
+          5735.0,
+          109.0,
+          5626.0,
+          9.59296770494936,
+          7.510032486145614
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "consolidated_currency_bridge": {
+      "columns": {
+        "comparison": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "quarter_over_quarter",
+            "year_over_year"
+          ]
+        },
+        "prior_reported_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_reported_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fx_effect_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "hedging_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "reported_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "cc_disclosure_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "comparison"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c06:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "year_over_year",
+          84742.0,
+          96428.0,
+          95997.0,
+          11357.0,
+          543.0,
+          -214.0,
+          11686.0,
+          13.418005671077506,
+          0.0
+        ],
+        [
+          "quarter_over_quarter",
+          90234.0,
+          96428.0,
+          94919.0,
+          4945.0,
+          1621.0,
+          -372.0,
+          6194.0,
+          5.496032187076266,
+          0.0
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c06:s03"
+      ]
+    },
+    "revenue_growth_components": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "Cloud",
+            "Hedging",
+            "Network",
+            "Other Bets",
+            "Search",
+            "Subscriptions platforms devices",
+            "YouTube ads"
+          ]
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_reported_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c06:s02"
+        ]
+      ],
+      "rows": [
+        [
+          "Search",
+          48509.0,
+          54190.0,
+          5681.0,
+          48.61372582577443
+        ],
+        [
+          "YouTube ads",
+          8663.0,
+          9796.0,
+          1133.0,
+          9.695361971589938
+        ],
+        [
+          "Network",
+          7444.0,
+          7354.0,
+          -90.0,
+          -0.770152319014205
+        ],
+        [
+          "Subscriptions platforms devices",
+          9312.0,
+          11203.0,
+          1891.0,
+          16.181755947287353
+        ],
+        [
+          "Cloud",
+          10347.0,
+          13624.0,
+          3277.0,
+          28.04210166010611
+        ],
+        [
+          "Other Bets",
+          365.0,
+          373.0,
+          8.0,
+          0.06845798391237377
+        ],
+        [
+          "Hedging",
+          102.0,
+          -112.0,
+          -214.0,
+          -1.8312510696559987
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c06:s01",
+        "c06:s03"
+      ]
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c06:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c06:s03"
+      ]
+    },
+    "claim_2": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c06:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c06:s01",
+        "c06:s03"
+      ]
+    },
+    "claim_3": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c06:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c06:s01"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "scaled_financial_observations",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "geographic_currency": [
+          [
+            "year_over_year",
+            "United States",
+            82392.0,
+            92126.0,
+            0.0,
+            92126.0,
+            11.814253811049616,
+            11.814253811049616
+          ],
+          [
+            "year_over_year",
+            "EMEA",
+            49366.0,
+            56524.0,
+            1560.0,
+            54964.0,
+            14.499858202001377,
+            11.339788518413483
+          ],
+          [
+            "year_over_year",
+            "APAC",
+            27646.0,
+            32960.0,
+            230.0,
+            32730.0,
+            19.221587209722927,
+            18.389640454315273
+          ],
+          [
+            "year_over_year",
+            "Other Americas",
+            9876.0,
+            11470.0,
+            -704.0,
+            12174.0,
+            16.140137707573917,
+            23.268529769137302
+          ],
+          [
+            "quarter_over_quarter",
+            "United States",
+            87928.0,
+            92126.0,
+            0.0,
+            92126.0,
+            4.7743608406878355,
+            4.7743608406878355
+          ],
+          [
+            "quarter_over_quarter",
+            "EMEA",
+            51846.0,
+            56524.0,
+            2540.0,
+            53984.0,
+            9.022875438799522,
+            4.123751109053736
+          ],
+          [
+            "quarter_over_quarter",
+            "APAC",
+            29708.0,
+            32960.0,
+            484.0,
+            32476.0,
+            10.946546384812171,
+            9.317355594452673
+          ],
+          [
+            "quarter_over_quarter",
+            "Other Americas",
+            10466.0,
+            11470.0,
+            218.0,
+            11252.0,
+            9.59296770494936,
+            7.510032486145614
+          ]
+        ],
+        "consolidated_currency_bridge": [
+          [
+            "year_over_year",
+            169484.0,
+            192856.0,
+            191994.0,
+            22714.0,
+            1086.0,
+            -428.0,
+            23372.0,
+            13.418005671077506,
+            0.0
+          ],
+          [
+            "quarter_over_quarter",
+            180468.0,
+            192856.0,
+            189838.0,
+            9890.0,
+            3242.0,
+            -744.0,
+            12388.0,
+            5.496032187076266,
+            0.0
+          ]
+        ],
+        "revenue_growth_components": [
+          [
+            "Search",
+            97018.0,
+            108380.0,
+            11362.0,
+            48.61372582577443
+          ],
+          [
+            "YouTube ads",
+            17326.0,
+            19592.0,
+            2266.0,
+            9.695361971589938
+          ],
+          [
+            "Network",
+            14888.0,
+            14708.0,
+            -180.0,
+            -0.770152319014205
+          ],
+          [
+            "Subscriptions platforms devices",
+            18624.0,
+            22406.0,
+            3782.0,
+            16.181755947287353
+          ],
+          [
+            "Cloud",
+            20694.0,
+            27248.0,
+            6554.0,
+            28.04210166010611
+          ],
+          [
+            "Other Bets",
+            730.0,
+            746.0,
+            16.0,
+            0.06845798391237377
+          ],
+          [
+            "Hedging",
+            204.0,
+            -224.0,
+            -428.0,
+            -1.8312510696559987
+          ]
+        ]
+      }
+    },
+    {
+      "name": "currency_translation_changes_reported_not_cc",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "geographic_currency": [
+          [
+            "year_over_year",
+            "United States",
+            41196.0,
+            46063.0,
+            0.0,
+            46063.0,
+            11.814253811049616,
+            11.814253811049616
+          ],
+          [
+            "year_over_year",
+            "EMEA",
+            24683.0,
+            28312.0,
+            830.0,
+            27482.0,
+            14.70242677146214,
+            11.339788518413483
+          ],
+          [
+            "year_over_year",
+            "APAC",
+            13823.0,
+            16480.0,
+            115.0,
+            16365.0,
+            19.221587209722927,
+            18.389640454315273
+          ],
+          [
+            "year_over_year",
+            "Other Americas",
+            4938.0,
+            5735.0,
+            -352.0,
+            6087.0,
+            16.140137707573917,
+            23.268529769137302
+          ],
+          [
+            "quarter_over_quarter",
+            "United States",
+            43964.0,
+            46063.0,
+            0.0,
+            46063.0,
+            4.7743608406878355,
+            4.7743608406878355
+          ],
+          [
+            "quarter_over_quarter",
+            "EMEA",
+            25923.0,
+            28312.0,
+            1320.0,
+            26992.0,
+            9.215754349419434,
+            4.123751109053736
+          ],
+          [
+            "quarter_over_quarter",
+            "APAC",
+            14854.0,
+            16480.0,
+            242.0,
+            16238.0,
+            10.946546384812171,
+            9.317355594452673
+          ],
+          [
+            "quarter_over_quarter",
+            "Other Americas",
+            5233.0,
+            5735.0,
+            109.0,
+            5626.0,
+            9.59296770494936,
+            7.510032486145614
+          ]
+        ],
+        "consolidated_currency_bridge": [
+          [
+            "year_over_year",
+            84742.0,
+            96478.0,
+            95997.0,
+            11357.0,
+            593.0,
+            -214.0,
+            11736.0,
+            13.418005671077506,
+            0.0
+          ],
+          [
+            "quarter_over_quarter",
+            90234.0,
+            96478.0,
+            94919.0,
+            4945.0,
+            1671.0,
+            -372.0,
+            6244.0,
+            5.496032187076266,
+            0.0
+          ]
+        ],
+        "revenue_growth_components": [
+          [
+            "Search",
+            48509.0,
+            54240.0,
+            5731.0,
+            48.83265167007498
+          ],
+          [
+            "YouTube ads",
+            8663.0,
+            9796.0,
+            1133.0,
+            9.654055896387185
+          ],
+          [
+            "Network",
+            7444.0,
+            7354.0,
+            -90.0,
+            -0.7668711656441718
+          ],
+          [
+            "Subscriptions platforms devices",
+            9312.0,
+            11203.0,
+            1891.0,
+            16.112815269256988
+          ],
+          [
+            "Cloud",
+            10347.0,
+            13624.0,
+            3277.0,
+            27.922631220177234
+          ],
+          [
+            "Other Bets",
+            365.0,
+            373.0,
+            8.0,
+            0.0681663258350375
+          ],
+          [
+            "Hedging",
+            102.0,
+            -112.0,
+            -214.0,
+            -1.8234492160872529
+          ]
+        ]
+      }
+    },
+    {
+      "name": "irrelevant_later_disclosures",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "geographic_currency": [
+          [
+            "year_over_year",
+            "United States",
+            41196.0,
+            46063.0,
+            0.0,
+            46063.0,
+            11.814253811049616,
+            11.814253811049616
+          ],
+          [
+            "year_over_year",
+            "EMEA",
+            24683.0,
+            28262.0,
+            780.0,
+            27482.0,
+            14.499858202001377,
+            11.339788518413483
+          ],
+          [
+            "year_over_year",
+            "APAC",
+            13823.0,
+            16480.0,
+            115.0,
+            16365.0,
+            19.221587209722927,
+            18.389640454315273
+          ],
+          [
+            "year_over_year",
+            "Other Americas",
+            4938.0,
+            5735.0,
+            -352.0,
+            6087.0,
+            16.140137707573917,
+            23.268529769137302
+          ],
+          [
+            "quarter_over_quarter",
+            "United States",
+            43964.0,
+            46063.0,
+            0.0,
+            46063.0,
+            4.7743608406878355,
+            4.7743608406878355
+          ],
+          [
+            "quarter_over_quarter",
+            "EMEA",
+            25923.0,
+            28262.0,
+            1270.0,
+            26992.0,
+            9.022875438799522,
+            4.123751109053736
+          ],
+          [
+            "quarter_over_quarter",
+            "APAC",
+            14854.0,
+            16480.0,
+            242.0,
+            16238.0,
+            10.946546384812171,
+            9.317355594452673
+          ],
+          [
+            "quarter_over_quarter",
+            "Other Americas",
+            5233.0,
+            5735.0,
+            109.0,
+            5626.0,
+            9.59296770494936,
+            7.510032486145614
+          ]
+        ],
+        "consolidated_currency_bridge": [
+          [
+            "year_over_year",
+            84742.0,
+            96428.0,
+            95997.0,
+            11357.0,
+            543.0,
+            -214.0,
+            11686.0,
+            13.418005671077506,
+            0.0
+          ],
+          [
+            "quarter_over_quarter",
+            90234.0,
+            96428.0,
+            94919.0,
+            4945.0,
+            1621.0,
+            -372.0,
+            6194.0,
+            5.496032187076266,
+            0.0
+          ]
+        ],
+        "revenue_growth_components": [
+          [
+            "Search",
+            48509.0,
+            54190.0,
+            5681.0,
+            48.61372582577443
+          ],
+          [
+            "YouTube ads",
+            8663.0,
+            9796.0,
+            1133.0,
+            9.695361971589938
+          ],
+          [
+            "Network",
+            7444.0,
+            7354.0,
+            -90.0,
+            -0.770152319014205
+          ],
+          [
+            "Subscriptions platforms devices",
+            9312.0,
+            11203.0,
+            1891.0,
+            16.181755947287353
+          ],
+          [
+            "Cloud",
+            10347.0,
+            13624.0,
+            3277.0,
+            28.04210166010611
+          ],
+          [
+            "Other Bets",
+            365.0,
+            373.0,
+            8.0,
+            0.06845798391237377
+          ],
+          [
+            "Hedging",
+            102.0,
+            -112.0,
+            -214.0,
+            -1.8312510696559987
+          ]
+        ]
+      }
+    },
+    {
+      "name": "independent_disclosure_discrepancy",
+      "database": "control-discrepancy.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "changes": [
+        [
+          "geography",
+          0,
+          "current_usd_million",
+          17
+        ]
+      ],
+      "tables": {
+        "geographic_currency": [
+          [
+            "year_over_year",
+            "United States",
+            41196.0,
+            46080.0,
+            0.0,
+            46080.0,
+            11.855519953393534,
+            11.855519953393534
+          ],
+          [
+            "year_over_year",
+            "EMEA",
+            24683.0,
+            28262.0,
+            780.0,
+            27482.0,
+            14.499858202001377,
+            11.339788518413483
+          ],
+          [
+            "year_over_year",
+            "APAC",
+            13823.0,
+            16480.0,
+            115.0,
+            16365.0,
+            19.221587209722927,
+            18.389640454315273
+          ],
+          [
+            "year_over_year",
+            "Other Americas",
+            4938.0,
+            5735.0,
+            -352.0,
+            6087.0,
+            16.140137707573917,
+            23.268529769137302
+          ],
+          [
+            "quarter_over_quarter",
+            "United States",
+            43964.0,
+            46063.0,
+            0.0,
+            46063.0,
+            4.7743608406878355,
+            4.7743608406878355
+          ],
+          [
+            "quarter_over_quarter",
+            "EMEA",
+            25923.0,
+            28262.0,
+            1270.0,
+            26992.0,
+            9.022875438799522,
+            4.123751109053736
+          ],
+          [
+            "quarter_over_quarter",
+            "APAC",
+            14854.0,
+            16480.0,
+            242.0,
+            16238.0,
+            10.946546384812171,
+            9.317355594452673
+          ],
+          [
+            "quarter_over_quarter",
+            "Other Americas",
+            5233.0,
+            5735.0,
+            109.0,
+            5626.0,
+            9.59296770494936,
+            7.510032486145614
+          ]
+        ],
+        "consolidated_currency_bridge": [
+          [
+            "year_over_year",
+            84742.0,
+            96445.0,
+            96014.0,
+            11374.0,
+            543.0,
+            -214.0,
+            11703.0,
+            13.438090737240076,
+            17.0
+          ],
+          [
+            "quarter_over_quarter",
+            90234.0,
+            96428.0,
+            94919.0,
+            4945.0,
+            1621.0,
+            -372.0,
+            6194.0,
+            5.496032187076266,
+            0.0
+          ]
+        ],
+        "revenue_growth_components": [
+          [
+            "Search",
+            48509.0,
+            54190.0,
+            5681.0,
+            48.61372582577443
+          ],
+          [
+            "YouTube ads",
+            8663.0,
+            9796.0,
+            1133.0,
+            9.695361971589938
+          ],
+          [
+            "Network",
+            7444.0,
+            7354.0,
+            -90.0,
+            -0.770152319014205
+          ],
+          [
+            "Subscriptions platforms devices",
+            9312.0,
+            11203.0,
+            1891.0,
+            16.181755947287353
+          ],
+          [
+            "Cloud",
+            10347.0,
+            13624.0,
+            3277.0,
+            28.04210166010611
+          ],
+          [
+            "Other Bets",
+            365.0,
+            373.0,
+            8.0,
+            0.06845798391237377
+          ],
+          [
+            "Hedging",
+            102.0,
+            -112.0,
+            -214.0,
+            -1.8312510696559987
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "1c27fa5375db2bfa6d24578e92c590db95e513a53499e8a2f601f15f4d69e79b",
+    "control-2.sqlite": "dd8c7433062bde889773d4647c85708c3c6f80d4d85ddd4cb57766dbd62002dc",
+    "control-3.sqlite": "741bb922050a604999ded879aecf144e222d01c8b72fc3daca57491a6f690489",
+    "control-discrepancy.sqlite": "ba44a5784b9d02037024e8e854d4d84e8e4c1133ad28d3b99129867c6eab270e",
+    "data.sqlite": "2290ade5a37a50fd8fc142a9f7d1ed965106873ef27d903437351a2342432a8b",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "81e26d9da535d3a03f0d95a212f5c746c2186fd7e44266dda5883264ac4cf370",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "557aaf177841f354b2bacd8ae9af015c62a04cb1d0480cca86cf3d79c77763e1",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

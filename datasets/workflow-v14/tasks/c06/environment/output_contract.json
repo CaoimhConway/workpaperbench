@@ -1,0 +1,186 @@
+{
+  "tables": {
+    "geographic_currency": {
+      "columns": {
+        "comparison": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "quarter_over_quarter",
+            "year_over_year"
+          ]
+        },
+        "region": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "APAC",
+            "EMEA",
+            "Other Americas",
+            "United States"
+          ]
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fx_effect_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "reported_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "cc_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "comparison",
+        "region"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "consolidated_currency_bridge": {
+      "columns": {
+        "comparison": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "quarter_over_quarter",
+            "year_over_year"
+          ]
+        },
+        "prior_reported_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_reported_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fx_effect_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "hedging_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "reported_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "cc_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "cc_disclosure_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "comparison"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "revenue_growth_components": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "Cloud",
+            "Hedging",
+            "Network",
+            "Other Bets",
+            "Search",
+            "Subscriptions platforms devices",
+            "YouTube ads"
+          ]
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_reported_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "The constant-currency growth denominator excludes prior-period hedging.",
+    "claim_2": "The year-over-year change in consolidated hedging revenue reduced the reported Q2 FY2025 revenue increase by USD 214 million.",
+    "claim_3": "Google Cloud contributes more than half the reported Q2 year-over-year revenue increase."
+  },
+  "definitions": {
+    "geographic_currency": "Two declared comparison contexts and four regions. CC current is current less that comparison FX effect.",
+    "consolidated_currency_bridge": "CC growth uses prior unhedged regional revenue. Reported growth decomposes into CC change, translation FX and the change in consolidated hedging. cc_disclosure_residual_usd_million is reconstructed regional constant-currency current revenue less independently reported consolidated constant-currency current revenue.",
+    "revenue_growth_components": "Seven leaf components, including hedging. Contributions divide by total reported Q2FY2025 less Q2FY2024 revenue."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

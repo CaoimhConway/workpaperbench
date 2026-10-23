@@ -1,0 +1,91 @@
+{
+  "rationale": "Build Salesforce FY2026 earnings workpapers with Q4 and annual comparisons and reconstructed first nine months. Reconcile operating and below-operating income, avoid double-counting restructuring SBC, and produce a labeled acquisition-scope revenue bridge without overstating an organic currency-adjusted conclusion.",
+  "source_group": "salesforce-fy2026-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "a86b1ecc4b7a068303eb1950a16720e2512a908ef5a8dafb7fbab81ad156fda1",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "82dcc481753e17bdfe7637a507adfb33ef2755410e7dfcf38e58565a75f887c0",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "f8b8de1f7c4e8a3b46e7a83fa4c78d8b1dd544d3a5b113c9aded1921b231f635",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "e316cc459f22a5b8fd8cbd15953e015600e49d08eea51dba23d7b5ca75f7a657",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "9a1316be1f490f7a53df78fe51ef93346423c58edd913542d3b382e6e3fe5ace",
+    "claim_mapping": {
+      "annual_acquisition_same_as_q4": "claim_1",
+      "offering_rename_changes_allocation": "claim_2",
+      "exact_organic_cc_growth": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_organic_cc_growth",
+      "assertion": "Subtracting the disclosed Informatica contribution from FY2026 total revenue gives an arithmetic current-period revenue amount of USD 41,126 million.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a08:s01",
+          "a08:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "Total FY2026 revenue is subscription/support plus professional services. Removing the USD 399 million disclosed acquisition contribution gives a defined arithmetic scope adjustment, without claiming exact organic constant-currency growth.",
+      "independent_calculation": "39388 + 2137 - 399 = 41126 USD million"
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "9116a0da0c26826697379a59820c67be6a889ce061fa68976290b7baeb7e3156",
+    "maintenance_rationale": "A November acquisition has the same cumulative and quarter contribution, while overlapping SBC labels invite a duplicate exclusion. Historical preservation and a bounded acquisition attribution interact with earnings reconstruction.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_acquisition_scope.sql",
+      "starting_income_model.sql",
+      "starting_operating_adjustment_bridge.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "4b10c9c5c034a3077b852d7cdb02fa43581a7e27e342435375d5ca8daecd557d",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "measurement_revision": {
+    "prior_task_sha256": "fc9aacffd4f733d3dce991cdc07a0a4de01e2df6782d8bdb52b9ec84f0cf59fa",
+    "public_definition_addenda": {
+      "income_model": "For each matching period, reconstructed pretax income is reconstructed operating income plus strategic gains and other income. Reconstructed net income is reconstructed pretax income plus signed tax. residual_usd_million is reconstructed net income less independently reported net income.",
+      "operating_adjustment_bridge": "Adjusted operating income is reconstructed GAAP operating income plus amortization, ordinary SBC and restructuring/acquisition exclusions, with restructuring SBC excluded from ordinary SBC so it is included once. adjusted_margin_pct is 100 times reconstructed adjusted operating income divided by reconstructed matching-period revenue (subscription plus professional services). residual_usd_million is reconstructed adjusted operating income less independently reported adjusted operating income."
+    },
+    "new_public_definitions": {},
+    "additional_context_evidence": {},
+    "financial_inputs_changed": false,
+    "reference_sql_changed": false,
+    "human_review": "pending"
+  }
+}

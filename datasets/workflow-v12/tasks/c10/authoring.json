@@ -1,0 +1,92 @@
+{
+  "rationale": "Reconcile Netflix FY2025 currency presentation with the FY2026 forecast. Use detailed Q4 regional precision, distinguish the annual beginning-year margin basis, and build low/high forecast implications using the reported FY2025 baseline. Assess the acquisition-expense and membership-denominator limits.",
+  "source_group": "netflix-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "c3ea36bdf0a2dc5ad5d185a683f3168e1c9e9243fc9880f6404bf715cb09ba62",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "919529fd29cb7324edce64e9c5e07d5b75276216cf11d449c8ee7939acb38213",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "1622706a1004c879cbe4d78c64266f15ceaccad8327872a359e49f27f2e2a931",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "beea2a71f850117cc773933c73eb385e7e2b3bf1fcfdedbe6a91b1e40395efc0",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "982f1f53bca8f55c71916077c9e2858cfc8bd40a8e347faa252867fc93974e05",
+    "claim_mapping": {
+      "beginning_year_margin_basis_matches_regional_basis": "claim_1",
+      "exact_average_member_revenue_identified": "claim_2",
+      "target_includes_acquisition_expense": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_average_member_revenue_identified",
+      "assertion": "The supplied 325 million paid-membership milestone is reported as the FY2025 annual average number of paid memberships.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c10:s03"
+        ]
+      ],
+      "context_evidence_allowed": [],
+      "source_grounded_reason": "The supplied figure is a milestone crossed during Q4, not the average membership count across FY2025. No annual average is supplied."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "fef4b4bc13a355d113b200c9de099d0eca3f1ee003566adfd7366f0b51285628",
+    "maintenance_rationale": "Quarter revenue growth and annual margin use different currency bases and precisions. A forecast bridge must match thousand-dollar actuals to million-dollar projections without double-removing an included cost or inventing average membership data.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_annual_currency_margin.sql",
+      "starting_forecast_bounds.sql",
+      "starting_regional_currency.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "5a99483bb56fe464ea7b4b6b88d6fb76a076fc4d58c6a622eccf13e47bf3f2f4",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "grading_contract_revision": {
+    "prior_task_sha256": "a59f3f5172ad9165f34a9fa7f5c5f2bc01a502b32656ef2b7dc8d041af00d370",
+    "additional_sufficient_evidence": {
+      "claim_1": [
+        [
+          "c10:s02"
+        ]
+      ]
+    },
+    "public_definitions": {},
+    "observation_date_context_added": false,
+    "original_observations_changed": false,
+    "original_targets_changed": false,
+    "human_review": "pending"
+  }
+}

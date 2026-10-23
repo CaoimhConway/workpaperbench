@@ -95,6 +95,25 @@ directory and compares the output with the frozen package. It is not a generic
 new-task generator. Do not edit published packages and regenerate them in place.
 A future catalog needs its own reviewed construction and freeze process.
 
+The corrected construction catalog is
+`workflow-v12-canonical-dc12075916d4`, also using scorer `workflow-1.2.1`.
+Select `--dataset workflow-v12` explicitly for this condition. The version 11
+commands and frozen comparison configurations retain their original identity.
+Reconstruct the corrected catalog on the same SQLite 3.45.1 controller with:
+
+```sh
+.venv/bin/python scripts/build_workflow_grading_contract_revision.py --check
+```
+
+Version 12 accepts narrow sufficient claim-evidence alternatives and relevant
+Brale observation-date context. Its public contracts distinguish reported from
+reconstructed amounts in the Brale, Berkshire, Adobe and Visa tables. The reserve
+bridge uses `(June cash + June government debt) - (May cash + May government debt)`.
+Independent component and reported-total controls preserve the reconciliation
+residual. Original observations, numerical targets, reference SQL, prior controls
+and scorer code remain unchanged. Regrading a saved submission after a public
+contract change is diagnostic, rather than a fresh result on the revised task.
+
 On the installed Linux Docker controller, verify all four submitted files in a
 fresh separate verifier and inspect the report:
 

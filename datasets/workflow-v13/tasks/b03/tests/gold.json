@@ -1,0 +1,709 @@
+{
+  "task_id": "workflow-v13-b03",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "annual_revenue_bridge": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "blockchain_rewards",
+            "consumer",
+            "corporate_interest",
+            "institutional",
+            "interest_finance",
+            "other_subscription",
+            "other_transaction",
+            "stablecoin"
+          ]
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_total_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "b03:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "consumer",
+          3430.3,
+          3322.8,
+          -107.5,
+          -17.414547221772235
+        ],
+        [
+          "institutional",
+          345.6,
+          479.7,
+          134.1,
+          21.72363518548518
+        ],
+        [
+          "other_transaction",
+          210.2,
+          252.9,
+          42.7,
+          6.917220152276041
+        ],
+        [
+          "stablecoin",
+          910.5,
+          1348.8,
+          438.3,
+          71.00275392839787
+        ],
+        [
+          "blockchain_rewards",
+          705.8,
+          677.4,
+          -28.4,
+          -4.60068038231006
+        ],
+        [
+          "interest_finance",
+          265.8,
+          247.0,
+          -18.8,
+          -3.045520816458772
+        ],
+        [
+          "other_subscription",
+          425.1,
+          554.8,
+          129.7,
+          21.010853717803336
+        ],
+        [
+          "corporate_interest",
+          270.8,
+          297.9,
+          27.1,
+          4.390085857767698
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b03:s03"
+      ]
+    },
+    "spot_revenue_proxy": {
+      "columns": {
+        "segment": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "consumer",
+            "institutional"
+          ]
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "spot_volume_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "apparent_revenue_to_spot_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "segment"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "b03:s01",
+          "b03:s02"
+        ]
+      ],
+      "rows": [
+        [
+          "consumer",
+          733.9,
+          56.0,
+          1.3105357142857144
+        ],
+        [
+          "institutional",
+          185.0,
+          215.0,
+          0.08604651162790698
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "usdc_booked_ratio": {
+      "columns": {
+        "scope": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "off_platform",
+            "on_platform",
+            "total"
+          ]
+        },
+        "average_usdc_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "quarter_booked_ratio_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "annualized_booked_ratio_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "scope"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "b03:s03"
+        ]
+      ],
+      "rows": [
+        [
+          "on_platform",
+          18.0,
+          172.0,
+          0.9555555555555556,
+          3.8222222222222224
+        ],
+        [
+          "off_platform",
+          58.0,
+          192.0,
+          0.3310344827586207,
+          1.3241379310344827
+        ],
+        [
+          "total",
+          76.0,
+          364.0,
+          0.4789473684210526,
+          1.9157894736842105
+        ]
+      ],
+      "context_evidence_allowed": []
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b03:s01"
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "claim_2": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "b03:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b03:s03"
+      ]
+    },
+    "claim_3": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b03:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b03:s01"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "scaled_amounts_preserve_ratios",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "annual_revenue_bridge": [
+          [
+            "consumer",
+            6860.6,
+            6645.6,
+            -215.0,
+            -17.414547221772235
+          ],
+          [
+            "institutional",
+            691.2,
+            959.4,
+            268.2,
+            21.72363518548518
+          ],
+          [
+            "other_transaction",
+            420.4,
+            505.8,
+            85.4,
+            6.917220152276041
+          ],
+          [
+            "stablecoin",
+            1821.0,
+            2697.6,
+            876.6,
+            71.00275392839787
+          ],
+          [
+            "blockchain_rewards",
+            1411.6,
+            1354.8,
+            -56.8,
+            -4.60068038231006
+          ],
+          [
+            "interest_finance",
+            531.6,
+            494.0,
+            -37.6,
+            -3.045520816458772
+          ],
+          [
+            "other_subscription",
+            850.2,
+            1109.6,
+            259.4,
+            21.010853717803336
+          ],
+          [
+            "corporate_interest",
+            541.6,
+            595.8,
+            54.2,
+            4.390085857767698
+          ]
+        ],
+        "spot_revenue_proxy": [
+          [
+            "consumer",
+            1467.8,
+            112.0,
+            1.3105357142857144
+          ],
+          [
+            "institutional",
+            370.0,
+            430.0,
+            0.08604651162790698
+          ]
+        ],
+        "usdc_booked_ratio": [
+          [
+            "on_platform",
+            36.0,
+            344.0,
+            0.9555555555555556,
+            3.8222222222222224
+          ],
+          [
+            "off_platform",
+            116.0,
+            384.0,
+            0.3310344827586207,
+            1.3241379310344827
+          ],
+          [
+            "total",
+            152.0,
+            728.0,
+            0.4789473684210526,
+            1.9157894736842105
+          ]
+        ]
+      }
+    },
+    {
+      "name": "platform_balance_mix_changes_scoped_ratios",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "annual_revenue_bridge": [
+          [
+            "consumer",
+            3430.3,
+            3322.8,
+            -107.5,
+            -17.414547221772235
+          ],
+          [
+            "institutional",
+            345.6,
+            479.7,
+            134.1,
+            21.72363518548518
+          ],
+          [
+            "other_transaction",
+            210.2,
+            252.9,
+            42.7,
+            6.917220152276041
+          ],
+          [
+            "stablecoin",
+            910.5,
+            1348.8,
+            438.3,
+            71.00275392839787
+          ],
+          [
+            "blockchain_rewards",
+            705.8,
+            677.4,
+            -28.4,
+            -4.60068038231006
+          ],
+          [
+            "interest_finance",
+            265.8,
+            247.0,
+            -18.8,
+            -3.045520816458772
+          ],
+          [
+            "other_subscription",
+            425.1,
+            554.8,
+            129.7,
+            21.010853717803336
+          ],
+          [
+            "corporate_interest",
+            270.8,
+            297.9,
+            27.1,
+            4.390085857767698
+          ]
+        ],
+        "spot_revenue_proxy": [
+          [
+            "consumer",
+            733.9,
+            56.0,
+            1.3105357142857144
+          ],
+          [
+            "institutional",
+            185.0,
+            215.0,
+            0.08604651162790698
+          ]
+        ],
+        "usdc_booked_ratio": [
+          [
+            "on_platform",
+            19.0,
+            172.0,
+            0.9052631578947369,
+            3.6210526315789475
+          ],
+          [
+            "off_platform",
+            57.0,
+            192.0,
+            0.3368421052631579,
+            1.3473684210526315
+          ],
+          [
+            "total",
+            76.0,
+            364.0,
+            0.4789473684210526,
+            1.9157894736842105
+          ]
+        ]
+      }
+    },
+    {
+      "name": "irrelevant_later_disclosures",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "annual_revenue_bridge": [
+          [
+            "consumer",
+            3430.3,
+            3322.8,
+            -107.5,
+            -17.414547221772235
+          ],
+          [
+            "institutional",
+            345.6,
+            479.7,
+            134.1,
+            21.72363518548518
+          ],
+          [
+            "other_transaction",
+            210.2,
+            252.9,
+            42.7,
+            6.917220152276041
+          ],
+          [
+            "stablecoin",
+            910.5,
+            1348.8,
+            438.3,
+            71.00275392839787
+          ],
+          [
+            "blockchain_rewards",
+            705.8,
+            677.4,
+            -28.4,
+            -4.60068038231006
+          ],
+          [
+            "interest_finance",
+            265.8,
+            247.0,
+            -18.8,
+            -3.045520816458772
+          ],
+          [
+            "other_subscription",
+            425.1,
+            554.8,
+            129.7,
+            21.010853717803336
+          ],
+          [
+            "corporate_interest",
+            270.8,
+            297.9,
+            27.1,
+            4.390085857767698
+          ]
+        ],
+        "spot_revenue_proxy": [
+          [
+            "consumer",
+            733.9,
+            56.0,
+            1.3105357142857144
+          ],
+          [
+            "institutional",
+            185.0,
+            215.0,
+            0.08604651162790698
+          ]
+        ],
+        "usdc_booked_ratio": [
+          [
+            "on_platform",
+            18.0,
+            172.0,
+            0.9555555555555556,
+            3.8222222222222224
+          ],
+          [
+            "off_platform",
+            58.0,
+            192.0,
+            0.3310344827586207,
+            1.3241379310344827
+          ],
+          [
+            "total",
+            76.0,
+            364.0,
+            0.4789473684210526,
+            1.9157894736842105
+          ]
+        ]
+      }
+    },
+    {
+      "name": "consumer_spot_volume_increases_with_revenue_fixed",
+      "changes": [
+        [
+          "spot_volume",
+          {
+            "period": "Q4FY2025",
+            "segment": "consumer"
+          },
+          "volume_usd_billion",
+          10
+        ]
+      ],
+      "reason": "Consumer spot volume varies independently of booked revenue. The apparent revenue-to-spot ratio changes without identifying a commission or changing annual revenue attribution or USDC economics.",
+      "database": "control-independent.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "annual_revenue_bridge": [
+          [
+            "blockchain_rewards",
+            705.8,
+            677.4,
+            -28.399999999999977,
+            -4.600680382310055
+          ],
+          [
+            "consumer",
+            3430.3,
+            3322.8,
+            -107.5,
+            -17.414547221772228
+          ],
+          [
+            "corporate_interest",
+            270.8,
+            297.9,
+            27.099999999999966,
+            4.390085857767691
+          ],
+          [
+            "institutional",
+            345.6,
+            479.7,
+            134.09999999999997,
+            21.723635185485165
+          ],
+          [
+            "interest_finance",
+            265.8,
+            247.0,
+            -18.80000000000001,
+            -3.045520816458773
+          ],
+          [
+            "other_subscription",
+            425.1,
+            554.8,
+            129.69999999999993,
+            21.010853717803318
+          ],
+          [
+            "other_transaction",
+            210.2,
+            252.9,
+            42.70000000000002,
+            6.917220152276042
+          ],
+          [
+            "stablecoin",
+            910.5,
+            1348.8,
+            438.29999999999995,
+            71.00275392839782
+          ]
+        ],
+        "spot_revenue_proxy": [
+          [
+            "consumer",
+            733.9,
+            66.0,
+            1.111969696969697
+          ],
+          [
+            "institutional",
+            185.0,
+            215.0,
+            0.08604651162790698
+          ]
+        ],
+        "usdc_booked_ratio": [
+          [
+            "on_platform",
+            18.0,
+            172.0,
+            0.9555555555555556,
+            3.8222222222222224
+          ],
+          [
+            "off_platform",
+            58.0,
+            192.0,
+            0.3310344827586207,
+            1.3241379310344827
+          ],
+          [
+            "total",
+            76.0,
+            364.0,
+            0.4789473684210526,
+            1.9157894736842105
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "eab810723243a495354033ae9622eceafbf8c8a9d00f815fa98d739975791820",
+    "control-2.sqlite": "1b19e9ad57c056a52b8bb108c2dad8ad8f6d2625a06ad3d680736ad58dc274a5",
+    "control-3.sqlite": "3cb4c58bca376212bd528a8d1aac4099940fd69cf6868b1a5448c33479907719",
+    "control-independent.sqlite": "b9d4d9413159ce694663d444cba7a24a358b805ad223a76bb47b1b45f6342a90",
+    "data.sqlite": "e3392d3346f62ea969e353de5596439d44352e311b4f1a1a0d2d1c2058b2d390",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "94f8fa0a5d96d4f05f95d0cd940cc602a97cca653c3a81b2e1560096bd8d932b",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "e1dbbb161e0ebfc2446b70acb27bd047c9a29d02722667e85be5529e9ec61c3a",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v12-a06",
+  "tables": [
+    {
+      "id": "income_model",
+      "file": "income_model.sql",
+      "evidence": [
+        "a06:s01",
+        "a06:s02"
+      ]
+    },
+    {
+      "id": "adjustment_bridge",
+      "file": "adjustment_bridge.sql",
+      "evidence": [
+        "a06:s01",
+        "a06:s02"
+      ]
+    },
+    {
+      "id": "year_to_date_cash",
+      "file": "year_to_date_cash.sql",
+      "evidence": [
+        "a06:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": [
+        "a06:s01",
+        "a06:s02"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "a06:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "contradicted",
+      "evidence": [
+        "a06:s03"
+      ]
+    }
+  ]
+}

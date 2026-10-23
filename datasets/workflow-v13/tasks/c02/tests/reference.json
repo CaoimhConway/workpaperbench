@@ -1,0 +1,50 @@
+{
+  "task_id": "workflow-v13-c02",
+  "tables": [
+    {
+      "id": "operating_reconciliation",
+      "file": "operating_reconciliation.sql",
+      "evidence": [
+        "c02:s01"
+      ]
+    },
+    {
+      "id": "adjustment_attribution",
+      "file": "adjustment_attribution.sql",
+      "evidence": [
+        "c02:s01"
+      ]
+    },
+    {
+      "id": "arr_guidance_bridge",
+      "file": "arr_guidance_bridge.sql",
+      "evidence": [
+        "c02:s02"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": [
+        "c02:s01"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "c02:s02",
+        "c02:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "supported",
+      "evidence": [
+        "c02:s02"
+      ]
+    }
+  ]
+}

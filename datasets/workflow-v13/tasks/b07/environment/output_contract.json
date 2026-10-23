@@ -1,0 +1,143 @@
+{
+  "tables": {
+    "booking_ratios": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "quarter": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "gbv_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "nights_and_seats_million": {
+          "type": "real",
+          "unit": "million",
+          "tolerance": 1e-06
+        },
+        "rounded_input_adr_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "adr_rounding_residual_usd": {
+          "type": "real",
+          "unit": "usd",
+          "tolerance": 1e-06
+        },
+        "implied_revenue_to_gbv_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year",
+        "quarter"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "quarter_cash": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "quarter": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "fcf_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fcf_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "adjusted_ebitda_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year",
+        "quarter"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "rolling_cash": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "quarter": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "ttm_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "ttm_fcf_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "ttm_fcf_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "revenue_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "fcf_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "year",
+        "quarter"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "Airbnb increased its contractual booking fee percentage from FY2024 to FY2025.",
+    "claim_2": "Four times Q4FY2025 FCF equals the disclosed year-end trailing-twelve-month FCF.",
+    "claim_3": "FY2025 trailing-twelve-month FCF at year end exceeds the same four-quarter measure for FY2024."
+  },
+  "definitions": {
+    "booking_ratios": "GBV converted from billion to million. Rounded-input ADR divides it by the supplied million Nights and Seats. Residual compares this quotient with published ADR, without forcing zero. adr_rounding_residual_usd is the rounded-input GBV quotient less published ADR.",
+    "quarter_cash": "Eight quarters in 2024 and 2025. Financial margins use quarter revenue.",
+    "rolling_cash": "Each FY2025 quarter requires the latest four consecutive quarters of FCF and revenue. Compare their sums with reported TTM disclosures. ttm_fcf_margin_pct is 100 times the reconstructed four-quarter FCF sum divided by the matching four-quarter revenue sum. revenue_residual_usd_million and fcf_residual_usd_million are the corresponding reconstructed four-quarter sums less reported TTM disclosures."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

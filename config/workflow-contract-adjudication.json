@@ -1,0 +1,389 @@
+{
+  "review_id": "workflow-v15-contract-adjudication-1",
+  "base_manifest_id": "workflow-v14-canonical-5809083838de",
+  "scope": "Output-specific evidence-context corrections, one reported-baseline oracle correction and explicit future measurement definitions. Original submissions and native verdicts remain historical observations.",
+  "scorer_version": "workflow-1.2.1",
+  "scorer_code_changed": false,
+  "human_financial_source_validation": "pending",
+  "evidence_mappings_reviewed": 180,
+  "evidence_patches": [
+    {
+      "task": "a08",
+      "group": "tables",
+      "output": "income_model",
+      "original_mapping": {
+        "evidence": [
+          [
+            "a08:s01"
+          ]
+        ],
+        "context_evidence_allowed": [
+          "a08:s03"
+        ]
+      },
+      "corrected_mapping": {
+        "evidence": [
+          [
+            "a08:s01"
+          ]
+        ],
+        "context_evidence_allowed": [
+          "a08:s02",
+          "a08:s03"
+        ]
+      },
+      "source": "a08:s02",
+      "rationale": "The GAAP-to-non-GAAP operating-income reconciliation independently repeats the matching Q4 and annual GAAP operating-income starting amounts. It corroborates those requested main values without replacing the complete statements needed for gross profit, pretax and net income.",
+      "retained_source_reference": {
+        "source_id": "a08:s02",
+        "origin": "https://s205.q4cdn.com/626266368/files/doc_financials/2026/q4/CRM-Q4-FY26-Earnings-Press-Release.pdf",
+        "locator": "GAAP-to-non-GAAP income-from-operations reconciliation, footnotes 2 and 3",
+        "capture_sha256": "354af69b3f976791e8f4c608fc86c1664af08d77a1d236197f362ebb2a4ab4d7"
+      },
+      "core_evidence_still_required": true
+    },
+    {
+      "task": "a10",
+      "group": "tables",
+      "output": "income_model",
+      "original_mapping": {
+        "evidence": [
+          [
+            "a10:s01"
+          ]
+        ],
+        "context_evidence_allowed": []
+      },
+      "corrected_mapping": {
+        "evidence": [
+          [
+            "a10:s01"
+          ]
+        ],
+        "context_evidence_allowed": [
+          "a10:s03"
+        ]
+      },
+      "source": "a10:s03",
+      "rationale": "Release page 1 independently prints reported Q4 and annual revenue and net income for both years. These matching reported amounts corroborate requested rows. They do not replace the detailed statement needed for all seven periods and reconciliation components.",
+      "retained_source_reference": {
+        "source_id": "a10:s03",
+        "origin": "https://s26.q4cdn.com/747928648/files/doc_earnings/2025/q4/earnings-result/Q4-2025-Earnings-Press-Release.pdf",
+        "locator": "FY/Q4 earnings release page 1, matching FX-adjusted prior columns",
+        "capture_sha256": "bb11b9496f56fdbe4e74c3c3f8a1fb51710e3ae4feab6450e41a1130b3d33a1c"
+      },
+      "core_evidence_still_required": true
+    },
+    {
+      "task": "b07",
+      "group": "tables",
+      "output": "booking_ratios",
+      "original_mapping": {
+        "evidence": [
+          [
+            "b07:s01",
+            "b07:s02"
+          ],
+          [
+            "b07:s01"
+          ]
+        ],
+        "context_evidence_allowed": []
+      },
+      "corrected_mapping": {
+        "evidence": [
+          [
+            "b07:s01",
+            "b07:s02"
+          ],
+          [
+            "b07:s01"
+          ]
+        ],
+        "context_evidence_allowed": [
+          "b07:s03"
+        ]
+      },
+      "source": "b07:s03",
+      "rationale": "The page 25 cash reconciliation independently prints all eight matching quarterly revenue amounts. Revenue is the numerator of the required revenue/GBV ratio. Missing GBV, booked units and ADR makes this source insufficient alone, not irrelevant with sufficient s01.",
+      "retained_source_reference": {
+        "source_id": "b07:s03",
+        "origin": "https://s26.q4cdn.com/656283129/files/doc_financials/2025/q4/Airbnb_Q4-2025-Shareholder-Letter-Final.pdf",
+        "locator": "PDF page 25, full twelve-quarter cash reconciliation and TTM disclosures",
+        "capture_sha256": "7584847394943565805f67f2187ef0773dced87199f66831ba9909d013faff0c"
+      },
+      "core_evidence_still_required": true
+    },
+    {
+      "task": "c06",
+      "group": "tables",
+      "output": "geographic_currency",
+      "original_mapping": {
+        "evidence": [
+          [
+            "c06:s01"
+          ]
+        ],
+        "context_evidence_allowed": []
+      },
+      "corrected_mapping": {
+        "evidence": [
+          [
+            "c06:s01"
+          ]
+        ],
+        "context_evidence_allowed": [
+          "c06:s03"
+        ]
+      },
+      "source": "c06:s03",
+      "rationale": "The scope passage explains comparison-specific geography currency adjustments and why hedging appears only at consolidated level. It is relevant interpretation of regional FX/CC growth, while s01 remains essential for every regional quantity.",
+      "retained_source_reference": {
+        "source_id": "c06:s03",
+        "origin": "https://s206.q4cdn.com/479360582/files/doc_financials/2025/q2/2025q2-alphabet-earnings-release.pdf",
+        "locator": "PDF pages 1, 2 and 9, revenue growth scope",
+        "capture_sha256": "3581be042fcbda6ea71185d5aef47458ce3a56cf6b16022d61a997d1807a4de5"
+      },
+      "core_evidence_still_required": true
+    },
+    {
+      "task": "c06",
+      "group": "tables",
+      "output": "consolidated_currency_bridge",
+      "original_mapping": {
+        "evidence": [
+          [
+            "c06:s01"
+          ]
+        ],
+        "context_evidence_allowed": [
+          "c06:s03"
+        ]
+      },
+      "corrected_mapping": {
+        "evidence": [
+          [
+            "c06:s01"
+          ]
+        ],
+        "context_evidence_allowed": [
+          "c06:s02",
+          "c06:s03"
+        ]
+      },
+      "source": "c06:s02",
+      "rationale": "The Q2 revenue table independently prints matching prior/current reported totals and consolidated hedging for the year-over-year bridge row. It cannot replace s01 for sequential CC quantities, but incomplete coverage does not make that direct corroboration irrelevant.",
+      "retained_source_reference": {
+        "source_id": "c06:s02",
+        "origin": "https://s206.q4cdn.com/479360582/files/doc_financials/2025/q2/2025q2-alphabet-earnings-release.pdf",
+        "locator": "PDF page 2, revenue components and consolidated totals",
+        "capture_sha256": "3581be042fcbda6ea71185d5aef47458ce3a56cf6b16022d61a997d1807a4de5"
+      },
+      "core_evidence_still_required": true
+    },
+    {
+      "task": "c07",
+      "group": "tables",
+      "output": "financial_versions",
+      "original_mapping": {
+        "evidence": [
+          [
+            "c07:s01",
+            "c07:s02"
+          ]
+        ],
+        "context_evidence_allowed": []
+      },
+      "corrected_mapping": {
+        "evidence": [
+          [
+            "c07:s01",
+            "c07:s02"
+          ]
+        ],
+        "context_evidence_allowed": [
+          "c07:s03"
+        ]
+      },
+      "source": "c07:s03",
+      "rationale": "Annual report page 59 cash flows independently repeats FY2025 and FY2024 consolidated net income, directly corroborating requested annual-version net-income values. The full release and annual income statements remain necessary for other columns.",
+      "retained_source_reference": {
+        "source_id": "c07:s03",
+        "origin": "https://www.cisco.com/c/dam/en_us/about/annual-report/2025-cisco-full-annual-report.pdf",
+        "locator": "Annual report pages 31 and 59, acquisition scope and operating cash",
+        "capture_sha256": "85571360fab2c1a9126db451530fe397f17a60b7cfb0b47538caf89190fb08eb"
+      },
+      "core_evidence_still_required": true
+    },
+    {
+      "task": "c07",
+      "group": "claims",
+      "output": "claim_1",
+      "original_mapping": {
+        "evidence": [
+          [
+            "c07:s01",
+            "c07:s02"
+          ]
+        ],
+        "context_evidence_allowed": []
+      },
+      "corrected_mapping": {
+        "evidence": [
+          [
+            "c07:s01",
+            "c07:s02"
+          ],
+          [
+            "c07:s01",
+            "c07:s03"
+          ]
+        ],
+        "context_evidence_allowed": []
+      },
+      "source": "c07:s03",
+      "rationale": "The annual cash-flow starting income of 10180 versus 10320 establishes negative annual-version growth. Paired with release s01, which supplies positive initially released growth, it independently establishes the claim without the annual income-statement s02.",
+      "retained_source_reference": {
+        "source_id": "c07:s03",
+        "origin": "https://www.cisco.com/c/dam/en_us/about/annual-report/2025-cisco-full-annual-report.pdf",
+        "locator": "Annual report pages 31 and 59, acquisition scope and operating cash",
+        "capture_sha256": "85571360fab2c1a9126db451530fe397f17a60b7cfb0b47538caf89190fb08eb"
+      },
+      "core_evidence_still_required": true
+    },
+    {
+      "task": "c07",
+      "group": "claims",
+      "output": "claim_3",
+      "original_mapping": {
+        "evidence": [
+          [
+            "c07:s02"
+          ]
+        ],
+        "context_evidence_allowed": [
+          "c07:s03"
+        ]
+      },
+      "corrected_mapping": {
+        "evidence": [
+          [
+            "c07:s02"
+          ]
+        ],
+        "context_evidence_allowed": [
+          "c07:s01",
+          "c07:s03"
+        ]
+      },
+      "source": "c07:s01",
+      "rationale": "The release supplies the pre-settlement operating-cash observation, directly contextualizing the unchanged cash comparison in the annual report. It does not replace the explicit settlement no-incremental-cash statement in s02.",
+      "retained_source_reference": {
+        "source_id": "c07:s01",
+        "origin": "https://newsroom.cisco.com/c/r/newsroom/en/us/a/y2025/m08/cisco-reports-fourth-quarter-earnings.html",
+        "locator": "Release consolidated income and cash-flow statements, annual columns",
+        "capture_sha256": "7a7dcea87ff7297c044f2b8a834ad5e76a23ef84b28d04ce50895efe826762ab"
+      },
+      "core_evidence_still_required": true
+    }
+  ],
+  "public_definition_clarifications": [
+    {
+      "task": "b08",
+      "output": "category_economics",
+      "before": "Both years, months=3 Q4, 9 first nine months, 12 annual. Category gross margins use their own revenue denominators. residual_usd_million is reconstructed operating income (subscription and merchant revenue less their costs and operating expense) less independently reported operating income.",
+      "after": "Both years, months=3 Q4, 9 first nine months, 12 annual. Category gross margins use their own revenue denominators. operating_income_usd_million is reconstructed as subscription and merchant revenue less their costs and operating expense. residual_usd_million is that reconstructed operating income less the independently reported operating-income observation. Keep the reported observation independent when they disagree.",
+      "compatibility": "model_visible_clarification_diagnostic_saved_output_only"
+    },
+    {
+      "task": "b08",
+      "output": "cash_generation",
+      "before": "FCF margin uses total company revenue and matched periods. residual_usd_million is reconstructed FCF less independently reported FCF.",
+      "after": "FCF is reconstructed as operating cash less capital expenditure, including for fcf_usd_million and the FCF-margin numerator. FCF margin uses total company revenue and matched periods. residual_usd_million is reconstructed FCF less the independent reported FCF observation. Do not replace the reported observation with the reconstruction.",
+      "compatibility": "model_visible_clarification_diagnostic_saved_output_only"
+    },
+    {
+      "task": "c03",
+      "output": "gross_to_net",
+      "before": "FY2025, Q4FY2025 and 9MFY2025. Gross sums four positive revenue categories, incentives keep their negative source sign. First nine months is annual less Q4. Net revenue is gross revenue plus signed incentives. residual_usd_million is reconstructed net revenue less independently reported net revenue.",
+      "after": "FY2025, Q4FY2025 and 9MFY2025. Gross sums four positive revenue categories, incentives keep their negative source sign. First nine months is annual less Q4. Net revenue is gross revenue plus signed incentives. incentive_share_of_gross_pct is the positive deduction magnitude: -100 times signed incentives divided by gross revenue. residual_usd_million is reconstructed net revenue less independently reported net revenue.",
+      "compatibility": "model_visible_clarification_diagnostic_saved_output_only"
+    },
+    {
+      "task": "c06",
+      "output": "consolidated_currency_bridge",
+      "before": "CC growth uses prior unhedged regional revenue. Reported growth decomposes into CC change, translation FX and the change in consolidated hedging. cc_disclosure_residual_usd_million is reconstructed regional constant-currency current revenue less independently reported consolidated constant-currency current revenue.",
+      "after": "For each comparison, sum regional current revenue less that comparison FX effect to reconstruct cc_current_usd_million. CC change is reconstructed CC current less prior unhedged regional revenue, and CC growth uses that prior unhedged denominator. Reconstruct prior/current reported bridge amounts as the matching regional sum plus consolidated hedging. Reported change decomposes into CC change, translation FX and the change in hedging. cc_disclosure_residual_usd_million is reconstructed regional CC current less the independent reported consolidated CC observation. Keep that observation independent.",
+      "compatibility": "model_visible_clarification_diagnostic_saved_output_only"
+    },
+    {
+      "task": "c06",
+      "output": "revenue_growth_components",
+      "before": "Seven leaf components, including hedging. Contributions divide by total reported Q2FY2025 less Q2FY2024 revenue.",
+      "after": "Use the seven mutually exclusive leaf components, including hedging. Each contribution divides by the current less prior sum of those same seven reported leaf components. Do not substitute a geography-based total if the independent representations disagree.",
+      "compatibility": "model_visible_clarification_diagnostic_saved_output_only"
+    },
+    {
+      "task": "c08",
+      "output": "share_basis",
+      "before": "Computed EPS uses matching million-dollar income and million-share denominators. Report the separate hypothetical adjusted-income/GAAP-share quotient and its difference from correctly based adjusted EPS. gaap_eps_rounding_residual_usd is computed GAAP EPS (GAAP net income divided by matching GAAP shares) less reported GAAP EPS. denominator_effect_usd is correctly based adjusted EPS (adjusted income divided by adjusted shares) less the hypothetical adjusted-income-over-GAAP-shares quotient.",
+      "after": "Computed EPS uses matching million-dollar income and million-share denominators. Use GAAP income for GAAP EPS. For both adjusted-income quotients use the reconstructed adjusted income defined in income_reconciliation: GAAP net income plus signed net-income-basis adjustments, not the independent reported adjusted-income observation. Correct adjusted EPS divides that reconstruction by adjusted shares. The hypothetical quotient divides the same reconstruction by GAAP shares. gaap_eps_rounding_residual_usd is computed GAAP EPS less reported GAAP EPS. denominator_effect_usd is correct adjusted EPS less the hypothetical quotient. Keep the reported adjusted-income observation independent for income_reconciliation residuals.",
+      "compatibility": "model_visible_clarification_diagnostic_saved_output_only"
+    },
+    {
+      "task": "c09",
+      "output": "significant_item_bridge",
+      "before": "Use after-tax reserve effect for net income. The tax shield is pretax reserve less after-tax effect. Rounded disclosure residual is recomputed adjusted net income less the printed rounded adjusted total.",
+      "after": "Use after-tax reserve effect for net income. The tax shield is pretax reserve less after-tax effect. printed_input_adjusted_net_income_usd_million means the recomputation from printed GAAP income plus the signed after-tax net-income exclusion change. It is not the separately printed rounded adjusted total. rounding_residual_usd_million is that recomputation less the independent printed rounded adjusted total.",
+      "compatibility": "model_visible_clarification_diagnostic_saved_output_only"
+    },
+    {
+      "task": "c10",
+      "output": "annual_currency_margin",
+      "before": "Recompute revenue and expense on the beginning-year FX basis, with margin-change basis points equal to adjusted less reported margin. adjusted_operating_income_usd_thousand is beginning-year-FX revenue less beginning-year-FX expense. residual_usd_thousand is reconstructed adjusted operating income less independently reported adjusted operating income.",
+      "after": "Recompute revenue and expense on the beginning-year FX basis by subtracting their respective FX-impact amounts from reported revenue and expense. These are effects included in reported figures, unlike the additive signed regional adjustments. operating_income_usd_thousand and reported_margin_pct in this table use reported revenue less reported expense, and that income divided by reported revenue. adjusted_operating_income_usd_thousand is beginning-year-FX revenue less beginning-year-FX expense. Margin-change basis points equal adjusted less reported margin. residual_usd_thousand is reconstructed adjusted operating income less the independent reported adjusted operating-income observation.",
+      "compatibility": "model_visible_clarification_diagnostic_saved_output_only"
+    },
+    {
+      "task": "c10",
+      "output": "forecast_bounds",
+      "before": "FY2026 forecasts are not actuals. Implied revenue and operating growth use reported FY2025 actuals. The 31.5 percent target already includes the acquisition expense, so do not add it again.",
+      "after": "FY2026 forecasts are not actuals. Implied revenue growth uses the observed annual FY2025 revenue baseline. Implied operating growth uses the independent operating_income_usd_thousand observation in the annual_margin input table, not the reconstructed operating-income output of annual_currency_margin. Keep the reported baseline independent when revenue and expense disagree. The 31.5 percent target already includes the acquisition expense, so do not add it again.",
+      "compatibility": "model_visible_clarification_diagnostic_saved_output_only"
+    },
+    {
+      "task": "c03",
+      "output": "net_income_reconciliation",
+      "before": "Use the net-income column of each reconciliation, already after tax. Adjusted income is reconstructed as GAAP income plus the signed after-tax adjustment rows. Residual is that reconstructed amount less independently reported adjusted income. Missing categories are not separately observed adjustments.",
+      "after": "Use the net-income column of each reconciliation, already after tax. Adjusted income is reconstructed as GAAP income plus the signed after-tax adjustment rows. Residual is that reconstructed amount less independently reported adjusted income. Missing categories are not separately observed adjustments. litigation_adjustment_usd_million is the sum of the signed litigation rows in that period. An empty set contributes zero to this additive bridge, without asserting a separately observed zero adjustment.",
+      "compatibility": "model_visible_clarification_diagnostic_saved_output_only"
+    }
+  ],
+  "model_visible_changed_tasks": [
+    "b08",
+    "c03",
+    "c06",
+    "c08",
+    "c09",
+    "c10"
+  ],
+  "reference_sql_corrections": [
+    {
+      "task": "c10",
+      "table": "forecast_bounds",
+      "before": "(a.revenue_usd_thousand-a.expense_usd_thousand)",
+      "after": "a.operating_income_usd_thousand",
+      "rationale": "The existing public contract requires reported FY2025 actual baseline. Independent reported operating income must not be silently reconstructed from changed revenue and expense."
+    }
+  ],
+  "retained_negative_examples": [
+    "a03 claim_2 s03 alone lacks the quantitative bound",
+    "a09 claim_1 lacks required consolidation/equity scope without s02",
+    "b10 consolidated_cash_bridge s02 alone lacks parent income/NCI support",
+    "c04 claim_3 s02 alone lacks matching numerical comparison",
+    "c08 share_basis s02 alone lacks income numerators",
+    "c10 forecast_bounds s03 alone lacks precise annual baseline"
+  ],
+  "original_instruction_ambiguities_not_retroactively_penalized": true,
+  "no_new_model_performance_claim_from_saved_output": true
+}

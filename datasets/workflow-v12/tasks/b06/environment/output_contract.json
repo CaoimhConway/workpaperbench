@@ -1,0 +1,157 @@
+{
+  "tables": {
+    "segment_metrics": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "segment": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "Delivery",
+            "Freight",
+            "Mobility"
+          ]
+        },
+        "bookings_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_ebitda_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "revenue_to_bookings_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "ebitda_to_bookings_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year",
+        "segment"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "corporate_bridge": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "segment_sum_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "corporate_cost_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "total_adjusted_ebitda_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "ebitda_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "bookings_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "revenue_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "total_ebitda_to_bookings_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "consumer_activity": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "trips_million": {
+          "type": "real",
+          "unit": "million",
+          "tolerance": 1e-06
+        },
+        "mapcs_million": {
+          "type": "real",
+          "unit": "million",
+          "tolerance": 1e-06
+        },
+        "quarterly_trips_per_monthly_consumer": {
+          "type": "real",
+          "unit": "trips",
+          "tolerance": 1e-06
+        },
+        "monthly_trips_per_monthly_consumer": {
+          "type": "real",
+          "unit": "trips",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "The supplied Freight revenue-to-bookings ratio is disclosed as the contractual commission rate on Freight bookings.",
+    "claim_2": "Every supplied segment had positive adjusted EBITDA in Q4FY2024.",
+    "claim_3": "Monthly trips per monthly active consumer increased between the supplied Q4 periods."
+  },
+  "definitions": {
+    "segment_metrics": "Both years 2024 and 2025. Financial ratios use the matching segment Gross Bookings denominator.",
+    "corporate_bridge": "For each year, segment_sum_usd_million is summed segment adjusted EBITDA. total_adjusted_ebitda_usd_million is reconstructed as that sum plus the signed corporate_cost_usd_million. The EBITDA residual is reconstructed total adjusted EBITDA less platform.adjusted_ebitda_usd_million. The bookings residual is summed segment bookings less platform.bookings_usd_million, and the revenue residual is summed segment revenue less platform.revenue_usd_million. total_ebitda_to_bookings_pct is 100 times reconstructed total adjusted EBITDA divided by summed segment bookings. Reported platform totals remain independent reconciliation observations even when they disagree with reconstructed totals.",
+    "consumer_activity": "Quarterly ratio and monthly ratio are both required. The latter divides quarter trips by the average monthly consumer count and three months."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

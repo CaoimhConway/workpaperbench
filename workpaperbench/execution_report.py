@@ -46,14 +46,78 @@ def response_usage(response):
     completion = counter(usage.get('completion_tokens'))
     cached = counter((usage.get('prompt_tokens_details') or {}).get('cached_tokens'))
     reasoning = counter((usage.get('completion_tokens_details') or {}).get('reasoning_tokens'))
-    return {'response_id': response.get('id'), 'model': response.get('model'),
+    identifier = response.get('id')
+    reasons = sorted({choice['finish_reason'] for choice in response.get('choices') or []
+                      if isinstance(choice.get('finish_reason'), str)})
+    return {'response_id': identifier if isinstance(identifier, str) and identifier else None,
+        'model': response.get('model'),
         'provider': response.get('provider'), 'prompt_tokens': prompt,
         'completion_tokens': completion, 'cached_tokens': cached,
         'cache_write_tokens': counter((usage.get('prompt_tokens_details') or {}).get('cache_write_tokens')),
         'reasoning_tokens': reasoning, 'total_tokens': total([prompt, completion]),
         'provider_charge': {'amount': number(usage.get('cost')), 'unit': 'OpenRouter credits', 'currency': 'USD',
                             'source': 'OpenRouter response.usage.cost'},
+        'finish_reasons': reasons or None,
         'response_replay': (response.get('cache_status') == 'HIT') if 'cache_status' in response else None}
+
+
+def normalize_responses(observations):
+    """Count each identified generation once, retaining conflicting observations."""
+    groups = {}
+    for index, observation in enumerate(observations):
+        row = response_usage(observation)
+        key = ('id', row['response_id']) if row['response_id'] else ('unidentified', index)
+        groups.setdefault(key, []).append(row)
+    responses = []
+    for group in groups.values():
+        row = {'observation_count': len(group), 'conflicts': {}}
+        for field in group[0]:
+            if field in ('provider_charge', 'total_tokens'):
+                continue
+            values = {json.dumps(item[field], sort_keys=True): item[field]
+                      for item in group if item[field] is not None}
+            row[field] = next(iter(values.values())) if len(values) == 1 else None
+            if len(values) > 1:
+                row['conflicts'][field] = [values[key] for key in sorted(values)]
+        charges = sorted({item['provider_charge']['amount'] for item in group
+                          if item['provider_charge']['amount'] is not None})
+        row['provider_charge'] = dict(group[0]['provider_charge'],
+            amount=charges[0] if len(charges) == 1 else None)
+        if len(charges) > 1:
+            row['conflicts']['provider_charge'] = charges
+        row['total_tokens'] = total([row['prompt_tokens'], row['completion_tokens']])
+        responses.append(row)
+    return sorted(responses, key=lambda row: json.dumps(row, sort_keys=True))
+
+
+def summarize_responses(responses):
+    identified = [row for row in responses if row['response_id']]
+    unidentified = len(responses) - len(identified)
+    summary = {'observations': sum(row['observation_count'] for row in responses),
+        'identified_generations': len(identified), 'unidentified_observations': unidentified,
+        'duplicate_observations': sum(row['observation_count'] - 1 for row in responses),
+        'conflicting_generations': sum(bool(row['conflicts']) for row in identified),
+        'finish_reason_observed_generations': sum(row['finish_reasons'] is not None for row in identified),
+        'length_truncated_generations': sum('length' in (row['finish_reasons'] or []) for row in identified),
+        'tokens': {}}
+    for field in ('prompt_tokens', 'completion_tokens', 'cached_tokens', 'cache_write_tokens',
+                  'reasoning_tokens', 'total_tokens', 'provider_charge'):
+        values = [row['provider_charge']['amount'] if field == 'provider_charge' else row[field]
+                  for row in identified]
+        observed = [value for value in values if value is not None]
+        measurement = {'total': total(values) if not unidentified else None,
+            'observed_sum': total(observed), 'observed_generations': len(observed),
+            'unknown_generations': len(values) - len(observed)}
+        if field == 'provider_charge':
+            summary[field] = dict(measurement, unit='OpenRouter credits', currency='USD',
+                                 source='OpenRouter response.usage.cost')
+        else:
+            summary['tokens'][field] = measurement
+    summary['coverage'] = ('Supplied response records only, without attribution to native trials or new '
+        'execution. Unidentified observations remain in response_usage and make complete totals unknown. '
+        'Missing failed requests or generations cannot be inferred. Charge observations from other '
+        'sources are for reconciliation and must not be added. Cached and reasoning tokens are subsets.')
+    return summary
 
 
 def trial_metrics(path, result=None):
@@ -79,7 +143,7 @@ def trial_metrics(path, result=None):
         'actual_charge': {'amount': None, 'unit': 'USD'},
         'request_count': len(requests) if isinstance(request_times, list) else None,
         'request_retries': None,
-        'limits': 'Native aggregate usage can omit failed calls. Reasoning is included in completion tokens when reported by the provider. Missing cache or cost fields do not establish zero usage or charges.'}
+        'limits': 'Native aggregate usage can omit failed or length-truncated calls followed by recovery. Reasoning is included in completion tokens when reported by the provider. Missing cache or cost fields do not establish zero usage or charges.'}
     if (result.get('config') or {}).get('source_trial'):
         metrics['inherited_model_metrics'] = {'tokens': dict(tokens),
             'native_cost': dict(metrics['native_cost']), 'request_count': metrics['request_count'],
@@ -175,14 +239,12 @@ def analyze(jobs, destination, usage=None):
     responses = []
     if usage:
         saved = read_json(Path(usage))
-        responses = [response_usage(item) for item in (saved if isinstance(saved, list) else [saved])]
-        identifiers = [row['response_id'] for row in responses if row['response_id']]
-        if len(set(identifiers)) != len(identifiers):
-            raise ValueError('duplicate_response_usage')
+        responses = normalize_responses(saved if isinstance(saved, list) else [saved])
     result = {'report_version': 'execution-1', 'inference': False, 'jobs': rows,
         'summary': summarize_metrics([attempt['metrics'] for row in rows for attempt in row['attempts']],
                                      total([counter(row['planned_trials']) for row in rows])),
         'response_usage': responses,
+        'provider_usage_summary': summarize_responses(responses),
         'usage_sha256': hashlib.sha256(Path(usage).read_bytes()).hexdigest() if usage else None,
         'interpretation': 'Read-only analysis, not new attempts or regrading. Responses are a separate usage source and are never added to native aggregates. Cache hits in prompt tokens still generate fresh responses. Full response replay is ineligible for fresh inference. Tool and build time remain unknown when native logs do not measure them.',
         'report_seconds': time.perf_counter() - started}

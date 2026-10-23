@@ -1,0 +1,108 @@
+{
+  "review_id": "workflow-measurement-review-v13",
+  "base_dataset": "workflow-v12",
+  "definitions": {
+    "a01": {},
+    "a02": {
+      "segment_model": "For each segment and matching period, operating_margin_pct is 100 times that segment's operating income divided by that segment's revenue. Use the same segment and period for both values."
+    },
+    "a03": {
+      "expense_model": "prior_residual_usd_thousand is reconstructed prior-definition expense (GAAP expense plus signed prior adjustments) less independently reported prior-definition expense. new_residual_usd_thousand is reconstructed new-definition expense (GAAP expense plus signed prior and extra adjustments) less independently reported new-definition expense.",
+      "operating_margins": "Reconstructed revenue is reserve income plus other revenue. Reconstructed costs are distribution plus other costs. RLDC is reconstructed revenue less reconstructed costs. revenue_usd_thousand is the reconstructed component sum. rldc_margin_pct is 100 times reconstructed RLDC divided by reconstructed revenue. adjusted_ebitda_margin_pct is 100 times independently reported adjusted EBITDA divided by reconstructed RLDC. revenue_residual_usd_thousand is reconstructed revenue less independently reported total revenue. cost_residual_usd_thousand is reconstructed costs less independently reported total costs. The component-based RLDC margin is an analytical reconstruction and can differ from the issuer-reported margin when the reported total differs from its components."
+    },
+    "a05": {
+      "income_model": "For each year, derive every 36-week flow input as the 52-week amount less the 16-week amount before reconstructing 36-week gross profit, operating income and residual. Calculate 36-week merchandise_gross_margin_pct from 36-week merchandise gross profit divided by 36-week net sales, rather than subtracting margin percentages. The output operating_income_usd_million is reconstructed operating income: merchandise gross profit plus earned membership fees less SG&A expense. residual_usd_million is reconstructed operating income less independently reported operating income. The reported amount is the comparator and must not replace the reconstructed output."
+    },
+    "a06": {
+      "income_model": "For Q3 and nine-month periods, reconstruct GAAP operating income as revenue less cost of sales less SG&A. Reconstructed adjusted operating income is reconstructed GAAP operating income plus the signed PhonePe SBC, legal and reorganization adjustments. Reconstructed adjusted constant-currency operating income is reconstructed adjusted operating income plus the reported adjusted-income currency bridge. For each fiscal year, every first-six-month flow and reconstructed stage equals its nine-month amount less its Q3 amount before calculating margins. Each margin is 100 times its matching reconstructed income divided by reported total revenue. Reported income amounts are comparison observations, not inputs that restart a later reconstructed stage.",
+      "adjustment_bridge": "gaap_residual_usd_million is reconstructed GAAP operating income less independently reported GAAP operating income. adjusted_residual_usd_million is reconstructed adjusted operating income less independently reported adjusted operating income. cc_residual_usd_million is reconstructed adjusted constant-currency operating income less independently reported adjusted constant-currency operating income. Reconstruct each first-six-month stage and adjustment as nine months less Q3.",
+      "year_to_date_cash": "residual_usd_million is reconstructed free cash flow (operating cash less positive capital spending) less independently reported free cash flow for the same nine-month period."
+    },
+    "a07": {
+      "gross_profit_bases": "Adjusted gross profit is GAAP gross profit plus signed standard adjustments. residual_usd_million is reconstructed adjusted gross profit less reported adjusted gross profit.",
+      "current_h20_bridge": "excluded_gross_profit_usd_million is standard adjusted gross profit plus the source-signed H20 charge or release. excluded_gross_margin_pct is 100 times that reconstructed amount divided by matching revenue. residual_usd_million is reconstructed excluded gross profit less independently reported excluded gross profit.",
+      "cash_generation": "Issuer FCF is operating cash flow less positive property and intangible purchases and less disclosed positive property and intangible principal. residual_usd_million is reconstructed FCF less independently reported FCF for the same period."
+    },
+    "a08": {
+      "income_model": "For each matching period, reconstructed pretax income is reconstructed operating income plus strategic gains and other income. Reconstructed net income is reconstructed pretax income plus signed tax. residual_usd_million is reconstructed net income less independently reported net income.",
+      "operating_adjustment_bridge": "Adjusted operating income is reconstructed GAAP operating income plus amortization, ordinary SBC and restructuring/acquisition exclusions, with restructuring SBC excluded from ordinary SBC so it is included once. adjusted_margin_pct is 100 times reconstructed adjusted operating income divided by reconstructed matching-period revenue (subscription plus professional services). residual_usd_million is reconstructed adjusted operating income less independently reported adjusted operating income."
+    },
+    "a09": {
+      "consolidated_bridge": "pretax_bridge_residual_usd_million is pretax income plus each signed disclosed pretax bridge adjustment less summed segment operating income. segment_sum_residual_usd_million is summed segment operating income less independently reported segment operating income."
+    },
+    "a10": {
+      "income_model": "revenue_residual_usd_million is reconstructed revenue less independently reported revenue. net_residual_usd_million is reconstructed net income less independently reported net income."
+    },
+    "b04": {
+      "expense_audit": "residual_usd_million is reconstructed adjusted expense less independently reported adjusted expense."
+    },
+    "b05": {
+      "margin_reconciliation": "tm_residual_usd_million is reconstructed transaction margin less independently reported transaction margin. ex_interest_residual_usd_million is reconstructed ex-interest margin less independently reported ex-interest margin."
+    },
+    "b07": {
+      "booking_ratios": "adr_rounding_residual_usd is the rounded-input GBV quotient less published ADR.",
+      "rolling_cash": "ttm_fcf_margin_pct is 100 times the reconstructed four-quarter FCF sum divided by the matching four-quarter revenue sum. revenue_residual_usd_million and fcf_residual_usd_million are the corresponding reconstructed four-quarter sums less reported TTM disclosures."
+    },
+    "b08": {
+      "category_economics": "residual_usd_million is reconstructed operating income (subscription and merchant revenue less their costs and operating expense) less independently reported operating income.",
+      "cash_generation": "residual_usd_million is reconstructed FCF less independently reported FCF."
+    },
+    "b09": {
+      "operating_reconciliation": "residual_usd_million is reconstructed adjusted operating income less independently reported adjusted operating income."
+    },
+    "b10": {
+      "consolidated_cash_bridge": "residual_usd_million is reconstructed operating cash flow less independently reported operating cash flow.",
+      "investment_gain_bridge": "cash_removal_residual_usd_million is net pretax investment gain components plus the signed cash-flow statement adjustment for investment gains."
+    },
+    "c03": {
+      "gross_to_net": "Net revenue is gross revenue plus signed incentives. residual_usd_million is reconstructed net revenue less independently reported net revenue."
+    },
+    "c04": {
+      "regional_attribution": "current_gdv_residual_usd_billion is current-period reported purchase volume plus cash volume less reported gross dollar volume."
+    },
+    "c05": {
+      "prior_tax_baseline": "residual_usd_million is adjusted prior net income less independently reported adjusted prior net income."
+    },
+    "c06": {
+      "consolidated_currency_bridge": "cc_disclosure_residual_usd_million is reconstructed regional constant-currency current revenue less independently reported consolidated constant-currency current revenue."
+    },
+    "c07": {
+      "financial_versions": "residual_usd_million is reconstructed net income less independently reported net income for that version.",
+      "settlement_revision_bridge": "residual_usd_million is the observed annual-report-minus-release change less the signed settlement effect for the same measure."
+    },
+    "c10": {
+      "annual_currency_margin": "adjusted_operating_income_usd_thousand is beginning-year-FX revenue less beginning-year-FX expense. residual_usd_thousand is reconstructed adjusted operating income less independently reported adjusted operating income."
+    },
+    "c08": {
+      "income_reconciliation": "residual_usd_million is reconstructed adjusted net income (GAAP net income plus the signed net-income-basis adjustments) less independently reported adjusted net income for the same period.",
+      "share_basis": "gaap_eps_rounding_residual_usd is computed GAAP EPS (GAAP net income divided by matching GAAP shares) less reported GAAP EPS. denominator_effect_usd is correctly based adjusted EPS (adjusted income divided by adjusted shares) less the hypothetical adjusted-income-over-GAAP-shares quotient."
+    }
+  },
+  "additional_context_evidence": {
+    "a05": {
+      "income_model": [
+        "a05:s02"
+      ],
+      "claim_1": [
+        "a05:s02"
+      ]
+    }
+  },
+  "evidence_decisions": {
+    "a03_claim_2": "Retain the existing sufficient evidence requirement. The more-than-half yield attribution is not established by a03:s03 alone because the annual balance-rate interaction allocation is not specified.",
+    "a05_context": "a05:s02 establishes that earned membership fees are period revenue. It is relevant context only alongside the sufficient numerical evidence in a05:s01, not sufficient evidence by itself."
+  },
+  "provenance": {
+    "financial_inputs_changed": false,
+    "reference_sql_changed": false,
+    "scorer_changed": false,
+    "claims_changed": false,
+    "new_inference": false,
+    "human_review": "pending"
+  },
+  "new_definitions": {
+    "a01": {
+      "quarter_model": "Within the requested fiscal-year and quarter rows, operating_margin_pct is 100 times that row's consolidated operating income divided by that row's consolidated revenue. For each fiscal year, derive Q1 revenue and operating income as the six-month statement amount less Q2 before calculating the Q1 margin."
+    }
+  }
+}

@@ -1,0 +1,795 @@
+{
+  "task_id": "workflow-v14-c01",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "revenue_bridge": {
+      "columns": {
+        "category": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "bitcoin",
+            "hardware",
+            "subscription",
+            "transaction"
+          ],
+          "aliases": {
+            "Transaction-based revenue": "transaction",
+            "Subscription and services-based revenue": "subscription",
+            "Hardware revenue": "hardware",
+            "Bitcoin revenue": "bitcoin"
+          }
+        },
+        "revenue_2023_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "revenue_2024_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "contribution_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "share_2023_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "share_2024_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "share_change_pp": {
+          "type": "real",
+          "unit": "percentage_points",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "category"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c03:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "transaction",
+          6315301.0,
+          6613680.0,
+          298379.0,
+          13.529289072879212,
+          28.816433828963017,
+          27.418703486949763,
+          -1.3977303420132574
+        ],
+        [
+          "subscription",
+          5944842.0,
+          7164799.0,
+          1219957.0,
+          55.3160608135375,
+          27.12604610875082,
+          29.70350838331975,
+          2.5774622745689286
+        ],
+        [
+          "hardware",
+          157178.0,
+          143369.0,
+          -13809.0,
+          -0.6261363997043661,
+          0.7171961299023989,
+          0.5943728907689063,
+          -0.12282323913349254
+        ],
+        [
+          "bitcoin",
+          9498302.0,
+          10199205.0,
+          700903.0,
+          31.78078651328766,
+          43.34032393238376,
+          42.28341523896158,
+          -1.0569086934221785
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s03",
+        "c03:s05"
+      ]
+    },
+    "profit_bridge": {
+      "columns": {
+        "category": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "acquired_technology_amortization",
+            "bitcoin",
+            "hardware",
+            "subscription",
+            "transaction"
+          ],
+          "aliases": {
+            "Transaction-based revenue": "transaction",
+            "Subscription and services-based revenue": "subscription",
+            "Hardware revenue": "hardware",
+            "Bitcoin revenue": "bitcoin",
+            "Amortization of acquired technology assets": "acquired_technology_amortization"
+          }
+        },
+        "gross_profit_2023_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "gross_profit_2024_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "category"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c03:s01",
+          "c03:s02"
+        ]
+      ],
+      "rows": [
+        [
+          "transaction",
+          2613285.0,
+          2732667.0,
+          119382.0
+        ],
+        [
+          "subscription",
+          4869713.0,
+          6028986.0,
+          1159273.0
+        ],
+        [
+          "hardware",
+          -110472.0,
+          -93072.0,
+          17400.0
+        ],
+        [
+          "bitcoin",
+          205189.0,
+          288819.0,
+          83630.0
+        ],
+        [
+          "acquired_technology_amortization",
+          -72829.0,
+          -68364.0,
+          4465.0
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s03",
+        "c03:s05"
+      ]
+    },
+    "reconciliation": {
+      "columns": {
+        "revenue_change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "gross_profit_change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "revenue_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "gross_profit_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 1e-06
+        },
+        "bitcoin_gross_profit_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c03:s01",
+          "c03:s02"
+        ]
+      ],
+      "rows": [
+        [
+          2205430.0,
+          1384150.0,
+          0.0,
+          0.0,
+          40.75754548245764
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s03",
+        "c03:s05"
+      ]
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "c03:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s01",
+        "c03:s02",
+        "c03:s05"
+      ]
+    },
+    "claim_2": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c03:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s03",
+        "c03:s05"
+      ]
+    },
+    "claim_3": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c03:s01",
+          "c03:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s03",
+        "c03:s05"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "scaled_amounts_preserve_ratios",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "revenue_bridge": [
+          [
+            "transaction",
+            12630602.0,
+            13227360.0,
+            596758.0,
+            13.529289072879212,
+            28.816433828963017,
+            27.418703486949763,
+            -1.3977303420132574
+          ],
+          [
+            "subscription",
+            11889684.0,
+            14329598.0,
+            2439914.0,
+            55.3160608135375,
+            27.12604610875082,
+            29.70350838331975,
+            2.5774622745689286
+          ],
+          [
+            "hardware",
+            314356.0,
+            286738.0,
+            -27618.0,
+            -0.6261363997043661,
+            0.7171961299023989,
+            0.5943728907689063,
+            -0.12282323913349254
+          ],
+          [
+            "bitcoin",
+            18996604.0,
+            20398410.0,
+            1401806.0,
+            31.78078651328766,
+            43.34032393238376,
+            42.28341523896158,
+            -1.0569086934221785
+          ]
+        ],
+        "profit_bridge": [
+          [
+            "transaction",
+            5226570.0,
+            5465334.0,
+            238764.0
+          ],
+          [
+            "subscription",
+            9739426.0,
+            12057972.0,
+            2318546.0
+          ],
+          [
+            "hardware",
+            -220944.0,
+            -186144.0,
+            34800.0
+          ],
+          [
+            "bitcoin",
+            410378.0,
+            577638.0,
+            167260.0
+          ],
+          [
+            "acquired_technology_amortization",
+            -145658.0,
+            -136728.0,
+            8930.0
+          ]
+        ],
+        "reconciliation": [
+          [
+            4410860.0,
+            2768300.0,
+            0.0,
+            0.0,
+            40.75754548245764
+          ]
+        ]
+      }
+    },
+    {
+      "name": "bitcoin_revenue_and_cost_change_with_matching_totals",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "revenue_bridge": [
+          [
+            "transaction",
+            6315301.0,
+            6613680.0,
+            298379.0,
+            11.028893743323612,
+            28.816433828963017,
+            26.861889294499306,
+            -1.9545445344637136
+          ],
+          [
+            "subscription",
+            5944842.0,
+            7164799.0,
+            1219957.0,
+            45.092905748808874,
+            27.12604610875082,
+            29.100294776181993,
+            1.9742486674311723
+          ],
+          [
+            "hardware",
+            157178.0,
+            143369.0,
+            -13809.0,
+            -0.5104179372595115,
+            0.7171961299023989,
+            0.5823024709788002,
+            -0.13489365892359872
+          ],
+          [
+            "bitcoin",
+            9498302.0,
+            10699205.0,
+            1200903.0,
+            44.38861844512702,
+            43.34032393238376,
+            43.4555134583399,
+            0.1151895259561401
+          ]
+        ],
+        "profit_bridge": [
+          [
+            "transaction",
+            2613285.0,
+            2732667.0,
+            119382.0
+          ],
+          [
+            "subscription",
+            4869713.0,
+            6028986.0,
+            1159273.0
+          ],
+          [
+            "hardware",
+            -110472.0,
+            -93072.0,
+            17400.0
+          ],
+          [
+            "bitcoin",
+            205189.0,
+            338819.0,
+            133630.0
+          ],
+          [
+            "acquired_technology_amortization",
+            -72829.0,
+            -68364.0,
+            4465.0
+          ]
+        ],
+        "reconciliation": [
+          [
+            2705430.0,
+            1434150.0,
+            0.0,
+            0.0,
+            65.12532348225295
+          ]
+        ]
+      }
+    },
+    {
+      "name": "irrelevant_later_disclosure",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "revenue_bridge": [
+          [
+            "transaction",
+            6315301.0,
+            6613680.0,
+            298379.0,
+            13.529289072879212,
+            28.816433828963017,
+            27.418703486949763,
+            -1.3977303420132574
+          ],
+          [
+            "subscription",
+            5944842.0,
+            7164799.0,
+            1219957.0,
+            55.3160608135375,
+            27.12604610875082,
+            29.70350838331975,
+            2.5774622745689286
+          ],
+          [
+            "hardware",
+            157178.0,
+            143369.0,
+            -13809.0,
+            -0.6261363997043661,
+            0.7171961299023989,
+            0.5943728907689063,
+            -0.12282323913349254
+          ],
+          [
+            "bitcoin",
+            9498302.0,
+            10199205.0,
+            700903.0,
+            31.78078651328766,
+            43.34032393238376,
+            42.28341523896158,
+            -1.0569086934221785
+          ]
+        ],
+        "profit_bridge": [
+          [
+            "transaction",
+            2613285.0,
+            2732667.0,
+            119382.0
+          ],
+          [
+            "subscription",
+            4869713.0,
+            6028986.0,
+            1159273.0
+          ],
+          [
+            "hardware",
+            -110472.0,
+            -93072.0,
+            17400.0
+          ],
+          [
+            "bitcoin",
+            205189.0,
+            288819.0,
+            83630.0
+          ],
+          [
+            "acquired_technology_amortization",
+            -72829.0,
+            -68364.0,
+            4465.0
+          ]
+        ],
+        "reconciliation": [
+          [
+            2205430.0,
+            1384150.0,
+            0.0,
+            0.0,
+            40.75754548245764
+          ]
+        ]
+      }
+    },
+    {
+      "name": "independent_disclosure_discrepancy",
+      "database": "control-discrepancy.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "changes": [
+        [
+          "revenues",
+          0,
+          "amount",
+          17
+        ]
+      ],
+      "tables": {
+        "revenue_bridge": [
+          [
+            "transaction",
+            6315301.0,
+            6613697.0,
+            298396.0,
+            13.530059897616338,
+            28.816433828963017,
+            27.41877396480162,
+            -1.397659864161399
+          ],
+          [
+            "subscription",
+            5944842.0,
+            7164799.0,
+            1219957.0,
+            55.3160608135375,
+            27.12604610875082,
+            29.70350838331975,
+            2.5774622745689286
+          ],
+          [
+            "hardware",
+            157178.0,
+            143369.0,
+            -13809.0,
+            -0.6261363997043661,
+            0.7171961299023989,
+            0.5943728907689063,
+            -0.12282323913349254
+          ],
+          [
+            "bitcoin",
+            9498302.0,
+            10199205.0,
+            700903.0,
+            31.78078651328766,
+            43.34032393238376,
+            42.28341523896158,
+            -1.0569086934221785
+          ]
+        ],
+        "profit_bridge": [
+          [
+            "transaction",
+            2613285.0,
+            2732684.0,
+            119399.0
+          ],
+          [
+            "subscription",
+            4869713.0,
+            6028986.0,
+            1159273.0
+          ],
+          [
+            "hardware",
+            -110472.0,
+            -93072.0,
+            17400.0
+          ],
+          [
+            "bitcoin",
+            205189.0,
+            288819.0,
+            83630.0
+          ],
+          [
+            "acquired_technology_amortization",
+            -72829.0,
+            -68364.0,
+            4465.0
+          ]
+        ],
+        "reconciliation": [
+          [
+            2205430.0,
+            1384150.0,
+            -17.0,
+            -17.0,
+            40.75754548245764
+          ]
+        ]
+      }
+    },
+    {
+      "name": "subscription_cost_increases_with_matching_total",
+      "changes": [
+        [
+          "costs",
+          {
+            "period_end": "2024-12-31",
+            "months": 12,
+            "category": "Subscription and services-based costs"
+          },
+          "amount",
+          1000
+        ],
+        [
+          "costs",
+          {
+            "period_end": "2024-12-31",
+            "months": 12,
+            "category": "Total cost of revenue"
+          },
+          "amount",
+          1000
+        ]
+      ],
+      "reason": "Subscription cost varies independently of revenue. Matching reported total cost preserves the original reconciliation residuals and reduces current subscription and aggregate gross profit by USD 1 million.",
+      "database": "control-independent.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "revenue_bridge": [
+          [
+            "bitcoin",
+            9498302.0,
+            10199205.0,
+            700903.0,
+            31.78078651328766,
+            43.34032393238376,
+            42.28341523896158,
+            -1.05690869342218
+          ],
+          [
+            "hardware",
+            157178.0,
+            143369.0,
+            -13809.0,
+            -0.6261363997043661,
+            0.7171961299023989,
+            0.5943728907689063,
+            -0.12282323913349258
+          ],
+          [
+            "subscription",
+            5944842.0,
+            7164799.0,
+            1219957.0,
+            55.3160608135375,
+            27.12604610875082,
+            29.70350838331975,
+            2.57746227456893
+          ],
+          [
+            "transaction",
+            6315301.0,
+            6613680.0,
+            298379.0,
+            13.529289072879212,
+            28.816433828963017,
+            27.418703486949763,
+            -1.3977303420132543
+          ]
+        ],
+        "profit_bridge": [
+          [
+            "acquired_technology_amortization",
+            -72829.0,
+            -68364.0,
+            4465.0
+          ],
+          [
+            "bitcoin",
+            205189.0,
+            288819.0,
+            83630.0
+          ],
+          [
+            "hardware",
+            -110472.0,
+            -93072.0,
+            17400.0
+          ],
+          [
+            "subscription",
+            4869713.0,
+            6027986.0,
+            1158273.0
+          ],
+          [
+            "transaction",
+            2613285.0,
+            2732667.0,
+            119382.0
+          ]
+        ],
+        "reconciliation": [
+          [
+            2205430.0,
+            1383150.0,
+            0.0,
+            0.0,
+            40.757545482457644
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "346f874730a73091b627f201210df2557f40bbb7ed282d14e7b2dec019e66ad6",
+    "control-2.sqlite": "2670a77c862ad5e08b91c992417cf7fce734b473e40a194a66d75ae61b543b3a",
+    "control-3.sqlite": "d7a8585627716007ca0e466b9d29e124068181a1cd0745a6751d4bd36b9064e2",
+    "control-discrepancy.sqlite": "bc1023f6e4d13f6b0594fa4d136cc08edfec9ba36cce4aef33da10df8d30fadf",
+    "control-independent.sqlite": "f01814373efd3c2b0a79322248e3d9122f508b84af12242956f2e28e7a77314e",
+    "data.sqlite": "02f1f9b02e3ca94b31d255afc94659d027e115e1d57fd68f3463c93ba8107db6",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "a238a441d37a41192a3f9cd6e623b9008e4c89f0d61916b42de309c4d13bed19",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "420523d2bab652e4bd271ae1291f88c6ca82071745c3160153cb8d749e49619b",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

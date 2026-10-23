@@ -1,0 +1,6 @@
+SELECT period,revenue_usd_million-gaap_expense_usd_million gaap_operating_income_usd_million,
+revenue_usd_million-adjusted_expense_usd_million adjusted_operating_income_usd_million,
+100.0*(revenue_usd_million-gaap_expense_usd_million)/revenue_usd_million gaap_margin_pct,
+100.0*(revenue_usd_million-adjusted_expense_usd_million)/revenue_usd_million adjusted_margin_pct,
+gaap_expense_usd_million-litigation_usd_million-restructuring_usd_million-adjusted_expense_usd_million expense_residual_usd_million
+FROM financials WHERE period IN ('FY2024','FY2025','Q4FY2024','Q4FY2025')

@@ -1,0 +1,174 @@
+{
+  "rationale": "Build a PYUSD valuation workpaper from the January and February 2026 reports. Report coverage at January 30, February 10 and February 27 at their disclosed observation times. Reconcile Treasury holdings at fair value to the reported asset category, show separate par and cost comparisons, and build adjacent stock-change bridges. Address the January 16 date conflict without assigning an invented year. Do not count repo collateral as additional Treasury assets.",
+  "source_group": "paxos-pyusd-january-february-2026",
+  "split": "development",
+  "exposure": "Newly authored development case, never held out",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "6041025083f3cbf5886ba901f06c74e65e03ba1c6eb07bbae291f298d8c37497",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "3af86e120fc92989e5618e4db11a623953ab0bf8af192e6b1aa6228dacdcc7d3",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "8ae5e76878c1f3a076dfc111ad3a18cc3d025bcd040965753037ff2ac9282d54",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "a07c03489010467b1967b239f9b916dfec47857e73e14ee199e2d1475c1ca75b",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "7fe795f88561ad85c6f0df87d36899ed2483400dc600e2b071c2f40b47ca4c5b",
+    "claim_mapping": {
+      "jan16_year_uniquely_resolved": "claim_1",
+      "payments_volume_identifiable": "claim_2",
+      "all_clear_dates_fully_backed": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "payments_volume_identifiable",
+      "assertion": "The supplied January and February reports include a total of PYUSD payment transfers between January 30 and February 27.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b02:s04"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b02:s01",
+        "b02:s02"
+      ],
+      "source_grounded_reason": "The supplied reports contain dated token and reserve stocks and timing definitions, not an interval payment-transfer total. This is an assertion about what the dossier reports, rather than about the unobserved size of payment flows."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "cc09e210f5e7d1131dbdcd27d3bd7d6f26d88a69df111812dbfaab98ae0cc725",
+    "maintenance_rationale": "Reserve adequacy depends on valuation basis, holding identity and economic-date scope. A real internal date conflict remains unresolved alongside useful calculations on unambiguous dates. Authored par-versus-fair-value errors are distinct from the issuer discrepancy.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_qualified_coverage.sql",
+      "starting_stock_bridge.sql",
+      "starting_treasury_valuation.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "pyusd_revision": {
+    "prior_task_sha256": "a87b9049816172f057351ee1737ae9188c9f5da82fea2ce7366fcaa2f1a1cdf2",
+    "task": "b02",
+    "additional_claim_3_evidence": [
+      "b02:s01",
+      "b02:s02"
+    ],
+    "evidence_reason": "The January and February asset comparisons support assets exceeding tokens at the requested original observation dates. The detailed Treasury schedule is not necessary for this standalone claim.",
+    "treasury_residual_definition": "Residual is deduplicated Treasury-holding fair value less the reported Treasury asset-category fair value at the same economic date.",
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "scorer_changed": false,
+    "new_inference": false
+  },
+  "contract_correction": {
+    "prior_task_sha256": "c8e58bf9cd9737fd20652548fbe393e2c5dce29162ab0913fa932c1246ae04fc",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {
+      "stock_bridge_definition": "Use January 30 to February 10 and February 10 to February 27. Each stock is the reported observation in reserve_observations. Treasury change uses treasury_fair_value_usd, asset change uses reported_assets_usd, and cash, repo and token changes use cash_usd, repo_fair_value_usd and redeemable_tokens. Changes are current less prior stocks, with surplus change equal to asset change less redeemable-token change. This reported-stock basis is separate from the holdings-based reconstruction in qualified_coverage and treasury_valuation. Preserve any difference between reported and reconstructed values."
+    },
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "evidence_revision": {
+    "review_id": "workflow-evidence-contract-review-20261022",
+    "prior_task_sha256": "abdc70dd35e3d1ce40008ed5e9cdfba0d4442d4b517c588d691c73b01b2a38ca",
+    "changes": [
+      {
+        "group": "tables",
+        "output": "treasury_valuation",
+        "before": {
+          "evidence": [
+            [
+              "b02:s01",
+              "b02:s02",
+              "b02:s05"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b02:s04"
+          ]
+        },
+        "after": {
+          "evidence": [
+            [
+              "b02:s01",
+              "b02:s02",
+              "b02:s05"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b02:s04",
+            "b02:s03"
+          ]
+        }
+      },
+      {
+        "group": "tables",
+        "output": "stock_bridge",
+        "before": {
+          "evidence": [
+            [
+              "b02:s01",
+              "b02:s02"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b02:s04",
+            "b02:s05"
+          ]
+        },
+        "after": {
+          "evidence": [
+            [
+              "b02:s01",
+              "b02:s02"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "b02:s04",
+            "b02:s05",
+            "b02:s03"
+          ]
+        }
+      }
+    ],
+    "grading_only": true,
+    "authored_reference_citations": {},
+    "public_requirements_changed": false,
+    "human_review": "pending"
+  },
+  "contract_adjudication": {
+    "review_id": "workflow-v15-contract-adjudication-1",
+    "prior_task_sha256": "acfd87b2bc291c4ae165f7a0260a89b46785782e43e2b2a3fd8cd774388128cc",
+    "evidence_changes": [],
+    "model_visible_clarification": false,
+    "reference_sql_corrections": [],
+    "saved_output_compatibility": "compatible_grading_only",
+    "human_review": "pending"
+  }
+}

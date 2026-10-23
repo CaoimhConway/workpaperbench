@@ -1,0 +1,101 @@
+{
+  "rationale": "Build Walmart earnings workpapers through Q3FY2026. Include both Q3 and nine-month comparisons and reconstruct first-six-month earnings outputs. Reconcile signed legal, PhonePe and reorganization adjustments before applying the adjusted currency bridge. Keep year-to-date cash flow in its nine-month scope and assess whether quarter cash flow can be reconstructed.",
+  "source_group": "walmart-q3fy2026-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "73206cc27ccb5d1ef72f566b9da6783a08522dfe3a4a74f2f0b679b8e62d685b",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "8fa22b73495038d9ad1b1672802c722e67c37df72f4b9178d426696e56e20f32",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "a1918d27bc164204cd0bcb976daceb509a1e45bf6bb9dc3eb8278348352a3bcf",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "91621f99669428f43e2e08628d7b161626f5d3b7f04a915ba1e66a6fed6aee07",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "c8e2d012263738c6f02788f00a84352a9211397e3b10039f72dd428116ca0711",
+    "claim_mapping": {
+      "q3_gaap_and_adjusted_diverge": "claim_1",
+      "headline_cash_is_q3": "claim_2",
+      "exact_q3_operating_cash_identified": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_q3_operating_cash_identified",
+      "assertion": "The supplied cash-flow dossier contains both six-month and nine-month operating cash flow, allowing Q3 operating cash flow to be obtained by subtraction.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "a06:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a06:s01"
+      ],
+      "source_grounded_reason": "The dossier explicitly supplies nine-month cash flows and no six-month cash-flow statement. The income statement has different durations and cannot supply the missing cash-flow input."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "3aba4dc3d5d31ddcf07c301581aa75305988b25b59ed8e53f071cf6d3a81ffd0",
+    "maintenance_rationale": "A noncash IPO charge, a signed quarter legal benefit and different GAAP/adjusted currency bridges can reverse an earnings narrative. An update must preserve cumulative scope and fiscal naming, while incomplete cash periods require a supported non-answer.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_adjustment_bridge.sql",
+      "starting_income_model.sql",
+      "starting_year_to_date_cash.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "53b2cef6b653235cc9c966bee2bf36d3db2a49ede6e26f60600688b0167b834f",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "measurement_revision": {
+    "prior_task_sha256": "a72a712e277368d322728b5cb4ab3583b583fe92f230bd23c181ddd98f31c170",
+    "public_definition_addenda": {
+      "income_model": "For Q3 and nine-month periods, reconstruct GAAP operating income as revenue less cost of sales less SG&A. Reconstructed adjusted operating income is reconstructed GAAP operating income plus the signed PhonePe SBC, legal and reorganization adjustments. Reconstructed adjusted constant-currency operating income is reconstructed adjusted operating income plus the reported adjusted-income currency bridge. For each fiscal year, every first-six-month flow and reconstructed stage equals its nine-month amount less its Q3 amount before calculating margins. Each margin is 100 times its matching reconstructed income divided by reported total revenue. Reported income amounts are comparison observations, not inputs that restart a later reconstructed stage.",
+      "adjustment_bridge": "gaap_residual_usd_million is reconstructed GAAP operating income less independently reported GAAP operating income. adjusted_residual_usd_million is reconstructed adjusted operating income less independently reported adjusted operating income. cc_residual_usd_million is reconstructed adjusted constant-currency operating income less independently reported adjusted constant-currency operating income. Reconstruct each first-six-month stage and adjustment as nine months less Q3.",
+      "year_to_date_cash": "residual_usd_million is reconstructed free cash flow (operating cash less positive capital spending) less independently reported free cash flow for the same nine-month period."
+    },
+    "new_public_definitions": {},
+    "additional_context_evidence": {},
+    "financial_inputs_changed": false,
+    "reference_sql_changed": false,
+    "human_review": "pending"
+  },
+  "contract_adjudication": {
+    "review_id": "workflow-v15-contract-adjudication-1",
+    "prior_task_sha256": "e648c62f3ce79d5981e05c59c71cceed5889d566548ecd7ff8d3f58bf54a8f90",
+    "evidence_changes": [],
+    "model_visible_clarification": false,
+    "reference_sql_corrections": [],
+    "saved_output_compatibility": "compatible_grading_only",
+    "human_review": "pending"
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "tables": {
+    "category_margin": {
+      "columns": {
+        "year": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "category": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "product",
+            "service"
+          ]
+        },
+        "gross_profit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "year",
+        "months",
+        "category"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "net_income_growth_bridge": {
+      "columns": {
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "other",
+            "product_gp",
+            "research",
+            "selling",
+            "service_gp",
+            "tax"
+          ]
+        },
+        "prior_signed_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_signed_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_net_income_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "months",
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "prior_tax_baseline": {
+      "columns": {
+        "months": {
+          "type": "integer",
+          "unit": "count"
+        },
+        "prior_gaap_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "tax_charge_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "prior_adjusted_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_gaap_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "gaap_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "current_gaap_growth_vs_adjusted_prior_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "months"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "The full annual GAAP net-income increase equals the operating-income increase.",
+    "claim_2": "The supplied product-category tables include separate dollar contributions from price changes and unit-volume changes to FY2025 product revenue growth.",
+    "claim_3": "The excluded prior tax charge exceeds half the FY2025 increase in GAAP net income."
+  },
+  "definitions": {
+    "category_margin": "Both fiscal years, months=3 Q4 and 12 annual. Category gross margin uses category revenue.",
+    "net_income_growth_bridge": "Six signed net-income components per duration. Expenses and tax enter negatively. Contributions divide by the same-duration GAAP net-income increase.",
+    "prior_tax_baseline": "Remove the prior tax charge by adding it to prior net income. Current remains GAAP. Percentage growth uses each clearly declared baseline. residual_usd_million is adjusted prior net income less independently reported adjusted prior net income."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

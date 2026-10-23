@@ -1,4 +1,4 @@
-# Owner-hosted local execution
+# Local execution on macOS
 
 For current evaluations without Mac-specific paths, use the [portable Linux
 execution guide](RUNNING.md). This document preserves the measured local profiles
@@ -178,7 +178,7 @@ Microsoft. Its [report](../reports/local/workflow-qwen36-development-1.json)
 retains both outcomes. Brale delivered files but failed financial and robustness
 checks. Do not interpret delivery as a passing workpaper.
 
-For the authorized continuation, use the distinct
+The continuation uses the distinct
 [non-thinking profile](../config/local/qwen36-35b-nonthinking-terminal-24.json):
 
 ```sh

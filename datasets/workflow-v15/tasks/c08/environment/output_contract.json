@@ -1,0 +1,165 @@
+{
+  "tables": {
+    "income_reconciliation": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2024",
+            "FY2025",
+            "Q3FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "gaap_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "signed_adjustment_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "share_basis": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2024",
+            "FY2025",
+            "Q3FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "gaap_shares_million": {
+          "type": "real",
+          "unit": "million_shares",
+          "tolerance": 1e-06
+        },
+        "adjusted_shares_million": {
+          "type": "real",
+          "unit": "million_shares",
+          "tolerance": 1e-06
+        },
+        "computed_gaap_eps_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        },
+        "gaap_eps_rounding_residual_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        },
+        "computed_adjusted_eps_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        },
+        "adjusted_income_over_gaap_shares_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        },
+        "denominator_effect_usd": {
+          "type": "real",
+          "unit": "usd_per_share",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "segment_growth_bridge": {
+      "columns": {
+        "window": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY",
+            "Q4FY"
+          ]
+        },
+        "segment": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "Infrastructure software",
+            "Semiconductor"
+          ]
+        },
+        "prior_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "current_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_total_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "window",
+        "segment"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "The FY2025 GAAP diluted share denominator is the matching published denominator for adjusted net income.",
+    "claim_2": "Semiconductor solutions contributes more than half the FY2025 total-revenue increase.",
+    "claim_3": "Higher AI-semiconductor prices caused more than half of the FY2025 increase in Broadcom semiconductor revenue."
+  },
+  "definitions": {
+    "income_reconciliation": "Five declared periods. All net-income adjustments are signed and already expressed on the net-income reconciliation basis. residual_usd_million is reconstructed adjusted net income (GAAP net income plus the signed net-income-basis adjustments) less independently reported adjusted net income for the same period.",
+    "share_basis": "Computed EPS uses matching million-dollar income and million-share denominators. Use GAAP income for GAAP EPS. For both adjusted-income quotients use the reconstructed adjusted income defined in income_reconciliation: GAAP net income plus signed net-income-basis adjustments, not the independent reported adjusted-income observation. Correct adjusted EPS divides that reconstruction by adjusted shares. The hypothetical quotient divides the same reconstruction by GAAP shares. gaap_eps_rounding_residual_usd is computed GAAP EPS less reported GAAP EPS. denominator_effect_usd is correct adjusted EPS less the hypothetical quotient. Keep the reported adjusted-income observation independent for income_reconciliation residuals.",
+    "segment_growth_bridge": "Windows FY and Q4FY. Segment contribution is its dollar change divided by the matching total-revenue dollar change."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

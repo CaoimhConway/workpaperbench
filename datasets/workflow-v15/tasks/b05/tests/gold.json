@@ -1,0 +1,731 @@
+{
+  "task_id": "workflow-v15-b05",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "quarter_activity": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "Q1FY2025",
+            "Q2FY2025",
+            "Q3FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "active_accounts_million": {
+          "type": "real",
+          "unit": "million_accounts",
+          "tolerance": 1e-06
+        },
+        "transactions_million": {
+          "type": "real",
+          "unit": "million_transactions",
+          "tolerance": 1e-06
+        },
+        "quarter_transactions_per_active_account": {
+          "type": "real",
+          "unit": "transactions_per_account",
+          "tolerance": 1e-06
+        },
+        "reported_ttm_activity": {
+          "type": "real",
+          "unit": "transactions_per_account",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "b05:s01",
+          "b05:s02"
+        ],
+        [
+          "b05:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "Q4FY2024",
+          434,
+          6619,
+          15.251152073732719,
+          60.6
+        ],
+        [
+          "Q1FY2025",
+          436,
+          6045,
+          13.864678899082568,
+          59.4
+        ],
+        [
+          "Q2FY2025",
+          438,
+          6226,
+          14.214611872146119,
+          58.3
+        ],
+        [
+          "Q3FY2025",
+          438,
+          6331,
+          14.454337899543379,
+          57.6
+        ],
+        [
+          "Q4FY2025",
+          439,
+          6754,
+          15.38496583143508,
+          57.7
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "margin_reconciliation": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2024",
+            "FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "transaction_margin_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "tm_ex_interest_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "tm_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "tm_ex_interest_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "tm_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "ex_interest_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "b05:s03"
+        ]
+      ],
+      "rows": [
+        [
+          "Q4FY2025",
+          4034.0,
+          3741.0,
+          46.496081143384046,
+          43.118948824343015,
+          0.0,
+          0.0
+        ],
+        [
+          "Q4FY2024",
+          3935.0,
+          3603.0,
+          47.03562036815683,
+          43.06717666746354,
+          0.0,
+          0.0
+        ],
+        [
+          "FY2025",
+          15465.0,
+          14235.0,
+          46.62064391655613,
+          42.91269745568552,
+          0.0,
+          0.0
+        ],
+        [
+          "FY2024",
+          14658.0,
+          13374.0,
+          46.098688555524106,
+          42.06057175205208,
+          0.0,
+          0.0
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b05:s01"
+      ]
+    },
+    "annual_activity_bridge": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2025"
+          ]
+        },
+        "transactions_million": {
+          "type": "real",
+          "unit": "million_transactions",
+          "tolerance": 1e-06
+        },
+        "recomputed_ttm_activity": {
+          "type": "real",
+          "unit": "transactions_per_account",
+          "tolerance": 1e-06
+        },
+        "rounded_activity_residual": {
+          "type": "real",
+          "unit": "transactions_per_account",
+          "tolerance": 1e-06
+        },
+        "transaction_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "ovas_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "net_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "revenue_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "tpv_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "transaction_revenue_to_tpv_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "b05:s01",
+          "b05:s02"
+        ],
+        [
+          "b05:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "FY2025",
+          25356.0,
+          57.758542141230066,
+          0.05854214123006834,
+          29798.0,
+          3374.0,
+          33172.0,
+          0.0,
+          1793978.0,
+          1.6610014169627498
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b05:s03"
+      ]
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "b05:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b05:s01"
+      ]
+    },
+    "claim_2": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "b05:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b05:s02"
+      ]
+    },
+    "claim_3": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b05:s01",
+          "b05:s02"
+        ],
+        [
+          "b05:s01"
+        ]
+      ],
+      "context_evidence_allowed": []
+    }
+  },
+  "controls": [
+    {
+      "name": "scaled_amounts_preserve_ratios",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "quarter_activity": [
+          [
+            "Q4FY2024",
+            868,
+            13238,
+            15.251152073732719,
+            60.6
+          ],
+          [
+            "Q1FY2025",
+            872,
+            12090,
+            13.864678899082568,
+            59.4
+          ],
+          [
+            "Q2FY2025",
+            876,
+            12452,
+            14.214611872146119,
+            58.3
+          ],
+          [
+            "Q3FY2025",
+            876,
+            12662,
+            14.454337899543379,
+            57.6
+          ],
+          [
+            "Q4FY2025",
+            878,
+            13508,
+            15.38496583143508,
+            57.7
+          ]
+        ],
+        "margin_reconciliation": [
+          [
+            "Q4FY2025",
+            8068.0,
+            7482.0,
+            46.496081143384046,
+            43.118948824343015,
+            0.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            7870.0,
+            7206.0,
+            47.03562036815683,
+            43.06717666746354,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            30930.0,
+            28470.0,
+            46.62064391655613,
+            42.91269745568552,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2024",
+            29316.0,
+            26748.0,
+            46.098688555524106,
+            42.06057175205208,
+            0.0,
+            0.0
+          ]
+        ],
+        "annual_activity_bridge": [
+          [
+            "FY2025",
+            50712.0,
+            57.758542141230066,
+            0.05854214123006834,
+            59596.0,
+            6748.0,
+            66344.0,
+            0.0,
+            3587956.0,
+            1.6610014169627498
+          ]
+        ]
+      }
+    },
+    {
+      "name": "customer_interest_changes_tm_not_ex_interest",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "quarter_activity": [
+          [
+            "Q4FY2024",
+            434,
+            6619,
+            15.251152073732719,
+            60.6
+          ],
+          [
+            "Q1FY2025",
+            436,
+            6045,
+            13.864678899082568,
+            59.4
+          ],
+          [
+            "Q2FY2025",
+            438,
+            6226,
+            14.214611872146119,
+            58.3
+          ],
+          [
+            "Q3FY2025",
+            438,
+            6331,
+            14.454337899543379,
+            57.6
+          ],
+          [
+            "Q4FY2025",
+            439,
+            6754,
+            15.38496583143508,
+            57.7
+          ]
+        ],
+        "margin_reconciliation": [
+          [
+            "Q4FY2025",
+            4134.0,
+            3741.0,
+            47.10574293527803,
+            42.627620783956246,
+            0.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            3935.0,
+            3603.0,
+            47.03562036815683,
+            43.06717666746354,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            15565.0,
+            14235.0,
+            46.781077182014904,
+            42.783722048569366,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2024",
+            14658.0,
+            13374.0,
+            46.098688555524106,
+            42.06057175205208,
+            0.0,
+            0.0
+          ]
+        ],
+        "annual_activity_bridge": [
+          [
+            "FY2025",
+            25356.0,
+            57.758542141230066,
+            0.05854214123006834,
+            29798.0,
+            3474.0,
+            33272.0,
+            0.0,
+            1793978.0,
+            1.6610014169627498
+          ]
+        ]
+      }
+    },
+    {
+      "name": "irrelevant_later_disclosures",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "quarter_activity": [
+          [
+            "Q4FY2024",
+            434,
+            6619,
+            15.251152073732719,
+            60.6
+          ],
+          [
+            "Q1FY2025",
+            436,
+            6045,
+            13.864678899082568,
+            59.4
+          ],
+          [
+            "Q2FY2025",
+            438,
+            6226,
+            14.214611872146119,
+            58.3
+          ],
+          [
+            "Q3FY2025",
+            438,
+            6331,
+            14.454337899543379,
+            57.6
+          ],
+          [
+            "Q4FY2025",
+            439,
+            6754,
+            15.38496583143508,
+            57.7
+          ]
+        ],
+        "margin_reconciliation": [
+          [
+            "Q4FY2025",
+            4034.0,
+            3741.0,
+            46.496081143384046,
+            43.118948824343015,
+            0.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            3935.0,
+            3603.0,
+            47.03562036815683,
+            43.06717666746354,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            15465.0,
+            14235.0,
+            46.62064391655613,
+            42.91269745568552,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2024",
+            14658.0,
+            13374.0,
+            46.098688555524106,
+            42.06057175205208,
+            0.0,
+            0.0
+          ]
+        ],
+        "annual_activity_bridge": [
+          [
+            "FY2025",
+            25356.0,
+            57.758542141230066,
+            0.05854214123006834,
+            29798.0,
+            3374.0,
+            33172.0,
+            0.0,
+            1793978.0,
+            1.6610014169627498
+          ]
+        ]
+      }
+    },
+    {
+      "name": "independent_disclosure_discrepancy",
+      "database": "control-discrepancy.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "changes": [
+        [
+          "margin",
+          0,
+          "net_revenue_usd_million",
+          17
+        ],
+        [
+          "quarters",
+          0,
+          "transaction_revenue_usd_million",
+          34
+        ]
+      ],
+      "tables": {
+        "quarter_activity": [
+          [
+            "Q4FY2024",
+            434,
+            6619,
+            15.251152073732719,
+            60.6
+          ],
+          [
+            "Q1FY2025",
+            436,
+            6045,
+            13.864678899082568,
+            59.4
+          ],
+          [
+            "Q2FY2025",
+            438,
+            6226,
+            14.214611872146119,
+            58.3
+          ],
+          [
+            "Q3FY2025",
+            438,
+            6331,
+            14.454337899543379,
+            57.6
+          ],
+          [
+            "Q4FY2025",
+            439,
+            6754,
+            15.38496583143508,
+            57.7
+          ]
+        ],
+        "margin_reconciliation": [
+          [
+            "Q4FY2025",
+            4051.0,
+            3758.0,
+            46.60071321753135,
+            43.23018520648798,
+            17.0,
+            17.0
+          ],
+          [
+            "Q4FY2024",
+            3935.0,
+            3603.0,
+            47.03562036815683,
+            43.06717666746354,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            15465.0,
+            14235.0,
+            46.62064391655613,
+            42.91269745568552,
+            0.0,
+            0.0
+          ],
+          [
+            "FY2024",
+            14658.0,
+            13374.0,
+            46.098688555524106,
+            42.06057175205208,
+            0.0,
+            0.0
+          ]
+        ],
+        "annual_activity_bridge": [
+          [
+            "FY2025",
+            25356.0,
+            57.758542141230066,
+            0.05854214123006834,
+            29832.0,
+            3374.0,
+            33172.0,
+            34.0,
+            1793978.0,
+            1.6628966464471693
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "4abdc45aaa939c79e451e252a460b22117675464161eb6a3464a659dea71aaea",
+    "control-2.sqlite": "de62cf7d4eac10b84f13bd182a2f2ed93a0e7f59fcada55d4279404f0b8151ae",
+    "control-3.sqlite": "a8a0d74be90093ab7abd3c1c2b8f4551717c330b4387ea5dbf1085b449a03100",
+    "control-discrepancy.sqlite": "7247b1d48acbee9dd277a34c78d6e5bf97f169f401c50c081ce57dae655d28ee",
+    "data.sqlite": "6826f7f8a4cd6b28d8cc8bf0f30d34c824004089856fff5d55647a626c54c503",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "dd2a1e145f23adf9fb6df073dfe9977829c2e97c1c5f8774ba7514ee66c20d53",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "0bf62bfb030a49d28b546a095d2c196a2c483a081fba392e7cf31b98732c4b9f",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "rationale": "Build Berkshire FY2025 research bridges with FY2024/FY2023 comparisons. Separate parent-attributable operating earnings from consolidated earnings, reconcile consolidated operating cash, and tie the pretax investment-gain components to their cash-flow removal. Assess the limits of interpreting gains and float stocks as economic cash returns.",
+  "source_group": "berkshire-fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "6a3775c7c5f81af6d96b5d1840facde1cd172dbe5fbe6ba3514b7853c25b1112",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "f50f23048d168bfa260e34689bac2d83ec3df23834ab1585c578d0579783bf21",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "4dfef41a315ff4e4f5763b67cae557ad463fc30b52c916549cfa221b1575a057",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "d1f6fa2fa7a03b6f290e4d462bc1f4eb803f442f658d3ff6bbf7f0237ce6968e",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {},
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "93b39b0207c6e4933e196baf78b2116240b8c22c9129bbe398ec00a2093bb0ae",
+    "claim_mapping": {
+      "exact_float_cost_identified": "claim_1",
+      "unrealized_exceeds_net_gain": "claim_2",
+      "parent_income_is_cf_start": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_float_cost_identified",
+      "assertion": "Berkshire FY2025 average insurance float exceeded its FY2024 average insurance float.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "b10:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b10:s01"
+      ],
+      "source_grounded_reason": "The supplied approximate year-end stocks rose from USD 171 billion to USD 176 billion. Endpoints do not determine either annual average, so the ordering of the averages remains unknown."
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "f63e60bad46bc98375c92b2adcd9bd5f1d4ed934eaac39d0efb7860d5ebffaae",
+    "maintenance_rationale": "A report contains parent-only and consolidated statements with superficially similar starting labels. An audit must preserve tax and ownership scopes across three linked reconciliations and resist equating unrealized earnings, sale gains and float stocks with cash flows.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_consolidated_cash_bridge.sql",
+      "starting_investment_gain_bridge.sql",
+      "starting_parent_earnings_bridge.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "cdc342dfd7ac09440a07bd7f6cb3c4d3846dd6216c0ddd904ff348ddf197a457",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "grading_contract_revision": {
+    "prior_task_sha256": "35f716549d4db40aa00d009128392540b08cb0c895ca7e6abc03ee89f1e7106b",
+    "additional_sufficient_evidence": {
+      "claim_3": [
+        [
+          "b10:s01"
+        ],
+        [
+          "b10:s02"
+        ]
+      ]
+    },
+    "public_definitions": {
+      "parent_earnings_bridge": "After-tax parent scope for three years. Parent income is the sum of the disclosed after-tax parent earnings components. Operating earnings remove signed investment gains and signed equity-method impairments from that sum. Residual is the component sum less independently reported parent income.",
+      "consolidated_cash_bridge": "Consolidated scope for three years. Parent income retains the independently reported parent amount, rather than the component sum in parent_earnings_bridge. Add all signed statement adjustments to consolidated net earnings. Noncontrolling income is consolidated less reported parent income."
+    },
+    "observation_date_context_added": false,
+    "original_observations_changed": false,
+    "original_targets_changed": false,
+    "human_review": "pending"
+  },
+  "measurement_revision": {
+    "prior_task_sha256": "15346cc4746e3118a73e576d6c91059877c2a4e811c420639b3256574a16fd98",
+    "public_definition_addenda": {
+      "consolidated_cash_bridge": "residual_usd_million is reconstructed operating cash flow less independently reported operating cash flow.",
+      "investment_gain_bridge": "cash_removal_residual_usd_million is net pretax investment gain components plus the signed cash-flow statement adjustment for investment gains."
+    },
+    "new_public_definitions": {},
+    "additional_context_evidence": {},
+    "financial_inputs_changed": false,
+    "reference_sql_changed": false,
+    "human_review": "pending"
+  }
+}

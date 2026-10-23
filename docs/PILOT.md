@@ -2,7 +2,7 @@
 
 Status: prepared but not executed. No provider compatibility, effective settings,
 usage, latency, price, returned revision or model performance has been observed.
-The prepared release `v0.6.3-rc.1` is unpublished. All commands use its local checkout,
+All commands in this protocol use
 `workflow-v11-canonical-99f9af5fc8cb`, scorer `workflow-1.2.1` and Harbor `0.23.0`.
 
 This condition runs six development tasks once for provider compatibility and
@@ -31,6 +31,12 @@ configuration decision and separate identity. Inspect `harbor agent schema termi
 and provider documentation before accepting the configuration. Never silently
 remove or translate an unsupported setting.
 
+For the verified OpenRouter DeepSeek model, use the model-specific `model_info`
+from the [OpenRouter example](../config/openrouter-execution.example.json),
+including `supports_reasoning: true`. Limits alone can cause LiteLLM to omit
+the requested reasoning setting. Follow the [merge command](RUNNING.md#connections-and-caching)
+and verify capabilities separately before applying metadata to another model.
+
 The [local reference template](../config/preliminary-local-reference.example.json)
 points to the historical local setup. Verify the loaded weights, quantization,
 runtime and context rather than assuming those files describe a running server.
@@ -40,9 +46,8 @@ No local inference is part of this preparation.
 
 The harness does not enforce a monetary cap. Establish an explicit funded pilot
 budget before launch, retain failed-call/cache/reasoning/retry costs where
-observable, and record missing prices or usage as unknown. Existing owner spending
-and execution restrictions still apply. These templates provide no spending or
-inference authorization. Hash the resolved configuration and record the exact
+observable, and record missing prices or usage as unknown. Hash the resolved
+configuration and record the exact
 checkout commit, catalog/scorer hashes, dependencies and image digests. After the
 six development outcomes, freeze the final configuration and exact evaluation
 schedule before opening any evaluation results. Retain development runs under

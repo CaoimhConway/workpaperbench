@@ -62,6 +62,47 @@ def test_openrouter_request_preserves_history_and_generation(native, monkeypatch
     assert Chat(model).messages == []
 
 
+def test_openrouter_high_reasoning_reaches_serialized_request(native, monkeypatch):
+    import httpx
+    from litellm.llms.custom_httpx.async_client_cleanup import close_litellm_async_clients
+    spec = json.loads((Path(__file__).parents[1] / 'config/openrouter-execution.example.json').read_text())
+    settings = copy.deepcopy(spec['llm_call_kwargs'])
+    settings['extra_body']['provider']['only'] = ['deepinfra/fp8']
+    monkeypatch.setenv('OPENROUTER_API_KEY', 'offline-fixture-key')
+    seen = []
+
+    async def send(client, request, *args, **kwargs):
+        assert str(request.url) == 'https://openrouter.ai/api/v1/chat/completions'
+        seen.append((json.loads(request.content), dict(request.headers)))
+        return httpx.Response(200, request=request, json={
+            'id': 'offline-response', 'object': 'chat.completion', 'created': 0,
+            'model': 'deepseek/deepseek-v4.1-flash-1017',
+            'choices': [{'index': 0, 'message': {'role': 'assistant', 'content': '{}'},
+                         'finish_reason': 'stop'}],
+            'usage': {'prompt_tokens': 10, 'completion_tokens': 2, 'total_tokens': 12}})
+
+    monkeypatch.setattr(httpx.AsyncClient, 'send', send)
+
+    async def exercise():
+        model = native.LiteLLM(spec['harbor_model'], reasoning_effort='high',
+                              session_id='offline-attempt', model_info=spec['model_info'])
+        try:
+            await model.call('unchanged instruction', **settings)
+        finally:
+            await close_litellm_async_clients()
+    asyncio.run(exercise())
+    assert len(seen) == 1
+    body, headers = seen[0]
+    assert body['model'] == 'deepseek/deepseek-v4.1-flash-1017'
+    assert body['reasoning_effort'] == 'high'
+    assert body['max_tokens'] == 16384
+    assert body['provider'] == settings['extra_body']['provider']
+    assert body['session_id'] == 'offline-attempt'
+    assert body['messages'] == [{'role': 'user', 'content': 'unchanged instruction'}]
+    assert headers['x-openrouter-cache'] == 'false'
+    assert 'temperature' not in body
+
+
 def test_native_cancellation_does_not_retry(native, monkeypatch):
     calls = []
 

@@ -1,0 +1,166 @@
+{
+  "tables": {
+    "expense_model": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "9MFY2024",
+            "9MFY2025",
+            "FY2024",
+            "FY2025",
+            "Q1FY2025",
+            "Q2FY2025",
+            "Q3FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "gaap_expense_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "prior_adjusted_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "new_adjusted_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "additional_exclusions_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "prior_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "new_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "operating_margins": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2024",
+            "FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "revenue_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "rldc_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "rldc_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "adjusted_ebitda_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "revenue_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "cost_residual_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "definition_attribution": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "acquisition",
+            "legal",
+            "payroll_tax",
+            "restructuring"
+          ]
+        },
+        "prior_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "current_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "change_usd_thousand": {
+          "type": "real",
+          "unit": "usd_thousand",
+          "tolerance": 0.001
+        },
+        "contribution_to_definition_gap_change_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "Annual FY2025 adjusted expenses are lower under the new definition than under the prior definition.",
+    "claim_2": "Reserve-yield changes contributed more than half of the FY2024-to-FY2025 change in reserve income.",
+    "claim_3": "The issuer defines adjusted EBITDA margin using total revenue as denominator."
+  },
+  "definitions": {
+    "expense_model": "9MFY denotes the first nine months, annual less Q4. Adjustments retain source signs. Both reported-definition residuals compare recomputed amounts to reported amounts.",
+    "definition_attribution": "Positive exclusions reduce expense. Changes are FY2025 less FY2024 and contributions divide by the change in the prior-minus-new definition gap.",
+    "operating_margins": "Use exact USD thousand statement amounts. RLDC equals reserve plus other revenue less distribution and other costs. EBITDA margin uses the issuer denominator. No rounding to whole millions."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

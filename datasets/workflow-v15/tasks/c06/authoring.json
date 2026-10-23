@@ -1,0 +1,153 @@
+{
+  "rationale": "Reconcile Alphabet Q2FY2025 year-over-year and sequential revenue growth. Apply comparison-specific translation bases, separate currency from hedging, and attribute reported year-over-year growth across mutually exclusive revenue components. Assess the limit on a separate AI-product attribution.",
+  "source_group": "alphabet-q2fy2025-workflow",
+  "split": "evaluation",
+  "exposure": "Reference/control verification only, no candidate-model exposure",
+  "observations": "authentic primary disclosures",
+  "starting_defects": "not applicable - no starting SQL supplied",
+  "controls": "authored synthetic counterfactuals",
+  "reference_method": "Independent Python Decimal calculations from source facts, separate from submitted SQL",
+  "human_review": "pending",
+  "source_snapshot_sha256": "9a43b868a895c58cfc91496f295c069a7be2e1c7d06fa2f70686432d44b2a5ae",
+  "candidate_view_review": "Source headings, signs, periods and relevant definitions directly inspected before model exposure",
+  "contract_revision": {
+    "number": 1,
+    "prior_task_sha256": "436d91c10db69839e1c65926d329f7533e79736f91a57f5d8651653ba935af33",
+    "changes": "Explicit input database, output directory and existing basename restriction"
+  },
+  "grading_correction": {
+    "number": 1,
+    "prior_task_sha256": "f3b6550e744bd8a511301c06dc51e199ab3f8f722af2358bd3c39ec182b10a92",
+    "changes": "Correct SBC source bindings and accept known dossier context with sufficient support. No financial, source, SQL or counterfactual changes."
+  },
+  "quality_revision": {
+    "prior_task_sha256": "3030d8a86deeba6f370edee52c230241e4e10b924f83227ecb47e9b2087fa1cf",
+    "evidence": "Reviewed per-output support and additional context, unrelated sections rejected",
+    "removed_identity_columns": {
+      "consolidated_currency_bridge": [
+        "bridge_residual_usd_million"
+      ]
+    },
+    "new_synthetic_control": true,
+    "reference_correction": null,
+    "human_review": "pending"
+  },
+  "validity_revision": {
+    "prior_task_sha256": "7d34b1ecb89ce7e2eb6df4e91737459984e8f7fec4addaea1bce270f3707e1ba",
+    "claim_mapping": {
+      "prior_hedging_excluded_from_cc_growth": "claim_1",
+      "exact_ai_product_effect_identified": "claim_2",
+      "cloud_exceeds_half_reported_growth": "claim_3"
+    },
+    "replacement_review": {
+      "replaces": "exact_ai_product_effect_identified",
+      "assertion": "The year-over-year change in consolidated hedging revenue reduced the reported Q2 FY2025 revenue increase by USD 214 million.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c06:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c06:s01",
+        "c06:s03"
+      ],
+      "source_grounded_reason": "Consolidated hedging moves from positive USD 102 million to negative USD 112 million. This additive contribution is distinct from geography translation effects and from the existing Cloud majority claim.",
+      "independent_calculation": "-112 - 102 = -214 USD million"
+    },
+    "human_review": "pending"
+  },
+  "construction_revision": {
+    "prior_task_sha256": "05343457130672d3d786595b7b6e12836dd6dbd57d51364ed67cd5687535d4bf",
+    "maintenance_rationale": "The same current quarter has different constant-currency amounts under different comparison rates. A coherent bridge must retain that dependence and exclude prior hedging from CC growth without double-counting product subtotals.",
+    "maintenance_starting_defects": "authored synthetic work-product defects",
+    "removed_starting_files": [
+      "starting_consolidated_currency_bridge.sql",
+      "starting_geographic_currency.sql",
+      "starting_revenue_growth_components.sql"
+    ],
+    "claim_assertion_changes": {},
+    "evidence_support_changes": {}
+  },
+  "evaluation_track": "construction",
+  "contract_correction": {
+    "prior_task_sha256": "0443c06228b6599fc02d4f831808e9661bf7cc81a750949b3746e65c96795b65",
+    "scorer_version": "workflow-1.2.1",
+    "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+    "changes": {},
+    "financial_inputs_changed": false,
+    "financial_targets_changed": false,
+    "controls_changed": false,
+    "reference_sql_changed": false,
+    "new_inference": false
+  },
+  "measurement_revision": {
+    "prior_task_sha256": "3fd056ba8c2b8436198db0e158f740ab05056d62119af839cf7ada4886b61e6d",
+    "public_definition_addenda": {
+      "consolidated_currency_bridge": "cc_disclosure_residual_usd_million is reconstructed regional constant-currency current revenue less independently reported consolidated constant-currency current revenue."
+    },
+    "new_public_definitions": {},
+    "additional_context_evidence": {},
+    "financial_inputs_changed": false,
+    "reference_sql_changed": false,
+    "human_review": "pending"
+  },
+  "evidence_revision": {
+    "review_id": "workflow-evidence-contract-review-20261022",
+    "prior_task_sha256": "68d02628547343c57effcc1add76ebfe761bde26d0cf48c0c929a7244eb1270d",
+    "changes": [
+      {
+        "group": "claims",
+        "output": "claim_2",
+        "before": {
+          "evidence": [
+            [
+              "c06:s02"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "c06:s01",
+            "c06:s03"
+          ]
+        },
+        "after": {
+          "evidence": [
+            [
+              "c06:s02"
+            ],
+            [
+              "c06:s01"
+            ]
+          ],
+          "context_evidence_allowed": [
+            "c06:s01",
+            "c06:s03"
+          ]
+        }
+      }
+    ],
+    "grading_only": true,
+    "authored_reference_citations": {},
+    "public_requirements_changed": false,
+    "human_review": "pending"
+  },
+  "contract_adjudication": {
+    "review_id": "workflow-v15-contract-adjudication-1",
+    "prior_task_sha256": "7119b9316f85b6ed9382d744359c5690be5585834a49d1d5a0071d2660002ff4",
+    "evidence_changes": [
+      {
+        "group": "tables",
+        "output": "geographic_currency"
+      },
+      {
+        "group": "tables",
+        "output": "consolidated_currency_bridge"
+      }
+    ],
+    "model_visible_clarification": true,
+    "reference_sql_corrections": [],
+    "saved_output_compatibility": "diagnostic_model_visible_change",
+    "human_review": "pending"
+  }
+}

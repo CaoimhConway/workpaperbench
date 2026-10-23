@@ -1,0 +1,52 @@
+{
+  "task_id": "workflow-v13-a08",
+  "tables": [
+    {
+      "id": "income_model",
+      "file": "income_model.sql",
+      "evidence": [
+        "a08:s01"
+      ]
+    },
+    {
+      "id": "operating_adjustment_bridge",
+      "file": "operating_adjustment_bridge.sql",
+      "evidence": [
+        "a08:s01",
+        "a08:s02"
+      ]
+    },
+    {
+      "id": "acquisition_scope",
+      "file": "acquisition_scope.sql",
+      "evidence": [
+        "a08:s01",
+        "a08:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": [
+        "a08:s03"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "a08:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "supported",
+      "evidence": [
+        "a08:s01",
+        "a08:s03"
+      ]
+    }
+  ]
+}

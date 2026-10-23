@@ -1,0 +1,156 @@
+{
+  "tables": {
+    "income_model": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2024",
+            "FY2025",
+            "Q1FY2025",
+            "Q2FY2025",
+            "Q3FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "pretax_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "net_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "revenue_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "net_residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "currency_and_network": {
+      "columns": {
+        "window": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY",
+            "Q4"
+          ]
+        },
+        "billed_reported_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "billed_fx_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "revenue_reported_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "revenue_fx_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "current_processed_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        },
+        "prior_processed_usd_billion": {
+          "type": "real",
+          "unit": "usd_billion",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "window"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    },
+    "revenue_growth_bridge": {
+      "columns": {
+        "window": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY",
+            "Q4"
+          ]
+        },
+        "measure": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "card_fees",
+            "discount",
+            "net_interest",
+            "service_other"
+          ]
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "contribution_to_revenue_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "window",
+        "measure"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored"
+    }
+  },
+  "claim_assertions": {
+    "claim_1": "Using the supplied annual values, FY2025 discount revenue divided by billed business is approximately 2.24 percent.",
+    "claim_2": "The stated FX comparison restates prior-year amounts at current-period rates.",
+    "claim_3": "Billed business and total network volume have identical payment-product scope."
+  },
+  "definitions": {
+    "income_model": "All seven stated periods. Recompute revenue from four components, then pretax and net income, preserving source rounding residuals. revenue_residual_usd_million is reconstructed revenue less independently reported revenue. net_residual_usd_million is reconstructed net income less independently reported net income.",
+    "currency_and_network": "Annual and Q4 comparisons use current reported numerators and the matching prior reported or prior FX-adjusted denominator. Processed volume is network less billed business in USD billion.",
+    "revenue_growth_bridge": "Four component changes, FY2025 less FY2024 and Q4FY2025 less Q4FY2024. Contributions divide by matching total reported-revenue change."
+  },
+  "filesystem": {
+    "input_database": "/workspace/data.sqlite",
+    "answer_file": "/logs/artifacts/answer.json",
+    "sql_directory": "/logs/artifacts",
+    "json_file_fields": "SQL basenames relative to answer.json"
+  },
+  "evidence_policy": "Cite sufficient supporting source IDs for each output. IDs may appear alone or inside explanations, with multiple IDs in one entry. Explanation-only entries do not supply evidence. Every cited ID must be relevant and known. Additional unrelated sections fail. Prose is not an entailment check and cannot repair incorrect numbers.",
+  "reconciliation_policy": "Residuals compare independently supplied observations. Synthetic controls may make reported totals and components disagree. Preserve the discrepancy instead of forcing zero or changing a source observation. Algebraic identity residuals are not requested.",
+  "claim_policy": "Supported means the supplied evidence entails the assertion. Contradicted means it entails the negation. Unresolved means neither follows. A claim that the supplied dossier explicitly reports a quantity is contradicted when the supplied scope explicitly omits it. A claim about the unknown economic quantity itself remains unresolved. Do not infer zero from missing information. No label count or order is promised.",
+  "text_policy": "Text columns declare canonical values and accepted source-label aliases. Aliases refer to the same economic category, never a different period, unit or measure. Duplicate keys after normalization fail. Different SQL, row order and column order are accepted. Numeric tolerances are unchanged."
+}

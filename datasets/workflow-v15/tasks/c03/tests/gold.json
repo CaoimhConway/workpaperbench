@@ -1,0 +1,639 @@
+{
+  "task_id": "workflow-v15-c03",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "gross_to_net": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "9MFY2025",
+            "FY2025",
+            "Q4FY2025"
+          ]
+        },
+        "gross_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "incentives_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "net_revenue_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "incentive_share_of_gross_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c03:s01"
+        ]
+      ],
+      "rows": [
+        [
+          "FY2025",
+          55751.0,
+          -15751.0,
+          40000.0,
+          28.252408028555543,
+          0.0
+        ],
+        [
+          "Q4FY2025",
+          14972.0,
+          -4248.0,
+          10724.0,
+          28.372962864012823,
+          0.0
+        ],
+        [
+          "9MFY2025",
+          40779.0,
+          -11503.0,
+          29276.0,
+          28.208146349836927,
+          0.0
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s03"
+      ]
+    },
+    "net_income_reconciliation": {
+      "columns": {
+        "period": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY2024",
+            "FY2025",
+            "Q4FY2024",
+            "Q4FY2025"
+          ]
+        },
+        "gaap_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "after_tax_adjustments_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_income_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "litigation_adjustment_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "period"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c03:s02"
+        ]
+      ],
+      "rows": [
+        [
+          "FY2024",
+          19743.0,
+          646.0,
+          20389.0,
+          337.0,
+          0.0
+        ],
+        [
+          "FY2025",
+          20058.0,
+          2484.0,
+          22542.0,
+          1964.0,
+          0.0
+        ],
+        [
+          "Q4FY2024",
+          5318.0,
+          107.0,
+          5425.0,
+          0.0,
+          0.0
+        ],
+        [
+          "Q4FY2025",
+          5090.0,
+          713.0,
+          5803.0,
+          697.0,
+          0.0
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "income_growth_bridge": {
+      "columns": {
+        "window": {
+          "type": "text",
+          "unit": "label",
+          "values": [
+            "FY",
+            "Q4FY"
+          ]
+        },
+        "gaap_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "adjusted_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        },
+        "gaap_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "adjusted_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "gap_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 0.001
+        }
+      },
+      "keys": [
+        "window"
+      ],
+      "duplicates": "Keys must be unique",
+      "row_order": "ignored",
+      "evidence": [
+        [
+          "c03:s02"
+        ]
+      ],
+      "rows": [
+        [
+          "FY",
+          315.0,
+          2153.0,
+          1.5955022033125665,
+          10.55961547893472,
+          1838.0
+        ],
+        [
+          "Q4FY",
+          -228.0,
+          378.0,
+          -4.287326062429485,
+          6.967741935483871,
+          606.0
+        ]
+      ],
+      "context_evidence_allowed": []
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c03:s02"
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "claim_2": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c03:s02"
+        ]
+      ],
+      "context_evidence_allowed": []
+    },
+    "claim_3": {
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c03:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c03:s03"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "scaled_amounts_preserve_ratios",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "gross_to_net": [
+          [
+            "FY2025",
+            111502.0,
+            -31502.0,
+            80000.0,
+            28.252408028555543,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            29944.0,
+            -8496.0,
+            21448.0,
+            28.372962864012823,
+            0.0
+          ],
+          [
+            "9MFY2025",
+            81558.0,
+            -23006.0,
+            58552.0,
+            28.208146349836927,
+            0.0
+          ]
+        ],
+        "net_income_reconciliation": [
+          [
+            "FY2024",
+            39486.0,
+            1292.0,
+            40778.0,
+            674.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            40116.0,
+            4968.0,
+            45084.0,
+            3928.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            10636.0,
+            214.0,
+            10850.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            10180.0,
+            1426.0,
+            11606.0,
+            1394.0,
+            0.0
+          ]
+        ],
+        "income_growth_bridge": [
+          [
+            "FY",
+            630.0,
+            4306.0,
+            1.5955022033125665,
+            10.55961547893472,
+            3676.0
+          ],
+          [
+            "Q4FY",
+            -456.0,
+            756.0,
+            -4.287326062429485,
+            6.967741935483871,
+            1212.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "gross_and_incentive_increase_net_unchanged",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "gross_to_net": [
+          [
+            "FY2025",
+            55851.0,
+            -15851.0,
+            40000.0,
+            28.380870530518703,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            15072.0,
+            -4348.0,
+            10724.0,
+            28.848195329087048,
+            0.0
+          ],
+          [
+            "9MFY2025",
+            40779.0,
+            -11503.0,
+            29276.0,
+            28.208146349836927,
+            0.0
+          ]
+        ],
+        "net_income_reconciliation": [
+          [
+            "FY2024",
+            19743.0,
+            646.0,
+            20389.0,
+            337.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            20058.0,
+            2484.0,
+            22542.0,
+            1964.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            5318.0,
+            107.0,
+            5425.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            5090.0,
+            713.0,
+            5803.0,
+            697.0,
+            0.0
+          ]
+        ],
+        "income_growth_bridge": [
+          [
+            "FY",
+            315.0,
+            2153.0,
+            1.5955022033125665,
+            10.55961547893472,
+            1838.0
+          ],
+          [
+            "Q4FY",
+            -228.0,
+            378.0,
+            -4.287326062429485,
+            6.967741935483871,
+            606.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "irrelevant_later_disclosures",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "gross_to_net": [
+          [
+            "FY2025",
+            55751.0,
+            -15751.0,
+            40000.0,
+            28.252408028555543,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            14972.0,
+            -4248.0,
+            10724.0,
+            28.372962864012823,
+            0.0
+          ],
+          [
+            "9MFY2025",
+            40779.0,
+            -11503.0,
+            29276.0,
+            28.208146349836927,
+            0.0
+          ]
+        ],
+        "net_income_reconciliation": [
+          [
+            "FY2024",
+            19743.0,
+            646.0,
+            20389.0,
+            337.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            20058.0,
+            2484.0,
+            22542.0,
+            1964.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            5318.0,
+            107.0,
+            5425.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            5090.0,
+            713.0,
+            5803.0,
+            697.0,
+            0.0
+          ]
+        ],
+        "income_growth_bridge": [
+          [
+            "FY",
+            315.0,
+            2153.0,
+            1.5955022033125665,
+            10.55961547893472,
+            1838.0
+          ],
+          [
+            "Q4FY",
+            -228.0,
+            378.0,
+            -4.287326062429485,
+            6.967741935483871,
+            606.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "independent_disclosure_discrepancy",
+      "database": "control-discrepancy.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "changes": [
+        [
+          "revenue_components",
+          0,
+          "amount_usd_million",
+          17
+        ],
+        [
+          "net_income_reconciliation",
+          0,
+          "amount_usd_million",
+          34
+        ]
+      ],
+      "tables": {
+        "gross_to_net": [
+          [
+            "FY2025",
+            55751.0,
+            -15751.0,
+            40000.0,
+            28.252408028555543,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            14989.0,
+            -4248.0,
+            10741.0,
+            28.340783241043432,
+            17.0
+          ],
+          [
+            "9MFY2025",
+            40762.0,
+            -11503.0,
+            29259.0,
+            28.21991070114322,
+            -17.0
+          ]
+        ],
+        "net_income_reconciliation": [
+          [
+            "FY2024",
+            19743.0,
+            646.0,
+            20389.0,
+            337.0,
+            0.0
+          ],
+          [
+            "FY2025",
+            20058.0,
+            2484.0,
+            22542.0,
+            1964.0,
+            0.0
+          ],
+          [
+            "Q4FY2024",
+            5318.0,
+            107.0,
+            5425.0,
+            0.0,
+            0.0
+          ],
+          [
+            "Q4FY2025",
+            5124.0,
+            713.0,
+            5837.0,
+            697.0,
+            34.0
+          ]
+        ],
+        "income_growth_bridge": [
+          [
+            "FY",
+            315.0,
+            2153.0,
+            1.5955022033125665,
+            10.55961547893472,
+            1838.0
+          ],
+          [
+            "Q4FY",
+            -194.0,
+            378.0,
+            -3.6479879654005267,
+            6.967741935483871,
+            572.0
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "5a155be4f01597563b1aa1a4b75c41f8a840c1b16a72cfe974a7ba3061a29a5d",
+    "control-2.sqlite": "341893f7416aa997f341a1a7ffe36c660263e84d3a13f3e07e50b5489c7ec8e4",
+    "control-3.sqlite": "01240d230a2f54738b40d84f56a3b4864de466d4e481ee9c55c53b8805531789",
+    "control-discrepancy.sqlite": "75c07fdfb8a673529fe769624d9e36b478b318748634505396d872899545f2c0",
+    "data.sqlite": "a721641b601a692021eefcbdf45d6b401340fcffb2e5e2f04bde6c282dcb9621",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "1fdbaad9a032c35d4b81b87baf5dc2670a0d091e11fb561cfbcaa2e483888dfc",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "184fa07bdc8c0ceb0ef8fe005c6019488f9f3813d946c773d1549ecd04800225",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

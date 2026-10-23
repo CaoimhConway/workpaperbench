@@ -1,0 +1,50 @@
+{
+  "task_id": "workflow-v15-c08",
+  "tables": [
+    {
+      "id": "income_reconciliation",
+      "file": "income_reconciliation.sql",
+      "evidence": [
+        "c08:s01"
+      ]
+    },
+    {
+      "id": "share_basis",
+      "file": "share_basis.sql",
+      "evidence": [
+        "c08:s01",
+        "c08:s02"
+      ]
+    },
+    {
+      "id": "segment_growth_bridge",
+      "file": "segment_growth_bridge.sql",
+      "evidence": [
+        "c08:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "c08:s02"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "c08:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": [
+        "c08:s03"
+      ]
+    }
+  ]
+}

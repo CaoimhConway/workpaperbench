@@ -1,6 +1,12 @@
 {
   "execution_version": "execution-efficiency-1",
   "status": "provider_configuration_example",
+  "harbor_model": "openrouter/deepseek/deepseek-v4.1-flash-1017",
+  "model_info": {
+    "max_input_tokens": 65536,
+    "max_output_tokens": 16384,
+    "supports_reasoning": true
+  },
   "llm_call_kwargs": {
     "max_tokens": 16384,
     "caching": false,
@@ -16,5 +22,5 @@
     }
   },
   "session_id": "<unique-attempt-affinity-id>",
-  "policy": "Resolve the endpoint slug and assign a fresh session_id per attempt. Use the same session_id across that attempt's turns. Metadata stays outside messages. Keep the frozen model, generation settings, timeouts and retries. Prompt caching depends on the endpoint. Full response replay is disabled. This example is a separately identified route, not an update to the frozen serial comparison."
+  "policy": "Model metadata applies only to harbor_model. Verify capabilities and replace that metadata when selecting another model. Resolve the endpoint slug and assign a fresh session_id per attempt. Use the same session_id across that attempt's turns. Metadata stays outside messages. Keep the frozen model, generation settings, timeouts and retries. Prompt caching depends on the endpoint. Full response replay is disabled. This example is a separately identified route, not an update to the frozen serial comparison."
 }
