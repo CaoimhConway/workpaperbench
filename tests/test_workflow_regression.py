@@ -15,8 +15,8 @@ SPEC.loader.exec_module(REGRESSION)
 NATIVE = REGRESSION.native
 
 
-def trial(directory, key='c01', reward=1.0):
-    task = ROOT / NATIVE.TASKS / key
+def trial(directory, key='c01', reward=1.0, dataset='workflow-v11'):
+    task = ROOT / 'datasets' / dataset / 'tasks' / key
     reference = json.loads((task / 'tests/reference.json').read_text())
     gold = json.loads((task / 'tests/gold.json').read_text())
     positive = reward == 1
@@ -116,15 +116,19 @@ def test_regression_retains_failures_and_uses_current_checkout(tmp_path, monkeyp
     def run(command, **kwargs):
         calls.append(command)
         assert '--repo' not in command
-        assert command[command.index('-p') + 1] == str(ROOT / NATIVE.TASKS)
-        jobs = Path(command[command.index('--jobs-dir') + 1]) / 'oracles'
-        for key in REGRESSION.TASKS:
-            trial(jobs / (key + '__fixture'), key)
-        job = {'n_total_trials': 5, 'stats': {'n_completed_trials': 5, 'n_errored_trials': 0,
+        assert command[command.index('-p') + 1] == str(ROOT / 'datasets/workflow-v15/tasks')
+        key = command[command.index('-i') + 1]
+        assert command.count('-i') == 1
+        assert command[command.index('--env') + 1] == 'workpaperbench.runtime_integrity:VerifiedDockerEnvironment'
+        assert 'expected_task=workflow-v15-' + key in command
+        assert 'expected_manifest=' + NATIVE.load(ROOT, 'workflow-v15')['manifest_id'] in command
+        jobs = Path(command[command.index('--jobs-dir') + 1]) / key
+        trial(jobs / (key + '__fixture'), key, dataset='workflow-v15')
+        job = {'n_total_trials': 1, 'stats': {'n_completed_trials': 1, 'n_errored_trials': 0,
             'n_running_trials': 0, 'n_pending_trials': 0, 'n_cancelled_trials': 0, 'n_retries': 0}}
         if failure == 'job-diagnostics':
             job['stats'].pop('n_retries')
-        if failure == 'oracle':
+        if failure == 'oracle' and key == 'b01':
             path = jobs / 'b01__fixture/result.json'
             data = json.loads(path.read_text())
             data['verifier_result']['rewards']['reward'] = 0.0
@@ -133,8 +137,8 @@ def test_regression_retains_failures_and_uses_current_checkout(tmp_path, monkeyp
         return subprocess.CompletedProcess(command, 0)
     monkeypatch.setattr(REGRESSION.subprocess, 'run', run)
     fixtures = []
-    def validate(binary, output, checkout):
-        assert checkout is True
+    def validate(binary, output, checkout, dataset):
+        assert checkout is True and dataset == 'workflow-v15'
         fixtures.append(output)
         return {'inference': False, 'cases': [{'reward': 1.0}, {'reward': 0.0}]}
     monkeypatch.setattr(NATIVE, 'validate', validate)
@@ -150,4 +154,4 @@ def test_regression_retains_failures_and_uses_current_checkout(tmp_path, monkeyp
         assert report['status'] == 'passed' and len(report['oracles']) == 5
         assert report['source']['kind'] == 'checkout' and fixtures
         assert report['inference'] is False and report['model_performance_evaluation'] is False
-    assert len(calls) == 1
+    assert len(calls) == (1 if failure == 'job-diagnostics' else 2 if failure == 'oracle' else 5)

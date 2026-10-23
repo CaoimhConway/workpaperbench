@@ -95,9 +95,9 @@ def validate(verdict, variant, covered):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--dataset', default='workflow-v11', choices=['workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9', 'workflow-v10', 'workflow-v11', 'workflow-v12'])
+    parser.add_argument('--dataset', default='workflow-v15', choices=['workflow-v5', 'workflow-v6', 'workflow-v7', 'workflow-v8', 'workflow-v9', 'workflow-v10', 'workflow-v11', 'workflow-v12', 'workflow-v13', 'workflow-v14', 'workflow-v15'])
     parser.add_argument('--executor', choices=['docker', 'local-lima'], default='docker',
-                        help='Docker on this Linux controller, or the historical owner maintenance wrapper')
+                        help='Docker on this Linux controller, or the historical maintenance wrapper')
     parser.add_argument('--tasks', nargs='+', default=['a01', 'b01', 'c01'])
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--native-prefix', help='Also test these cases through native Harbor before the control sweep')

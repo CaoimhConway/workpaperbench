@@ -1,0 +1,575 @@
+{
+  "validation_id": "workflow-v15-quality-1",
+  "manifest_id": "workflow-v15-canonical-400f60b5b3b6",
+  "scorer_version": "workflow-1.2.1",
+  "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+  "validator_sha256": "ab32facab7258336117360af033fd87bbb3e0f7a0fbd6a03097a608d647c1955",
+  "inference": false,
+  "external_service_spend_usd": 0,
+  "scope": "Authored positive and negative controls, not candidate-model performance",
+  "native_receipts": [],
+  "isolated_verifier_checks": [
+    {
+      "task": "c01",
+      "task_sha256": "011ee090ece83ff983acf92723e427fa912a7403c6b1ed92cde04e5d94acf9d3",
+      "variant": "reference",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:acfaff3a39454b3e017226a748e078a29f90ad4773ece4a52b55ce186c444f00",
+      "files_sha256": {
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "answer.json": "3daff44ab5624d007daa1b4dcc34646b09467dcfa3e362e578fcc3ae8a06f140"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "c01",
+      "task_sha256": "011ee090ece83ff983acf92723e427fa912a7403c6b1ed92cde04e5d94acf9d3",
+      "variant": "context",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:acfaff3a39454b3e017226a748e078a29f90ad4773ece4a52b55ce186c444f00",
+      "files_sha256": {
+        "revenue_bridge.sql": "bed84445aa3fc9546cc6b85ebaaba2ae7bf3d1e9df3459b7b0beea9776d4d8b3",
+        "profit_bridge.sql": "4f3ee342dccef65e48a11202a8dbedbf8fcc6f3d7e849d54d15b296267f54c6f",
+        "reconciliation.sql": "b0bf8e11b830fa68577d6d4f7a2fdbba01f757763994771c1aa17b83be51fb60",
+        "answer.json": "47e2336d6920eac28de6f923ffb9e9291408687ead06c1b4aec06466c22331bb"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": true,
+        "verified_research_completion": true,
+        "strict_delivery_completion": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "c01",
+      "task_sha256": "011ee090ece83ff983acf92723e427fa912a7403c6b1ed92cde04e5d94acf9d3",
+      "variant": "citation_dump",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:acfaff3a39454b3e017226a748e078a29f90ad4773ece4a52b55ce186c444f00",
+      "files_sha256": {
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "answer.json": "c069997dd2900c38ab290674900ef87f4a3fc9998e7c33d40e08cbc986623f20"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": false,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": false,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": false
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": false
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": false
+            }
+          }
+        },
+        "errors": [
+          "revenue_bridge:evidence",
+          "profit_bridge:evidence",
+          "reconciliation:evidence",
+          "claim_1:evidence",
+          "claim_2:evidence",
+          "claim_3:evidence"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "c01",
+      "task_sha256": "011ee090ece83ff983acf92723e427fa912a7403c6b1ed92cde04e5d94acf9d3",
+      "variant": "constant_residual",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:acfaff3a39454b3e017226a748e078a29f90ad4773ece4a52b55ce186c444f00",
+      "files_sha256": {
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "f844e07b67e9aa38d41510427d4f7255d5fd341892a924cda19536d55f812d0b",
+        "answer.json": "3daff44ab5624d007daa1b4dcc34646b09467dcfa3e362e578fcc3ae8a06f140"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": false,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": "numeric",
+                "subscription_cost_increases_with_matching_total": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": true,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "reconciliation:control:independent_disclosure_discrepancy"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    },
+    {
+      "task": "c01",
+      "task_sha256": "011ee090ece83ff983acf92723e427fa912a7403c6b1ed92cde04e5d94acf9d3",
+      "variant": "always_unresolved",
+      "expectation_passed": true,
+      "failure": null,
+      "image_id": "sha256:acfaff3a39454b3e017226a748e078a29f90ad4773ece4a52b55ce186c444f00",
+      "files_sha256": {
+        "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae",
+        "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+        "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+        "answer.json": "4619f7fb27e462561afdfeca5c1c1821ba95674b8890621a805564ab28e47df6"
+      },
+      "verdict": {
+        "scorer_version": "workflow-1.2.1",
+        "complete": false,
+        "verified_research_completion": false,
+        "strict_delivery_completion": false,
+        "checks": {
+          "financial_answer": false,
+          "numerical_tables": true,
+          "claim_verdicts": false,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "details": {
+          "tables": {
+            "revenue_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "profit_bridge": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            },
+            "reconciliation": {
+              "original": true,
+              "original_error": null,
+              "evidence": true,
+              "controls": {
+                "scaled_amounts_preserve_ratios": true,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": true,
+                "irrelevant_later_disclosure": true,
+                "independent_disclosure_discrepancy": true,
+                "subscription_cost_increases_with_matching_total": true
+              },
+              "control_errors": {
+                "scaled_amounts_preserve_ratios": null,
+                "bitcoin_revenue_and_cost_change_with_matching_totals": null,
+                "irrelevant_later_disclosure": null,
+                "independent_disclosure_discrepancy": null,
+                "subscription_cost_increases_with_matching_total": null
+              }
+            }
+          },
+          "claims": {
+            "claim_1": {
+              "verdict": true,
+              "evidence": true
+            },
+            "claim_2": {
+              "verdict": false,
+              "evidence": true
+            },
+            "claim_3": {
+              "verdict": false,
+              "evidence": true
+            }
+          }
+        },
+        "errors": [
+          "claim_2:verdict",
+          "claim_3:verdict"
+        ],
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        }
+      }
+    }
+  ]
+}

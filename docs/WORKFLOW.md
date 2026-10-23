@@ -1,14 +1,19 @@
 # Workflow methods
 
-The default catalog is `workflow-v11-canonical-99f9af5fc8cb` (construction), using
+The default catalog is `workflow-v15-canonical-400f60b5b3b6` (construction), using
 scorer `workflow-1.2.1`. Six development and 24 evaluation cases each request three
 SQL result tables and three claim verdicts. All 30 cases are available for external
 model execution. Deliver `answer.json` and three named `.sql` files. The
-[Block example](../examples/block-workpaper-v11) is an authored reference.
+[Block example](../examples/block-workpaper-v15) is an authored reference.
+
+Version 15 clarifies financial bases, accepts sufficient evidence alternatives
+and corrects the reported baseline in one authored forecast. Historical catalogs
+and saved submissions keep their original identities. See the
+[current validation record](../reports/workflow-v15/README.md).
 
 ## Construction and maintenance
 
-| Condition | Construction, workflow-v11 | Maintenance, workflow-v7 |
+| Condition | Construction, workflow-v15 | Maintenance, workflow-v7 |
 | --- | --- | --- |
 | Candidate receives | Dossier, normalized observations and output contract | Same financial inputs plus three starting queries |
 | Starting SQL | None | 61/90 queries already correct across the catalog |
@@ -171,12 +176,12 @@ without any Mac/Lima dependency:
 ```sh
 .venv/bin/pip install -e '.[test]'
 .venv/bin/python -m pytest -q
-.venv/bin/python scripts/build_workflow_dependency_revision.py --check
+.venv/bin/python scripts/build_workflow_contract_adjudication.py --check
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v11 --native-prefix my-validity \
+  --dataset workflow-v15 --native-prefix my-validity \
   --output .local/my-validity-prototypes.json
 .venv/bin/python scripts/validate_workflow_quality.py \
-  --dataset workflow-v11 --tasks all --output .local/my-validity-suite.json
+  --dataset workflow-v15 --tasks all --output .local/my-validity-suite.json
 ```
 
 The explicit `--executor local-lima` option retains the historical Mac/Lima maintenance

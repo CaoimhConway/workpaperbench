@@ -4,8 +4,8 @@ Run any of the 30 prepared construction tasks through native Harbor 0.23.0. The 
 can be your Linux workstation, dedicated server or VM. Docker Engine and Docker
 Compose must run on that controller. Ubuntu 24.04 x86_64 is the validated platform.
 The tested guest has six CPUs and 12 GiB RAM. Use one concurrent candidate trial
-and at most two oracle trials. All inference examples in this guide are prepared
-but not executed for workflow-v11.
+and at most two oracle trials. Current execution examples use `workflow-v15`.
+Versioned comparison recipes retain their explicitly frozen catalogs.
 
 ## Runtime input integrity
 
@@ -49,13 +49,13 @@ before sharing. They are outside candidate log mounts.
 Reproduce the inference-free checks on the dedicated Linux controller:
 
 ```sh
-python3 scripts/validate_runtime_integrity.py --dataset workflow-v13 \
+python3 scripts/validate_runtime_integrity.py --dataset workflow-v15 \
   --output .local/runtime-integrity-regressions
 python3 scripts/validate_runtime_integrity.py --mode cold \
   --output .local/runtime-integrity-copy-cold
-python3 scripts/validate_runtime_integrity.py --dataset workflow-v13 \
+python3 scripts/validate_runtime_integrity.py --dataset workflow-v15 \
   --mode ordered --output .local/runtime-integrity-ordered
-python3 scripts/validate_runtime_integrity.py --dataset workflow-v13 \
+python3 scripts/validate_runtime_integrity.py --dataset workflow-v15 \
   --mode grading --output .local/runtime-integrity-grading
 ```
 
@@ -78,15 +78,27 @@ then install the pinned harness:
 uv tool install --python 3.12 'harbor==0.23.0'
 ```
 
-The commands below use `workflow-v11` from this checkout.
-Start with the [single-task quickstart](../README.md#quickstart).
-Full qualification then runs all 30 oracle solutions five times before model evaluation:
+Run these commands from the repository root. `./wpb` is the current project
+interface. The installed `workpaperbench` command preserves the historical
+inline-answer interface. Both routes use the pinned native harness.
 
 ```sh
-harbor run \
-  -p datasets/workflow-v11/tasks \
-  --agent oracle -k 5 \
-  --n-concurrent 2 --max-retries 0 --env docker
+export PYTHONPATH="$PWD"
+```
+
+Start with the [single-task quickstart](../README.md#quickstart). Full qualification
+runs all 30 oracle solutions five times, with each invocation bound to one task:
+
+```sh
+for task in $(python3 -c 'import json; print(" ".join(json.load(open("datasets/workflow-v15/manifest.json"))["tasks"]))'); do
+  harbor run -p datasets/workflow-v15/tasks -i "$task" \
+    --agent oracle -k 5 --n-concurrent 1 --max-retries 0 \
+    --env workpaperbench.runtime_integrity:VerifiedDockerEnvironment \
+    --ek canonical_root="$PWD" \
+    --ek expected_manifest=workflow-v15-canonical-400f60b5b3b6 \
+    --ek expected_task="workflow-v15-$task" \
+    --job-name "oracles-v15-$task" --jobs-dir .local/oracles-v15 || exit $?
+done
 ```
 
 Each oracle attempt should have reward `1` and no exception. These are reference
@@ -100,10 +112,14 @@ through its environment variables and choose its Harbor model name:
 
 ```sh
 harbor run \
-  -p datasets/workflow-v11/tasks \
+  -p datasets/workflow-v15/tasks -i c01 \
   --agent terminus-2 --model '<provider/model>' \
   --ak max_turns=24 \
-  --n-concurrent 1 --max-retries 0 --env docker
+  --n-concurrent 1 --max-retries 0 \
+  --env workpaperbench.runtime_integrity:VerifiedDockerEnvironment \
+  --ek canonical_root="$PWD" \
+  --ek expected_manifest=workflow-v15-canonical-400f60b5b3b6 \
+  --ek expected_task=workflow-v15-c01
 ```
 
 Terminus-2 calls the model from the controller and sends terminal commands into
@@ -112,7 +128,7 @@ from the controller. For example, with a server already running locally:
 
 ```sh
 OPENAI_API_KEY=local-only harbor run \
-  -p datasets/workflow-v11/tasks -i c01 \
+  -p datasets/workflow-v15/tasks -i c01 \
   --agent terminus-2 --model openai/my-model \
   --ak api_base=http://127.0.0.1:8000/v1 \
   --ak 'model_info={"max_input_tokens":65536,"max_output_tokens":4096,"input_cost_per_token":0,"output_cost_per_token":0,"litellm_provider":"openai","mode":"chat"}' \
@@ -120,7 +136,11 @@ OPENAI_API_KEY=local-only harbor run \
   --ak temperature=0.6 \
   --ak max_turns=24 \
   --agent-timeout-multiplier 6 \
-  --n-concurrent 1 --env docker
+  --n-concurrent 1 --max-retries 0 \
+  --env workpaperbench.runtime_integrity:VerifiedDockerEnvironment \
+  --ek canonical_root="$PWD" \
+  --ek expected_manifest=workflow-v15-canonical-400f60b5b3b6 \
+  --ek expected_task=workflow-v15-c01
 ```
 
 The placeholder above is for a credential-free local endpoint serving a
@@ -141,12 +161,10 @@ Keep those settings and budgets fixed across a comparison and retain the job
 configuration. The direct interface records the selected model name and options,
 without attesting to the server's weights revision or enforcement of settings.
 
-Use `-i c01` to select one development task. The complete development set is
-`a01`, `a02`, `b01`, `b02`, `c01`, `c02`. To run only the 24 evaluation tasks, add:
-
-```sh
--x a01 -x a02 -x b01 -x b02 -x c01 -x c02
-```
+The complete development set is `a01`, `a02`, `b01`, `b02`, `c01`, `c02`.
+For another task, change both `-i` and `expected_task`. Run tasks serially with
+unique job identities, as in the oracle loop. The manifest records the six
+development and 24 evaluation cases under each task's `split` field.
 
 The [comparison recipe](COMPARISON.md) fixes the agent, budgets and result metadata
 for a declared comparison. The quickstart above is an execution example.
@@ -181,12 +199,12 @@ authorization and bounded workers constrain replay. These checks do not prove
 security for arbitrary workloads. Modal and other sandbox backends have not been
 validated against this verifier's network-namespace requirements.
 
-The [release validation record](../reports/workflow-v11/README.md)
-binds the oracle sweep and local scripted Terminus-2 fixtures. The fixtures check
+The [current software record](../reports/workflow-v15/README.md)
+binds the v15 quickstart and local scripted Terminus-2 fixtures. The fixtures check
 native API transport, terminal feedback, retained delivery, positive and negative
 grader outcomes, and isolation on development task `c01`. They make no inference
 or provider calls and establish no model-performance result. To reproduce the
-transport checks from the prepared checkout, run:
+transport checks from this checkout, run:
 
 ```sh
 python3 scripts/validate_direct_harbor.py --checkout \
@@ -219,7 +237,7 @@ complete verifier diagnostics.
 
 ### Regression checks
 
-From the prepared checkout on the Linux Docker controller, run:
+From this checkout on the Linux Docker controller, run:
 
 ```sh
 python3 scripts/workflow_regression.py \
@@ -231,7 +249,8 @@ by correct and invalid scripted deliveries through native Terminus-2. It makes
 no model calls. Missing diagnostics, infrastructure errors, changed artifacts
 or unexpected rewards fail the command and remain in the result ledger. Use a
 fresh output path. Raw native logs remain local beside the summary.
-See the [current release validation](../reports/workflow-v11/README.md) for the exact checks completed and their retained identities.
+See the [current software validation](../reports/workflow-v15/README.md) for the
+exact checks completed and their retained identities.
 
 To reproduce the corrected arithmetic, citation and SQL transport cases:
 
@@ -240,7 +259,7 @@ python3 scripts/validate_workflow_contract_revision.py \
   --output .local/my-contract-validation.json
 ```
 
-The [contract validation record](../reports/workflow-v11/contract-validation.json)
+The [preserved v11 contract record](../reports/workflow-v11/contract-validation.json)
 includes accepted alternatives and rejected financial, citation and delivery
 errors. These authored checks make no model calls.
 
@@ -254,26 +273,26 @@ uploads their summary separately from historical reports.
 Give your agent the task's `instruction.md` and only the files copied by its
 `environment/Dockerfile`: `data.sqlite`, `sources.md`, `evidence.json`, `schema.json`
 and `output_contract.json`. The permitted inputs for the example are in
-`datasets/workflow-v11/tasks/c01/environment`. In the native candidate they are
+`datasets/workflow-v15/tasks/c01/environment`. In the native candidate they are
 at `/workspace`. Gold, solutions, tests and the checkout are outside that boundary.
 
 Produce `answer.json` plus the three SQL basenames declared by the contract.
-The [current example](../examples/block-workpaper-v11/answer.json) shows the JSON
+The [current example](../examples/block-workpaper-v15/answer.json) shows the JSON
 schema and its adjacent SQL files. This authored reference is for integration
 checking, not candidate input. Grade a saved artifact directory on the supported
 Linux Docker controller, with fresh attempt IDs:
 
 ```sh
-./wpb validate examples/block-workpaper-v11/answer.json
-./wpb grade --dataset workflow-v11 --task c01 \
-  --artifacts examples/block-workpaper-v11 --attempt external-reference-v11-1
-./wpb report --attempts external-reference-v11-1 \
-  --output .local/external-reference-v11-1-report.json
+./wpb validate examples/block-workpaper-v15/answer.json
+./wpb grade --dataset workflow-v15 --task c01 \
+  --artifacts examples/block-workpaper-v15 --attempt external-reference-v15-1
+./wpb report --attempts external-reference-v15-1 \
+  --output .local/external-reference-v15-1-report.json
 
-./wpb grade --dataset workflow-v11 --task c01 \
-  --artifacts examples/block-frozen-ratio-v11 --attempt external-frozen-v11-1
-./wpb report --attempts external-frozen-v11-1 \
-  --output .local/external-frozen-v11-1-report.json
+./wpb grade --dataset workflow-v15 --task c01 \
+  --artifacts examples/block-frozen-ratio-v15 --attempt external-frozen-v15-1
+./wpb report --attempts external-frozen-v15-1 \
+  --output .local/external-frozen-v15-1-report.json
 ```
 
 The reference passes. The negative fixture delivers valid files and citations,
@@ -282,8 +301,8 @@ historical cost/revenue ratios. In `verifier.json`, `profit_bridge` has
 `original: true` and `control_errors.subscription_cost_increases_with_matching_total:
 "numeric"`. Delivery, claims and evidence pass, while robustness and complete
 workpaper completion fail. Read the table diagnostics as well as the summary.
-The [retained example reports](../reports/workflow-v11/README.md) demonstrate this
-financial failure without a model. Replace `--artifacts` with your agent's saved
+The [preserved v11 example reports](../reports/workflow-v11/README.md) demonstrate
+this failure on that earlier catalog. Replace `--artifacts` with your agent's saved
 directory to use the same grading and reporting interfaces.
 
 Structural validation is a smoke check. Oracle and negative qualification check
@@ -298,7 +317,7 @@ Hermes compatibility, identity-bound receipts and detailed financial reports.
 It uses one tool-capable Chat Completions endpoint from a qualified Linux
 controller. The native execution route is portable across compatible controllers.
 
-The default `workflow-v11` construction track supplies source observations and an
+The default `workflow-v15` construction track supplies source observations and an
 output contract, with no starting SQL. Models write all three queries.
 `--dataset workflow-v7` selects the separate maintenance track with supplied SQL
 and repair/preservation reporting. Keep results from these conditions separate.
@@ -328,9 +347,8 @@ sudo apt-get install -y ca-certificates curl git python3 python3-venv
 docker info >/dev/null
 docker compose version
 
-# Transfer the exact prepared checkout to this controller, preserving its bytes.
-cd /path/to/prepared/workpaperbench
-# The proposed v0.6.3-rc.1 tag is not published.
+# Use the exact source checkout selected for this evaluation.
+cd /path/to/workpaperbench
 python3 -m venv .venv
 .venv/bin/pip install -e . harbor==0.23.0
 mkdir -p .local
@@ -351,7 +369,7 @@ is not part of this setup. `./wpb guest ...` remains an alias for the public com
 ## 2. Verify delivery and scoring without a model
 
 ```sh
-./wpb grade --task c01 --artifacts examples/block-workpaper-v11 \
+./wpb grade --task c01 --artifacts examples/block-workpaper-v15 \
   --attempt reference-1
 ./wpb report --attempts reference-1 --output .local/reference-report.json
 ./wpb smoke --task c09 --attempt transport-1 --port 19090 --authenticated
@@ -522,11 +540,19 @@ The existing oracle qualification warms images without inference. For a small
 setup measurement, run the same task twice under distinct job names:
 
 ```sh
-harbor run -p datasets/workflow-v11/tasks -i c01 --agent oracle -k 1 \
-  --n-concurrent 1 --max-retries 0 --env docker \
+harbor run -p datasets/workflow-v15/tasks -i c01 --agent oracle -k 1 \
+  --n-concurrent 1 --max-retries 0 \
+  --env workpaperbench.runtime_integrity:VerifiedDockerEnvironment \
+  --ek canonical_root="$PWD" \
+  --ek expected_manifest=workflow-v15-canonical-400f60b5b3b6 \
+  --ek expected_task=workflow-v15-c01 \
   --jobs-dir .local/setup-check --job-name first
-harbor run -p datasets/workflow-v11/tasks -i c01 --agent oracle -k 1 \
-  --n-concurrent 1 --max-retries 0 --env docker \
+harbor run -p datasets/workflow-v15/tasks -i c01 --agent oracle -k 1 \
+  --n-concurrent 1 --max-retries 0 \
+  --env workpaperbench.runtime_integrity:VerifiedDockerEnvironment \
+  --ek canonical_root="$PWD" \
+  --ek expected_manifest=workflow-v15-canonical-400f60b5b3b6 \
+  --ek expected_task=workflow-v15-c01 \
   --jobs-dir .local/setup-check --job-name warm
 docker image ls --no-trunc --digests --format '{{json .}}' > .local/image-identities.jsonl
 python -m pip freeze > .local/controller-dependencies.txt
@@ -587,7 +613,8 @@ OpenRouter remains optional.
 
 ### Saved-artifact workflows
 
-Native Harbor already supports inference-free regrading into a new job:
+For saved v11 workpapers, native Harbor supports inference-free regrading into
+a new job on that same catalog:
 
 ```sh
 harbor job regrade .local/jobs/original-job \

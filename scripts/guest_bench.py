@@ -275,10 +275,10 @@ def main():
     commands = parser.add_subparsers(dest='command', required=True)
     commands.add_parser('preflight')
     listing = commands.add_parser('list')
-    listing.add_argument('--dataset', default='workflow-v11')
+    listing.add_argument('--dataset', default='workflow-v15')
     listing.add_argument('--split', choices=('development', 'evaluation', 'all'), default='all')
     batching = commands.add_parser('batch')
-    batching.add_argument('--dataset', default='workflow-v11')
+    batching.add_argument('--dataset', default='workflow-v15')
     selection = batching.add_mutually_exclusive_group(required=True)
     selection.add_argument('--tasks', nargs='+')
     selection.add_argument('--split', choices=('development', 'evaluation', 'all'))
@@ -288,7 +288,7 @@ def main():
                           help='Continue matching unstarted slots, retaining failures and interruptions')
     for name in ('run', 'grade', 'smoke'):
         command = commands.add_parser(name)
-        command.add_argument('--dataset', default='workflow-v11')
+        command.add_argument('--dataset', default='workflow-v15')
         command.add_argument('--task', default='c01')
         command.add_argument('--attempt', required=True)
         if name == 'run':

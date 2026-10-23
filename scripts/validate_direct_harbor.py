@@ -27,13 +27,24 @@ ISOLATION = ('network_probe_blocked', 'network_namespace_none',
              'no_inference_key', 'no_docker_socket')
 
 
-def task_arguments(checkout=False):
-    return ['-p', str(ROOT / TASKS)] if checkout else ['--repo', REPO, '-p', TASKS]
+def task_arguments(checkout=False, dataset='workflow-v11'):
+    tasks = 'datasets/' + dataset + '/tasks'
+    return ['-p', str(ROOT / tasks)] if checkout else ['--repo', REPO, '-p', tasks]
+
+
+def environment_arguments(manifest, spec, checkout=False):
+    if checkout and manifest['dataset_id'] in ('workflow-v12', 'workflow-v13', 'workflow-v14', 'workflow-v15'):
+        return ['--env', 'workpaperbench.runtime_integrity:VerifiedDockerEnvironment',
+                '--ek', 'canonical_root=' + str(ROOT),
+                '--ek', 'expected_manifest=' + manifest['manifest_id'],
+                '--ek', 'expected_task=' + spec['task_id']]
+    return ['--env', 'docker']
 
 
 def child_environment():
-    return {name: value for name, value in os.environ.items()
-            if not name.endswith('API_KEY') and name not in ('GH_TOKEN', 'GITHUB_TOKEN')}
+    return {**{name: value for name, value in os.environ.items()
+               if not name.endswith('API_KEY') and name not in ('GH_TOKEN', 'GITHUB_TOKEN')},
+            'PYTHONPATH': str(ROOT), 'LITELLM_LOCAL_MODEL_COST_MAP': 'True'}
 
 
 def check_job(path, count):
@@ -191,16 +202,17 @@ class Fixture(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
 
-def validate(binary, output, checkout=False, comparison_recipe=False):
+def validate(binary, output, checkout=False, comparison_recipe=False, dataset=None):
     if output.exists() or output.parent.joinpath(output.stem + '-jobs').exists():
         raise ValueError('validation_output_already_exists')
     if subprocess.check_output([binary, '--version'], text=True, timeout=30,
                                env=child_environment()).strip() != '0.23.0':
         raise ValueError('unexpected_harbor_version')
-    manifest, spec, task = load(ROOT, 'workflow-v11', 'c01')
-    recipe = None
+    recipe = json.loads((ROOT / 'config/construction-comparison.json').read_text()) if comparison_recipe else None
+    dataset = dataset or (recipe['task_source']['dataset'] if recipe else
+                          'workflow-v15' if checkout else 'workflow-v11')
+    manifest, spec, task = load(ROOT, dataset, 'c01')
     if comparison_recipe:
-        recipe = json.loads((ROOT / 'config/construction-comparison.json').read_text())
         if recipe['task_source']['manifest_id'] != manifest['manifest_id']:
             raise ValueError('comparison_recipe_catalog_mismatch')
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -218,11 +230,11 @@ def validate(binary, output, checkout=False, comparison_recipe=False):
         model_info = {'max_input_tokens': 65536, 'max_output_tokens': 4096,
             'input_cost_per_token': 0, 'output_cost_per_token': 0,
             'litellm_provider': 'openai', 'mode': 'chat'}
-        arguments = [binary, 'run', *task_arguments(checkout), '-i', 'c01',
+        arguments = [binary, 'run', *task_arguments(checkout, dataset), '-i', 'c01',
             '--agent', 'terminus-2', '--model', 'openai/' + MODEL,
             '--ak', 'api_base=' + endpoint,
             '--ae', 'WPB_DIRECT_FIXTURE_API_KEY=' + KEY,
-            '--n-concurrent', '1', '--max-retries', '0', '--env', 'docker', '--jobs-dir', str(jobs),
+            '--n-concurrent', '1', '--max-retries', '0', *environment_arguments(manifest, spec, checkout), '--jobs-dir', str(jobs),
             '--job-name', variant]
         options = {'max_turns': 5, 'model_info': model_info}
         if recipe:
@@ -254,7 +266,7 @@ def validate(binary, output, checkout=False, comparison_recipe=False):
             **result, 'native_job_result_sha256': job_sha256, 'requests': requests,
             'candidate_received_test_key': True, 'candidate_external_tls_probe_blocked': True,
             'candidate_reference_paths_absent': True})
-    current, current_spec, _ = load(ROOT, 'workflow-v11', 'c01')
+    current, current_spec, _ = load(ROOT, dataset, 'c01')
     if current['manifest_id'] != manifest['manifest_id'] or current_spec['task_sha256'] != spec['task_sha256']:
         raise ValueError('fixture_inputs_changed_during_execution')
     report = {'kind': 'scripted_native_harbor_agent_fixture', 'harbor_version': '0.23.0',
@@ -281,10 +293,11 @@ def main():
                         help='Run the current checkout task bytes instead of the pinned public release')
     parser.add_argument('--comparison-recipe', action='store_true',
                         help='Check the frozen comparison settings with scripted responses, without inference')
+    parser.add_argument('--dataset', help='Explicit catalog, defaults to v15 for checkout checks or the frozen recipe catalog')
     args = parser.parse_args()
     if not args.harbor:
         raise ValueError('harbor_not_installed')
-    validate(args.harbor, args.output.resolve(), args.checkout, args.comparison_recipe)
+    validate(args.harbor, args.output.resolve(), args.checkout, args.comparison_recipe, args.dataset)
 
 
 if __name__ == '__main__':

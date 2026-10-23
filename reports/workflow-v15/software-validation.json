@@ -1,0 +1,134 @@
+{
+  "kind": "workflow-v15-selected-software-validation",
+  "manifest_id": "workflow-v15-canonical-400f60b5b3b6",
+  "manifest_sha256": "37af80bffedb92166a41494b64834d616bba32a6af76850af473ae6f9532a588",
+  "scorer_version": "workflow-1.2.1",
+  "scorer_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+  "sql_worker_sha256": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200",
+  "harbor_version": "0.23.0",
+  "platform": "Ubuntu 24.04 x86_64 with separate Docker verification",
+  "inference": false,
+  "model_performance_evaluation": false,
+  "external_service_spend_usd": 0,
+  "implementation_sha256": {
+    "scripts/validate_direct_harbor.py": "3bf798b1504f714dc697a739782a32f9a6f133f51e71f332eae8f588aa6e9e17",
+    "scripts/workflow_regression.py": "723695bf98e6bb75e111d48a1d3be7b2f9d39f2b4ac786b0c36582ead803db25",
+    "scripts/validate_workflow_quality.py": "ab32facab7258336117360af033fd87bbb3e0f7a0fbd6a03097a608d647c1955",
+    "scripts/guest_bench.py": "72a38b5af3c66e8c3fc49e02d12022d5691f2d2f021d6e29e39558311c8889d6",
+    "workpaperbench/current_cli.py": "8838e63ef270db0346d85edbb449f44210e337a6bffcc22748f260a5e76928a7",
+    "workpaperbench/runtime_integrity.py": "9715ba881d3cd9397a11f1cf52c28a80c25b2a882fd98ecc610a41393feab740"
+  },
+  "unit_tests": {
+    "passed": 741,
+    "skipped": 0,
+    "log_sha256": "17d1d299c886022a0a6c8814ecae074d0147dbee0fa2f1f1b90c35311df6bf8e"
+  },
+  "quickstart": {
+    "job_result_sha256": "a1750f40b74f9b26da2406825a59b8b77746ff0b7a48f12705bc6023988e7dc2",
+    "task": "workflow-v15-c01",
+    "reward": 1.0,
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    },
+    "native_result_sha256": "89c2af036b5d1d140619a631a116a6101ec5865448d9e228d2c54e4722949360",
+    "verdict_sha256": "9457526d32683d824fb8badb19c5eb23092b26d5fcd4d60878afe355f01f7c57",
+    "retained_answer_sha256": "3daff44ab5624d007daa1b4dcc34646b09467dcfa3e362e578fcc3ae8a06f140",
+    "retained_sql_sha256": {
+      "profit_bridge.sql": "0f7df688d023d5e5efb4e59b344c38e2d9717d49cc7e87c3fb4ee2d2dd889cd4",
+      "reconciliation.sql": "31bfdffed986c2630f676c352032abd99fef251b853b15e17d54763e1c081cf3",
+      "revenue_bridge.sql": "7a59472657ae75fe98c1663aa5f6a14569d02c3ee112bda6799190ad5fa2b5ae"
+    },
+    "runtime_integrity": [
+      {
+        "role": "candidate",
+        "phase": "setup",
+        "outcome": "verified",
+        "record_sha256": "73de6961b2e49f1172b0ada4422e2b22aa8ef7e5957e8349ea1afb163b5f4d06"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "record_sha256": "7600eb87f49667841c85bf8dc694f61d6ebda3dc5ed3845fa94c17f19bd7353c"
+      },
+      {
+        "role": "candidate",
+        "phase": "before-agent",
+        "outcome": "verified",
+        "record_sha256": "4ca56525333e7c89e3f331e9f056f9caeb2678aa4ed8d9830a2163b8adecdbbb"
+      },
+      {
+        "role": "verifier",
+        "phase": "before-grading",
+        "outcome": "verified",
+        "record_sha256": "7365cf802ce65b7c945d89abac6d14912a8bff4ee68a7f5bb324ec1ebdc4d138"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "record_sha256": "dd812e02cd4726a8496f0047fb995e14bb50753f13f0c90cb1fa77e88a945832"
+      }
+    ]
+  },
+  "maintained_oracle_tasks": [
+    "workflow-v15-a01",
+    "workflow-v15-b01",
+    "workflow-v15-b02",
+    "workflow-v15-b06",
+    "workflow-v15-c01"
+  ],
+  "scripted_deliveries": 2,
+  "saved_examples": {
+    "manifest_id": "workflow-v15-canonical-400f60b5b3b6",
+    "inference": false,
+    "cases": [
+      {
+        "example": "block-workpaper-v15",
+        "complete": true,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": true,
+          "delivery": true
+        },
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        },
+        "receipt_sha256": "44b1755d09e27d156b78e294bfc48ce05d5896185fd46389ec27e5733881e4bb",
+        "verdict_sha256": "9457526d32683d824fb8badb19c5eb23092b26d5fcd4d60878afe355f01f7c57"
+      },
+      {
+        "example": "block-frozen-ratio-v15",
+        "complete": false,
+        "checks": {
+          "financial_answer": true,
+          "numerical_tables": true,
+          "claim_verdicts": true,
+          "evidence": true,
+          "robustness": false,
+          "delivery": true
+        },
+        "isolation": {
+          "network_probe_blocked": true,
+          "network_namespace_none": true,
+          "no_inference_key": true,
+          "no_docker_socket": true
+        },
+        "receipt_sha256": "bf07dbb39a37c3a64b9dcbaaea6285d913e28ab87854ab2bd9464f292f36b334",
+        "verdict_sha256": "deda87a10a0594fc8b5ab9608596883ec708ec524df53f652365fecf16f728e0"
+      }
+    ]
+  },
+  "quality_checks": 5,
+  "human_financial_review": "pending",
+  "interpretation": "Selected authored references, negative controls and scripted transport checks. This record does not establish model performance or whole-catalog five-attempt oracle qualification."
+}
