@@ -30,3 +30,12 @@ Its original outcomes remain separate. Reassessment applies worker 1.0.1 to
 every scheduled submission without edits or new inference, including missing
 or delivery-failed submissions. It is not a campaign executed entirely under
 the revised worker.
+
+The [delivery-preservation addendum](../../config/hard-evaluation-20261023-r2/sql-reassessment-delivery.json)
+also precedes output review. Every delivery-valid submission is replayed.
+Delivery rejections retain their full original verdict and are labeled unchanged,
+not replayed. The frozen scorer returns before SQL for those failures, so the
+worker correction cannot affect them. This prevents filtered exports from
+accidentally repairing extra-file delivery failures. Missing or indeterminate
+verdicts remain separate infrastructure statuses. All twelve slots stay in the
+reporting denominator.

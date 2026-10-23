@@ -1,0 +1,20 @@
+{
+  "addendum_id": "hard-evaluation-20261023-r2-delivery-preservation",
+  "frozen_at": "2026-10-23T12:30:48.912607+00:00",
+  "protocol_sha256": "9b93db434df41cef5905860da4ac59ba8f29fb47c13db7e319787a3df578c54c",
+  "candidate_outputs_or_scores_inspected_before_freeze": false,
+  "population": "All twelve scheduled slots remain in the denominator.",
+  "delivery_true": "Replay every original delivery-valid workpaper under worker 1.0.1, regardless of its original score, after verifying identical answer.json and SQL hashes.",
+  "delivery_false": "Retain the full original verdict as an unchanged delivery rejection, SQL not reached. This is not a newly replayed result. Preserve null numerical checks and any partial claim diagnostics.",
+  "missing_or_indeterminate_verdict": "Retain as missing or infrastructure status, separately from delivery rejection. Do not count as a successful completion.",
+  "reason": "The frozen workflow-1.2.1 scorer returns on delivery failure before invoking SQL. Worker 1.0.1 cannot change that result. Filtering an invalid native artifact directory to exported JSON and SQL could otherwise remove extra entries and accidentally repair delivery.",
+  "source_path": "config/scorers/workflow-1.2.1.py",
+  "source_sha256": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+  "relevant_lines": {
+    "exact_directory_check": 57,
+    "delivery_failure": 158,
+    "delivery_return": 178,
+    "first_sql_replay": 182
+  },
+  "inference": false
+}
