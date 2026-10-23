@@ -1,0 +1,333 @@
+{
+  "slot_id": "hard-20261023-sol-a01-1",
+  "configuration": "sol",
+  "task": "a01",
+  "attempt": 1,
+  "task_id": "workflow-hard-pilot-v1-a01",
+  "task_sha256": "0ca636a8969f4c5e8f56587fe3ad34d700b75c4aeca5f1413ceb77615ef57229",
+  "configuration_path": "config/hard-calibration-20261023/sol.json",
+  "configuration_sha256": "671a1ed98a0bac61ff90c76bf9a087f63ba01b87375e484c7058b9fcc1b83336",
+  "command_argv_sha256": "0d29ad931ae61bace612f3aca3bc7f7c7591abcb5c4bd3fb3dcf3e1b514e7008",
+  "status": "finalized",
+  "source_commit": "e554adcfdf36088cb507e5beeaf4cfa6d01f8508",
+  "execution_id": "hard-calibration-5e1f247e241f",
+  "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+  "workpaper_sha256": {
+    "quarter_scope.sql": "181d3bf920c611eebae52790fd645a0f4b5e35db186559e2995df4f9a2c45746",
+    "comparable_periods.sql": "3b97b5dc32f57dc3fdb790819ca2e2e5aded0ce3e607fb7ca925d4766ce29349",
+    "annual_change_bridge.sql": "cd93141be96d425fd481417b00a10a75fb6c1a01ce58a2a5068a31658368a165",
+    "answer.json": "096274be4f176858d3f2f02d2307bdaee6a97e16800747afc22365e9535deec0"
+  },
+  "observed": {
+    "models": [
+      "gpt-6.1-sol"
+    ],
+    "native_model_providers": [
+      "openai"
+    ],
+    "reasoning_efforts": [
+      "high"
+    ],
+    "client_versions": [
+      "0.162.0-alpha.17.2"
+    ],
+    "auth_mode": "chatgpt",
+    "compaction_events": 0,
+    "model_context_windows": [
+      475000
+    ],
+    "native_event_counts": {
+      "thread.started": 1,
+      "turn.started": 1,
+      "item.completed": 8,
+      "item.started": 5,
+      "turn.completed": 1
+    },
+    "model_identity_scope": "Native session model and reasoning metadata, not independent backend attestation"
+  },
+  "complete_workpaper": true,
+  "score": 1.0,
+  "verifier": {
+    "scorer_version": "workflow-1.2.1",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": true,
+      "robustness": true,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "quarter_scope": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "monetary_scale": true,
+            "row_order": true,
+            "calendar_extension": true,
+            "prior_extra_week": true,
+            "divestment_scope": true,
+            "independent_reported_discrepancy": true
+          },
+          "control_errors": {
+            "monetary_scale": null,
+            "row_order": null,
+            "calendar_extension": null,
+            "prior_extra_week": null,
+            "divestment_scope": null,
+            "independent_reported_discrepancy": null
+          }
+        },
+        "comparable_periods": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "monetary_scale": true,
+            "row_order": true,
+            "calendar_extension": true,
+            "prior_extra_week": true,
+            "divestment_scope": true,
+            "independent_reported_discrepancy": true
+          },
+          "control_errors": {
+            "monetary_scale": null,
+            "row_order": null,
+            "calendar_extension": null,
+            "prior_extra_week": null,
+            "divestment_scope": null,
+            "independent_reported_discrepancy": null
+          }
+        },
+        "annual_change_bridge": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "monetary_scale": true,
+            "row_order": true,
+            "calendar_extension": true,
+            "prior_extra_week": true,
+            "divestment_scope": true,
+            "independent_reported_discrepancy": true
+          },
+          "control_errors": {
+            "monetary_scale": null,
+            "row_order": null,
+            "calendar_extension": null,
+            "prior_extra_week": null,
+            "divestment_scope": null,
+            "independent_reported_discrepancy": null
+          }
+        }
+      },
+      "claims": {
+        "claim_1": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_2": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_3": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "runtime_integrity": {
+    "all_identities_and_bytes_match": true,
+    "candidate_setup": true,
+    "candidate_before_agent": true,
+    "verifier_setup": true,
+    "verifier_before_grading": true,
+    "proofs": [
+      {
+        "role": "candidate",
+        "phase": "before-agent",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-a01",
+        "task_sha256": "0ca636a8969f4c5e8f56587fe3ad34d700b75c4aeca5f1413ceb77615ef57229",
+        "instruction_sha256": "d1a6d77fba49a3a330f6ffd52e7b68c48b2a82edf6709517100306bb0001a495",
+        "context_identity": "a9eaf9659b141940697ebfa5b2cf1876c2fe2f75645bc03a49cf37132adfb50c",
+        "session_id": "a01__QQ68ha4__env",
+        "container_id": "42935ef122afd5355b7533db1df2da57febd2f365d12703441dac70839e8c3f2",
+        "image_id": "sha256:b5d413a1473b80f32869a25c960cfd26b8385b68358f1b6dfbc4a59aa684e340",
+        "mismatches": [],
+        "diagnostic_sha256": "94697644093d0d3f292cf507ac8fa1fc7989ae6dfbc7ea7818e8d6233b45aaa6"
+      },
+      {
+        "role": "candidate",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-a01",
+        "task_sha256": "0ca636a8969f4c5e8f56587fe3ad34d700b75c4aeca5f1413ceb77615ef57229",
+        "instruction_sha256": "d1a6d77fba49a3a330f6ffd52e7b68c48b2a82edf6709517100306bb0001a495",
+        "context_identity": "a9eaf9659b141940697ebfa5b2cf1876c2fe2f75645bc03a49cf37132adfb50c",
+        "session_id": "a01__QQ68ha4__env",
+        "container_id": "42935ef122afd5355b7533db1df2da57febd2f365d12703441dac70839e8c3f2",
+        "image_id": "sha256:b5d413a1473b80f32869a25c960cfd26b8385b68358f1b6dfbc4a59aa684e340",
+        "mismatches": [],
+        "diagnostic_sha256": "78d217e187ff7189b2eaee02d9f0042b32f420371887d8e6904c2ddda34d4fe2"
+      },
+      {
+        "role": "verifier",
+        "phase": "before-grading",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-a01",
+        "task_sha256": "0ca636a8969f4c5e8f56587fe3ad34d700b75c4aeca5f1413ceb77615ef57229",
+        "instruction_sha256": null,
+        "context_identity": "aafcf8ef99d6d6fc11f8f1ff0ea97fa7c922fb3c73ab4b1699e53c28d6840b5c",
+        "session_id": "a01__QQ68ha4__verifier__trial",
+        "container_id": "b9f8423db15c3a4cf0e83729486b40bfc661b45b8e05db76aace8565f014912b",
+        "image_id": "sha256:0b04e782cd0c18e0c80f8776cacf54617b3013a41e3d5ece7f138e56b9ed5bb0",
+        "mismatches": [],
+        "diagnostic_sha256": "716d40191503ed5d9d69d947819d2c97b50fdaca6f3d73bda54b5b374b32c7a1"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-a01",
+        "task_sha256": "0ca636a8969f4c5e8f56587fe3ad34d700b75c4aeca5f1413ceb77615ef57229",
+        "instruction_sha256": null,
+        "context_identity": "aafcf8ef99d6d6fc11f8f1ff0ea97fa7c922fb3c73ab4b1699e53c28d6840b5c",
+        "session_id": "a01__QQ68ha4__verifier__trial",
+        "container_id": "b9f8423db15c3a4cf0e83729486b40bfc661b45b8e05db76aace8565f014912b",
+        "image_id": "sha256:0b04e782cd0c18e0c80f8776cacf54617b3013a41e3d5ece7f138e56b9ed5bb0",
+        "mismatches": [],
+        "diagnostic_sha256": "3f786b006e8c25e3e3536cf28dfa0a4fbaebbea72311e48ec353eb81acbf9a6f"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-a01",
+        "task_sha256": "0ca636a8969f4c5e8f56587fe3ad34d700b75c4aeca5f1413ceb77615ef57229",
+        "instruction_sha256": null,
+        "context_identity": "aafcf8ef99d6d6fc11f8f1ff0ea97fa7c922fb3c73ab4b1699e53c28d6840b5c",
+        "session_id": "wpb-trusted-22a8b08ac4e9bf0b9a0dfa4b",
+        "container_id": "8aa69144d3a662a1566b23360e3ff5d4dae2d7612d081d4f0eaa248ae6ca0684",
+        "image_id": "sha256:747fb902f6af61aea898db04ac353d3135e0519feaa8a5bda0ae3ac6ec4a814d",
+        "mismatches": [],
+        "diagnostic_sha256": "22b7370c5f78b16638c1b283d4b987a94ddb4d972da0dfe0f2a197c9b5658c62"
+      }
+    ],
+    "candidate_checked_before_first_observable_request_or_session": true
+  },
+  "native_result_sha256": "c8cd3a671c90db2c8d7d0835207a4d2a17572796f5d01758c49e0de7861b2d93",
+  "verdict_sha256": "d30a0e7a185359c5310be643d7ca222b630a4b486ef42bdc88a17c6fda3a02fa",
+  "wall_time": {
+    "native_controller_seconds": 201.63258504800615,
+    "agent_execution": {
+      "started_at": "2026-10-23T07:43:51.246518Z",
+      "finished_at": "2026-10-23T07:45:05.734246Z"
+    },
+    "agent_setup": {
+      "started_at": "2026-10-23T07:42:40.856759Z",
+      "finished_at": "2026-10-23T07:43:51.246347Z"
+    }
+  },
+  "termination_reason": "native_turn_completed",
+  "exception": null,
+  "tokens": {
+    "input_tokens": 83187,
+    "cached_input_tokens": 30976,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 3324,
+    "reasoning_output_tokens": 288,
+    "total_tokens": 86511
+  },
+  "charges": null,
+  "subscription": {
+    "rate_limit_observations": [
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 36.0,
+          "window_minutes": 10080,
+          "resets_at": 1793299893
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      },
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 36.0,
+          "window_minutes": 10080,
+          "resets_at": 1793299893
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      },
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 36.0,
+          "window_minutes": 10080,
+          "resets_at": 1793299893
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      },
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 36.0,
+          "window_minutes": 10080,
+          "resets_at": 1793299893
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      },
+      {
+        "limit_id": "codex",
+        "primary": {
+          "used_percent": 36.0,
+          "window_minutes": 10080,
+          "resets_at": 1793299893
+        },
+        "secondary": null,
+        "rate_limit_reached_type": null,
+        "spend_control_reached": null
+      }
+    ],
+    "actual_subscription_charge_usd": null,
+    "billing_measurement": "Unknown. Native token and rate-window telemetry only, no API-equivalent estimate treated as a charge."
+  },
+  "requests": {
+    "observed_requests": null,
+    "retained_provider_generations": null,
+    "failure_events": null,
+    "identical_full_body_repeats": null,
+    "output_limit_recovery_calls": null,
+    "length_responses": null,
+    "whole_trial_retries": 0,
+    "sdk_retries": "unknown",
+    "request_configuration_violations": []
+  }
+}

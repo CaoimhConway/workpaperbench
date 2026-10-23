@@ -1,0 +1,40 @@
+{
+  "task_id": "workflow-hard-pilot-v1-c01",
+  "tables": [
+    {
+      "id": "worldwide_mix",
+      "file": "worldwide_mix.sql",
+      "evidence": ["c01:s01", "c01:s03"]
+    },
+    {
+      "id": "regional_product_bounds",
+      "file": "regional_product_bounds.sql",
+      "evidence": ["c01:s01", "c01:s02", "c01:s04"]
+    },
+    {
+      "id": "stress_bounds",
+      "file": "stress_bounds.sql",
+      "evidence": ["c01:s01", "c01:s02", "c01:s04"]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": ["c01:s01", "c01:s02", "c01:s04"],
+      "note": "The sharp gross-profit loss interval has distinct endpoints; the marginals and scenario do not identify a unique loss."
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": ["c01:s01"],
+      "note": "Services gross margin is 71050/96169, exceeding Products gross margin of 109633/294866."
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": ["c01:s01", "c01:s02", "c01:s04"],
+      "note": "Feasible U.S. Products sales range from 46027 to 142196 USD million. Half of U.S. sales is 71098, within this interval."
+    }
+  ]
+}

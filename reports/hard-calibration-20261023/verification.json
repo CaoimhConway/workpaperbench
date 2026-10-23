@@ -1,0 +1,42 @@
+{
+  "frozen_dataset": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+  "source_commit": "e554adcfdf36088cb507e5beeaf4cfa6d01f8508",
+  "configuration_commit": "0011a43e29247a652df4d4a070c19092806b2351",
+  "canonical_hash_checks": "all three packages, manifest, frozen scorer and SQL worker match",
+  "original_recipe_unchanged": true,
+  "preparation": {
+    "execution_id": "hard-calibration-5e1f247e241f",
+    "configuration_checkpoint": "0011a43",
+    "files_sha256": {
+      "config/hard-calibration-20261023/glm.json": "eba1d862b85d219c49edeb7bbd5d700f3dd7175e0c30d413ddf9743045cebb6a",
+      "config/hard-calibration-20261023/sol.json": "671a1ed98a0bac61ff90c76bf9a087f63ba01b87375e484c7058b9fcc1b83336",
+      "config/hard-calibration-20261023/manifest.json": "e9fb4b81f29ed9584c6d1e156cbe5123fc0af82359ba6ccce2d034d197d137b7",
+      ".local/hard-calibration-20261023/preparation/checkout.json": "1af5c078c7623401ad8702c629878971ff97fbe163210d3b01b93deec454153b",
+      ".local/hard-calibration-20261023/preparation/provider-preflight.json": "5ed6de5372ef6231d8e615cf35ae711107fd7766649f6719fb54f14175271ca3",
+      ".local/hard-calibration-20261023/preparation/guest-preflight.log": "91c151e50e603d02e579e1ba14624bddb1776a8b52367a3baca37e1afb3e0f39",
+      ".local/hard-calibration-20261023/preparation/codex-config-validation.json": "dde0ab4987b1e0dbf74f54b21d58c8d6f982a288baf80af7dfde15db3bee8bc2",
+      ".local/hard-calibration-20261023/preparation/staging.json": "b2344c110a1606c2ead30a9b4a24d1c9fd4e50180233a3db0ecbcfc9fb43a682"
+    },
+    "live_smoke_attempts": 0,
+    "benchmark_inputs_modified": false
+  },
+  "runtime_integrity_proofs": 30,
+  "all_runtime_materializations_match": true,
+  "original_table_comparisons_passed": 18,
+  "control_table_comparisons_passed": 108,
+  "claim_verdicts_and_support_passed": 18,
+  "separate_verifier_boundary_checks": {
+    "attempts": 6,
+    "network_blocked": true,
+    "no_inference_credential": true,
+    "no_docker_socket": true
+  },
+  "credential_pattern_review": {
+    "output_files": "passed",
+    "raw_native_archive_members_checked": 216,
+    "authentication_credential_matches": 0,
+    "account_identifiers_in_output_files": 0,
+    "private_native_traces_local_only": true
+  },
+  "test_scope": "Focused offline configuration/hash verification and six scheduled native attempts with isolated grading. No broad infrastructure test suite or additional inference attempts."
+}

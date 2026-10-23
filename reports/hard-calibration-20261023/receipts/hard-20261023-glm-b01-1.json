@@ -1,0 +1,279 @@
+{
+  "slot_id": "hard-20261023-glm-b01-1",
+  "configuration": "glm",
+  "task": "b01",
+  "attempt": 1,
+  "task_id": "workflow-hard-pilot-v1-b01",
+  "task_sha256": "24353994d3c496771214259a1d08070505ffc368f54f044c6edeab411428d481",
+  "configuration_path": "config/hard-calibration-20261023/glm.json",
+  "configuration_sha256": "eba1d862b85d219c49edeb7bbd5d700f3dd7175e0c30d413ddf9743045cebb6a",
+  "command_argv_sha256": "0892ebcc6eb92f438d81d6c52f52b462a714a487efc6719427142e7e206155dc",
+  "status": "finalized",
+  "source_commit": "e554adcfdf36088cb507e5beeaf4cfa6d01f8508",
+  "execution_id": "hard-calibration-5e1f247e241f",
+  "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+  "workpaper_sha256": {
+    "cash_investment.sql": "5010192cc0ede3c5fd49d089792462063958772882b5c1a9c609484c6aad8df1",
+    "ppe_bridge.sql": "2dcff862eabaeac74c154707c4f43ac3983323bd1e7f228ad26bd43ca85d7cb7",
+    "lease_movements.sql": "e377b5fafc2f262ea69c0e225249c1017e1c7a0146d1d29dc00a9b1bcd8d5d83",
+    "answer.json": "8ea2e3fcbf94533b226870dd5478567fe8522bd5b66b7a26773c4729071b6f4f"
+  },
+  "observed": {
+    "models": [
+      "z-ai/glm-5.3"
+    ],
+    "providers": [
+      "Wafer"
+    ],
+    "reasoning_effort_on_all_requests": "high",
+    "provider_internal_reasoning_effort": "unknown",
+    "generation_models": [
+      "z-ai/glm-5.3-20260816"
+    ],
+    "generation_providers": [
+      "Wafer"
+    ]
+  },
+  "complete_workpaper": true,
+  "score": 1.0,
+  "verifier": {
+    "scorer_version": "workflow-1.2.1",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": true,
+      "robustness": true,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "cash_investment": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "monetary_scale": true,
+            "row_order": true,
+            "payable_settlement": true,
+            "noncash_lease": true,
+            "principal_settlement": true,
+            "other_cf_adjustment": true,
+            "unallocated_asset_movement": true
+          },
+          "control_errors": {
+            "monetary_scale": null,
+            "row_order": null,
+            "payable_settlement": null,
+            "noncash_lease": null,
+            "principal_settlement": null,
+            "other_cf_adjustment": null,
+            "unallocated_asset_movement": null
+          }
+        },
+        "ppe_bridge": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "monetary_scale": true,
+            "row_order": true,
+            "payable_settlement": true,
+            "noncash_lease": true,
+            "principal_settlement": true,
+            "other_cf_adjustment": true,
+            "unallocated_asset_movement": true
+          },
+          "control_errors": {
+            "monetary_scale": null,
+            "row_order": null,
+            "payable_settlement": null,
+            "noncash_lease": null,
+            "principal_settlement": null,
+            "other_cf_adjustment": null,
+            "unallocated_asset_movement": null
+          }
+        },
+        "lease_movements": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "monetary_scale": true,
+            "row_order": true,
+            "payable_settlement": true,
+            "noncash_lease": true,
+            "principal_settlement": true,
+            "other_cf_adjustment": true,
+            "unallocated_asset_movement": true
+          },
+          "control_errors": {
+            "monetary_scale": null,
+            "row_order": null,
+            "payable_settlement": null,
+            "noncash_lease": null,
+            "principal_settlement": null,
+            "other_cf_adjustment": null,
+            "unallocated_asset_movement": null
+          }
+        }
+      },
+      "claims": {
+        "claim_1": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_2": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_3": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "runtime_integrity": {
+    "all_identities_and_bytes_match": true,
+    "candidate_setup": true,
+    "candidate_before_agent": true,
+    "verifier_setup": true,
+    "verifier_before_grading": true,
+    "proofs": [
+      {
+        "role": "candidate",
+        "phase": "before-agent",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-b01",
+        "task_sha256": "24353994d3c496771214259a1d08070505ffc368f54f044c6edeab411428d481",
+        "instruction_sha256": "116f111d1c7f2d7c588cce4d02f0bbd1896c2c3eb233b387174429419f17ba4e",
+        "context_identity": "c0929694f0504a03bc7b99e7cd353289e9e41108e296c80d44f407d450770555",
+        "session_id": "b01__J7rwTsJ__env",
+        "container_id": "0447166e1d070bde8429657c56e5f9eaf2b42a01c14f4d4b514344c4ccd3b6f2",
+        "image_id": "sha256:767af0dad9265e25f25ad05907902671b69918aaacbd2df7d977a5f1251f5acf",
+        "mismatches": [],
+        "diagnostic_sha256": "2b895f41f0657c94c9122a0137f2ae058ac27b4bf3c987bcb25d0d277278a4e3"
+      },
+      {
+        "role": "candidate",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-b01",
+        "task_sha256": "24353994d3c496771214259a1d08070505ffc368f54f044c6edeab411428d481",
+        "instruction_sha256": "116f111d1c7f2d7c588cce4d02f0bbd1896c2c3eb233b387174429419f17ba4e",
+        "context_identity": "c0929694f0504a03bc7b99e7cd353289e9e41108e296c80d44f407d450770555",
+        "session_id": "b01__J7rwTsJ__env",
+        "container_id": "0447166e1d070bde8429657c56e5f9eaf2b42a01c14f4d4b514344c4ccd3b6f2",
+        "image_id": "sha256:767af0dad9265e25f25ad05907902671b69918aaacbd2df7d977a5f1251f5acf",
+        "mismatches": [],
+        "diagnostic_sha256": "18562188b35aecaed940198beca34029ca92c9dd75346c36d628982411b17280"
+      },
+      {
+        "role": "verifier",
+        "phase": "before-grading",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-b01",
+        "task_sha256": "24353994d3c496771214259a1d08070505ffc368f54f044c6edeab411428d481",
+        "instruction_sha256": null,
+        "context_identity": "edff0c3017b707f4e0a2b4413f9d7d429584b782b8cbc0523749fdc6a835f0ea",
+        "session_id": "b01__J7rwTsJ__verifier__trial",
+        "container_id": "b5c1dee559a20357f095728c75d5463373b3ad066cae7a769321584a8df47437",
+        "image_id": "sha256:e82f6bb466244ae7cb93a4047eeea31bb04914d0b83ee4b4f6e9ba1ebe598dd5",
+        "mismatches": [],
+        "diagnostic_sha256": "92fbc1c411b1fbb8ab8b9d1e728b2a0700935de58245f3e977b64d5aac095134"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-b01",
+        "task_sha256": "24353994d3c496771214259a1d08070505ffc368f54f044c6edeab411428d481",
+        "instruction_sha256": null,
+        "context_identity": "edff0c3017b707f4e0a2b4413f9d7d429584b782b8cbc0523749fdc6a835f0ea",
+        "session_id": "b01__J7rwTsJ__verifier__trial",
+        "container_id": "b5c1dee559a20357f095728c75d5463373b3ad066cae7a769321584a8df47437",
+        "image_id": "sha256:e82f6bb466244ae7cb93a4047eeea31bb04914d0b83ee4b4f6e9ba1ebe598dd5",
+        "mismatches": [],
+        "diagnostic_sha256": "f4b24531fb12ad8fe1613200c37b20f814ec65b7220d8c567fe0950d107fed6e"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-b01",
+        "task_sha256": "24353994d3c496771214259a1d08070505ffc368f54f044c6edeab411428d481",
+        "instruction_sha256": null,
+        "context_identity": "edff0c3017b707f4e0a2b4413f9d7d429584b782b8cbc0523749fdc6a835f0ea",
+        "session_id": "wpb-trusted-9086fb5ff781a03b99a66b86",
+        "container_id": "770e6f2c06539a18fe8f05f10777f4c54be069d2ace5baf58f943f7f7b70122f",
+        "image_id": "sha256:787abfa21c3d1b35e941acb51956992f740e5d0b8f5815770daaf74be3c7348f",
+        "mismatches": [],
+        "diagnostic_sha256": "9342d96a4146d206a328c499dde1d1d8fe69288c19f1475737abc28ed8dd2d7d"
+      }
+    ],
+    "candidate_checked_before_first_observable_request_or_session": true
+  },
+  "native_result_sha256": "413afd9ea74ece756f54556cde961b6c633f7c552da04827de840d2e4896c5d9",
+  "verdict_sha256": "6ce571164d1c66b408008b4503208a9a840172a8ccc7babd6f2899553bfc2f29",
+  "wall_time": {
+    "native_controller_seconds": 148.3620786999818,
+    "agent_execution": {
+      "started_at": "2026-10-23T07:33:02.278471Z",
+      "finished_at": "2026-10-23T07:34:26.201394Z"
+    },
+    "agent_setup": {
+      "started_at": "2026-10-23T07:32:53.870028Z",
+      "finished_at": "2026-10-23T07:33:02.278308Z"
+    }
+  },
+  "termination_reason": "confirmed_task_complete",
+  "exception": null,
+  "tokens": {
+    "input_including_cached": 53167,
+    "output_including_reasoning": 10280,
+    "cached_input_subset": 38528,
+    "reasoning_output_subset": 6640
+  },
+  "charges": {
+    "settled_key_usage_delta_usd": "0.018553665",
+    "settled_key_reconciled": true,
+    "settlement_observation": "Next scheduled GLM preflight snapshot",
+    "recorded_openrouter_usd": "0.018553665",
+    "generation_records_total_usd": "0.018553665",
+    "key_usage_delta_usd": "0.018553665",
+    "response_and_key_reconciled": true,
+    "generation_records_reconciled": true,
+    "remaining_unchanged_key_allowance_usd": 7.238038499,
+    "remaining_account_balance_usd": 7.238038499,
+    "lifetime_limit_usd": 20.0,
+    "reset_is_null": true
+  },
+  "subscription": null,
+  "requests": {
+    "observed_requests": 6,
+    "retained_provider_generations": 6,
+    "failure_events": 0,
+    "identical_full_body_repeats": 0,
+    "output_limit_recovery_calls": 0,
+    "length_responses": 0,
+    "whole_trial_retries": 0,
+    "sdk_retries": "unknown",
+    "request_configuration_violations": []
+  }
+}

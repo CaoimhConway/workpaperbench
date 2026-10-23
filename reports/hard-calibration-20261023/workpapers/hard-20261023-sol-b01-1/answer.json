@@ -1,0 +1,60 @@
+{
+  "task_id": "workflow-hard-pilot-v1-b01",
+  "tables": [
+    {
+      "id": "cash_investment",
+      "file": "cash_investment.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s03"
+      ]
+    },
+    {
+      "id": "ppe_bridge",
+      "file": "ppe_bridge.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04"
+      ]
+    },
+    {
+      "id": "lease_movements",
+      "file": "lease_movements.sql",
+      "evidence": [
+        "b01:s03",
+        "b01:s04"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "b01:s03"
+      ],
+      "note": "Principal cash payments are 2,283 million; noncash finance-lease ROU additions are 20,511 million."
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "b01:s03"
+      ],
+      "note": "Net finance-lease PPE increased by 18,153 million, exceeding principal cash payments of 2,283 million."
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04"
+      ],
+      "note": "The positive 3,713 million total-PPE net bridge residual is unexplained by the supplied disclosures. They do not identify acquired PPE as its cause. The bridge uses displayed values, including rounded billion-dollar payables and depreciation observations, and the contract convention that PPE depreciation includes finance-lease amortization."
+    }
+  ]
+}

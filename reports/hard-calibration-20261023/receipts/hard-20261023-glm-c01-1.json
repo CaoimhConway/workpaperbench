@@ -1,0 +1,267 @@
+{
+  "slot_id": "hard-20261023-glm-c01-1",
+  "configuration": "glm",
+  "task": "c01",
+  "attempt": 1,
+  "task_id": "workflow-hard-pilot-v1-c01",
+  "task_sha256": "955e23fb579fa9c40460fa2fb0e94c6f7afe4d9b950cb5fb3e57ed8f0eec280e",
+  "configuration_path": "config/hard-calibration-20261023/glm.json",
+  "configuration_sha256": "eba1d862b85d219c49edeb7bbd5d700f3dd7175e0c30d413ddf9743045cebb6a",
+  "command_argv_sha256": "f52b951835a3318b61a5bd544b824122adef42d9bfbaf9ab959e0185f4e84261",
+  "status": "finalized",
+  "source_commit": "e554adcfdf36088cb507e5beeaf4cfa6d01f8508",
+  "execution_id": "hard-calibration-5e1f247e241f",
+  "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+  "workpaper_sha256": {
+    "stress_bounds.sql": "f60991a3d1931e432801d8349761b83d74f652a702945e9290bee5bf55aed556",
+    "regional_product_bounds.sql": "9d549ddff140a641d6b05ff5c9b083723054e5c88b5e66d502cae22b701ec953",
+    "worldwide_mix.sql": "849352480aeb95a37698813ed2b32dfb8bd7da8b3e15eee3ea6be613015b1a3f",
+    "answer.json": "d00208ea4896d648d122026d92c94683dfe5687ad8aaa58913b02ae11cb758a5"
+  },
+  "observed": {
+    "models": [
+      "z-ai/glm-5.3"
+    ],
+    "providers": [
+      "Wafer"
+    ],
+    "reasoning_effort_on_all_requests": "high",
+    "provider_internal_reasoning_effort": "unknown",
+    "generation_models": [
+      "z-ai/glm-5.3-20260816"
+    ],
+    "generation_providers": [
+      "Wafer"
+    ]
+  },
+  "complete_workpaper": true,
+  "score": 1.0,
+  "verifier": {
+    "scorer_version": "workflow-1.2.1",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": true,
+      "robustness": true,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "worldwide_mix": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "monetary_scale": true,
+            "row_order": true,
+            "capacity_breakpoint": true,
+            "slope_reversal": true,
+            "product_mix": true
+          },
+          "control_errors": {
+            "monetary_scale": null,
+            "row_order": null,
+            "capacity_breakpoint": null,
+            "slope_reversal": null,
+            "product_mix": null
+          }
+        },
+        "regional_product_bounds": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "monetary_scale": true,
+            "row_order": true,
+            "capacity_breakpoint": true,
+            "slope_reversal": true,
+            "product_mix": true
+          },
+          "control_errors": {
+            "monetary_scale": null,
+            "row_order": null,
+            "capacity_breakpoint": null,
+            "slope_reversal": null,
+            "product_mix": null
+          }
+        },
+        "stress_bounds": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "monetary_scale": true,
+            "row_order": true,
+            "capacity_breakpoint": true,
+            "slope_reversal": true,
+            "product_mix": true
+          },
+          "control_errors": {
+            "monetary_scale": null,
+            "row_order": null,
+            "capacity_breakpoint": null,
+            "slope_reversal": null,
+            "product_mix": null
+          }
+        }
+      },
+      "claims": {
+        "claim_1": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_2": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_3": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "runtime_integrity": {
+    "all_identities_and_bytes_match": true,
+    "candidate_setup": true,
+    "candidate_before_agent": true,
+    "verifier_setup": true,
+    "verifier_before_grading": true,
+    "proofs": [
+      {
+        "role": "candidate",
+        "phase": "before-agent",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-c01",
+        "task_sha256": "955e23fb579fa9c40460fa2fb0e94c6f7afe4d9b950cb5fb3e57ed8f0eec280e",
+        "instruction_sha256": "9a372fa91a60ef102ee2628fc38d0b5b2ea03240f85ecbeac57a7c63d1023c1e",
+        "context_identity": "4ba98201b713c68fb373fede607dbe912c414c6f6c879ecaf36356437f151033",
+        "session_id": "c01__TazjLH7__env",
+        "container_id": "85a26d8cd1cc57f7a5e0b04d1533616cd780175b4b67f22b98b4a2032da8a1b7",
+        "image_id": "sha256:2b2975f25e809a608ad6452a1e6ab119897df8e4bfe178a609288d57d0a2e194",
+        "mismatches": [],
+        "diagnostic_sha256": "a2dd2fd34ffac23eba440aa322a0a006f970095d40b776e7df49f3bb0c251098"
+      },
+      {
+        "role": "candidate",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-c01",
+        "task_sha256": "955e23fb579fa9c40460fa2fb0e94c6f7afe4d9b950cb5fb3e57ed8f0eec280e",
+        "instruction_sha256": "9a372fa91a60ef102ee2628fc38d0b5b2ea03240f85ecbeac57a7c63d1023c1e",
+        "context_identity": "4ba98201b713c68fb373fede607dbe912c414c6f6c879ecaf36356437f151033",
+        "session_id": "c01__TazjLH7__env",
+        "container_id": "85a26d8cd1cc57f7a5e0b04d1533616cd780175b4b67f22b98b4a2032da8a1b7",
+        "image_id": "sha256:2b2975f25e809a608ad6452a1e6ab119897df8e4bfe178a609288d57d0a2e194",
+        "mismatches": [],
+        "diagnostic_sha256": "7f5090e428563e8e3f44de87b8a6cd437b4012b718bdadffbe1d90154e1630b5"
+      },
+      {
+        "role": "verifier",
+        "phase": "before-grading",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-c01",
+        "task_sha256": "955e23fb579fa9c40460fa2fb0e94c6f7afe4d9b950cb5fb3e57ed8f0eec280e",
+        "instruction_sha256": null,
+        "context_identity": "763d8f6f995da296327733017efa240abad3e81330df7b2739feb01e7b0530b0",
+        "session_id": "c01__TazjLH7__verifier__trial",
+        "container_id": "c977b01fd6c66eebba2be2eb916b06b66f521f916b640ba23c68d7d57876be9f",
+        "image_id": "sha256:8cfe282a9c3988df10b3506483b87378a791a417281cc53c09b693cf6d86179e",
+        "mismatches": [],
+        "diagnostic_sha256": "825024a7e563d1cf23f50da4d22abda355f3a13a15d47f04a9c8b143d654615e"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-c01",
+        "task_sha256": "955e23fb579fa9c40460fa2fb0e94c6f7afe4d9b950cb5fb3e57ed8f0eec280e",
+        "instruction_sha256": null,
+        "context_identity": "763d8f6f995da296327733017efa240abad3e81330df7b2739feb01e7b0530b0",
+        "session_id": "c01__TazjLH7__verifier__trial",
+        "container_id": "c977b01fd6c66eebba2be2eb916b06b66f521f916b640ba23c68d7d57876be9f",
+        "image_id": "sha256:8cfe282a9c3988df10b3506483b87378a791a417281cc53c09b693cf6d86179e",
+        "mismatches": [],
+        "diagnostic_sha256": "32ca02e4392edbcf4ae2d355a56a47bc7cbeaa8651ca19f8891a47f9e0b4e631"
+      },
+      {
+        "role": "verifier",
+        "phase": "setup",
+        "outcome": "verified",
+        "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+        "task_id": "workflow-hard-pilot-v1-c01",
+        "task_sha256": "955e23fb579fa9c40460fa2fb0e94c6f7afe4d9b950cb5fb3e57ed8f0eec280e",
+        "instruction_sha256": null,
+        "context_identity": "763d8f6f995da296327733017efa240abad3e81330df7b2739feb01e7b0530b0",
+        "session_id": "wpb-trusted-55a8b4ec626bb0b849038cb4",
+        "container_id": "9aa261b20e5670e07cef80c89187bb6ec4e7a4cbf8d77d010ba1ebc18aac10b9",
+        "image_id": "sha256:7e8ef7bc2e2f9f30a12421a0e1723fe747289c85e61f5f231d1a6407cb3d3954",
+        "mismatches": [],
+        "diagnostic_sha256": "9204538dded71086d0a0ef9b70f99a2afa81c9e97db05e8ad5f988fb690aa7c0"
+      }
+    ],
+    "candidate_checked_before_first_observable_request_or_session": true
+  },
+  "native_result_sha256": "dcfef3a521e11bec564bcc6547544971b8defcd0e4930e56ced315dadb78cd48",
+  "verdict_sha256": "8d2be566f8c047fa38afe634eabec8a8621cec3162a51855dd635f61900ffb72",
+  "wall_time": {
+    "native_controller_seconds": 435.56704003200866,
+    "agent_execution": {
+      "started_at": "2026-10-23T07:35:32.431657Z",
+      "finished_at": "2026-10-23T07:41:43.321662Z"
+    },
+    "agent_setup": {
+      "started_at": "2026-10-23T07:35:24.057236Z",
+      "finished_at": "2026-10-23T07:35:32.431515Z"
+    }
+  },
+  "termination_reason": "confirmed_task_complete",
+  "exception": null,
+  "tokens": {
+    "input_including_cached": 109766,
+    "output_including_reasoning": 50876,
+    "cached_input_subset": 88864,
+    "reasoning_output_subset": 44113
+  },
+  "charges": {
+    "settled_key_usage_delta_usd": "0.079809050",
+    "settled_key_reconciled": true,
+    "settlement_observation": "Final GLM postflight snapshot",
+    "recorded_openrouter_usd": "0.079809050",
+    "generation_records_total_usd": "0.079809050",
+    "key_usage_delta_usd": "0.079809050",
+    "response_and_key_reconciled": true,
+    "generation_records_reconciled": true,
+    "remaining_unchanged_key_allowance_usd": 7.158229449,
+    "remaining_account_balance_usd": 7.158229449,
+    "lifetime_limit_usd": 20.0,
+    "reset_is_null": true
+  },
+  "subscription": null,
+  "requests": {
+    "observed_requests": 9,
+    "retained_provider_generations": 9,
+    "failure_events": 0,
+    "identical_full_body_repeats": 0,
+    "output_limit_recovery_calls": 0,
+    "length_responses": 0,
+    "whole_trial_retries": 0,
+    "sdk_retries": "unknown",
+    "request_configuration_violations": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "task_id": "workflow-hard-pilot-v1-a01",
+  "tables": [
+    {
+      "id": "quarter_scope",
+      "file": "quarter_scope.sql",
+      "evidence": ["a01:s01", "a01:s02", "a01:s03", "a01:s04"]
+    },
+    {
+      "id": "comparable_periods",
+      "file": "comparable_periods.sql",
+      "evidence": ["a01:s01", "a01:s02", "a01:s03", "a01:s04"]
+    },
+    {
+      "id": "annual_change_bridge",
+      "file": "annual_change_bridge.sql",
+      "evidence": ["a01:s01", "a01:s03", "a01:s04", "a01:s05"]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": ["a01:s01", "a01:s02", "a01:s03", "a01:s04"],
+      "note": "Pre-Q4 sales increases are EUR 523m for Ahold USA, 208m for Delhaize America, 428m for the Netherlands, 96m for Belgium and 357m for CSE. Each uses its respective annual period less source Q4, retaining the former-business calendars; pre-Q4 does not mean nine calendar months."
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": ["a01:s01", "a01:s03", "a01:s04", "a01:s05"],
+      "note": "Statutory annual growth is EUR 11,492m. Pro forma less IFRS sales are EUR 12,636m in 2016 and EUR 22,678m in 2015, a presentation change of -10,042m. Adding back the prior extra week of 745m gives 11,492 - 10,042 + 745 = EUR 2,195m matched-duration growth, or 3.650060% on EUR 60,136m prior sales. This is EUR 9,297m below the statutory increase. The segment residual is zero."
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": ["a01:s01", "a01:s03", "a01:s04", "a01:s05"],
+      "note": "The disclosed pro forma perimeter and calendar adjustments establish a matched-duration sales comparison at reported exchange rates. The dossier supplies no volume, price, mix or currency attribution sufficient to establish that volume alone caused the increase. This comparison is not an organic, same-store or constant-currency estimate."
+    }
+  ]
+}

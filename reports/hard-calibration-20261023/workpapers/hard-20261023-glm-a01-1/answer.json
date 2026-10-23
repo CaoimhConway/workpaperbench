@@ -1,0 +1,37 @@
+{
+  "task_id": "workflow-hard-pilot-v1-a01",
+  "tables": [
+    {
+      "id": "quarter_scope",
+      "file": "quarter_scope.sql",
+      "evidence": ["a01:s01", "a01:s02", "a01:s03", "a01:s04"]
+    },
+    {
+      "id": "comparable_periods",
+      "file": "comparable_periods.sql",
+      "evidence": ["a01:s01", "a01:s02", "a01:s03", "a01:s04"]
+    },
+    {
+      "id": "annual_change_bridge",
+      "file": "annual_change_bridge.sql",
+      "evidence": ["a01:s01", "a01:s03", "a01:s04", "a01:s05"]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": ["a01:s01", "a01:s02", "a01:s03", "a01:s04"]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": ["a01:s01", "a01:s03", "a01:s04", "a01:s05"]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": ["a01:s01", "a01:s03", "a01:s04", "a01:s05"]
+    }
+  ]
+}

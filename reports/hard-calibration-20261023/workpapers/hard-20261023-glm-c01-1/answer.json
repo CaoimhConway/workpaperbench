@@ -1,0 +1,40 @@
+{
+  "task_id": "workflow-hard-pilot-v1-c01",
+  "tables": [
+    {
+      "id": "worldwide_mix",
+      "file": "worldwide_mix.sql",
+      "evidence": ["c01:s01", "c01:s03"]
+    },
+    {
+      "id": "regional_product_bounds",
+      "file": "regional_product_bounds.sql",
+      "evidence": ["c01:s01", "c01:s02", "c01:s03"]
+    },
+    {
+      "id": "stress_bounds",
+      "file": "stress_bounds.sql",
+      "evidence": ["c01:s01", "c01:s02", "c01:s03", "c01:s04"]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": ["c01:s01", "c01:s02", "c01:s03", "c01:s04"],
+      "note": "Feasible allocations produce a sharp gross-profit loss interval, not one unique value."
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": ["c01:s01", "c01:s03"],
+      "note": "Worldwide Services gross margin exceeds worldwide Products gross margin."
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": ["c01:s01", "c01:s02", "c01:s03"],
+      "note": "The sharp U.S. Products-sales interval includes values both below and above one-half of U.S. sales; the joint allocation is undisclosed."
+    }
+  ]
+}
