@@ -1,0 +1,169 @@
+{
+  "issuer": "Ahold Delhaize",
+  "url": "https://www.sec.gov/Archives/edgar/data/869425/000119312517066172/d352780dex1.htm",
+  "title": "Fourth quarter and Full year 2016 summary report",
+  "publication_date": "2017-03-01",
+  "publication_time": null,
+  "unit": "EUR million",
+  "evidence": [
+    {
+      "id": "a01:s01",
+      "locator": "pp. 2-3, Basis of preparation and calendar footnotes",
+      "facts": "IFRS consolidates former Delhaize from July 24, 2016. Pro forma treats the merger as occurring at the start of the 2015 financial year and includes remedy-store and other divestment adjustments. It is hypothetical comparative information, not actual historical combined results. Former Ahold FY/Q4: 2016 52/12 weeks, 2015 53/13. Former Delhaize FY/Q4: 52/13 in both years. The pro forma calendars remain different across the former groups. The 2016 Q4 calendar adjustment reinstates October 1-9 for European Delhaize and the corresponding October 2-9 U.S. period excluded from the IFRS presentation. CSE includes former Ahold Czech operations and former Delhaize Greece, Romania and Serbia."
+    },
+    {
+      "id": "a01:s02",
+      "locator": "p. 34, Pro forma net sales by segment Q4 2016, IFRS and adjustment columns",
+      "table": "quarter_current"
+    },
+    {
+      "id": "a01:s03",
+      "locator": "pp. 4-7, segment pro forma net sales, FY 2016, FY 2015 and Q4 2015 EUR columns",
+      "table": "period_sales"
+    },
+    {
+      "id": "a01:s04",
+      "locator": "p. 2, Pro forma net sales after adjustment for week 53, adjusted Q4 2015 column",
+      "table": "matched_quarter"
+    },
+    {
+      "id": "a01:s05",
+      "locator": "p. 2, Group performance IFRS and pro forma net sales, FY columns",
+      "table": "group_annual"
+    }
+  ],
+  "tables": {
+    "quarter_current": {
+      "columns": {
+        "segment": "TEXT",
+        "ifrs": "REAL",
+        "divestments": "REAL",
+        "calendar": "REAL"
+      },
+      "rows": [
+        [
+          "ahold_usa",
+          5690,
+          -100,
+          0
+        ],
+        [
+          "delhaize_america",
+          3675,
+          -9,
+          303
+        ],
+        [
+          "netherlands",
+          3226,
+          -18,
+          0
+        ],
+        [
+          "belgium",
+          1164,
+          -5,
+          121
+        ],
+        [
+          "cse",
+          1364,
+          0,
+          94
+        ]
+      ]
+    },
+    "period_sales": {
+      "columns": {
+        "segment": "TEXT",
+        "fy2016": "REAL",
+        "fy2015": "REAL",
+        "q42015": "REAL"
+      },
+      "rows": [
+        [
+          "ahold_usa",
+          23316,
+          23106,
+          5903
+        ],
+        [
+          "delhaize_america",
+          15501,
+          15146,
+          3822
+        ],
+        [
+          "netherlands",
+          13015,
+          12624,
+          3245
+        ],
+        [
+          "belgium",
+          4942,
+          4859,
+          1293
+        ],
+        [
+          "cse",
+          5557,
+          5146,
+          1404
+        ]
+      ]
+    },
+    "matched_quarter": {
+      "columns": {
+        "segment": "TEXT",
+        "q42015_matched": "REAL"
+      },
+      "rows": [
+        [
+          "ahold_usa",
+          5451
+        ],
+        [
+          "delhaize_america",
+          3822
+        ],
+        [
+          "netherlands",
+          2983
+        ],
+        [
+          "belgium",
+          1293
+        ],
+        [
+          "cse",
+          1373
+        ]
+      ]
+    },
+    "group_annual": {
+      "columns": {
+        "year": "INTEGER",
+        "ifrs": "REAL",
+        "proforma": "REAL"
+      },
+      "rows": [
+        [
+          2015,
+          38203,
+          60881
+        ],
+        [
+          2016,
+          49695,
+          62331
+        ]
+      ]
+    }
+  },
+  "precision": "Amounts published in whole EUR million. Compute from displayed amounts without reverse-engineering rounded percentage growth. Selected columns retain necessary facts without the redundant derived pro forma Q4 segment totals or adjusted full-year 2015 targets.",
+  "rights": "Attributed factual observations and concise definitions only. Issuer material is excluded from the project MIT license. Full source documents are not redistributed.",
+  "retrieved_date": "2026-10-22",
+  "extract_origin": "Manually normalized financial facts checked against the cited primary disclosure. Not an original-document capture.",
+  "extract_sha256": "b59962dba2ce0acce84e2edfac6e3ed0bab08cfa06ed5731afe653952ee03f6b"
+}

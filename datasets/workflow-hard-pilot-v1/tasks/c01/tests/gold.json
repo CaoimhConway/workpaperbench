@@ -1,0 +1,516 @@
+{
+  "task_id": "workflow-hard-pilot-v1-c01",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "worldwide_mix": {
+      "columns": {
+        "business_line": {
+          "type": "text",
+          "unit": "label"
+        },
+        "net_sales_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "gross_profit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "gross_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "business_line"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "c01:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04"
+      ],
+      "rows": [
+        [
+          "products",
+          294866,
+          109633.0,
+          37.18061763648573
+        ],
+        [
+          "services",
+          96169,
+          71050.0,
+          73.88035645582256
+        ]
+      ]
+    },
+    "regional_product_bounds": {
+      "columns": {
+        "geography": {
+          "type": "text",
+          "unit": "label"
+        },
+        "lower_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "upper_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "geography"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04"
+      ],
+      "rows": [
+        [
+          "china",
+          0.0,
+          66952.0
+        ],
+        [
+          "other",
+          85718.0,
+          181887.0
+        ],
+        [
+          "us",
+          46027.0,
+          142196.0
+        ]
+      ]
+    },
+    "stress_bounds": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "lower_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "upper_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "lower_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "upper_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s02",
+          "c01:s04"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04"
+      ],
+      "rows": [
+        [
+          "revenue",
+          33001.91,
+          42789.17,
+          8.439630723592517,
+          10.94254222767783
+        ],
+        [
+          "gross_profit",
+          14822.717151790983,
+          16615.15312402922,
+          8.203714323866098,
+          9.195747870042682
+        ]
+      ]
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "assertion": "The stated marginals and scenario identify one unique total gross-profit loss.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s02",
+          "c01:s04"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04"
+      ]
+    },
+    "claim_2": {
+      "assertion": "Worldwide FY2024 Services gross margin exceeds worldwide Products gross margin.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "c01:s01"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04"
+      ]
+    },
+    "claim_3": {
+      "assertion": "Products account for more than half of U.S. FY2024 sales.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "c01:s01",
+          "c01:s02"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "c01:s01",
+        "c01:s02",
+        "c01:s03",
+        "c01:s04"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "monetary_scale",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "worldwide_mix": [
+          [
+            "products",
+            589732,
+            219266.0,
+            37.18061763648573
+          ],
+          [
+            "services",
+            192338,
+            142100.0,
+            73.88035645582256
+          ]
+        ],
+        "regional_product_bounds": [
+          [
+            "china",
+            0.0,
+            133904.0
+          ],
+          [
+            "other",
+            171436.0,
+            363774.0
+          ],
+          [
+            "us",
+            92054.0,
+            284392.0
+          ]
+        ],
+        "stress_bounds": [
+          [
+            "revenue",
+            66003.82,
+            85578.34,
+            8.439630723592517,
+            10.94254222767783
+          ],
+          [
+            "gross_profit",
+            29645.434303581966,
+            33230.30624805844,
+            8.203714323866098,
+            9.195747870042682
+          ]
+        ]
+      }
+    },
+    {
+      "name": "row_order",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "worldwide_mix": [
+          [
+            "services",
+            96169,
+            71050.0,
+            73.88035645582256
+          ],
+          [
+            "products",
+            294866,
+            109633.0,
+            37.18061763648573
+          ]
+        ],
+        "regional_product_bounds": [
+          [
+            "china",
+            0.0,
+            66952.0
+          ],
+          [
+            "other",
+            85718.0,
+            181887.0
+          ],
+          [
+            "us",
+            46027.0,
+            142196.0
+          ]
+        ],
+        "stress_bounds": [
+          [
+            "revenue",
+            33001.91,
+            42789.17,
+            8.439630723592517,
+            10.94254222767783
+          ],
+          [
+            "gross_profit",
+            14822.717151790983,
+            16615.15312402922,
+            8.203714323866098,
+            9.195747870042682
+          ]
+        ]
+      }
+    },
+    {
+      "name": "capacity_breakpoint",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "worldwide_mix": [
+          [
+            "products",
+            294866,
+            109633.0,
+            37.18061763648573
+          ],
+          [
+            "services",
+            96169,
+            71050.0,
+            73.88035645582256
+          ]
+        ],
+        "regional_product_bounds": [
+          [
+            "china",
+            40783.0,
+            136952.0
+          ],
+          [
+            "other",
+            15718.0,
+            111887.0
+          ],
+          [
+            "us",
+            46027.0,
+            142196.0
+          ]
+        ],
+        "stress_bounds": [
+          [
+            "revenue",
+            40348.89,
+            51889.17,
+            10.318485557558786,
+            13.269699643254441
+          ],
+          [
+            "gross_profit",
+            18206.153356711184,
+            19998.58932894942,
+            10.076295698384012,
+            11.068329244560596
+          ]
+        ]
+      }
+    },
+    {
+      "name": "slope_reversal",
+      "database": "control-4.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "worldwide_mix": [
+          [
+            "products",
+            294866,
+            109633.0,
+            37.18061763648573
+          ],
+          [
+            "services",
+            96169,
+            71050.0,
+            73.88035645582256
+          ]
+        ],
+        "regional_product_bounds": [
+          [
+            "china",
+            0.0,
+            66952.0
+          ],
+          [
+            "other",
+            85718.0,
+            181887.0
+          ],
+          [
+            "us",
+            46027.0,
+            142196.0
+          ]
+        ],
+        "stress_bounds": [
+          [
+            "revenue",
+            58898.62,
+            112753.26,
+            15.062237395629547,
+            28.8345697955426
+          ],
+          [
+            "gross_profit",
+            22604.74613187007,
+            52510.49002082302,
+            12.510721059463297,
+            29.06221947876835
+          ]
+        ]
+      }
+    },
+    {
+      "name": "product_mix",
+      "database": "control-5.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "worldwide_mix": [
+          [
+            "products",
+            214866,
+            29633.0,
+            13.791386259343032
+          ],
+          [
+            "services",
+            176169,
+            151050.0,
+            85.74153227866424
+          ]
+        ],
+        "regional_product_bounds": [
+          [
+            "china",
+            0.0,
+            66952.0
+          ],
+          [
+            "other",
+            5718.0,
+            181887.0
+          ],
+          [
+            "us",
+            0.0,
+            142196.0
+          ]
+        ],
+        "stress_bounds": [
+          [
+            "revenue",
+            25801.91,
+            38350.79,
+            6.598363317861573,
+            9.807508279310037
+          ],
+          [
+            "gross_profit",
+            7915.0731883127155,
+            10851.03536608409,
+            4.3806407843088255,
+            6.005565197657827
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "f1ba485e8523d7057a0d5381dd46a0532a54c6e13651a10b4c46549b2593c180",
+    "control-2.sqlite": "35af3588a13ae01776d7197756009fe910e891fd915d0c6f8e5266a3460b9f46",
+    "control-3.sqlite": "1c029feba554a7d1ed72fc94549dc1620f841aeb39da1f723624ed35155b0c5e",
+    "control-4.sqlite": "4caaecf9d8ff84492ca71e7945f1d0adc84026f3cf4ad921e2283551541b1c8f",
+    "control-5.sqlite": "e6787ffedd5a29d81ec8836ec94d25e57885d5d68660b99c5f1ed2f44522b360",
+    "data.sqlite": "911bd8cdb3f32f3208b916d90c80d6074b247feb694370a44c040fd2aded4016",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "d617325c2db292a2f15ca4b1970dc2a93e5229f509b392ec0f900bb84c7ac2de",
+    "reference.json": "4c61ca01691da0832da710c0cab24abf9b52398f5eb226e1e2324386f243f0dd",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "7d2ad0dbb4996123d10a2d197d260f2bdbcd4e516e53e00fe77bf5c3d1901d7d",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

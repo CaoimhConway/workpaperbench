@@ -1,0 +1,75 @@
+{
+  "issuer": "Apple",
+  "url": "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000320193/1e7e3da9-526f-477e-add2-b6ea6deb3d81.html",
+  "issuer_index": "https://investor.apple.com/investor-relations/",
+  "title": "2024 Form 10-K",
+  "publication_date": "2024-11-01",
+  "publication_time": null,
+  "unit": "USD million",
+  "economic_period": "52-week fiscal year ended September 28, 2024",
+  "original_capture_sha256": "e8fc9ecabfa4ab91e05eab06dac16302afc4253d9164207815b3a75ac7d39c1a",
+  "evidence": [
+    {
+      "id": "c01:s01",
+      "locator": "p. 29, Consolidated Statements of Operations, FY2024 Products and Services net sales and cost of sales",
+      "table": "business_lines"
+    },
+    {
+      "id": "c01:s02",
+      "locator": "p. 47, Note 13, net sales by country, FY2024",
+      "table": "geographies",
+      "facts": "China includes Hong Kong and Taiwan. U.S. is a country disclosure, not the Americas operating segment. The supplied country totals and Products/Services totals do not disclose their joint allocation."
+    },
+    {
+      "id": "c01:s03",
+      "locator": "p. 21, fiscal period definition",
+      "facts": "FY2024 spans 52 weeks and ends September 28, 2024. These are annual net sales, not balances, customer counts or cash receipts."
+    }
+  ],
+  "tables": {
+    "business_lines": {
+      "columns": {
+        "business_line": "TEXT",
+        "net_sales": "REAL",
+        "cost_of_sales": "REAL"
+      },
+      "rows": [
+        [
+          "products",
+          294866,
+          185233
+        ],
+        [
+          "services",
+          96169,
+          25119
+        ]
+      ]
+    },
+    "geographies": {
+      "columns": {
+        "geography": "TEXT",
+        "net_sales": "REAL"
+      },
+      "rows": [
+        [
+          "us",
+          142196
+        ],
+        [
+          "china",
+          66952
+        ],
+        [
+          "other",
+          181887
+        ]
+      ]
+    }
+  },
+  "precision": "Whole USD million. Bounds concern all nonnegative joint allocations consistent with these displayed annual marginals. No estimate of the actual undisclosed mix is substituted.",
+  "rights": "Attributed factual observations and concise definitions only. Issuer material is excluded from the project MIT license. Full source documents are not redistributed.",
+  "retrieved_date": "2026-10-22",
+  "extract_origin": "Manually normalized financial facts checked against the cited primary disclosure. Not an original-document capture.",
+  "extract_sha256": "5c5aeac05bec84b8e7611635ed210f886739c240993832202d134d6e9cdfaee4"
+}

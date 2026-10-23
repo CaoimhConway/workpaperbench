@@ -1,0 +1,42 @@
+{
+  "manifest_id": "workflow-hard-pilot-v1-canonical-39c72d97a4ed",
+  "starting_commit": "c9afff4ba933ff3bb98e5357818ac20aff4eb052",
+  "baseline_identity": "workflow-v15-canonical-400f60b5b3b6",
+  "baseline_task_count": 30,
+  "tracked_changes_outside_new_assets": [
+    "scripts/local_trial.py",
+    "workpaperbench/catalog.py"
+  ],
+  "checks": {
+    "supported_controller_focused_tests": {
+      "passed": 13,
+      "skipped": 0
+    },
+    "editing_host_catalog_grading_and_initial_experimental_tests": {
+      "passed": 21,
+      "skipped": 2,
+      "skip_reason": "Harbor unavailable and SQLite differs from pinned builder, both exercised on supported controller"
+    },
+    "editing_host_final_experimental_tests": {
+      "passed": 5,
+      "skipped": 1
+    },
+    "baseline_reconstruction": "passed",
+    "new_catalog_reconstruction": "passed",
+    "local_document_links": "passed",
+    "qualified_glm_recipe_arguments": "Exact match to the existing qualified serving configuration after combining shared and provider-specific kwargs",
+    "recipe_model_calls": 0,
+    "native_candidate_model_calls": 0
+  },
+  "review_artifact_sha256": {
+    "docs/WORKFLOW_HARD_PILOT.md": "8a29abe9652caa89588ae92f178f83f66d8f5784dd3da7e32e24070150343608",
+    "config/workflow-hard-pilot-v1-calibration.json": "8bc7ced751f452ec7929741f7ab4106d9db244e98cf45333d8257bcbe7fb65f2",
+    "tests/test_workflow_hard_pilot.py": "a47b1ae0a4eff9bfbf48f2da3d92e28ab2db7be91ae88ff3e54be1b38bf08333",
+    "scripts/validate_workflow_hard_pilot.py": "9a453c838797d7258bd4892582f46c2a248896e33cd5f065d332dec6e6a34b6f",
+    "scripts/local_trial.py": "8c35c1702f39944ce934a2674e10b9b24163c109d597158d25a3b3234118844d",
+    "workpaperbench/catalog.py": "f9ee762c7ceaa61bc0a5644de63d37f76076468649e25d5aaee821136890ab79",
+    "datasets/workflow-hard-pilot-v1/references/a01.md": "50208ccf81842324f979f08a8469e67b4b931d7e61aa1582d0c28472921a3d60",
+    "datasets/workflow-hard-pilot-v1/references/c01.md": "e7b12bd045446e46a55d95e3656d32986409df761edfa14596f20d796a271513",
+    "datasets/workflow-hard-pilot-v1/references/b01.md": "1e32455c96a65adf839f87c92d6910ccc59aff9938901aefc2180a0dea4aeaa1"
+  }
+}

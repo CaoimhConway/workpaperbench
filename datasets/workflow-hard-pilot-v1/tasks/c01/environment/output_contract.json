@@ -1,0 +1,100 @@
+{
+  "tables": {
+    "worldwide_mix": {
+      "columns": {
+        "business_line": {
+          "type": "text",
+          "unit": "label"
+        },
+        "net_sales_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "gross_profit_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "gross_margin_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "business_line"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "regional_product_bounds": {
+      "columns": {
+        "geography": {
+          "type": "text",
+          "unit": "label"
+        },
+        "lower_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "upper_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "geography"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "stress_bounds": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "lower_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "upper_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "lower_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "upper_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    }
+  },
+  "definitions": {
+    "worldwide_mix": "Two rows keyed products and services. Report annual net sales, gross profit and gross margin percent.",
+    "regional_product_bounds": "Three rows keyed us, china and other. Each interval is the sharp feasible bound on that geography's Products sales under the marginal totals and nonnegativity. Each endpoint may use its own feasible joint allocation.",
+    "stress_bounds": "Two rows keyed revenue and gross_profit. Return sharp lower and upper total stress losses in USD million. lower_pct and upper_pct use original worldwide revenue and original worldwide gross profit respectively. These are bounds from allocation uncertainty, not a supplied forecast range. No particular witness allocation or explanatory wording is required. Optional prose is not semantically graded."
+  },
+  "claim_assertions": {
+    "claim_1": "The stated marginals and scenario identify one unique total gross-profit loss.",
+    "claim_2": "Worldwide FY2024 Services gross margin exceeds worldwide Products gross margin.",
+    "claim_3": "Products account for more than half of U.S. FY2024 sales."
+  },
+  "numeric_policy": "Displayed-value arithmetic. Absolute tolerances are computational, not claims of source precision.",
+  "assumptions": "Authored sensitivity scenario, not an issuer forecast: allocate sales into nonnegative Products/Services by U.S., China (including Hong Kong and Taiwan), and other countries, preserving both sets of supplied totals. No other cross-cell constraints apply. The rates in stress_rates are percentage reductions of the relevant cell sales. Lost sales carry that business line's worldwide FY2024 gross margin in every geography. Beyond the cost-of-sales change implied by those margins, no secondary demand response, geographic switching or other profit changes occur. Gross profit here is sales less cost of sales. Optimize revenue and gross-profit loss separately over the same feasible allocations. Bounds are inclusive. The actual joint allocation is unknown."
+}

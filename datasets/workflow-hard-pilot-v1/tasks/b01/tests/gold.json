@@ -1,0 +1,574 @@
+{
+  "task_id": "workflow-hard-pilot-v1-b01",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "cash_investment": {
+      "columns": {
+        "cash_ppe_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "principal_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "capital_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "noncash_lease_additions_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "b01:s01",
+          "b01:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04"
+      ],
+      "rows": [
+        [
+          64551.0,
+          2283,
+          66834.0,
+          20511.0
+        ]
+      ]
+    },
+    "ppe_bridge": {
+      "columns": {
+        "payables_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "purchase_proxy_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "lease_additions_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "depreciation_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "net_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "explained_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "b01:s01",
+          "b01:s02",
+          "b01:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04"
+      ],
+      "rows": [
+        [
+          2600.0,
+          67151.0,
+          20511.0,
+          22000.0,
+          69375.0,
+          65662.0,
+          3713.0
+        ]
+      ]
+    },
+    "lease_movements": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "explained_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "b01:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04"
+      ],
+      "rows": [
+        [
+          "gross",
+          21628.0,
+          20511.0,
+          1117.0
+        ],
+        [
+          "accumulated",
+          3475.0,
+          3408.0,
+          67.0
+        ],
+        [
+          "net",
+          18153.0,
+          17103.0,
+          1050.0
+        ]
+      ]
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "assertion": "FY2025 finance-lease principal cash payments equal the disclosed FY2025 noncash finance-lease ROU additions.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "b01:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04"
+      ]
+    },
+    "claim_2": {
+      "assertion": "The increase in net finance-lease PPE exceeds FY2025 finance-lease principal cash payments.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "b01:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04"
+      ]
+    },
+    "claim_3": {
+      "assertion": "Acquired PPE accounts for the entire total-PPE net bridge residual.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "b01:s01",
+          "b01:s02",
+          "b01:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "monetary_scale",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cash_investment": [
+          [
+            129102.0,
+            4566,
+            133668.0,
+            41022.0
+          ]
+        ],
+        "ppe_bridge": [
+          [
+            5200.0,
+            134302.0,
+            41022.0,
+            44000.0,
+            138750.0,
+            131324.0,
+            7426.0
+          ]
+        ],
+        "lease_movements": [
+          [
+            "gross",
+            43256.0,
+            41022.0,
+            2234.0
+          ],
+          [
+            "accumulated",
+            6950.0,
+            6816.0,
+            134.0
+          ],
+          [
+            "net",
+            36306.0,
+            34206.0,
+            2100.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "row_order",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cash_investment": [
+          [
+            64551.0,
+            2283,
+            66834.0,
+            20511.0
+          ]
+        ],
+        "ppe_bridge": [
+          [
+            2600.0,
+            67151.0,
+            20511.0,
+            22000.0,
+            69375.0,
+            65662.0,
+            3713.0
+          ]
+        ],
+        "lease_movements": [
+          [
+            "gross",
+            21628.0,
+            20511.0,
+            1117.0
+          ],
+          [
+            "accumulated",
+            3475.0,
+            3408.0,
+            67.0
+          ],
+          [
+            "net",
+            18153.0,
+            17103.0,
+            1050.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "payable_settlement",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cash_investment": [
+          [
+            65551.0,
+            2283,
+            67834.0,
+            20511.0
+          ]
+        ],
+        "ppe_bridge": [
+          [
+            1600.0,
+            67151.0,
+            20511.0,
+            22000.0,
+            69375.0,
+            65662.0,
+            3713.0
+          ]
+        ],
+        "lease_movements": [
+          [
+            "gross",
+            21628.0,
+            20511.0,
+            1117.0
+          ],
+          [
+            "accumulated",
+            3475.0,
+            3408.0,
+            67.0
+          ],
+          [
+            "net",
+            18153.0,
+            17103.0,
+            1050.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "noncash_lease",
+      "database": "control-4.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cash_investment": [
+          [
+            64551.0,
+            2283,
+            66834.0,
+            21011.0
+          ]
+        ],
+        "ppe_bridge": [
+          [
+            2600.0,
+            67151.0,
+            21011.0,
+            22000.0,
+            69875.0,
+            66162.0,
+            3713.0
+          ]
+        ],
+        "lease_movements": [
+          [
+            "gross",
+            22128.0,
+            21011.0,
+            1117.0
+          ],
+          [
+            "accumulated",
+            3475.0,
+            3408.0,
+            67.0
+          ],
+          [
+            "net",
+            18653.0,
+            17603.0,
+            1050.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "principal_settlement",
+      "database": "control-5.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cash_investment": [
+          [
+            64551.0,
+            2383,
+            66934.0,
+            20511.0
+          ]
+        ],
+        "ppe_bridge": [
+          [
+            2600.0,
+            67151.0,
+            20511.0,
+            22000.0,
+            69375.0,
+            65662.0,
+            3713.0
+          ]
+        ],
+        "lease_movements": [
+          [
+            "gross",
+            21628.0,
+            20511.0,
+            1117.0
+          ],
+          [
+            "accumulated",
+            3475.0,
+            3408.0,
+            67.0
+          ],
+          [
+            "net",
+            18153.0,
+            17103.0,
+            1050.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "other_cf_adjustment",
+      "database": "control-6.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cash_investment": [
+          [
+            64551.0,
+            2283,
+            66834.0,
+            20511.0
+          ]
+        ],
+        "ppe_bridge": [
+          [
+            2600.0,
+            67151.0,
+            20511.0,
+            22000.0,
+            69375.0,
+            65662.0,
+            3713.0
+          ]
+        ],
+        "lease_movements": [
+          [
+            "gross",
+            21628.0,
+            20511.0,
+            1117.0
+          ],
+          [
+            "accumulated",
+            3475.0,
+            3408.0,
+            67.0
+          ],
+          [
+            "net",
+            18153.0,
+            17103.0,
+            1050.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "unallocated_asset_movement",
+      "database": "control-7.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "cash_investment": [
+          [
+            64551.0,
+            2283,
+            66834.0,
+            20511.0
+          ]
+        ],
+        "ppe_bridge": [
+          [
+            2600.0,
+            67151.0,
+            20511.0,
+            22000.0,
+            69625.0,
+            65662.0,
+            3963.0
+          ]
+        ],
+        "lease_movements": [
+          [
+            "gross",
+            21628.0,
+            20511.0,
+            1117.0
+          ],
+          [
+            "accumulated",
+            3475.0,
+            3408.0,
+            67.0
+          ],
+          [
+            "net",
+            18153.0,
+            17103.0,
+            1050.0
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "c3e94c821ae59ec983d8cece3e297e858b899765f1b3f1b0e3dfad809ea52e3a",
+    "control-2.sqlite": "ad387ff2f38c7e19da7c69ad4a9f66e6d6dce769f11c360941763950949c1c39",
+    "control-3.sqlite": "30f29938295cdb0f358410a51b3ce3ea880717956711a2c856efcbfe933d740b",
+    "control-4.sqlite": "c872e150ed91ba90dc0ae1480bbfcca7155f54e0c8c11c4f26a365e01c1243b5",
+    "control-5.sqlite": "325a073eabc0de7842a4a19040761ea1c70c8f2a123d86824323be8ec01137c9",
+    "control-6.sqlite": "45f09f9ab472459bc607d620827941bc2461ee2bea7ed6d410ef6f0d2ab263b2",
+    "control-7.sqlite": "1adbc0d41b249945c987ef86521a7aed814f283d054f75a0ff076b3d00be1322",
+    "data.sqlite": "0b73e15e31ae84ff4bf46364be24df66cdeb6066c1393d53c7a819dc887a1194",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "3f36815ea43cc3636217edd431364a40d90e4c9ebb1e4c11369013c3df0c2dce",
+    "reference.json": "8e3f6aa8c0b64bfafbc538c0df448c7e2e90efed9d9086676a3bfeacf06765f4",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "c1ce7539059d40f212ebe290c2d511da6f60683db355fa023c0a77dd1a3a2cae",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

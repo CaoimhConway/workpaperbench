@@ -1,0 +1,1460 @@
+{
+  "task_id": "workflow-hard-pilot-v1-a01",
+  "scorer_version": "workflow-1.2.1",
+  "tables": {
+    "quarter_scope": {
+      "columns": {
+        "segment": {
+          "type": "text",
+          "unit": "label"
+        },
+        "proforma_q42016_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "extra_week2015_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "change_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "segment"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "a01:s02",
+          "a01:s03",
+          "a01:s04"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s04",
+        "a01:s05"
+      ],
+      "rows": [
+        [
+          "ahold_usa",
+          5590.0,
+          452.0,
+          139.0,
+          2.5499908273711247
+        ],
+        [
+          "delhaize_america",
+          3969.0,
+          0.0,
+          147.0,
+          3.8461538461538463
+        ],
+        [
+          "netherlands",
+          3208.0,
+          262.0,
+          225.0,
+          7.542742205833054
+        ],
+        [
+          "belgium",
+          1280.0,
+          0.0,
+          -13.0,
+          -1.005413766434648
+        ],
+        [
+          "cse",
+          1458.0,
+          31.0,
+          85.0,
+          6.190823015294974
+        ]
+      ]
+    },
+    "comparable_periods": {
+      "columns": {
+        "segment": {
+          "type": "text",
+          "unit": "label"
+        },
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "current_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "prior_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "change_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "segment",
+        "period"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "a01:s02",
+          "a01:s03",
+          "a01:s04"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s04",
+        "a01:s05"
+      ],
+      "rows": [
+        [
+          "ahold_usa",
+          "fy",
+          23316.0,
+          22654.0,
+          662.0,
+          2.9222212412818926
+        ],
+        [
+          "ahold_usa",
+          "q4",
+          5590.0,
+          5451.0,
+          139.0,
+          2.5499908273711247
+        ],
+        [
+          "ahold_usa",
+          "pre_q4",
+          17726.0,
+          17203.0,
+          523.0,
+          3.0401674126605824
+        ],
+        [
+          "delhaize_america",
+          "fy",
+          15501.0,
+          15146.0,
+          355.0,
+          2.3438531625511687
+        ],
+        [
+          "delhaize_america",
+          "q4",
+          3969.0,
+          3822.0,
+          147.0,
+          3.8461538461538463
+        ],
+        [
+          "delhaize_america",
+          "pre_q4",
+          11532.0,
+          11324.0,
+          208.0,
+          1.8368067820558107
+        ],
+        [
+          "netherlands",
+          "fy",
+          13015.0,
+          12362.0,
+          653.0,
+          5.282316777220514
+        ],
+        [
+          "netherlands",
+          "q4",
+          3208.0,
+          2983.0,
+          225.0,
+          7.542742205833054
+        ],
+        [
+          "netherlands",
+          "pre_q4",
+          9807.0,
+          9379.0,
+          428.0,
+          4.5633862885169
+        ],
+        [
+          "belgium",
+          "fy",
+          4942.0,
+          4859.0,
+          83.0,
+          1.7081704054332167
+        ],
+        [
+          "belgium",
+          "q4",
+          1280.0,
+          1293.0,
+          -13.0,
+          -1.005413766434648
+        ],
+        [
+          "belgium",
+          "pre_q4",
+          3662.0,
+          3566.0,
+          96.0,
+          2.69209197980931
+        ],
+        [
+          "cse",
+          "fy",
+          5557.0,
+          5115.0,
+          442.0,
+          8.641251221896383
+        ],
+        [
+          "cse",
+          "q4",
+          1458.0,
+          1373.0,
+          85.0,
+          6.190823015294974
+        ],
+        [
+          "cse",
+          "pre_q4",
+          4099.0,
+          3742.0,
+          357.0,
+          9.54035275253875
+        ]
+      ]
+    },
+    "annual_change_bridge": {
+      "columns": {
+        "statutory_change_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "presentation_change_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "prior_extra_week_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "comparable_change_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "comparable_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "segment_residual_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique",
+      "evidence": [
+        [
+          "a01:s03",
+          "a01:s04",
+          "a01:s05"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s04",
+        "a01:s05"
+      ],
+      "rows": [
+        [
+          11492.0,
+          -10042.0,
+          745.0,
+          2195.0,
+          3.6500598643075697,
+          0.0
+        ]
+      ]
+    }
+  },
+  "claims": {
+    "claim_1": {
+      "assertion": "Every supplied segment has positive pre-Q4 sales growth on the requested basis.",
+      "verdict": "supported",
+      "evidence": [
+        [
+          "a01:s02",
+          "a01:s03"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s04",
+        "a01:s05"
+      ]
+    },
+    "claim_2": {
+      "assertion": "The requested matched-duration annual sales increase equals the annual statutory IFRS sales increase.",
+      "verdict": "contradicted",
+      "evidence": [
+        [
+          "a01:s03",
+          "a01:s04",
+          "a01:s05"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s04",
+        "a01:s05"
+      ]
+    },
+    "claim_3": {
+      "assertion": "Volume growth alone caused the entire matched-duration pro forma annual sales increase.",
+      "verdict": "unresolved",
+      "evidence": [
+        [
+          "a01:s01",
+          "a01:s03",
+          "a01:s04"
+        ]
+      ],
+      "context_evidence_allowed": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03",
+        "a01:s04",
+        "a01:s05"
+      ]
+    }
+  },
+  "controls": [
+    {
+      "name": "monetary_scale",
+      "database": "control-1.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "quarter_scope": [
+          [
+            "ahold_usa",
+            11180.0,
+            904.0,
+            278.0,
+            2.5499908273711247
+          ],
+          [
+            "delhaize_america",
+            7938.0,
+            0.0,
+            294.0,
+            3.8461538461538463
+          ],
+          [
+            "netherlands",
+            6416.0,
+            524.0,
+            450.0,
+            7.542742205833054
+          ],
+          [
+            "belgium",
+            2560.0,
+            0.0,
+            -26.0,
+            -1.005413766434648
+          ],
+          [
+            "cse",
+            2916.0,
+            62.0,
+            170.0,
+            6.190823015294974
+          ]
+        ],
+        "comparable_periods": [
+          [
+            "ahold_usa",
+            "fy",
+            46632.0,
+            45308.0,
+            1324.0,
+            2.9222212412818926
+          ],
+          [
+            "ahold_usa",
+            "q4",
+            11180.0,
+            10902.0,
+            278.0,
+            2.5499908273711247
+          ],
+          [
+            "ahold_usa",
+            "pre_q4",
+            35452.0,
+            34406.0,
+            1046.0,
+            3.0401674126605824
+          ],
+          [
+            "delhaize_america",
+            "fy",
+            31002.0,
+            30292.0,
+            710.0,
+            2.3438531625511687
+          ],
+          [
+            "delhaize_america",
+            "q4",
+            7938.0,
+            7644.0,
+            294.0,
+            3.8461538461538463
+          ],
+          [
+            "delhaize_america",
+            "pre_q4",
+            23064.0,
+            22648.0,
+            416.0,
+            1.8368067820558107
+          ],
+          [
+            "netherlands",
+            "fy",
+            26030.0,
+            24724.0,
+            1306.0,
+            5.282316777220514
+          ],
+          [
+            "netherlands",
+            "q4",
+            6416.0,
+            5966.0,
+            450.0,
+            7.542742205833054
+          ],
+          [
+            "netherlands",
+            "pre_q4",
+            19614.0,
+            18758.0,
+            856.0,
+            4.5633862885169
+          ],
+          [
+            "belgium",
+            "fy",
+            9884.0,
+            9718.0,
+            166.0,
+            1.7081704054332167
+          ],
+          [
+            "belgium",
+            "q4",
+            2560.0,
+            2586.0,
+            -26.0,
+            -1.005413766434648
+          ],
+          [
+            "belgium",
+            "pre_q4",
+            7324.0,
+            7132.0,
+            192.0,
+            2.69209197980931
+          ],
+          [
+            "cse",
+            "fy",
+            11114.0,
+            10230.0,
+            884.0,
+            8.641251221896383
+          ],
+          [
+            "cse",
+            "q4",
+            2916.0,
+            2746.0,
+            170.0,
+            6.190823015294974
+          ],
+          [
+            "cse",
+            "pre_q4",
+            8198.0,
+            7484.0,
+            714.0,
+            9.54035275253875
+          ]
+        ],
+        "annual_change_bridge": [
+          [
+            22984.0,
+            -20084.0,
+            1490.0,
+            4390.0,
+            3.6500598643075697,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "row_order",
+      "database": "control-2.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "quarter_scope": [
+          [
+            "cse",
+            1458.0,
+            31.0,
+            85.0,
+            6.190823015294974
+          ],
+          [
+            "belgium",
+            1280.0,
+            0.0,
+            -13.0,
+            -1.005413766434648
+          ],
+          [
+            "netherlands",
+            3208.0,
+            262.0,
+            225.0,
+            7.542742205833054
+          ],
+          [
+            "delhaize_america",
+            3969.0,
+            0.0,
+            147.0,
+            3.8461538461538463
+          ],
+          [
+            "ahold_usa",
+            5590.0,
+            452.0,
+            139.0,
+            2.5499908273711247
+          ]
+        ],
+        "comparable_periods": [
+          [
+            "cse",
+            "fy",
+            5557.0,
+            5115.0,
+            442.0,
+            8.641251221896383
+          ],
+          [
+            "cse",
+            "q4",
+            1458.0,
+            1373.0,
+            85.0,
+            6.190823015294974
+          ],
+          [
+            "cse",
+            "pre_q4",
+            4099.0,
+            3742.0,
+            357.0,
+            9.54035275253875
+          ],
+          [
+            "belgium",
+            "fy",
+            4942.0,
+            4859.0,
+            83.0,
+            1.7081704054332167
+          ],
+          [
+            "belgium",
+            "q4",
+            1280.0,
+            1293.0,
+            -13.0,
+            -1.005413766434648
+          ],
+          [
+            "belgium",
+            "pre_q4",
+            3662.0,
+            3566.0,
+            96.0,
+            2.69209197980931
+          ],
+          [
+            "netherlands",
+            "fy",
+            13015.0,
+            12362.0,
+            653.0,
+            5.282316777220514
+          ],
+          [
+            "netherlands",
+            "q4",
+            3208.0,
+            2983.0,
+            225.0,
+            7.542742205833054
+          ],
+          [
+            "netherlands",
+            "pre_q4",
+            9807.0,
+            9379.0,
+            428.0,
+            4.5633862885169
+          ],
+          [
+            "delhaize_america",
+            "fy",
+            15501.0,
+            15146.0,
+            355.0,
+            2.3438531625511687
+          ],
+          [
+            "delhaize_america",
+            "q4",
+            3969.0,
+            3822.0,
+            147.0,
+            3.8461538461538463
+          ],
+          [
+            "delhaize_america",
+            "pre_q4",
+            11532.0,
+            11324.0,
+            208.0,
+            1.8368067820558107
+          ],
+          [
+            "ahold_usa",
+            "fy",
+            23316.0,
+            22654.0,
+            662.0,
+            2.9222212412818926
+          ],
+          [
+            "ahold_usa",
+            "q4",
+            5590.0,
+            5451.0,
+            139.0,
+            2.5499908273711247
+          ],
+          [
+            "ahold_usa",
+            "pre_q4",
+            17726.0,
+            17203.0,
+            523.0,
+            3.0401674126605824
+          ]
+        ],
+        "annual_change_bridge": [
+          [
+            11492.0,
+            -10042.0,
+            745.0,
+            2195.0,
+            3.6500598643075697,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "calendar_extension",
+      "database": "control-3.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "quarter_scope": [
+          [
+            "ahold_usa",
+            5590.0,
+            452.0,
+            139.0,
+            2.5499908273711247
+          ],
+          [
+            "delhaize_america",
+            4049.0,
+            0.0,
+            227.0,
+            5.939298796441654
+          ],
+          [
+            "netherlands",
+            3208.0,
+            262.0,
+            225.0,
+            7.542742205833054
+          ],
+          [
+            "belgium",
+            1280.0,
+            0.0,
+            -13.0,
+            -1.005413766434648
+          ],
+          [
+            "cse",
+            1458.0,
+            31.0,
+            85.0,
+            6.190823015294974
+          ]
+        ],
+        "comparable_periods": [
+          [
+            "ahold_usa",
+            "fy",
+            23316.0,
+            22654.0,
+            662.0,
+            2.9222212412818926
+          ],
+          [
+            "ahold_usa",
+            "q4",
+            5590.0,
+            5451.0,
+            139.0,
+            2.5499908273711247
+          ],
+          [
+            "ahold_usa",
+            "pre_q4",
+            17726.0,
+            17203.0,
+            523.0,
+            3.0401674126605824
+          ],
+          [
+            "delhaize_america",
+            "fy",
+            15581.0,
+            15146.0,
+            435.0,
+            2.8720454245345306
+          ],
+          [
+            "delhaize_america",
+            "q4",
+            4049.0,
+            3822.0,
+            227.0,
+            5.939298796441654
+          ],
+          [
+            "delhaize_america",
+            "pre_q4",
+            11532.0,
+            11324.0,
+            208.0,
+            1.8368067820558107
+          ],
+          [
+            "netherlands",
+            "fy",
+            13015.0,
+            12362.0,
+            653.0,
+            5.282316777220514
+          ],
+          [
+            "netherlands",
+            "q4",
+            3208.0,
+            2983.0,
+            225.0,
+            7.542742205833054
+          ],
+          [
+            "netherlands",
+            "pre_q4",
+            9807.0,
+            9379.0,
+            428.0,
+            4.5633862885169
+          ],
+          [
+            "belgium",
+            "fy",
+            4942.0,
+            4859.0,
+            83.0,
+            1.7081704054332167
+          ],
+          [
+            "belgium",
+            "q4",
+            1280.0,
+            1293.0,
+            -13.0,
+            -1.005413766434648
+          ],
+          [
+            "belgium",
+            "pre_q4",
+            3662.0,
+            3566.0,
+            96.0,
+            2.69209197980931
+          ],
+          [
+            "cse",
+            "fy",
+            5557.0,
+            5115.0,
+            442.0,
+            8.641251221896383
+          ],
+          [
+            "cse",
+            "q4",
+            1458.0,
+            1373.0,
+            85.0,
+            6.190823015294974
+          ],
+          [
+            "cse",
+            "pre_q4",
+            4099.0,
+            3742.0,
+            357.0,
+            9.54035275253875
+          ]
+        ],
+        "annual_change_bridge": [
+          [
+            11492.0,
+            -9962.0,
+            745.0,
+            2275.0,
+            3.7830916589064785,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "prior_extra_week",
+      "database": "control-4.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "quarter_scope": [
+          [
+            "ahold_usa",
+            5590.0,
+            552.0,
+            139.0,
+            2.5499908273711247
+          ],
+          [
+            "delhaize_america",
+            3969.0,
+            0.0,
+            147.0,
+            3.8461538461538463
+          ],
+          [
+            "netherlands",
+            3208.0,
+            262.0,
+            225.0,
+            7.542742205833054
+          ],
+          [
+            "belgium",
+            1280.0,
+            0.0,
+            -13.0,
+            -1.005413766434648
+          ],
+          [
+            "cse",
+            1458.0,
+            31.0,
+            85.0,
+            6.190823015294974
+          ]
+        ],
+        "comparable_periods": [
+          [
+            "ahold_usa",
+            "fy",
+            23316.0,
+            22654.0,
+            662.0,
+            2.9222212412818926
+          ],
+          [
+            "ahold_usa",
+            "q4",
+            5590.0,
+            5451.0,
+            139.0,
+            2.5499908273711247
+          ],
+          [
+            "ahold_usa",
+            "pre_q4",
+            17726.0,
+            17203.0,
+            523.0,
+            3.0401674126605824
+          ],
+          [
+            "delhaize_america",
+            "fy",
+            15501.0,
+            15146.0,
+            355.0,
+            2.3438531625511687
+          ],
+          [
+            "delhaize_america",
+            "q4",
+            3969.0,
+            3822.0,
+            147.0,
+            3.8461538461538463
+          ],
+          [
+            "delhaize_america",
+            "pre_q4",
+            11532.0,
+            11324.0,
+            208.0,
+            1.8368067820558107
+          ],
+          [
+            "netherlands",
+            "fy",
+            13015.0,
+            12362.0,
+            653.0,
+            5.282316777220514
+          ],
+          [
+            "netherlands",
+            "q4",
+            3208.0,
+            2983.0,
+            225.0,
+            7.542742205833054
+          ],
+          [
+            "netherlands",
+            "pre_q4",
+            9807.0,
+            9379.0,
+            428.0,
+            4.5633862885169
+          ],
+          [
+            "belgium",
+            "fy",
+            4942.0,
+            4859.0,
+            83.0,
+            1.7081704054332167
+          ],
+          [
+            "belgium",
+            "q4",
+            1280.0,
+            1293.0,
+            -13.0,
+            -1.005413766434648
+          ],
+          [
+            "belgium",
+            "pre_q4",
+            3662.0,
+            3566.0,
+            96.0,
+            2.69209197980931
+          ],
+          [
+            "cse",
+            "fy",
+            5557.0,
+            5115.0,
+            442.0,
+            8.641251221896383
+          ],
+          [
+            "cse",
+            "q4",
+            1458.0,
+            1373.0,
+            85.0,
+            6.190823015294974
+          ],
+          [
+            "cse",
+            "pre_q4",
+            4099.0,
+            3742.0,
+            357.0,
+            9.54035275253875
+          ]
+        ],
+        "annual_change_bridge": [
+          [
+            11392.0,
+            -10042.0,
+            845.0,
+            2195.0,
+            3.6500598643075697,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "divestment_scope",
+      "database": "control-5.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "quarter_scope": [
+          [
+            "ahold_usa",
+            5590.0,
+            452.0,
+            139.0,
+            2.5499908273711247
+          ],
+          [
+            "delhaize_america",
+            3969.0,
+            0.0,
+            147.0,
+            3.8461538461538463
+          ],
+          [
+            "netherlands",
+            3188.0,
+            262.0,
+            205.0,
+            6.872276231981227
+          ],
+          [
+            "belgium",
+            1280.0,
+            0.0,
+            -13.0,
+            -1.005413766434648
+          ],
+          [
+            "cse",
+            1458.0,
+            31.0,
+            85.0,
+            6.190823015294974
+          ]
+        ],
+        "comparable_periods": [
+          [
+            "ahold_usa",
+            "fy",
+            23316.0,
+            22654.0,
+            662.0,
+            2.9222212412818926
+          ],
+          [
+            "ahold_usa",
+            "q4",
+            5590.0,
+            5451.0,
+            139.0,
+            2.5499908273711247
+          ],
+          [
+            "ahold_usa",
+            "pre_q4",
+            17726.0,
+            17203.0,
+            523.0,
+            3.0401674126605824
+          ],
+          [
+            "delhaize_america",
+            "fy",
+            15501.0,
+            15146.0,
+            355.0,
+            2.3438531625511687
+          ],
+          [
+            "delhaize_america",
+            "q4",
+            3969.0,
+            3822.0,
+            147.0,
+            3.8461538461538463
+          ],
+          [
+            "delhaize_america",
+            "pre_q4",
+            11532.0,
+            11324.0,
+            208.0,
+            1.8368067820558107
+          ],
+          [
+            "netherlands",
+            "fy",
+            12995.0,
+            12362.0,
+            633.0,
+            5.120530658469503
+          ],
+          [
+            "netherlands",
+            "q4",
+            3188.0,
+            2983.0,
+            205.0,
+            6.872276231981227
+          ],
+          [
+            "netherlands",
+            "pre_q4",
+            9807.0,
+            9379.0,
+            428.0,
+            4.5633862885169
+          ],
+          [
+            "belgium",
+            "fy",
+            4942.0,
+            4859.0,
+            83.0,
+            1.7081704054332167
+          ],
+          [
+            "belgium",
+            "q4",
+            1280.0,
+            1293.0,
+            -13.0,
+            -1.005413766434648
+          ],
+          [
+            "belgium",
+            "pre_q4",
+            3662.0,
+            3566.0,
+            96.0,
+            2.69209197980931
+          ],
+          [
+            "cse",
+            "fy",
+            5557.0,
+            5115.0,
+            442.0,
+            8.641251221896383
+          ],
+          [
+            "cse",
+            "q4",
+            1458.0,
+            1373.0,
+            85.0,
+            6.190823015294974
+          ],
+          [
+            "cse",
+            "pre_q4",
+            4099.0,
+            3742.0,
+            357.0,
+            9.54035275253875
+          ]
+        ],
+        "annual_change_bridge": [
+          [
+            11492.0,
+            -10062.0,
+            745.0,
+            2175.0,
+            3.616801915657842,
+            0.0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "independent_reported_discrepancy",
+      "database": "control-6.sqlite",
+      "origin": "authored_synthetic_counterfactual",
+      "tables": {
+        "quarter_scope": [
+          [
+            "ahold_usa",
+            5590.0,
+            452.0,
+            139.0,
+            2.5499908273711247
+          ],
+          [
+            "delhaize_america",
+            3969.0,
+            0.0,
+            147.0,
+            3.8461538461538463
+          ],
+          [
+            "netherlands",
+            3208.0,
+            262.0,
+            225.0,
+            7.542742205833054
+          ],
+          [
+            "belgium",
+            1280.0,
+            0.0,
+            -13.0,
+            -1.005413766434648
+          ],
+          [
+            "cse",
+            1458.0,
+            31.0,
+            85.0,
+            6.190823015294974
+          ]
+        ],
+        "comparable_periods": [
+          [
+            "ahold_usa",
+            "fy",
+            23316.0,
+            22654.0,
+            662.0,
+            2.9222212412818926
+          ],
+          [
+            "ahold_usa",
+            "q4",
+            5590.0,
+            5451.0,
+            139.0,
+            2.5499908273711247
+          ],
+          [
+            "ahold_usa",
+            "pre_q4",
+            17726.0,
+            17203.0,
+            523.0,
+            3.0401674126605824
+          ],
+          [
+            "delhaize_america",
+            "fy",
+            15501.0,
+            15146.0,
+            355.0,
+            2.3438531625511687
+          ],
+          [
+            "delhaize_america",
+            "q4",
+            3969.0,
+            3822.0,
+            147.0,
+            3.8461538461538463
+          ],
+          [
+            "delhaize_america",
+            "pre_q4",
+            11532.0,
+            11324.0,
+            208.0,
+            1.8368067820558107
+          ],
+          [
+            "netherlands",
+            "fy",
+            13015.0,
+            12362.0,
+            653.0,
+            5.282316777220514
+          ],
+          [
+            "netherlands",
+            "q4",
+            3208.0,
+            2983.0,
+            225.0,
+            7.542742205833054
+          ],
+          [
+            "netherlands",
+            "pre_q4",
+            9807.0,
+            9379.0,
+            428.0,
+            4.5633862885169
+          ],
+          [
+            "belgium",
+            "fy",
+            4942.0,
+            4859.0,
+            83.0,
+            1.7081704054332167
+          ],
+          [
+            "belgium",
+            "q4",
+            1280.0,
+            1293.0,
+            -13.0,
+            -1.005413766434648
+          ],
+          [
+            "belgium",
+            "pre_q4",
+            3662.0,
+            3566.0,
+            96.0,
+            2.69209197980931
+          ],
+          [
+            "cse",
+            "fy",
+            5557.0,
+            5115.0,
+            442.0,
+            8.641251221896383
+          ],
+          [
+            "cse",
+            "q4",
+            1458.0,
+            1373.0,
+            85.0,
+            6.190823015294974
+          ],
+          [
+            "cse",
+            "pre_q4",
+            4099.0,
+            3742.0,
+            357.0,
+            9.54035275253875
+          ]
+        ],
+        "annual_change_bridge": [
+          [
+            11492.0,
+            -10035.0,
+            745.0,
+            2202.0,
+            3.661700146334974,
+            -7.0
+          ]
+        ]
+      }
+    }
+  ],
+  "hashes": {
+    "Dockerfile": "abe39667d51965c332631b0d806e774f36ed1e2d2b78ec75613a635d207e6005",
+    "control-1.sqlite": "5a9d821ad016b66ee6efeaee815b89037339b34623e89b6027394e3f22c37522",
+    "control-2.sqlite": "6e6f530d151e15ce0b3bb76491347210619fdabeef2dc6554ed59b6fed2a7b7a",
+    "control-3.sqlite": "74f201fa9bd208798cbf071a2d7b50f7eead21692c92a8de80d1e36dfa9ad631",
+    "control-4.sqlite": "f7abaaa1d8a2d184075db79dd1ec6ac0ce9084d0da7241cb8cf65c2468af0dea",
+    "control-5.sqlite": "9259c87e67113a6a6e9ad9900e8b0ad33a91ff878902b3d7779f2480058c937e",
+    "control-6.sqlite": "3613ee3dacbc13498f617027106df5ca2573dfa06da2540f4885cf9f8164be95",
+    "data.sqlite": "8201e5a6692be38ddd154c34ced69e290344f3b03a356002c34f4482acad11c4",
+    "docker-compose.yaml": "17ceef0a82e7dfb63d9f5ce974350f392dd8a323eac174ec69d28a90c7de8388",
+    "evidence.json": "bea4c6d7e6e99578c2b919e5fe2c1779b1489667fef50d5430ee472fbe2394f1",
+    "reference.json": "4b631a0deb5faefc5b3583501a6b574cc52ef6f98f76ae1101c3f77ca9ef5c29",
+    "schema.json": "f051d87fd738d2f844d5391fc1b777b7aad6a35da777a2ebf7a06cd7ef328430",
+    "sources.md": "e1d307a236eee85f53ff971a37dcba9d2dff298b7656c93a020654e3f69d609a",
+    "test.sh": "7c2837bd3a4df721b9594bea73a2941e1ee8279ca1b887916c3a18fdc1f575e5",
+    "verify.py": "372266dbe63e39211437d121e1a429653c1c7b273c298a24f1b9d75293c1d6ab",
+    "workpaperbench/__init__.py": "ab8294b0a14379ec2b26807d8e2e98c1b536cd33e7811c491f9a48844c741e27",
+    "workpaperbench/challenge_sql_worker.py": "cf63191e482093dfd945323cd9afa88f5d05bbd8eb1efe712ab5b78373d43ba4",
+    "workpaperbench/grading.py": "7742ba0e1b76621491b6c6caacd5f3289b03309d103a1df023670aed62908fc5",
+    "workpaperbench/workflow_grading.py": "a515f5d124a925bc8652f48fe92d8cad6a991580d5c615ecd37d87359dcda607",
+    "workpaperbench/workflow_sql_worker.py": "07a2d2203152982ac8ead066908f8030de05f108b28298241cfd33c3c7f51200"
+  }
+}

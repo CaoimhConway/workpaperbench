@@ -1,0 +1,169 @@
+{
+  "recipe_id": "workflow-hard-pilot-v1-calibration-1",
+  "status": "prepared_not_executed",
+  "launch_authorized": false,
+  "dataset": "workflow-hard-pilot-v1",
+  "split": "development",
+  "tasks_in_order": [
+    "a01",
+    "b01",
+    "c01"
+  ],
+  "attempts_per_task_per_configuration": 1,
+  "planned_attempts": 6,
+  "results": null,
+  "runtime": {
+    "harbor_version": "0.23.0",
+    "agent": "terminus-2",
+    "inference_transport": "LiteLLM Chat Completions",
+    "environment": "workpaperbench.runtime_integrity:VerifiedDockerEnvironment",
+    "concurrent_trials": 1,
+    "trial_retries": 0,
+    "fresh_session_per_attempt": true,
+    "fresh_candidate_environment_per_attempt": true,
+    "model_fallback": false,
+    "agent_timeout_multiplier": 6,
+    "agent_seconds": 3600,
+    "agent_kwargs": {
+      "max_turns": 24,
+      "parser_name": "json",
+      "enable_summarize": false,
+      "proactive_summarization_threshold": 0,
+      "model_info": {
+        "max_input_tokens": 65536,
+        "max_output_tokens": 16384,
+        "supports_reasoning": true
+      },
+      "store_all_messages": true
+    },
+    "sampling": {
+      "request_parameters": {},
+      "policy": "Provider defaults, with effective settings or unavailable observations recorded before execution"
+    }
+  },
+  "configurations": {
+    "qualified_glm": {
+      "harbor_model": "openrouter/z-ai/glm-5.3",
+      "model_id": "z-ai/glm-5.3",
+      "provider_endpoint": "wafer/us",
+      "requested_reasoning_effort": "high",
+      "quantization": "fp4",
+      "status": "Previously qualified serving condition, no execution on this dataset",
+      "qualified_serving_configuration_sha256": "dd3541c5ee89408b7767cdc42e3c51d9fa9628e09e05593fbf1b82af507306b0",
+      "qualified_execution_revision": "workflow-v15-execution-1d65ec3a0dfb",
+      "prelaunch_revalidation": [
+        "Endpoint model/revision availability",
+        "Effective high reasoning mapping",
+        "No fallback and no full-response cache replay",
+        "Existing pinned native dependencies and runtime boundaries"
+      ],
+      "provider_agent_kwargs": {
+        "use_responses_api": false,
+        "reasoning_effort": "high",
+        "interleaved_thinking": true,
+        "llm_call_kwargs": {
+          "max_tokens": 16384,
+          "caching": false,
+          "extra_headers": {
+            "X-OpenRouter-Cache": "false"
+          },
+          "extra_body": {
+            "provider": {
+              "only": [
+                "wafer/us"
+              ],
+              "allow_fallbacks": false,
+              "require_parameters": true
+            }
+          }
+        }
+      }
+    },
+    "strong_reference": {
+      "model_id": "claude-opus-5-5",
+      "requested_reasoning_effort": "high",
+      "model_documentation": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "status": "Proposed reference condition, native provider compatibility not yet qualified",
+      "harbor_model": null,
+      "provider_endpoint": null,
+      "model_revision": null,
+      "quantization": null,
+      "context_budget": 65536,
+      "output_budget_including_reasoning": 16384,
+      "provider_choices_unresolved": [
+        "Direct versus routed provider",
+        "Exact Harbor/LiteLLM model route",
+        "Endpoint revision and serving identity",
+        "High-effort parameter mapping and reasoning preservation",
+        "Effective sampling, cache and usage reporting"
+      ],
+      "runtime_policy": "Use the shared qualified budgets and native Terminus-2 path. Do not silently substitute a model or reduce budgets. A required compatibility change creates a separately frozen execution condition. Resolve provider_agent_kwargs explicitly. GLM provider arguments are not shared defaults.",
+      "provider_agent_kwargs": null
+    }
+  },
+  "schedule": [
+    {
+      "configuration": "qualified_glm",
+      "task": "a01",
+      "attempt": 1
+    },
+    {
+      "configuration": "qualified_glm",
+      "task": "b01",
+      "attempt": 1
+    },
+    {
+      "configuration": "qualified_glm",
+      "task": "c01",
+      "attempt": 1
+    },
+    {
+      "configuration": "strong_reference",
+      "task": "a01",
+      "attempt": 1
+    },
+    {
+      "configuration": "strong_reference",
+      "task": "b01",
+      "attempt": 1
+    },
+    {
+      "configuration": "strong_reference",
+      "task": "c01",
+      "attempt": 1
+    }
+  ],
+  "execution_policy": {
+    "fresh_state": true,
+    "continuations": false,
+    "replace_failures": false,
+    "candidate_reference_access": false,
+    "claims_scope": "original dossier",
+    "sql_scope": "original and synthetic controls",
+    "retain_every_outcome": true,
+    "prerequisites": [
+      "Resolve reference provider fields",
+      "Freeze source commit, catalog/task/scorer hashes and native image/dependency identities",
+      "Verify outgoing request configuration offline, without inferring provider-internal reasoning",
+      "Obtain separate authorization for model calls and spending"
+    ],
+    "preflight_note": "The submitted-artifact oracle verification establishes materialization and grading, not reference-provider compatibility."
+  },
+  "report_fields": [
+    "configuration identity",
+    "task/source-group identity",
+    "complete workpaper",
+    "numerical tables",
+    "claim verdicts",
+    "evidence",
+    "robustness",
+    "delivery",
+    "original/control diagnostics",
+    "exceptions",
+    "wall time",
+    "all observable request and retry usage",
+    "tokens including reasoning/cache",
+    "cost or explicitly unknown cost"
+  ],
+  "interpretation": "Six proposed development observations, no held-out evaluation, target pass rate or general model ranking. The prior GLM pilot motivates investigation but does not establish empirical hardness."
+}

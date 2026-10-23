@@ -1,0 +1,54 @@
+{
+  "task_id": "workflow-hard-pilot-v1-b01",
+  "tables": [
+    {
+      "id": "cash_investment",
+      "file": "cash_investment.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s03"
+      ]
+    },
+    {
+      "id": "ppe_bridge",
+      "file": "ppe_bridge.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03"
+      ]
+    },
+    {
+      "id": "lease_movements",
+      "file": "lease_movements.sql",
+      "evidence": [
+        "b01:s03"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "b01:s03"
+      ]
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "b01:s03"
+      ]
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03"
+      ]
+    }
+  ]
+}

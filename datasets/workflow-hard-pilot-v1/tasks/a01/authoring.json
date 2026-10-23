@@ -1,0 +1,43 @@
+{
+  "split": "development",
+  "evaluation_track": "construction",
+  "source_group": "ahold-2016",
+  "nearest_existing_counterparts": [
+    "workflow-v15/c07",
+    "workflow-v15/a03"
+  ],
+  "additional_analytical_decisions": "Reconstruct comparable numerical sales and an additive annual presentation bridge, including a nonuniform extra week and its cancellation in pre-Q4 periods. This goes beyond judging unequal acquisition duration or subtracting cumulative quarters on a single basis.",
+  "source_snapshot": "datasets/workflow-hard-pilot-v1/sources/ahold-2016.json",
+  "source_snapshot_sha256": "9f6b928159c70e69c8f7aeba05db567f494a13f2bcd92f08980d6f63a4737993",
+  "reference_method": "Decimal source calculations plus separate structural derivations and endpoint feasibility checks",
+  "controls": [
+    {
+      "name": "monetary_scale",
+      "rationale": "All monetary observations double, ratios and dimensionless bounds stay invariant."
+    },
+    {
+      "name": "row_order",
+      "rationale": "Reverse every input table. Logical financial results are unchanged."
+    },
+    {
+      "name": "calendar_extension",
+      "rationale": "Extra comparable calendar sales enter current Q4 and annual pro forma equally. Pre-Q4 stays fixed."
+    },
+    {
+      "name": "prior_extra_week",
+      "rationale": "Extra-week sales change only unadjusted prior-period observations. Comparable amounts stay fixed."
+    },
+    {
+      "name": "divestment_scope",
+      "rationale": "A further Q4 pro forma exclusion affects current annual pro forma equally. IFRS and pre-Q4 unchanged."
+    },
+    {
+      "name": "independent_reported_discrepancy",
+      "rationale": "Synthetic independent group/segment disclosure discrepancy. Keep the residual, not force agreement."
+    }
+  ],
+  "human_review": "pending",
+  "source_review": "Primary source headings, definitions and factual values inspected. Independent human review remains pending.",
+  "model_exposure": "No model trials. Published references are a contamination risk. Development tasks only.",
+  "execution": "Baseline task resources and frozen scorer reused. Calibration recipe preserves qualified 3600-second, 24-turn execution."
+}

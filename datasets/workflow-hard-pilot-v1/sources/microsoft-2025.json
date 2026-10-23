@@ -1,0 +1,123 @@
+{
+  "issuer": "Microsoft",
+  "url": "https://www.microsoft.com/investor/reports/ar25/index.html",
+  "filing_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/msft-20250630.htm",
+  "title": "2025 annual report",
+  "publication_date": "2025-07-30",
+  "publication_time": null,
+  "unit": "USD million unless specified",
+  "evidence": [
+    {
+      "id": "b01:s01",
+      "locator": "Consolidated cash flows, year ended June 30, 2025",
+      "table": "cash_flows"
+    },
+    {
+      "id": "b01:s02",
+      "locator": "Note 6, Property and Equipment, June 30, 2025 and 2024 and following paragraphs",
+      "table": "ppe",
+      "facts": "Depreciation expense for FY2025 is USD 22.0 billion. Purchases of PPE remaining in accounts payable at June 30, 2025 and 2024 are USD 6.9 billion and USD 4.3 billion. These three observations are rounded to one decimal billion."
+    },
+    {
+      "id": "b01:s03",
+      "locator": "Note 13, Leases, lease cost and supplemental cash flow tables FY2025 and finance-lease balance sheet table June 30, 2025 and 2024",
+      "table": "finance_leases"
+    },
+    {
+      "id": "b01:s04",
+      "locator": "Note 1, Accounting Policies, Property and Equipment and Leases",
+      "facts": "PPE is stated at cost less accumulated depreciation. Finance leases are included in PPE. Operating lease right-of-use assets are presented separately.",
+      "dossier_scope_note": "The supplied extracts do not provide a complete PPE roll-forward identifying disposals, foreign exchange, acquired PPE or other changes. The total-depreciation scope convention used by the analytical bridge is authored in the output contract."
+    }
+  ],
+  "tables": {
+    "cash_flows": {
+      "columns": {
+        "year": "INTEGER",
+        "cash_ppe": "REAL",
+        "cfo": "REAL",
+        "depreciation_amortization_other": "REAL"
+      },
+      "rows": [
+        [
+          2025,
+          64551,
+          136162,
+          34153
+        ]
+      ]
+    },
+    "ppe": {
+      "columns": {
+        "year": "INTEGER",
+        "gross": "REAL",
+        "accumulated": "REAL",
+        "net": "REAL",
+        "capital_payables_billion": "REAL"
+      },
+      "rows": [
+        [
+          2024,
+          212012,
+          76421,
+          135591,
+          4.3
+        ],
+        [
+          2025,
+          298619,
+          93653,
+          204966,
+          6.9
+        ]
+      ]
+    },
+    "finance_leases": {
+      "columns": {
+        "year": "INTEGER",
+        "gross": "REAL",
+        "accumulated": "REAL",
+        "net": "REAL"
+      },
+      "rows": [
+        [
+          2024,
+          32248,
+          6386,
+          25862
+        ],
+        [
+          2025,
+          53876,
+          9861,
+          44015
+        ]
+      ]
+    },
+    "annual_expenses": {
+      "columns": {
+        "year": "INTEGER",
+        "ppe_depreciation_billion": "REAL",
+        "finance_amortization": "REAL",
+        "finance_rou_additions": "REAL",
+        "finance_principal_cash": "REAL",
+        "finance_interest_cash": "REAL"
+      },
+      "rows": [
+        [
+          2025,
+          22.0,
+          3408,
+          20511,
+          2283,
+          1372
+        ]
+      ]
+    }
+  },
+  "precision": "Balance-sheet and lease amounts are whole USD million. PPE depreciation and capital payables are one-decimal USD billion, retained in those input units. Outputs use displayed-value arithmetic and cannot imply more precise underlying observations. cash_ppe is the positive magnitude of the investing cash outflow, accumulated depreciation is positive contra-asset magnitude. Financing lease cash is principal and finance-lease cash classified in operating activities is interest.",
+  "rights": "Attributed factual observations and concise definitions only. Issuer material is excluded from the project MIT license. Full source documents are not redistributed.",
+  "retrieved_date": "2026-10-22",
+  "extract_origin": "Manually normalized financial facts checked against the cited primary disclosure. Not an original-document capture.",
+  "extract_sha256": "f5f0c645a7a489680efa16706080e0ce635af31cccd04b2498b559a29377331b"
+}

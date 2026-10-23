@@ -1,0 +1,39 @@
+{
+  "split": "development",
+  "evaluation_track": "construction",
+  "source_group": "apple-2024",
+  "nearest_existing_counterparts": [
+    "workflow-v15/c01",
+    "workflow-v15/c10"
+  ],
+  "additional_analytical_decisions": "Optimize over an undisclosed product-by-geography allocation constrained by two sets of authentic marginal totals. Finite revenue and gross-profit stress-loss endpoints must be feasible and sharp, rather than returning unresolved or multiplying a supplied forecast interval.",
+  "source_snapshot": "datasets/workflow-hard-pilot-v1/sources/apple-2024.json",
+  "source_snapshot_sha256": "0213de5bbda748b3b6feccaa3ca9898030a98fe52c43e57be7cf71f811f88710",
+  "reference_method": "Decimal source calculations plus separate structural derivations and endpoint feasibility checks",
+  "controls": [
+    {
+      "name": "monetary_scale",
+      "rationale": "All monetary observations double, ratios and dimensionless bounds stay invariant."
+    },
+    {
+      "name": "row_order",
+      "rationale": "Reverse every input table. Logical financial results are unchanged."
+    },
+    {
+      "name": "capacity_breakpoint",
+      "rationale": "Move country sales from Other to China, preserving global totals. Optimal service allocation crosses a capacity boundary."
+    },
+    {
+      "name": "slope_reversal",
+      "rationale": "Change only authored stress rates, reversing allocation preference and allowing a negative marginal saving."
+    },
+    {
+      "name": "product_mix",
+      "rationale": "Move revenue from Products to Services with costs fixed, preserving global/geographic totals and nonnegative margins."
+    }
+  ],
+  "human_review": "pending",
+  "source_review": "Primary source headings, definitions and factual values inspected. Independent human review remains pending.",
+  "model_exposure": "No model trials. Published references are a contamination risk. Development tasks only.",
+  "execution": "Baseline task resources and frozen scorer reused. Calibration recipe preserves qualified 3600-second, 24-turn execution."
+}

@@ -1,0 +1,47 @@
+{
+  "split": "development",
+  "evaluation_track": "construction",
+  "source_group": "microsoft-2025",
+  "nearest_existing_counterparts": [
+    "workflow-v15/a07",
+    "workflow-v15/b10"
+  ],
+  "additional_analytical_decisions": "Distinguish principal cash payments, noncash lease recognition, capital payables and depreciation across cash flow and nested gross/net asset disclosures. Preserve unallocated movement residuals rather than treating cash as asset additions.",
+  "source_snapshot": "datasets/workflow-hard-pilot-v1/sources/microsoft-2025.json",
+  "source_snapshot_sha256": "f69b2cc2efa898eadae49abdf6ea4b4606a18c3d98cd67be1a110e2e8bb4c14c",
+  "reference_method": "Decimal source calculations plus separate structural derivations and endpoint feasibility checks",
+  "controls": [
+    {
+      "name": "monetary_scale",
+      "rationale": "All monetary observations double, ratios and dimensionless bounds stay invariant."
+    },
+    {
+      "name": "row_order",
+      "rationale": "Reverse every input table. Logical financial results are unchanged."
+    },
+    {
+      "name": "payable_settlement",
+      "rationale": "Paying an extra 1000 reduces closing capital payables by 1000. Accrual proxy unchanged."
+    },
+    {
+      "name": "noncash_lease",
+      "rationale": "New lease recognition raises total and subset gross/net assets. Cash and residuals unchanged."
+    },
+    {
+      "name": "principal_settlement",
+      "rationale": "Principal cash settlement changes defined cash outlay, not gross asset recognition. Lease liabilities are not supplied."
+    },
+    {
+      "name": "other_cf_adjustment",
+      "rationale": "Unrelated other cash-flow adjustment changes, while Note 6 PPE depreciation stays fixed."
+    },
+    {
+      "name": "unallocated_asset_movement",
+      "rationale": "A synthetic noncash gross/net PPE movement is not assigned to a cause. The total-PPE residual increases."
+    }
+  ],
+  "human_review": "pending",
+  "source_review": "Primary source headings, definitions and factual values inspected. Independent human review remains pending.",
+  "model_exposure": "No model trials. Published references are a contamination risk. Development tasks only.",
+  "execution": "Baseline task resources and frozen scorer reused. Calibration recipe preserves qualified 3600-second, 24-turn execution."
+}

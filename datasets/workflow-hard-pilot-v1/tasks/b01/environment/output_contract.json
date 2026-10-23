@@ -1,0 +1,112 @@
+{
+  "tables": {
+    "cash_investment": {
+      "columns": {
+        "cash_ppe_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "principal_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "capital_cash_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "noncash_lease_additions_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "ppe_bridge": {
+      "columns": {
+        "payables_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "purchase_proxy_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "lease_additions_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "depreciation_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "net_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "explained_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "lease_movements": {
+      "columns": {
+        "measure": {
+          "type": "text",
+          "unit": "label"
+        },
+        "change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "explained_change_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        },
+        "residual_usd_million": {
+          "type": "real",
+          "unit": "usd_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "measure"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    }
+  },
+  "definitions": {
+    "cash_investment": "One row. capital_cash is the authored metric cash paid for PPE plus finance-lease principal, excluding interest. noncash_lease_additions are ROU assets obtained for lease obligations, separately reported and outside capital_cash.",
+    "ppe_bridge": "One row, all USD million. purchase_proxy is cash PPE payments adjusted for the change in disclosed PPE purchase payables. It is a displayed-value analytical proxy, not a claim of fully identified accounting additions. lease_additions are noncash finance-lease additions. Use the Note 6 PPE depreciation scope, including finance-lease asset amortization, as the bridge convention. explained_change is the net PPE movement attributable to the supplied recognition and consumption disclosures on the specified scope. residual is observed net PPE increase less explained_change. Rounded billion-dollar disclosures remain approximate economic observations even though point arithmetic is graded precisely.",
+    "lease_movements": "Three rows keyed gross, accumulated and net. Accumulated depreciation is a positive contra-asset magnitude. change is ending less beginning balance. explained_change is the corresponding movement accounted for by disclosed new finance-lease ROU recognition and finance-lease asset amortization. residual is observed less explained."
+  },
+  "claim_assertions": {
+    "claim_1": "FY2025 finance-lease principal cash payments equal the disclosed FY2025 noncash finance-lease ROU additions.",
+    "claim_2": "The increase in net finance-lease PPE exceeds FY2025 finance-lease principal cash payments.",
+    "claim_3": "Acquired PPE accounts for the entire total-PPE net bridge residual."
+  },
+  "numeric_policy": "Displayed-value arithmetic. Absolute tolerances are computational, not claims of source precision."
+}

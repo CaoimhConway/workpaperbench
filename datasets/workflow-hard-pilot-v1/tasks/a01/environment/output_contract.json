@@ -1,0 +1,123 @@
+{
+  "tables": {
+    "quarter_scope": {
+      "columns": {
+        "segment": {
+          "type": "text",
+          "unit": "label"
+        },
+        "proforma_q42016_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "extra_week2015_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "change_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "segment"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "comparable_periods": {
+      "columns": {
+        "segment": {
+          "type": "text",
+          "unit": "label"
+        },
+        "period": {
+          "type": "text",
+          "unit": "label"
+        },
+        "current_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "prior_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "change_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [
+        "segment",
+        "period"
+      ],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    },
+    "annual_change_bridge": {
+      "columns": {
+        "statutory_change_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "presentation_change_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "prior_extra_week_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "comparable_change_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        },
+        "comparable_growth_pct": {
+          "type": "real",
+          "unit": "percent",
+          "tolerance": 1e-06
+        },
+        "segment_residual_eur_million": {
+          "type": "real",
+          "unit": "eur_million",
+          "tolerance": 1e-06
+        }
+      },
+      "keys": [],
+      "row_order": "ignored",
+      "duplicates": "Keys must be unique"
+    }
+  },
+  "definitions": {
+    "quarter_scope": "Five segment rows. proforma_q42016 is on the disclosed pro forma perimeter and calendar. extra_week2015 is the prior extra-week sales amount. change and growth compare reconstructed Q4 2016 with the matched-duration Q4 2015. Segment keys are ahold_usa, delhaize_america, netherlands, belgium and cse.",
+    "comparable_periods": "Fifteen rows, the five segments for each period fy, q4 and pre_q4. FY and Q4 use the matched-duration comparison. pre_q4 means the respective annual reporting period before the source Q4, not nine calendar months. Growth uses prior sales as denominator. No uniform weekly sales assumption is authorized.",
+    "annual_change_bridge": "One row. statutory_change is annual IFRS 2016 less 2015. presentation_change is the current-minus-prior change in pro forma less IFRS sales. prior_extra_week is the positive prior-year extra-week amount. comparable_change is the group matched-duration annual change using independently reported group totals. comparable_growth uses the matched-duration group prior-year denominator. segment_residual is summed segment matched-duration annual changes less the group comparable change. Keep separately reported totals independent."
+  },
+  "claim_assertions": {
+    "claim_1": "Every supplied segment has positive pre-Q4 sales growth on the requested basis.",
+    "claim_2": "The requested matched-duration annual sales increase equals the annual statutory IFRS sales increase.",
+    "claim_3": "Volume growth alone caused the entire matched-duration pro forma annual sales increase."
+  },
+  "numeric_policy": "Displayed-value arithmetic. Absolute tolerances are computational, not claims of source precision."
+}

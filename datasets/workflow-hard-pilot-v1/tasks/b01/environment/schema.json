@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "tables",
+    "claims"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string"
+    },
+    "tables": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "file",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,40}\\.sql$(?!\\n)",
+            "description": "SQL basename in /logs/artifacts, beginning with a lowercase letter, followed by at most 40 lowercase letters, digits or underscores, then .sql. No directory or whitespace."
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true,
+            "maxItems": 20
+          }
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "verdict",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "verdict": {
+            "enum": [
+              "supported",
+              "contradicted",
+              "unresolved"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true,
+            "maxItems": 20
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 1024
+          }
+        }
+      }
+    }
+  }
+}
