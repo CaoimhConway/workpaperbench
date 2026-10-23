@@ -1,0 +1,79 @@
+{
+  "task_id": "workflow-hard-pilot-v2-b01",
+  "tables": [
+    {
+      "id": "settlement_scenarios",
+      "file": "settlement_scenarios.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s08"
+      ]
+    },
+    {
+      "id": "diluted_eps",
+      "file": "diluted_eps.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s06",
+        "b01:s07",
+        "b01:s08"
+      ]
+    },
+    {
+      "id": "thresholds",
+      "file": "thresholds.sql",
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s06",
+        "b01:s07",
+        "b01:s08"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "supported",
+      "evidence": [
+        "b01:s01",
+        "b01:s02",
+        "b01:s03",
+        "b01:s04",
+        "b01:s05",
+        "b01:s06",
+        "b01:s07",
+        "b01:s08"
+      ],
+      "note": "At USD 12 all holders take principal cash. At the reported-income sensitivity, both optional-principal notes still reduce EPS beyond fixed awards under the maximum-share method."
+    },
+    {
+      "id": "claim_2",
+      "verdict": "contradicted",
+      "evidence": [
+        "b01:s05",
+        "b01:s06"
+      ],
+      "note": "The 2029 principal requires cash; only excess conversion value is settled in shares in these scenarios."
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": [
+        "b01:s06",
+        "b01:s08"
+      ],
+      "note": "Capped calls are separate transactions. The dossier does not establish all remaining hedge notionals after repurchases, so gross issuance cannot establish net company dilution."
+    }
+  ]
+}

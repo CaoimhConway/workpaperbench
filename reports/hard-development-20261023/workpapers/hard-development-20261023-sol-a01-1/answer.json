@@ -1,0 +1,64 @@
+{
+  "task_id": "workflow-hard-pilot-v2-a01",
+  "tables": [
+    {
+      "id": "proposal_tests",
+      "file": "proposal_tests.sql",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s04"
+      ]
+    },
+    {
+      "id": "distribution_frontier",
+      "file": "distribution_frontier.sql",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s04"
+      ]
+    },
+    {
+      "id": "equity_support",
+      "file": "equity_support.sql",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s04"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim_1",
+      "verdict": "contradicted",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s04"
+      ],
+      "note": "The commitment caps total utilisation. Suppressed availability does not increase that commitment; no commitment increase or alternative debt is available in this exercise."
+    },
+    {
+      "id": "claim_2",
+      "verdict": "supported",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s04"
+      ],
+      "note": "The required draw is 3043.478260869565 million, within unused commitment of 3399 million. Remaining covenant availability is 572.521739130435 million, above 475 million, so the ratio below one is not tested."
+    },
+    {
+      "id": "claim_3",
+      "verdict": "unresolved",
+      "evidence": [
+        "a01:s01",
+        "a01:s02",
+        "a01:s03"
+      ],
+      "note": "The supplied disclosures do not reconcile covenant availability of 3616 million with commitment less utilisation of 3399 million or establish currency translation as the explanation."
+    }
+  ]
+}

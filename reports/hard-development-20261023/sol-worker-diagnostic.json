@@ -1,0 +1,125 @@
+{
+  "scope": "Post-run diagnostic only. Historical official verdict unchanged. Candidate files unchanged, only copied verifier worker and its integrity binding replaced.",
+  "worker_sha256": "4103f82f9b3af6fce87f0db2235f581bceee7cabc0ab88822280950e914ec7e4",
+  "workpaper_sha256": {
+    "thresholds.sql": "751e28cbf0614b6869d027253ddc24a5a9f2ea1bf8f21c3ca648685faef7b33c",
+    "settlement_scenarios.sql": "6527c1f57e51a9caf1f97efd26239db4239ea8e548bf2b0f85957c95985deb0e",
+    "diluted_eps.sql": "97d6e5ecb8cf21a83c0a537fad3a7adb043979f0623841113028fee5eda48070",
+    "answer.json": "03afbbdf7a53cfc4af6ab155203380eea3323ea0770791ba123c69e0e89379dd"
+  },
+  "verdict": {
+    "scorer_version": "workflow-1.2.1",
+    "complete": true,
+    "verified_research_completion": true,
+    "strict_delivery_completion": true,
+    "checks": {
+      "financial_answer": true,
+      "numerical_tables": true,
+      "claim_verdicts": true,
+      "evidence": true,
+      "robustness": true,
+      "delivery": true
+    },
+    "details": {
+      "tables": {
+        "settlement_scenarios": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scale": true,
+            "row_order": true,
+            "dilution_order": true,
+            "out_of_money": true,
+            "carrying_only": true,
+            "cash_principal": true,
+            "target_shift": true,
+            "neutrality_tie": true
+          },
+          "control_errors": {
+            "scale": null,
+            "row_order": null,
+            "dilution_order": null,
+            "out_of_money": null,
+            "carrying_only": null,
+            "cash_principal": null,
+            "target_shift": null,
+            "neutrality_tie": null
+          }
+        },
+        "diluted_eps": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scale": true,
+            "row_order": true,
+            "dilution_order": true,
+            "out_of_money": true,
+            "carrying_only": true,
+            "cash_principal": true,
+            "target_shift": true,
+            "neutrality_tie": true
+          },
+          "control_errors": {
+            "scale": null,
+            "row_order": null,
+            "dilution_order": null,
+            "out_of_money": null,
+            "carrying_only": null,
+            "cash_principal": null,
+            "target_shift": null,
+            "neutrality_tie": null
+          }
+        },
+        "thresholds": {
+          "original": true,
+          "original_error": null,
+          "evidence": true,
+          "controls": {
+            "scale": true,
+            "row_order": true,
+            "dilution_order": true,
+            "out_of_money": true,
+            "carrying_only": true,
+            "cash_principal": true,
+            "target_shift": true,
+            "neutrality_tie": true
+          },
+          "control_errors": {
+            "scale": null,
+            "row_order": null,
+            "dilution_order": null,
+            "out_of_money": null,
+            "carrying_only": null,
+            "cash_principal": null,
+            "target_shift": null,
+            "neutrality_tie": null
+          }
+        }
+      },
+      "claims": {
+        "claim_1": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_2": {
+          "verdict": true,
+          "evidence": true
+        },
+        "claim_3": {
+          "verdict": true,
+          "evidence": true
+        }
+      }
+    },
+    "errors": [],
+    "isolation": {
+      "network_probe_blocked": true,
+      "network_namespace_none": true,
+      "no_inference_key": true,
+      "no_docker_socket": true
+    }
+  },
+  "inference": false
+}

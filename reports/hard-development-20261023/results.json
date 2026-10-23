@@ -1,0 +1,345 @@
+{
+  "execution_id": "hard-development-20261023-b0c2e9e4f0f0",
+  "source_commit": "3e29c2c18415c9816b4a59b410f0ef6abd84edb6",
+  "manifest_id": "workflow-hard-pilot-v2-canonical-5034f88e23bf",
+  "configuration_commit": "bdaabd3f526b05553efdc0f40af1d5e0576b0142",
+  "slots": [
+    {
+      "slot_id": "hard-development-20261023-glm-a01-1",
+      "task": "a01",
+      "configuration": "glm",
+      "complete_workpaper": false,
+      "score": 0.0,
+      "termination_reason": "turn_limit",
+      "tokens": {
+        "input_including_cached": 675233,
+        "output_including_reasoning": 166420,
+        "cached_input_subset": 633280,
+        "reasoning_output_subset": 153496
+      },
+      "charges": {
+        "settled_key_usage_delta_usd": "0.285698127",
+        "settled_key_reconciled": true,
+        "settlement_observation": "Next scheduled paid preflight snapshot",
+        "recorded_openrouter_usd": "0.285698127",
+        "generation_records_total_usd": "0.285698127",
+        "key_usage_delta_usd": "0.285698127",
+        "response_and_key_reconciled": true,
+        "generation_records_reconciled": true,
+        "remaining_unchanged_key_allowance_usd": 6.872531322,
+        "remaining_account_balance_usd": 6.872531322,
+        "lifetime_limit_usd": 20.0,
+        "reset_is_null": true
+      },
+      "observed": {
+        "models": [
+          "z-ai/glm-5.3"
+        ],
+        "providers": [
+          "Wafer"
+        ],
+        "reasoning_effort_on_all_requests": "high",
+        "provider_internal_reasoning_effort": "unknown",
+        "generation_models": [
+          "z-ai/glm-5.3-20260816"
+        ],
+        "generation_providers": [
+          "Wafer"
+        ]
+      },
+      "checks": {
+        "financial_answer": false,
+        "numerical_tables": false,
+        "claim_verdicts": true,
+        "evidence": false,
+        "robustness": false,
+        "delivery": true
+      },
+      "receipt_sha256": "307033b1bebe2409f94fcd1ac21dc0e44d1a944bfe9975e1bcbc6ee14293bb28"
+    },
+    {
+      "slot_id": "hard-development-20261023-glm-b01-1",
+      "task": "b01",
+      "configuration": "glm",
+      "complete_workpaper": false,
+      "score": 0.0,
+      "termination_reason": "confirmed_task_complete",
+      "tokens": {
+        "input_including_cached": 259480,
+        "output_including_reasoning": 75524,
+        "cached_input_subset": 230080,
+        "reasoning_output_subset": 65122
+      },
+      "charges": {
+        "settled_key_usage_delta_usd": "0.112404811",
+        "settled_key_reconciled": false,
+        "settlement_observation": "Next scheduled paid preflight snapshot",
+        "recorded_openrouter_usd": "0.126002440",
+        "generation_records_total_usd": "0.126002440",
+        "key_usage_delta_usd": "0.112404811",
+        "response_and_key_reconciled": false,
+        "generation_records_reconciled": true,
+        "remaining_unchanged_key_allowance_usd": 6.760126510999999,
+        "remaining_account_balance_usd": 6.760126510999999,
+        "lifetime_limit_usd": 20.0,
+        "reset_is_null": true
+      },
+      "observed": {
+        "models": [
+          "z-ai/glm-5.3"
+        ],
+        "providers": [
+          "Wafer"
+        ],
+        "reasoning_effort_on_all_requests": "high",
+        "provider_internal_reasoning_effort": "unknown",
+        "generation_models": [
+          "z-ai/glm-5.3-20260816"
+        ],
+        "generation_providers": [
+          "Wafer"
+        ]
+      },
+      "checks": {
+        "financial_answer": true,
+        "numerical_tables": true,
+        "claim_verdicts": true,
+        "evidence": false,
+        "robustness": true,
+        "delivery": true
+      },
+      "receipt_sha256": "8aa02f3a404d9b412b084654aa09066f730de561d2c556cf674340bf8fe07643"
+    },
+    {
+      "slot_id": "hard-development-20261023-deepseek-a01-1",
+      "task": "a01",
+      "configuration": "deepseek",
+      "complete_workpaper": true,
+      "score": 1.0,
+      "termination_reason": "confirmed_task_complete",
+      "tokens": {
+        "input_including_cached": 277846,
+        "output_including_reasoning": 208930,
+        "cached_input_subset": 255616,
+        "reasoning_output_subset": 203242
+      },
+      "charges": {
+        "settled_key_usage_delta_usd": "0.143056977",
+        "settled_key_reconciled": false,
+        "settlement_observation": "Next scheduled paid preflight snapshot",
+        "recorded_openrouter_usd": "0.129459348",
+        "generation_records_total_usd": "0.129459348",
+        "key_usage_delta_usd": "0.143056977",
+        "response_and_key_reconciled": false,
+        "generation_records_reconciled": true,
+        "remaining_unchanged_key_allowance_usd": 6.6170695340000005,
+        "remaining_account_balance_usd": 6.6170695340000005,
+        "lifetime_limit_usd": 20.0,
+        "reset_is_null": true
+      },
+      "observed": {
+        "models": [
+          "deepseek/deepseek-v4.1-flash-1017"
+        ],
+        "providers": [
+          "DeepSeek"
+        ],
+        "reasoning_effort_on_all_requests": "high",
+        "provider_internal_reasoning_effort": "unknown",
+        "generation_models": [
+          "deepseek/deepseek-v4.1-flash-20261017"
+        ],
+        "generation_providers": [
+          "DeepSeek"
+        ]
+      },
+      "checks": {
+        "financial_answer": true,
+        "numerical_tables": true,
+        "claim_verdicts": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "receipt_sha256": "3dcd18b6f403fbec0acf348f0f8e6770dba0587a6065c888898b6e455d04b3a3"
+    },
+    {
+      "slot_id": "hard-development-20261023-deepseek-b01-1",
+      "task": "b01",
+      "configuration": "deepseek",
+      "complete_workpaper": false,
+      "score": 0.0,
+      "termination_reason": "confirmed_task_complete",
+      "tokens": {
+        "input_including_cached": 268282,
+        "output_including_reasoning": 110397,
+        "cached_input_subset": 240640,
+        "reasoning_output_subset": 103399
+      },
+      "charges": {
+        "settled_key_usage_delta_usd": "0.071106420",
+        "settled_key_reconciled": true,
+        "settlement_observation": "Post-campaign settlement snapshot",
+        "recorded_openrouter_usd": "0.071106420",
+        "generation_records_total_usd": "0.071106420",
+        "key_usage_delta_usd": "0.071106420",
+        "response_and_key_reconciled": true,
+        "generation_records_reconciled": true,
+        "remaining_unchanged_key_allowance_usd": 6.545963113999999,
+        "remaining_account_balance_usd": 6.545963113999999,
+        "lifetime_limit_usd": 20.0,
+        "reset_is_null": true
+      },
+      "observed": {
+        "models": [
+          "deepseek/deepseek-v4.1-flash-1017"
+        ],
+        "providers": [
+          "DeepSeek"
+        ],
+        "reasoning_effort_on_all_requests": "high",
+        "provider_internal_reasoning_effort": "unknown",
+        "generation_models": [
+          "deepseek/deepseek-v4.1-flash-20261017"
+        ],
+        "generation_providers": [
+          "DeepSeek"
+        ]
+      },
+      "checks": {
+        "financial_answer": true,
+        "numerical_tables": true,
+        "claim_verdicts": true,
+        "evidence": false,
+        "robustness": false,
+        "delivery": true
+      },
+      "receipt_sha256": "3b8cc503fb46c8b477824e0ea5c22cf79d58f11f06688dbe0b1a98be7c05f664"
+    },
+    {
+      "slot_id": "hard-development-20261023-sol-a01-1",
+      "task": "a01",
+      "configuration": "sol",
+      "complete_workpaper": true,
+      "score": 1.0,
+      "termination_reason": "native_turn_completed",
+      "tokens": {
+        "input_tokens": 164360,
+        "cached_input_tokens": 153600,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 7995,
+        "reasoning_output_tokens": 2843,
+        "total_tokens": 172355
+      },
+      "charges": null,
+      "observed": {
+        "models": [
+          "gpt-6.1-sol"
+        ],
+        "native_model_providers": [
+          "openai"
+        ],
+        "reasoning_efforts": [
+          "high"
+        ],
+        "client_versions": [
+          "0.162.0-alpha.17.2"
+        ],
+        "auth_mode": "chatgpt",
+        "compaction_events": 0,
+        "model_context_windows": [
+          475000
+        ],
+        "native_event_counts": {
+          "thread.started": 1,
+          "turn.started": 1,
+          "item.completed": 10,
+          "item.started": 7,
+          "turn.completed": 1
+        },
+        "model_identity_scope": "Native session model and reasoning metadata, not independent backend attestation"
+      },
+      "checks": {
+        "financial_answer": true,
+        "numerical_tables": true,
+        "claim_verdicts": true,
+        "evidence": true,
+        "robustness": true,
+        "delivery": true
+      },
+      "receipt_sha256": "1eaf5dfb264114ba428f5ea512fcf328b45c82e14dded41325725a559cc57764"
+    },
+    {
+      "slot_id": "hard-development-20261023-sol-b01-1",
+      "task": "b01",
+      "configuration": "sol",
+      "complete_workpaper": false,
+      "score": 0.0,
+      "termination_reason": "native_turn_completed",
+      "tokens": {
+        "input_tokens": 122076,
+        "cached_input_tokens": 110208,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5591,
+        "reasoning_output_tokens": 1674,
+        "total_tokens": 127667
+      },
+      "charges": null,
+      "observed": {
+        "models": [
+          "gpt-6.1-sol"
+        ],
+        "native_model_providers": [
+          "openai"
+        ],
+        "reasoning_efforts": [
+          "high"
+        ],
+        "client_versions": [
+          "0.162.0-alpha.17.2"
+        ],
+        "auth_mode": "chatgpt",
+        "compaction_events": 0,
+        "model_context_windows": [
+          475000
+        ],
+        "native_event_counts": {
+          "thread.started": 1,
+          "turn.started": 1,
+          "item.completed": 8,
+          "item.started": 5,
+          "turn.completed": 1
+        },
+        "model_identity_scope": "Native session model and reasoning metadata, not independent backend attestation"
+      },
+      "checks": {
+        "financial_answer": false,
+        "numerical_tables": false,
+        "claim_verdicts": true,
+        "evidence": true,
+        "robustness": false,
+        "delivery": true
+      },
+      "receipt_sha256": "f93c77fc73a27659c54cf166db21dafbb2bbe9a66a34f5cfa6f299820f0c3e6a"
+    }
+  ],
+  "scores": {
+    "glm": {
+      "complete": 0,
+      "scheduled": 2
+    },
+    "deepseek": {
+      "complete": 1,
+      "scheduled": 2
+    },
+    "sol": {
+      "complete": 1,
+      "scheduled": 2
+    }
+  },
+  "total_recorded_openrouter_usd": "0.612266335",
+  "campaign_key_usage_delta_usd": "0.612266335",
+  "cost_reconciliation_note": "Per-slot key deltas can include delayed charges from the preceding slot. Generation costs identify each slot. The campaign aggregate reconciles to settled key usage.",
+  "codex_actual_subscription_charge_usd": null,
+  "interpretation": "Development calibration of three model-and-agent configurations on two tasks. No held-out evaluation or stable ranking claim."
+}
