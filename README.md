@@ -14,26 +14,17 @@ right only by coincidence fails.
 
 [Results](#results) · [Quickstart](#quickstart) · [How scoring works](#how-scoring-works) · [Methods](docs/WORKFLOW.md) · [Execution guide](docs/RUNNING.md)
 
-## What it catches
+## What gets checked
 
-In one recorded trial an agent reported the correct 20% growth, but its SQL
-computed `P2 - P1 * 100 / P1` instead of `(P2 - P1) * 100 / P1`. With P1 = 100
-the two formulas agree. With P1 = 120 and P2 = 150 the submitted formula gives
-50% instead of 25%. Checking only the final number would have accepted it. The
-[case study](reports/case-study.md) shows the retained submission and its
-original verdict.
+A workpaper is complete only when it passes five separate checks:
 
-Every submission is scored on five separate dimensions:
-
-| Dimension | Question |
+| Check | Passes when |
 | --- | --- |
-| Numerical | Do the SQL results match the reference rows within declared tolerances? |
-| Robustness | Does the same SQL stay correct when controlled inputs change? |
-| Claims | Is each assertion correctly judged supported, contradicted or unresolved by the dossier? |
-| Evidence | Does each table and claim cite sources sufficient to support it? |
-| Delivery | Were exactly the requested files delivered, within size and safety limits? |
-
-A workpaper is complete only when all five pass.
+| Numerical | Query results match the reference rows within the declared tolerances |
+| Robustness | The same queries are still correct on altered copies of the data |
+| Claims | Each claim is marked correctly as supported, contradicted or unresolved |
+| Evidence | Each table and claim cites enough sources to support it |
+| Delivery | Exactly the four requested files arrive, within size and naming limits |
 
 ## Results
 
