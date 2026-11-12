@@ -2,15 +2,84 @@
 
 Reproducible evaluations for financial research agents
 
-WorkpaperBench tests whether agents can reconcile financial sources, calculate metrics consistently and support their conclusions with frozen financial evidence.
+WorkpaperBench tests whether a financial agent's analysis can be trusted, not
+just whether its final numbers look right. Each task supplies a small dossier
+from public filings or reserve reports. The agent delivers a workpaper: three
+SQL queries that build the requested tables and verdicts on three claims, with
+source citations for every output. A separate verifier reruns the submitted SQL
+on the original data and on changed copies of it, so a calculation that is
+right only by coincidence fails.
 
-[Quickstart](#quickstart) · [Execution guide](docs/RUNNING.md) · [Methods](docs/WORKFLOW.md) · [Task contract](datasets/workflow-v15/tasks/c01/instruction.md) · [Validation record](reports/workflow-v15/README.md)
+[Results](#results) · [Quickstart](#quickstart) · [How scoring works](#how-scoring-works) · [Methods](docs/WORKFLOW.md) · [Execution guide](docs/RUNNING.md)
 
-## Scope
+## What it catches
 
-The core benchmark contains 30 source-backed tasks across three financial workflows,
-with six development cases and 24 evaluation cases. All tasks are available to
-external teams using a compatible model.
+In one recorded trial an agent reported the correct 20% growth, but its SQL
+computed `P2 - P1 * 100 / P1` instead of `(P2 - P1) * 100 / P1`. With P1 = 100
+the two formulas agree. With P1 = 120 and P2 = 150 the submitted formula gives
+50% instead of 25%. Checking only the final number would have accepted it. The
+[case study](reports/case-study.md) shows the retained submission and its
+original verdict.
+
+Every submission is scored on five separate dimensions:
+
+| Dimension | Question |
+| --- | --- |
+| Numerical | Do the SQL results match the reference rows within declared tolerances? |
+| Robustness | Does the same SQL stay correct when controlled inputs change? |
+| Claims | Is each assertion correctly judged supported, contradicted or unresolved by the dossier? |
+| Evidence | Does each table and claim cite sources sufficient to support it? |
+| Delivery | Were exactly the requested files delivered, within size and safety limits? |
+
+A workpaper is complete only when all five pass.
+
+## Results
+
+### Financial reasoning supplement
+
+Four evaluation tasks, one fresh attempt per task and configuration, October
+2026. See the [full report](reports/hard-evaluation-20261023-r2/README.md).
+
+| Task | GLM-5.3 | DeepSeek v4.1 Flash | GPT-6.1 Sol |
+| --- | --- | --- | --- |
+| a01 Albertsons - borrowing capacity | No `answer.json` | Pass | Pass |
+| b01 BMS - acquisition accounting | Pass | Correct numbers, incomplete citations | Pass |
+| b02 Reddit - liquidation rights | No `answer.json` | No `answer.json` | Pass |
+| c01 Constellation - receivables financing | Pass\* | Timed out | Numerical error |
+| **Complete workpapers** | **2/4** | **1/4** | **3/4** |
+
+\*Passes after a documented correction that accepts a sufficient citation path.
+The correction followed outcome review. Original scores were 1/4, 1/4 and 3/4.
+
+- Seven of the eight delivered workpapers passed every numerical and
+  changed-input check. Most failures came from agents that did not finish or
+  did not cite enough sources.
+- Sol's c01 error treated a loss on receivables sales as an extra reduction of
+  the retained interest. It reported 535 explained and +15 unallocated against
+  the correct 578 and -28, and the error persisted on all eight controls.
+- The GLM and DeepSeek attempts cost USD 1.39 through OpenRouter. Sol ran on a
+  subscription, and its charge was not measured.
+
+Configurations differ in agent, tools and provider route. With four tasks, one
+outcome moves a score by 25 percentage points.
+
+### Earlier results
+
+- **Development calibration.** On three harder development tasks, GLM-5.3 and
+  GPT-6.1 Sol both completed 3/3, so those tasks do not separate the two
+  ([report](reports/hard-calibration-20261023/README.md)).
+- **Research Challenge, retired catalog.** Gemini 3.1 Pro Preview completed
+  17/27 evaluation workpapers versus 2/27 for Qwen3.6-35B-A3B as originally
+  scored, and 18/27 versus 8/27 after a documented evidence-scoring review
+  ([results](reports/challenge-v1/reviewed-results.md)).
+
+Model results on the current 30-task core catalog are not yet published.
+
+## The benchmark
+
+The core suite has 30 tasks, six for development and 24 for evaluation. Sources
+include filings from Block, Coinbase, Circle, PayPal, Robinhood, Visa, Nvidia
+and Apple, and the PYUSD and Brale reserve reports.
 
 | Workflow | Analytical work | Development / evaluation |
 | --- | --- | ---: |
@@ -18,63 +87,40 @@ external teams using a compatible model.
 | Audit a metric | Choose denominators, separate stocks from flows, deduplicate exports | 2 / 8 |
 | Explain a change | Build signed bridges, reconcile totals, bound causal attribution | 2 / 8 |
 
-The default construction track (`workflow-v15`, scorer `workflow-1.2.1`)
-requires agents to write three SQL queries per task, with no starting SQL.
-The separate maintenance track (`workflow-v7`) supplies existing queries to
-check and repair while preserving correct work. The tracks have distinct
-identities and reports. See the [track comparison](docs/WORKFLOW.md#construction-and-maintenance).
+The [financial reasoning supplement](docs/WORKFLOW_HARD_EVALUATION.md) adds four
+evaluation tasks on borrowing capacity, acquisition accounting, receivables
+financing and liquidation rights. Report its results separately from the core
+suite.
 
-Tasks supply source excerpts, normalized observations, definitions and output
-contracts. They measure analysis within a fixed dossier, not source extraction,
-open-ended search or investment research. Evidence grading checks source
-selection, and claim verdicts assess bounded assertions.
-
-Tests include independently calculated reference answers, alternative correct
-solutions and targeted counterexamples.
-
-The separate [financial reasoning supplement](docs/WORKFLOW_HARD_EVALUATION.md)
-adds four evaluation tasks on borrowing capacity, acquisition accounting,
-receivables financing and liquidation rights. Five experimental development
-tasks remain in their own catalogs. These additions preserve the core suite and
-its historical scores. Supplementary results should be reported separately.
-The [three-configuration calibration](reports/hard-evaluation-20261023-r2/README.md)
-records per-task outcomes, grading corrections and the limits of this small sample.
-
-## Evaluation
-
-Each submission contains `answer.json` and three SQL files, with citations and
-claim verdicts. A separate verifier runs the SQL against pristine observations
-and synthetic controls to check both the original calculations and recomputation
-under input changes.
-
-Reports distinguish numerical correctness, claim verdicts, evidence, robustness,
-delivery and infrastructure outcomes. Maintenance reports also identify repairs,
-preserved results and regressions. Missing or invalid deliveries leave financial
-outcomes unassessed. Versioned receipts bind submissions to task, scorer and
-configuration hashes.
-
-Retained submissions can be replayed without inference to investigate failures and
-check scorer changes.
-
-Model runs use native Harbor. Python graders execute submitted SQL against SQLite
-in a separate Docker verifier on Linux, with no network or inference credentials,
-read-only access and bounded memory, time and output.
-
-The pytest suite covers graders, reporting and task regressions, with CI in
-[GitHub Actions](.github/workflows/ci.yml).
+Tasks supply source excerpts, normalized observations, definitions and an
+output contract. They test analysis within a fixed dossier, not source
+extraction or open-ended research. The default construction track
+(`workflow-v15`, scorer `workflow-1.2.1`) supplies no starting SQL. A separate
+maintenance track (`workflow-v7`) supplies existing queries to check and repair.
+Read an example [task instruction](datasets/workflow-v15/tasks/c01/instruction.md)
+and its [reference workpaper](examples/block-workpaper-v15).
 
 ## Quickstart
 
-From the repository root on a Linux controller with uv, Docker Engine and
-Docker Compose installed:
+See the formula case and preserved submissions without Docker or a model:
+
+```sh
+python3 -m venv .venv
+.venv/bin/pip install -e .
+.venv/bin/python -m workpaperbench.cli demo
+```
+
+Scoring runs submitted SQL only inside an isolated Linux verifier. From the
+repository root on a Linux controller with uv, Docker Engine and Docker Compose
+installed:
 
 ```sh
 uv tool install --python 3.12 'harbor==0.23.0'
 export PYTHONPATH="$PWD"
 ```
 
-From this checkout, run one `c01` oracle attempt. This uses the authored solution
-with no model calls:
+Run one `c01` oracle attempt. This uses the authored solution with no model
+calls:
 
 ```sh
 harbor run -p datasets/workflow-v15/tasks -i c01 --agent oracle -k 1 \
@@ -93,10 +139,10 @@ cat .local/quickstart-v15-1/quickstart-c01-v15-1/result.json
 cat .local/quickstart-v15-1/quickstart-c01-v15-1/*/verifier/verdict.json
 ```
 
-Reward should be `1`, `complete` should be `true`, every check should pass and the
-job should have no exception. A process exit alone is not a passing financial result.
+Reward should be `1`, `complete` should be `true`, every check should pass and
+the job should have no exception. A process exit alone is not a passing result.
 
-To evaluate a candidate, set the provider's credential environment variables
+To evaluate your own model, set the provider's credential environment variables
 and replace the model placeholder. This command requires inference:
 
 ```sh
@@ -110,13 +156,35 @@ harbor run -p datasets/workflow-v15/tasks -i c01 \
   --job-name candidate-c01-v15-1 --jobs-dir .local/candidate-v15-1
 ```
 
-This is a first-use example, not the frozen comparison condition. Continue with
+This is a first run, not the frozen comparison condition. Continue with
 [full oracle qualification](docs/RUNNING.md#direct-harbor-execution),
-[evaluate your own agent](docs/RUNNING.md#evaluate-your-own-agent), and the
-[comparison protocol](docs/COMPARISON.md). The versioned comparison and
-[pilot protocol](docs/PILOT.md) retain their declared catalog identities. The [v15 validation record](reports/workflow-v15/README.md)
-describes software checks and pending independent financial review. These are
-not model-performance results.
+[evaluating your own agent](docs/RUNNING.md#evaluate-your-own-agent) and the
+[comparison protocol](docs/COMPARISON.md).
+
+## How scoring works
+
+The verifier runs in a separate Docker container with no network, inference
+credential or Docker socket. Submitted SQL runs read-only against SQLite, with
+an allowlist of SQL operations and limits on memory, CPU time and output. Each
+query is replayed on the original observations and on three to six synthetic
+controls that exercise period filters, monetary scaling, component changes and
+disagreements between reported totals and their components. Different SQL is
+accepted when its results agree.
+
+Versioned receipts bind every submission to its task, scorer and configuration
+hashes. Retained submissions can be [replayed without inference](docs/REPLAY.md)
+to check scorer changes. Original verdicts are never overwritten. Corrections
+are published as separate versions. The [v15 validation record](reports/workflow-v15/README.md)
+lists the software checks for the current catalog.
+
+Known limits:
+
+- Tasks use public sources, so training contamination is possible.
+- Results compare complete agent configurations, not models in isolation.
+- Native installed agents can read their inference credential through terminal tools.
+- Independent financial review of the tasks and external replication are pending.
+
+See [methods and limits](docs/WORKFLOW.md) for details.
 
 ## Contributing
 
