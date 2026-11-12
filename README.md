@@ -1,5 +1,7 @@
 # WorkpaperBench
 
+[![CI](https://github.com/CaoimhConway/workpaperbench/actions/workflows/ci.yml/badge.svg)](https://github.com/CaoimhConway/workpaperbench/actions/workflows/ci.yml)
+
 Reproducible evaluations for financial research agents
 
 WorkpaperBench tests whether a financial agent's analysis can be trusted, not
