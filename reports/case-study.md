@@ -60,9 +60,9 @@ The test `test_authored_formula_control_exposes_accidentally_correct_number` sep
 
 ## Evidence identity
 
-The original campaign is `wpb-v1-92baa4a72f0e`, executed at `b4e256dc8976223a8a3fdad157a6b212f49bb8e1` in [run 37280454673](https://github.com/CaoimhConway/workpaperbench/actions/runs/37280454673). Artifact `11334520085` was uploaded on 2026-10-05 at 08:45:01 UTC. Its ZIP SHA-256 is `56ebdd836fc3bfadacbfdb4b554c72a24db2288fdf0a10c6dd9ba851518da646`.
+The original campaign is `wpb-v1-92baa4a72f0e`, executed at `b4e256dc8976223a8a3fdad157a6b212f49bb8e1` in Actions run `37280454673`. Artifact `11334520085` was uploaded on 2026-10-05 at 08:45:01 UTC. Its ZIP SHA-256 is `56ebdd836fc3bfadacbfdb4b554c72a24db2288fdf0a10c6dd9ba851518da646`. The run executed in the project's earlier GitHub repository, and its page is no longer available. The [retained evidence copy](evidence/final-wp03-A-1/README.md) lists the hashes of the files copied from that artifact.
 
-The legacy runner retained normalized JSON, not the raw serialization described by its `answer_sha256`. The collected artifact audit identifies the retained-file hash separately. Missing original bytes are not reconstructed from a digest. The [previously preserved evidence copy](evidence/final-wp03-A-1/answer.json) is also retained.
+The legacy runner retained normalized JSON, not the raw serialization described by its `answer_sha256`. The collected artifact audit identifies the retained-file hash separately. Missing original bytes are not reconstructed from a digest.
 
 ## Why this case leads
 

@@ -28,7 +28,9 @@ Each run writes a create-only receipt under `reports/fresh-replay/<run>-<attempt
 
 ## Research Challenge
 
-All 72 retained challenge answers were freshly replayed in [37589616780](https://github.com/CaoimhConway/workpaperbench/actions/runs/37589616780), matching the complete original verdicts. This includes 18 development and 54 evaluation answers under their original scorers. The separate [corrected scoring run](https://github.com/CaoimhConway/workpaperbench/actions/runs/37589625073) passed 29 controls and graded all 54 unchanged evaluation answers under `challenge-1.1.3`. Original results remain preserved.
+All 72 retained challenge answers were freshly replayed in Actions run `37589616780`, matching the complete original verdicts. This includes 18 development and 54 evaluation answers under their original scorers. The separate corrected scoring run `37589625073` passed 29 controls and graded all 54 unchanged evaluation answers under `challenge-1.1.3`. Original results remain preserved.
+
+Both runs executed in the project's earlier GitHub repository, and their run pages are no longer available. Their receipts are retained here: [fresh replay](../reports/fresh-replay/37589616780-1/challenge-v1) and [corrected scoring](../reports/challenge-v1/scoring-reviews/challenge-v1-scoring-review-446af865b146/37589625073-1).
 
 Use your authorized repository or enabled fork for all original challenge answers:
 

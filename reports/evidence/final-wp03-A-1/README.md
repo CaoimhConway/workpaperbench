@@ -10,7 +10,7 @@ These files were copied unchanged from the original GitHub Actions artifact. The
 
 The original verifier output is also embedded unchanged in `record.json.verdict`.
 
-Source: [run 37280454673](https://github.com/CaoimhConway/workpaperbench/actions/runs/37280454673), artifact ID `11334520085`, uploaded 2026-10-05 at 08:45:01 UTC. Executed commit: `b4e256dc8976223a8a3fdad157a6b212f49bb8e1`. Manifest: `wpb-v1-92baa4a72f0e`.
+Source: Actions run `37280454673` in the project's earlier GitHub repository, whose run page is no longer available. Artifact ID `11334520085`, uploaded 2026-10-05 at 08:45:01 UTC. Executed commit: `b4e256dc8976223a8a3fdad157a6b212f49bb8e1`. Manifest: `wpb-v1-92baa4a72f0e`.
 
 **Important serialization distinction:** `record.json.answer_sha256` is the historical hash of the original raw model-output bytes. The original collector normalized the JSON before retention, so that field does not identify the retained `answer.json`. The hashes above identify the actual retained files. The absent raw serialization has not been reconstructed or invented.
 
