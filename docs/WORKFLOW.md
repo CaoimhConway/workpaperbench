@@ -8,6 +8,41 @@ named `.sql` files. The [Block example](../examples/block-workpaper-v15) is an
 authored reference. The [validation record](../reports/workflow-v15/README.md)
 lists the software checks for this catalog.
 
+## Scorer files
+
+Current workflow catalogs embed `workflow-1.2.1` from the frozen scorer below
+as `tests/workpaperbench/workflow_grading.py` in each task.
+`workpaperbench/workflow_grading.py` is the frozen `workflow-1.0.0` scorer kept
+for historical catalogs. Its path does not identify the current implementation.
+
+| File | Version | Catalogs or retained review bindings |
+| --- | --- | --- |
+| [config/scorers/workflow-1.2.1.py](../config/scorers/workflow-1.2.1.py) | `workflow-1.2.1` | `workflow-v10` through `workflow-v15`, `workflow-hard-pilot-v1`, `workflow-hard-pilot-v2`, `workflow-hard-eval-v1` |
+| [config/scorers/workflow_sql_worker-1.2.1.py](../config/scorers/workflow_sql_worker-1.2.1.py) | 1.2.1 worker snapshot | `workflow-v10` through `workflow-v15`, `workflow-hard-pilot-v1`, `workflow-hard-pilot-v2` |
+| [config/scorers/workflow_hard_sql_worker-1.0.1.py](../config/scorers/workflow_hard_sql_worker-1.0.1.py) | `workflow-hard-sql-1.0.1` | `workflow-hard-eval-v1` |
+| [workpaperbench/workflow_grading.py](../workpaperbench/workflow_grading.py) | `workflow-1.0.0` | `workflow-v1` through `workflow-v4` |
+| [config/scorers/workflow-1.1.0.py](../config/scorers/workflow-1.1.0.py) | `workflow-1.1.0` | `workflow-v5` |
+| [config/scorers/workflow-1.2.0.py](../config/scorers/workflow-1.2.0.py) | `workflow-1.2.0` | `workflow-v6` through `workflow-v9` |
+| [workpaperbench/workflow_sql_worker.py](../workpaperbench/workflow_sql_worker.py) | Unversioned worker | `workflow-v1` through `workflow-v9` |
+| [workpaperbench/challenge_grading.py](../workpaperbench/challenge_grading.py) | `challenge-1.0.0` | `challenge-v1` development |
+| [config/scorers/challenge-1.1.0.py](../config/scorers/challenge-1.1.0.py) | `challenge-1.1.0` | Original `challenge-v1` evaluation |
+| [config/scorers/challenge-1.1.1.py](../config/scorers/challenge-1.1.1.py) | `challenge-1.1.1` | Retained `challenge-v1` review `5141a5569da6` |
+| [config/scorers/challenge-1.1.2.py](../config/scorers/challenge-1.1.2.py) | `challenge-1.1.2` | Retained `challenge-v1` review `e8bab96d4e9c` |
+| [config/scorers/challenge-1.1.3.py](../config/scorers/challenge-1.1.3.py) | `challenge-1.1.3` | `challenge-v2` and the current `challenge-v1` scoring review |
+| [workpaperbench/challenge_sql_worker.py](../workpaperbench/challenge_sql_worker.py) | Unversioned worker | `challenge-v1`, `challenge-v2` and shared SQL helpers for workflow workers |
+| [workpaperbench/grading.py](../workpaperbench/grading.py) | `1.2.0` | `real-v1` and reviewed legacy `wpb-v1` |
+| [workpaperbench/sql_worker.py](../workpaperbench/sql_worker.py) | Unversioned worker | `real-v1` and reviewed legacy `wpb-v1` |
+| [config/scorers/workflow_hard_sql_worker-1.0.0.py](../config/scorers/workflow_hard_sql_worker-1.0.0.py) | 1.0.0 worker snapshot | No retained catalog selects this file |
+
+These selections follow the manifests and [catalog loader](../workpaperbench/catalog.py).
+Historical Challenge bindings are in its [development](../datasets/challenge-v1/manifests/development.json)
+and [evaluation](../datasets/challenge-v1/manifests/evaluation.json) manifests,
+[retained reviews](../config/scoring-reviews/) and [current review](../datasets/challenge-v1/scoring-review.json).
+The [legacy review](../config/review.json) binds the reviewed `wpb-v1` implementation.
+Workers without a version field are identified by SHA-256. Later manifests can
+retain older implementation hashes as provenance alongside their selected scorer
+and worker paths.
+
 ## Construction and maintenance
 
 | Condition | Construction, workflow-v15 | Maintenance, workflow-v7 |

@@ -163,6 +163,9 @@ This is a first run, not the frozen comparison condition. Continue with
 
 ## How scoring works
 
+See [scorer files and catalog bindings](docs/WORKFLOW.md#scorer-files) for the
+current and historical implementations.
+
 The verifier runs in a separate Docker container with no network, inference
 credential or Docker socket. Submitted SQL runs read-only against SQLite, with
 an allowlist of SQL operations and limits on memory, CPU time and output. Each
