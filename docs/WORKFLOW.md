@@ -1,15 +1,12 @@
 # Workflow methods
 
-The default catalog is `workflow-v15-canonical-400f60b5b3b6` (construction), using
-scorer `workflow-1.2.1`. Six development and 24 evaluation cases each request three
-SQL result tables and three claim verdicts. All 30 cases are available for external
-model execution. Deliver `answer.json` and three named `.sql` files. The
-[Block example](../examples/block-workpaper-v15) is an authored reference.
-
-Version 15 clarifies financial bases, accepts sufficient evidence alternatives
-and corrects the reported baseline in one authored forecast. Historical catalogs
-and saved submissions keep their original identities. See the
-[current validation record](../reports/workflow-v15/README.md).
+The default catalog is `workflow-v15-canonical-400f60b5b3b6` (construction
+track), scored by `workflow-1.2.1`. It has six development and 24 evaluation
+tasks, all available for external model runs. Each task requests three SQL
+result tables and three claim verdicts, delivered as `answer.json` and three
+named `.sql` files. The [Block example](../examples/block-workpaper-v15) is an
+authored reference. The [validation record](../reports/workflow-v15/README.md)
+lists the software checks for this catalog.
 
 ## Construction and maintenance
 
@@ -21,157 +18,101 @@ and saved submissions keep their original identities. See the
 | Report | Original and control-inclusive correctness | Correctness plus repair, preservation, regression and unrepaired transitions |
 | Interpretation | Bounded workpaper construction | Supplied-work maintenance with a predictable defect-count prior |
 
-Construction removes all 90 starting SQL files and their candidate Docker COPY
-entries. There is no faulty-query count to infer and no supplied correct SQL to
-copy into the answer. It does not add defects or cases, alter numeric targets, or
-claim increased empirical difficulty. Definitions and observations are retained
-because they define the financial question and make scoring reproducible.
-Source extraction and open-ended investment research remain outside the scope.
+Construction removes all 90 starting queries, so there is no defect count to
+infer and no correct SQL to copy. Source values, reference SQL, numerical
+targets, controls, scorer and source-group splits match the maintenance track.
+The [builder](../scripts/build_workflow_construction.py) rewrites the
+instructions and two Brale claims that referred to the removed SQL. The new
+claims compare June and May signature lag (16 versus 12 days, supported) and
+assert that at least one observation has reserves greater than circulation
+(contradicted by both dated equalities). [Tests](../tests/test_workflow_construction.py)
+calculate these relationships independently.
 
-The [versioned builder](../scripts/build_workflow_construction.py) preserves the
-financial source values, reference SQL, numerical targets, controls, scorer and
-source-group splits. It rewrites construction instructions and two Brale claims
-that previously referred to the removed starting SQL. The replacements compare
-June versus May signature lag (16 versus 12 days, supported) and assert that at
-least one observation has reserves greater than circulation (contradicted by
-both dated equalities). These are new assertions, not historical rescores.
-
-Every supplied Brale evidence entry includes observation and signature dates.
-Version 8 accepts all nine cross-report citation pairs for the lag table and its
-claim. Refuting the existential reserve assertion still requires both dated
-amount tables. [Tests](../tests/test_workflow_construction.py) independently
-calculate these relationships and check sufficient and insufficient alternatives.
-
-Catalog and task identities separate the conditions. Reports reject mixed
-catalogs/tracks and never transfer maintenance baselines to construction.
-Historical maintenance results remain unchanged and are not construction scores.
+Catalog and task identities keep the tracks apart. Reports reject mixed
+catalogs and never transfer maintenance baselines to construction.
 
 ## Measurement contract
 
-Numerical correctness requires every requested original row, matched by declared
-keys and column names with explicit absolute tolerances. Row and column order do
-not matter. Declared source-label aliases map to the same economic category
-before key matching. Normalized duplicate keys and swapped category values fail.
-Text keys and aliases are public in each `output_contract.json`.
+- **Numerical.** Every requested row must match on declared keys and column
+  names, within explicit absolute tolerances. Row and column order are ignored.
+  Declared source-label aliases map to the same category before matching.
+  Duplicate keys fail. Keys and aliases are public in each `output_contract.json`.
+- **Claims.** Supported means the supplied evidence entails the assertion,
+  contradicted means it entails the negation, and unresolved means neither
+  follows. Claims concern the original dossier only. A claim that a complete
+  supplied table reports a disclosure it omits is contradicted. A claim about
+  an unobserved economic value can be unresolved.
+- **Evidence.** Each table and claim must cite at least one reviewed sufficient
+  set of source IDs. Relevant extra context and alternative sufficient paths are
+  accepted. Every `namespace:s<digits>` token is checked, including unknown or
+  unrelated IDs. Prose without IDs supplies no evidence. This tests source
+  selection, not the truth of explanations. A rejected valid path is a grader
+  defect.
+- **Robustness.** The same SQL must stay correct on every synthetic control.
+  Three to six controls per task test specific dependencies, not all possible
+  inputs. Different SQL passes when its results agree.
+- **Delivery.** Exactly the requested files, bounded sizes, unique IDs and safe
+  relative basenames. A structural rejection prevents SQL replay and leaves the
+  other dimensions unassessed rather than failed.
 
-Claim verdicts are a separate diagnostic. Supported means the supplied evidence
-entails the assertion, contradicted means it entails the negation, and unresolved
-means neither follows. Claims concern the original dossier only. A false claim
-that a complete supplied table reports a particular disclosure is contradicted.
-A claim about an unobserved economic value can instead be unresolved.
+In maintenance, preservation means an initially correct query stays correct on
+original inputs and controls. Repair, regression and unrepaired cover the other
+before and after combinations.
 
-Evidence is checked separately for each table and claim. At least one reviewed
-support set must be present. Relevant extra context and alternative sufficient
-paths are accepted. Source IDs use `namespace:s<digits>` locators and may be
-embedded in explanations. Every source-shaped token is checked, including unknown
-or unrelated IDs. Explanation-only prose contributes no evidence. This tests
-source selection, not the entailment or truthfulness of arbitrary explanations.
-A valid rejected evidence path remains a grader defect requiring review.
-
-Robustness requires correct recomputation across every synthetic control.
-In maintenance, preservation means a query that was initially correct remains correct on the
-same original inputs and controls. Repair, regression, and unrepaired outcomes
-use the other three before/after combinations.
-Different SQL is accepted when its observable results agree on original and
-control inputs. Three to six controls test specific dependencies, not all future
-inputs. Delivery requires the exact requested files, bounded sizes, unique IDs,
-and safe relative basenames. Structural rejection prevents SQL replay and leaves
-semantic aggregates unassessed, rather than recording failed calculations.
-
-The report exposes numerical tables, claim verdicts, evidence, robustness, and
-delivery separately. `financial_answer` combines numbers and claims for continuity.
-Each table also reports execution, column, row, key, text, or numeric mismatch
-reasons. Full completion requires all substantive checks and delivery.
+Reports show each dimension separately, with per-table execution, column, row,
+key, text or numeric mismatch reasons. `financial_answer` combines numbers and
+claims for continuity. Completion requires every substantive check and delivery.
 
 ## Validity revisions and continuity
 
-Version 5 fixed blanket-citation acceptance and zero-residual shortcuts. Fifty-one
-independent residual columns now encounter synthetic discrepancies. Three algebraic
-identity residuals were removed. These controls remain unchanged in version 6.
+Each revision has its own catalog identity. Earlier catalogs, saved submissions
+and results keep theirs, and corrections never rescore old answers as answers
+to a new version.
 
-Version 5 still rejected full Block filing labels and Microsoft citations with
-explanations. Its identifiability assertions also conflated missing disclosures
-with unknown economic values. The [versioned correction](../scripts/review_workflow.py)
-uses scorer 1.2.0, published filing-label aliases, and explicit acceptance of both
-`contradicted` and `unresolved` for those ambiguous historical assertions. All
-numeric targets, tolerances, SQL restrictions, and controls remain unchanged.
-The [corrected replay report](../reports/workflow-v5/corrected-replay.json) preserves
-original verdicts alongside corrected diagnostics and exact retained file hashes.
-It is not new inference and does not rescore old answers as version 6 answers.
-
-Version 6 replaces each ambiguous assertion using a
-[source-grounded claim review](../config/workflow-claim-review.json). Ten replacements
-are supported calculations, ten are contradicted disclosure/scope assertions,
-and ten are unresolved economic assertions. The complete 90-claim distribution
-is 37 supported, 43 contradicted and 10 unresolved. Twenty cases have no unresolved
-claim and ten have one. Opaque IDs and deterministic ordering remove the fixed
-uncertainty slot. Every new assertion has one accepted verdict.
-
-In version 6, original source observations, starting/reference SQL, financial
-targets, evidence options for tables, and synthetic databases remain byte-identical
-to version 5 or equal as structured targets. No held-out candidate outcomes informed these
-changes. Source-based reference/control validation is distinct from candidate-model
-tuning. Historical releases, task catalogs, scorers and correction receipts retain
-their identities. Public label distributions still permit statistical shortcuts,
-and this revision does not establish calibrated abstention or human agreement.
-
-Version 7 corrects one sufficient-evidence omission. Microsoft's `a03:s05`
-segment table includes consolidated revenue and operating-income Total rows
-for both three- and six-month periods in both years. Those totals independently
-reproduce `quarter_model`, `quarter_reconciliation`, and the margin-change claim.
-The [versioned builder](../scripts/build_workflow_evidence_alternative.py) accepts
-that table alone for those three outputs, retaining the income-statement route.
-Source values, SQL, financial targets, controls, claim assertions and verdicts,
-and scorer 1.2.0 are unchanged. Historical catalogs and receipts are untouched.
+| Version | Change | Record |
+| --- | --- | --- |
+| v5 | Fixes blanket-citation acceptance and zero-residual shortcuts. 51 independent residual columns meet synthetic discrepancies, and three algebraic identity residuals are removed. | - |
+| v5 correction | Scorer 1.2.0 accepts published filing-label aliases and both `contradicted` and `unresolved` for ambiguous historical assertions. Targets, tolerances, SQL restrictions and controls are unchanged. | [Builder](../scripts/review_workflow.py), [corrected replay](../reports/workflow-v5/corrected-replay.json) |
+| v6 | Replaces 30 ambiguous assertions with source-grounded claims: ten supported, ten contradicted and ten unresolved. The 90 claims are 37 supported, 43 contradicted and 10 unresolved. No held-out candidate outcomes informed these changes. | [Claim review](../config/workflow-claim-review.json) |
+| v7 | Accepts Microsoft's segment table alone as sufficient evidence for three outputs. | [Builder](../scripts/build_workflow_evidence_alternative.py) |
+| v8 | Accepts all nine cross-report Brale citation pairs for the lag table and its claim. Validation adds 147 reference and control expectations and native network fixtures. | [Validation](../reports/workflow-v8/validation.json) |
+| v9 | Accepts the January and February PYUSD summaries for asset coverage and defines Treasury valuation residuals. | [Native validation](../reports/workflow-v9/direct-harbor-validation.json) |
+| v10 | Removes Block's numerical singleton key, specifies Uber's EBITDA and residual directions and PYUSD's reported stocks, and accepts Uber's segment comparison alone for its commission claim. Scorer `workflow-1.2.1` accepts the full escaped JSON envelope. | [Builder](../scripts/build_workflow_contract_revision.py) |
+| v11 | Adds independent operands to block shortcuts: c01 subscription costs, b06 consumer activity, b03 consumer spot volume and c04 operating expenses on both bases. | [Dependency audit](../reports/workflow-v11/dependency-audit.md), [release record](../reports/workflow-v11/README.md) |
+| v12-v14 | Evidence and measurement contract corrections. | - |
+| v15 | Clarifies financial bases, accepts sufficient evidence alternatives and corrects the reported baseline in one authored forecast. | [Validation](../reports/workflow-v15/README.md) |
 
 ## Validity assessment
 
-The starting-SQL check was rerun on all 30 maintenance tasks in isolated verification.
-**61/90 queries pass original inputs and every control.** They are also
-byte-identical to the reference SQL. Twenty-nine tasks have exactly one faulty
-query, while `b04` has none. Existing correct code is realistic assistance for
-maintenance work and provides preservation opportunities. The repeated defect
-count supplies a shortcut prior. That track therefore measures bounded
-maintenance, not unconstrained defect discovery or writing a workpaper from scratch.
-The default construction condition removes those starting queries entirely.
-No coverage gap justified adding defects or expanding the dataset.
+- **Starting SQL.** In isolated verification, 61/90 maintenance starting
+  queries pass original inputs and every control, and each is byte-identical to
+  the reference SQL. Twenty-nine tasks have exactly one faulty query and `b04`
+  has none. That repeated defect count is a shortcut prior, so maintenance
+  measures bounded repair, not open defect discovery. Construction removes the
+  starting queries.
+- **Claim baselines.** Constant answers score 43/90 (`contradicted`), 37/90
+  (`supported`) and 10/90 (`unresolved`) before evidence or whole-task checks.
+  Grading supports bounded uncertainty about an assertion. It does not measure
+  confidence calibration or free-text entailment.
+- **Supplied assistance.** Both tracks supply normalized observations,
+  excerpts, definitions, units and formulas, which removes most source
+  extraction and search by design. Difficulty comes from period reconstruction,
+  unit conversion, economic denominators, signed changes and identifiability.
+- **Recomputed transitions.** The nine retained workflow-v5 query transitions
+  give three repairs, five preservations and one regression on original inputs.
+  Including controls gives two repairs, five preservations, one regression and
+  one unrepaired defect, Brale's duplicate export. Block's apparent category
+  failures were grader errors.
 
-Both tracks supply normalized observations, source excerpts, definitions,
-units and formulas. Only maintenance supplies starting SQL. These intentionally remove much of source
-extraction and search. They are disclosed assistance, not hidden reference access.
-Candidate images omit gold, solutions, tests, checkout history and credentials.
-Published references remain a contamination risk outside that execution boundary.
-Source-group separation does not make related issuer templates independent.
-
-Claim-only constant answers achieve 43/90 for `contradicted`, 37/90 for
-`supported`, and 10/90 for `unresolved`, before evidence or whole-task checks.
-The current 14 ordered verdict patterns remove the old universal unresolved slot,
-but these label priors remain. Grading supports bounded uncertainty about an
-assertion. It does not measure confidence calibration or free-text entailment.
-Financial difficulty comes from period reconstruction, unit conversion, economic
-denominators, signed changes and identifiability, within the supplied contract.
-
-The nine retained workflow-v5 query transitions were independently recomputed
-using matching frozen tasks and scorers. Original inputs give three repairs,
-five preservations and one regression. Including controls gives **two repairs,
-five preservations, one regression and one unrepaired defect**. The latter is
-Brale's duplicate-export failure. Microsoft's correct starting basis-point query
-regressed. Block's apparent category failures were grader errors. Neither scorer
-corrections nor improved original-input results are automatically robust repairs.
-
-Maintenance reports use the [identity-bound starting receipts](../reports/workflow-v7/starting-sql.json)
-and expose per-query transitions on both scopes, plus initially correct and
-incorrect opportunity counts. Missing or rejected deliveries leave SQL transitions
-unassessed. Infrastructure failures leave semantic diagnostics unassessed. A
-numerical or claim failure is an observed reasoning/calculation outcome, not proof
-of its internal cause. SQL execution errors remain distinguishable in table details.
-Budgets, continuation history and unscored attempts must accompany interpretation.
+Maintenance reports use the [identity-bound starting receipts](../reports/workflow-v7/starting-sql.json).
+A numerical or claim failure is an observed outcome, not proof of its internal
+cause. Missing deliveries and infrastructure failures leave semantic checks
+unassessed.
 
 ## Reproduce the quality checks
 
-Install the [portable Linux/Docker harness](RUNNING.md). No model or inference
-server is needed for these checks. The full suite runs on the same controller
-without any Mac/Lima dependency:
+These checks need no model or inference server. Install the
+[portable Linux/Docker harness](RUNNING.md), then run:
 
 ```sh
 .venv/bin/pip install -e '.[test]'
@@ -184,84 +125,37 @@ without any Mac/Lima dependency:
   --dataset workflow-v15 --tasks all --output .local/my-validity-suite.json
 ```
 
-The explicit `--executor local-lima` option retains the historical Mac/Lima maintenance
-wrapper. It is not the public execution default. Historical
-corrected-replay receipts and scripts retain their original identities.
+Use fresh output paths and attempt prefixes. The prototype command runs
+Microsoft, Brale and Block through native Harbor and the same separate
+verifier. The sweep checks authored references, reordered equivalent SQL with
+source aliases and explanatory citations, citation dumping, constant-zero
+residuals and an always-unresolved claim baseline. These are engineering
+controls, not model trials. The `--executor local-lima` option keeps the
+historical Mac/Lima wrapper and is not the default.
 
-Use fresh output paths and attempt prefixes. The prototype command runs Microsoft,
-Brale and Block through native Harbor, then exercises the same separate verifier.
-The sweep checks authored references, equivalent reordered SQL with source aliases
-and explanatory citations, citation dumping, applicable constant-zero residuals,
-and an always-unresolved claim baseline. Incorrect claim labels cannot be rescued
-by correct SQL or evidence. These are engineering controls, not model trials.
-
-Standalone sweep, baseline and historical-replay containers use network-none,
-a read-only root, bounded temporary storage and dropped capabilities. Native
-verifier receipts directly check network-none, blocked network access, no inference
-credential and no Docker socket. These receipts do not attest to every standalone
-container restriction. Scoring executes SQL only inside isolated Linux verification.
-Both paths use workers that enforce read-only authorization,
-256 MiB address space, two-second CPU and 1.5-second progress limits with bounded
-output. Actual network and namespace checks accompany verdicts. The unchanged
-worker and runner retain the earlier [resource and candidate-boundary proof](../reports/local/local-boundary-validation.json).
-These probes do not constitute a security proof for arbitrary workloads.
-
-The preserved [workflow-v8 validation record](../reports/workflow-v8/validation.json) includes
-147 reference/control expectations and native authenticated HTTP/HTTPS fixtures.
-The HTTPS fixture uses a test-only hostname mapping and temporary certificate
-trust after setup, with ordinary certificate verification enabled. It does not
-contact a model or provider. The separate IPv6 fixture verifies fresh neighbor
-resolution, the selected TCP destination and rejection of an unrelated port and
-ICMP echo using the native sidecar. Fixture failures remain separately recorded.
-
-The `workflow-v9` revision accepts the January and February report summaries as
-sufficient support for the PYUSD asset-coverage claim. It also defines Treasury
-valuation residuals as deduplicated holding fair value less the reported Treasury
-category. Financial observations, targets, controls and scorer code are unchanged.
-The [preserved native validation](../reports/workflow-v9/direct-harbor-validation.json)
-records the revised catalog separately. Earlier task versions and results remain
-available under their original identities.
-
-The `workflow-v10` revision removes the numerical row key from Block's singleton
-reconciliation, preserving its declared cell tolerances. It specifies reconstructed
-EBITDA and residual directions for Uber, and reported stocks for the PYUSD bridge.
-Uber's commission claim also accepts its sufficient segment-comparison source alone.
-Scorer `workflow-1.2.1` retains the 16,384-byte SQL limit and accepts the full bounded
-JSON envelope after escaping. The [versioned builder](../scripts/build_workflow_contract_revision.py)
-preserves source observations, reference SQL, numerical targets and synthetic
-controls. Earlier catalogs and results keep their original identities.
-
-Use the [comparison recipe](COMPARISON.md) to freeze agent and execution settings
-before a model comparison. These corrections and authored checks do not establish
-model performance on the revised catalog.
-
-Version 11 adds independent subscription costs in c01, consumer activity in b06,
-consumer spot volume in b03 and operating expenses on both bases in c04.
-The [dependency audit](../reports/workflow-v11/dependency-audit.md) records the
-specific shortcuts tested and the bounded coverage. These coherent changes
-preserve revenue or other denominators as stated, including existing rounded
-reconciliation discrepancies. Original observations, original targets, reference
-SQL, splits and scorer 1.2.1 are unchanged. The
-[release record](../reports/workflow-v11/README.md) distinguishes software checks,
-authored references, pending human review and the unexecuted difficulty pilot.
+Standalone sweep and replay containers use no network, a read-only root,
+bounded temporary storage and dropped capabilities. Native verifier receipts
+check for no network, no inference credential and no Docker socket. SQL workers
+enforce read-only authorization, a 256 MiB address space, two-second CPU and
+1.5-second progress limits and bounded output. See the
+[resource and boundary proof](../reports/local/local-boundary-validation.json).
+These probes are not a security proof for arbitrary workloads.
 
 ## Evaluation limits
 
-The evaluation split has 24 distinct source-window groups without development
-group overlap. Public sources, related issuer templates, public references, and
-repeated structure create contamination and shortcut risks. Held out means not
-used for candidate-model tuning here, not private or absent from training.
-
-Observed facts, normalized observations, authored starting-query defects, synthetic
-counterfactuals, references, and actual submissions have different provenance.
-Publication, signature, economic-period, and retrieval dates must not be confused.
-The [source audit](../reports/local/workflow-source-review.json) and claim review
-retain derivations. Independent financial-domain review remains pending.
-
-A measured comparison requires frozen profiles and budgets, all failures retained,
-task-level paired reporting, and uncertainty that accounts for repeated attempts.
-The [historical comparison proposal](../config/future-comparison.json) was not executed.
-It does not restrict external task selection. The
-three corrected development replays use different settings and include a continued
-session. They do not establish construction accuracy or a model ranking. Human
-review and external replication also remain unevidenced.
+- The 24 evaluation tasks come from distinct source-window groups with no
+  development overlap. Held out means not used for candidate-model tuning here,
+  not private or absent from training data. Public sources, related issuer
+  templates and published references create contamination and shortcut risks.
+- Observed facts, normalized observations, authored defects, synthetic
+  controls, references and model submissions have different provenance.
+  Publication, signature, economic-period and retrieval dates are distinct. The
+  [source audit](../reports/local/workflow-source-review.json) retains
+  derivations.
+- A measured comparison needs frozen profiles and budgets, every failure
+  retained, paired per-task reporting and uncertainty across repeated attempts.
+  Use the [comparison recipe](COMPARISON.md). The
+  [historical comparison proposal](../config/future-comparison.json) was not
+  executed. The corrected development replays shown by the demo use unequal
+  settings and are not construction results.
+- Independent financial-domain review and external replication are pending.
