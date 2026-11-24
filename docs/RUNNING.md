@@ -5,7 +5,8 @@ can be your Linux workstation, dedicated server or VM. Docker Engine and Docker
 Compose must run on that controller. Ubuntu 24.04 x86_64 is the validated platform.
 The tested guest has six CPUs and 12 GiB RAM. Use one concurrent candidate trial
 and at most two oracle trials. Current execution examples use `workflow-v15`.
-Versioned comparison recipes retain their explicitly frozen catalogs.
+The [current comparison recipe](COMPARISON.md) also uses v15. Historical recipes
+retain their explicitly frozen catalogs.
 
 ## Runtime input integrity
 
@@ -79,8 +80,9 @@ uv tool install --python 3.12 'harbor==0.23.0'
 ```
 
 Run these commands from the repository root. `./wpb` is the current project
-interface. The installed `workpaperbench` command preserves the historical
-inline-answer interface. Both routes use the pinned native harness.
+interface, equivalent to `.venv/bin/python -m workpaperbench.current_cli`.
+The installed `workpaperbench` command and `python -m workpaperbench.cli` preserve
+the historical inline-answer interface, also available through `./wpb legacy`.
 
 ```sh
 export PYTHONPATH="$PWD"

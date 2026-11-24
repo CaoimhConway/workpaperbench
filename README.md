@@ -95,13 +95,19 @@ and its [reference workpaper](examples/block-workpaper-v15).
 
 ## Quickstart
 
-See the formula case and preserved submissions without Docker or a model:
+See the current Block workpaper reference and preserved submissions without Docker
+or a model. Run these commands from the repository root:
 
 ```sh
 python3 -m venv .venv
 .venv/bin/pip install -e .
-.venv/bin/python -m workpaperbench.cli demo
+./wpb demo
 ```
+
+`./wpb` is the current interface, equivalent to
+`.venv/bin/python -m workpaperbench.current_cli`. The installed `workpaperbench`
+command and `python -m workpaperbench.cli` retain the historical interface.
+Use `./wpb legacy demo` to view that older example.
 
 Scoring runs submitted SQL only inside an isolated Linux verifier. From the
 repository root on a Linux controller with uv, Docker Engine and Docker Compose

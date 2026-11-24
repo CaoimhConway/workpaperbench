@@ -202,19 +202,21 @@ class Fixture(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
 
-def validate(binary, output, checkout=False, comparison_recipe=False, dataset=None):
+def validate(binary, output, checkout=False, comparison_recipe=None, dataset=None):
     if output.exists() or output.parent.joinpath(output.stem + '-jobs').exists():
         raise ValueError('validation_output_already_exists')
-    if subprocess.check_output([binary, '--version'], text=True, timeout=30,
-                               env=child_environment()).strip() != '0.23.0':
-        raise ValueError('unexpected_harbor_version')
-    recipe = json.loads((ROOT / 'config/construction-comparison.json').read_text()) if comparison_recipe else None
+    recipe_path = Path(comparison_recipe) if comparison_recipe else None
+    recipe = json.loads(recipe_path.read_text()) if recipe_path else None
+    if recipe and not checkout:
+        raise ValueError('comparison_recipe_requires_checkout')
     dataset = dataset or (recipe['task_source']['dataset'] if recipe else
                           'workflow-v15' if checkout else 'workflow-v11')
     manifest, spec, task = load(ROOT, dataset, 'c01')
-    if comparison_recipe:
-        if recipe['task_source']['manifest_id'] != manifest['manifest_id']:
-            raise ValueError('comparison_recipe_catalog_mismatch')
+    if recipe and recipe['task_source']['manifest_id'] != manifest['manifest_id']:
+        raise ValueError('comparison_recipe_catalog_mismatch')
+    if subprocess.check_output([binary, '--version'], text=True, timeout=30,
+                               env=child_environment()).strip() != '0.23.0':
+        raise ValueError('unexpected_harbor_version')
     output.parent.mkdir(parents=True, exist_ok=True)
     jobs = output.parent / (output.stem + '-jobs')
     results = []
@@ -274,7 +276,7 @@ def validate(binary, output, checkout=False, comparison_recipe=False, dataset=No
         'external_service_spend_usd': 0, 'cases': results}
     if recipe:
         report['comparison_recipe'] = {'protocol_version': recipe['protocol_version'],
-            'configuration_sha256': hashlib.sha256((ROOT / 'config/construction-comparison.json').read_bytes()).hexdigest(),
+            'configuration_sha256': hashlib.sha256(recipe_path.read_bytes()).hexdigest(),
             'agent_kwargs': recipe['runtime']['agent_kwargs']}
     if checkout:
         report['repo'] = None
@@ -291,8 +293,9 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--checkout', action='store_true',
                         help='Run the current checkout task bytes instead of the pinned public release')
-    parser.add_argument('--comparison-recipe', action='store_true',
-                        help='Check the frozen comparison settings with scripted responses, without inference')
+    parser.add_argument('--comparison-recipe', type=Path, nargs='?',
+                        const=ROOT / 'config/construction-comparison-v15.json',
+                        help='Check comparison settings without inference, defaults to the v15 template and requires --checkout')
     parser.add_argument('--dataset', help='Explicit catalog, defaults to v15 for checkout checks or the frozen recipe catalog')
     args = parser.parse_args()
     if not args.harbor:

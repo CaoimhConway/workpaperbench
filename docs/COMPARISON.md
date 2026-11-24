@@ -1,22 +1,27 @@
 # Model comparison protocol
 
 Use this recipe to evaluate models under one declared construction condition.
-The [configuration template](../config/construction-comparison.json) fixes the
+The [configuration template](../config/construction-comparison-v15.json) fixes the
 task, scorer, agent and resource settings. It contains no model results.
 
-The [scripted validation](../reports/workflow-v11/comparison-recipe-validation.json)
-checks native delivery and forwarding of the output budget and reasoning setting.
-It makes no model calls and does not establish provider compatibility or performance.
+The [v15 software checks](../reports/workflow-v15/README.md) cover selected
+references and native scripted delivery. The [earlier comparison validation](../reports/workflow-v11/comparison-recipe-validation.json)
+checked budget and reasoning forwarding on v11. It is historical evidence, not
+validation of this v15 recipe. Before inference, run the scripted check below on
+your Linux controller. It makes no model calls and does not establish provider
+compatibility or performance.
 
 ```sh
-python3 scripts/validate_direct_harbor.py --checkout --comparison-recipe \
+export PYTHONPATH="$PWD"
+python3 scripts/validate_direct_harbor.py --checkout \
+  --comparison-recipe config/construction-comparison-v15.json \
   --output .local/my-comparison-recipe-validation.json
 ```
 
 ## Freeze the configuration
 
 Use Harbor 0.23.0 from this checkout with catalog
-`workflow-v11-canonical-99f9af5fc8cb` and scorer `workflow-1.2.1`. Complete the
+`workflow-v15-canonical-400f60b5b3b6` and scorer `workflow-1.2.1`. Complete the
 [environment and oracle checks](RUNNING.md#direct-harbor-execution) first.
 
 Before any model calls, save a separate configuration for each model with its
@@ -57,8 +62,9 @@ job name and output directory for every execution.
 ```bash
 model='<provider/model>'
 jobs_dir='.local/comparison/<frozen-model-configuration-id>'
+export PYTHONPATH="$PWD"
 recipe=(
-  -p datasets/workflow-v11/tasks
+  -p datasets/workflow-v15/tasks
   --agent terminus-2 --model "$model"
   --ak max_turns=24 --ak parser_name=json
   --ak enable_summarize=false --ak proactive_summarization_threshold=0
@@ -67,17 +73,22 @@ recipe=(
   --ak 'model_info={"max_input_tokens":65536,"max_output_tokens":16384}'
   --ak 'llm_call_kwargs={"max_tokens":16384}'
   --agent-timeout-multiplier 6
-  --n-concurrent 1 --max-retries 0 --env docker
+  --n-concurrent 1 --max-retries 0 \
+  --env workpaperbench.runtime_integrity:VerifiedDockerEnvironment
+  --ek canonical_root="$PWD"
+  --ek expected_manifest=workflow-v15-canonical-400f60b5b3b6
 )
 
 # First smoke task checks provider compatibility and retained artifacts.
 harbor run "${recipe[@]}" -i c01 -k 1 \
+  --ek expected_task=workflow-v15-c01 \
   --job-name smoke-c01 --jobs-dir "$jobs_dir"
 
 # Continue once each on the remaining development tasks after checking c01.
 for task in a01 a02 b01 b02 c02
 do
   harbor run "${recipe[@]}" -i "$task" -k 1 \
+    --ek expected_task="workflow-v15-$task" \
     --job-name "smoke-$task" --jobs-dir "$jobs_dir"
 done
 
@@ -90,6 +101,7 @@ do
   for attempt in 1 2 3
   do
     harbor run "${recipe[@]}" -i "$task" -k 1 \
+      --ek expected_task="workflow-v15-$task" \
       --job-name "evaluation-$task-$attempt" --jobs-dir "$jobs_dir"
   done
 done
@@ -119,8 +131,12 @@ This sample supports bounded comparisons and does not establish a general model
 ranking. Keep historical runs with different agents, quantization, reasoning,
 sampling or budgets in their original conditions.
 
-## Preliminary difficulty pilot
+## Historical protocols
 
-The [pilot](PILOT.md) is a separate condition: six development compatibility checks,
-then one attempt on each of the 24 evaluation tasks per frozen configuration.
-It does not change this full comparison's three-attempt, 72-outcome recipe.
+The [v11 comparison template](../config/construction-comparison.json) and
+[preliminary difficulty pilot](PILOT.md) retain their original catalog and
+conditions. The pilot uses one attempt per evaluation task. This v15 comparison
+uses three attempts per evaluation task, 72 outcomes per model. Keep their
+results separate. To check the historical comparison settings, pass
+`--comparison-recipe config/construction-comparison.json` with `--checkout` to
+the scripted validator.
